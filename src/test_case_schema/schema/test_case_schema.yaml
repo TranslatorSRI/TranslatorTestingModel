@@ -88,7 +88,9 @@ classes:
     tree_root: true
     description: >-
       A holder for TestCase objects
-    attributes:
+    slots:
+      - entries
+    slot_usage:
       entries:
         range: TestCase
         multivalued: true
@@ -97,7 +99,12 @@ classes:
 
 slots:
 
-
+  entries:
+    description: >-
+      The entries in a TestSuite
+    range: TestCase
+    multivalued: true
+    
   id:
     identifier: true
     slot_uri: schema:identifier
