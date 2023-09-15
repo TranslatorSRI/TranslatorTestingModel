@@ -28,10 +28,6 @@
       "prefix_reference": "http://schema.org/"
     },
     {
-      "prefix_prefix": "PATO",
-      "prefix_reference": "http://purl.obolibrary.org/obo/PATO_"
-    },
-    {
       "prefix_prefix": "example",
       "prefix_reference": "https://example.org/"
     }
@@ -348,32 +344,6 @@
       "@type": "TypeDefinition"
     }
   ],
-  "enums": [
-    {
-      "name": "PersonStatus",
-      "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/PersonStatus",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
-      "permissible_values": [
-        {
-          "text": "ALIVE",
-          "description": "the person is living",
-          "meaning": "PATO:0001421"
-        },
-        {
-          "text": "DEAD",
-          "description": "the person is deceased",
-          "meaning": "PATO:0001422"
-        },
-        {
-          "text": "UNKNOWN",
-          "description": "the vital status is not known",
-          "todos": [
-            "map this to an ontology"
-          ]
-        }
-      ]
-    }
-  ],
   "slots": [
     {
       "name": "id",
@@ -385,10 +355,6 @@
       ],
       "slot_uri": "http://schema.org/identifier",
       "identifier": true,
-      "owner": "NamedThing",
-      "domain_of": [
-        "NamedThing"
-      ],
       "range": "uriorcurie",
       "required": true,
       "@type": "SlotDefinition"
@@ -402,10 +368,6 @@
         "http://schema.org/name"
       ],
       "slot_uri": "http://schema.org/name",
-      "owner": "NamedThing",
-      "domain_of": [
-        "NamedThing"
-      ],
       "range": "string",
       "@type": "SlotDefinition"
     },
@@ -418,69 +380,7 @@
         "http://schema.org/description"
       ],
       "slot_uri": "http://schema.org/description",
-      "owner": "NamedThing",
-      "domain_of": [
-        "NamedThing"
-      ],
       "range": "string",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "primary_email",
-      "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/primary_email",
-      "description": "The main email address of a person",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
-      "mappings": [
-        "http://schema.org/email"
-      ],
-      "slot_uri": "http://schema.org/email",
-      "owner": "TestCase",
-      "domain_of": [
-        "TestCase"
-      ],
-      "range": "string",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "birth_date",
-      "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/birth_date",
-      "description": "Date on which a person is born",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
-      "mappings": [
-        "http://schema.org/birthDate"
-      ],
-      "slot_uri": "http://schema.org/birthDate",
-      "owner": "TestCase",
-      "domain_of": [
-        "TestCase"
-      ],
-      "range": "date",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "age_in_years",
-      "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/age_in_years",
-      "description": "Number of years since birth",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
-      "slot_uri": "https://w3id.org/TranslatorSRI/test-case-schema/age_in_years",
-      "owner": "TestCase",
-      "domain_of": [
-        "TestCase"
-      ],
-      "range": "integer",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "vital_status",
-      "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/vital_status",
-      "description": "living or dead status",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
-      "slot_uri": "https://w3id.org/TranslatorSRI/test-case-schema/vital_status",
-      "owner": "TestCase",
-      "domain_of": [
-        "TestCase"
-      ],
-      "range": "PersonStatus",
       "@type": "SlotDefinition"
     },
     {
@@ -496,63 +396,14 @@
       "range": "TestCase",
       "inlined": true,
       "@type": "SlotDefinition"
-    },
-    {
-      "name": "TestCase_primary_email",
-      "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/primary_email",
-      "description": "The main email address of a person",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
-      "mappings": [
-        "http://schema.org/email"
-      ],
-      "is_a": "primary_email",
-      "domain": "TestCase",
-      "slot_uri": "http://schema.org/email",
-      "alias": "primary_email",
-      "owner": "TestCase",
-      "domain_of": [
-        "TestCase"
-      ],
-      "is_usage_slot": true,
-      "usage_slot_name": "primary_email",
-      "range": "string",
-      "pattern": "^\\S+@[\\S+\\.]+\\S+",
-      "@type": "SlotDefinition"
     }
   ],
   "classes": [
-    {
-      "name": "NamedThing",
-      "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/NamedThing",
-      "description": "A generic grouping for any identifiable entity",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
-      "mappings": [
-        "schema:Thing"
-      ],
-      "slots": [
-        "id",
-        "name",
-        "description"
-      ],
-      "slot_usage": {},
-      "class_uri": "http://schema.org/Thing",
-      "@type": "ClassDefinition"
-    },
     {
       "name": "TestCase",
       "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/TestCase",
       "description": "Represents a TestCase",
       "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
-      "is_a": "NamedThing",
-      "slots": [
-        "id",
-        "name",
-        "description",
-        "TestCase_primary_email",
-        "birth_date",
-        "age_in_years",
-        "vital_status"
-      ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/TranslatorSRI/test-case-schema/TestCase",
       "@type": "ClassDefinition"
@@ -582,9 +433,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "test_case_schema.yaml",
-  "source_file_date": "2023-09-15T10:31:05",
-  "source_file_size": 2235,
-  "generation_date": "2023-09-15T10:44:05",
+  "source_file_date": "2023-09-15T10:46:12",
+  "source_file_size": 1137,
+  "generation_date": "2023-09-15T10:46:16",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/test_case_schema.context.jsonld",

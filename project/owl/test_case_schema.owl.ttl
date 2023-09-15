@@ -1,17 +1,14 @@
 @prefix IAO: <http://purl.obolibrary.org/obo/IAO_> .
-@prefix PATO: <http://purl.obolibrary.org/obo/PATO_> .
 @prefix linkml: <https://w3id.org/linkml/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix schema1: <http://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix test_case_schema: <https://w3id.org/TranslatorSRI/test-case-schema/> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <https://w3id.org/TranslatorSRI/test-case-schema> a owl:Ontology ;
     rdfs:label "test-case-schema" ;
-    IAO:0000700 test_case_schema:NamedThing,
+    IAO:0000700 test_case_schema:TestCase,
         test_case_schema:TestCaseCollection ;
     linkml:id "https://w3id.org/TranslatorSRI/test-case-schema" ;
     linkml:imports "linkml:types" .
@@ -23,59 +20,12 @@ linkml:TypeDefinition a owl:Class .
 linkml:topValue a owl:DatatypeProperty ;
     rdfs:label "value" .
 
-test_case_schema:TestCaseCollection a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "TestCaseCollection" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom test_case_schema:TestCase ;
-            owl:onProperty test_case_schema:entries ] ;
-    skos:definition "A holder for TestCase objects" .
-
-test_case_schema:age_in_years a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "age_in_years" ;
-    rdfs:range linkml:Integer ;
-    skos:definition "Number of years since birth" .
-
-test_case_schema:entries a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "entries" ;
-    rdfs:range test_case_schema:TestCase .
-
-test_case_schema:vital_status a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "vital_status" ;
-    rdfs:range test_case_schema:PersonStatus ;
-    skos:definition "living or dead status" .
-
-PATO:0001421 a owl:Class,
-        test_case_schema:PersonStatus ;
-    rdfs:label "ALIVE" .
-
-PATO:0001422 a owl:Class,
-        test_case_schema:PersonStatus ;
-    rdfs:label "DEAD" .
-
-schema1:birthDate a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "birth_date" ;
-    rdfs:range linkml:Date ;
-    skos:definition "Date on which a person is born" ;
-    skos:exactMatch schema1:birthDate .
-
 schema1:description a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "description" ;
     rdfs:range linkml:String ;
     skos:definition "A human-readable description for a thing" ;
     skos:exactMatch schema1:description .
-
-schema1:email a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "primary_email" ;
-    rdfs:range linkml:String ;
-    skos:definition "The main email address of a person" ;
-    skos:exactMatch schema1:email .
 
 schema1:identifier a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -91,59 +41,25 @@ schema1:name a owl:ObjectProperty,
     skos:definition "A human-readable name for a thing" ;
     skos:exactMatch schema1:name .
 
-test_case_schema:NamedThing a owl:Class,
+test_case_schema:TestCaseCollection a owl:Class,
         linkml:ClassDefinition ;
-    rdfs:label "NamedThing" ;
+    rdfs:label "TestCaseCollection" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass linkml:Uriorcurie ;
-            owl:onProperty schema1:identifier ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty schema1:name ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty schema1:description ] ;
-    skos:definition "A generic grouping for any identifiable entity" ;
-    skos:exactMatch schema1:Thing .
+            owl:allValuesFrom test_case_schema:TestCase ;
+            owl:onProperty test_case_schema:entries ] ;
+    skos:definition "A holder for TestCase objects" .
 
-<https://w3id.org/TranslatorSRI/test-case-schema/PersonStatus#UNKNOWN> a owl:Class,
-        test_case_schema:PersonStatus ;
-    rdfs:label "UNKNOWN" .
+test_case_schema:entries a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "entries" ;
+    rdfs:range test_case_schema:TestCase .
+
+linkml:ClassDefinition a owl:Class .
 
 test_case_schema:TestCase a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "TestCase" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass test_case_schema:PersonStatus ;
-            owl:onProperty test_case_schema:vital_status ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Integer ;
-            owl:onProperty test_case_schema:age_in_years ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Date ;
-            owl:onProperty schema1:birthDate ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty schema1:email ],
-        test_case_schema:NamedThing ;
     skos:definition "Represents a TestCase" .
-
-linkml:ClassDefinition a owl:Class .
-
-test_case_schema:PersonStatus a owl:Class,
-        linkml:EnumDefinition ;
-    rdfs:label "PersonStatus" ;
-    owl:unionOf ( PATO:0001421 PATO:0001422 <https://w3id.org/TranslatorSRI/test-case-schema/PersonStatus#UNKNOWN> ) ;
-    linkml:permissible_values PATO:0001421,
-        PATO:0001422,
-        <https://w3id.org/TranslatorSRI/test-case-schema/PersonStatus#UNKNOWN> .
 
 linkml:SlotDefinition a owl:Class .
 
