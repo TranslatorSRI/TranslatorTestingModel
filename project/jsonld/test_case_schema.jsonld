@@ -584,7 +584,7 @@
   "source_file": "test_case_schema.yaml",
   "source_file_date": "2023-09-15T10:31:05",
   "source_file_size": 2235,
-  "generation_date": "2023-09-15T10:31:54",
+  "generation_date": "2023-09-15T10:44:05",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/test_case_schema.context.jsonld",
