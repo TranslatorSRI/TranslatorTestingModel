@@ -36,12 +36,32 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://TranslatorSRI.github.io/test-case-schema/DirectionEnum/</loc>
+         <lastmod>2023-09-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://TranslatorSRI.github.io/test-case-schema/Double/</loc>
          <lastmod>2023-09-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://TranslatorSRI.github.io/test-case-schema/EnvironmentEnum/</loc>
+         <lastmod>2023-09-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/test-case-schema/ExpectedResultsEnum/</loc>
+         <lastmod>2023-09-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://TranslatorSRI.github.io/test-case-schema/Float/</loc>
+         <lastmod>2023-09-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/test-case-schema/Input/</loc>
          <lastmod>2023-09-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -66,6 +86,31 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://TranslatorSRI.github.io/test-case-schema/Output/</loc>
+         <lastmod>2023-09-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/test-case-schema/Precondition/</loc>
+         <lastmod>2023-09-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/test-case-schema/SemanticSmokeTestCase/</loc>
+         <lastmod>2023-09-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/test-case-schema/SemanticSmokeTestInput/</loc>
+         <lastmod>2023-09-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/test-case-schema/SemanticSmokeTestOutput/</loc>
+         <lastmod>2023-09-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://TranslatorSRI.github.io/test-case-schema/String/</loc>
          <lastmod>2023-09-15</lastmod>
          <changefreq>daily</changefreq>
@@ -76,7 +121,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://TranslatorSRI.github.io/test-case-schema/TestCaseCollection/</loc>
+         <loc>https://TranslatorSRI.github.io/test-case-schema/TestSuite/</loc>
          <lastmod>2023-09-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -101,7 +146,22 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://TranslatorSRI.github.io/test-case-schema/answer_informal_concept/</loc>
+         <lastmod>2023-09-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/test-case-schema/curie/</loc>
+         <lastmod>2023-09-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://TranslatorSRI.github.io/test-case-schema/description/</loc>
+         <lastmod>2023-09-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/test-case-schema/direction/</loc>
          <lastmod>2023-09-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -111,7 +171,27 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://TranslatorSRI.github.io/test-case-schema/expected_result/</loc>
+         <lastmod>2023-09-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://TranslatorSRI.github.io/test-case-schema/id/</loc>
+         <lastmod>2023-09-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/test-case-schema/inputs/</loc>
+         <lastmod>2023-09-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/test-case-schema/must_pass_date/</loc>
+         <lastmod>2023-09-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/test-case-schema/must_pass_environment/</loc>
          <lastmod>2023-09-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -121,7 +201,47 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://TranslatorSRI.github.io/test-case-schema/node/</loc>
+         <lastmod>2023-09-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/test-case-schema/notes/</loc>
+         <lastmod>2023-09-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/test-case-schema/outputs/</loc>
+         <lastmod>2023-09-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/test-case-schema/preconditions/</loc>
+         <lastmod>2023-09-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/test-case-schema/query/</loc>
+         <lastmod>2023-09-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/test-case-schema/requires_trapi/</loc>
+         <lastmod>2023-09-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/test-case-schema/string_entry/</loc>
+         <lastmod>2023-09-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://TranslatorSRI.github.io/test-case-schema/test-case-schema/</loc>
+         <lastmod>2023-09-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/test-case-schema/top_level/</loc>
          <lastmod>2023-09-15</lastmod>
          <changefreq>daily</changefreq>
     </url>

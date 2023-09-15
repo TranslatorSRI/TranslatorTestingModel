@@ -5,10 +5,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://TranslatorSRI.github.io/test-case-schema/TestCase/" rel="canonical"/>
+<link href="https://TranslatorSRI.github.io/test-case-schema/Precondition/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.5.2, mkdocs-material-8.5.10" name="generator"/>
-<title>Class: TestCase - test-case-schema</title>
+<title>Class: Precondition - test-case-schema</title>
 <link href="../assets/stylesheets/main.975780f9.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -21,7 +21,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#class-testcase">
+<a class="md-skip" href="#class-precondition">
           Skip to content
         </a>
 </div>
@@ -45,7 +45,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Class: TestCase
+              Class: Precondition
             
           </span>
 </div>
@@ -142,11 +142,6 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#inheritance">
-    Inheritance
-  </a>
-</li>
-<li class="md-nav__item">
 <a class="md-nav__link" href="#slots">
     Slots
   </a>
@@ -201,43 +196,17 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<a class="md-content__button md-icon" href="https://github.com/TranslatorSRI/test-case-schema/edit/master/docs/TestCase.md" title="Edit this page">
+<a class="md-content__button md-icon" href="https://github.com/TranslatorSRI/test-case-schema/edit/master/docs/Precondition.md" title="Edit this page">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"></path></svg>
 </a>
-<h1 id="class-testcase">Class: TestCase</h1>
-<p><em>Represents a TestCase</em></p>
-<p>URI: <a href="https://w3id.org/TranslatorSRI/test-case-schema/TestCase">test_case_schema:TestCase</a></p>
+<h1 id="class-precondition">Class: Precondition</h1>
+<p><em>Represents a precondition for a TestCase</em></p>
+<p>URI: <a href="https://w3id.org/TranslatorSRI/test-case-schema/Precondition">test_case_schema:Precondition</a></p>
 <div class="mermaid"> classDiagram
-    class TestCase
-      TestCase &lt;|-- SemanticSmokeTestCase
-
-      TestCase : description
-
-      TestCase : id
-
-      TestCase : inputs
-
-          TestCase --|&gt; Input : inputs
-
-      TestCase : name
-
-      TestCase : outputs
-
-          TestCase --|&gt; Output : outputs
-
-      TestCase : preconditions
-
-          TestCase --|&gt; Precondition : preconditions
-
+    class Precondition
 
 </div>
-<h2 id="inheritance">Inheritance</h2>
-<ul>
-<li><strong>TestCase</strong><ul>
-<li><a href="../SemanticSmokeTestCase/">SemanticSmokeTestCase</a></li>
-</ul>
-</li>
-</ul>
+<!-- no inheritance hierarchy -->
 <h2 id="slots">Slots</h2>
 <table>
 <thead>
@@ -250,40 +219,10 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../name/">name</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>A human-readable name for a TestCase</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../id/">id</a></td>
-<td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
-<td>A unique identifier for a TestCase</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../description/">description</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>A human-readable description for a TestCase</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../inputs/">inputs</a></td>
-<td>0..* <br/> <a href="../Input/">Input</a></td>
 <td></td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../outputs/">outputs</a></td>
-<td>0..* <br/> <a href="../Output/">Output</a></td>
 <td></td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../preconditions/">preconditions</a></td>
-<td>0..* <br/> <a href="../Precondition/">Precondition</a></td>
 <td></td>
-<td>direct</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -299,10 +238,16 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../TestSuite/">TestSuite</a></td>
-<td><a href="../entries/">entries</a></td>
+<td><a href="../TestCase/">TestCase</a></td>
+<td><a href="../preconditions/">preconditions</a></td>
 <td>range</td>
-<td><a href="./">TestCase</a></td>
+<td><a href="./">Precondition</a></td>
+</tr>
+<tr>
+<td><a href="../SemanticSmokeTestCase/">SemanticSmokeTestCase</a></td>
+<td><a href="../preconditions/">preconditions</a></td>
+<td>range</td>
+<td><a href="./">Precondition</a></td>
 </tr>
 </tbody>
 </table>
@@ -322,11 +267,11 @@
 <tbody>
 <tr>
 <td>self</td>
-<td>test_case_schema:TestCase</td>
+<td>test_case_schema:Precondition</td>
 </tr>
 <tr>
 <td>native</td>
-<td>test_case_schema:TestCase</td>
+<td>test_case_schema:Precondition</td>
 </tr>
 </tbody>
 </table>
@@ -334,89 +279,17 @@
 <!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
 <h3 id="direct">Direct</h3>
 <details>
-<pre><code class="language-yaml">name: TestCase
-description: Represents a TestCase
+<pre><code class="language-yaml">name: Precondition
+description: Represents a precondition for a TestCase
 from_schema: https://w3id.org/TranslatorSRI/test-case-schema
-slots:
-- name
-- id
-- description
-- inputs
-- outputs
-- preconditions
 
 </code></pre>
 </details>
 <h3 id="induced">Induced</h3>
 <details>
-<pre><code class="language-yaml">name: TestCase
-description: Represents a TestCase
+<pre><code class="language-yaml">name: Precondition
+description: Represents a precondition for a TestCase
 from_schema: https://w3id.org/TranslatorSRI/test-case-schema
-attributes:
-  name:
-    name: name
-    description: A human-readable name for a TestCase
-    from_schema: https://w3id.org/TranslatorSRI/test-case-schema
-    rank: 1000
-    slot_uri: schema:name
-    alias: name
-    owner: TestCase
-    domain_of:
-    - TestCase
-    range: string
-  id:
-    name: id
-    description: A unique identifier for a TestCase
-    from_schema: https://w3id.org/TranslatorSRI/test-case-schema
-    rank: 1000
-    slot_uri: schema:identifier
-    identifier: true
-    alias: id
-    owner: TestCase
-    domain_of:
-    - TestCase
-    range: uriorcurie
-  description:
-    name: description
-    description: A human-readable description for a TestCase
-    from_schema: https://w3id.org/TranslatorSRI/test-case-schema
-    rank: 1000
-    slot_uri: schema:description
-    alias: description
-    owner: TestCase
-    domain_of:
-    - TestCase
-    range: string
-  inputs:
-    name: inputs
-    from_schema: https://w3id.org/TranslatorSRI/test-case-schema
-    rank: 1000
-    multivalued: true
-    alias: inputs
-    owner: TestCase
-    domain_of:
-    - TestCase
-    range: Input
-  outputs:
-    name: outputs
-    from_schema: https://w3id.org/TranslatorSRI/test-case-schema
-    rank: 1000
-    multivalued: true
-    alias: outputs
-    owner: TestCase
-    domain_of:
-    - TestCase
-    range: Output
-  preconditions:
-    name: preconditions
-    from_schema: https://w3id.org/TranslatorSRI/test-case-schema
-    rank: 1000
-    multivalued: true
-    alias: preconditions
-    owner: TestCase
-    domain_of:
-    - TestCase
-    range: Precondition
 
 </code></pre>
 </details>

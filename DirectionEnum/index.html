@@ -8,14 +8,14 @@
       
       
       
-        <link rel="canonical" href="https://TranslatorSRI.github.io/test-case-schema/name/">
+        <link rel="canonical" href="https://TranslatorSRI.github.io/test-case-schema/DirectionEnum/">
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-8.5.10">
     
     
       
-        <title>Slot: name - test-case-schema</title>
+        <title>Enum: DirectionEnum - test-case-schema</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-name" class="md-skip">
+        <a href="#enum-directionenum" class="md-skip">
           Skip to content
         </a>
       
@@ -97,7 +97,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: name
+              Enum: DirectionEnum
             
           </span>
         </div>
@@ -256,15 +256,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#applicable-classes" class="md-nav__link">
-    Applicable Classes
+  <a href="#permissible-values" class="md-nav__link">
+    Permissible Values
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
-    Properties
+  <a href="#slots" class="md-nav__link">
+    Slots
   </a>
   
 </li>
@@ -310,43 +310,51 @@
                 
                   
 
-  <a href="https://github.com/TranslatorSRI/test-case-schema/edit/master/docs/name.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/TranslatorSRI/test-case-schema/edit/master/docs/DirectionEnum.md" title="Edit this page" class="md-content__button md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
-<h1 id="slot-name">Slot: name</h1>
-<p><em>A human-readable name for a TestCase</em></p>
-<p>URI: <a href="http://schema.org/name">schema:name</a></p>
-<!-- no inheritance hierarchy -->
-
-<h2 id="applicable-classes">Applicable Classes</h2>
+<h1 id="enum-directionenum">Enum: DirectionEnum</h1>
+<p>URI: <a href="DirectionEnum">DirectionEnum</a></p>
+<h2 id="permissible-values">Permissible Values</h2>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Meaning</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>increased</td>
+<td>None</td>
+<td></td>
+</tr>
+<tr>
+<td>decreased</td>
+<td>None</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="slots">Slots</h2>
 <table>
 <thead>
 <tr>
 <th>Name</th>
 <th>Description</th>
-<th>Modifies Slot</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><a href="../TestCase/">TestCase</a></td>
-<td>Represents a TestCase</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../SemanticSmokeTestCase/">SemanticSmokeTestCase</a></td>
-<td>Lifting schema from Shervin's runner JSON here as an example</td>
-<td>no</td>
+<td><a href="../direction/">direction</a></td>
+<td>The direction of the expected query result triple</td>
 </tr>
 </tbody>
 </table>
-<h2 id="properties">Properties</h2>
-<ul>
-<li>Range: <a href="../String/">String</a></li>
-</ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
@@ -355,15 +363,14 @@
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: name
-description: A human-readable name for a TestCase
+<pre><code class="language-yaml">name: DirectionEnum
 from_schema: https://w3id.org/TranslatorSRI/test-case-schema
 rank: 1000
-slot_uri: schema:name
-alias: name
-domain_of:
-- TestCase
-range: string
+permissible_values:
+  increased:
+    text: increased
+  decreased:
+    text: decreased
 
 </code></pre>
 

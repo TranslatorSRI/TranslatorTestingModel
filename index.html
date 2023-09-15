@@ -393,11 +393,35 @@
 </thead>
 <tbody>
 <tr>
+<td><a href="Input/">Input</a></td>
+<td>Represents an input to a TestCase</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="SemanticSmokeTestInput/">SemanticSmokeTestInput</a></td>
+<td>Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.</td>
+</tr>
+<tr>
+<td><a href="Output/">Output</a></td>
+<td>Represents an output from a TestCase</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="SemanticSmokeTestOutput/">SemanticSmokeTestOutput</a></td>
+<td>Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.</td>
+</tr>
+<tr>
+<td><a href="Precondition/">Precondition</a></td>
+<td>Represents a precondition for a TestCase</td>
+</tr>
+<tr>
 <td><a href="TestCase/">TestCase</a></td>
 <td>Represents a TestCase</td>
 </tr>
 <tr>
-<td><a href="TestCaseCollection/">TestCaseCollection</a></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="SemanticSmokeTestCase/">SemanticSmokeTestCase</a></td>
+<td>Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.</td>
+</tr>
+<tr>
+<td><a href="TestSuite/">TestSuite</a></td>
 <td>A holder for TestCase objects</td>
 </tr>
 </tbody>
@@ -412,20 +436,80 @@
 </thead>
 <tbody>
 <tr>
+<td><a href="answer_informal_concept/">answer_informal_concept</a></td>
+<td>An answer that is returned from the test case, note: this must be combined wi...</td>
+</tr>
+<tr>
+<td><a href="curie/">curie</a></td>
+<td>The curie of the query</td>
+</tr>
+<tr>
 <td><a href="description/">description</a></td>
-<td>A human-readable description for a thing</td>
+<td>A human-readable description for a TestCase</td>
+</tr>
+<tr>
+<td><a href="direction/">direction</a></td>
+<td>The direction of the expected query result triple</td>
 </tr>
 <tr>
 <td><a href="entries/">entries</a></td>
 <td></td>
 </tr>
 <tr>
+<td><a href="expected_result/">expected_result</a></td>
+<td>The expected result of the query</td>
+</tr>
+<tr>
 <td><a href="id/">id</a></td>
-<td>A unique identifier for a thing</td>
+<td>A unique identifier for a TestCase</td>
+</tr>
+<tr>
+<td><a href="inputs/">inputs</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="must_pass_date/">must_pass_date</a></td>
+<td>The date by which this test must pass</td>
+</tr>
+<tr>
+<td><a href="must_pass_environment/">must_pass_environment</a></td>
+<td>The environment in which this test must pass</td>
 </tr>
 <tr>
 <td><a href="name/">name</a></td>
-<td>A human-readable name for a thing</td>
+<td>A human-readable name for a TestCase</td>
+</tr>
+<tr>
+<td><a href="node/">node</a></td>
+<td>The node of the TRAPI query to replace</td>
+</tr>
+<tr>
+<td><a href="notes/">notes</a></td>
+<td>The notes of the query</td>
+</tr>
+<tr>
+<td><a href="outputs/">outputs</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="preconditions/">preconditions</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="query/">query</a></td>
+<td>The question a SME would ask</td>
+</tr>
+<tr>
+<td><a href="requires_trapi/">requires_trapi</a></td>
+<td>Does this test require a TRAPI-compliant query to run?</td>
+</tr>
+<tr>
+<td><a href="string_entry/">string_entry</a></td>
+<td>The object of the core triple to be tested</td>
+</tr>
+<tr>
+<td><a href="top_level/">top_level</a></td>
+<td>The answer must return in these many results</td>
 </tr>
 </tbody>
 </table>
@@ -439,7 +523,15 @@
 </thead>
 <tbody>
 <tr>
+<td><a href="DirectionEnum/">DirectionEnum</a></td>
 <td></td>
+</tr>
+<tr>
+<td><a href="EnvironmentEnum/">EnvironmentEnum</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="ExpectedResultsEnum/">ExpectedResultsEnum</a></td>
 <td></td>
 </tr>
 </tbody>

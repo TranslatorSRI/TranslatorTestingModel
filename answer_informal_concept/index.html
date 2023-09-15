@@ -8,14 +8,14 @@
       
       
       
-        <link rel="canonical" href="https://TranslatorSRI.github.io/test-case-schema/name/">
+        <link rel="canonical" href="https://TranslatorSRI.github.io/test-case-schema/answer_informal_concept/">
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-8.5.10">
     
     
       
-        <title>Slot: name - test-case-schema</title>
+        <title>Slot: answer_informal_concept - test-case-schema</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-name" class="md-skip">
+        <a href="#slot-answer_informal_concept" class="md-skip">
           Skip to content
         </a>
       
@@ -97,7 +97,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: name
+              Slot: answer_informal_concept
             
           </span>
         </div>
@@ -270,6 +270,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    Examples
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#identifier-and-mapping-information" class="md-nav__link">
     Identifier and Mapping Information
   </a>
@@ -310,15 +317,15 @@
                 
                   
 
-  <a href="https://github.com/TranslatorSRI/test-case-schema/edit/master/docs/name.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/TranslatorSRI/test-case-schema/edit/master/docs/answer_informal_concept.md" title="Edit this page" class="md-content__button md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
-<h1 id="slot-name">Slot: name</h1>
-<p><em>A human-readable name for a TestCase</em></p>
-<p>URI: <a href="http://schema.org/name">schema:name</a></p>
+<h1 id="slot-answer_informal_concept">Slot: answer_informal_concept</h1>
+<p><em>An answer that is returned from the test case, note: this must be combined with the expected_result to form a complete answer.  It might make sense to couple these in their own object instead of strictly sticking to the flat schema introduced by the spreadsheet here: https://docs.google.com/spreadsheets/d/1yj7zIchFeVl1OHqL_kE_pqvzNLmGml_FLbHDs-8Yvig/edit#gid=0</em></p>
+<p>URI: <a href="https://w3id.org/TranslatorSRI/test-case-schema/answer_informal_concept">test_case_schema:answer_informal_concept</a></p>
 <!-- no inheritance hierarchy -->
 
 <h2 id="applicable-classes">Applicable Classes</h2>
@@ -332,12 +339,7 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../TestCase/">TestCase</a></td>
-<td>Represents a TestCase</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../SemanticSmokeTestCase/">SemanticSmokeTestCase</a></td>
+<td><a href="../SemanticSmokeTestInput/">SemanticSmokeTestInput</a></td>
 <td>Lifting schema from Shervin's runner JSON here as an example</td>
 <td>no</td>
 </tr>
@@ -347,6 +349,28 @@
 <ul>
 <li>Range: <a href="../String/">String</a></li>
 </ul>
+<h2 id="examples">Examples</h2>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fingolimod</td>
+</tr>
+<tr>
+<td>natalizumab</td>
+</tr>
+<tr>
+<td>lead</td>
+</tr>
+<tr>
+<td>great answer here</td>
+</tr>
+</tbody>
+</table>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
@@ -355,14 +379,21 @@
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: name
-description: A human-readable name for a TestCase
+<pre><code class="language-yaml">name: answer_informal_concept
+description: 'An answer that is returned from the test case, note: this must be combined
+  with the expected_result to form a complete answer.  It might make sense to couple
+  these in their own object instead of strictly sticking to the flat schema introduced
+  by the spreadsheet here: https://docs.google.com/spreadsheets/d/1yj7zIchFeVl1OHqL_kE_pqvzNLmGml_FLbHDs-8Yvig/edit#gid=0'
+examples:
+- value: fingolimod
+- value: natalizumab
+- value: lead
+- value: great answer here
 from_schema: https://w3id.org/TranslatorSRI/test-case-schema
 rank: 1000
-slot_uri: schema:name
-alias: name
+alias: answer_informal_concept
 domain_of:
-- TestCase
+- SemanticSmokeTestInput
 range: string
 
 </code></pre>
