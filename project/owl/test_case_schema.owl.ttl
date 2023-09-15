@@ -5,6 +5,7 @@
 @prefix schema1: <http://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix test_case_schema: <https://w3id.org/TranslatorSRI/test-case-schema/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <https://w3id.org/TranslatorSRI/test-case-schema> a owl:Ontology ;
     rdfs:label "test-case-schema" ;
@@ -19,6 +20,19 @@ linkml:TypeDefinition a owl:Class .
 
 linkml:topValue a owl:DatatypeProperty ;
     rdfs:label "value" .
+
+test_case_schema:TestCaseCollection a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "TestCaseCollection" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom test_case_schema:TestCase ;
+            owl:onProperty test_case_schema:entries ] ;
+    skos:definition "A holder for TestCase objects" .
+
+test_case_schema:entries a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "entries" ;
+    rdfs:range test_case_schema:TestCase .
 
 schema1:description a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -41,24 +55,23 @@ schema1:name a owl:ObjectProperty,
     skos:definition "A human-readable name for a thing" ;
     skos:exactMatch schema1:name .
 
-test_case_schema:TestCaseCollection a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "TestCaseCollection" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom test_case_schema:TestCase ;
-            owl:onProperty test_case_schema:entries ] ;
-    skos:definition "A holder for TestCase objects" .
-
-test_case_schema:entries a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "entries" ;
-    rdfs:range test_case_schema:TestCase .
-
 linkml:ClassDefinition a owl:Class .
 
 test_case_schema:TestCase a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "TestCase" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty schema1:description ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty schema1:name ],
+        [ a owl:Restriction ;
+            owl:onClass linkml:Uriorcurie ;
+            owl:onProperty schema1:identifier ;
+            owl:qualifiedCardinality 1 ] ;
     skos:definition "Represents a TestCase" .
 
 linkml:SlotDefinition a owl:Class .

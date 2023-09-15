@@ -355,6 +355,10 @@
       ],
       "slot_uri": "http://schema.org/identifier",
       "identifier": true,
+      "owner": "TestCase",
+      "domain_of": [
+        "TestCase"
+      ],
       "range": "uriorcurie",
       "required": true,
       "@type": "SlotDefinition"
@@ -368,6 +372,10 @@
         "http://schema.org/name"
       ],
       "slot_uri": "http://schema.org/name",
+      "owner": "TestCase",
+      "domain_of": [
+        "TestCase"
+      ],
       "range": "string",
       "@type": "SlotDefinition"
     },
@@ -380,6 +388,10 @@
         "http://schema.org/description"
       ],
       "slot_uri": "http://schema.org/description",
+      "owner": "TestCase",
+      "domain_of": [
+        "TestCase"
+      ],
       "range": "string",
       "@type": "SlotDefinition"
     },
@@ -404,6 +416,11 @@
       "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/TestCase",
       "description": "Represents a TestCase",
       "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "slots": [
+        "name",
+        "id",
+        "description"
+      ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/TranslatorSRI/test-case-schema/TestCase",
       "@type": "ClassDefinition"
@@ -433,9 +450,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "test_case_schema.yaml",
-  "source_file_date": "2023-09-15T10:46:12",
-  "source_file_size": 1137,
-  "generation_date": "2023-09-15T10:46:16",
+  "source_file_date": "2023-09-15T10:47:35",
+  "source_file_size": 1192,
+  "generation_date": "2023-09-15T10:47:44",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/test_case_schema.context.jsonld",

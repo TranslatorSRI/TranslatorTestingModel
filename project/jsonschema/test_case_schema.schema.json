@@ -3,6 +3,23 @@
         "TestCase": {
             "additionalProperties": false,
             "description": "Represents a TestCase",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
             "title": "TestCase",
             "type": "object"
         },
@@ -11,13 +28,41 @@
             "description": "A holder for TestCase objects",
             "properties": {
                 "entries": {
-                    "items": {
-                        "$ref": "#/$defs/TestCase"
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/TestCase__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
                     },
-                    "type": "array"
+                    "type": "object"
                 }
             },
             "title": "TestCaseCollection",
+            "type": "object"
+        },
+        "TestCase__identifier_optional": {
+            "additionalProperties": false,
+            "description": "Represents a TestCase",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                }
+            },
+            "required": [],
+            "title": "TestCase",
             "type": "object"
         }
     },
@@ -28,10 +73,17 @@
     "metamodel_version": "1.7.0",
     "properties": {
         "entries": {
-            "items": {
-                "$ref": "#/$defs/TestCase"
+            "additionalProperties": {
+                "anyOf": [
+                    {
+                        "$ref": "#/$defs/TestCase__identifier_optional"
+                    },
+                    {
+                        "type": "null"
+                    }
+                ]
             },
-            "type": "array"
+            "type": "object"
         }
     },
     "title": "test-case-schema",

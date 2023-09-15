@@ -1,5 +1,5 @@
 # Auto generated from test_case_schema.yaml by pythongen.py version: 0.0.1
-# Generation date: 2023-09-15T10:46:18
+# Generation date: 2023-09-15T10:47:46
 # Schema: test-case-schema
 #
 # id: https://w3id.org/TranslatorSRI/test-case-schema
@@ -42,9 +42,11 @@ DEFAULT_ = TEST_CASE_SCHEMA
 # Types
 
 # Class references
+class TestCaseId(URIorCURIE):
+    pass
 
 
-
+@dataclass
 class TestCase(YAMLRoot):
     """
     Represents a TestCase
@@ -55,6 +57,24 @@ class TestCase(YAMLRoot):
     class_class_curie: ClassVar[str] = "test_case_schema:TestCase"
     class_name: ClassVar[str] = "TestCase"
     class_model_uri: ClassVar[URIRef] = TEST_CASE_SCHEMA.TestCase
+
+    id: Union[str, TestCaseId] = None
+    name: Optional[str] = None
+    description: Optional[str] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, TestCaseId):
+            self.id = TestCaseId(self.id)
+
+        if self.name is not None and not isinstance(self.name, str):
+            self.name = str(self.name)
+
+        if self.description is not None and not isinstance(self.description, str):
+            self.description = str(self.description)
+
+        super().__post_init__(**kwargs)
 
 
 @dataclass
@@ -69,12 +89,10 @@ class TestCaseCollection(YAMLRoot):
     class_name: ClassVar[str] = "TestCaseCollection"
     class_model_uri: ClassVar[URIRef] = TEST_CASE_SCHEMA.TestCaseCollection
 
-    entries: Optional[Union[Union[dict, TestCase], List[Union[dict, TestCase]]]] = empty_list()
+    entries: Optional[Union[Dict[Union[str, TestCaseId], Union[dict, TestCase]], List[Union[dict, TestCase]]]] = empty_dict()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if not isinstance(self.entries, list):
-            self.entries = [self.entries] if self.entries is not None else []
-        self.entries = [v if isinstance(v, TestCase) else TestCase(**as_dict(v)) for v in self.entries]
+        self._normalize_inlined_as_dict(slot_name="entries", slot_type=TestCase, key_name="id", keyed=True)
 
         super().__post_init__(**kwargs)
 
@@ -96,4 +114,4 @@ slots.description = Slot(uri=SCHEMA.description, name="description", curie=SCHEM
                    model_uri=TEST_CASE_SCHEMA.description, domain=None, range=Optional[str])
 
 slots.testCaseCollection__entries = Slot(uri=TEST_CASE_SCHEMA.entries, name="testCaseCollection__entries", curie=TEST_CASE_SCHEMA.curie('entries'),
-                   model_uri=TEST_CASE_SCHEMA.testCaseCollection__entries, domain=None, range=Optional[Union[Union[dict, TestCase], List[Union[dict, TestCase]]]])
+                   model_uri=TEST_CASE_SCHEMA.testCaseCollection__entries, domain=None, range=Optional[Union[Dict[Union[str, TestCaseId], Union[dict, TestCase]], List[Union[dict, TestCase]]]])

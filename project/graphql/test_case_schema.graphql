@@ -1,5 +1,8 @@
 type TestCase
   {
+    name: String
+    id: Uriorcurie!
+    description: String
   }
 
 type TestCaseCollection

@@ -1,4 +1,5 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema1: <http://schema.org/> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix test_case_schema: <https://w3id.org/TranslatorSRI/test-case-schema/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -8,7 +9,7 @@ test_case_schema:TestCaseCollection a sh:NodeShape ;
     sh:description "A holder for TestCase objects" ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:class test_case_schema:TestCase ;
-            sh:nodeKind sh:BlankNode ;
+            sh:nodeKind sh:IRI ;
             sh:order 0 ;
             sh:path test_case_schema:entries ] ;
     sh:targetClass test_case_schema:TestCaseCollection .
@@ -17,5 +18,19 @@ test_case_schema:TestCase a sh:NodeShape ;
     sh:closed true ;
     sh:description "Represents a TestCase" ;
     sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path schema1:name ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path schema1:identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path schema1:description ] ;
     sh:targetClass test_case_schema:TestCase .
 
