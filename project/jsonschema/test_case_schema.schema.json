@@ -1,20 +1,187 @@
 {
     "$defs": {
+        "DirectionEnum": {
+            "description": "",
+            "enum": [
+                "increased",
+                "decreased"
+            ],
+            "title": "DirectionEnum",
+            "type": "string"
+        },
+        "EnvironmentEnum": {
+            "description": "",
+            "enum": [
+                "DEV",
+                "CI",
+                "TEST",
+                "PROD"
+            ],
+            "title": "EnvironmentEnum",
+            "type": "string"
+        },
+        "ExpectedResultsEnum": {
+            "description": "",
+            "enum": [
+                "include_good",
+                "exclude_bad"
+            ],
+            "title": "ExpectedResultsEnum",
+            "type": "string"
+        },
+        "Input": {
+            "additionalProperties": false,
+            "description": "Represents an input to a TestCase",
+            "title": "Input",
+            "type": "object"
+        },
+        "Output": {
+            "additionalProperties": false,
+            "description": "Represents an output from a TestCase",
+            "title": "Output",
+            "type": "object"
+        },
+        "Precondition": {
+            "additionalProperties": false,
+            "description": "Represents a precondition for a TestCase",
+            "title": "Precondition",
+            "type": "object"
+        },
+        "SemanticSmokeTestCase": {
+            "additionalProperties": false,
+            "description": "Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a TestCase",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a TestCase",
+                    "type": "string"
+                },
+                "inputs": {
+                    "items": {
+                        "$ref": "#/$defs/SemanticSmokeTestInput"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "description": "A human-readable name for a TestCase",
+                    "type": "string"
+                },
+                "outputs": {
+                    "items": {
+                        "$ref": "#/$defs/SemanticSmokeTestOutput"
+                    },
+                    "type": "array"
+                },
+                "preconditions": {
+                    "items": {
+                        "$ref": "#/$defs/Precondition"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id",
+                "inputs",
+                "outputs"
+            ],
+            "title": "SemanticSmokeTestCase",
+            "type": "object"
+        },
+        "SemanticSmokeTestInput": {
+            "additionalProperties": false,
+            "description": "Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.",
+            "properties": {
+                "answer_informal_concept": {
+                    "description": "An answer that is returned from the test case, note: this must be combined with the expected_result to form a complete answer.  It might make sense to couple these in their own object instead of strictly sticking to the flat schema introduced by the spreadsheet here: https://docs.google.com/spreadsheets/d/1yj7zIchFeVl1OHqL_kE_pqvzNLmGml_FLbHDs-8Yvig/edit#gid=0",
+                    "type": "string"
+                },
+                "curie": {
+                    "description": "The curie of the query",
+                    "type": "string"
+                },
+                "direction": {
+                    "$ref": "#/$defs/DirectionEnum",
+                    "description": "The direction of the expected query result triple"
+                },
+                "expected_result": {
+                    "$ref": "#/$defs/ExpectedResultsEnum",
+                    "description": "The expected result of the query"
+                },
+                "must_pass_date": {
+                    "description": "The date by which this test must pass",
+                    "format": "date",
+                    "type": "string"
+                },
+                "must_pass_environment": {
+                    "$ref": "#/$defs/EnvironmentEnum",
+                    "description": "The environment in which this test must pass"
+                },
+                "node": {
+                    "description": "The node of the TRAPI query to replace.",
+                    "type": "string"
+                },
+                "notes": {
+                    "description": "The notes of the query",
+                    "type": "string"
+                },
+                "query": {
+                    "description": "The question a SME would ask",
+                    "type": "string"
+                },
+                "string_entry": {
+                    "description": "The object of the core triple to be tested",
+                    "type": "string"
+                },
+                "top_level": {
+                    "description": "The answer must return in these many results",
+                    "type": "string"
+                }
+            },
+            "title": "SemanticSmokeTestInput",
+            "type": "object"
+        },
+        "SemanticSmokeTestOutput": {
+            "additionalProperties": false,
+            "description": "Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.",
+            "title": "SemanticSmokeTestOutput",
+            "type": "object"
+        },
         "TestCase": {
             "additionalProperties": false,
             "description": "Represents a TestCase",
             "properties": {
                 "description": {
-                    "description": "A human-readable description for a thing",
+                    "description": "A human-readable description for a TestCase",
                     "type": "string"
                 },
                 "id": {
-                    "description": "A unique identifier for a thing",
+                    "description": "A unique identifier for a TestCase",
                     "type": "string"
                 },
+                "inputs": {
+                    "items": {
+                        "$ref": "#/$defs/Input"
+                    },
+                    "type": "array"
+                },
                 "name": {
-                    "description": "A human-readable name for a thing",
+                    "description": "A human-readable name for a TestCase",
                     "type": "string"
+                },
+                "outputs": {
+                    "items": {
+                        "$ref": "#/$defs/Output"
+                    },
+                    "type": "array"
+                },
+                "preconditions": {
+                    "items": {
+                        "$ref": "#/$defs/Precondition"
+                    },
+                    "type": "array"
                 }
             },
             "required": [
@@ -23,7 +190,46 @@
             "title": "TestCase",
             "type": "object"
         },
-        "TestCaseCollection": {
+        "TestCase__identifier_optional": {
+            "additionalProperties": false,
+            "description": "Represents a TestCase",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a TestCase",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a TestCase",
+                    "type": "string"
+                },
+                "inputs": {
+                    "items": {
+                        "$ref": "#/$defs/Input"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "description": "A human-readable name for a TestCase",
+                    "type": "string"
+                },
+                "outputs": {
+                    "items": {
+                        "$ref": "#/$defs/Output"
+                    },
+                    "type": "array"
+                },
+                "preconditions": {
+                    "items": {
+                        "$ref": "#/$defs/Precondition"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [],
+            "title": "TestCase",
+            "type": "object"
+        },
+        "TestSuite": {
             "additionalProperties": false,
             "description": "A holder for TestCase objects",
             "properties": {
@@ -41,28 +247,7 @@
                     "type": "object"
                 }
             },
-            "title": "TestCaseCollection",
-            "type": "object"
-        },
-        "TestCase__identifier_optional": {
-            "additionalProperties": false,
-            "description": "Represents a TestCase",
-            "properties": {
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "A unique identifier for a thing",
-                    "type": "string"
-                },
-                "name": {
-                    "description": "A human-readable name for a thing",
-                    "type": "string"
-                }
-            },
-            "required": [],
-            "title": "TestCase",
+            "title": "TestSuite",
             "type": "object"
         }
     },

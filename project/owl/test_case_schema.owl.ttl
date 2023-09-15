@@ -1,6 +1,7 @@
 @prefix IAO: <http://purl.obolibrary.org/obo/IAO_> .
 @prefix linkml: <https://w3id.org/linkml/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix schema1: <http://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
@@ -9,10 +10,37 @@
 
 <https://w3id.org/TranslatorSRI/test-case-schema> a owl:Ontology ;
     rdfs:label "test-case-schema" ;
-    IAO:0000700 test_case_schema:TestCase,
-        test_case_schema:TestCaseCollection ;
+    IAO:0000700 test_case_schema:Input,
+        test_case_schema:Output,
+        test_case_schema:Precondition,
+        test_case_schema:TestCase,
+        test_case_schema:TestSuite ;
     linkml:id "https://w3id.org/TranslatorSRI/test-case-schema" ;
     linkml:imports "linkml:types" .
+
+test_case_schema:SemanticSmokeTestCase a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "SemanticSmokeTestCase" ;
+    rdfs:subClassOf [ a owl:Class ;
+            owl:intersectionOf ( [ a owl:Restriction ;
+                        owl:allValuesFrom test_case_schema:SemanticSmokeTestInput ;
+                        owl:onProperty test_case_schema:inputs ] [ a owl:Restriction ;
+                        owl:onProperty test_case_schema:inputs ;
+                        owl:someValuesFrom test_case_schema:SemanticSmokeTestInput ] ) ],
+        [ a owl:Class ;
+            owl:intersectionOf ( [ a owl:Restriction ;
+                        owl:allValuesFrom test_case_schema:SemanticSmokeTestOutput ;
+                        owl:onProperty test_case_schema:outputs ] [ a owl:Restriction ;
+                        owl:onProperty test_case_schema:outputs ;
+                        owl:someValuesFrom test_case_schema:SemanticSmokeTestOutput ] ) ],
+        test_case_schema:TestCase ;
+    skos:definition "Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete." .
+
+test_case_schema:requires_trapi a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "requires_trapi" ;
+    rdfs:range linkml:Boolean ;
+    skos:definition "Does this test require a TRAPI-compliant query to run?" .
 
 linkml:SubsetDefinition a owl:Class .
 
@@ -21,49 +49,256 @@ linkml:TypeDefinition a owl:Class .
 linkml:topValue a owl:DatatypeProperty ;
     rdfs:label "value" .
 
-test_case_schema:TestCaseCollection a owl:Class,
+test_case_schema:TestSuite a owl:Class,
         linkml:ClassDefinition ;
-    rdfs:label "TestCaseCollection" ;
+    rdfs:label "TestSuite" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:allValuesFrom test_case_schema:TestCase ;
             owl:onProperty test_case_schema:entries ] ;
     skos:definition "A holder for TestCase objects" .
+
+test_case_schema:answer_informal_concept a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "answer_informal_concept" ;
+    rdfs:range linkml:String ;
+    skos:definition "An answer that is returned from the test case, note: this must be combined with the expected_result to form a complete answer.  It might make sense to couple these in their own object instead of strictly sticking to the flat schema introduced by the spreadsheet here: https://docs.google.com/spreadsheets/d/1yj7zIchFeVl1OHqL_kE_pqvzNLmGml_FLbHDs-8Yvig/edit#gid=0" .
+
+test_case_schema:curie a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "curie" ;
+    rdfs:range linkml:Curie ;
+    skos:definition "The curie of the query" .
+
+test_case_schema:direction a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "direction" ;
+    rdfs:range test_case_schema:DirectionEnum ;
+    skos:definition "The direction of the expected query result triple" .
 
 test_case_schema:entries a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "entries" ;
     rdfs:range test_case_schema:TestCase .
 
+test_case_schema:expected_result a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "expected_result" ;
+    rdfs:range test_case_schema:ExpectedResultsEnum ;
+    skos:definition "The expected result of the query" .
+
+test_case_schema:must_pass_date a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "must_pass_date" ;
+    rdfs:range linkml:Date ;
+    skos:definition "The date by which this test must pass" .
+
+test_case_schema:must_pass_environment a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "must_pass_environment" ;
+    rdfs:range test_case_schema:EnvironmentEnum ;
+    skos:definition "The environment in which this test must pass" .
+
+test_case_schema:node a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "node" ;
+    rdfs:range linkml:String ;
+    skos:definition "The node of the TRAPI query to replace." .
+
+test_case_schema:notes a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "notes" ;
+    rdfs:range linkml:String ;
+    skos:definition "The notes of the query" .
+
+test_case_schema:preconditions a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "preconditions" ;
+    rdfs:range test_case_schema:Precondition .
+
+test_case_schema:query a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "query" ;
+    rdfs:range linkml:String ;
+    skos:definition "The question a SME would ask" .
+
+test_case_schema:string_entry a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "string_entry" ;
+    rdfs:range linkml:String ;
+    skos:altLabel "disease",
+        "trapi node 2" ;
+    skos:definition "The object of the core triple to be tested" .
+
+test_case_schema:top_level a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "top_level" ;
+    rdfs:range linkml:String ;
+    skos:definition "The answer must return in these many results" .
+
 schema1:description a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "description" ;
     rdfs:range linkml:String ;
-    skos:definition "A human-readable description for a thing" ;
+    skos:definition "A human-readable description for a TestCase" ;
     skos:exactMatch schema1:description .
 
 schema1:identifier a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "id" ;
     rdfs:range linkml:Uriorcurie ;
-    skos:definition "A unique identifier for a thing" ;
+    skos:definition "A unique identifier for a TestCase" ;
     skos:exactMatch schema1:identifier .
 
 schema1:name a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "name" ;
     rdfs:range linkml:String ;
-    skos:definition "A human-readable name for a thing" ;
+    skos:definition "A human-readable name for a TestCase" ;
     skos:exactMatch schema1:name .
 
-linkml:ClassDefinition a owl:Class .
+<https://w3id.org/TranslatorSRI/test-case-schema/DirectionEnum#decreased> a owl:Class,
+        test_case_schema:DirectionEnum ;
+    rdfs:label "decreased" .
+
+<https://w3id.org/TranslatorSRI/test-case-schema/DirectionEnum#increased> a owl:Class,
+        test_case_schema:DirectionEnum ;
+    rdfs:label "increased" .
+
+<https://w3id.org/TranslatorSRI/test-case-schema/EnvironmentEnum#CI> a owl:Class,
+        test_case_schema:EnvironmentEnum ;
+    rdfs:label "CI" .
+
+<https://w3id.org/TranslatorSRI/test-case-schema/EnvironmentEnum#DEV> a owl:Class,
+        test_case_schema:EnvironmentEnum ;
+    rdfs:label "DEV" .
+
+<https://w3id.org/TranslatorSRI/test-case-schema/EnvironmentEnum#PROD> a owl:Class,
+        test_case_schema:EnvironmentEnum ;
+    rdfs:label "PROD" .
+
+<https://w3id.org/TranslatorSRI/test-case-schema/EnvironmentEnum#TEST> a owl:Class,
+        test_case_schema:EnvironmentEnum ;
+    rdfs:label "TEST" .
+
+<https://w3id.org/TranslatorSRI/test-case-schema/ExpectedResultsEnum#exclude_bad> a owl:Class,
+        test_case_schema:ExpectedResultsEnum ;
+    rdfs:label "exclude_bad" .
+
+<https://w3id.org/TranslatorSRI/test-case-schema/ExpectedResultsEnum#include_good> a owl:Class,
+        test_case_schema:ExpectedResultsEnum ;
+    rdfs:label "include_good" .
+
+test_case_schema:SemanticSmokeTestInput a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "SemanticSmokeTestInput" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty test_case_schema:top_level ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Curie ;
+            owl:onProperty test_case_schema:curie ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty test_case_schema:answer_informal_concept ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Date ;
+            owl:onProperty test_case_schema:must_pass_date ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty test_case_schema:node ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass test_case_schema:DirectionEnum ;
+            owl:onProperty test_case_schema:direction ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty test_case_schema:query ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty test_case_schema:notes ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass test_case_schema:EnvironmentEnum ;
+            owl:onProperty test_case_schema:must_pass_environment ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass test_case_schema:ExpectedResultsEnum ;
+            owl:onProperty test_case_schema:expected_result ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty test_case_schema:string_entry ],
+        test_case_schema:Input ;
+    skos:definition "Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete." .
+
+test_case_schema:SemanticSmokeTestOutput a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "SemanticSmokeTestOutput" ;
+    rdfs:subClassOf test_case_schema:Output ;
+    skos:definition "Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete." .
+
+test_case_schema:Precondition a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Precondition" ;
+    skos:definition "Represents a precondition for a TestCase" .
+
+test_case_schema:inputs a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "inputs" ;
+    rdfs:range test_case_schema:Input .
+
+test_case_schema:outputs a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "outputs" ;
+    rdfs:range test_case_schema:Output .
+
+test_case_schema:DirectionEnum a owl:Class,
+        linkml:EnumDefinition ;
+    rdfs:label "DirectionEnum" ;
+    owl:unionOf ( <https://w3id.org/TranslatorSRI/test-case-schema/DirectionEnum#increased> <https://w3id.org/TranslatorSRI/test-case-schema/DirectionEnum#decreased> ) ;
+    linkml:permissible_values <https://w3id.org/TranslatorSRI/test-case-schema/DirectionEnum#decreased>,
+        <https://w3id.org/TranslatorSRI/test-case-schema/DirectionEnum#increased> .
+
+test_case_schema:ExpectedResultsEnum a owl:Class,
+        linkml:EnumDefinition ;
+    rdfs:label "ExpectedResultsEnum" ;
+    owl:unionOf ( <https://w3id.org/TranslatorSRI/test-case-schema/ExpectedResultsEnum#include_good> <https://w3id.org/TranslatorSRI/test-case-schema/ExpectedResultsEnum#exclude_bad> ) ;
+    linkml:permissible_values <https://w3id.org/TranslatorSRI/test-case-schema/ExpectedResultsEnum#exclude_bad>,
+        <https://w3id.org/TranslatorSRI/test-case-schema/ExpectedResultsEnum#include_good> .
+
+test_case_schema:Input a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Input" ;
+    skos:definition "Represents an input to a TestCase" .
+
+test_case_schema:Output a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Output" ;
+    skos:definition "Represents an output from a TestCase" .
 
 test_case_schema:TestCase a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "TestCase" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom test_case_schema:Precondition ;
+            owl:onProperty test_case_schema:preconditions ],
+        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
             owl:onProperty schema1:description ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom test_case_schema:Input ;
+            owl:onProperty test_case_schema:inputs ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom test_case_schema:Output ;
+            owl:onProperty test_case_schema:outputs ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
@@ -73,6 +308,17 @@ test_case_schema:TestCase a owl:Class,
             owl:onProperty schema1:identifier ;
             owl:qualifiedCardinality 1 ] ;
     skos:definition "Represents a TestCase" .
+
+test_case_schema:EnvironmentEnum a owl:Class,
+        linkml:EnumDefinition ;
+    rdfs:label "EnvironmentEnum" ;
+    owl:unionOf ( <https://w3id.org/TranslatorSRI/test-case-schema/EnvironmentEnum#DEV> <https://w3id.org/TranslatorSRI/test-case-schema/EnvironmentEnum#CI> <https://w3id.org/TranslatorSRI/test-case-schema/EnvironmentEnum#TEST> <https://w3id.org/TranslatorSRI/test-case-schema/EnvironmentEnum#PROD> ) ;
+    linkml:permissible_values <https://w3id.org/TranslatorSRI/test-case-schema/EnvironmentEnum#CI>,
+        <https://w3id.org/TranslatorSRI/test-case-schema/EnvironmentEnum#DEV>,
+        <https://w3id.org/TranslatorSRI/test-case-schema/EnvironmentEnum#PROD>,
+        <https://w3id.org/TranslatorSRI/test-case-schema/EnvironmentEnum#TEST> .
+
+linkml:ClassDefinition a owl:Class .
 
 linkml:SlotDefinition a owl:Class .
 

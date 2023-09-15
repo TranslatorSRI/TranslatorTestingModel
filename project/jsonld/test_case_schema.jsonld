@@ -344,11 +344,60 @@
       "@type": "TypeDefinition"
     }
   ],
+  "enums": [
+    {
+      "name": "ExpectedResultsEnum",
+      "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/ExpectedResultsEnum",
+      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "permissible_values": [
+        {
+          "text": "include_good",
+          "description": "The query should return the result in this test case"
+        },
+        {
+          "text": "exclude_bad",
+          "description": "The query should not return the result in this test case"
+        }
+      ]
+    },
+    {
+      "name": "DirectionEnum",
+      "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/DirectionEnum",
+      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "permissible_values": [
+        {
+          "text": "increased"
+        },
+        {
+          "text": "decreased"
+        }
+      ]
+    },
+    {
+      "name": "EnvironmentEnum",
+      "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/EnvironmentEnum",
+      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "permissible_values": [
+        {
+          "text": "DEV"
+        },
+        {
+          "text": "CI"
+        },
+        {
+          "text": "TEST"
+        },
+        {
+          "text": "PROD"
+        }
+      ]
+    }
+  ],
   "slots": [
     {
       "name": "id",
       "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/id",
-      "description": "A unique identifier for a thing",
+      "description": "A unique identifier for a TestCase",
       "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
       "mappings": [
         "http://schema.org/identifier"
@@ -366,7 +415,7 @@
     {
       "name": "name",
       "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/name",
-      "description": "A human-readable name for a thing",
+      "description": "A human-readable name for a TestCase",
       "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
       "mappings": [
         "http://schema.org/name"
@@ -382,7 +431,7 @@
     {
       "name": "description",
       "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/description",
-      "description": "A human-readable description for a thing",
+      "description": "A human-readable description for a TestCase",
       "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
       "mappings": [
         "http://schema.org/description"
@@ -396,16 +445,312 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "testCaseCollection__entries",
+      "name": "must_pass_date",
+      "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/must_pass_date",
+      "description": "The date by which this test must pass",
+      "examples": [
+        {
+          "value": "2023-09-01",
+          "@type": "Example"
+        }
+      ],
+      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "slot_uri": "https://w3id.org/TranslatorSRI/test-case-schema/must_pass_date",
+      "owner": "SemanticSmokeTestInput",
+      "domain_of": [
+        "SemanticSmokeTestInput"
+      ],
+      "range": "date",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "must_pass_environment",
+      "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/must_pass_environment",
+      "description": "The environment in which this test must pass",
+      "examples": [
+        {
+          "value": "PROD",
+          "@type": "Example"
+        },
+        {
+          "value": "CI",
+          "@type": "Example"
+        },
+        {
+          "value": "TEST",
+          "@type": "Example"
+        }
+      ],
+      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "slot_uri": "https://w3id.org/TranslatorSRI/test-case-schema/must_pass_environment",
+      "owner": "SemanticSmokeTestInput",
+      "domain_of": [
+        "SemanticSmokeTestInput"
+      ],
+      "range": "EnvironmentEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "query",
+      "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/query",
+      "description": "The question a SME would ask",
+      "examples": [
+        {
+          "value": "What drugs may treat multiple sclerosis?",
+          "@type": "Example"
+        },
+        {
+          "value": "What gene is upregulated?",
+          "@type": "Example"
+        }
+      ],
+      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "slot_uri": "https://w3id.org/TranslatorSRI/test-case-schema/query",
+      "owner": "SemanticSmokeTestInput",
+      "domain_of": [
+        "SemanticSmokeTestInput"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "string_entry",
+      "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/string_entry",
+      "description": "The object of the core triple to be tested",
+      "examples": [
+        {
+          "value": "multiple sclerosis",
+          "@type": "Example"
+        },
+        {
+          "value": "Castlemans",
+          "@type": "Example"
+        }
+      ],
+      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "aliases": [
+        "trapi node 2",
+        "disease"
+      ],
+      "slot_uri": "https://w3id.org/TranslatorSRI/test-case-schema/string_entry",
+      "owner": "SemanticSmokeTestInput",
+      "domain_of": [
+        "SemanticSmokeTestInput"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "direction",
+      "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/direction",
+      "description": "The direction of the expected query result triple",
+      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "slot_uri": "https://w3id.org/TranslatorSRI/test-case-schema/direction",
+      "owner": "SemanticSmokeTestInput",
+      "domain_of": [
+        "SemanticSmokeTestInput"
+      ],
+      "range": "DirectionEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "answer_informal_concept",
+      "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/answer_informal_concept",
+      "description": "An answer that is returned from the test case, note: this must be combined with the expected_result to form a complete answer.  It might make sense to couple these in their own object instead of strictly sticking to the flat schema introduced by the spreadsheet here: https://docs.google.com/spreadsheets/d/1yj7zIchFeVl1OHqL_kE_pqvzNLmGml_FLbHDs-8Yvig/edit#gid=0",
+      "examples": [
+        {
+          "value": "fingolimod",
+          "@type": "Example"
+        },
+        {
+          "value": "natalizumab",
+          "@type": "Example"
+        },
+        {
+          "value": "lead",
+          "@type": "Example"
+        },
+        {
+          "value": "great answer here",
+          "@type": "Example"
+        }
+      ],
+      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "slot_uri": "https://w3id.org/TranslatorSRI/test-case-schema/answer_informal_concept",
+      "owner": "SemanticSmokeTestInput",
+      "domain_of": [
+        "SemanticSmokeTestInput"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "expected_result",
+      "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/expected_result",
+      "description": "The expected result of the query",
+      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "slot_uri": "https://w3id.org/TranslatorSRI/test-case-schema/expected_result",
+      "owner": "SemanticSmokeTestInput",
+      "domain_of": [
+        "SemanticSmokeTestInput"
+      ],
+      "range": "ExpectedResultsEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "curie",
+      "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/curie",
+      "description": "The curie of the query",
+      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "slot_uri": "https://w3id.org/TranslatorSRI/test-case-schema/curie",
+      "owner": "SemanticSmokeTestInput",
+      "domain_of": [
+        "SemanticSmokeTestInput"
+      ],
+      "range": "curie",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "top_level",
+      "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/top_level",
+      "description": "The answer must return in these many results",
+      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "slot_uri": "https://w3id.org/TranslatorSRI/test-case-schema/top_level",
+      "owner": "SemanticSmokeTestInput",
+      "domain_of": [
+        "SemanticSmokeTestInput"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "node",
+      "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/node",
+      "description": "The node of the TRAPI query to replace.",
+      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "slot_uri": "https://w3id.org/TranslatorSRI/test-case-schema/node",
+      "owner": "SemanticSmokeTestInput",
+      "domain_of": [
+        "SemanticSmokeTestInput"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "notes",
+      "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/notes",
+      "description": "The notes of the query",
+      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "slot_uri": "https://w3id.org/TranslatorSRI/test-case-schema/notes",
+      "owner": "SemanticSmokeTestInput",
+      "domain_of": [
+        "SemanticSmokeTestInput"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "requires_trapi",
+      "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/requires_trapi",
+      "description": "Does this test require a TRAPI-compliant query to run?",
+      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "slot_uri": "https://w3id.org/TranslatorSRI/test-case-schema/requires_trapi",
+      "range": "boolean",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "inputs",
+      "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/inputs",
+      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "slot_uri": "https://w3id.org/TranslatorSRI/test-case-schema/inputs",
+      "multivalued": true,
+      "owner": "TestCase",
+      "domain_of": [
+        "TestCase"
+      ],
+      "range": "Input",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "outputs",
+      "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/outputs",
+      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "slot_uri": "https://w3id.org/TranslatorSRI/test-case-schema/outputs",
+      "multivalued": true,
+      "owner": "TestCase",
+      "domain_of": [
+        "TestCase"
+      ],
+      "range": "Output",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "preconditions",
+      "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/preconditions",
+      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "slot_uri": "https://w3id.org/TranslatorSRI/test-case-schema/preconditions",
+      "multivalued": true,
+      "owner": "TestCase",
+      "domain_of": [
+        "TestCase"
+      ],
+      "range": "Precondition",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "testSuite__entries",
       "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
       "slot_uri": "https://w3id.org/TranslatorSRI/test-case-schema/entries",
       "multivalued": true,
       "alias": "entries",
-      "owner": "TestCaseCollection",
+      "owner": "TestSuite",
       "domain_of": [
-        "TestCaseCollection"
+        "TestSuite"
       ],
       "range": "TestCase",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "SemanticSmokeTestCase_inputs",
+      "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/inputs",
+      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "is_a": "inputs",
+      "domain": "SemanticSmokeTestCase",
+      "slot_uri": "https://w3id.org/TranslatorSRI/test-case-schema/inputs",
+      "multivalued": true,
+      "alias": "inputs",
+      "owner": "SemanticSmokeTestCase",
+      "domain_of": [
+        "SemanticSmokeTestCase"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "inputs",
+      "range": "SemanticSmokeTestInput",
+      "required": true,
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "SemanticSmokeTestCase_outputs",
+      "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/outputs",
+      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "is_a": "outputs",
+      "domain": "SemanticSmokeTestCase",
+      "slot_uri": "https://w3id.org/TranslatorSRI/test-case-schema/outputs",
+      "multivalued": true,
+      "alias": "outputs",
+      "owner": "SemanticSmokeTestCase",
+      "domain_of": [
+        "SemanticSmokeTestCase"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "outputs",
+      "range": "SemanticSmokeTestOutput",
+      "required": true,
       "inlined": true,
       "@type": "SlotDefinition"
     }
@@ -419,19 +764,100 @@
       "slots": [
         "name",
         "id",
-        "description"
+        "description",
+        "inputs",
+        "outputs",
+        "preconditions"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/TranslatorSRI/test-case-schema/TestCase",
       "@type": "ClassDefinition"
     },
     {
-      "name": "TestCaseCollection",
-      "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/TestCaseCollection",
+      "name": "SemanticSmokeTestCase",
+      "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/SemanticSmokeTestCase",
+      "description": "Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.",
+      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "is_a": "TestCase",
+      "slots": [
+        "name",
+        "id",
+        "description",
+        "preconditions",
+        "SemanticSmokeTestCase_inputs",
+        "SemanticSmokeTestCase_outputs"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/TranslatorSRI/test-case-schema/SemanticSmokeTestCase",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Input",
+      "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/Input",
+      "description": "Represents an input to a TestCase",
+      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/TranslatorSRI/test-case-schema/Input",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "SemanticSmokeTestInput",
+      "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/SemanticSmokeTestInput",
+      "description": "Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.",
+      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "is_a": "Input",
+      "slots": [
+        "must_pass_date",
+        "must_pass_environment",
+        "query",
+        "string_entry",
+        "direction",
+        "answer_informal_concept",
+        "expected_result",
+        "curie",
+        "top_level",
+        "node",
+        "notes"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/TranslatorSRI/test-case-schema/SemanticSmokeTestInput",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Output",
+      "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/Output",
+      "description": "Represents an output from a TestCase",
+      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/TranslatorSRI/test-case-schema/Output",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "SemanticSmokeTestOutput",
+      "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/SemanticSmokeTestOutput",
+      "description": "Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.",
+      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "is_a": "Output",
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/TranslatorSRI/test-case-schema/SemanticSmokeTestOutput",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Precondition",
+      "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/Precondition",
+      "description": "Represents a precondition for a TestCase",
+      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/TranslatorSRI/test-case-schema/Precondition",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "TestSuite",
+      "definition_uri": "https://w3id.org/TranslatorSRI/test-case-schema/TestSuite",
       "description": "A holder for TestCase objects",
       "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
       "slots": [
-        "testCaseCollection__entries"
+        "testSuite__entries"
       ],
       "slot_usage": {},
       "attributes": [
@@ -443,16 +869,16 @@
           "@type": "SlotDefinition"
         }
       ],
-      "class_uri": "https://w3id.org/TranslatorSRI/test-case-schema/TestCaseCollection",
+      "class_uri": "https://w3id.org/TranslatorSRI/test-case-schema/TestSuite",
       "tree_root": true,
       "@type": "ClassDefinition"
     }
   ],
   "metamodel_version": "1.7.0",
   "source_file": "test_case_schema.yaml",
-  "source_file_date": "2023-09-15T10:47:35",
-  "source_file_size": 1192,
-  "generation_date": "2023-09-15T10:47:44",
+  "source_file_date": "2023-09-15T11:16:43",
+  "source_file_size": 5042,
+  "generation_date": "2023-09-15T11:16:46",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/test_case_schema.context.jsonld",

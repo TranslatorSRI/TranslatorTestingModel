@@ -43,17 +43,81 @@ linkml:Jsonpath xsd:string
 
 linkml:Sparqlpath xsd:string
 
-<TestCase> CLOSED {
-    (  $<TestCase_tes> (  schema1:name @linkml:String ? ;
-          schema1:description @linkml:String ?
-       ) ;
-       rdf:type [ <TestCase> ]
+<Input>  (
+    CLOSED {
+       (  $<Input_tes> rdf:type . * ;
+          rdf:type [ <Input> ] ?
+       )
+    } OR @<SemanticSmokeTestInput>
+)
+
+<Output>  (
+    CLOSED {
+       (  $<Output_tes> rdf:type . * ;
+          rdf:type [ <Output> ] ?
+       )
+    } OR @<SemanticSmokeTestOutput>
+)
+
+<Precondition> CLOSED {
+    (  $<Precondition_tes> rdf:type . * ;
+       rdf:type [ <Precondition> ] ?
     )
 }
 
-<TestCaseCollection> CLOSED {
-    (  $<TestCaseCollection_tes> <entries> @<TestCase> * ;
-       rdf:type [ <TestCaseCollection> ] ?
+<SemanticSmokeTestCase> CLOSED {
+    (  $<SemanticSmokeTestCase_tes> (  &<TestCase_tes> ;
+          rdf:type [ <TestCase> ] ? ;
+          <inputs> @<SemanticSmokeTestInput> + ;
+          <outputs> @<SemanticSmokeTestOutput> +
+       ) ;
+       rdf:type [ <SemanticSmokeTestCase> ]
+    )
+}
+
+<SemanticSmokeTestInput> CLOSED {
+    (  $<SemanticSmokeTestInput_tes> (  &<Input_tes> ;
+          rdf:type [ <Input> ] ? ;
+          <must_pass_date> @linkml:Date ? ;
+          <must_pass_environment> @<EnvironmentEnum> ? ;
+          <query> @linkml:String ? ;
+          <string_entry> @linkml:String ? ;
+          <direction> @<DirectionEnum> ? ;
+          <answer_informal_concept> @linkml:String ? ;
+          <expected_result> @<ExpectedResultsEnum> ? ;
+          <curie> @linkml:Curie ? ;
+          <top_level> @linkml:String ? ;
+          <node> @linkml:String ? ;
+          <notes> @linkml:String ?
+       ) ;
+       rdf:type [ <SemanticSmokeTestInput> ] ?
+    )
+}
+
+<SemanticSmokeTestOutput> CLOSED {
+    (  $<SemanticSmokeTestOutput_tes> (  &<Output_tes> ;
+          rdf:type [ <Output> ] ?
+       ) ;
+       rdf:type [ <SemanticSmokeTestOutput> ] ?
+    )
+}
+
+<TestCase>  (
+    CLOSED {
+       (  $<TestCase_tes> (  schema1:name @linkml:String ? ;
+             schema1:description @linkml:String ? ;
+             <inputs> @<Input> * ;
+             <outputs> @<Output> * ;
+             <preconditions> @<Precondition> *
+          ) ;
+          rdf:type [ <TestCase> ]
+       )
+    } OR @<SemanticSmokeTestCase>
+)
+
+<TestSuite> CLOSED {
+    (  $<TestSuite_tes> <entries> @<TestCase> * ;
+       rdf:type [ <TestSuite> ] ?
     )
 }
 
