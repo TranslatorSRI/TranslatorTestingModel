@@ -104,7 +104,7 @@ slots:
       The entries in a TestSuite
     range: TestCase
     multivalued: true
-    
+
   id:
     identifier: true
     slot_uri: schema:identifier
