@@ -51,11 +51,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://TranslatorSRI.github.io/test-case-schema/NamedThing/</loc>
-         <lastmod>2023-09-15</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://TranslatorSRI.github.io/test-case-schema/Ncname/</loc>
          <lastmod>2023-09-15</lastmod>
          <changefreq>daily</changefreq>
@@ -67,11 +62,6 @@
     </url>
     <url>
          <loc>https://TranslatorSRI.github.io/test-case-schema/Objectidentifier/</loc>
-         <lastmod>2023-09-15</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://TranslatorSRI.github.io/test-case-schema/PersonStatus/</loc>
          <lastmod>2023-09-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -111,16 +101,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://TranslatorSRI.github.io/test-case-schema/age_in_years/</loc>
-         <lastmod>2023-09-15</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://TranslatorSRI.github.io/test-case-schema/birth_date/</loc>
-         <lastmod>2023-09-15</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://TranslatorSRI.github.io/test-case-schema/description/</loc>
          <lastmod>2023-09-15</lastmod>
          <changefreq>daily</changefreq>
@@ -141,17 +121,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://TranslatorSRI.github.io/test-case-schema/primary_email/</loc>
-         <lastmod>2023-09-15</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://TranslatorSRI.github.io/test-case-schema/test-case-schema/</loc>
-         <lastmod>2023-09-15</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://TranslatorSRI.github.io/test-case-schema/vital_status/</loc>
          <lastmod>2023-09-15</lastmod>
          <changefreq>daily</changefreq>
     </url>

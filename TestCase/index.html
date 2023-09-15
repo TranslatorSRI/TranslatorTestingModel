@@ -142,11 +142,6 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#inheritance">
-    Inheritance
-  </a>
-</li>
-<li class="md-nav__item">
 <a class="md-nav__link" href="#slots">
     Slots
   </a>
@@ -209,33 +204,9 @@
 <p>URI: <a href="https://w3id.org/TranslatorSRI/test-case-schema/TestCase">test_case_schema:TestCase</a></p>
 <div class="mermaid"> classDiagram
     class TestCase
-      NamedThing &lt;|-- TestCase
-
-      TestCase : age_in_years
-
-      TestCase : birth_date
-
-      TestCase : description
-
-      TestCase : id
-
-      TestCase : name
-
-      TestCase : primary_email
-
-      TestCase : vital_status
-
-          TestCase --|&gt; PersonStatus : vital_status
-
 
 </div>
-<h2 id="inheritance">Inheritance</h2>
-<ul>
-<li><a href="../NamedThing/">NamedThing</a><ul>
-<li><strong>TestCase</strong></li>
-</ul>
-</li>
-</ul>
+<!-- no inheritance hierarchy -->
 <h2 id="slots">Slots</h2>
 <table>
 <thead>
@@ -248,46 +219,10 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../primary_email/">primary_email</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>The main email address of a person</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../birth_date/">birth_date</a></td>
-<td>0..1 <br/> <a href="../Date/">Date</a></td>
-<td>Date on which a person is born</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../age_in_years/">age_in_years</a></td>
-<td>0..1 <br/> <a href="../Integer/">Integer</a></td>
-<td>Number of years since birth</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../vital_status/">vital_status</a></td>
-<td>0..1 <br/> <a href="../PersonStatus/">PersonStatus</a></td>
-<td>living or dead status</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../id/">id</a></td>
-<td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
-<td>A unique identifier for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../name/">name</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>A human-readable name for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../description/">description</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>A human-readable description for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -341,18 +276,6 @@
 <pre><code class="language-yaml">name: TestCase
 description: Represents a TestCase
 from_schema: https://w3id.org/TranslatorSRI/test-case-schema
-is_a: NamedThing
-slots:
-- primary_email
-- birth_date
-- age_in_years
-- vital_status
-slot_usage:
-  primary_email:
-    name: primary_email
-    domain_of:
-    - TestCase
-    pattern: ^\S+@[\S+\.]+\S+
 
 </code></pre>
 </details>
@@ -361,92 +284,6 @@ slot_usage:
 <pre><code class="language-yaml">name: TestCase
 description: Represents a TestCase
 from_schema: https://w3id.org/TranslatorSRI/test-case-schema
-is_a: NamedThing
-slot_usage:
-  primary_email:
-    name: primary_email
-    domain_of:
-    - TestCase
-    pattern: ^\S+@[\S+\.]+\S+
-attributes:
-  primary_email:
-    name: primary_email
-    description: The main email address of a person
-    from_schema: https://w3id.org/TranslatorSRI/test-case-schema
-    rank: 1000
-    slot_uri: schema:email
-    alias: primary_email
-    owner: TestCase
-    domain_of:
-    - TestCase
-    range: string
-    pattern: ^\S+@[\S+\.]+\S+
-  birth_date:
-    name: birth_date
-    description: Date on which a person is born
-    from_schema: https://w3id.org/TranslatorSRI/test-case-schema
-    rank: 1000
-    slot_uri: schema:birthDate
-    alias: birth_date
-    owner: TestCase
-    domain_of:
-    - TestCase
-    range: date
-  age_in_years:
-    name: age_in_years
-    description: Number of years since birth
-    from_schema: https://w3id.org/TranslatorSRI/test-case-schema
-    rank: 1000
-    alias: age_in_years
-    owner: TestCase
-    domain_of:
-    - TestCase
-    range: integer
-  vital_status:
-    name: vital_status
-    description: living or dead status
-    from_schema: https://w3id.org/TranslatorSRI/test-case-schema
-    rank: 1000
-    alias: vital_status
-    owner: TestCase
-    domain_of:
-    - TestCase
-    range: PersonStatus
-  id:
-    name: id
-    description: A unique identifier for a thing
-    from_schema: https://w3id.org/TranslatorSRI/test-case-schema
-    rank: 1000
-    slot_uri: schema:identifier
-    identifier: true
-    alias: id
-    owner: TestCase
-    domain_of:
-    - NamedThing
-    range: uriorcurie
-    required: true
-  name:
-    name: name
-    description: A human-readable name for a thing
-    from_schema: https://w3id.org/TranslatorSRI/test-case-schema
-    rank: 1000
-    slot_uri: schema:name
-    alias: name
-    owner: TestCase
-    domain_of:
-    - NamedThing
-    range: string
-  description:
-    name: description
-    description: A human-readable description for a thing
-    from_schema: https://w3id.org/TranslatorSRI/test-case-schema
-    rank: 1000
-    slot_uri: schema:description
-    alias: description
-    owner: TestCase
-    domain_of:
-    - NamedThing
-    range: string
 
 </code></pre>
 </details>
