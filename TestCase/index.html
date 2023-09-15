@@ -204,6 +204,12 @@
 <p>URI: <a href="https://w3id.org/TranslatorSRI/test-case-schema/TestCase">test_case_schema:TestCase</a></p>
 <div class="mermaid"> classDiagram
     class TestCase
+      TestCase : description
+
+      TestCase : id
+
+      TestCase : name
+
 
 </div>
 <!-- no inheritance hierarchy -->
@@ -219,10 +225,22 @@
 </thead>
 <tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td><a href="../name/">name</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>A human-readable name for a thing</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../id/">id</a></td>
+<td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>A unique identifier for a thing</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../description/">description</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>A human-readable description for a thing</td>
+<td>direct</td>
 </tr>
 </tbody>
 </table>
@@ -276,6 +294,10 @@
 <pre><code class="language-yaml">name: TestCase
 description: Represents a TestCase
 from_schema: https://w3id.org/TranslatorSRI/test-case-schema
+slots:
+- name
+- id
+- description
 
 </code></pre>
 </details>
@@ -284,6 +306,41 @@ from_schema: https://w3id.org/TranslatorSRI/test-case-schema
 <pre><code class="language-yaml">name: TestCase
 description: Represents a TestCase
 from_schema: https://w3id.org/TranslatorSRI/test-case-schema
+attributes:
+  name:
+    name: name
+    description: A human-readable name for a thing
+    from_schema: https://w3id.org/TranslatorSRI/test-case-schema
+    rank: 1000
+    slot_uri: schema:name
+    alias: name
+    owner: TestCase
+    domain_of:
+    - TestCase
+    range: string
+  id:
+    name: id
+    description: A unique identifier for a thing
+    from_schema: https://w3id.org/TranslatorSRI/test-case-schema
+    rank: 1000
+    slot_uri: schema:identifier
+    identifier: true
+    alias: id
+    owner: TestCase
+    domain_of:
+    - TestCase
+    range: uriorcurie
+  description:
+    name: description
+    description: A human-readable description for a thing
+    from_schema: https://w3id.org/TranslatorSRI/test-case-schema
+    rank: 1000
+    slot_uri: schema:description
+    alias: description
+    owner: TestCase
+    domain_of:
+    - TestCase
+    range: string
 
 </code></pre>
 </details>
