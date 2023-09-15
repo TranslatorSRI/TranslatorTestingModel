@@ -25,6 +25,10 @@ classes:
   TestCase:
     description: >-
       Represents a TestCase
+    slots:
+      - name
+      - id
+      - description
 
   TestCaseCollection:
     tree_root: true
