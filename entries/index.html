@@ -317,6 +317,7 @@
 
 
 <h1 id="slot-entries">Slot: entries</h1>
+<p><em>The entries in a TestSuite</em></p>
 <p>URI: <a href="https://w3id.org/TranslatorSRI/test-case-schema/entries">test_case_schema:entries</a></p>
 <!-- no inheritance hierarchy -->
 
@@ -333,7 +334,7 @@
 <tr>
 <td><a href="../TestSuite/">TestSuite</a></td>
 <td>A holder for TestCase objects</td>
-<td>no</td>
+<td>yes</td>
 </tr>
 </tbody>
 </table>
@@ -355,15 +356,14 @@
 <details>
 
 <pre><code class="language-yaml">name: entries
+description: The entries in a TestSuite
 from_schema: https://w3id.org/TranslatorSRI/test-case-schema
 rank: 1000
 multivalued: true
 alias: entries
-owner: TestSuite
 domain_of:
 - TestSuite
 range: TestCase
-inlined: true
 
 </code></pre>
 

@@ -220,7 +220,7 @@
 <tr>
 <td><a href="../entries/">entries</a></td>
 <td>0..* <br/> <a href="../TestCase/">TestCase</a></td>
-<td></td>
+<td>The entries in a TestSuite</td>
 <td>direct</td>
 </tr>
 </tbody>
@@ -256,12 +256,14 @@
 <pre><code class="language-yaml">name: TestSuite
 description: A holder for TestCase objects
 from_schema: https://w3id.org/TranslatorSRI/test-case-schema
-attributes:
+slots:
+- entries
+slot_usage:
   entries:
     name: entries
-    from_schema: https://w3id.org/TranslatorSRI/test-case-schema
-    rank: 1000
     multivalued: true
+    domain_of:
+    - TestSuite
     range: TestCase
     inlined: true
 tree_root: true
@@ -273,9 +275,18 @@ tree_root: true
 <pre><code class="language-yaml">name: TestSuite
 description: A holder for TestCase objects
 from_schema: https://w3id.org/TranslatorSRI/test-case-schema
+slot_usage:
+  entries:
+    name: entries
+    multivalued: true
+    domain_of:
+    - TestSuite
+    range: TestCase
+    inlined: true
 attributes:
   entries:
     name: entries
+    description: The entries in a TestSuite
     from_schema: https://w3id.org/TranslatorSRI/test-case-schema
     rank: 1000
     multivalued: true
