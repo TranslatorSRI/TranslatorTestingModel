@@ -22,6 +22,10 @@ imports:
 
 classes:
 
+  TestAsset:
+  QueryAnswerPair:
+    aliases: [""]
+  
   TestCase:
     description: >-
       Represents a TestCase
@@ -32,6 +36,7 @@ classes:
       - inputs
       - outputs
       - preconditions
+      - persona
 
   AcceptanceTestCase:
     is_a: TestCase
