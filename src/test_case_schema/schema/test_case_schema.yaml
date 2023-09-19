@@ -33,7 +33,7 @@ classes:
       - outputs
       - preconditions
 
-  SemanticSmokeTestCase:
+  AcceptanceTestCase:
     is_a: TestCase
     description: >-
       Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.
@@ -44,6 +44,16 @@ classes:
       outputs:
         range: SemanticSmokeTestOutput
         required: true
+
+  AcceptanceTestSuite
+    is_a: TestSuite
+    description:
+    slots:
+      - test_cases
+
+  BenchmarkTestCase
+     is_a: TestCase
+     
 
   Input:
     description: >-
@@ -89,9 +99,9 @@ classes:
     description: >-
       A holder for TestCase objects
     slots:
-      - entries
+      - test_cases
     slot_usage:
-      entries:
+      test_cases:
         range: TestCase
         multivalued: true
         inlined: true
@@ -99,11 +109,10 @@ classes:
 
 slots:
 
-  entries:
-    description: >-
-      The entries in a TestSuite
+  test_cases:
     range: TestCase
     multivalued: true
+
 
   id:
     identifier: true
