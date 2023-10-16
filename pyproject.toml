@@ -1,11 +1,11 @@
 [tool.poetry]
-name = "test_case_schema"
+name = "translator_testing_model"
 version = "0.1.0"
 description = "This is the project description."
-authors = ["Sierra Moxon <sierra.taylor@gmail.com>"]
+authors = ["Sierra Moxon <sierra.taylor@gmail.com>", "Richard Bruskiewich <richard.bruskiewich@delphinai.com>"]
 license = "MIT"
 readme = "README.md"
-include = ["README.md", "src/test_case_schema/schema", "project"]
+include = ["README.md", "src/translator_testing_model/schema", "project"]
 
 [tool.poetry.dependencies]
 python = "^3.9"

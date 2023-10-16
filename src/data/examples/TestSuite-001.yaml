@@ -1,8 +1,3 @@
 # Example data object
 ---
-entries:
-  - id: example:TestCase001
-    name: foo bar
-    description: This is a test case
-    must_pass_date: "2023-09-01"
-
+# TODO: Need to prepare fresh examples
