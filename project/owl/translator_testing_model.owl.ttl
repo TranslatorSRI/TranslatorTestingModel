@@ -11,17 +11,17 @@ ttm:AcceptanceTestCase a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "AcceptanceTestCase" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom ttm:SemanticSmokeTestInput ;
-            owl:onProperty ttm:inputs ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty ttm:inputs ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty ttm:outputs ],
-        [ a owl:Restriction ;
             owl:allValuesFrom ttm:SemanticSmokeTestOutput ;
             owl:onProperty ttm:outputs ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty ttm:inputs ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty ttm:outputs ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom ttm:SemanticSmokeTestInput ;
+            owl:onProperty ttm:inputs ],
         ttm:TestCase ;
     skos:definition "Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/test-case-schema> .
@@ -405,10 +405,10 @@ ttm:TestAsset a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "TestAsset" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:allValuesFrom linkml:Uriorcurie ;
             owl:onProperty ttm:id ],
         [ a owl:Restriction ;
-            owl:allValuesFrom linkml:Uriorcurie ;
+            owl:maxCardinality 1 ;
             owl:onProperty ttm:id ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;

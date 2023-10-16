@@ -8,13 +8,7 @@ ttm:AcceptanceTestCase a sh:NodeShape ;
     sh:closed true ;
     sh:description "Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete." ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "A Test Case or Suite may be statically enumerated (in the Test Suite repository) or dynamically generated (e.g. in a Test Runner)." ;
-            sh:in ( "Enumerated" "Generated" ) ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 0 ;
-            sh:path ttm:mode ],
-        [ sh:class ttm:SemanticSmokeTestInput ;
+    sh:property [ sh:class ttm:SemanticSmokeTestInput ;
             sh:minCount 1 ;
             sh:nodeKind sh:IRI ;
             sh:order 1 ;
@@ -24,11 +18,6 @@ ttm:AcceptanceTestCase a sh:NodeShape ;
             sh:minCount 1 ;
             sh:order 4 ;
             sh:path schema1:identifier ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable description for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:order 6 ;
-            sh:path schema1:description ],
         [ sh:class ttm:SemanticSmokeTestOutput ;
             sh:minCount 1 ;
             sh:nodeKind sh:IRI ;
@@ -39,6 +28,17 @@ ttm:AcceptanceTestCase a sh:NodeShape ;
             sh:maxCount 1 ;
             sh:order 5 ;
             sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path schema1:description ],
+        [ sh:description "A Test Case or Suite may be statically enumerated (in the Test Suite repository) or dynamically generated (e.g. in a Test Runner)." ;
+            sh:in ( "Enumerated" "Generated" ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path ttm:mode ],
         [ sh:class ttm:Precondition ;
             sh:nodeKind sh:IRI ;
             sh:order 3 ;
@@ -48,33 +48,17 @@ ttm:AcceptanceTestCase a sh:NodeShape ;
 ttm:AcceptanceTestSuite a sh:NodeShape ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "A Test Case or Suite may be statically enumerated (in the Test Suite repository) or dynamically generated (e.g. in a Test Runner)." ;
-            sh:in ( "Enumerated" "Generated" ) ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 0 ;
-            sh:path ttm:mode ],
+    sh:property [ sh:class ttm:TestCase ;
+            sh:description "List of explicitly enumerated Test Cases." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 3 ;
+            sh:path ttm:test_cases ],
         [ sh:class ttm:TestMetadata ;
             sh:description "Test metadata describes the external provenance, cross-references and objectives for a given test." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:IRI ;
             sh:order 1 ;
             sh:path ttm:test_metadata ],
-        [ sh:description "A unique identifier for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 5 ;
-            sh:path schema1:identifier ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable description for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:order 7 ;
-            sh:path schema1:description ],
-        [ sh:description "A Test persona describes the user or operational context of a given test." ;
-            sh:in ( "All" "Clinical" "LookUp" "Mechanistic" ) ;
-            sh:maxCount 1 ;
-            sh:order 2 ;
-            sh:path ttm:test_persona ],
         [ sh:class ttm:TestCaseSpecification ;
             sh:description "Declarative specification of a set of Test Cases generated elsewhere (i.e. within a Test Runner)" ;
             sh:maxCount 1 ;
@@ -86,11 +70,27 @@ ttm:AcceptanceTestSuite a sh:NodeShape ;
             sh:maxCount 1 ;
             sh:order 6 ;
             sh:path schema1:name ],
-        [ sh:class ttm:TestCase ;
-            sh:description "List of explicitly enumerated Test Cases." ;
-            sh:nodeKind sh:IRI ;
-            sh:order 3 ;
-            sh:path ttm:test_cases ] ;
+        [ sh:description "A unique identifier for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 5 ;
+            sh:path schema1:identifier ],
+        [ sh:description "A Test persona describes the user or operational context of a given test." ;
+            sh:in ( "All" "Clinical" "LookUp" "Mechanistic" ) ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path ttm:test_persona ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 7 ;
+            sh:path schema1:description ],
+        [ sh:description "A Test Case or Suite may be statically enumerated (in the Test Suite repository) or dynamically generated (e.g. in a Test Runner)." ;
+            sh:in ( "Enumerated" "Generated" ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path ttm:mode ] ;
     sh:targetClass ttm:AcceptanceTestSuite .
 
 ttm:BenchmarkTestSuite a sh:NodeShape ;
@@ -103,17 +103,138 @@ ttm:OneHopTestSuite a sh:NodeShape ;
     sh:closed true ;
     sh:description "Test case for testing the integrity of \"One Hop\" knowledge graph retrievals sensa legacy SRI_Testing harness." ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:class ttm:TestCase ;
-            sh:description "List of explicitly enumerated Test Cases." ;
-            sh:nodeKind sh:IRI ;
-            sh:order 3 ;
-            sh:path ttm:test_cases ],
+    sh:property [ sh:description "A unique identifier for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 5 ;
+            sh:path schema1:identifier ],
         [ sh:class ttm:TestCaseSpecification ;
             sh:description "Declarative specification of a set of Test Cases generated elsewhere (i.e. within a Test Runner)" ;
             sh:maxCount 1 ;
             sh:nodeKind sh:IRI ;
             sh:order 4 ;
             sh:path ttm:test_case_specification ],
+        [ sh:class ttm:TestCase ;
+            sh:description "List of explicitly enumerated Test Cases." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 3 ;
+            sh:path ttm:test_cases ],
+        [ sh:description "A Test persona describes the user or operational context of a given test." ;
+            sh:in ( "All" "Clinical" "LookUp" "Mechanistic" ) ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path ttm:test_persona ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 7 ;
+            sh:path schema1:description ],
+        [ sh:class ttm:TestMetadata ;
+            sh:description "Test metadata describes the external provenance, cross-references and objectives for a given test." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path ttm:test_metadata ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path schema1:name ],
+        [ sh:description "A Test Case or Suite may be statically enumerated (in the Test Suite repository) or dynamically generated (e.g. in a Test Runner)." ;
+            sh:in ( "Enumerated" "Generated" ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path ttm:mode ] ;
+    sh:targetClass ttm:OneHopTestSuite .
+
+ttm:QueryAnswerPair a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Represents a QueryAnswerPair specification of a Test Asset" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "A unique identifier for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 9 ;
+            sh:path schema1:identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 11 ;
+            sh:path schema1:description ],
+        [ sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path ttm:output_id ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 10 ;
+            sh:path schema1:name ],
+        [ sh:datatype xsd:boolean ;
+            sh:maxCount 1 ;
+            sh:order 8 ;
+            sh:path ttm:well_known ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path ttm:output_name ],
+        [ sh:in ( "High" "Low" "NotApplicable" ) ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path ttm:semantic_severity ],
+        [ sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path ttm:input_id ],
+        [ sh:in ( "Acceptable" "BadButForgivable" "NeverShow" "1_TopAnswer" "4_NeverShow" ) ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path ttm:expected_output ],
+        [ sh:datatype xsd:boolean ;
+            sh:maxCount 1 ;
+            sh:order 7 ;
+            sh:path ttm:in_v1 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path ttm:input_name ],
+        [ sh:in ( "causes not treats" "TMKP" "category too generic" "contraindications" "chemical roles" ) ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path ttm:test_issue ] ;
+    sh:targetClass ttm:QueryAnswerPair .
+
+ttm:StandardsComplianceTestSuite a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Test suite for testing Translator components against releases of standards like TRAPI and the Biolink Model." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class ttm:TestCase ;
+            sh:description "List of explicitly enumerated Test Cases." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 3 ;
+            sh:path ttm:test_cases ],
+        [ sh:description "A Test Case or Suite may be statically enumerated (in the Test Suite repository) or dynamically generated (e.g. in a Test Runner)." ;
+            sh:in ( "Enumerated" "Generated" ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path ttm:mode ],
+        [ sh:class ttm:TestMetadata ;
+            sh:description "Test metadata describes the external provenance, cross-references and objectives for a given test." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path ttm:test_metadata ],
+        [ sh:class ttm:TestCaseSpecification ;
+            sh:description "Declarative specification of a set of Test Cases generated elsewhere (i.e. within a Test Runner)" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 4 ;
+            sh:path ttm:test_case_specification ],
+        [ sh:description "A unique identifier for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 5 ;
+            sh:path schema1:identifier ],
         [ sh:description "A Test persona describes the user or operational context of a given test." ;
             sh:in ( "All" "Clinical" "LookUp" "Mechanistic" ) ;
             sh:maxCount 1 ;
@@ -128,183 +249,62 @@ ttm:OneHopTestSuite a sh:NodeShape ;
             sh:description "A human-readable name for a Test Entity" ;
             sh:maxCount 1 ;
             sh:order 6 ;
-            sh:path schema1:name ],
-        [ sh:description "A Test Case or Suite may be statically enumerated (in the Test Suite repository) or dynamically generated (e.g. in a Test Runner)." ;
-            sh:in ( "Enumerated" "Generated" ) ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 0 ;
-            sh:path ttm:mode ],
-        [ sh:class ttm:TestMetadata ;
-            sh:description "Test metadata describes the external provenance, cross-references and objectives for a given test." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:IRI ;
-            sh:order 1 ;
-            sh:path ttm:test_metadata ],
-        [ sh:description "A unique identifier for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 5 ;
-            sh:path schema1:identifier ] ;
-    sh:targetClass ttm:OneHopTestSuite .
-
-ttm:QueryAnswerPair a sh:NodeShape ;
-    sh:closed true ;
-    sh:description "Represents a QueryAnswerPair specification of a Test Asset" ;
-    sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:datatype xsd:boolean ;
-            sh:maxCount 1 ;
-            sh:order 7 ;
-            sh:path ttm:in_v1 ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable name for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:order 10 ;
-            sh:path schema1:name ],
-        [ sh:in ( "causes not treats" "TMKP" "category too generic" "contraindications" "chemical roles" ) ;
-            sh:maxCount 1 ;
-            sh:order 5 ;
-            sh:path ttm:test_issue ],
-        [ sh:maxCount 1 ;
-            sh:order 0 ;
-            sh:path ttm:input_id ],
-        [ sh:datatype xsd:string ;
-            sh:maxCount 1 ;
-            sh:order 3 ;
-            sh:path ttm:output_name ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable description for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:order 11 ;
-            sh:path schema1:description ],
-        [ sh:description "A unique identifier for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 9 ;
-            sh:path schema1:identifier ],
-        [ sh:datatype xsd:boolean ;
-            sh:maxCount 1 ;
-            sh:order 8 ;
-            sh:path ttm:well_known ],
-        [ sh:maxCount 1 ;
-            sh:order 2 ;
-            sh:path ttm:output_id ],
-        [ sh:datatype xsd:string ;
-            sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path ttm:input_name ],
-        [ sh:in ( "Acceptable" "BadButForgivable" "NeverShow" "1_TopAnswer" "4_NeverShow" ) ;
-            sh:maxCount 1 ;
-            sh:order 4 ;
-            sh:path ttm:expected_output ],
-        [ sh:in ( "High" "Low" "NotApplicable" ) ;
-            sh:maxCount 1 ;
-            sh:order 6 ;
-            sh:path ttm:semantic_severity ] ;
-    sh:targetClass ttm:QueryAnswerPair .
-
-ttm:StandardsComplianceTestSuite a sh:NodeShape ;
-    sh:closed true ;
-    sh:description "Test suite for testing Translator components against releases of standards like TRAPI and the Biolink Model." ;
-    sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "A Test persona describes the user or operational context of a given test." ;
-            sh:in ( "All" "Clinical" "LookUp" "Mechanistic" ) ;
-            sh:maxCount 1 ;
-            sh:order 2 ;
-            sh:path ttm:test_persona ],
-        [ sh:description "A unique identifier for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 5 ;
-            sh:path schema1:identifier ],
-        [ sh:description "A Test Case or Suite may be statically enumerated (in the Test Suite repository) or dynamically generated (e.g. in a Test Runner)." ;
-            sh:in ( "Enumerated" "Generated" ) ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 0 ;
-            sh:path ttm:mode ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable description for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:order 7 ;
-            sh:path schema1:description ],
-        [ sh:class ttm:TestMetadata ;
-            sh:description "Test metadata describes the external provenance, cross-references and objectives for a given test." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:IRI ;
-            sh:order 1 ;
-            sh:path ttm:test_metadata ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable name for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:order 6 ;
-            sh:path schema1:name ],
-        [ sh:class ttm:TestCaseSpecification ;
-            sh:description "Declarative specification of a set of Test Cases generated elsewhere (i.e. within a Test Runner)" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:IRI ;
-            sh:order 4 ;
-            sh:path ttm:test_case_specification ],
-        [ sh:class ttm:TestCase ;
-            sh:description "List of explicitly enumerated Test Cases." ;
-            sh:nodeKind sh:IRI ;
-            sh:order 3 ;
-            sh:path ttm:test_cases ] ;
+            sh:path schema1:name ] ;
     sh:targetClass ttm:StandardsComplianceTestSuite .
 
 ttm:TestAsset a sh:NodeShape ;
     sh:closed true ;
     sh:description "Represents a Test Asset, which is a test case agnostic semantic specification of a Translator test target." ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:in ( "causes not treats" "TMKP" "category too generic" "contraindications" "chemical roles" ) ;
-            sh:maxCount 1 ;
-            sh:order 5 ;
-            sh:path ttm:test_issue ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable description for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:order 11 ;
-            sh:path schema1:description ],
-        [ sh:datatype xsd:string ;
-            sh:maxCount 1 ;
-            sh:order 3 ;
-            sh:path ttm:output_name ],
-        [ sh:datatype xsd:string ;
-            sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path ttm:input_name ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable name for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:order 10 ;
-            sh:path schema1:name ],
-        [ sh:maxCount 1 ;
-            sh:order 0 ;
-            sh:path ttm:input_id ],
-        [ sh:datatype xsd:boolean ;
-            sh:maxCount 1 ;
-            sh:order 7 ;
-            sh:path ttm:in_v1 ],
-        [ sh:maxCount 1 ;
+    sh:property [ sh:maxCount 1 ;
             sh:order 2 ;
             sh:path ttm:output_id ],
+        [ sh:in ( "Acceptable" "BadButForgivable" "NeverShow" "1_TopAnswer" "4_NeverShow" ) ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path ttm:expected_output ],
         [ sh:in ( "High" "Low" "NotApplicable" ) ;
             sh:maxCount 1 ;
             sh:order 6 ;
             sh:path ttm:semantic_severity ],
+        [ sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path ttm:input_id ],
         [ sh:description "A unique identifier for a Test Entity" ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:order 9 ;
             sh:path schema1:identifier ],
-        [ sh:in ( "Acceptable" "BadButForgivable" "NeverShow" "1_TopAnswer" "4_NeverShow" ) ;
+        [ sh:datatype xsd:string ;
             sh:maxCount 1 ;
-            sh:order 4 ;
-            sh:path ttm:expected_output ],
+            sh:order 1 ;
+            sh:path ttm:input_name ],
+        [ sh:datatype xsd:boolean ;
+            sh:maxCount 1 ;
+            sh:order 7 ;
+            sh:path ttm:in_v1 ],
+        [ sh:in ( "causes not treats" "TMKP" "category too generic" "contraindications" "chemical roles" ) ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path ttm:test_issue ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 10 ;
+            sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 11 ;
+            sh:path schema1:description ],
         [ sh:datatype xsd:boolean ;
             sh:maxCount 1 ;
             sh:order 8 ;
-            sh:path ttm:well_known ] ;
+            sh:path ttm:well_known ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path ttm:output_name ] ;
     sh:targetClass ttm:TestAsset .
 
 ttm:TestEdgeData a sh:NodeShape ;
@@ -315,35 +315,32 @@ ttm:TestEdgeData a sh:NodeShape ;
             sh:maxCount 1 ;
             sh:order 5 ;
             sh:path ttm:test_issue ],
-        [ sh:description "A unique identifier for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 9 ;
-            sh:path schema1:identifier ],
         [ sh:datatype xsd:string ;
             sh:description "A human-readable name for a Test Entity" ;
             sh:maxCount 1 ;
             sh:order 10 ;
             sh:path schema1:name ],
+        [ sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path ttm:output_id ],
         [ sh:datatype xsd:boolean ;
             sh:maxCount 1 ;
-            sh:order 8 ;
-            sh:path ttm:well_known ],
+            sh:order 7 ;
+            sh:path ttm:in_v1 ],
         [ sh:datatype xsd:string ;
             sh:description "A human-readable description for a Test Entity" ;
             sh:maxCount 1 ;
             sh:order 11 ;
             sh:path schema1:description ],
-        [ sh:maxCount 1 ;
-            sh:order 2 ;
-            sh:path ttm:output_id ],
-        [ sh:in ( "High" "Low" "NotApplicable" ) ;
+        [ sh:description "A unique identifier for a Test Entity" ;
             sh:maxCount 1 ;
-            sh:order 6 ;
-            sh:path ttm:semantic_severity ],
-        [ sh:maxCount 1 ;
-            sh:order 0 ;
-            sh:path ttm:input_id ],
+            sh:minCount 1 ;
+            sh:order 9 ;
+            sh:path schema1:identifier ],
+        [ sh:datatype xsd:boolean ;
+            sh:maxCount 1 ;
+            sh:order 8 ;
+            sh:path ttm:well_known ],
         [ sh:datatype xsd:string ;
             sh:maxCount 1 ;
             sh:order 3 ;
@@ -352,14 +349,17 @@ ttm:TestEdgeData a sh:NodeShape ;
             sh:maxCount 1 ;
             sh:order 1 ;
             sh:path ttm:input_name ],
-        [ sh:datatype xsd:boolean ;
-            sh:maxCount 1 ;
-            sh:order 7 ;
-            sh:path ttm:in_v1 ],
+        [ sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path ttm:input_id ],
         [ sh:in ( "Acceptable" "BadButForgivable" "NeverShow" "1_TopAnswer" "4_NeverShow" ) ;
             sh:maxCount 1 ;
             sh:order 4 ;
-            sh:path ttm:expected_output ] ;
+            sh:path ttm:expected_output ],
+        [ sh:in ( "High" "Low" "NotApplicable" ) ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path ttm:semantic_severity ] ;
     sh:targetClass ttm:TestEdgeData .
 
 ttm:TestEntity a sh:NodeShape ;
@@ -367,11 +367,6 @@ ttm:TestEntity a sh:NodeShape ;
     sh:description "Parent identification class of all major classes within the data model for Translator testing." ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:datatype xsd:string ;
-            sh:description "A human-readable description for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:order 2 ;
-            sh:path schema1:description ],
-        [ sh:datatype xsd:string ;
             sh:description "A human-readable name for a Test Entity" ;
             sh:maxCount 1 ;
             sh:order 1 ;
@@ -379,56 +374,61 @@ ttm:TestEntity a sh:NodeShape ;
         [ sh:description "A unique identifier for a Test Entity" ;
             sh:maxCount 1 ;
             sh:order 0 ;
-            sh:path schema1:identifier ] ;
+            sh:path schema1:identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path schema1:description ] ;
     sh:targetClass ttm:TestEntity .
 
 ttm:TestSuite a sh:NodeShape ;
     sh:closed true ;
     sh:description "Specification of a set of Test Cases, one of either with a static list of 'test_cases' or a 'test_case_specification' (note: at least one or the other needs to be present)." ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "A Test Case or Suite may be statically enumerated (in the Test Suite repository) or dynamically generated (e.g. in a Test Runner)." ;
-            sh:in ( "Enumerated" "Generated" ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 7 ;
+            sh:path schema1:description ],
+        [ sh:description "A unique identifier for a Test Entity" ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:order 0 ;
-            sh:path ttm:mode ],
+            sh:order 5 ;
+            sh:path schema1:identifier ],
         [ sh:class ttm:TestMetadata ;
             sh:description "Test metadata describes the external provenance, cross-references and objectives for a given test." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:IRI ;
             sh:order 1 ;
             sh:path ttm:test_metadata ],
-        [ sh:description "A Test persona describes the user or operational context of a given test." ;
-            sh:in ( "All" "Clinical" "LookUp" "Mechanistic" ) ;
-            sh:maxCount 1 ;
-            sh:order 2 ;
-            sh:path ttm:test_persona ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable name for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:order 6 ;
-            sh:path schema1:name ],
-        [ sh:class ttm:TestCase ;
-            sh:description "List of explicitly enumerated Test Cases." ;
-            sh:nodeKind sh:IRI ;
-            sh:order 3 ;
-            sh:path ttm:test_cases ],
-        [ sh:description "A unique identifier for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 5 ;
-            sh:path schema1:identifier ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable description for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:order 7 ;
-            sh:path schema1:description ],
         [ sh:class ttm:TestCaseSpecification ;
             sh:description "Declarative specification of a set of Test Cases generated elsewhere (i.e. within a Test Runner)" ;
             sh:maxCount 1 ;
             sh:nodeKind sh:IRI ;
             sh:order 4 ;
-            sh:path ttm:test_case_specification ] ;
+            sh:path ttm:test_case_specification ],
+        [ sh:description "A Test persona describes the user or operational context of a given test." ;
+            sh:in ( "All" "Clinical" "LookUp" "Mechanistic" ) ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path ttm:test_persona ],
+        [ sh:description "A Test Case or Suite may be statically enumerated (in the Test Suite repository) or dynamically generated (e.g. in a Test Runner)." ;
+            sh:in ( "Enumerated" "Generated" ) ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path ttm:mode ],
+        [ sh:class ttm:TestCase ;
+            sh:description "List of explicitly enumerated Test Cases." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 3 ;
+            sh:path ttm:test_cases ] ;
     sh:targetClass ttm:TestSuite .
 
 ttm:Input a sh:NodeShape ;
@@ -457,15 +457,15 @@ ttm:Output a sh:NodeShape ;
     sh:description "Represents an output from a TestCase" ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:datatype xsd:string ;
-            sh:description "A human-readable description for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:order 2 ;
-            sh:path schema1:description ],
-        [ sh:datatype xsd:string ;
             sh:description "A human-readable name for a Test Entity" ;
             sh:maxCount 1 ;
             sh:order 1 ;
             sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path schema1:description ],
         [ sh:description "A unique identifier for a Test Entity" ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
@@ -478,20 +478,10 @@ ttm:SemanticSmokeTestInput a sh:NodeShape ;
     sh:description "Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete." ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:datatype xsd:string ;
-            sh:description "A human-readable name for a Test Entity" ;
+            sh:description "An answer that is returned from the test case, note: this must be combined with the expected_result to form a complete answer.  It might make sense to couple these in their own object instead of strictly sticking to the flat schema introduced by the spreadsheet here: https://docs.google.com/spreadsheets/d/1yj7zIchFeVl1OHqL_kE_pqvzNLmGml_FLbHDs-8Yvig/edit#gid=0" ;
             sh:maxCount 1 ;
-            sh:order 12 ;
-            sh:path schema1:name ],
-        [ sh:datatype xsd:string ;
-            sh:description "The answer must return in these many results" ;
-            sh:maxCount 1 ;
-            sh:order 8 ;
-            sh:path ttm:top_level ],
-        [ sh:description "The expected result of the query" ;
-            sh:in ( "include_good" "exclude_bad" ) ;
-            sh:maxCount 1 ;
-            sh:order 6 ;
-            sh:path ttm:expected_result ],
+            sh:order 5 ;
+            sh:path ttm:answer_informal_concept ],
         [ sh:description "The direction of the expected query result triple" ;
             sh:in ( "increased" "decreased" ) ;
             sh:maxCount 1 ;
@@ -501,51 +491,61 @@ ttm:SemanticSmokeTestInput a sh:NodeShape ;
             sh:maxCount 1 ;
             sh:order 7 ;
             sh:path ttm:curie ],
-        [ sh:datatype xsd:string ;
-            sh:description "The object of the core triple to be tested" ;
-            sh:maxCount 1 ;
-            sh:order 3 ;
-            sh:path ttm:string_entry ],
-        [ sh:datatype xsd:string ;
-            sh:description "An answer that is returned from the test case, note: this must be combined with the expected_result to form a complete answer.  It might make sense to couple these in their own object instead of strictly sticking to the flat schema introduced by the spreadsheet here: https://docs.google.com/spreadsheets/d/1yj7zIchFeVl1OHqL_kE_pqvzNLmGml_FLbHDs-8Yvig/edit#gid=0" ;
-            sh:maxCount 1 ;
-            sh:order 5 ;
-            sh:path ttm:answer_informal_concept ],
-        [ sh:datatype xsd:string ;
-            sh:description "The question a SME would ask" ;
-            sh:maxCount 1 ;
-            sh:order 2 ;
-            sh:path ttm:query ],
-        [ sh:description "A unique identifier for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 11 ;
-            sh:path schema1:identifier ],
-        [ sh:datatype xsd:string ;
-            sh:description "The node of the TRAPI query to replace." ;
-            sh:maxCount 1 ;
-            sh:order 9 ;
-            sh:path ttm:node ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable description for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:order 13 ;
-            sh:path schema1:description ],
         [ sh:description "The environment in which this test must pass" ;
             sh:in ( "DEV" "CI" "TEST" "PROD" ) ;
             sh:maxCount 1 ;
             sh:order 1 ;
             sh:path ttm:must_pass_environment ],
         [ sh:datatype xsd:string ;
-            sh:description "The notes of the query" ;
+            sh:description "The node of the TRAPI query to replace." ;
             sh:maxCount 1 ;
-            sh:order 10 ;
-            sh:path ttm:notes ],
+            sh:order 9 ;
+            sh:path ttm:node ],
+        [ sh:datatype xsd:string ;
+            sh:description "The answer must return in these many results" ;
+            sh:maxCount 1 ;
+            sh:order 8 ;
+            sh:path ttm:top_level ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 13 ;
+            sh:path schema1:description ],
         [ sh:datatype xsd:date ;
             sh:description "The date by which this test must pass" ;
             sh:maxCount 1 ;
             sh:order 0 ;
-            sh:path ttm:must_pass_date ] ;
+            sh:path ttm:must_pass_date ],
+        [ sh:datatype xsd:string ;
+            sh:description "The notes of the query" ;
+            sh:maxCount 1 ;
+            sh:order 10 ;
+            sh:path ttm:notes ],
+        [ sh:description "The expected result of the query" ;
+            sh:in ( "include_good" "exclude_bad" ) ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path ttm:expected_result ],
+        [ sh:datatype xsd:string ;
+            sh:description "The question a SME would ask" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path ttm:query ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 12 ;
+            sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "The object of the core triple to be tested" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path ttm:string_entry ],
+        [ sh:description "A unique identifier for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 11 ;
+            sh:path schema1:identifier ] ;
     sh:targetClass ttm:SemanticSmokeTestInput .
 
 ttm:SemanticSmokeTestOutput a sh:NodeShape ;
@@ -557,16 +557,16 @@ ttm:SemanticSmokeTestOutput a sh:NodeShape ;
             sh:maxCount 1 ;
             sh:order 1 ;
             sh:path schema1:name ],
-        [ sh:description "A unique identifier for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 0 ;
-            sh:path schema1:identifier ],
         [ sh:datatype xsd:string ;
             sh:description "A human-readable description for a Test Entity" ;
             sh:maxCount 1 ;
             sh:order 2 ;
-            sh:path schema1:description ] ;
+            sh:path schema1:description ],
+        [ sh:description "A unique identifier for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path schema1:identifier ] ;
     sh:targetClass ttm:SemanticSmokeTestOutput .
 
 ttm:Precondition a sh:NodeShape ;
@@ -574,6 +574,11 @@ ttm:Precondition a sh:NodeShape ;
     sh:description "Represents a precondition for a TestCase" ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
             sh:description "A human-readable description for a Test Entity" ;
             sh:maxCount 1 ;
             sh:order 2 ;
@@ -582,27 +587,22 @@ ttm:Precondition a sh:NodeShape ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:order 0 ;
-            sh:path schema1:identifier ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable name for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path schema1:name ] ;
+            sh:path schema1:identifier ] ;
     sh:targetClass ttm:Precondition .
 
 ttm:TestCase a sh:NodeShape ;
     sh:closed true ;
     sh:description "Represents a static specification of a Test Case" ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:datatype xsd:string ;
-            sh:description "A human-readable description for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:order 6 ;
-            sh:path schema1:description ],
-        [ sh:class ttm:Precondition ;
+    sh:property [ sh:class ttm:Input ;
             sh:nodeKind sh:IRI ;
-            sh:order 3 ;
-            sh:path ttm:preconditions ],
+            sh:order 1 ;
+            sh:path ttm:inputs ],
+        [ sh:description "A unique identifier for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 4 ;
+            sh:path schema1:identifier ],
         [ sh:description "A Test Case or Suite may be statically enumerated (in the Test Suite repository) or dynamically generated (e.g. in a Test Runner)." ;
             sh:in ( "Enumerated" "Generated" ) ;
             sh:maxCount 1 ;
@@ -618,15 +618,15 @@ ttm:TestCase a sh:NodeShape ;
             sh:maxCount 1 ;
             sh:order 5 ;
             sh:path schema1:name ],
-        [ sh:description "A unique identifier for a Test Entity" ;
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a Test Entity" ;
             sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 4 ;
-            sh:path schema1:identifier ],
-        [ sh:class ttm:Input ;
+            sh:order 6 ;
+            sh:path schema1:description ],
+        [ sh:class ttm:Precondition ;
             sh:nodeKind sh:IRI ;
-            sh:order 1 ;
-            sh:path ttm:inputs ] ;
+            sh:order 3 ;
+            sh:path ttm:preconditions ] ;
     sh:targetClass ttm:TestCase .
 
 ttm:TestCaseSpecification a sh:NodeShape ;
@@ -673,15 +673,15 @@ ttm:TestMetadata a sh:NodeShape ;
             sh:maxCount 1 ;
             sh:order 1 ;
             sh:path ttm:test_reference ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable name for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:order 4 ;
-            sh:path schema1:name ],
         [ sh:description "A unique identifier for a Test Entity" ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:order 3 ;
-            sh:path schema1:identifier ] ;
+            sh:path schema1:identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path schema1:name ] ;
     sh:targetClass ttm:TestMetadata .
 
