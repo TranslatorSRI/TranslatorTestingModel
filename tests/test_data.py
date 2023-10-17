@@ -5,7 +5,7 @@ import unittest
 from typing import List, Dict
 
 from linkml_runtime.loaders import yaml_loader
-from translator_testing_model.datamodel.translator_testing_model import (
+from src.translator_testing_model.datamodel.translator_testing_model import (
     TestEntity,
     TestMetadata,
     TestAsset,
