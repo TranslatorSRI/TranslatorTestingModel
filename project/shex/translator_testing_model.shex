@@ -169,7 +169,6 @@ linkml:Sparqlpath xsd:string
     CLOSED {
        (  $<TestCase_tes> (  &<TestEntity_tes> ;
              rdf:type [ <TestEntity> ] ? ;
-             <mode> @<TestModeEnum> ;
              <inputs> @<Input> * ;
              <outputs> @<Output> * ;
              <preconditions> @<Precondition> *
@@ -223,7 +222,6 @@ linkml:Sparqlpath xsd:string
     CLOSED {
        (  $<TestSuite_tes> (  &<TestEntity_tes> ;
              rdf:type [ <TestEntity> ] ? ;
-             <mode> @<TestModeEnum> ;
              <test_metadata> @<TestMetadata> ? ;
              <test_persona> @<TestPersonaEnum> ? ;
              <test_cases> @<TestCase> * ;

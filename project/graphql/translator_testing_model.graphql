@@ -3,7 +3,6 @@ type AcceptanceTestCase
     id: Uriorcurie!
     name: String
     description: String
-    mode: TestModeEnum!
     preconditions: [Precondition]
     inputs: [SemanticSmokeTestInput]!
     outputs: [SemanticSmokeTestOutput]!
@@ -14,7 +13,6 @@ type AcceptanceTestSuite
     id: Uriorcurie!
     name: String
     description: String
-    mode: TestModeEnum!
     testMetadata: TestMetadata
     testPersona: TestPersonaEnum
     testCases: [TestCase]
@@ -37,7 +35,6 @@ type OneHopTestSuite
     id: Uriorcurie!
     name: String
     description: String
-    mode: TestModeEnum!
     testMetadata: TestMetadata
     testPersona: TestPersonaEnum
     testCases: [TestCase]
@@ -104,7 +101,6 @@ type StandardsComplianceTestSuite
     id: Uriorcurie!
     name: String
     description: String
-    mode: TestModeEnum!
     testMetadata: TestMetadata
     testPersona: TestPersonaEnum
     testCases: [TestCase]
@@ -132,7 +128,6 @@ type TestCase
     id: Uriorcurie!
     name: String
     description: String
-    mode: TestModeEnum!
     inputs: [Input]
     outputs: [Output]
     preconditions: [Precondition]
@@ -183,7 +178,6 @@ type TestSuite
     id: Uriorcurie!
     name: String
     description: String
-    mode: TestModeEnum!
     testMetadata: TestMetadata
     testPersona: TestPersonaEnum
     testCases: [TestCase]

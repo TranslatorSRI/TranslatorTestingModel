@@ -17,10 +17,10 @@ ttm:AcceptanceTestCase a owl:Class,
             owl:minCardinality 1 ;
             owl:onProperty ttm:outputs ],
         [ a owl:Restriction ;
-            owl:allValuesFrom ttm:SemanticSmokeTestInput ;
+            owl:minCardinality 1 ;
             owl:onProperty ttm:inputs ],
         [ a owl:Restriction ;
-            owl:minCardinality 1 ;
+            owl:allValuesFrom ttm:SemanticSmokeTestInput ;
             owl:onProperty ttm:inputs ],
         ttm:TestCase ;
     skos:definition "Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete." ;
@@ -125,13 +125,6 @@ ttm:input_name a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "input_name" ;
     skos:altLabel "InputName (user choice)" ;
-    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
-
-ttm:mode a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "mode" ;
-    rdfs:range ttm:TestModeEnum ;
-    skos:definition "A Test Case or Suite may be statically enumerated (in the Test Suite repository) or dynamically generated (e.g. in a Test Runner)." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:must_pass_date a owl:ObjectProperty,
@@ -313,14 +306,14 @@ ttm:TestCaseSpecification a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "TestCaseSpecification" ;
     rdfs:subClassOf ttm:TestEntity ;
-    skos:definition "Parameterized declaration of a Test Case generator which dynamically generates Test Cases from Test Assets using applicable heuristics." ;
+    skos:definition "Parameterized declaration of the Test Case generator which dynamically generates a collection of Test Cases from Test Assets, using applicable heuristics." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:TestMetadata a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "TestMetadata" ;
     rdfs:subClassOf ttm:TestEntity ;
-    skos:definition "Represents metadata related to (external SME, SMURF, Translator feedback,  large scale batch, etc.) provenance of test assets, cases and/or suites." ;
+    skos:definition "Represents metadata related to (external SME, SMURF, Translator feedback,  large scale batch, etc.) like the provenance of test assets, cases and/or suites." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 <https://w3id.org/TranslatorSRI/TranslatorTestingModel/DirectionEnum#decreased> a owl:Class,
@@ -405,23 +398,23 @@ ttm:TestAsset a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "TestAsset" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:allValuesFrom linkml:Uriorcurie ;
             owl:onProperty ttm:id ],
         [ a owl:Restriction ;
-            owl:allValuesFrom linkml:Uriorcurie ;
+            owl:maxCardinality 1 ;
             owl:onProperty ttm:id ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty ttm:id ],
         ttm:TestEntity ;
-    skos:definition "Represents a Test Asset, which is a test case agnostic semantic specification of a Translator test target." ;
+    skos:definition "Represents a Test Asset, which is a single specific instance of TestCase-agnostic semantic parameters representing the specification of a Translator test target with inputs and (expected) outputs." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:TestCase a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "TestCase" ;
     rdfs:subClassOf ttm:TestEntity ;
-    skos:definition "Represents a static specification of a Test Case" ;
+    skos:definition "Represents a single enumerated instance of Test Case, derived from a  given TestAsset and used to probe a particular test condition." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#TMKP> a owl:Class,
@@ -443,14 +436,6 @@ ttm:TestCase a owl:Class,
 <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#contraindications> a owl:Class,
         ttm:TestIssueEnum ;
     rdfs:label "contraindications" .
-
-<https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestModeEnum#Enumerated> a owl:Class,
-        ttm:TestModeEnum ;
-    rdfs:label "Enumerated" .
-
-<https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestModeEnum#Generated> a owl:Class,
-        ttm:TestModeEnum ;
-    rdfs:label "Generated" .
 
 <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#AcceptanceTest> a owl:Class,
         ttm:TestObjectiveEnum ;
@@ -532,17 +517,11 @@ ttm:ExpectedResultsEnum a owl:Class,
     linkml:permissible_values <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedResultsEnum#exclude_bad>,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedResultsEnum#include_good> .
 
-ttm:TestModeEnum a owl:Class,
-        linkml:EnumDefinition ;
-    owl:unionOf ( <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestModeEnum#Enumerated> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestModeEnum#Generated> ) ;
-    linkml:permissible_values <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestModeEnum#Enumerated>,
-        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestModeEnum#Generated> .
-
 ttm:TestSuite a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "TestSuite" ;
     rdfs:subClassOf ttm:TestEntity ;
-    skos:definition "Specification of a set of Test Cases, one of either with a static list of 'test_cases' or a 'test_case_specification' (note: at least one or the other needs to be present)." ;
+    skos:definition "Specification of a set of Test Cases, one of either with a static list of 'test_cases' or a dynamic 'test_case_specification' slot values. Note: at least one slot or the other, but generally not both(?) needs to be present." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:id a owl:ObjectProperty,
@@ -603,7 +582,7 @@ ttm:TestIssueEnum a owl:Class,
 ttm:TestEntity a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "TestEntity" ;
-    skos:definition "Parent identification class of all major classes within the data model for Translator testing." ;
+    skos:definition "Abstract global 'identification' class shared as a parent with all major model classes within the data model for Translator testing." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:TestSourceEnum a owl:Class,

@@ -18,10 +18,6 @@
                     },
                     "type": "array"
                 },
-                "mode": {
-                    "$ref": "#/$defs/TestModeEnum",
-                    "description": "A Test Case or Suite may be statically enumerated (in the Test Suite repository) or dynamically generated (e.g. in a Test Runner)."
-                },
                 "name": {
                     "description": "A human-readable name for a Test Entity",
                     "type": "string"
@@ -40,7 +36,6 @@
                 }
             },
             "required": [
-                "mode",
                 "inputs",
                 "outputs",
                 "id"
@@ -60,10 +55,6 @@
                     "description": "A unique identifier for a Test Entity",
                     "type": "string"
                 },
-                "mode": {
-                    "$ref": "#/$defs/TestModeEnum",
-                    "description": "A Test Case or Suite may be statically enumerated (in the Test Suite repository) or dynamically generated (e.g. in a Test Runner)."
-                },
                 "name": {
                     "description": "A human-readable name for a Test Entity",
                     "type": "string"
@@ -74,7 +65,14 @@
                 },
                 "test_cases": {
                     "additionalProperties": {
-                        "$ref": "#/$defs/TestCase__identifier_optional"
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/TestCase__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
                     },
                     "description": "List of explicitly enumerated Test Cases.",
                     "type": "object"
@@ -89,7 +87,6 @@
                 }
             },
             "required": [
-                "mode",
                 "id"
             ],
             "title": "AcceptanceTestSuite",
@@ -177,10 +174,6 @@
                     "description": "A unique identifier for a Test Entity",
                     "type": "string"
                 },
-                "mode": {
-                    "$ref": "#/$defs/TestModeEnum",
-                    "description": "A Test Case or Suite may be statically enumerated (in the Test Suite repository) or dynamically generated (e.g. in a Test Runner)."
-                },
                 "name": {
                     "description": "A human-readable name for a Test Entity",
                     "type": "string"
@@ -191,7 +184,14 @@
                 },
                 "test_cases": {
                     "additionalProperties": {
-                        "$ref": "#/$defs/TestCase__identifier_optional"
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/TestCase__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
                     },
                     "description": "List of explicitly enumerated Test Cases.",
                     "type": "object"
@@ -206,7 +206,6 @@
                 }
             },
             "required": [
-                "mode",
                 "id"
             ],
             "title": "OneHopTestSuite",
@@ -421,10 +420,6 @@
                     "description": "A unique identifier for a Test Entity",
                     "type": "string"
                 },
-                "mode": {
-                    "$ref": "#/$defs/TestModeEnum",
-                    "description": "A Test Case or Suite may be statically enumerated (in the Test Suite repository) or dynamically generated (e.g. in a Test Runner)."
-                },
                 "name": {
                     "description": "A human-readable name for a Test Entity",
                     "type": "string"
@@ -435,7 +430,14 @@
                 },
                 "test_cases": {
                     "additionalProperties": {
-                        "$ref": "#/$defs/TestCase__identifier_optional"
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/TestCase__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
                     },
                     "description": "List of explicitly enumerated Test Cases.",
                     "type": "object"
@@ -450,7 +452,6 @@
                 }
             },
             "required": [
-                "mode",
                 "id"
             ],
             "title": "StandardsComplianceTestSuite",
@@ -458,7 +459,7 @@
         },
         "TestAsset": {
             "additionalProperties": false,
-            "description": "Represents a Test Asset, which is a test case agnostic semantic specification of a Translator test target.",
+            "description": "Represents a Test Asset, which is a single specific instance of TestCase-agnostic semantic parameters representing the specification of a Translator test target with inputs and (expected) outputs.",
             "properties": {
                 "description": {
                     "description": "A human-readable description for a Test Entity",
@@ -508,7 +509,7 @@
         },
         "TestCase": {
             "additionalProperties": false,
-            "description": "Represents a static specification of a Test Case",
+            "description": "Represents a single enumerated instance of Test Case, derived from a  given TestAsset and used to probe a particular test condition.",
             "properties": {
                 "description": {
                     "description": "A human-readable description for a Test Entity",
@@ -523,10 +524,6 @@
                         "type": "string"
                     },
                     "type": "array"
-                },
-                "mode": {
-                    "$ref": "#/$defs/TestModeEnum",
-                    "description": "A Test Case or Suite may be statically enumerated (in the Test Suite repository) or dynamically generated (e.g. in a Test Runner)."
                 },
                 "name": {
                     "description": "A human-readable name for a Test Entity",
@@ -546,7 +543,6 @@
                 }
             },
             "required": [
-                "mode",
                 "id"
             ],
             "title": "TestCase",
@@ -554,7 +550,7 @@
         },
         "TestCaseSpecification": {
             "additionalProperties": false,
-            "description": "Parameterized declaration of a Test Case generator which dynamically generates Test Cases from Test Assets using applicable heuristics.",
+            "description": "Parameterized declaration of the Test Case generator which dynamically generates a collection of Test Cases from Test Assets, using applicable heuristics.",
             "properties": {
                 "description": {
                     "description": "A human-readable description for a Test Entity",
@@ -577,7 +573,7 @@
         },
         "TestCase__identifier_optional": {
             "additionalProperties": false,
-            "description": "Represents a static specification of a Test Case",
+            "description": "Represents a single enumerated instance of Test Case, derived from a  given TestAsset and used to probe a particular test condition.",
             "properties": {
                 "description": {
                     "description": "A human-readable description for a Test Entity",
@@ -592,10 +588,6 @@
                         "type": "string"
                     },
                     "type": "array"
-                },
-                "mode": {
-                    "$ref": "#/$defs/TestModeEnum",
-                    "description": "A Test Case or Suite may be statically enumerated (in the Test Suite repository) or dynamically generated (e.g. in a Test Runner)."
                 },
                 "name": {
                     "description": "A human-readable name for a Test Entity",
@@ -614,9 +606,7 @@
                     "type": "array"
                 }
             },
-            "required": [
-                "mode"
-            ],
+            "required": [],
             "title": "TestCase",
             "type": "object"
         },
@@ -684,7 +674,7 @@
         },
         "TestMetadata": {
             "additionalProperties": false,
-            "description": "Represents metadata related to (external SME, SMURF, Translator feedback,  large scale batch, etc.) provenance of test assets, cases and/or suites.",
+            "description": "Represents metadata related to (external SME, SMURF, Translator feedback,  large scale batch, etc.) like the provenance of test assets, cases and/or suites.",
             "properties": {
                 "description": {
                     "description": "A human-readable description for a Test Entity",
@@ -716,15 +706,6 @@
             ],
             "title": "TestMetadata",
             "type": "object"
-        },
-        "TestModeEnum": {
-            "description": "",
-            "enum": [
-                "Enumerated",
-                "Generated"
-            ],
-            "title": "TestModeEnum",
-            "type": "string"
         },
         "TestObjectiveEnum": {
             "description": "",
@@ -763,7 +744,7 @@
         },
         "TestSuite": {
             "additionalProperties": false,
-            "description": "Specification of a set of Test Cases, one of either with a static list of 'test_cases' or a 'test_case_specification' (note: at least one or the other needs to be present).",
+            "description": "Specification of a set of Test Cases, one of either with a static list of 'test_cases' or a dynamic 'test_case_specification' slot values. Note: at least one slot or the other, but generally not both(?) needs to be present.",
             "properties": {
                 "description": {
                     "description": "A human-readable description for a Test Entity",
@@ -772,10 +753,6 @@
                 "id": {
                     "description": "A unique identifier for a Test Entity",
                     "type": "string"
-                },
-                "mode": {
-                    "$ref": "#/$defs/TestModeEnum",
-                    "description": "A Test Case or Suite may be statically enumerated (in the Test Suite repository) or dynamically generated (e.g. in a Test Runner)."
                 },
                 "name": {
                     "description": "A human-readable name for a Test Entity",
@@ -787,7 +764,14 @@
                 },
                 "test_cases": {
                     "additionalProperties": {
-                        "$ref": "#/$defs/TestCase__identifier_optional"
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/TestCase__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
                     },
                     "description": "List of explicitly enumerated Test Cases.",
                     "type": "object"
@@ -802,7 +786,6 @@
                 }
             },
             "required": [
-                "mode",
                 "id"
             ],
             "title": "TestSuite",

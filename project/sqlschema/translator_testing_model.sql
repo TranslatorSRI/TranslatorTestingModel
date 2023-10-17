@@ -4,7 +4,6 @@ CREATE TABLE "AcceptanceTestCase" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	description TEXT, 
-	mode VARCHAR(10) NOT NULL, 
 	preconditions TEXT, 
 	PRIMARY KEY (id)
 );
@@ -52,7 +51,6 @@ CREATE TABLE "TestCase" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	description TEXT, 
-	mode VARCHAR(10) NOT NULL, 
 	preconditions TEXT, 
 	PRIMARY KEY (id)
 );
@@ -94,7 +92,6 @@ CREATE TABLE "AcceptanceTestSuite" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	description TEXT, 
-	mode VARCHAR(10) NOT NULL, 
 	test_metadata TEXT, 
 	test_persona VARCHAR(11), 
 	test_cases TEXT, 
@@ -117,7 +114,6 @@ CREATE TABLE "OneHopTestSuite" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	description TEXT, 
-	mode VARCHAR(10) NOT NULL, 
 	test_metadata TEXT, 
 	test_persona VARCHAR(11), 
 	test_cases TEXT, 
@@ -169,7 +165,6 @@ CREATE TABLE "StandardsComplianceTestSuite" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	description TEXT, 
-	mode VARCHAR(10) NOT NULL, 
 	test_metadata TEXT, 
 	test_persona VARCHAR(11), 
 	test_cases TEXT, 
@@ -183,7 +178,6 @@ CREATE TABLE "TestSuite" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	description TEXT, 
-	mode VARCHAR(10) NOT NULL, 
 	test_metadata TEXT, 
 	test_persona VARCHAR(11), 
 	test_cases TEXT, 

@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2023-10-17T12:59:45
+# Generation date: 2023-10-17T16:38:13
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -114,7 +114,8 @@ class PreconditionId(TestEntityId):
 @dataclass
 class TestEntity(YAMLRoot):
     """
-    Parent identification class of all major classes within the data model for Translator testing.
+    Abstract global 'identification' class shared as a parent with all major model classes within the data model for
+    Translator testing.
     """
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -145,8 +146,8 @@ class TestEntity(YAMLRoot):
 @dataclass
 class TestMetadata(TestEntity):
     """
-    Represents metadata related to (external SME, SMURF, Translator feedback, large scale batch, etc.) provenance of
-    test assets, cases and/or suites.
+    Represents metadata related to (external SME, SMURF, Translator feedback, large scale batch, etc.) like the
+    provenance of test assets, cases and/or suites.
     """
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -181,7 +182,8 @@ class TestMetadata(TestEntity):
 @dataclass
 class TestAsset(TestEntity):
     """
-    Represents a Test Asset, which is a test case agnostic semantic specification of a Translator test target.
+    Represents a Test Asset, which is a single specific instance of TestCase-agnostic semantic parameters representing
+    the specification of a Translator test target with inputs and (expected) outputs.
     """
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -286,7 +288,8 @@ class TestEdgeData(TestAsset):
 @dataclass
 class TestCase(TestEntity):
     """
-    Represents a static specification of a Test Case
+    Represents a single enumerated instance of Test Case, derived from a given TestAsset and used to probe a
+    particular test condition.
     """
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -296,7 +299,6 @@ class TestCase(TestEntity):
     class_model_uri: ClassVar[URIRef] = TTM.TestCase
 
     id: Union[str, TestCaseId] = None
-    mode: Union[str, "TestModeEnum"] = None
     inputs: Optional[Union[Union[str, InputId], List[Union[str, InputId]]]] = empty_list()
     outputs: Optional[Union[Union[str, OutputId], List[Union[str, OutputId]]]] = empty_list()
     preconditions: Optional[Union[Union[str, PreconditionId], List[Union[str, PreconditionId]]]] = empty_list()
@@ -306,11 +308,6 @@ class TestCase(TestEntity):
             self.MissingRequiredField("id")
         if not isinstance(self.id, TestCaseId):
             self.id = TestCaseId(self.id)
-
-        if self._is_empty(self.mode):
-            self.MissingRequiredField("mode")
-        if not isinstance(self.mode, TestModeEnum):
-            self.mode = TestModeEnum(self.mode)
 
         if not isinstance(self.inputs, list):
             self.inputs = [self.inputs] if self.inputs is not None else []
@@ -330,8 +327,8 @@ class TestCase(TestEntity):
 @dataclass
 class TestCaseSpecification(TestEntity):
     """
-    Parameterized declaration of a Test Case generator which dynamically generates Test Cases from Test Assets using
-    applicable heuristics.
+    Parameterized declaration of the Test Case generator which dynamically generates a collection of Test Cases from
+    Test Assets, using applicable heuristics.
     """
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -354,8 +351,9 @@ class TestCaseSpecification(TestEntity):
 @dataclass
 class TestSuite(TestEntity):
     """
-    Specification of a set of Test Cases, one of either with a static list of 'test_cases' or a
-    'test_case_specification' (note: at least one or the other needs to be present).
+    Specification of a set of Test Cases, one of either with a static list of 'test_cases' or a dynamic
+    'test_case_specification' slot values. Note: at least one slot or the other, but generally not both(?) needs to be
+    present.
     """
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -365,7 +363,6 @@ class TestSuite(TestEntity):
     class_model_uri: ClassVar[URIRef] = TTM.TestSuite
 
     id: Union[str, TestSuiteId] = None
-    mode: Union[str, "TestModeEnum"] = None
     test_metadata: Optional[Union[str, TestMetadataId]] = None
     test_persona: Optional[Union[str, "TestPersonaEnum"]] = None
     test_cases: Optional[Union[Dict[Union[str, TestCaseId], Union[dict, TestCase]], List[Union[dict, TestCase]]]] = empty_dict()
@@ -376,11 +373,6 @@ class TestSuite(TestEntity):
             self.MissingRequiredField("id")
         if not isinstance(self.id, TestSuiteId):
             self.id = TestSuiteId(self.id)
-
-        if self._is_empty(self.mode):
-            self.MissingRequiredField("mode")
-        if not isinstance(self.mode, TestModeEnum):
-            self.mode = TestModeEnum(self.mode)
 
         if self.test_metadata is not None and not isinstance(self.test_metadata, TestMetadataId):
             self.test_metadata = TestMetadataId(self.test_metadata)
@@ -409,7 +401,6 @@ class AcceptanceTestCase(TestCase):
     class_model_uri: ClassVar[URIRef] = TTM.AcceptanceTestCase
 
     id: Union[str, AcceptanceTestCaseId] = None
-    mode: Union[str, "TestModeEnum"] = None
     inputs: Union[Union[str, SemanticSmokeTestInputId], List[Union[str, SemanticSmokeTestInputId]]] = None
     outputs: Union[Union[str, SemanticSmokeTestOutputId], List[Union[str, SemanticSmokeTestOutputId]]] = None
 
@@ -444,7 +435,6 @@ class AcceptanceTestSuite(TestSuite):
     class_model_uri: ClassVar[URIRef] = TTM.AcceptanceTestSuite
 
     id: Union[str, AcceptanceTestSuiteId] = None
-    mode: Union[str, "TestModeEnum"] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -480,7 +470,6 @@ class StandardsComplianceTestSuite(TestSuite):
     class_model_uri: ClassVar[URIRef] = TTM.StandardsComplianceTestSuite
 
     id: Union[str, StandardsComplianceTestSuiteId] = None
-    mode: Union[str, "TestModeEnum"] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -504,7 +493,6 @@ class OneHopTestSuite(TestSuite):
     class_model_uri: ClassVar[URIRef] = TTM.OneHopTestSuite
 
     id: Union[str, OneHopTestSuiteId] = None
-    mode: Union[str, "TestModeEnum"] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -719,19 +707,6 @@ class TestObjectiveEnum(EnumDefinitionImpl):
         name="TestObjectiveEnum",
     )
 
-class TestModeEnum(EnumDefinitionImpl):
-
-    Enumerated = PermissibleValue(
-        text="Enumerated",
-        description="Test case and/or suite explicitly enumerated within the Test Suite repository")
-    Generated = PermissibleValue(
-        text="Generated",
-        description="""Test case and/or suite explicitly generated by Test Runner  from parameters recorded in the Test Suite repository""")
-
-    _defn = EnumDefinition(
-        name="TestModeEnum",
-    )
-
 class TestPersonaEnum(EnumDefinitionImpl):
 
     All = PermissibleValue(text="All")
@@ -887,9 +862,6 @@ slots.in_v1 = Slot(uri=TTM.in_v1, name="in_v1", curie=TTM.curie('in_v1'),
 
 slots.well_known = Slot(uri=TTM.well_known, name="well_known", curie=TTM.curie('well_known'),
                    model_uri=TTM.well_known, domain=None, range=Optional[Union[bool, Bool]])
-
-slots.mode = Slot(uri=TTM.mode, name="mode", curie=TTM.curie('mode'),
-                   model_uri=TTM.mode, domain=None, range=Union[str, "TestModeEnum"])
 
 slots.test_metadata = Slot(uri=TTM.test_metadata, name="test_metadata", curie=TTM.curie('test_metadata'),
                    model_uri=TTM.test_metadata, domain=None, range=Optional[Union[str, TestMetadataId]])

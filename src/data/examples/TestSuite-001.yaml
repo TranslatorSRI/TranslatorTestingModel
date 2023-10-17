@@ -1,7 +1,7 @@
 # Example TestSuite data object
 ---
+# TODO: the TestSuite example data needs further elaboration
 
 id: example:TestSuite001
 name: foo bar
 description: This is a test case
-mode: Enumerated

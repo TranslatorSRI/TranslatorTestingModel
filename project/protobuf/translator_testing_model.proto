@@ -4,7 +4,6 @@ message AcceptanceTestCase
   uriorcurie id = 0
   string name = 0
   string description = 0
-  testModeEnum mode = 0
  repeated  precondition preconditions = 0
  repeated  semanticSmokeTestInput inputs = 0
  repeated  semanticSmokeTestOutput outputs = 0
@@ -14,7 +13,6 @@ message AcceptanceTestSuite
   uriorcurie id = 0
   string name = 0
   string description = 0
-  testModeEnum mode = 0
   testMetadata testMetadata = 0
   testPersonaEnum testPersona = 0
  repeated  testCase testCases = 0
@@ -33,7 +31,6 @@ message OneHopTestSuite
   uriorcurie id = 0
   string name = 0
   string description = 0
-  testModeEnum mode = 0
   testMetadata testMetadata = 0
   testPersonaEnum testPersona = 0
  repeated  testCase testCases = 0
@@ -100,13 +97,12 @@ message StandardsComplianceTestSuite
   uriorcurie id = 0
   string name = 0
   string description = 0
-  testModeEnum mode = 0
   testMetadata testMetadata = 0
   testPersonaEnum testPersona = 0
  repeated  testCase testCases = 0
   testCaseSpecification testCaseSpecification = 0
  }
-// Represents a Test Asset, which is a test case agnostic semantic specification of a Translator test target.
+// Represents a Test Asset, which is a single specific instance of TestCase-agnostic semantic parameters representing the specification of a Translator test target with inputs and (expected) outputs.
 message TestAsset
  {
   string name = 0
@@ -122,18 +118,17 @@ message TestAsset
   boolean wellKnown = 0
   uriorcurie id = 0
  }
-// Represents a static specification of a Test Case
+// Represents a single enumerated instance of Test Case, derived from a  given TestAsset and used to probe a particular test condition.
 message TestCase
  {
   uriorcurie id = 0
   string name = 0
   string description = 0
-  testModeEnum mode = 0
  repeated  input inputs = 0
  repeated  output outputs = 0
  repeated  precondition preconditions = 0
  }
-// Parameterized declaration of a Test Case generator which dynamically generates Test Cases from Test Assets using applicable heuristics.
+// Parameterized declaration of the Test Case generator which dynamically generates a collection of Test Cases from Test Assets, using applicable heuristics.
 message TestCaseSpecification
  {
   uriorcurie id = 0
@@ -156,7 +151,7 @@ message TestEdgeData
   boolean wellKnown = 0
   uriorcurie id = 0
  }
-// Represents metadata related to (external SME, SMURF, Translator feedback,  large scale batch, etc.) provenance of test assets, cases and/or suites.
+// Represents metadata related to (external SME, SMURF, Translator feedback,  large scale batch, etc.) like the provenance of test assets, cases and/or suites.
 message TestMetadata
  {
   uriorcurie id = 0
@@ -166,13 +161,12 @@ message TestMetadata
   uriorcurie testReference = 0
   testObjectiveEnum testObjective = 0
  }
-// Specification of a set of Test Cases, one of either with a static list of 'test_cases' or a 'test_case_specification' (note: at least one or the other needs to be present).
+// Specification of a set of Test Cases, one of either with a static list of 'test_cases' or a dynamic 'test_case_specification' slot values. Note: at least one slot or the other, but generally not both(?) needs to be present.
 message TestSuite
  {
   uriorcurie id = 0
   string name = 0
   string description = 0
-  testModeEnum mode = 0
   testMetadata testMetadata = 0
   testPersonaEnum testPersona = 0
  repeated  testCase testCases = 0

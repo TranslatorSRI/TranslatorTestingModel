@@ -1,7 +1,7 @@
- Example Test Entity
+# Example TestSuite data object
 ---
+# TODO: the TestSuite example data needs further elaboration
 
-id: example:TestCase001
+id: example:TestSuite001
 name: foo bar
 description: This is a test case
-must_pass_date: "2023-09-01"
