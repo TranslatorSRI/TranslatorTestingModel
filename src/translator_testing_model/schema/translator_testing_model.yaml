@@ -1,5 +1,5 @@
 ---
-id: https://w3id.org/TranslatorSRI/test-case-schema
+id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
 name: Translator-Testing-Model
 title: Translator Testing Data Model
 description: |-
@@ -7,10 +7,10 @@ description: |-
   applied to run the diverse polymorphic testing objectives for the Biomedical Data Translator system.
 license: MIT
 see_also:
-  - https://TranslatorSRI.github.io/test-case-schema
+  - https://TranslatorSRI.github.io/TranslatorTestingModel
 
 prefixes:
-  ttm: https://w3id.org/TranslatorSRI/Translator-Testing-Model/
+  ttm: https://w3id.org/TranslatorSRI/TranslatorTestingModel/
   linkml: https://w3id.org/linkml/
   biolink: https://w3id.org/biolink/
   schema: http://schema.org/

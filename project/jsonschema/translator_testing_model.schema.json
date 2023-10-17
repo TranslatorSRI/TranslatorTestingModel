@@ -809,7 +809,7 @@
             "type": "object"
         }
     },
-    "$id": "https://w3id.org/TranslatorSRI/test-case-schema",
+    "$id": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
     "$schema": "http://json-schema.org/draft-07/schema#",
     "additionalProperties": true,
     "metamodel_version": "1.7.0",

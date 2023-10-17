@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "translator_testing_model"
+name = "TranslatorTestingModel"
 version = "0.1.0"
 description = "This is the project description."
 authors = ["Sierra Moxon <sierra.taylor@gmail.com>", "Richard Bruskiewich <richard.bruskiewich@delphinai.com>"]

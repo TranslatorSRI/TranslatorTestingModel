@@ -3,9 +3,9 @@
   "description": "Data model to formalize the structure of test assets, cases, suites and related metadata\napplied to run the diverse polymorphic testing objectives for the Biomedical Data Translator system.",
   "title": "Translator Testing Data Model",
   "see_also": [
-    "https://TranslatorSRI.github.io/test-case-schema"
+    "https://TranslatorSRI.github.io/TranslatorTestingModel"
   ],
-  "id": "https://w3id.org/TranslatorSRI/test-case-schema",
+  "id": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
   "imports": [
     "linkml:types"
   ],
@@ -13,7 +13,7 @@
   "prefixes": [
     {
       "prefix_prefix": "ttm",
-      "prefix_reference": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/"
+      "prefix_reference": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/"
     },
     {
       "prefix_prefix": "linkml",
@@ -347,8 +347,8 @@
   "enums": [
     {
       "name": "TestSourceEnum",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/TestSourceEnum",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestSourceEnum",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "permissible_values": [
         {
           "text": "SME",
@@ -383,8 +383,8 @@
     },
     {
       "name": "TestObjectiveEnum",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/TestObjectiveEnum",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "permissible_values": [
         {
           "text": "AcceptanceTest",
@@ -402,8 +402,8 @@
     },
     {
       "name": "TestModeEnum",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/TestModeEnum",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestModeEnum",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "permissible_values": [
         {
           "text": "Enumerated",
@@ -417,8 +417,8 @@
     },
     {
       "name": "TestPersonaEnum",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/TestPersonaEnum",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestPersonaEnum",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "permissible_values": [
         {
           "text": "All"
@@ -439,9 +439,9 @@
     },
     {
       "name": "ExpectedOutputEnum",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/ExpectedOutputEnum",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum",
       "description": "Expected output values for instances of Test Asset or Test Cases(?). (Note: does this Enum overlap with 'ExpectedResultsEnum' below?)",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "permissible_values": [
         {
           "text": "Acceptable"
@@ -462,9 +462,9 @@
     },
     {
       "name": "ExpectedResultsEnum",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/ExpectedResultsEnum",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedResultsEnum",
       "description": "Does this Enum overlap with 'ExpectedOutputEnum' above?",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "permissible_values": [
         {
           "text": "include_good",
@@ -478,8 +478,8 @@
     },
     {
       "name": "TestIssueEnum",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/TestIssueEnum",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "permissible_values": [
         {
           "text": "causes not treats"
@@ -501,9 +501,9 @@
     },
     {
       "name": "SemanticSeverityEnum",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/SemanticSeverityEnum",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/SemanticSeverityEnum",
       "description": "From Jenn's worksheet, empty or ill defined (needs elaboration)",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "permissible_values": [
         {
           "text": "High"
@@ -518,8 +518,8 @@
     },
     {
       "name": "DirectionEnum",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/DirectionEnum",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/DirectionEnum",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "permissible_values": [
         {
           "text": "increased"
@@ -531,8 +531,8 @@
     },
     {
       "name": "EnvironmentEnum",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/EnvironmentEnum",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/EnvironmentEnum",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "permissible_values": [
         {
           "text": "DEV"
@@ -552,9 +552,9 @@
   "slots": [
     {
       "name": "id",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/id",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/id",
       "description": "A unique identifier for a Test Entity",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "mappings": [
         "http://schema.org/identifier"
       ],
@@ -570,9 +570,9 @@
     },
     {
       "name": "name",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/name",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/name",
       "description": "A human-readable name for a Test Entity",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "mappings": [
         "http://schema.org/name"
       ],
@@ -586,9 +586,9 @@
     },
     {
       "name": "description",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/description",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/description",
       "description": "A human-readable description for a Test Entity",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "mappings": [
         "http://schema.org/description"
       ],
@@ -602,10 +602,10 @@
     },
     {
       "name": "test_source",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/test_source",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_source",
       "description": "Provenance of a specific set of test assets, cases and/or suites.",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
-      "slot_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/test_source",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_source",
       "owner": "TestMetadata",
       "domain_of": [
         "TestMetadata"
@@ -615,13 +615,13 @@
     },
     {
       "name": "test_reference",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/test_reference",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_reference",
       "description": "Source documentation where original test particulars are registered (e.g. Github repo)",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "aliases": [
         "GitHubIssue"
       ],
-      "slot_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/test_reference",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_reference",
       "owner": "TestMetadata",
       "domain_of": [
         "TestMetadata"
@@ -631,10 +631,10 @@
     },
     {
       "name": "test_objective",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/test_objective",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_objective",
       "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
-      "slot_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/test_objective",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_objective",
       "owner": "TestMetadata",
       "domain_of": [
         "TestMetadata"
@@ -644,12 +644,12 @@
     },
     {
       "name": "input_id",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/input_id",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/input_id",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "aliases": [
         "InputID, node normalized"
       ],
-      "slot_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/input_id",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/input_id",
       "owner": "TestAsset",
       "domain_of": [
         "TestAsset"
@@ -659,12 +659,12 @@
     },
     {
       "name": "input_name",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/input_name",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/input_name",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "aliases": [
         "InputName (user choice)"
       ],
-      "slot_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/input_name",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/input_name",
       "owner": "TestAsset",
       "domain_of": [
         "TestAsset"
@@ -674,12 +674,12 @@
     },
     {
       "name": "output_id",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/output_id",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/output_id",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "aliases": [
         "OutputID"
       ],
-      "slot_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/output_id",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/output_id",
       "owner": "TestAsset",
       "domain_of": [
         "TestAsset"
@@ -689,12 +689,12 @@
     },
     {
       "name": "output_name",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/output_name",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/output_name",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "aliases": [
         "OutputName"
       ],
-      "slot_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/output_name",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/output_name",
       "owner": "TestAsset",
       "domain_of": [
         "TestAsset"
@@ -704,12 +704,12 @@
     },
     {
       "name": "expected_output",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/expected_output",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/expected_output",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "aliases": [
         "Expected Output"
       ],
-      "slot_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/expected_output",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/expected_output",
       "owner": "TestAsset",
       "domain_of": [
         "TestAsset"
@@ -719,12 +719,12 @@
     },
     {
       "name": "test_issue",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/test_issue",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_issue",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "aliases": [
         "issue label"
       ],
-      "slot_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/test_issue",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_issue",
       "owner": "TestAsset",
       "domain_of": [
         "TestAsset"
@@ -734,12 +734,12 @@
     },
     {
       "name": "semantic_severity",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/semantic_severity",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/semantic_severity",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "aliases": [
         "Semantic Severity"
       ],
-      "slot_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/semantic_severity",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/semantic_severity",
       "owner": "TestAsset",
       "domain_of": [
         "TestAsset"
@@ -749,12 +749,12 @@
     },
     {
       "name": "in_v1",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/in_v1",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/in_v1",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "aliases": [
         "In v1"
       ],
-      "slot_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/in_v1",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/in_v1",
       "owner": "TestAsset",
       "domain_of": [
         "TestAsset"
@@ -764,12 +764,12 @@
     },
     {
       "name": "well_known",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/well_known",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/well_known",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "aliases": [
         "Well Known"
       ],
-      "slot_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/well_known",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/well_known",
       "owner": "TestAsset",
       "domain_of": [
         "TestAsset"
@@ -779,10 +779,10 @@
     },
     {
       "name": "mode",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/mode",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/mode",
       "description": "A Test Case or Suite may be statically enumerated (in the Test Suite repository) or dynamically generated (e.g. in a Test Runner).",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
-      "slot_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/mode",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/mode",
       "owner": "TestSuite",
       "domain_of": [
         "TestCase",
@@ -794,10 +794,10 @@
     },
     {
       "name": "test_metadata",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/test_metadata",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_metadata",
       "description": "Test metadata describes the external provenance, cross-references and objectives for a given test.",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
-      "slot_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/test_metadata",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_metadata",
       "owner": "TestSuite",
       "domain_of": [
         "TestSuite"
@@ -807,10 +807,10 @@
     },
     {
       "name": "test_persona",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/test_persona",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_persona",
       "description": "A Test persona describes the user or operational context of a given test.",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
-      "slot_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/test_persona",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_persona",
       "owner": "TestSuite",
       "domain_of": [
         "TestSuite"
@@ -820,10 +820,10 @@
     },
     {
       "name": "test_cases",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/test_cases",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_cases",
       "description": "List of explicitly enumerated Test Cases.",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
-      "slot_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/test_cases",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_cases",
       "multivalued": true,
       "owner": "TestSuite",
       "domain_of": [
@@ -835,10 +835,10 @@
     },
     {
       "name": "test_case_specification",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/test_case_specification",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case_specification",
       "description": "Declarative specification of a set of Test Cases generated elsewhere (i.e. within a Test Runner)",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
-      "slot_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/test_case_specification",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case_specification",
       "owner": "TestSuite",
       "domain_of": [
         "TestSuite"
@@ -848,7 +848,7 @@
     },
     {
       "name": "must_pass_date",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/must_pass_date",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/must_pass_date",
       "description": "The date by which this test must pass",
       "examples": [
         {
@@ -856,8 +856,8 @@
           "@type": "Example"
         }
       ],
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
-      "slot_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/must_pass_date",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/must_pass_date",
       "owner": "SemanticSmokeTestInput",
       "domain_of": [
         "SemanticSmokeTestInput"
@@ -867,7 +867,7 @@
     },
     {
       "name": "must_pass_environment",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/must_pass_environment",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/must_pass_environment",
       "description": "The environment in which this test must pass",
       "examples": [
         {
@@ -883,8 +883,8 @@
           "@type": "Example"
         }
       ],
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
-      "slot_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/must_pass_environment",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/must_pass_environment",
       "owner": "SemanticSmokeTestInput",
       "domain_of": [
         "SemanticSmokeTestInput"
@@ -894,7 +894,7 @@
     },
     {
       "name": "query",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/query",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/query",
       "description": "The question a SME would ask",
       "examples": [
         {
@@ -906,8 +906,8 @@
           "@type": "Example"
         }
       ],
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
-      "slot_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/query",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/query",
       "owner": "SemanticSmokeTestInput",
       "domain_of": [
         "SemanticSmokeTestInput"
@@ -917,7 +917,7 @@
     },
     {
       "name": "string_entry",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/string_entry",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/string_entry",
       "description": "The object of the core triple to be tested",
       "examples": [
         {
@@ -929,12 +929,12 @@
           "@type": "Example"
         }
       ],
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "aliases": [
         "trapi node 2",
         "disease"
       ],
-      "slot_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/string_entry",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/string_entry",
       "owner": "SemanticSmokeTestInput",
       "domain_of": [
         "SemanticSmokeTestInput"
@@ -944,10 +944,10 @@
     },
     {
       "name": "direction",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/direction",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/direction",
       "description": "The direction of the expected query result triple",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
-      "slot_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/direction",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/direction",
       "owner": "SemanticSmokeTestInput",
       "domain_of": [
         "SemanticSmokeTestInput"
@@ -957,7 +957,7 @@
     },
     {
       "name": "answer_informal_concept",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/answer_informal_concept",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/answer_informal_concept",
       "description": "An answer that is returned from the test case, note: this must be combined with the expected_result to form a complete answer.  It might make sense to couple these in their own object instead of strictly sticking to the flat schema introduced by the spreadsheet here: https://docs.google.com/spreadsheets/d/1yj7zIchFeVl1OHqL_kE_pqvzNLmGml_FLbHDs-8Yvig/edit#gid=0",
       "examples": [
         {
@@ -977,8 +977,8 @@
           "@type": "Example"
         }
       ],
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
-      "slot_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/answer_informal_concept",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/answer_informal_concept",
       "owner": "SemanticSmokeTestInput",
       "domain_of": [
         "SemanticSmokeTestInput"
@@ -988,10 +988,10 @@
     },
     {
       "name": "expected_result",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/expected_result",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/expected_result",
       "description": "The expected result of the query",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
-      "slot_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/expected_result",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/expected_result",
       "owner": "SemanticSmokeTestInput",
       "domain_of": [
         "SemanticSmokeTestInput"
@@ -1001,10 +1001,10 @@
     },
     {
       "name": "curie",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/curie",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/curie",
       "description": "The curie of the query",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
-      "slot_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/curie",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/curie",
       "owner": "SemanticSmokeTestInput",
       "domain_of": [
         "SemanticSmokeTestInput"
@@ -1014,10 +1014,10 @@
     },
     {
       "name": "top_level",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/top_level",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/top_level",
       "description": "The answer must return in these many results",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
-      "slot_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/top_level",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/top_level",
       "owner": "SemanticSmokeTestInput",
       "domain_of": [
         "SemanticSmokeTestInput"
@@ -1027,10 +1027,10 @@
     },
     {
       "name": "node",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/node",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/node",
       "description": "The node of the TRAPI query to replace.",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
-      "slot_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/node",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/node",
       "owner": "SemanticSmokeTestInput",
       "domain_of": [
         "SemanticSmokeTestInput"
@@ -1040,10 +1040,10 @@
     },
     {
       "name": "notes",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/notes",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/notes",
       "description": "The notes of the query",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
-      "slot_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/notes",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/notes",
       "owner": "SemanticSmokeTestInput",
       "domain_of": [
         "SemanticSmokeTestInput"
@@ -1053,18 +1053,18 @@
     },
     {
       "name": "requires_trapi",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/requires_trapi",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/requires_trapi",
       "description": "Does this test require a TRAPI-compliant query to run?",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
-      "slot_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/requires_trapi",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/requires_trapi",
       "range": "boolean",
       "@type": "SlotDefinition"
     },
     {
       "name": "inputs",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/inputs",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
-      "slot_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/inputs",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/inputs",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/inputs",
       "multivalued": true,
       "owner": "TestCase",
       "domain_of": [
@@ -1075,9 +1075,9 @@
     },
     {
       "name": "outputs",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/outputs",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
-      "slot_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/outputs",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/outputs",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/outputs",
       "multivalued": true,
       "owner": "TestCase",
       "domain_of": [
@@ -1088,9 +1088,9 @@
     },
     {
       "name": "preconditions",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/preconditions",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
-      "slot_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/preconditions",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/preconditions",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/preconditions",
       "multivalued": true,
       "owner": "TestCase",
       "domain_of": [
@@ -1101,9 +1101,9 @@
     },
     {
       "name": "TestAsset_id",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/id",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/id",
       "description": "A unique identifier for a Test Entity",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "aliases": [
         "AssetIdentifier"
       ],
@@ -1127,11 +1127,11 @@
     },
     {
       "name": "AcceptanceTestCase_inputs",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/inputs",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/inputs",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "is_a": "inputs",
       "domain": "AcceptanceTestCase",
-      "slot_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/inputs",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/inputs",
       "multivalued": true,
       "alias": "inputs",
       "owner": "AcceptanceTestCase",
@@ -1146,11 +1146,11 @@
     },
     {
       "name": "AcceptanceTestCase_outputs",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/outputs",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/outputs",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "is_a": "outputs",
       "domain": "AcceptanceTestCase",
-      "slot_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/outputs",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/outputs",
       "multivalued": true,
       "alias": "outputs",
       "owner": "AcceptanceTestCase",
@@ -1167,9 +1167,9 @@
   "classes": [
     {
       "name": "TestEntity",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/TestEntity",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEntity",
       "description": "Parent identification class of all major classes within the data model for Translator testing.",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "abstract": true,
       "slots": [
         "id",
@@ -1177,15 +1177,15 @@
         "description"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/TestEntity",
+      "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEntity",
       "tree_root": true,
       "@type": "ClassDefinition"
     },
     {
       "name": "TestMetadata",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/TestMetadata",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestMetadata",
       "description": "Represents metadata related to (external SME, SMURF, Translator feedback,  large scale batch, etc.) provenance of test assets, cases and/or suites.",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "is_a": "TestEntity",
       "slots": [
         "id",
@@ -1196,14 +1196,14 @@
         "test_objective"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/TestMetadata",
+      "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestMetadata",
       "@type": "ClassDefinition"
     },
     {
       "name": "TestAsset",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/TestAsset",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestAsset",
       "description": "Represents a Test Asset, which is a test case agnostic semantic specification of a Translator test target.",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "is_a": "TestEntity",
       "slots": [
         "name",
@@ -1220,14 +1220,14 @@
         "TestAsset_id"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/TestAsset",
+      "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestAsset",
       "@type": "ClassDefinition"
     },
     {
       "name": "QueryAnswerPair",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/QueryAnswerPair",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/QueryAnswerPair",
       "description": "Represents a QueryAnswerPair specification of a Test Asset",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "is_a": "TestAsset",
       "slots": [
         "name",
@@ -1244,14 +1244,14 @@
         "TestAsset_id"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/QueryAnswerPair",
+      "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/QueryAnswerPair",
       "@type": "ClassDefinition"
     },
     {
       "name": "TestEdgeData",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/TestEdgeData",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEdgeData",
       "description": "Represents a single Biolink Model compliant instance of an edge that can be used for testing.",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "is_a": "TestAsset",
       "slots": [
         "name",
@@ -1268,14 +1268,14 @@
         "TestAsset_id"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/TestEdgeData",
+      "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEdgeData",
       "@type": "ClassDefinition"
     },
     {
       "name": "TestCase",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/TestCase",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestCase",
       "description": "Represents a static specification of a Test Case",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "is_a": "TestEntity",
       "slots": [
         "id",
@@ -1287,14 +1287,14 @@
         "preconditions"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/TestCase",
+      "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestCase",
       "@type": "ClassDefinition"
     },
     {
       "name": "TestCaseSpecification",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/TestCaseSpecification",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestCaseSpecification",
       "description": "Parameterized declaration of a Test Case generator which dynamically generates Test Cases from Test Assets using applicable heuristics.",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "is_a": "TestEntity",
       "slots": [
         "id",
@@ -1302,14 +1302,14 @@
         "description"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/TestCaseSpecification",
+      "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestCaseSpecification",
       "@type": "ClassDefinition"
     },
     {
       "name": "TestSuite",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/TestSuite",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestSuite",
       "description": "Specification of a set of Test Cases, one of either with a static list of 'test_cases' or a 'test_case_specification' (note: at least one or the other needs to be present).",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "is_a": "TestEntity",
       "slots": [
         "id",
@@ -1322,14 +1322,14 @@
         "test_case_specification"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/TestSuite",
+      "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestSuite",
       "@type": "ClassDefinition"
     },
     {
       "name": "AcceptanceTestCase",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/AcceptanceTestCase",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/AcceptanceTestCase",
       "description": "Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "is_a": "TestCase",
       "slots": [
         "id",
@@ -1341,13 +1341,13 @@
         "AcceptanceTestCase_outputs"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/AcceptanceTestCase",
+      "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/AcceptanceTestCase",
       "@type": "ClassDefinition"
     },
     {
       "name": "AcceptanceTestSuite",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/AcceptanceTestSuite",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/AcceptanceTestSuite",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "is_a": "TestSuite",
       "slots": [
         "id",
@@ -1360,23 +1360,23 @@
         "test_case_specification"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/AcceptanceTestSuite",
+      "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/AcceptanceTestSuite",
       "@type": "ClassDefinition"
     },
     {
       "name": "BenchmarkTestSuite",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/BenchmarkTestSuite",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/BenchmarkTestSuite",
       "description": "JsonObj(is_a='TestSuite')",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "slot_usage": {},
-      "class_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/BenchmarkTestSuite",
+      "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/BenchmarkTestSuite",
       "@type": "ClassDefinition"
     },
     {
       "name": "StandardsComplianceTestSuite",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/StandardsComplianceTestSuite",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/StandardsComplianceTestSuite",
       "description": "Test suite for testing Translator components against releases of standards like TRAPI and the Biolink Model.",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "is_a": "TestSuite",
       "slots": [
         "id",
@@ -1389,14 +1389,14 @@
         "test_case_specification"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/StandardsComplianceTestSuite",
+      "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/StandardsComplianceTestSuite",
       "@type": "ClassDefinition"
     },
     {
       "name": "OneHopTestSuite",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/OneHopTestSuite",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/OneHopTestSuite",
       "description": "Test case for testing the integrity of \"One Hop\" knowledge graph retrievals sensa legacy SRI_Testing harness.",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "is_a": "TestSuite",
       "slots": [
         "id",
@@ -1409,14 +1409,14 @@
         "test_case_specification"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/OneHopTestSuite",
+      "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/OneHopTestSuite",
       "@type": "ClassDefinition"
     },
     {
       "name": "Input",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/Input",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/Input",
       "description": "Represents an input to a TestCase",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "is_a": "TestEntity",
       "slots": [
         "id",
@@ -1424,14 +1424,14 @@
         "description"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/Input",
+      "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/Input",
       "@type": "ClassDefinition"
     },
     {
       "name": "SemanticSmokeTestInput",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/SemanticSmokeTestInput",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/SemanticSmokeTestInput",
       "description": "Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "is_a": "Input",
       "slots": [
         "id",
@@ -1450,14 +1450,14 @@
         "notes"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/SemanticSmokeTestInput",
+      "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/SemanticSmokeTestInput",
       "@type": "ClassDefinition"
     },
     {
       "name": "Output",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/Output",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/Output",
       "description": "Represents an output from a TestCase",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "is_a": "TestEntity",
       "slots": [
         "id",
@@ -1465,14 +1465,14 @@
         "description"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/Output",
+      "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/Output",
       "@type": "ClassDefinition"
     },
     {
       "name": "SemanticSmokeTestOutput",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/SemanticSmokeTestOutput",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/SemanticSmokeTestOutput",
       "description": "Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "is_a": "Output",
       "slots": [
         "id",
@@ -1480,14 +1480,14 @@
         "description"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/SemanticSmokeTestOutput",
+      "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/SemanticSmokeTestOutput",
       "@type": "ClassDefinition"
     },
     {
       "name": "Precondition",
-      "definition_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/Precondition",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/Precondition",
       "description": "Represents a precondition for a TestCase",
-      "from_schema": "https://w3id.org/TranslatorSRI/test-case-schema",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "is_a": "TestEntity",
       "slots": [
         "id",
@@ -1495,21 +1495,21 @@
         "description"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/Precondition",
+      "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/Precondition",
       "@type": "ClassDefinition"
     }
   ],
   "metamodel_version": "1.7.0",
   "source_file": "translator_testing_model.yaml",
-  "source_file_date": "2023-10-16T15:18:04",
-  "source_file_size": 12801,
-  "generation_date": "2023-10-16T16:36:48",
+  "source_file_date": "2023-10-17T12:59:00",
+  "source_file_size": 12811,
+  "generation_date": "2023-10-17T12:59:42",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",
     "https://w3id.org/linkml/types.context.jsonld",
     {
-      "@base": "https://w3id.org/TranslatorSRI/Translator-Testing-Model/"
+      "@base": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/"
     }
   ]
 }

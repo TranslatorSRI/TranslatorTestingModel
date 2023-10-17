@@ -1,8 +1,8 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2023-10-16T16:36:51
+# Generation date: 2023-10-17T12:59:45
 # Schema: Translator-Testing-Model
 #
-# id: https://w3id.org/TranslatorSRI/test-case-schema
+# id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
 # description: Data model to formalize the structure of test assets, cases, suites and related metadata
 #   applied to run the diverse polymorphic testing objectives for the Biomedical Data Translator system.
 # license: MIT
@@ -22,7 +22,7 @@ from linkml_runtime.utils.formatutils import camelcase, underscore, sfx
 from linkml_runtime.utils.enumerations import EnumDefinitionImpl
 from rdflib import Namespace, URIRef
 from linkml_runtime.utils.curienamespace import CurieNamespace
-from linkml_runtime.linkml_model.types import Boolean, Date, String, Uriorcurie
+from linkml_runtime.linkml_model.types import Boolean, Curie, Date, String, Uriorcurie
 from linkml_runtime.utils.metamodelcore import Bool, Curie, URIorCURIE, XSDDate
 
 metamodel_version = "1.7.0"
@@ -36,7 +36,7 @@ BIOLINK = CurieNamespace('biolink', 'https://w3id.org/biolink/')
 EXAMPLE = CurieNamespace('example', 'https://example.org/')
 LINKML = CurieNamespace('linkml', 'https://w3id.org/linkml/')
 SCHEMA = CurieNamespace('schema', 'http://schema.org/')
-TTM = CurieNamespace('ttm', 'https://w3id.org/TranslatorSRI/Translator-Testing-Model/')
+TTM = CurieNamespace('ttm', 'https://w3id.org/TranslatorSRI/TranslatorTestingModel/')
 DEFAULT_ = TTM
 
 
