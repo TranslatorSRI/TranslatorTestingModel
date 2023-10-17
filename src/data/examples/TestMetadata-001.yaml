@@ -1,0 +1,6 @@
+# Example TestMetadata data object
+---
+
+id: example:TestMetadata001
+name: foo bar
+description: This is a test case

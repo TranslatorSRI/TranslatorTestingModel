@@ -1,0 +1,6 @@
+# Example TestAsset data object
+---
+
+id: example:TestAsset001
+name: foo bar
+description: This is a test case

@@ -1,7 +1,7 @@
-# Example TestSuite data object
+# Example TestCase data object
 ---
 
-id: example:TestSuite001
+id: example:TestCase001
 name: foo bar
 description: This is a test case
 mode: Enumerated
