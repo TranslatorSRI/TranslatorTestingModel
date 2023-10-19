@@ -1,1 +1,1 @@
-"""Tests for test-case-schema."""
+"""Tests for TranslatorTestingModel."""

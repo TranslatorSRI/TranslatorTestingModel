@@ -1,0 +1,186 @@
+type AcceptanceTestCase
+  {
+    id: Uriorcurie!
+    name: String
+    description: String
+    preconditions: [Precondition]
+    inputs: [SemanticSmokeTestInput]!
+    outputs: [SemanticSmokeTestOutput]!
+  }
+
+type AcceptanceTestSuite
+  {
+    id: Uriorcurie!
+    name: String
+    description: String
+    testMetadata: TestMetadata
+    testPersona: TestPersonaEnum
+    testCases: [TestCase]
+    testCaseSpecification: TestCaseSpecification
+  }
+
+type BenchmarkTestSuite
+  {
+  }
+
+type Input
+  {
+    id: Uriorcurie!
+    name: String
+    description: String
+  }
+
+type OneHopTestSuite
+  {
+    id: Uriorcurie!
+    name: String
+    description: String
+    testMetadata: TestMetadata
+    testPersona: TestPersonaEnum
+    testCases: [TestCase]
+    testCaseSpecification: TestCaseSpecification
+  }
+
+type Output
+  {
+    id: Uriorcurie!
+    name: String
+    description: String
+  }
+
+type Precondition
+  {
+    id: Uriorcurie!
+    name: String
+    description: String
+  }
+
+type QueryAnswerPair
+  {
+    name: String
+    description: String
+    inputId: Uriorcurie
+    inputName: String
+    outputId: Uriorcurie
+    outputName: String
+    expectedOutput: ExpectedOutputEnum
+    testIssue: TestIssueEnum
+    semanticSeverity: SemanticSeverityEnum
+    inV1: Boolean
+    wellKnown: Boolean
+    id: Uriorcurie!
+  }
+
+type SemanticSmokeTestInput
+  {
+    id: Uriorcurie!
+    name: String
+    description: String
+    mustPassDate: Date
+    mustPassEnvironment: EnvironmentEnum
+    query: String
+    stringEntry: String
+    direction: DirectionEnum
+    answerInformalConcept: String
+    expectedResult: ExpectedResultsEnum
+    curie: Curie
+    topLevel: String
+    node: String
+    notes: String
+  }
+
+type SemanticSmokeTestOutput
+  {
+    id: Uriorcurie!
+    name: String
+    description: String
+  }
+
+type StandardsComplianceTestSuite
+  {
+    id: Uriorcurie!
+    name: String
+    description: String
+    testMetadata: TestMetadata
+    testPersona: TestPersonaEnum
+    testCases: [TestCase]
+    testCaseSpecification: TestCaseSpecification
+  }
+
+type TestAsset
+  {
+    name: String
+    description: String
+    inputId: Uriorcurie
+    inputName: String
+    outputId: Uriorcurie
+    outputName: String
+    expectedOutput: ExpectedOutputEnum
+    testIssue: TestIssueEnum
+    semanticSeverity: SemanticSeverityEnum
+    inV1: Boolean
+    wellKnown: Boolean
+    id: Uriorcurie!
+  }
+
+type TestCase
+  {
+    id: Uriorcurie!
+    name: String
+    description: String
+    inputs: [Input]
+    outputs: [Output]
+    preconditions: [Precondition]
+  }
+
+type TestCaseSpecification
+  {
+    id: Uriorcurie!
+    name: String
+    description: String
+  }
+
+type TestEdgeData
+  {
+    name: String
+    description: String
+    inputId: Uriorcurie
+    inputName: String
+    outputId: Uriorcurie
+    outputName: String
+    expectedOutput: ExpectedOutputEnum
+    testIssue: TestIssueEnum
+    semanticSeverity: SemanticSeverityEnum
+    inV1: Boolean
+    wellKnown: Boolean
+    id: Uriorcurie!
+  }
+
+interface TestEntity
+  {
+    id: Uriorcurie!
+    name: String
+    description: String
+  }
+
+type TestMetadata
+  {
+    id: Uriorcurie!
+    name: String
+    description: String
+    testSource: TestSourceEnum
+    testReference: Uriorcurie
+    testObjective: TestObjectiveEnum
+  }
+
+type TestSuite
+  {
+    id: Uriorcurie!
+    name: String
+    description: String
+    testMetadata: TestMetadata
+    testPersona: TestPersonaEnum
+    testCases: [TestCase]
+    testCaseSpecification: TestCaseSpecification
+  }
+

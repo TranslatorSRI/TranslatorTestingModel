@@ -1,0 +1,7 @@
+# Example TestMetadata data object
+---
+# TODO: the TestMetadata example data needs further elaboration
+
+id: example:TestMetadata001
+name: foo bar
+description: This is a test case

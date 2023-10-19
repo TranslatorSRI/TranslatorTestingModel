@@ -3,5 +3,5 @@
    "example": "https://example.org/",
    "linkml": "https://w3id.org/linkml/",
    "schema": "http://schema.org/",
-   "test_case_schema": "https://w3id.org/TranslatorSRI/test-case-schema/"
+   "ttm": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/"
 }
