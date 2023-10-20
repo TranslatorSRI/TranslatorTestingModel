@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2023-10-17T16:38:13
+# Generation date: 2023-10-19T19:44:28
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -22,7 +22,7 @@ from linkml_runtime.utils.formatutils import camelcase, underscore, sfx
 from linkml_runtime.utils.enumerations import EnumDefinitionImpl
 from rdflib import Namespace, URIRef
 from linkml_runtime.utils.curienamespace import CurieNamespace
-from linkml_runtime.linkml_model.types import Boolean, Date, String, Uriorcurie
+from linkml_runtime.linkml_model.types import Boolean, Curie, Date, String, Uriorcurie
 from linkml_runtime.utils.metamodelcore import Bool, Curie, URIorCURIE, XSDDate
 
 metamodel_version = "1.7.0"

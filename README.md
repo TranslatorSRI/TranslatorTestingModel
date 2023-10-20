@@ -30,8 +30,10 @@ The project uses [Poetry](https://python-poetry.org/) to manage its dependencies
 
 Then use the `make` command to generate project artifacts:
 
+* `make gen-project`: regenerates core project artifacts
 * `make all`: make everything
 * `make deploy`: deploys site
+
 </details>
 
 ## Credits
