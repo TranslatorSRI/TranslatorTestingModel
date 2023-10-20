@@ -261,6 +261,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/about/</loc>
+         <lastmod>2023-10-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/answer_informal_concept/</loc>
          <lastmod>2023-10-20</lastmod>
          <changefreq>daily</changefreq>
