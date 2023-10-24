@@ -8,14 +8,14 @@
       
       
       
-        <link rel="canonical" href="https://TranslatorSRI.github.io/TranslatorTestingModel/name/">
+        <link rel="canonical" href="https://TranslatorSRI.github.io/TranslatorTestingModel/test_assets/">
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-8.5.10">
     
     
       
-        <title>Slot: name - Translator Testing Model</title>
+        <title>Slot: test_assets - Translator Testing Model</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-name" class="md-skip">
+        <a href="#slot-test_assets" class="md-skip">
           Skip to content
         </a>
       
@@ -97,7 +97,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: name
+              Slot: test_assets
             
           </span>
         </div>
@@ -310,15 +310,15 @@
                 
                   
 
-  <a href="https://github.com/TranslatorSRI/TranslatorTestingModel/edit/master/docs/name.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/TranslatorSRI/TranslatorTestingModel/edit/master/docs/test_assets.md" title="Edit this page" class="md-content__button md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
-<h1 id="slot-name">Slot: name</h1>
-<p><em>A human-readable name for a Test Entity</em></p>
-<p>URI: <a href="http://schema.org/name">schema:name</a></p>
+<h1 id="slot-test_assets">Slot: test_assets</h1>
+<p><em>List of explicitly enumerated Test Assets.</em></p>
+<p>URI: <a href="https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_assets">ttm:test_assets</a></p>
 <!-- no inheritance hierarchy -->
 
 <h2 id="applicable-classes">Applicable Classes</h2>
@@ -332,100 +332,23 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../TestEntity/">TestEntity</a></td>
-<td>Abstract global 'identification' class shared as a parent with all major mode...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../TestMetadata/">TestMetadata</a></td>
-<td>Represents metadata related to (external SME, SMURF, Translator feedback,  la...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../TestAsset/">TestAsset</a></td>
-<td>Represents a Test Asset, which is a single specific instance of TestCase-agno...</td>
-<td>no</td>
-</tr>
-<tr>
 <td><a href="../TestAssetCollection/">TestAssetCollection</a></td>
 <td>Represents an ad hoc list of Test Assets</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../QueryAnswerPair/">QueryAnswerPair</a></td>
-<td>Represents a QueryAnswerPair specification of a Test Asset</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../TestEdgeData/">TestEdgeData</a></td>
-<td>Represents a single Biolink Model compliant instance of an edge that can be u...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../TestCase/">TestCase</a></td>
-<td>Represents a single enumerated instance of Test Case, derived from a  given T...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../TestCaseSpecification/">TestCaseSpecification</a></td>
-<td>Parameterized declaration of the Test Case generator which dynamically genera...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../TestSuite/">TestSuite</a></td>
-<td>Specification of a set of Test Cases, one of either with a static list of 'te...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../AcceptanceTestCase/">AcceptanceTestCase</a></td>
-<td>Lifting schema from Shervin's runner JSON here as an example</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../AcceptanceTestSuite/">AcceptanceTestSuite</a></td>
-<td></td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../StandardsComplianceTestSuite/">StandardsComplianceTestSuite</a></td>
-<td>Test suite for testing Translator components against releases of standards li...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../OneHopTestSuite/">OneHopTestSuite</a></td>
-<td>Test case for testing the integrity of "One Hop" knowledge graph retrievals s...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Input/">Input</a></td>
-<td>Represents an input to a TestCase</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../SemanticSmokeTestInput/">SemanticSmokeTestInput</a></td>
-<td>Lifting schema from Shervin's runner JSON here as an example</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Output/">Output</a></td>
-<td>Represents an output from a TestCase</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../SemanticSmokeTestOutput/">SemanticSmokeTestOutput</a></td>
-<td>Lifting schema from Shervin's runner JSON here as an example</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Precondition/">Precondition</a></td>
-<td>Represents a precondition for a TestCase</td>
 <td>no</td>
 </tr>
 </tbody>
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
-<li>Range: <a href="../String/">String</a></li>
+<li>
+<p>Range: <a href="../TestCase/">TestCase</a></p>
+</li>
+<li>
+<p>Multivalued: True</p>
+</li>
+<li>
+<p>Required: True</p>
+</li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
@@ -435,15 +358,17 @@
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: name
-description: A human-readable name for a Test Entity
+<pre><code class="language-yaml">name: test_assets
+description: List of explicitly enumerated Test Assets.
 from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
 rank: 1000
-slot_uri: schema:name
-alias: name
+multivalued: true
+alias: test_assets
 domain_of:
-- TestEntity
-range: string
+- TestAssetCollection
+range: TestCase
+required: true
+inlined: true
 
 </code></pre>
 

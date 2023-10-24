@@ -235,6 +235,8 @@
 
           TestAsset --|&gt; SemanticSeverityEnum : semantic_severity
 
+      TestAsset : tags
+
       TestAsset : test_issue
 
           TestAsset --|&gt; TestIssueEnum : test_issue
@@ -337,6 +339,12 @@
 <td>A human-readable description for a Test Entity</td>
 <td><a href="../TestEntity/">TestEntity</a></td>
 </tr>
+<tr>
+<td><a href="../tags/">tags</a></td>
+<td>0..* <br/> <a href="../String/">String</a></td>
+<td>One or more 'tags' slot values (inherited from TestEntity) should generally b...</td>
+<td><a href="../TestEntity/">TestEntity</a></td>
+</tr>
 </tbody>
 </table>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
@@ -391,6 +399,13 @@ slot_usage:
     domain_of:
     - TestEntity
     range: uriorcurie
+  tags:
+    name: tags
+    description: 'One or more ''tags'' slot values (inherited from TestEntity) should
+      generally be defined to specify TestAsset membership in a "Block List" collection  '
+    domain_of:
+    - TestEntity
+    - TestAssetCollection
 
 </code></pre>
 </details>
@@ -410,6 +425,13 @@ slot_usage:
     domain_of:
     - TestEntity
     range: uriorcurie
+  tags:
+    name: tags
+    description: 'One or more ''tags'' slot values (inherited from TestEntity) should
+      generally be defined to specify TestAsset membership in a "Block List" collection  '
+    domain_of:
+    - TestEntity
+    - TestAssetCollection
 attributes:
   input_id:
     name: input_id
@@ -546,6 +568,20 @@ attributes:
     owner: TestAsset
     domain_of:
     - TestEntity
+    range: string
+  tags:
+    name: tags
+    description: 'One or more ''tags'' slot values (inherited from TestEntity) should
+      generally be defined to specify TestAsset membership in a "Block List" collection  '
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    slot_uri: schema:additionalType
+    multivalued: true
+    alias: tags
+    owner: TestAsset
+    domain_of:
+    - TestEntity
+    - TestAssetCollection
     range: string
 
 </code></pre>

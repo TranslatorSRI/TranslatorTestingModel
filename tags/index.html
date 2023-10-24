@@ -8,14 +8,14 @@
       
       
       
-        <link rel="canonical" href="https://TranslatorSRI.github.io/TranslatorTestingModel/name/">
+        <link rel="canonical" href="https://TranslatorSRI.github.io/TranslatorTestingModel/tags/">
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-8.5.10">
     
     
       
-        <title>Slot: name - Translator Testing Model</title>
+        <title>Slot: tags - Translator Testing Model</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-name" class="md-skip">
+        <a href="#slot-tags" class="md-skip">
           Skip to content
         </a>
       
@@ -97,7 +97,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: name
+              Slot: tags
             
           </span>
         </div>
@@ -310,15 +310,15 @@
                 
                   
 
-  <a href="https://github.com/TranslatorSRI/TranslatorTestingModel/edit/master/docs/name.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/TranslatorSRI/TranslatorTestingModel/edit/master/docs/tags.md" title="Edit this page" class="md-content__button md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
-<h1 id="slot-name">Slot: name</h1>
-<p><em>A human-readable name for a Test Entity</em></p>
-<p>URI: <a href="http://schema.org/name">schema:name</a></p>
+<h1 id="slot-tags">Slot: tags</h1>
+<p><em>A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.</em></p>
+<p>URI: <a href="http://schema.org/additionalType">schema:additionalType</a></p>
 <!-- no inheritance hierarchy -->
 
 <h2 id="applicable-classes">Applicable Classes</h2>
@@ -337,6 +337,11 @@
 <td>no</td>
 </tr>
 <tr>
+<td><a href="../TestAssetCollection/">TestAssetCollection</a></td>
+<td>Represents an ad hoc list of Test Assets</td>
+<td>yes</td>
+</tr>
+<tr>
 <td><a href="../TestMetadata/">TestMetadata</a></td>
 <td>Represents metadata related to (external SME, SMURF, Translator feedback,  la...</td>
 <td>no</td>
@@ -344,12 +349,7 @@
 <tr>
 <td><a href="../TestAsset/">TestAsset</a></td>
 <td>Represents a Test Asset, which is a single specific instance of TestCase-agno...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../TestAssetCollection/">TestAssetCollection</a></td>
-<td>Represents an ad hoc list of Test Assets</td>
-<td>no</td>
+<td>yes</td>
 </tr>
 <tr>
 <td><a href="../QueryAnswerPair/">QueryAnswerPair</a></td>
@@ -425,7 +425,12 @@
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
-<li>Range: <a href="../String/">String</a></li>
+<li>
+<p>Range: <a href="../String/">String</a></p>
+</li>
+<li>
+<p>Multivalued: True</p>
+</li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
@@ -435,14 +440,18 @@
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: name
-description: A human-readable name for a Test Entity
+<pre><code class="language-yaml">name: tags
+description: A human-readable tags for categorical memberships of a TestEntity (preferably
+  a URI or CURIE). Typically used to aggregate instances of TestEntity into formally
+  typed or ad hoc lists.
 from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
 rank: 1000
-slot_uri: schema:name
-alias: name
+slot_uri: schema:additionalType
+multivalued: true
+alias: tags
 domain_of:
 - TestEntity
+- TestAssetCollection
 range: string
 
 </code></pre>

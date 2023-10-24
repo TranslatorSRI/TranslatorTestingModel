@@ -230,6 +230,8 @@
 
           QueryAnswerPair --|&gt; SemanticSeverityEnum : semantic_severity
 
+      QueryAnswerPair : tags
+
       QueryAnswerPair : test_issue
 
           QueryAnswerPair --|&gt; TestIssueEnum : test_issue
@@ -329,6 +331,12 @@
 <td><a href="../description/">description</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A human-readable description for a Test Entity</td>
+<td><a href="../TestEntity/">TestEntity</a></td>
+</tr>
+<tr>
+<td><a href="../tags/">tags</a></td>
+<td>0..* <br/> <a href="../String/">String</a></td>
+<td>One or more 'tags' slot values (inherited from TestEntity) should generally b...</td>
 <td><a href="../TestEntity/">TestEntity</a></td>
 </tr>
 </tbody>
@@ -510,6 +518,20 @@ attributes:
     owner: QueryAnswerPair
     domain_of:
     - TestEntity
+    range: string
+  tags:
+    name: tags
+    description: 'One or more ''tags'' slot values (inherited from TestEntity) should
+      generally be defined to specify TestAsset membership in a "Block List" collection  '
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    slot_uri: schema:additionalType
+    multivalued: true
+    alias: tags
+    owner: QueryAnswerPair
+    domain_of:
+    - TestEntity
+    - TestAssetCollection
     range: string
 
 </code></pre>

@@ -221,6 +221,8 @@
 
       Output : name
 
+      Output : tags
+
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
@@ -260,6 +262,12 @@
 <td><a href="../description/">description</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A human-readable description for a Test Entity</td>
+<td><a href="../TestEntity/">TestEntity</a></td>
+</tr>
+<tr>
+<td><a href="../tags/">tags</a></td>
+<td>0..* <br/> <a href="../String/">String</a></td>
+<td>A human-readable tags for categorical memberships of a TestEntity (preferably...</td>
 <td><a href="../TestEntity/">TestEntity</a></td>
 </tr>
 </tbody>
@@ -359,6 +367,21 @@ attributes:
     owner: Output
     domain_of:
     - TestEntity
+    range: string
+  tags:
+    name: tags
+    description: A human-readable tags for categorical memberships of a TestEntity
+      (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity
+      into formally typed or ad hoc lists.
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    slot_uri: schema:additionalType
+    multivalued: true
+    alias: tags
+    owner: Output
+    domain_of:
+    - TestEntity
+    - TestAssetCollection
     range: string
 
 </code></pre>

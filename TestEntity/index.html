@@ -209,6 +209,7 @@
     class TestEntity
       TestEntity &lt;|-- TestMetadata
       TestEntity &lt;|-- TestAsset
+      TestEntity &lt;|-- TestAssetCollection
       TestEntity &lt;|-- TestCase
       TestEntity &lt;|-- TestCaseSpecification
       TestEntity &lt;|-- TestSuite
@@ -222,6 +223,8 @@
 
       TestEntity : name
 
+      TestEntity : tags
+
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
@@ -229,6 +232,7 @@
 <li><strong>TestEntity</strong><ul>
 <li><a href="../TestMetadata/">TestMetadata</a></li>
 <li><a href="../TestAsset/">TestAsset</a></li>
+<li><a href="../TestAssetCollection/">TestAssetCollection</a></li>
 <li><a href="../TestCase/">TestCase</a></li>
 <li><a href="../TestCaseSpecification/">TestCaseSpecification</a></li>
 <li><a href="../TestSuite/">TestSuite</a></li>
@@ -265,6 +269,12 @@
 <td><a href="../description/">description</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A human-readable description for a Test Entity</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../tags/">tags</a></td>
+<td>0..* <br/> <a href="../String/">String</a></td>
+<td>A human-readable tags for categorical memberships of a TestEntity (preferably...</td>
 <td>direct</td>
 </tr>
 </tbody>
@@ -306,6 +316,7 @@ slots:
 - id
 - name
 - description
+- tags
 tree_root: true
 
 </code></pre>
@@ -351,6 +362,21 @@ attributes:
     owner: TestEntity
     domain_of:
     - TestEntity
+    range: string
+  tags:
+    name: tags
+    description: A human-readable tags for categorical memberships of a TestEntity
+      (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity
+      into formally typed or ad hoc lists.
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    slot_uri: schema:additionalType
+    multivalued: true
+    alias: tags
+    owner: TestEntity
+    domain_of:
+    - TestEntity
+    - TestAssetCollection
     range: string
 tree_root: true
 
