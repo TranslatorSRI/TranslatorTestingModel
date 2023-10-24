@@ -33,6 +33,13 @@
                         "type": "string"
                     },
                     "type": "array"
+                },
+                "tags": {
+                    "description": "A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 }
             },
             "required": [
@@ -58,6 +65,13 @@
                 "name": {
                     "description": "A human-readable name for a Test Entity",
                     "type": "string"
+                },
+                "tags": {
+                    "description": "A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 },
                 "test_case_specification": {
                     "description": "Declarative specification of a set of Test Cases generated elsewhere (i.e. within a Test Runner)",
@@ -154,6 +168,13 @@
                 "name": {
                     "description": "A human-readable name for a Test Entity",
                     "type": "string"
+                },
+                "tags": {
+                    "description": "A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 }
             },
             "required": [
@@ -177,6 +198,13 @@
                 "name": {
                     "description": "A human-readable name for a Test Entity",
                     "type": "string"
+                },
+                "tags": {
+                    "description": "A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 },
                 "test_case_specification": {
                     "description": "Declarative specification of a set of Test Cases generated elsewhere (i.e. within a Test Runner)",
@@ -226,6 +254,13 @@
                 "name": {
                     "description": "A human-readable name for a Test Entity",
                     "type": "string"
+                },
+                "tags": {
+                    "description": "A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 }
             },
             "required": [
@@ -249,6 +284,13 @@
                 "name": {
                     "description": "A human-readable name for a Test Entity",
                     "type": "string"
+                },
+                "tags": {
+                    "description": "A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 }
             },
             "required": [
@@ -293,6 +335,13 @@
                 },
                 "semantic_severity": {
                     "$ref": "#/$defs/SemanticSeverityEnum"
+                },
+                "tags": {
+                    "description": "One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a \"Block List\" collection  ",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 },
                 "test_issue": {
                     "$ref": "#/$defs/TestIssueEnum"
@@ -374,6 +423,13 @@
                     "description": "The object of the core triple to be tested",
                     "type": "string"
                 },
+                "tags": {
+                    "description": "A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
                 "top_level": {
                     "description": "The answer must return in these many results",
                     "type": "string"
@@ -400,6 +456,13 @@
                 "name": {
                     "description": "A human-readable name for a Test Entity",
                     "type": "string"
+                },
+                "tags": {
+                    "description": "A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 }
             },
             "required": [
@@ -423,6 +486,13 @@
                 "name": {
                     "description": "A human-readable name for a Test Entity",
                     "type": "string"
+                },
+                "tags": {
+                    "description": "A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 },
                 "test_case_specification": {
                     "description": "Declarative specification of a set of Test Cases generated elsewhere (i.e. within a Test Runner)",
@@ -494,6 +564,13 @@
                 "semantic_severity": {
                     "$ref": "#/$defs/SemanticSeverityEnum"
                 },
+                "tags": {
+                    "description": "One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a \"Block List\" collection  ",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
                 "test_issue": {
                     "$ref": "#/$defs/TestIssueEnum"
                 },
@@ -505,6 +582,51 @@
                 "id"
             ],
             "title": "TestAsset",
+            "type": "object"
+        },
+        "TestAssetCollection": {
+            "additionalProperties": false,
+            "description": "Represents an ad hoc list of Test Assets.",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a Test Entity",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a Test Entity",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a Test Entity",
+                    "type": "string"
+                },
+                "tags": {
+                    "description": "One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection  ",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "test_assets": {
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/TestCase__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "description": "List of explicitly enumerated Test Assets.",
+                    "type": "object"
+                }
+            },
+            "required": [
+                "test_assets",
+                "id"
+            ],
+            "title": "TestAssetCollection",
             "type": "object"
         },
         "TestCase": {
@@ -540,6 +662,13 @@
                         "type": "string"
                     },
                     "type": "array"
+                },
+                "tags": {
+                    "description": "A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 }
             },
             "required": [
@@ -563,6 +692,13 @@
                 "name": {
                     "description": "A human-readable name for a Test Entity",
                     "type": "string"
+                },
+                "tags": {
+                    "description": "A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 }
             },
             "required": [
@@ -600,6 +736,13 @@
                     "type": "array"
                 },
                 "preconditions": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "tags": {
+                    "description": "A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.",
                     "items": {
                         "type": "string"
                     },
@@ -647,6 +790,13 @@
                 "semantic_severity": {
                     "$ref": "#/$defs/SemanticSeverityEnum"
                 },
+                "tags": {
+                    "description": "One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a \"Block List\" collection  ",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
                 "test_issue": {
                     "$ref": "#/$defs/TestIssueEnum"
                 },
@@ -687,6 +837,13 @@
                 "name": {
                     "description": "A human-readable name for a Test Entity",
                     "type": "string"
+                },
+                "tags": {
+                    "description": "A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 },
                 "test_objective": {
                     "$ref": "#/$defs/TestObjectiveEnum",
@@ -757,6 +914,13 @@
                 "name": {
                     "description": "A human-readable name for a Test Entity",
                     "type": "string"
+                },
+                "tags": {
+                    "description": "A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 },
                 "test_case_specification": {
                     "description": "Declarative specification of a set of Test Cases generated elsewhere (i.e. within a Test Runner)",

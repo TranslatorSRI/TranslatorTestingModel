@@ -47,6 +47,14 @@ CREATE TABLE "TestAsset" (
 	PRIMARY KEY (id)
 );
 
+CREATE TABLE "TestAssetCollection" (
+	id TEXT NOT NULL, 
+	name TEXT, 
+	description TEXT, 
+	test_assets TEXT NOT NULL, 
+	PRIMARY KEY (id)
+);
+
 CREATE TABLE "TestCase" (
 	id TEXT NOT NULL, 
 	name TEXT, 
@@ -185,4 +193,123 @@ CREATE TABLE "TestSuite" (
 	PRIMARY KEY (id), 
 	FOREIGN KEY(test_metadata) REFERENCES "TestMetadata" (id), 
 	FOREIGN KEY(test_case_specification) REFERENCES "TestCaseSpecification" (id)
+);
+
+CREATE TABLE "AcceptanceTestCase_tags" (
+	backref_id TEXT, 
+	tags TEXT, 
+	PRIMARY KEY (backref_id, tags), 
+	FOREIGN KEY(backref_id) REFERENCES "AcceptanceTestCase" (id)
+);
+
+CREATE TABLE "Precondition_tags" (
+	backref_id TEXT, 
+	tags TEXT, 
+	PRIMARY KEY (backref_id, tags), 
+	FOREIGN KEY(backref_id) REFERENCES "Precondition" (id)
+);
+
+CREATE TABLE "QueryAnswerPair_tags" (
+	backref_id TEXT, 
+	tags TEXT, 
+	PRIMARY KEY (backref_id, tags), 
+	FOREIGN KEY(backref_id) REFERENCES "QueryAnswerPair" (id)
+);
+
+CREATE TABLE "TestAsset_tags" (
+	backref_id TEXT, 
+	tags TEXT, 
+	PRIMARY KEY (backref_id, tags), 
+	FOREIGN KEY(backref_id) REFERENCES "TestAsset" (id)
+);
+
+CREATE TABLE "TestAssetCollection_tags" (
+	backref_id TEXT, 
+	tags TEXT, 
+	PRIMARY KEY (backref_id, tags), 
+	FOREIGN KEY(backref_id) REFERENCES "TestAssetCollection" (id)
+);
+
+CREATE TABLE "TestCase_tags" (
+	backref_id TEXT, 
+	tags TEXT, 
+	PRIMARY KEY (backref_id, tags), 
+	FOREIGN KEY(backref_id) REFERENCES "TestCase" (id)
+);
+
+CREATE TABLE "TestCaseSpecification_tags" (
+	backref_id TEXT, 
+	tags TEXT, 
+	PRIMARY KEY (backref_id, tags), 
+	FOREIGN KEY(backref_id) REFERENCES "TestCaseSpecification" (id)
+);
+
+CREATE TABLE "TestEdgeData_tags" (
+	backref_id TEXT, 
+	tags TEXT, 
+	PRIMARY KEY (backref_id, tags), 
+	FOREIGN KEY(backref_id) REFERENCES "TestEdgeData" (id)
+);
+
+CREATE TABLE "TestMetadata_tags" (
+	backref_id TEXT, 
+	tags TEXT, 
+	PRIMARY KEY (backref_id, tags), 
+	FOREIGN KEY(backref_id) REFERENCES "TestMetadata" (id)
+);
+
+CREATE TABLE "AcceptanceTestSuite_tags" (
+	backref_id TEXT, 
+	tags TEXT, 
+	PRIMARY KEY (backref_id, tags), 
+	FOREIGN KEY(backref_id) REFERENCES "AcceptanceTestSuite" (id)
+);
+
+CREATE TABLE "Input_tags" (
+	backref_id TEXT, 
+	tags TEXT, 
+	PRIMARY KEY (backref_id, tags), 
+	FOREIGN KEY(backref_id) REFERENCES "Input" (id)
+);
+
+CREATE TABLE "OneHopTestSuite_tags" (
+	backref_id TEXT, 
+	tags TEXT, 
+	PRIMARY KEY (backref_id, tags), 
+	FOREIGN KEY(backref_id) REFERENCES "OneHopTestSuite" (id)
+);
+
+CREATE TABLE "Output_tags" (
+	backref_id TEXT, 
+	tags TEXT, 
+	PRIMARY KEY (backref_id, tags), 
+	FOREIGN KEY(backref_id) REFERENCES "Output" (id)
+);
+
+CREATE TABLE "SemanticSmokeTestInput_tags" (
+	backref_id TEXT, 
+	tags TEXT, 
+	PRIMARY KEY (backref_id, tags), 
+	FOREIGN KEY(backref_id) REFERENCES "SemanticSmokeTestInput" (id)
+);
+
+CREATE TABLE "SemanticSmokeTestOutput_tags" (
+	backref_id TEXT, 
+	tags TEXT, 
+	PRIMARY KEY (backref_id, tags), 
+	FOREIGN KEY(backref_id) REFERENCES "SemanticSmokeTestOutput" (id)
+);
+
+CREATE TABLE "StandardsComplianceTestSuite_tags" (
+	backref_id TEXT, 
+	tags TEXT, 
+	PRIMARY KEY (backref_id, tags), 
+	FOREIGN KEY(backref_id) REFERENCES "StandardsComplianceTestSuite" (id)
+);
+
+CREATE TABLE "TestSuite_tags" (
+	backref_id TEXT, 
+	tags TEXT, 
+	PRIMARY KEY (backref_id, tags), 
+	FOREIGN KEY(backref_id) REFERENCES "TestSuite" (id)
 );

@@ -4,6 +4,7 @@ message AcceptanceTestCase
   uriorcurie id = 0
   string name = 0
   string description = 0
+ repeated  string tags = 0
  repeated  precondition preconditions = 0
  repeated  semanticSmokeTestInput inputs = 0
  repeated  semanticSmokeTestOutput outputs = 0
@@ -13,6 +14,7 @@ message AcceptanceTestSuite
   uriorcurie id = 0
   string name = 0
   string description = 0
+ repeated  string tags = 0
   testMetadata testMetadata = 0
   testPersonaEnum testPersona = 0
  repeated  testCase testCases = 0
@@ -24,6 +26,7 @@ message Input
   uriorcurie id = 0
   string name = 0
   string description = 0
+ repeated  string tags = 0
  }
 // Test case for testing the integrity of "One Hop" knowledge graph retrievals sensa legacy SRI_Testing harness.
 message OneHopTestSuite
@@ -31,6 +34,7 @@ message OneHopTestSuite
   uriorcurie id = 0
   string name = 0
   string description = 0
+ repeated  string tags = 0
   testMetadata testMetadata = 0
   testPersonaEnum testPersona = 0
  repeated  testCase testCases = 0
@@ -42,6 +46,7 @@ message Output
   uriorcurie id = 0
   string name = 0
   string description = 0
+ repeated  string tags = 0
  }
 // Represents a precondition for a TestCase
 message Precondition
@@ -49,6 +54,7 @@ message Precondition
   uriorcurie id = 0
   string name = 0
   string description = 0
+ repeated  string tags = 0
  }
 // Represents a QueryAnswerPair specification of a Test Asset
 message QueryAnswerPair
@@ -65,6 +71,7 @@ message QueryAnswerPair
   boolean inV1 = 0
   boolean wellKnown = 0
   uriorcurie id = 0
+ repeated  string tags = 0
  }
 // Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.
 message SemanticSmokeTestInput
@@ -72,6 +79,7 @@ message SemanticSmokeTestInput
   uriorcurie id = 0
   string name = 0
   string description = 0
+ repeated  string tags = 0
   date mustPassDate = 0
   environmentEnum mustPassEnvironment = 0
   string query = 0
@@ -90,6 +98,7 @@ message SemanticSmokeTestOutput
   uriorcurie id = 0
   string name = 0
   string description = 0
+ repeated  string tags = 0
  }
 // Test suite for testing Translator components against releases of standards like TRAPI and the Biolink Model.
 message StandardsComplianceTestSuite
@@ -97,6 +106,7 @@ message StandardsComplianceTestSuite
   uriorcurie id = 0
   string name = 0
   string description = 0
+ repeated  string tags = 0
   testMetadata testMetadata = 0
   testPersonaEnum testPersona = 0
  repeated  testCase testCases = 0
@@ -117,6 +127,16 @@ message TestAsset
   boolean inV1 = 0
   boolean wellKnown = 0
   uriorcurie id = 0
+ repeated  string tags = 0
+ }
+// Represents an ad hoc list of Test Assets.
+message TestAssetCollection
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+ repeated  testCase testAssets = 0
+ repeated  string tags = 0
  }
 // Represents a single enumerated instance of Test Case, derived from a  given TestAsset and used to probe a particular test condition.
 message TestCase
@@ -124,6 +144,7 @@ message TestCase
   uriorcurie id = 0
   string name = 0
   string description = 0
+ repeated  string tags = 0
  repeated  input inputs = 0
  repeated  output outputs = 0
  repeated  precondition preconditions = 0
@@ -134,6 +155,7 @@ message TestCaseSpecification
   uriorcurie id = 0
   string name = 0
   string description = 0
+ repeated  string tags = 0
  }
 // Represents a single Biolink Model compliant instance of an edge that can be used for testing.
 message TestEdgeData
@@ -150,6 +172,7 @@ message TestEdgeData
   boolean inV1 = 0
   boolean wellKnown = 0
   uriorcurie id = 0
+ repeated  string tags = 0
  }
 // Represents metadata related to (external SME, SMURF, Translator feedback,  large scale batch, etc.) like the provenance of test assets, cases and/or suites.
 message TestMetadata
@@ -157,6 +180,7 @@ message TestMetadata
   uriorcurie id = 0
   string name = 0
   string description = 0
+ repeated  string tags = 0
   testSourceEnum testSource = 0
   uriorcurie testReference = 0
   testObjectiveEnum testObjective = 0
@@ -167,6 +191,7 @@ message TestSuite
   uriorcurie id = 0
   string name = 0
   string description = 0
+ repeated  string tags = 0
   testMetadata testMetadata = 0
   testPersonaEnum testPersona = 0
  repeated  testCase testCases = 0

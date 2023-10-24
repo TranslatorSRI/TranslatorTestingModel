@@ -158,12 +158,23 @@ linkml:Sparqlpath xsd:string
              <test_issue> @<TestIssueEnum> ? ;
              <semantic_severity> @<SemanticSeverityEnum> ? ;
              <in_v1> @linkml:Boolean ? ;
-             <well_known> @linkml:Boolean ?
+             <well_known> @linkml:Boolean ? ;
+             schema1:additionalType @linkml:String *
           ) ;
           rdf:type [ <TestAsset> ]
        )
     } OR @<QueryAnswerPair> OR @<TestEdgeData>
 )
+
+<TestAssetCollection> CLOSED {
+    (  $<TestAssetCollection_tes> (  &<TestEntity_tes> ;
+          rdf:type [ <TestEntity> ] ? ;
+          <test_assets> @<TestCase> + ;
+          schema1:additionalType @linkml:String *
+       ) ;
+       rdf:type [ <TestAssetCollection> ]
+    )
+}
 
 <TestCase>  (
     CLOSED {
@@ -195,13 +206,14 @@ linkml:Sparqlpath xsd:string
 }
 
 <TestEntity>  (
-    @<Input> OR @<Output> OR @<Precondition> OR @<TestAsset> OR @<TestCase> OR @<TestCaseSpecification> OR @<TestMetadata> OR
-    @<TestSuite>
+    @<Input> OR @<Output> OR @<Precondition> OR @<TestAsset> OR @<TestAssetCollection> OR @<TestCase> OR @<TestCaseSpecification>
+    OR @<TestMetadata> OR @<TestSuite>
 )
 
 <TestEntity_struct> {
     (  $<TestEntity_tes> (  schema1:name @linkml:String ? ;
-          schema1:description @linkml:String ?
+          schema1:description @linkml:String ? ;
+          schema1:additionalType @linkml:String *
        ) ;
        rdf:type [ <TestEntity> ]
     )

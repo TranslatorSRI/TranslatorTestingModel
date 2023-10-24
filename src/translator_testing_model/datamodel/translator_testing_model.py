@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2023-10-19T19:44:28
+# Generation date: 2023-10-24T10:17:57
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -22,7 +22,7 @@ from linkml_runtime.utils.formatutils import camelcase, underscore, sfx
 from linkml_runtime.utils.enumerations import EnumDefinitionImpl
 from rdflib import Namespace, URIRef
 from linkml_runtime.utils.curienamespace import CurieNamespace
-from linkml_runtime.linkml_model.types import Boolean, Curie, Date, String, Uriorcurie
+from linkml_runtime.linkml_model.types import Boolean, Date, String, Uriorcurie
 from linkml_runtime.utils.metamodelcore import Bool, Curie, URIorCURIE, XSDDate
 
 metamodel_version = "1.7.0"
@@ -52,6 +52,10 @@ class TestMetadataId(TestEntityId):
 
 
 class TestAssetId(TestEntityId):
+    pass
+
+
+class TestAssetCollectionId(TestEntityId):
     pass
 
 
@@ -127,6 +131,7 @@ class TestEntity(YAMLRoot):
     id: Union[str, TestEntityId] = None
     name: Optional[str] = None
     description: Optional[str] = None
+    tags: Optional[Union[str, List[str]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -139,6 +144,10 @@ class TestEntity(YAMLRoot):
 
         if self.description is not None and not isinstance(self.description, str):
             self.description = str(self.description)
+
+        if not isinstance(self.tags, list):
+            self.tags = [self.tags] if self.tags is not None else []
+        self.tags = [v if isinstance(v, str) else str(v) for v in self.tags]
 
         super().__post_init__(**kwargs)
 
@@ -202,6 +211,7 @@ class TestAsset(TestEntity):
     semantic_severity: Optional[Union[str, "SemanticSeverityEnum"]] = None
     in_v1: Optional[Union[bool, Bool]] = None
     well_known: Optional[Union[bool, Bool]] = None
+    tags: Optional[Union[str, List[str]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -235,6 +245,43 @@ class TestAsset(TestEntity):
 
         if self.well_known is not None and not isinstance(self.well_known, Bool):
             self.well_known = Bool(self.well_known)
+
+        if not isinstance(self.tags, list):
+            self.tags = [self.tags] if self.tags is not None else []
+        self.tags = [v if isinstance(v, str) else str(v) for v in self.tags]
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class TestAssetCollection(TestEntity):
+    """
+    Represents an ad hoc list of Test Assets.
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = TTM.TestAssetCollection
+    class_class_curie: ClassVar[str] = "ttm:TestAssetCollection"
+    class_name: ClassVar[str] = "TestAssetCollection"
+    class_model_uri: ClassVar[URIRef] = TTM.TestAssetCollection
+
+    id: Union[str, TestAssetCollectionId] = None
+    test_assets: Union[Dict[Union[str, TestCaseId], Union[dict, "TestCase"]], List[Union[dict, "TestCase"]]] = empty_dict()
+    tags: Optional[Union[str, List[str]]] = empty_list()
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, TestAssetCollectionId):
+            self.id = TestAssetCollectionId(self.id)
+
+        if self._is_empty(self.test_assets):
+            self.MissingRequiredField("test_assets")
+        self._normalize_inlined_as_dict(slot_name="test_assets", slot_type=TestCase, key_name="id", keyed=True)
+
+        if not isinstance(self.tags, list):
+            self.tags = [self.tags] if self.tags is not None else []
+        self.tags = [v if isinstance(v, str) else str(v) for v in self.tags]
 
         super().__post_init__(**kwargs)
 
@@ -827,6 +874,9 @@ slots.name = Slot(uri=SCHEMA.name, name="name", curie=SCHEMA.curie('name'),
 slots.description = Slot(uri=SCHEMA.description, name="description", curie=SCHEMA.curie('description'),
                    model_uri=TTM.description, domain=None, range=Optional[str])
 
+slots.tags = Slot(uri=SCHEMA.additionalType, name="tags", curie=SCHEMA.curie('additionalType'),
+                   model_uri=TTM.tags, domain=None, range=Optional[Union[str, List[str]]])
+
 slots.test_source = Slot(uri=TTM.test_source, name="test_source", curie=TTM.curie('test_source'),
                    model_uri=TTM.test_source, domain=None, range=Optional[Union[str, "TestSourceEnum"]])
 
@@ -868,6 +918,9 @@ slots.test_metadata = Slot(uri=TTM.test_metadata, name="test_metadata", curie=TT
 
 slots.test_persona = Slot(uri=TTM.test_persona, name="test_persona", curie=TTM.curie('test_persona'),
                    model_uri=TTM.test_persona, domain=None, range=Optional[Union[str, "TestPersonaEnum"]])
+
+slots.test_assets = Slot(uri=TTM.test_assets, name="test_assets", curie=TTM.curie('test_assets'),
+                   model_uri=TTM.test_assets, domain=None, range=Union[Dict[Union[str, TestCaseId], Union[dict, TestCase]], List[Union[dict, TestCase]]])
 
 slots.test_cases = Slot(uri=TTM.test_cases, name="test_cases", curie=TTM.curie('test_cases'),
                    model_uri=TTM.test_cases, domain=None, range=Optional[Union[Dict[Union[str, TestCaseId], Union[dict, TestCase]], List[Union[dict, TestCase]]]])
@@ -922,6 +975,12 @@ slots.preconditions = Slot(uri=TTM.preconditions, name="preconditions", curie=TT
 
 slots.TestAsset_id = Slot(uri=SCHEMA.identifier, name="TestAsset_id", curie=SCHEMA.curie('identifier'),
                    model_uri=TTM.TestAsset_id, domain=TestAsset, range=Union[str, TestAssetId])
+
+slots.TestAsset_tags = Slot(uri=SCHEMA.additionalType, name="TestAsset_tags", curie=SCHEMA.curie('additionalType'),
+                   model_uri=TTM.TestAsset_tags, domain=TestAsset, range=Optional[Union[str, List[str]]])
+
+slots.TestAssetCollection_tags = Slot(uri=SCHEMA.additionalType, name="TestAssetCollection_tags", curie=SCHEMA.curie('additionalType'),
+                   model_uri=TTM.TestAssetCollection_tags, domain=TestAssetCollection, range=Optional[Union[str, List[str]]])
 
 slots.AcceptanceTestCase_inputs = Slot(uri=TTM.inputs, name="AcceptanceTestCase_inputs", curie=TTM.curie('inputs'),
                    model_uri=TTM.AcceptanceTestCase_inputs, domain=AcceptanceTestCase, range=Union[Union[str, SemanticSmokeTestInputId], List[Union[str, SemanticSmokeTestInputId]]])
