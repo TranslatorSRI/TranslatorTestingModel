@@ -12,13 +12,16 @@ Capturing these details in metadata that is parsable and usable by test runners 
 
 * [examples/](examples/) - example data
 * [project/](project/) - project files (do not edit these)
-* [src/](src/) - source files (edit these)
-  * [translator testing model specification](src/translator_testing_model)
-    * [schema](src/translator_testing_model/schema) -- LinkML schema
+* [src/](src/translator_testing_model/README.md) - source files (edit these)
+  * [translator testing model specification](src/translator_testing_model/README.md)
+    * [schema](src/translator_testing_model/schema/translator_testing_model.yaml) -- LinkML schema
       (edit this)
-    * [datamodel](src/translator_testing_model/datamodel) -- generated
-      Python datamodel
-* [tests/](tests/) - Python tests
+    * [datamodel](src/translator_testing_model/datamodel/README.md) -- generated
+      Python datamodels
+      * [Pydantic V1](src/translator_testing_model/datamodel/pydanticmodel.py)
+      * [Pydantic V2](src/translator_testing_model/datamodel/pydanticmodel_v2.py)
+      * [Python Dataclasses](src/translator_testing_model/datamodel/translator_testing_model.py)
+* [tests/](tests/test_data.py) - Python tests
 
 ## Developer Documentation
 

@@ -1,0 +1,29 @@
+# Example TestAsset data object
+---
+# TODO: the TestAsset example data needs further elaboration
+
+#
+#   TestAsset:
+#    description: >-
+#      Represents a Test Asset, which is a single specific instance of
+#      TestCase-agnostic semantic parameters representing the
+#      specification of a Translator test target with inputs and (expected) outputs.
+#    is_a: TestEntity
+#    slots:
+#      - input_id
+#      - input_name
+#      - output_id
+#      - output_name
+#      - expected_output
+#      - test_issue
+#      - semantic_severity
+#      - in_v1
+#      - well_known
+#    slot_usage:
+#      id:
+#        aliases: ["AssetIdentifier"]
+#        range: uriorcurie
+#
+id: example:TestAsset001
+name: foo bar
+description: This is a test case

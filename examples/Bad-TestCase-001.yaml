@@ -1,0 +1,19 @@
+# Example TestCase data object
+---
+# TODO: the TestCase example data needs further elaboration
+#
+#  TestCase:
+#    description: >-
+#      Represents a single enumerated instance of Test Case, derived from a
+#      given TestAsset and used to probe a particular test condition.
+#    is_a: TestEntity
+#    slots:
+#      - inputs
+#      - outputs
+#      - preconditions
+#
+# Bad Query 1 - Missing required identifier?
+
+# id: id: example:TestCase001
+name: foo bar
+description: This is a test case

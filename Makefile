@@ -187,6 +187,6 @@ clean:
 	rm -rf $(DEST)
 	rm -rf tmp
 	rm -fr docs/*
-	rm -fr $(PYMODEL)/*
+	rm -fr $(PYMODEL)/*.py
 
 include project.Makefile
