@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2023-10-24T10:17:57
+# Generation date: 2023-10-25T17:15:01
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -22,11 +22,11 @@ from linkml_runtime.utils.formatutils import camelcase, underscore, sfx
 from linkml_runtime.utils.enumerations import EnumDefinitionImpl
 from rdflib import Namespace, URIRef
 from linkml_runtime.utils.curienamespace import CurieNamespace
-from linkml_runtime.linkml_model.types import Boolean, Date, String, Uriorcurie
+from linkml_runtime.linkml_model.types import Boolean, Curie, Date, String, Uriorcurie
 from linkml_runtime.utils.metamodelcore import Bool, Curie, URIorCURIE, XSDDate
 
 metamodel_version = "1.7.0"
-version = None
+version = "0.0.0"
 
 # Overwrite dataclasses _init_fn to add **kwargs in __init__
 dataclasses._init_fn = dataclasses_init_fn_with_kwargs

@@ -6,6 +6,7 @@
     "https://TranslatorSRI.github.io/TranslatorTestingModel"
   ],
   "id": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+  "version": "0.0.0",
   "imports": [
     "linkml:types"
   ],
@@ -1580,9 +1581,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "translator_testing_model.yaml",
-  "source_file_date": "2023-10-24T10:06:11",
-  "source_file_size": 13635,
-  "generation_date": "2023-10-24T10:17:54",
+  "source_file_date": "2023-10-25T17:13:47",
+  "source_file_size": 13153,
+  "generation_date": "2023-10-25T17:14:58",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",
