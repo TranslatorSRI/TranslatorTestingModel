@@ -2,6 +2,7 @@
 id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
 name: Translator-Testing-Model
 title: Translator Testing Data Model
+version: 0.0.0
 description: |-
   Data model to formalize the structure of test assets, cases, suites and related metadata
   applied to run the diverse polymorphic testing objectives for the Biomedical Data Translator system.

@@ -1,6 +1,7 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix linkml: <https://w3id.org/linkml/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix pav: <http://purl.org/pav/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
@@ -12,10 +13,10 @@ ttm:AcceptanceTestCase a owl:Class,
     rdfs:label "AcceptanceTestCase" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:minCardinality 1 ;
-            owl:onProperty ttm:inputs ],
+            owl:onProperty ttm:outputs ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
-            owl:onProperty ttm:outputs ],
+            owl:onProperty ttm:inputs ],
         [ a owl:Restriction ;
             owl:allValuesFrom ttm:SemanticSmokeTestInput ;
             owl:onProperty ttm:inputs ],
@@ -419,17 +420,17 @@ ttm:TestAsset a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "TestAsset" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:id ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:id ],
-        [ a owl:Restriction ;
             owl:allValuesFrom linkml:Uriorcurie ;
             owl:onProperty ttm:id ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
             owl:onProperty ttm:tags ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:id ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty ttm:tags ],
@@ -633,6 +634,7 @@ ttm:TestEntity a owl:Class,
     rdfs:label "Translator-Testing-Model" ;
     dcterms:license "MIT" ;
     dcterms:title "Translator Testing Data Model" ;
+    pav:version "0.0.0" ;
     rdfs:seeAlso <https://TranslatorSRI.github.io/TranslatorTestingModel> ;
     skos:definition """Data model to formalize the structure of test assets, cases, suites and related metadata
 applied to run the diverse polymorphic testing objectives for the Biomedical Data Translator system.""" .
