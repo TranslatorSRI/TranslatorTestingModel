@@ -1,0 +1,17 @@
+[
+  {
+    "id": "example:TestAsset001",
+    "name": "foo bar",
+    "description": "This is a test asset"
+  },
+  {
+    "id": "example:TestAsset002",
+    "name": "tweedle dee",
+    "description": "This is another test asset"
+  },
+  {
+    "id": "example:TestAsset003",
+    "name": "tweedle dum",
+    "description": "This is yetanuder test asset"
+  }
+]
