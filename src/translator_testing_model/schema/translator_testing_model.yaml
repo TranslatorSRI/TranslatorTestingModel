@@ -56,6 +56,7 @@ classes:
     slots:
       - input_id
       - input_name
+      - predicate
       - output_id
       - output_name
       - expected_output
@@ -72,46 +73,111 @@ classes:
           One or more 'tags' slot values (inherited from TestEntity) should generally
           be defined to specify TestAsset membership in a "Block List" collection  
 
-  TestAssetCollection:
-    description: >-
-      Represents an ad hoc list of Test Assets.
-    aliases: ["BlockList"]
-    is_a: TestEntity
-    slots:
-      - test_assets
-      - tags
-    slot_usage:
-      tags:
-        description: >-
-          One or more 'tags' slot values (inherited from TestEntity) should generally
-          be defined as filters to specify TestAsset membership in a "Block List" collection  
-
-  QueryAnswerPair:
-    description: >-
-      Represents a QueryAnswerPair specification of a Test Asset
-    # aliases: [""]
+  AcceptanceTestAsset:
     is_a: TestAsset
+    description: >-
+      Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.
+    slots:
+      - must_pass_date
+      - must_pass_environment
+      - query
+      - string_entry
+      - direction
+      - answer_informal_concept
+      - expected_result
+#      - curie  # use input_id
+      - top_level
+      - query_node
+      - notes
+
+#  QueryAnswerPair:
+#    description: >-
+#      Represents a QueryAnswerPair specification type of Test Asset.
+#      (is this class really needed? Let's assume that the nothing
+#      is added above the other test types)
+#    # aliases: [""]
+#    is_a: TestAsset
   
   TestEdgeData:
     description: >-
-      Represents a single Biolink Model compliant instance of an edge that can be used for testing.
+      Represents a single Biolink Model compliant instance of a
+      subject-predicate-object edge that can be used for testing.
     is_a: TestAsset
 
   TestCase:
     description: >-
       Represents a single enumerated instance of Test Case, derived from a 
-      given TestAsset and used to probe a particular test condition.
+      given collection of one or more TestAsset instances (the value of the
+      'test_assets' slot) which define the 'inputs' and 'outputs' of the
+      TestCase, used to probe a particular test condition.
     is_a: TestEntity
     slots:
-      - inputs
-      - outputs
+      - test_env
+      - test_case_type
+      - query_type
+      - test_assets
       - preconditions
+    slot_usage:
+      test_case_type:
+        description: >-
+          Is this valid or even necessary with the class names already
+          available from classes of 'test_assets' used (seems redundant?)
+      test_assets:
+        aliases: ["Block List"]
+        description: >-
+          One or more 'tags' slot values (inherited from TestEntity)
+          should generally be defined as filters to specify TestAsset
+          membership in 'test_assets' slot ("Block List") collection.
+      tags:
+        description: >-
+          One or more 'tags' slot values (inherited from TestEntity) should generally
+          be defined as filters to specify TestAsset membership in a "Block List" collection.
 
   TestCaseSpecification:
     description: >-
       Parameterized declaration of the Test Case generator which dynamically
       generates a collection of Test Cases from Test Assets, using applicable heuristics.
     is_a: TestEntity
+
+  AcceptanceTestCase:
+    is_a: TestCase
+    description: >-
+      See AcceptanceTestAsset above for more details.
+    slot_usage:
+      test_assets:
+        range: AcceptanceTestAsset
+
+  QuantitativeTestCase:
+    is_a: TestCase
+    description: >-
+      Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.
+    slot_usage:
+#      test_assets:
+#        range: QuantitativeTestAsset
+
+  ComplianceTestCase:
+    is_a: TestCase
+    description: >-
+      TRAPI and Biolink Model standards compliance test
+    slot_usage:
+#      test_assets:
+#        range: ComplianceTestAsset
+
+  KnowledgeGraphNavigationTestCase:
+    is_a: TestCase
+    description: >-
+      Knowledge Graph navigation integration test
+    slot_usage:
+#      test_assets:
+#        range: KnowledgeGraphNavigationTestAsset
+
+  OneHopTestCase:
+    is_a: KnowledgeGraphNavigationTestCase
+    description: >-
+      'One Hop' Knowledge Graph navigation integration test
+    slot_usage:
+#      test_assets:
+#        range: OneHopTestAsset
 
   TestSuite:
     is_a: TestEntity
@@ -124,18 +190,6 @@ classes:
       - test_persona
       - test_cases
       - test_case_specification
-
-  AcceptanceTestCase:
-    is_a: TestCase
-    description: >-
-      Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.
-    slot_usage:
-      inputs:
-        range: SemanticSmokeTestInput
-        required: true
-      outputs:
-        range: SemanticSmokeTestOutput
-        required: true
 
   AcceptanceTestSuite:
     is_a: TestSuite
@@ -154,40 +208,6 @@ classes:
     description: >-
       Test case for testing the integrity of "One Hop" knowledge graph retrievals sensa legacy SRI_Testing harness.
     is_a: TestSuite
-
-  Input:
-    description: >-
-      Represents an input to a TestCase
-    is_a: TestEntity
-    slots:
-
-  SemanticSmokeTestInput:
-    is_a: Input
-    description: >-
-      Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.
-    slots:
-      - must_pass_date
-      - must_pass_environment
-      - query
-      - string_entry
-      - direction
-      - answer_informal_concept
-      - expected_result
-      - curie
-      - top_level
-      - node
-      - notes
-
-  Output:
-    description: >-
-      Represents an output from a TestCase
-    is_a: TestEntity
-    slots:
-
-  SemanticSmokeTestOutput:
-    is_a: Output
-    description: >-
-      Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.
 
   Precondition:
     description: >-
@@ -241,6 +261,9 @@ slots:
   input_name:
     aliases: ["InputName (user choice)"]
 
+  predicate:
+    aliases: ["Query"]
+
   output_id:
     aliases: ["OutputID"]
     range: uriorcurie
@@ -280,10 +303,15 @@ slots:
 
   test_assets:
     description: >-
-      List of explicitly enumerated Test Assets.
+      List of explicitly enumerated Test Assets. The class attributes of
+      TestAsset would be included in the TestCase versus being referred to by
+      the identifier (curie) of the TestAsset. That is, this would be a list of
+      objects (in JSONSchema serialization) versus a list of strings (where
+      each string is an identifier pointing to another class).
     range: TestCase
     multivalued: true
     inlined: true
+    inlined_as_list: true
     required: true
 
   test_cases:
@@ -309,12 +337,12 @@ slots:
 
   must_pass_environment:
     description: >-
-      The environment in which this test must pass
-    range: EnvironmentEnum
+      The deployment environment within which this test must pass.
+    range: TestEnvEnum
     examples:
-      - value: "PROD"
-      - value: "CI"
-      - value: "TEST"
+      - value: "prod"
+      - value: "ci"
+      - value: "test"
 
   query:
     description: >-
@@ -342,7 +370,8 @@ slots:
     description: >-
       An answer that is returned from the test case, note: this must be combined with the expected_result
       to form a complete answer.  It might make sense to couple these in their own object instead of
-      strictly sticking to the flat schema introduced by the spreadsheet here: https://docs.google.com/spreadsheets/d/1yj7zIchFeVl1OHqL_kE_pqvzNLmGml_FLbHDs-8Yvig/edit#gid=0
+      strictly sticking to the flat schema introduced by the spreadsheet here:
+      https://docs.google.com/spreadsheets/d/1yj7zIchFeVl1OHqL_kE_pqvzNLmGml_FLbHDs-8Yvig/edit#gid=0
     range: string
     examples:
       - value: "fingolimod"
@@ -355,20 +384,21 @@ slots:
       The expected result of the query
     range: ExpectedResultsEnum
 
-  curie:
-    description: >-
-      The curie of the query
-    range: curie
+#  curie:
+#    description: >-
+#      The curie of the query; this is only used in AcceptanceTestCase
+#      which is now converted to an AcceptanceTestAsset which has 'input_id'
+#    range: curie
 
   top_level:
     description: >-
       The answer must return in these many results
-    range: string
+    range: integer
 
-  node:
+  query_node:
     description: >-
-      The node of the TRAPI query to replace.
-    range: string
+      The node of the (templated) TRAPI query to replace
+    range: NodeEnum
 
   notes:
     description: >-
@@ -376,17 +406,24 @@ slots:
     range: string
 
   requires_trapi:
-    range: boolean
     description: >-
       Does this test require a TRAPI-compliant query to run?
+    range: boolean
 
-  inputs:
-    range: Input
-    multivalued: true
+  test_env:
+    description: >-
+      Deployment environment within which the associated TestSuite is run.
+    range: TestEnvEnum
 
-  outputs:
-    range: Output
-    multivalued: true
+  test_case_type:
+    description: >-
+      Type of TestCase.
+    range: TestCaseTypeEnum
+
+  query_type:
+    description: >-
+      Type of TestCase query.
+    range: QueryTypeEnum
 
   preconditions:
     range: Precondition
@@ -435,11 +472,21 @@ enums:
           Someone working on basic biology questions or drug discoveries
           where the study of the biological mechanism.
 
+  QueryTypeEnum:
+    description: >-
+      Query
+    permissible_values:
+      treats:
+        aliases: "treats(creative)"
+        description:
+
   ExpectedOutputEnum:
     description: >-
       Expected output values for instances of Test Asset or Test Cases(?).
       (Note: does this Enum overlap with 'ExpectedResultsEnum' below?)
     permissible_values:
+      Top_Answer:
+        description:
       Acceptable:
         description:
       BadButForgivable:
@@ -447,8 +494,10 @@ enums:
       NeverShow:
         description:
       1_TopAnswer:
+        is_a: Top_Answer
         description:
       4_NeverShow:
+        is_a: NeverShow
         description:
 
   ExpectedResultsEnum:
@@ -462,12 +511,50 @@ enums:
         description: >-
           The query should not return the result in this test case
 
+  NodeEnum:
+    description: >-
+      Target node of a Subject-Predicate-Object driven query
+    permissible_values:
+      subject:
+      object:
+
+  TestEnvEnum:
+    description: >-
+      Testing environments within which a TestSuite is
+      run by a TestRunner scheduled by the TestHarness.
+    permissible_values:
+      dev:
+        description: Development
+      ci:
+        description: Continuous Integration
+      test:
+        description: Test
+      prod:
+        description: Production
+
+  TestCaseTypeEnum:
+    description: >-
+      Enumerated tags for types of test (generally applied to a TestCase).
+    permissible_values:
+      acceptance:
+        description: Acceptance test
+      quantitative:
+        description: Quantitative test
+      compliance:
+        description: Standards compliance test
+      kg_navigation:
+        description: Knowledge Graph navigation integration test
+      one_hop:
+        is_a: kg_navigation
+        description: One Hop navigation test
+
   TestIssueEnum:
     permissible_values:
       causes not treats:
         description:
       TMKP:
-        description: Text Mining Knowledge Provider generated relationship?
+        description: >-
+          'Text Mining Knowledge Provider' generated relationship?
       category too generic:
         description:
       contraindications:
@@ -489,10 +576,3 @@ enums:
     permissible_values:
       increased:
       decreased:
-      
-  EnvironmentEnum:
-    permissible_values:
-      DEV:
-      CI:
-      TEST:
-      PROD:

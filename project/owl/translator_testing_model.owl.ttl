@@ -13,18 +13,12 @@ ttm:AcceptanceTestCase a owl:Class,
     rdfs:label "AcceptanceTestCase" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:minCardinality 1 ;
-            owl:onProperty ttm:outputs ],
+            owl:onProperty ttm:test_assets ],
         [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty ttm:inputs ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom ttm:SemanticSmokeTestInput ;
-            owl:onProperty ttm:inputs ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom ttm:SemanticSmokeTestOutput ;
-            owl:onProperty ttm:outputs ],
+            owl:allValuesFrom ttm:AcceptanceTestAsset ;
+            owl:onProperty ttm:test_assets ],
         ttm:TestCase ;
-    skos:definition "Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete." ;
+    skos:definition "See AcceptanceTestAsset above for more details." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:AcceptanceTestSuite a owl:Class,
@@ -39,6 +33,20 @@ ttm:BenchmarkTestSuite a owl:Class,
     skos:definition "JsonObj(is_a='TestSuite')" ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
+ttm:ComplianceTestCase a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "ComplianceTestCase" ;
+    rdfs:subClassOf ttm:TestCase ;
+    skos:definition "TRAPI and Biolink Model standards compliance test" ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
+ttm:OneHopTestCase a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "OneHopTestCase" ;
+    rdfs:subClassOf ttm:KnowledgeGraphNavigationTestCase ;
+    skos:definition "'One Hop' Knowledge Graph navigation integration test" ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
 ttm:OneHopTestSuite a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "OneHopTestSuite" ;
@@ -46,11 +54,11 @@ ttm:OneHopTestSuite a owl:Class,
     skos:definition "Test case for testing the integrity of \"One Hop\" knowledge graph retrievals sensa legacy SRI_Testing harness." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
-ttm:QueryAnswerPair a owl:Class,
+ttm:QuantitativeTestCase a owl:Class,
         linkml:ClassDefinition ;
-    rdfs:label "QueryAnswerPair" ;
-    rdfs:subClassOf ttm:TestAsset ;
-    skos:definition "Represents a QueryAnswerPair specification of a Test Asset" ;
+    rdfs:label "QuantitativeTestCase" ;
+    rdfs:subClassOf ttm:TestCase ;
+    skos:definition "Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:StandardsComplianceTestSuite a owl:Class,
@@ -60,25 +68,11 @@ ttm:StandardsComplianceTestSuite a owl:Class,
     skos:definition "Test suite for testing Translator components against releases of standards like TRAPI and the Biolink Model." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
-ttm:TestAssetCollection a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "TestAssetCollection" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:tags ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:tags ],
-        ttm:TestEntity ;
-    skos:altLabel "BlockList" ;
-    skos:definition "Represents an ad hoc list of Test Assets." ;
-    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
-
 ttm:TestEdgeData a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "TestEdgeData" ;
     rdfs:subClassOf ttm:TestAsset ;
-    skos:definition "Represents a single Biolink Model compliant instance of an edge that can be used for testing." ;
+    skos:definition "Represents a single Biolink Model compliant instance of a subject-predicate-object edge that can be used for testing." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:answer_informal_concept a owl:ObjectProperty,
@@ -86,13 +80,6 @@ ttm:answer_informal_concept a owl:ObjectProperty,
     rdfs:label "answer_informal_concept" ;
     rdfs:range linkml:String ;
     skos:definition "An answer that is returned from the test case, note: this must be combined with the expected_result to form a complete answer.  It might make sense to couple these in their own object instead of strictly sticking to the flat schema introduced by the spreadsheet here: https://docs.google.com/spreadsheets/d/1yj7zIchFeVl1OHqL_kE_pqvzNLmGml_FLbHDs-8Yvig/edit#gid=0" ;
-    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
-
-ttm:curie a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "curie" ;
-    rdfs:range linkml:curie ;
-    skos:definition "The curie of the query" ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:description a owl:ObjectProperty,
@@ -152,21 +139,14 @@ ttm:must_pass_date a owl:ObjectProperty,
 ttm:must_pass_environment a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "must_pass_environment" ;
-    rdfs:range ttm:EnvironmentEnum ;
-    skos:definition "The environment in which this test must pass" ;
+    rdfs:range ttm:TestEnvEnum ;
+    skos:definition "The deployment environment within which this test must pass." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:name a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "name" ;
     skos:definition "A human-readable name for a Test Entity" ;
-    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
-
-ttm:node a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "node" ;
-    rdfs:range linkml:String ;
-    skos:definition "The node of the TRAPI query to replace." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:notes a owl:ObjectProperty,
@@ -195,11 +175,31 @@ ttm:preconditions a owl:ObjectProperty,
     rdfs:range ttm:Precondition ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
+ttm:predicate a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "predicate" ;
+    skos:altLabel "Query" ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
 ttm:query a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "query" ;
     rdfs:range linkml:String ;
     skos:definition "The question a SME would ask" ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
+ttm:query_node a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "query_node" ;
+    rdfs:range ttm:NodeEnum ;
+    skos:definition "The node of the (templated) TRAPI query to replace" ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
+ttm:query_type a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "query_type" ;
+    rdfs:range ttm:QueryTypeEnum ;
+    skos:definition "Type of TestCase query." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:requires_trapi a owl:ObjectProperty,
@@ -225,13 +225,6 @@ ttm:string_entry a owl:ObjectProperty,
     skos:definition "The object of the core triple to be tested" ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
-ttm:test_assets a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "test_assets" ;
-    rdfs:range ttm:TestCase ;
-    skos:definition "List of explicitly enumerated Test Assets." ;
-    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
-
 ttm:test_case_specification a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "test_case_specification" ;
@@ -244,6 +237,13 @@ ttm:test_cases a owl:ObjectProperty,
     rdfs:label "test_cases" ;
     rdfs:range ttm:TestCase ;
     skos:definition "List of explicitly enumerated Test Cases." ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
+ttm:test_env a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "test_env" ;
+    rdfs:range ttm:TestEnvEnum ;
+    skos:definition "Deployment environment within which the associated TestSuite is run." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:test_issue a owl:ObjectProperty,
@@ -292,7 +292,7 @@ ttm:test_source a owl:ObjectProperty,
 ttm:top_level a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "top_level" ;
-    rdfs:range linkml:String ;
+    rdfs:range linkml:Integer ;
     skos:definition "The answer must return in these many results" ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
@@ -303,6 +303,20 @@ ttm:well_known a owl:ObjectProperty,
     skos:altLabel "Well Known" ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
+ttm:AcceptanceTestAsset a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "AcceptanceTestAsset" ;
+    rdfs:subClassOf ttm:TestAsset ;
+    skos:definition "Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete." ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
+ttm:KnowledgeGraphNavigationTestCase a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "KnowledgeGraphNavigationTestCase" ;
+    rdfs:subClassOf ttm:TestCase ;
+    skos:definition "Knowledge Graph navigation integration test" ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
 ttm:Precondition a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "Precondition" ;
@@ -310,19 +324,9 @@ ttm:Precondition a owl:Class,
     skos:definition "Represents a precondition for a TestCase" ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
-ttm:SemanticSmokeTestInput a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "SemanticSmokeTestInput" ;
-    rdfs:subClassOf ttm:Input ;
-    skos:definition "Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete." ;
-    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
-
-ttm:SemanticSmokeTestOutput a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "SemanticSmokeTestOutput" ;
-    rdfs:subClassOf ttm:Output ;
-    skos:definition "Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete." ;
-    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+<https://w3id.org/TranslatorSRI/TranslatorTestingModel/QueryTypeEnum#treats> a owl:Class,
+        ttm:QueryTypeEnum ;
+    rdfs:label "treats" .
 
 ttm:TestCaseSpecification a owl:Class,
         linkml:ClassDefinition ;
@@ -346,22 +350,6 @@ ttm:TestMetadata a owl:Class,
         ttm:DirectionEnum ;
     rdfs:label "increased" .
 
-<https://w3id.org/TranslatorSRI/TranslatorTestingModel/EnvironmentEnum#CI> a owl:Class,
-        ttm:EnvironmentEnum ;
-    rdfs:label "CI" .
-
-<https://w3id.org/TranslatorSRI/TranslatorTestingModel/EnvironmentEnum#DEV> a owl:Class,
-        ttm:EnvironmentEnum ;
-    rdfs:label "DEV" .
-
-<https://w3id.org/TranslatorSRI/TranslatorTestingModel/EnvironmentEnum#PROD> a owl:Class,
-        ttm:EnvironmentEnum ;
-    rdfs:label "PROD" .
-
-<https://w3id.org/TranslatorSRI/TranslatorTestingModel/EnvironmentEnum#TEST> a owl:Class,
-        ttm:EnvironmentEnum ;
-    rdfs:label "TEST" .
-
 <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#1_TopAnswer> a owl:Class,
         ttm:ExpectedOutputEnum ;
     rdfs:label "1_TopAnswer" .
@@ -382,6 +370,10 @@ ttm:TestMetadata a owl:Class,
         ttm:ExpectedOutputEnum ;
     rdfs:label "NeverShow" .
 
+<https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#Top_Answer> a owl:Class,
+        ttm:ExpectedOutputEnum ;
+    rdfs:label "Top_Answer" .
+
 <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedResultsEnum#exclude_bad> a owl:Class,
         ttm:ExpectedResultsEnum ;
     rdfs:label "exclude_bad" .
@@ -390,19 +382,17 @@ ttm:TestMetadata a owl:Class,
         ttm:ExpectedResultsEnum ;
     rdfs:label "include_good" .
 
-ttm:Input a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "Input" ;
-    rdfs:subClassOf ttm:TestEntity ;
-    skos:definition "Represents an input to a TestCase" ;
-    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+<https://w3id.org/TranslatorSRI/TranslatorTestingModel/NodeEnum#object> a owl:Class,
+        ttm:NodeEnum ;
+    rdfs:label "object" .
 
-ttm:Output a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "Output" ;
-    rdfs:subClassOf ttm:TestEntity ;
-    skos:definition "Represents an output from a TestCase" ;
-    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+<https://w3id.org/TranslatorSRI/TranslatorTestingModel/NodeEnum#subject> a owl:Class,
+        ttm:NodeEnum ;
+    rdfs:label "subject" .
+
+ttm:QueryTypeEnum a owl:Class,
+        linkml:EnumDefinition ;
+    linkml:permissible_values <https://w3id.org/TranslatorSRI/TranslatorTestingModel/QueryTypeEnum#treats> .
 
 <https://w3id.org/TranslatorSRI/TranslatorTestingModel/SemanticSeverityEnum#High> a owl:Class,
         ttm:SemanticSeverityEnum ;
@@ -420,23 +410,59 @@ ttm:TestAsset a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "TestAsset" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom linkml:Uriorcurie ;
-            owl:onProperty ttm:id ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:tags ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty ttm:id ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty ttm:id ],
         [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Uriorcurie ;
+            owl:onProperty ttm:id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:tags ],
+        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty ttm:tags ],
         ttm:TestEntity ;
     skos:definition "Represents a Test Asset, which is a single specific instance of TestCase-agnostic semantic parameters representing the specification of a Translator test target with inputs and (expected) outputs." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
+<https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestCaseTypeEnum#acceptance> a owl:Class,
+        ttm:TestCaseTypeEnum ;
+    rdfs:label "acceptance" .
+
+<https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestCaseTypeEnum#compliance> a owl:Class,
+        ttm:TestCaseTypeEnum ;
+    rdfs:label "compliance" .
+
+<https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestCaseTypeEnum#kg_navigation> a owl:Class,
+        ttm:TestCaseTypeEnum ;
+    rdfs:label "kg_navigation" .
+
+<https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestCaseTypeEnum#one_hop> a owl:Class,
+        ttm:TestCaseTypeEnum ;
+    rdfs:label "one_hop" .
+
+<https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestCaseTypeEnum#quantitative> a owl:Class,
+        ttm:TestCaseTypeEnum ;
+    rdfs:label "quantitative" .
+
+<https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#ci> a owl:Class,
+        ttm:TestEnvEnum ;
+    rdfs:label "ci" .
+
+<https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#dev> a owl:Class,
+        ttm:TestEnvEnum ;
+    rdfs:label "dev" .
+
+<https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#prod> a owl:Class,
+        ttm:TestEnvEnum ;
+    rdfs:label "prod" .
+
+<https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#test> a owl:Class,
+        ttm:TestEnvEnum ;
+    rdfs:label "test" .
 
 <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#TMKP> a owl:Class,
         ttm:TestIssueEnum ;
@@ -514,18 +540,6 @@ ttm:TestAsset a owl:Class,
         ttm:TestSourceEnum ;
     rdfs:label "TranslatorTeam" .
 
-ttm:inputs a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "inputs" ;
-    rdfs:range ttm:Input ;
-    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
-
-ttm:outputs a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "outputs" ;
-    rdfs:range ttm:Output ;
-    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
-
 ttm:DirectionEnum a owl:Class,
         linkml:EnumDefinition ;
     owl:unionOf ( <https://w3id.org/TranslatorSRI/TranslatorTestingModel/DirectionEnum#increased> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/DirectionEnum#decreased> ) ;
@@ -538,12 +552,11 @@ ttm:ExpectedResultsEnum a owl:Class,
     linkml:permissible_values <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedResultsEnum#exclude_bad>,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedResultsEnum#include_good> .
 
-ttm:TestCase a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "TestCase" ;
-    rdfs:subClassOf ttm:TestEntity ;
-    skos:definition "Represents a single enumerated instance of Test Case, derived from a  given TestAsset and used to probe a particular test condition." ;
-    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+ttm:NodeEnum a owl:Class,
+        linkml:EnumDefinition ;
+    owl:unionOf ( <https://w3id.org/TranslatorSRI/TranslatorTestingModel/NodeEnum#subject> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/NodeEnum#object> ) ;
+    linkml:permissible_values <https://w3id.org/TranslatorSRI/TranslatorTestingModel/NodeEnum#object>,
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/NodeEnum#subject> .
 
 ttm:TestSuite a owl:Class,
         linkml:ClassDefinition ;
@@ -557,6 +570,13 @@ ttm:id a owl:ObjectProperty,
     rdfs:label "id" ;
     rdfs:range linkml:Uriorcurie ;
     skos:definition "A unique identifier for a Test Entity" ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
+ttm:test_case_type a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "test_case_type" ;
+    rdfs:range ttm:TestCaseTypeEnum ;
+    skos:definition "Type of TestCase." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:SemanticSeverityEnum a owl:Class,
@@ -579,13 +599,12 @@ ttm:tags a owl:ObjectProperty,
     skos:definition "A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
-ttm:EnvironmentEnum a owl:Class,
-        linkml:EnumDefinition ;
-    owl:unionOf ( <https://w3id.org/TranslatorSRI/TranslatorTestingModel/EnvironmentEnum#DEV> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/EnvironmentEnum#CI> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/EnvironmentEnum#TEST> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/EnvironmentEnum#PROD> ) ;
-    linkml:permissible_values <https://w3id.org/TranslatorSRI/TranslatorTestingModel/EnvironmentEnum#CI>,
-        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/EnvironmentEnum#DEV>,
-        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/EnvironmentEnum#PROD>,
-        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/EnvironmentEnum#TEST> .
+ttm:test_assets a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "test_assets" ;
+    rdfs:range ttm:TestCase ;
+    skos:definition "List of explicitly enumerated Test Assets. The class attributes of TestAsset would be included in the TestCase versus being referred to by the identifier (curie) of the TestAsset. That is, this would be a list of objects (in JSONSchema serialization) versus a list of strings (where each string is an identifier pointing to another class)." ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:TestPersonaEnum a owl:Class,
         linkml:EnumDefinition ;
@@ -595,14 +614,56 @@ ttm:TestPersonaEnum a owl:Class,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestPersonaEnum#LookUp>,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestPersonaEnum#Mechanistic> .
 
-ttm:ExpectedOutputEnum a owl:Class,
+ttm:TestCase a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "TestCase" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:tags ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:test_case_type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:test_case_type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:test_assets ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:tags ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:test_case_type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty ttm:test_assets ],
+        ttm:TestEntity ;
+    skos:definition "Represents a single enumerated instance of Test Case, derived from a  given collection of one or more TestAsset instances (the value of the 'test_assets' slot) which define the 'inputs' and 'outputs' of the TestCase, used to probe a particular test condition." ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
+ttm:TestCaseTypeEnum a owl:Class,
         linkml:EnumDefinition ;
-    owl:unionOf ( <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#Acceptable> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#BadButForgivable> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#NeverShow> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#1_TopAnswer> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#4_NeverShow> ) ;
-    linkml:permissible_values <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#1_TopAnswer>,
-        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#4_NeverShow>,
-        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#Acceptable>,
-        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#BadButForgivable>,
-        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#NeverShow> .
+    owl:unionOf ( <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestCaseTypeEnum#acceptance> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestCaseTypeEnum#quantitative> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestCaseTypeEnum#compliance> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestCaseTypeEnum#kg_navigation> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestCaseTypeEnum#one_hop> ) ;
+    linkml:permissible_values <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestCaseTypeEnum#acceptance>,
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestCaseTypeEnum#compliance>,
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestCaseTypeEnum#kg_navigation>,
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestCaseTypeEnum#one_hop>,
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestCaseTypeEnum#quantitative> .
+
+ttm:TestEntity a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "TestEntity" ;
+    skos:definition "Abstract global 'identification' class shared as a parent with all major model classes within the data model for Translator testing." ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
+ttm:TestEnvEnum a owl:Class,
+        linkml:EnumDefinition ;
+    owl:unionOf ( <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#dev> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#ci> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#test> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#prod> ) ;
+    linkml:permissible_values <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#ci>,
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#dev>,
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#prod>,
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#test> .
 
 ttm:TestIssueEnum a owl:Class,
         linkml:EnumDefinition ;
@@ -612,6 +673,16 @@ ttm:TestIssueEnum a owl:Class,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#causes+not+treats>,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#chemical+roles>,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#contraindications> .
+
+ttm:ExpectedOutputEnum a owl:Class,
+        linkml:EnumDefinition ;
+    owl:unionOf ( <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#Top_Answer> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#Acceptable> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#BadButForgivable> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#NeverShow> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#1_TopAnswer> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#4_NeverShow> ) ;
+    linkml:permissible_values <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#1_TopAnswer>,
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#4_NeverShow>,
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#Acceptable>,
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#BadButForgivable>,
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#NeverShow>,
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#Top_Answer> .
 
 ttm:TestSourceEnum a owl:Class,
         linkml:EnumDefinition ;
@@ -623,12 +694,6 @@ ttm:TestSourceEnum a owl:Class,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestSourceEnum#TACT>,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestSourceEnum#TestDataLocation>,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestSourceEnum#TranslatorTeam> .
-
-ttm:TestEntity a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "TestEntity" ;
-    skos:definition "Abstract global 'identification' class shared as a parent with all major model classes within the data model for Translator testing." ;
-    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 <https://w3id.org/TranslatorSRI/TranslatorTestingModel> a owl:Ontology ;
     rdfs:label "Translator-Testing-Model" ;

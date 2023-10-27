@@ -69,10 +69,21 @@ class TestPersonaEnum(str, Enum):
     
     
 
+class QueryTypeEnum(str, Enum):
+    """
+    Query
+    """
+    
+    treats = "treats"
+    
+    
+
 class ExpectedOutputEnum(str, Enum):
     """
     Expected output values for instances of Test Asset or Test Cases(?). (Note: does this Enum overlap with 'ExpectedResultsEnum' below?)
     """
+    
+    Top_Answer = "Top_Answer"
     
     Acceptable = "Acceptable"
     
@@ -97,11 +108,54 @@ class ExpectedResultsEnum(str, Enum):
     
     
 
+class NodeEnum(str, Enum):
+    """
+    Target node of a Subject-Predicate-Object driven query
+    """
+    
+    subject = "subject"
+    
+    object = "object"
+    
+    
+
+class TestEnvEnum(str, Enum):
+    """
+    Testing environments within which a TestSuite is run by a TestRunner scheduled by the TestHarness.
+    """
+    # Development
+    dev = "dev"
+    # Continuous Integration
+    ci = "ci"
+    # Test
+    test = "test"
+    # Production
+    prod = "prod"
+    
+    
+
+class TestCaseTypeEnum(str, Enum):
+    """
+    Enumerated tags for types of test (generally applied to a TestCase).
+    """
+    # Acceptance test
+    acceptance = "acceptance"
+    # Quantitative test
+    quantitative = "quantitative"
+    # Standards compliance test
+    compliance = "compliance"
+    # Knowledge Graph navigation integration test
+    kg_navigation = "kg_navigation"
+    # One Hop navigation test
+    one_hop = "one_hop"
+    
+    
+
 class TestIssueEnum(str, Enum):
     
     
     causes_not_treats = "causes not treats"
-    # Text Mining Knowledge Provider generated relationship?
+    # 'Text Mining Knowledge Provider' generated relationship?
     TMKP = "TMKP"
     
     category_too_generic = "category too generic"
@@ -134,19 +188,6 @@ class DirectionEnum(str, Enum):
     
     
 
-class EnvironmentEnum(str, Enum):
-    
-    
-    DEV = "DEV"
-    
-    CI = "CI"
-    
-    TEST = "TEST"
-    
-    PROD = "PROD"
-    
-    
-
 class TestEntity(ConfiguredBaseModel):
     """
     Abstract global 'identification' class shared as a parent with all major model classes within the data model for Translator testing.
@@ -176,6 +217,7 @@ class TestAsset(TestEntity):
     """
     input_id: Optional[str] = Field(None)
     input_name: Optional[str] = Field(None)
+    predicate: Optional[str] = Field(None)
     output_id: Optional[str] = Field(None)
     output_name: Optional[str] = Field(None)
     expected_output: Optional[ExpectedOutputEnum] = Field(None)
@@ -189,23 +231,23 @@ class TestAsset(TestEntity):
     tags: Optional[List[str]] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a \"Block List\" collection  """)
     
 
-class TestAssetCollection(TestEntity):
+class AcceptanceTestAsset(TestAsset):
     """
-    Represents an ad hoc list of Test Assets.
+    Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.
     """
-    test_assets: Dict[str, TestCase] = Field(default_factory=dict, description="""List of explicitly enumerated Test Assets.""")
-    tags: Optional[List[str]] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection  """)
-    id: str = Field(..., description="""A unique identifier for a Test Entity""")
-    name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
-    description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
-    
-
-class QueryAnswerPair(TestAsset):
-    """
-    Represents a QueryAnswerPair specification of a Test Asset
-    """
+    must_pass_date: Optional[date] = Field(None, description="""The date by which this test must pass""")
+    must_pass_environment: Optional[TestEnvEnum] = Field(None, description="""The deployment environment within which this test must pass.""")
+    query: Optional[str] = Field(None, description="""The question a SME would ask""")
+    string_entry: Optional[str] = Field(None, description="""The object of the core triple to be tested""")
+    direction: Optional[DirectionEnum] = Field(None, description="""The direction of the expected query result triple""")
+    answer_informal_concept: Optional[str] = Field(None, description="""An answer that is returned from the test case, note: this must be combined with the expected_result to form a complete answer.  It might make sense to couple these in their own object instead of strictly sticking to the flat schema introduced by the spreadsheet here: https://docs.google.com/spreadsheets/d/1yj7zIchFeVl1OHqL_kE_pqvzNLmGml_FLbHDs-8Yvig/edit#gid=0""")
+    expected_result: Optional[ExpectedResultsEnum] = Field(None, description="""The expected result of the query""")
+    top_level: Optional[int] = Field(None, description="""The answer must return in these many results""")
+    query_node: Optional[NodeEnum] = Field(None, description="""The node of the (templated) TRAPI query to replace""")
+    notes: Optional[str] = Field(None, description="""The notes of the query""")
     input_id: Optional[str] = Field(None)
     input_name: Optional[str] = Field(None)
+    predicate: Optional[str] = Field(None)
     output_id: Optional[str] = Field(None)
     output_name: Optional[str] = Field(None)
     expected_output: Optional[ExpectedOutputEnum] = Field(None)
@@ -221,10 +263,11 @@ class QueryAnswerPair(TestAsset):
 
 class TestEdgeData(TestAsset):
     """
-    Represents a single Biolink Model compliant instance of an edge that can be used for testing.
+    Represents a single Biolink Model compliant instance of a subject-predicate-object edge that can be used for testing.
     """
     input_id: Optional[str] = Field(None)
     input_name: Optional[str] = Field(None)
+    predicate: Optional[str] = Field(None)
     output_id: Optional[str] = Field(None)
     output_name: Optional[str] = Field(None)
     expected_output: Optional[ExpectedOutputEnum] = Field(None)
@@ -240,15 +283,17 @@ class TestEdgeData(TestAsset):
 
 class TestCase(TestEntity):
     """
-    Represents a single enumerated instance of Test Case, derived from a  given TestAsset and used to probe a particular test condition.
+    Represents a single enumerated instance of Test Case, derived from a  given collection of one or more TestAsset instances (the value of the 'test_assets' slot) which define the 'inputs' and 'outputs' of the TestCase, used to probe a particular test condition.
     """
-    inputs: Optional[List[str]] = Field(default_factory=list)
-    outputs: Optional[List[str]] = Field(default_factory=list)
+    test_env: Optional[TestEnvEnum] = Field(None, description="""Deployment environment within which the associated TestSuite is run.""")
+    test_case_type: Optional[TestCaseTypeEnum] = Field(None, description="""Is this valid or even necessary with the class names already available from classes of 'test_assets' used (seems redundant?)""")
+    query_type: Optional[QueryTypeEnum] = Field(None, description="""Type of TestCase query.""")
+    test_assets: List[TestCase] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection.""")
     preconditions: Optional[List[str]] = Field(default_factory=list)
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
-    tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
+    tags: Optional[List[str]] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection.""")
     
 
 class TestCaseSpecification(TestEntity):
@@ -261,6 +306,81 @@ class TestCaseSpecification(TestEntity):
     tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
     
 
+class AcceptanceTestCase(TestCase):
+    """
+    See AcceptanceTestAsset above for more details.
+    """
+    test_env: Optional[TestEnvEnum] = Field(None, description="""Deployment environment within which the associated TestSuite is run.""")
+    test_case_type: Optional[TestCaseTypeEnum] = Field(None, description="""Is this valid or even necessary with the class names already available from classes of 'test_assets' used (seems redundant?)""")
+    query_type: Optional[QueryTypeEnum] = Field(None, description="""Type of TestCase query.""")
+    test_assets: List[AcceptanceTestAsset] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection.""")
+    preconditions: Optional[List[str]] = Field(default_factory=list)
+    id: str = Field(..., description="""A unique identifier for a Test Entity""")
+    name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
+    description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
+    tags: Optional[List[str]] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection.""")
+    
+
+class QuantitativeTestCase(TestCase):
+    """
+    Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.
+    """
+    test_env: Optional[TestEnvEnum] = Field(None, description="""Deployment environment within which the associated TestSuite is run.""")
+    test_case_type: Optional[TestCaseTypeEnum] = Field(None, description="""Is this valid or even necessary with the class names already available from classes of 'test_assets' used (seems redundant?)""")
+    query_type: Optional[QueryTypeEnum] = Field(None, description="""Type of TestCase query.""")
+    test_assets: List[TestCase] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection.""")
+    preconditions: Optional[List[str]] = Field(default_factory=list)
+    id: str = Field(..., description="""A unique identifier for a Test Entity""")
+    name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
+    description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
+    tags: Optional[List[str]] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection.""")
+    
+
+class ComplianceTestCase(TestCase):
+    """
+    TRAPI and Biolink Model standards compliance test
+    """
+    test_env: Optional[TestEnvEnum] = Field(None, description="""Deployment environment within which the associated TestSuite is run.""")
+    test_case_type: Optional[TestCaseTypeEnum] = Field(None, description="""Is this valid or even necessary with the class names already available from classes of 'test_assets' used (seems redundant?)""")
+    query_type: Optional[QueryTypeEnum] = Field(None, description="""Type of TestCase query.""")
+    test_assets: List[TestCase] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection.""")
+    preconditions: Optional[List[str]] = Field(default_factory=list)
+    id: str = Field(..., description="""A unique identifier for a Test Entity""")
+    name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
+    description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
+    tags: Optional[List[str]] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection.""")
+    
+
+class KnowledgeGraphNavigationTestCase(TestCase):
+    """
+    Knowledge Graph navigation integration test
+    """
+    test_env: Optional[TestEnvEnum] = Field(None, description="""Deployment environment within which the associated TestSuite is run.""")
+    test_case_type: Optional[TestCaseTypeEnum] = Field(None, description="""Is this valid or even necessary with the class names already available from classes of 'test_assets' used (seems redundant?)""")
+    query_type: Optional[QueryTypeEnum] = Field(None, description="""Type of TestCase query.""")
+    test_assets: List[TestCase] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection.""")
+    preconditions: Optional[List[str]] = Field(default_factory=list)
+    id: str = Field(..., description="""A unique identifier for a Test Entity""")
+    name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
+    description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
+    tags: Optional[List[str]] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection.""")
+    
+
+class OneHopTestCase(KnowledgeGraphNavigationTestCase):
+    """
+    'One Hop' Knowledge Graph navigation integration test
+    """
+    test_env: Optional[TestEnvEnum] = Field(None, description="""Deployment environment within which the associated TestSuite is run.""")
+    test_case_type: Optional[TestCaseTypeEnum] = Field(None, description="""Is this valid or even necessary with the class names already available from classes of 'test_assets' used (seems redundant?)""")
+    query_type: Optional[QueryTypeEnum] = Field(None, description="""Type of TestCase query.""")
+    test_assets: List[TestCase] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection.""")
+    preconditions: Optional[List[str]] = Field(default_factory=list)
+    id: str = Field(..., description="""A unique identifier for a Test Entity""")
+    name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
+    description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
+    tags: Optional[List[str]] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection.""")
+    
+
 class TestSuite(TestEntity):
     """
     Specification of a set of Test Cases, one of either with a static list of 'test_cases' or a dynamic 'test_case_specification' slot values. Note: at least one slot or the other, but generally not both(?) needs to be present.
@@ -269,19 +389,6 @@ class TestSuite(TestEntity):
     test_persona: Optional[TestPersonaEnum] = Field(None, description="""A Test persona describes the user or operational context of a given test.""")
     test_cases: Optional[Dict[str, TestCase]] = Field(default_factory=dict, description="""List of explicitly enumerated Test Cases.""")
     test_case_specification: Optional[str] = Field(None, description="""Declarative specification of a set of Test Cases generated elsewhere (i.e. within a Test Runner)""")
-    id: str = Field(..., description="""A unique identifier for a Test Entity""")
-    name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
-    description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
-    tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
-    
-
-class AcceptanceTestCase(TestCase):
-    """
-    Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.
-    """
-    inputs: List[str] = Field(default_factory=list)
-    outputs: List[str] = Field(default_factory=list)
-    preconditions: Optional[List[str]] = Field(default_factory=list)
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
@@ -335,57 +442,6 @@ class OneHopTestSuite(TestSuite):
     tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
     
 
-class Input(TestEntity):
-    """
-    Represents an input to a TestCase
-    """
-    id: str = Field(..., description="""A unique identifier for a Test Entity""")
-    name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
-    description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
-    tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
-    
-
-class SemanticSmokeTestInput(Input):
-    """
-    Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.
-    """
-    must_pass_date: Optional[date] = Field(None, description="""The date by which this test must pass""")
-    must_pass_environment: Optional[EnvironmentEnum] = Field(None, description="""The environment in which this test must pass""")
-    query: Optional[str] = Field(None, description="""The question a SME would ask""")
-    string_entry: Optional[str] = Field(None, description="""The object of the core triple to be tested""")
-    direction: Optional[DirectionEnum] = Field(None, description="""The direction of the expected query result triple""")
-    answer_informal_concept: Optional[str] = Field(None, description="""An answer that is returned from the test case, note: this must be combined with the expected_result to form a complete answer.  It might make sense to couple these in their own object instead of strictly sticking to the flat schema introduced by the spreadsheet here: https://docs.google.com/spreadsheets/d/1yj7zIchFeVl1OHqL_kE_pqvzNLmGml_FLbHDs-8Yvig/edit#gid=0""")
-    expected_result: Optional[ExpectedResultsEnum] = Field(None, description="""The expected result of the query""")
-    curie: Optional[str] = Field(None, description="""The curie of the query""")
-    top_level: Optional[str] = Field(None, description="""The answer must return in these many results""")
-    node: Optional[str] = Field(None, description="""The node of the TRAPI query to replace.""")
-    notes: Optional[str] = Field(None, description="""The notes of the query""")
-    id: str = Field(..., description="""A unique identifier for a Test Entity""")
-    name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
-    description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
-    tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
-    
-
-class Output(TestEntity):
-    """
-    Represents an output from a TestCase
-    """
-    id: str = Field(..., description="""A unique identifier for a Test Entity""")
-    name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
-    description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
-    tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
-    
-
-class SemanticSmokeTestOutput(Output):
-    """
-    Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.
-    """
-    id: str = Field(..., description="""A unique identifier for a Test Entity""")
-    name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
-    description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
-    tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
-    
-
 class Precondition(TestEntity):
     """
     Represents a precondition for a TestCase
@@ -402,20 +458,19 @@ class Precondition(TestEntity):
 TestEntity.update_forward_refs()
 TestMetadata.update_forward_refs()
 TestAsset.update_forward_refs()
-TestAssetCollection.update_forward_refs()
-QueryAnswerPair.update_forward_refs()
+AcceptanceTestAsset.update_forward_refs()
 TestEdgeData.update_forward_refs()
 TestCase.update_forward_refs()
 TestCaseSpecification.update_forward_refs()
-TestSuite.update_forward_refs()
 AcceptanceTestCase.update_forward_refs()
+QuantitativeTestCase.update_forward_refs()
+ComplianceTestCase.update_forward_refs()
+KnowledgeGraphNavigationTestCase.update_forward_refs()
+OneHopTestCase.update_forward_refs()
+TestSuite.update_forward_refs()
 AcceptanceTestSuite.update_forward_refs()
 BenchmarkTestSuite.update_forward_refs()
 StandardsComplianceTestSuite.update_forward_refs()
 OneHopTestSuite.update_forward_refs()
-Input.update_forward_refs()
-SemanticSmokeTestInput.update_forward_refs()
-Output.update_forward_refs()
-SemanticSmokeTestOutput.update_forward_refs()
 Precondition.update_forward_refs()
 

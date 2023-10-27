@@ -43,11 +43,28 @@ linkml:Jsonpath xsd:string
 
 linkml:Sparqlpath xsd:string
 
+<AcceptanceTestAsset> CLOSED {
+    (  $<AcceptanceTestAsset_tes> (  &<TestAsset_tes> ;
+          rdf:type [ <TestAsset> ] ? ;
+          <must_pass_date> @linkml:Date ? ;
+          <must_pass_environment> @<TestEnvEnum> ? ;
+          <query> @linkml:String ? ;
+          <string_entry> @linkml:String ? ;
+          <direction> @<DirectionEnum> ? ;
+          <answer_informal_concept> @linkml:String ? ;
+          <expected_result> @<ExpectedResultsEnum> ? ;
+          <top_level> @linkml:Integer ? ;
+          <query_node> @<NodeEnum> ? ;
+          <notes> @linkml:String ?
+       ) ;
+       rdf:type [ <AcceptanceTestAsset> ]
+    )
+}
+
 <AcceptanceTestCase> CLOSED {
     (  $<AcceptanceTestCase_tes> (  &<TestCase_tes> ;
           rdf:type [ <TestCase> ] ? ;
-          <inputs> @<SemanticSmokeTestInput> + ;
-          <outputs> @<SemanticSmokeTestOutput> +
+          <test_assets> @<AcceptanceTestAsset> +
        ) ;
        rdf:type [ <AcceptanceTestCase> ]
     )
@@ -67,15 +84,31 @@ linkml:Sparqlpath xsd:string
     )
 }
 
-<Input>  (
+<ComplianceTestCase> CLOSED {
+    (  $<ComplianceTestCase_tes> (  &<TestCase_tes> ;
+          rdf:type [ <TestCase> ] ?
+       ) ;
+       rdf:type [ <ComplianceTestCase> ]
+    )
+}
+
+<KnowledgeGraphNavigationTestCase>  (
     CLOSED {
-       (  $<Input_tes> (  &<TestEntity_tes> ;
-             rdf:type [ <TestEntity> ] ?
+       (  $<KnowledgeGraphNavigationTestCase_tes> (  &<TestCase_tes> ;
+             rdf:type [ <TestCase> ] ?
           ) ;
-          rdf:type [ <Input> ]
+          rdf:type [ <KnowledgeGraphNavigationTestCase> ]
        )
-    } OR @<SemanticSmokeTestInput>
+    } OR @<OneHopTestCase>
 )
+
+<OneHopTestCase> CLOSED {
+    (  $<OneHopTestCase_tes> (  &<KnowledgeGraphNavigationTestCase_tes> ;
+          rdf:type [ <KnowledgeGraphNavigationTestCase> ] ?
+       ) ;
+       rdf:type [ <OneHopTestCase> ]
+    )
+}
 
 <OneHopTestSuite> CLOSED {
     (  $<OneHopTestSuite_tes> (  &<TestSuite_tes> ;
@@ -85,16 +118,6 @@ linkml:Sparqlpath xsd:string
     )
 }
 
-<Output>  (
-    CLOSED {
-       (  $<Output_tes> (  &<TestEntity_tes> ;
-             rdf:type [ <TestEntity> ] ?
-          ) ;
-          rdf:type [ <Output> ]
-       )
-    } OR @<SemanticSmokeTestOutput>
-)
-
 <Precondition> CLOSED {
     (  $<Precondition_tes> (  &<TestEntity_tes> ;
           rdf:type [ <TestEntity> ] ?
@@ -103,38 +126,11 @@ linkml:Sparqlpath xsd:string
     )
 }
 
-<QueryAnswerPair> CLOSED {
-    (  $<QueryAnswerPair_tes> (  &<TestAsset_tes> ;
-          rdf:type [ <TestAsset> ] ?
+<QuantitativeTestCase> CLOSED {
+    (  $<QuantitativeTestCase_tes> (  &<TestCase_tes> ;
+          rdf:type [ <TestCase> ] ?
        ) ;
-       rdf:type [ <QueryAnswerPair> ]
-    )
-}
-
-<SemanticSmokeTestInput> CLOSED {
-    (  $<SemanticSmokeTestInput_tes> (  &<Input_tes> ;
-          rdf:type [ <Input> ] ? ;
-          <must_pass_date> @linkml:Date ? ;
-          <must_pass_environment> @<EnvironmentEnum> ? ;
-          <query> @linkml:String ? ;
-          <string_entry> @linkml:String ? ;
-          <direction> @<DirectionEnum> ? ;
-          <answer_informal_concept> @linkml:String ? ;
-          <expected_result> @<ExpectedResultsEnum> ? ;
-          <curie> @linkml:Curie ? ;
-          <top_level> @linkml:String ? ;
-          <node> @linkml:String ? ;
-          <notes> @linkml:String ?
-       ) ;
-       rdf:type [ <SemanticSmokeTestInput> ]
-    )
-}
-
-<SemanticSmokeTestOutput> CLOSED {
-    (  $<SemanticSmokeTestOutput_tes> (  &<Output_tes> ;
-          rdf:type [ <Output> ] ?
-       ) ;
-       rdf:type [ <SemanticSmokeTestOutput> ]
+       rdf:type [ <QuantitativeTestCase> ]
     )
 }
 
@@ -152,6 +148,7 @@ linkml:Sparqlpath xsd:string
              rdf:type [ <TestEntity> ] ? ;
              <input_id> @linkml:Uriorcurie ? ;
              <input_name> @linkml:String ? ;
+             <predicate> @linkml:String ? ;
              <output_id> @linkml:Uriorcurie ? ;
              <output_name> @linkml:String ? ;
              <expected_output> @<ExpectedOutputEnum> ? ;
@@ -163,30 +160,23 @@ linkml:Sparqlpath xsd:string
           ) ;
           rdf:type [ <TestAsset> ]
        )
-    } OR @<QueryAnswerPair> OR @<TestEdgeData>
+    } OR @<AcceptanceTestAsset> OR @<TestEdgeData>
 )
-
-<TestAssetCollection> CLOSED {
-    (  $<TestAssetCollection_tes> (  &<TestEntity_tes> ;
-          rdf:type [ <TestEntity> ] ? ;
-          <test_assets> @<TestCase> + ;
-          schema1:additionalType @linkml:String *
-       ) ;
-       rdf:type [ <TestAssetCollection> ]
-    )
-}
 
 <TestCase>  (
     CLOSED {
        (  $<TestCase_tes> (  &<TestEntity_tes> ;
              rdf:type [ <TestEntity> ] ? ;
-             <inputs> @<Input> * ;
-             <outputs> @<Output> * ;
-             <preconditions> @<Precondition> *
+             <test_env> @<TestEnvEnum> ? ;
+             <test_case_type> @<TestCaseTypeEnum> ? ;
+             <query_type> @<QueryTypeEnum> ? ;
+             <test_assets> @<TestCase> + ;
+             <preconditions> @<Precondition> * ;
+             schema1:additionalType @linkml:String *
           ) ;
           rdf:type [ <TestCase> ]
        )
-    } OR @<AcceptanceTestCase>
+    } OR @<AcceptanceTestCase> OR @<ComplianceTestCase> OR @<KnowledgeGraphNavigationTestCase> OR @<QuantitativeTestCase>
 )
 
 <TestCaseSpecification> CLOSED {
@@ -206,8 +196,7 @@ linkml:Sparqlpath xsd:string
 }
 
 <TestEntity>  (
-    @<Input> OR @<Output> OR @<Precondition> OR @<TestAsset> OR @<TestAssetCollection> OR @<TestCase> OR @<TestCaseSpecification>
-    OR @<TestMetadata> OR @<TestSuite>
+    @<Precondition> OR @<TestAsset> OR @<TestCase> OR @<TestCaseSpecification> OR @<TestMetadata> OR @<TestSuite>
 )
 
 <TestEntity_struct> {

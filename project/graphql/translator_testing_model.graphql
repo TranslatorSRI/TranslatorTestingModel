@@ -1,12 +1,42 @@
+type AcceptanceTestAsset
+  {
+    name: String
+    description: String
+    inputId: Uriorcurie
+    inputName: String
+    predicate: String
+    outputId: Uriorcurie
+    outputName: String
+    expectedOutput: ExpectedOutputEnum
+    testIssue: TestIssueEnum
+    semanticSeverity: SemanticSeverityEnum
+    inV1: Boolean
+    wellKnown: Boolean
+    id: Uriorcurie!
+    tags: [String]
+    mustPassDate: Date
+    mustPassEnvironment: TestEnvEnum
+    query: String
+    stringEntry: String
+    direction: DirectionEnum
+    answerInformalConcept: String
+    expectedResult: ExpectedResultsEnum
+    topLevel: Integer
+    queryNode: NodeEnum
+    notes: String
+  }
+
 type AcceptanceTestCase
   {
     id: Uriorcurie!
     name: String
     description: String
-    tags: [String]
+    testEnv: TestEnvEnum
+    testCaseType: TestCaseTypeEnum
+    queryType: QueryTypeEnum
     preconditions: [Precondition]
-    inputs: [SemanticSmokeTestInput]!
-    outputs: [SemanticSmokeTestOutput]!
+    tags: [String]
+    testAssets: [AcceptanceTestAsset]!
   }
 
 type AcceptanceTestSuite
@@ -25,11 +55,42 @@ type BenchmarkTestSuite
   {
   }
 
-type Input
+type ComplianceTestCase
   {
     id: Uriorcurie!
     name: String
     description: String
+    testEnv: TestEnvEnum
+    testCaseType: TestCaseTypeEnum
+    queryType: QueryTypeEnum
+    testAssets: [TestCase]!
+    preconditions: [Precondition]
+    tags: [String]
+  }
+
+type KnowledgeGraphNavigationTestCase
+  {
+    id: Uriorcurie!
+    name: String
+    description: String
+    testEnv: TestEnvEnum
+    testCaseType: TestCaseTypeEnum
+    queryType: QueryTypeEnum
+    testAssets: [TestCase]!
+    preconditions: [Precondition]
+    tags: [String]
+  }
+
+type OneHopTestCase
+  {
+    id: Uriorcurie!
+    name: String
+    description: String
+    testEnv: TestEnvEnum
+    testCaseType: TestCaseTypeEnum
+    queryType: QueryTypeEnum
+    testAssets: [TestCase]!
+    preconditions: [Precondition]
     tags: [String]
   }
 
@@ -45,14 +106,6 @@ type OneHopTestSuite
     testCaseSpecification: TestCaseSpecification
   }
 
-type Output
-  {
-    id: Uriorcurie!
-    name: String
-    description: String
-    tags: [String]
-  }
-
 type Precondition
   {
     id: Uriorcurie!
@@ -61,47 +114,16 @@ type Precondition
     tags: [String]
   }
 
-type QueryAnswerPair
-  {
-    name: String
-    description: String
-    inputId: Uriorcurie
-    inputName: String
-    outputId: Uriorcurie
-    outputName: String
-    expectedOutput: ExpectedOutputEnum
-    testIssue: TestIssueEnum
-    semanticSeverity: SemanticSeverityEnum
-    inV1: Boolean
-    wellKnown: Boolean
-    id: Uriorcurie!
-    tags: [String]
-  }
-
-type SemanticSmokeTestInput
+type QuantitativeTestCase
   {
     id: Uriorcurie!
     name: String
     description: String
-    tags: [String]
-    mustPassDate: Date
-    mustPassEnvironment: EnvironmentEnum
-    query: String
-    stringEntry: String
-    direction: DirectionEnum
-    answerInformalConcept: String
-    expectedResult: ExpectedResultsEnum
-    curie: Curie
-    topLevel: String
-    node: String
-    notes: String
-  }
-
-type SemanticSmokeTestOutput
-  {
-    id: Uriorcurie!
-    name: String
-    description: String
+    testEnv: TestEnvEnum
+    testCaseType: TestCaseTypeEnum
+    queryType: QueryTypeEnum
+    testAssets: [TestCase]!
+    preconditions: [Precondition]
     tags: [String]
   }
 
@@ -123,6 +145,7 @@ type TestAsset
     description: String
     inputId: Uriorcurie
     inputName: String
+    predicate: String
     outputId: Uriorcurie
     outputName: String
     expectedOutput: ExpectedOutputEnum
@@ -134,24 +157,17 @@ type TestAsset
     tags: [String]
   }
 
-type TestAssetCollection
-  {
-    id: Uriorcurie!
-    name: String
-    description: String
-    testAssets: [TestCase]!
-    tags: [String]
-  }
-
 type TestCase
   {
     id: Uriorcurie!
     name: String
     description: String
-    tags: [String]
-    inputs: [Input]
-    outputs: [Output]
+    testEnv: TestEnvEnum
+    testCaseType: TestCaseTypeEnum
+    queryType: QueryTypeEnum
+    testAssets: [TestCase]!
     preconditions: [Precondition]
+    tags: [String]
   }
 
 type TestCaseSpecification
@@ -168,6 +184,7 @@ type TestEdgeData
     description: String
     inputId: Uriorcurie
     inputName: String
+    predicate: String
     outputId: Uriorcurie
     outputName: String
     expectedOutput: ExpectedOutputEnum

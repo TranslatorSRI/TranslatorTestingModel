@@ -1,13 +1,43 @@
 // Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.
+message AcceptanceTestAsset
+ {
+  string name = 0
+  string description = 0
+  uriorcurie inputId = 0
+  string inputName = 0
+  string predicate = 0
+  uriorcurie outputId = 0
+  string outputName = 0
+  expectedOutputEnum expectedOutput = 0
+  testIssueEnum testIssue = 0
+  semanticSeverityEnum semanticSeverity = 0
+  boolean inV1 = 0
+  boolean wellKnown = 0
+  uriorcurie id = 0
+ repeated  string tags = 0
+  date mustPassDate = 0
+  testEnvEnum mustPassEnvironment = 0
+  string query = 0
+  string stringEntry = 0
+  directionEnum direction = 0
+  string answerInformalConcept = 0
+  expectedResultsEnum expectedResult = 0
+  integer topLevel = 0
+  nodeEnum queryNode = 0
+  string notes = 0
+ }
+// See AcceptanceTestAsset above for more details.
 message AcceptanceTestCase
  {
   uriorcurie id = 0
   string name = 0
   string description = 0
- repeated  string tags = 0
+  testEnvEnum testEnv = 0
+  testCaseTypeEnum testCaseType = 0
+  queryTypeEnum queryType = 0
  repeated  precondition preconditions = 0
- repeated  semanticSmokeTestInput inputs = 0
- repeated  semanticSmokeTestOutput outputs = 0
+ repeated  string tags = 0
+ repeated  acceptanceTestAsset testAssets = 0
  }
 message AcceptanceTestSuite
  {
@@ -20,12 +50,43 @@ message AcceptanceTestSuite
  repeated  testCase testCases = 0
   testCaseSpecification testCaseSpecification = 0
  }
-// Represents an input to a TestCase
-message Input
+// TRAPI and Biolink Model standards compliance test
+message ComplianceTestCase
  {
   uriorcurie id = 0
   string name = 0
   string description = 0
+  testEnvEnum testEnv = 0
+  testCaseTypeEnum testCaseType = 0
+  queryTypeEnum queryType = 0
+ repeated  testCase testAssets = 0
+ repeated  precondition preconditions = 0
+ repeated  string tags = 0
+ }
+// Knowledge Graph navigation integration test
+message KnowledgeGraphNavigationTestCase
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+  testEnvEnum testEnv = 0
+  testCaseTypeEnum testCaseType = 0
+  queryTypeEnum queryType = 0
+ repeated  testCase testAssets = 0
+ repeated  precondition preconditions = 0
+ repeated  string tags = 0
+ }
+// 'One Hop' Knowledge Graph navigation integration test
+message OneHopTestCase
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+  testEnvEnum testEnv = 0
+  testCaseTypeEnum testCaseType = 0
+  queryTypeEnum queryType = 0
+ repeated  testCase testAssets = 0
+ repeated  precondition preconditions = 0
  repeated  string tags = 0
  }
 // Test case for testing the integrity of "One Hop" knowledge graph retrievals sensa legacy SRI_Testing harness.
@@ -40,14 +101,6 @@ message OneHopTestSuite
  repeated  testCase testCases = 0
   testCaseSpecification testCaseSpecification = 0
  }
-// Represents an output from a TestCase
-message Output
- {
-  uriorcurie id = 0
-  string name = 0
-  string description = 0
- repeated  string tags = 0
- }
 // Represents a precondition for a TestCase
 message Precondition
  {
@@ -56,48 +109,17 @@ message Precondition
   string description = 0
  repeated  string tags = 0
  }
-// Represents a QueryAnswerPair specification of a Test Asset
-message QueryAnswerPair
- {
-  string name = 0
-  string description = 0
-  uriorcurie inputId = 0
-  string inputName = 0
-  uriorcurie outputId = 0
-  string outputName = 0
-  expectedOutputEnum expectedOutput = 0
-  testIssueEnum testIssue = 0
-  semanticSeverityEnum semanticSeverity = 0
-  boolean inV1 = 0
-  boolean wellKnown = 0
-  uriorcurie id = 0
- repeated  string tags = 0
- }
 // Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.
-message SemanticSmokeTestInput
+message QuantitativeTestCase
  {
   uriorcurie id = 0
   string name = 0
   string description = 0
- repeated  string tags = 0
-  date mustPassDate = 0
-  environmentEnum mustPassEnvironment = 0
-  string query = 0
-  string stringEntry = 0
-  directionEnum direction = 0
-  string answerInformalConcept = 0
-  expectedResultsEnum expectedResult = 0
-  curie curie = 0
-  string topLevel = 0
-  string node = 0
-  string notes = 0
- }
-// Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.
-message SemanticSmokeTestOutput
- {
-  uriorcurie id = 0
-  string name = 0
-  string description = 0
+  testEnvEnum testEnv = 0
+  testCaseTypeEnum testCaseType = 0
+  queryTypeEnum queryType = 0
+ repeated  testCase testAssets = 0
+ repeated  precondition preconditions = 0
  repeated  string tags = 0
  }
 // Test suite for testing Translator components against releases of standards like TRAPI and the Biolink Model.
@@ -119,6 +141,7 @@ message TestAsset
   string description = 0
   uriorcurie inputId = 0
   string inputName = 0
+  string predicate = 0
   uriorcurie outputId = 0
   string outputName = 0
   expectedOutputEnum expectedOutput = 0
@@ -129,25 +152,18 @@ message TestAsset
   uriorcurie id = 0
  repeated  string tags = 0
  }
-// Represents an ad hoc list of Test Assets.
-message TestAssetCollection
- {
-  uriorcurie id = 0
-  string name = 0
-  string description = 0
- repeated  testCase testAssets = 0
- repeated  string tags = 0
- }
-// Represents a single enumerated instance of Test Case, derived from a  given TestAsset and used to probe a particular test condition.
+// Represents a single enumerated instance of Test Case, derived from a  given collection of one or more TestAsset instances (the value of the 'test_assets' slot) which define the 'inputs' and 'outputs' of the TestCase, used to probe a particular test condition.
 message TestCase
  {
   uriorcurie id = 0
   string name = 0
   string description = 0
- repeated  string tags = 0
- repeated  input inputs = 0
- repeated  output outputs = 0
+  testEnvEnum testEnv = 0
+  testCaseTypeEnum testCaseType = 0
+  queryTypeEnum queryType = 0
+ repeated  testCase testAssets = 0
  repeated  precondition preconditions = 0
+ repeated  string tags = 0
  }
 // Parameterized declaration of the Test Case generator which dynamically generates a collection of Test Cases from Test Assets, using applicable heuristics.
 message TestCaseSpecification
@@ -157,13 +173,14 @@ message TestCaseSpecification
   string description = 0
  repeated  string tags = 0
  }
-// Represents a single Biolink Model compliant instance of an edge that can be used for testing.
+// Represents a single Biolink Model compliant instance of a subject-predicate-object edge that can be used for testing.
 message TestEdgeData
  {
   string name = 0
   string description = 0
   uriorcurie inputId = 0
   string inputName = 0
+  string predicate = 0
   uriorcurie outputId = 0
   string outputName = 0
   expectedOutputEnum expectedOutput = 0
