@@ -337,11 +337,6 @@
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../TestAssetCollection/">TestAssetCollection</a></td>
-<td>Represents an ad hoc list of Test Assets</td>
-<td>yes</td>
-</tr>
-<tr>
 <td><a href="../TestMetadata/">TestMetadata</a></td>
 <td>Represents metadata related to (external SME, SMURF, Translator feedback,  la...</td>
 <td>no</td>
@@ -352,19 +347,19 @@
 <td>yes</td>
 </tr>
 <tr>
-<td><a href="../QueryAnswerPair/">QueryAnswerPair</a></td>
-<td>Represents a QueryAnswerPair specification of a Test Asset</td>
+<td><a href="../AcceptanceTestAsset/">AcceptanceTestAsset</a></td>
+<td>Lifting schema from Shervin's runner JSON here as an example</td>
 <td>no</td>
 </tr>
 <tr>
 <td><a href="../TestEdgeData/">TestEdgeData</a></td>
-<td>Represents a single Biolink Model compliant instance of an edge that can be u...</td>
+<td>Represents a single Biolink Model compliant instance of a subject-predicate-o...</td>
 <td>no</td>
 </tr>
 <tr>
 <td><a href="../TestCase/">TestCase</a></td>
-<td>Represents a single enumerated instance of Test Case, derived from a  given T...</td>
-<td>no</td>
+<td>Represents a single enumerated instance of Test Case, derived from a  given c...</td>
+<td>yes</td>
 </tr>
 <tr>
 <td><a href="../TestCaseSpecification/">TestCaseSpecification</a></td>
@@ -372,13 +367,33 @@
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../TestSuite/">TestSuite</a></td>
-<td>Specification of a set of Test Cases, one of either with a static list of 'te...</td>
+<td><a href="../AcceptanceTestCase/">AcceptanceTestCase</a></td>
+<td>See AcceptanceTestAsset above for more details</td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../AcceptanceTestCase/">AcceptanceTestCase</a></td>
+<td><a href="../QuantitativeTestCase/">QuantitativeTestCase</a></td>
 <td>Lifting schema from Shervin's runner JSON here as an example</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../ComplianceTestCase/">ComplianceTestCase</a></td>
+<td>TRAPI and Biolink Model standards compliance test</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../KnowledgeGraphNavigationTestCase/">KnowledgeGraphNavigationTestCase</a></td>
+<td>Knowledge Graph navigation integration test</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../OneHopTestCase/">OneHopTestCase</a></td>
+<td>'One Hop' Knowledge Graph navigation integration test</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../TestSuite/">TestSuite</a></td>
+<td>Specification of a set of Test Cases, one of either with a static list of 'te...</td>
 <td>no</td>
 </tr>
 <tr>
@@ -394,26 +409,6 @@
 <tr>
 <td><a href="../OneHopTestSuite/">OneHopTestSuite</a></td>
 <td>Test case for testing the integrity of "One Hop" knowledge graph retrievals s...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Input/">Input</a></td>
-<td>Represents an input to a TestCase</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../SemanticSmokeTestInput/">SemanticSmokeTestInput</a></td>
-<td>Lifting schema from Shervin's runner JSON here as an example</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Output/">Output</a></td>
-<td>Represents an output from a TestCase</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../SemanticSmokeTestOutput/">SemanticSmokeTestOutput</a></td>
-<td>Lifting schema from Shervin's runner JSON here as an example</td>
 <td>no</td>
 </tr>
 <tr>
@@ -451,7 +446,6 @@ multivalued: true
 alias: tags
 domain_of:
 - TestEntity
-- TestAssetCollection
 range: string
 
 </code></pre>

@@ -205,7 +205,7 @@
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"></path></svg>
 </a>
 <h1 id="class-testcase">Class: TestCase</h1>
-<p><em>Represents a single enumerated instance of Test Case, derived from a  given TestAsset and used to probe a particular test condition.</em></p>
+<p><em>Represents a single enumerated instance of Test Case, derived from a  given collection of one or more TestAsset instances (the value of the 'test_assets' slot) which define the 'inputs' and 'outputs' of the TestCase, used to probe a particular test condition.</em></p>
 <p>URI: <a href="https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestCase">ttm:TestCase</a></p>
 <div class="mermaid"> classDiagram
     class TestCase
@@ -213,27 +213,38 @@
 
 
       TestCase &lt;|-- AcceptanceTestCase
+      TestCase &lt;|-- QuantitativeTestCase
+      TestCase &lt;|-- ComplianceTestCase
+      TestCase &lt;|-- KnowledgeGraphNavigationTestCase
 
 
       TestCase : description
 
       TestCase : id
 
-      TestCase : inputs
-
-          TestCase --|&gt; Input : inputs
-
       TestCase : name
-
-      TestCase : outputs
-
-          TestCase --|&gt; Output : outputs
 
       TestCase : preconditions
 
           TestCase --|&gt; Precondition : preconditions
 
+      TestCase : query_type
+
+          TestCase --|&gt; QueryTypeEnum : query_type
+
       TestCase : tags
+
+      TestCase : test_assets
+
+          TestCase --|&gt; TestCase : test_assets
+
+      TestCase : test_case_type
+
+          TestCase --|&gt; TestCaseTypeEnum : test_case_type
+
+      TestCase : test_env
+
+          TestCase --|&gt; TestEnvEnum : test_env
 
 
 </div>
@@ -242,6 +253,9 @@
 <li><a href="../TestEntity/">TestEntity</a><ul>
 <li><strong>TestCase</strong><ul>
 <li><a href="../AcceptanceTestCase/">AcceptanceTestCase</a></li>
+<li><a href="../QuantitativeTestCase/">QuantitativeTestCase</a></li>
+<li><a href="../ComplianceTestCase/">ComplianceTestCase</a></li>
+<li><a href="../KnowledgeGraphNavigationTestCase/">KnowledgeGraphNavigationTestCase</a></li>
 </ul>
 </li>
 </ul>
@@ -259,15 +273,27 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../inputs/">inputs</a></td>
-<td>0..* <br/> <a href="../Input/">Input</a></td>
-<td></td>
+<td><a href="../test_env/">test_env</a></td>
+<td>0..1 <br/> <a href="../TestEnvEnum/">TestEnvEnum</a></td>
+<td>Deployment environment within which the associated TestSuite is run</td>
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../outputs/">outputs</a></td>
-<td>0..* <br/> <a href="../Output/">Output</a></td>
-<td></td>
+<td><a href="../test_case_type/">test_case_type</a></td>
+<td>0..1 <br/> <a href="../TestCaseTypeEnum/">TestCaseTypeEnum</a></td>
+<td>Is this valid or even necessary with the class names already available from c...</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../query_type/">query_type</a></td>
+<td>0..1 <br/> <a href="../QueryTypeEnum/">QueryTypeEnum</a></td>
+<td>Type of TestCase query</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../test_assets/">test_assets</a></td>
+<td>1..* <br/> <a href="./">TestCase</a></td>
+<td>One or more 'tags' slot values (inherited from TestEntity) should generally b...</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -297,7 +323,7 @@
 <tr>
 <td><a href="../tags/">tags</a></td>
 <td>0..* <br/> <a href="../String/">String</a></td>
-<td>A human-readable tags for categorical memberships of a TestEntity (preferably...</td>
+<td>One or more 'tags' slot values (inherited from TestEntity) should generally b...</td>
 <td><a href="../TestEntity/">TestEntity</a></td>
 </tr>
 </tbody>
@@ -314,7 +340,31 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../TestAssetCollection/">TestAssetCollection</a></td>
+<td><a href="./">TestCase</a></td>
+<td><a href="../test_assets/">test_assets</a></td>
+<td>range</td>
+<td><a href="./">TestCase</a></td>
+</tr>
+<tr>
+<td><a href="../QuantitativeTestCase/">QuantitativeTestCase</a></td>
+<td><a href="../test_assets/">test_assets</a></td>
+<td>range</td>
+<td><a href="./">TestCase</a></td>
+</tr>
+<tr>
+<td><a href="../ComplianceTestCase/">ComplianceTestCase</a></td>
+<td><a href="../test_assets/">test_assets</a></td>
+<td>range</td>
+<td><a href="./">TestCase</a></td>
+</tr>
+<tr>
+<td><a href="../KnowledgeGraphNavigationTestCase/">KnowledgeGraphNavigationTestCase</a></td>
+<td><a href="../test_assets/">test_assets</a></td>
+<td>range</td>
+<td><a href="./">TestCase</a></td>
+</tr>
+<tr>
+<td><a href="../OneHopTestCase/">OneHopTestCase</a></td>
 <td><a href="../test_assets/">test_assets</a></td>
 <td>range</td>
 <td><a href="./">TestCase</a></td>
@@ -375,13 +425,40 @@
 <details>
 <pre><code class="language-yaml">name: TestCase
 description: Represents a single enumerated instance of Test Case, derived from a  given
-  TestAsset and used to probe a particular test condition.
+  collection of one or more TestAsset instances (the value of the 'test_assets' slot)
+  which define the 'inputs' and 'outputs' of the TestCase, used to probe a particular
+  test condition.
 from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
 is_a: TestEntity
 slots:
-- inputs
-- outputs
+- test_env
+- test_case_type
+- query_type
+- test_assets
 - preconditions
+slot_usage:
+  test_case_type:
+    name: test_case_type
+    description: Is this valid or even necessary with the class names already available
+      from classes of 'test_assets' used (seems redundant?)
+    domain_of:
+    - TestCase
+  test_assets:
+    name: test_assets
+    description: One or more 'tags' slot values (inherited from TestEntity) should
+      generally be defined as filters to specify TestAsset membership in 'test_assets'
+      slot ("Block List") collection.
+    aliases:
+    - Block List
+    domain_of:
+    - TestCase
+  tags:
+    name: tags
+    description: One or more 'tags' slot values (inherited from TestEntity) should
+      generally be defined as filters to specify TestAsset membership in a "Block
+      List" collection.
+    domain_of:
+    - TestEntity
 
 </code></pre>
 </details>
@@ -389,30 +466,84 @@ slots:
 <details>
 <pre><code class="language-yaml">name: TestCase
 description: Represents a single enumerated instance of Test Case, derived from a  given
-  TestAsset and used to probe a particular test condition.
+  collection of one or more TestAsset instances (the value of the 'test_assets' slot)
+  which define the 'inputs' and 'outputs' of the TestCase, used to probe a particular
+  test condition.
 from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
 is_a: TestEntity
+slot_usage:
+  test_case_type:
+    name: test_case_type
+    description: Is this valid or even necessary with the class names already available
+      from classes of 'test_assets' used (seems redundant?)
+    domain_of:
+    - TestCase
+  test_assets:
+    name: test_assets
+    description: One or more 'tags' slot values (inherited from TestEntity) should
+      generally be defined as filters to specify TestAsset membership in 'test_assets'
+      slot ("Block List") collection.
+    aliases:
+    - Block List
+    domain_of:
+    - TestCase
+  tags:
+    name: tags
+    description: One or more 'tags' slot values (inherited from TestEntity) should
+      generally be defined as filters to specify TestAsset membership in a "Block
+      List" collection.
+    domain_of:
+    - TestEntity
 attributes:
-  inputs:
-    name: inputs
+  test_env:
+    name: test_env
+    description: Deployment environment within which the associated TestSuite is run.
     from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
     rank: 1000
-    multivalued: true
-    alias: inputs
+    alias: test_env
     owner: TestCase
     domain_of:
     - TestCase
-    range: Input
-  outputs:
-    name: outputs
+    range: TestEnvEnum
+  test_case_type:
+    name: test_case_type
+    description: Is this valid or even necessary with the class names already available
+      from classes of 'test_assets' used (seems redundant?)
     from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
     rank: 1000
-    multivalued: true
-    alias: outputs
+    alias: test_case_type
     owner: TestCase
     domain_of:
     - TestCase
-    range: Output
+    range: TestCaseTypeEnum
+  query_type:
+    name: query_type
+    description: Type of TestCase query.
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    alias: query_type
+    owner: TestCase
+    domain_of:
+    - TestCase
+    range: QueryTypeEnum
+  test_assets:
+    name: test_assets
+    description: One or more 'tags' slot values (inherited from TestEntity) should
+      generally be defined as filters to specify TestAsset membership in 'test_assets'
+      slot ("Block List") collection.
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    aliases:
+    - Block List
+    rank: 1000
+    multivalued: true
+    alias: test_assets
+    owner: TestCase
+    domain_of:
+    - TestCase
+    range: TestCase
+    required: true
+    inlined: true
+    inlined_as_list: true
   preconditions:
     name: preconditions
     from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -460,9 +591,9 @@ attributes:
     range: string
   tags:
     name: tags
-    description: A human-readable tags for categorical memberships of a TestEntity
-      (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity
-      into formally typed or ad hoc lists.
+    description: One or more 'tags' slot values (inherited from TestEntity) should
+      generally be defined as filters to specify TestAsset membership in a "Block
+      List" collection.
     from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
     rank: 1000
     slot_uri: schema:additionalType
@@ -471,7 +602,6 @@ attributes:
     owner: TestCase
     domain_of:
     - TestEntity
-    - TestAssetCollection
     range: string
 
 </code></pre>

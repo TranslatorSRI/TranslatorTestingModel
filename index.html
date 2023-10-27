@@ -402,22 +402,6 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <td>Abstract global 'identification' class shared as a parent with all major model classes within the data model for Translator testing.</td>
 </tr>
 <tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="Input/">Input</a></td>
-<td>Represents an input to a TestCase</td>
-</tr>
-<tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="SemanticSmokeTestInput/">SemanticSmokeTestInput</a></td>
-<td>Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.</td>
-</tr>
-<tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="Output/">Output</a></td>
-<td>Represents an output from a TestCase</td>
-</tr>
-<tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="SemanticSmokeTestOutput/">SemanticSmokeTestOutput</a></td>
-<td>Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.</td>
-</tr>
-<tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="Precondition/">Precondition</a></td>
 <td>Represents a precondition for a TestCase</td>
 </tr>
@@ -426,23 +410,35 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <td>Represents a Test Asset, which is a single specific instance of TestCase-agnostic semantic parameters representing the specification of a Translator test target with inputs and (expected) outputs.</td>
 </tr>
 <tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="QueryAnswerPair/">QueryAnswerPair</a></td>
-<td>Represents a QueryAnswerPair specification of a Test Asset</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="AcceptanceTestAsset/">AcceptanceTestAsset</a></td>
+<td>Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="TestEdgeData/">TestEdgeData</a></td>
-<td>Represents a single Biolink Model compliant instance of an edge that can be used for testing.</td>
-</tr>
-<tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="TestAssetCollection/">TestAssetCollection</a></td>
-<td>Represents an ad hoc list of Test Assets.</td>
+<td>Represents a single Biolink Model compliant instance of a subject-predicate-object edge that can be used for testing.</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="TestCase/">TestCase</a></td>
-<td>Represents a single enumerated instance of Test Case, derived from a  given TestAsset and used to probe a particular test condition.</td>
+<td>Represents a single enumerated instance of Test Case, derived from a  given collection of one or more TestAsset instances (the value of the 'test_assets' slot) which define the 'inputs' and 'outputs' of the TestCase, used to probe a particular test condition.</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="AcceptanceTestCase/">AcceptanceTestCase</a></td>
+<td>See AcceptanceTestAsset above for more details.</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="ComplianceTestCase/">ComplianceTestCase</a></td>
+<td>TRAPI and Biolink Model standards compliance test</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="KnowledgeGraphNavigationTestCase/">KnowledgeGraphNavigationTestCase</a></td>
+<td>Knowledge Graph navigation integration test</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="OneHopTestCase/">OneHopTestCase</a></td>
+<td>'One Hop' Knowledge Graph navigation integration test</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="QuantitativeTestCase/">QuantitativeTestCase</a></td>
 <td>Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.</td>
 </tr>
 <tr>
@@ -485,10 +481,6 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <td>An answer that is returned from the test case, note: this must be combined wi...</td>
 </tr>
 <tr>
-<td><a href="curie/">curie</a></td>
-<td>The curie of the query</td>
-</tr>
-<tr>
 <td><a href="description/">description</a></td>
 <td>A human-readable description for a Test Entity</td>
 </tr>
@@ -521,24 +513,16 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <td></td>
 </tr>
 <tr>
-<td><a href="inputs/">inputs</a></td>
-<td></td>
-</tr>
-<tr>
 <td><a href="must_pass_date/">must_pass_date</a></td>
 <td>The date by which this test must pass</td>
 </tr>
 <tr>
 <td><a href="must_pass_environment/">must_pass_environment</a></td>
-<td>The environment in which this test must pass</td>
+<td>The deployment environment within which this test must pass</td>
 </tr>
 <tr>
 <td><a href="name/">name</a></td>
 <td>A human-readable name for a Test Entity</td>
-</tr>
-<tr>
-<td><a href="node/">node</a></td>
-<td>The node of the TRAPI query to replace</td>
 </tr>
 <tr>
 <td><a href="notes/">notes</a></td>
@@ -553,16 +537,24 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <td></td>
 </tr>
 <tr>
-<td><a href="outputs/">outputs</a></td>
+<td><a href="preconditions/">preconditions</a></td>
 <td></td>
 </tr>
 <tr>
-<td><a href="preconditions/">preconditions</a></td>
+<td><a href="predicate/">predicate</a></td>
 <td></td>
 </tr>
 <tr>
 <td><a href="query/">query</a></td>
 <td>The question a SME would ask</td>
+</tr>
+<tr>
+<td><a href="query_node/">query_node</a></td>
+<td>The node of the (templated) TRAPI query to replace</td>
+</tr>
+<tr>
+<td><a href="query_type/">query_type</a></td>
+<td>Type of TestCase query</td>
 </tr>
 <tr>
 <td><a href="requires_trapi/">requires_trapi</a></td>
@@ -589,8 +581,16 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <td>Declarative specification of a set of Test Cases generated elsewhere (i</td>
 </tr>
 <tr>
+<td><a href="test_case_type/">test_case_type</a></td>
+<td>Type of TestCase</td>
+</tr>
+<tr>
 <td><a href="test_cases/">test_cases</a></td>
 <td>List of explicitly enumerated Test Cases</td>
+</tr>
+<tr>
+<td><a href="test_env/">test_env</a></td>
+<td>Deployment environment within which the associated TestSuite is run</td>
 </tr>
 <tr>
 <td><a href="test_issue/">test_issue</a></td>
@@ -640,10 +640,6 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <td></td>
 </tr>
 <tr>
-<td><a href="EnvironmentEnum/">EnvironmentEnum</a></td>
-<td></td>
-</tr>
-<tr>
 <td><a href="ExpectedOutputEnum/">ExpectedOutputEnum</a></td>
 <td>Expected output values for instances of Test Asset or Test Cases(?)</td>
 </tr>
@@ -652,8 +648,24 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <td>Does this Enum overlap with 'ExpectedOutputEnum' above?</td>
 </tr>
 <tr>
+<td><a href="NodeEnum/">NodeEnum</a></td>
+<td>Target node of a Subject-Predicate-Object driven query</td>
+</tr>
+<tr>
+<td><a href="QueryTypeEnum/">QueryTypeEnum</a></td>
+<td>Query</td>
+</tr>
+<tr>
 <td><a href="SemanticSeverityEnum/">SemanticSeverityEnum</a></td>
 <td>From Jenn's worksheet, empty or ill defined (needs elaboration)</td>
+</tr>
+<tr>
+<td><a href="TestCaseTypeEnum/">TestCaseTypeEnum</a></td>
+<td>Enumerated tags for types of test (generally applied to a TestCase)</td>
+</tr>
+<tr>
+<td><a href="TestEnvEnum/">TestEnvEnum</a></td>
+<td>Testing environments within which a TestSuite is run by a TestRunner schedule...</td>
 </tr>
 <tr>
 <td><a href="TestIssueEnum/">TestIssueEnum</a></td>

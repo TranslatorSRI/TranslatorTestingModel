@@ -330,6 +330,11 @@
 </thead>
 <tbody>
 <tr>
+<td>Top_Answer</td>
+<td>None</td>
+<td></td>
+</tr>
+<tr>
 <td>Acceptable</td>
 <td>None</td>
 <td></td>
@@ -385,6 +390,8 @@ description: 'Expected output values for instances of Test Asset or Test Cases(?
 from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
 rank: 1000
 permissible_values:
+  Top_Answer:
+    text: Top_Answer
   Acceptable:
     text: Acceptable
   BadButForgivable:
@@ -393,8 +400,10 @@ permissible_values:
     text: NeverShow
   1_TopAnswer:
     text: 1_TopAnswer
+    is_a: Top_Answer
   4_NeverShow:
     text: 4_NeverShow
+    is_a: NeverShow
 
 </code></pre>
 

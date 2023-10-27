@@ -317,7 +317,7 @@
 
 
 <h1 id="slot-test_assets">Slot: test_assets</h1>
-<p><em>List of explicitly enumerated Test Assets.</em></p>
+<p><em>List of explicitly enumerated Test Assets. The class attributes of TestAsset would be included in the TestCase versus being referred to by the identifier (curie) of the TestAsset. That is, this would be a list of objects (in JSONSchema serialization) versus a list of strings (where each string is an identifier pointing to another class).</em></p>
 <p>URI: <a href="https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_assets">ttm:test_assets</a></p>
 <!-- no inheritance hierarchy -->
 
@@ -332,8 +332,33 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../TestAssetCollection/">TestAssetCollection</a></td>
-<td>Represents an ad hoc list of Test Assets</td>
+<td><a href="../TestCase/">TestCase</a></td>
+<td>Represents a single enumerated instance of Test Case, derived from a  given c...</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><a href="../AcceptanceTestCase/">AcceptanceTestCase</a></td>
+<td>See AcceptanceTestAsset above for more details</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><a href="../QuantitativeTestCase/">QuantitativeTestCase</a></td>
+<td>Lifting schema from Shervin's runner JSON here as an example</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../ComplianceTestCase/">ComplianceTestCase</a></td>
+<td>TRAPI and Biolink Model standards compliance test</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../KnowledgeGraphNavigationTestCase/">KnowledgeGraphNavigationTestCase</a></td>
+<td>Knowledge Graph navigation integration test</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../OneHopTestCase/">OneHopTestCase</a></td>
+<td>'One Hop' Knowledge Graph navigation integration test</td>
 <td>no</td>
 </tr>
 </tbody>
@@ -359,16 +384,21 @@
 <details>
 
 <pre><code class="language-yaml">name: test_assets
-description: List of explicitly enumerated Test Assets.
+description: List of explicitly enumerated Test Assets. The class attributes of TestAsset
+  would be included in the TestCase versus being referred to by the identifier (curie)
+  of the TestAsset. That is, this would be a list of objects (in JSONSchema serialization)
+  versus a list of strings (where each string is an identifier pointing to another
+  class).
 from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
 rank: 1000
 multivalued: true
 alias: test_assets
 domain_of:
-- TestAssetCollection
+- TestCase
 range: TestCase
 required: true
 inlined: true
+inlined_as_list: true
 
 </code></pre>
 

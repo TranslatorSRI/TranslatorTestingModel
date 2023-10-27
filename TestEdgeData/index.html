@@ -200,7 +200,7 @@
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"></path></svg>
 </a>
 <h1 id="class-testedgedata">Class: TestEdgeData</h1>
-<p><em>Represents a single Biolink Model compliant instance of an edge that can be used for testing.</em></p>
+<p><em>Represents a single Biolink Model compliant instance of a subject-predicate-object edge that can be used for testing.</em></p>
 <p>URI: <a href="https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEdgeData">ttm:TestEdgeData</a></p>
 <div class="mermaid"> classDiagram
     class TestEdgeData
@@ -225,6 +225,8 @@
       TestEdgeData : output_id
 
       TestEdgeData : output_name
+
+      TestEdgeData : predicate
 
       TestEdgeData : semantic_severity
 
@@ -269,6 +271,12 @@
 </tr>
 <tr>
 <td><a href="../input_name/">input_name</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td></td>
+<td><a href="../TestAsset/">TestAsset</a></td>
+</tr>
+<tr>
+<td><a href="../predicate/">predicate</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td></td>
 <td><a href="../TestAsset/">TestAsset</a></td>
@@ -370,8 +378,8 @@
 <h3 id="direct">Direct</h3>
 <details>
 <pre><code class="language-yaml">name: TestEdgeData
-description: Represents a single Biolink Model compliant instance of an edge that
-  can be used for testing.
+description: Represents a single Biolink Model compliant instance of a subject-predicate-object
+  edge that can be used for testing.
 from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
 is_a: TestAsset
 
@@ -380,8 +388,8 @@ is_a: TestAsset
 <h3 id="induced">Induced</h3>
 <details>
 <pre><code class="language-yaml">name: TestEdgeData
-description: Represents a single Biolink Model compliant instance of an edge that
-  can be used for testing.
+description: Represents a single Biolink Model compliant instance of a subject-predicate-object
+  edge that can be used for testing.
 from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
 is_a: TestAsset
 attributes:
@@ -403,6 +411,17 @@ attributes:
     - InputName (user choice)
     rank: 1000
     alias: input_name
+    owner: TestEdgeData
+    domain_of:
+    - TestAsset
+    range: string
+  predicate:
+    name: predicate
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    aliases:
+    - Query
+    rank: 1000
+    alias: predicate
     owner: TestEdgeData
     domain_of:
     - TestAsset
@@ -533,7 +552,6 @@ attributes:
     owner: TestEdgeData
     domain_of:
     - TestEntity
-    - TestAssetCollection
     range: string
 
 </code></pre>

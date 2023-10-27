@@ -200,7 +200,7 @@
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"></path></svg>
 </a>
 <h1 id="class-acceptancetestcase">Class: AcceptanceTestCase</h1>
-<p><em>Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.</em></p>
+<p><em>See AcceptanceTestAsset above for more details.</em></p>
 <p>URI: <a href="https://w3id.org/TranslatorSRI/TranslatorTestingModel/AcceptanceTestCase">ttm:AcceptanceTestCase</a></p>
 <div class="mermaid"> classDiagram
     class AcceptanceTestCase
@@ -210,21 +210,29 @@
 
       AcceptanceTestCase : id
 
-      AcceptanceTestCase : inputs
-
-          AcceptanceTestCase --|&gt; SemanticSmokeTestInput : inputs
-
       AcceptanceTestCase : name
-
-      AcceptanceTestCase : outputs
-
-          AcceptanceTestCase --|&gt; SemanticSmokeTestOutput : outputs
 
       AcceptanceTestCase : preconditions
 
           AcceptanceTestCase --|&gt; Precondition : preconditions
 
+      AcceptanceTestCase : query_type
+
+          AcceptanceTestCase --|&gt; QueryTypeEnum : query_type
+
       AcceptanceTestCase : tags
+
+      AcceptanceTestCase : test_assets
+
+          AcceptanceTestCase --|&gt; AcceptanceTestAsset : test_assets
+
+      AcceptanceTestCase : test_case_type
+
+          AcceptanceTestCase --|&gt; TestCaseTypeEnum : test_case_type
+
+      AcceptanceTestCase : test_env
+
+          AcceptanceTestCase --|&gt; TestEnvEnum : test_env
 
 
 </div>
@@ -250,15 +258,27 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../inputs/">inputs</a></td>
-<td>1..* <br/> <a href="../SemanticSmokeTestInput/">SemanticSmokeTestInput</a></td>
-<td></td>
+<td><a href="../test_env/">test_env</a></td>
+<td>0..1 <br/> <a href="../TestEnvEnum/">TestEnvEnum</a></td>
+<td>Deployment environment within which the associated TestSuite is run</td>
 <td><a href="../TestCase/">TestCase</a></td>
 </tr>
 <tr>
-<td><a href="../outputs/">outputs</a></td>
-<td>1..* <br/> <a href="../SemanticSmokeTestOutput/">SemanticSmokeTestOutput</a></td>
-<td></td>
+<td><a href="../test_case_type/">test_case_type</a></td>
+<td>0..1 <br/> <a href="../TestCaseTypeEnum/">TestCaseTypeEnum</a></td>
+<td>Is this valid or even necessary with the class names already available from c...</td>
+<td><a href="../TestCase/">TestCase</a></td>
+</tr>
+<tr>
+<td><a href="../query_type/">query_type</a></td>
+<td>0..1 <br/> <a href="../QueryTypeEnum/">QueryTypeEnum</a></td>
+<td>Type of TestCase query</td>
+<td><a href="../TestCase/">TestCase</a></td>
+</tr>
+<tr>
+<td><a href="../test_assets/">test_assets</a></td>
+<td>1..* <br/> <a href="../AcceptanceTestAsset/">AcceptanceTestAsset</a></td>
+<td>One or more 'tags' slot values (inherited from TestEntity) should generally b...</td>
 <td><a href="../TestCase/">TestCase</a></td>
 </tr>
 <tr>
@@ -288,7 +308,7 @@
 <tr>
 <td><a href="../tags/">tags</a></td>
 <td>0..* <br/> <a href="../String/">String</a></td>
-<td>A human-readable tags for categorical memberships of a TestEntity (preferably...</td>
+<td>One or more 'tags' slot values (inherited from TestEntity) should generally b...</td>
 <td><a href="../TestEntity/">TestEntity</a></td>
 </tr>
 </tbody>
@@ -322,69 +342,78 @@
 <h3 id="direct">Direct</h3>
 <details>
 <pre><code class="language-yaml">name: AcceptanceTestCase
-description: Lifting schema from Shervin's runner JSON here as an example.  This schema
-  is not yet complete.
+description: See AcceptanceTestAsset above for more details.
 from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
 is_a: TestCase
 slot_usage:
-  inputs:
-    name: inputs
+  test_assets:
+    name: test_assets
     domain_of:
     - TestCase
-    range: SemanticSmokeTestInput
-    required: true
-  outputs:
-    name: outputs
-    domain_of:
-    - TestCase
-    range: SemanticSmokeTestOutput
-    required: true
+    range: AcceptanceTestAsset
 
 </code></pre>
 </details>
 <h3 id="induced">Induced</h3>
 <details>
 <pre><code class="language-yaml">name: AcceptanceTestCase
-description: Lifting schema from Shervin's runner JSON here as an example.  This schema
-  is not yet complete.
+description: See AcceptanceTestAsset above for more details.
 from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
 is_a: TestCase
 slot_usage:
-  inputs:
-    name: inputs
+  test_assets:
+    name: test_assets
     domain_of:
     - TestCase
-    range: SemanticSmokeTestInput
-    required: true
-  outputs:
-    name: outputs
-    domain_of:
-    - TestCase
-    range: SemanticSmokeTestOutput
-    required: true
+    range: AcceptanceTestAsset
 attributes:
-  inputs:
-    name: inputs
+  test_env:
+    name: test_env
+    description: Deployment environment within which the associated TestSuite is run.
     from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
     rank: 1000
-    multivalued: true
-    alias: inputs
+    alias: test_env
     owner: AcceptanceTestCase
     domain_of:
     - TestCase
-    range: SemanticSmokeTestInput
-    required: true
-  outputs:
-    name: outputs
+    range: TestEnvEnum
+  test_case_type:
+    name: test_case_type
+    description: Is this valid or even necessary with the class names already available
+      from classes of 'test_assets' used (seems redundant?)
     from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
     rank: 1000
-    multivalued: true
-    alias: outputs
+    alias: test_case_type
     owner: AcceptanceTestCase
     domain_of:
     - TestCase
-    range: SemanticSmokeTestOutput
+    range: TestCaseTypeEnum
+  query_type:
+    name: query_type
+    description: Type of TestCase query.
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    alias: query_type
+    owner: AcceptanceTestCase
+    domain_of:
+    - TestCase
+    range: QueryTypeEnum
+  test_assets:
+    name: test_assets
+    description: One or more 'tags' slot values (inherited from TestEntity) should
+      generally be defined as filters to specify TestAsset membership in 'test_assets'
+      slot ("Block List") collection.
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    multivalued: true
+    alias: test_assets
+    owner: AcceptanceTestCase
+    domain_of:
+    - TestCase
+    range: AcceptanceTestAsset
     required: true
+    inlined: true
+    inlined_as_list: true
   preconditions:
     name: preconditions
     from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -432,9 +461,9 @@ attributes:
     range: string
   tags:
     name: tags
-    description: A human-readable tags for categorical memberships of a TestEntity
-      (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity
-      into formally typed or ad hoc lists.
+    description: One or more 'tags' slot values (inherited from TestEntity) should
+      generally be defined as filters to specify TestAsset membership in a "Block
+      List" collection.
     from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
     rank: 1000
     slot_uri: schema:additionalType
@@ -443,7 +472,6 @@ attributes:
     owner: AcceptanceTestCase
     domain_of:
     - TestEntity
-    - TestAssetCollection
     range: string
 
 </code></pre>

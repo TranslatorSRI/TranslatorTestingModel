@@ -5,10 +5,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://TranslatorSRI.github.io/TranslatorTestingModel/TestAssetCollection/" rel="canonical"/>
+<link href="https://TranslatorSRI.github.io/TranslatorTestingModel/OneHopTestCase/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.5.3, mkdocs-material-8.5.10" name="generator"/>
-<title>Class: TestAssetCollection - Translator Testing Model</title>
+<title>Class: OneHopTestCase - Translator Testing Model</title>
 <link href="../assets/stylesheets/main.975780f9.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -21,7 +21,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#class-testassetcollection">
+<a class="md-skip" href="#class-onehoptestcase">
           Skip to content
         </a>
 </div>
@@ -45,7 +45,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Class: TestAssetCollection
+              Class: OneHopTestCase
             
           </span>
 </div>
@@ -152,11 +152,6 @@
   </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#aliases">
-    Aliases
-  </a>
-</li>
-<li class="md-nav__item">
 <a class="md-nav__link" href="#identifier-and-mapping-information">
     Identifier and Mapping Information
   </a>
@@ -201,34 +196,56 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<a class="md-content__button md-icon" href="https://github.com/TranslatorSRI/TranslatorTestingModel/edit/master/docs/TestAssetCollection.md" title="Edit this page">
+<a class="md-content__button md-icon" href="https://github.com/TranslatorSRI/TranslatorTestingModel/edit/master/docs/OneHopTestCase.md" title="Edit this page">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"></path></svg>
 </a>
-<h1 id="class-testassetcollection">Class: TestAssetCollection</h1>
-<p><em>Represents an ad hoc list of Test Assets.</em></p>
-<p>URI: <a href="https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestAssetCollection">ttm:TestAssetCollection</a></p>
+<h1 id="class-onehoptestcase">Class: OneHopTestCase</h1>
+<p><em>'One Hop' Knowledge Graph navigation integration test</em></p>
+<p>URI: <a href="https://w3id.org/TranslatorSRI/TranslatorTestingModel/OneHopTestCase">ttm:OneHopTestCase</a></p>
 <div class="mermaid"> classDiagram
-    class TestAssetCollection
-      TestEntity &lt;|-- TestAssetCollection
+    class OneHopTestCase
+      KnowledgeGraphNavigationTestCase &lt;|-- OneHopTestCase
 
-      TestAssetCollection : description
+      OneHopTestCase : description
 
-      TestAssetCollection : id
+      OneHopTestCase : id
 
-      TestAssetCollection : name
+      OneHopTestCase : name
 
-      TestAssetCollection : tags
+      OneHopTestCase : preconditions
 
-      TestAssetCollection : test_assets
+          OneHopTestCase --|&gt; Precondition : preconditions
 
-          TestAssetCollection --|&gt; TestCase : test_assets
+      OneHopTestCase : query_type
+
+          OneHopTestCase --|&gt; QueryTypeEnum : query_type
+
+      OneHopTestCase : tags
+
+      OneHopTestCase : test_assets
+
+          OneHopTestCase --|&gt; TestCase : test_assets
+
+      OneHopTestCase : test_case_type
+
+          OneHopTestCase --|&gt; TestCaseTypeEnum : test_case_type
+
+      OneHopTestCase : test_env
+
+          OneHopTestCase --|&gt; TestEnvEnum : test_env
 
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
 <li><a href="../TestEntity/">TestEntity</a><ul>
-<li><strong>TestAssetCollection</strong></li>
+<li><a href="../TestCase/">TestCase</a><ul>
+<li><a href="../KnowledgeGraphNavigationTestCase/">KnowledgeGraphNavigationTestCase</a><ul>
+<li><strong>OneHopTestCase</strong></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -244,16 +261,34 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../test_assets/">test_assets</a></td>
-<td>1..* <br/> <a href="../TestCase/">TestCase</a></td>
-<td>List of explicitly enumerated Test Assets</td>
-<td>direct</td>
+<td><a href="../test_env/">test_env</a></td>
+<td>0..1 <br/> <a href="../TestEnvEnum/">TestEnvEnum</a></td>
+<td>Deployment environment within which the associated TestSuite is run</td>
+<td><a href="../TestCase/">TestCase</a></td>
 </tr>
 <tr>
-<td><a href="../tags/">tags</a></td>
-<td>0..* <br/> <a href="../String/">String</a></td>
+<td><a href="../test_case_type/">test_case_type</a></td>
+<td>0..1 <br/> <a href="../TestCaseTypeEnum/">TestCaseTypeEnum</a></td>
+<td>Is this valid or even necessary with the class names already available from c...</td>
+<td><a href="../TestCase/">TestCase</a></td>
+</tr>
+<tr>
+<td><a href="../query_type/">query_type</a></td>
+<td>0..1 <br/> <a href="../QueryTypeEnum/">QueryTypeEnum</a></td>
+<td>Type of TestCase query</td>
+<td><a href="../TestCase/">TestCase</a></td>
+</tr>
+<tr>
+<td><a href="../test_assets/">test_assets</a></td>
+<td>1..* <br/> <a href="../TestCase/">TestCase</a></td>
 <td>One or more 'tags' slot values (inherited from TestEntity) should generally b...</td>
-<td>direct</td>
+<td><a href="../TestCase/">TestCase</a></td>
+</tr>
+<tr>
+<td><a href="../preconditions/">preconditions</a></td>
+<td>0..* <br/> <a href="../Precondition/">Precondition</a></td>
+<td></td>
+<td><a href="../TestCase/">TestCase</a></td>
 </tr>
 <tr>
 <td><a href="../id/">id</a></td>
@@ -273,12 +308,14 @@
 <td>A human-readable description for a Test Entity</td>
 <td><a href="../TestEntity/">TestEntity</a></td>
 </tr>
+<tr>
+<td><a href="../tags/">tags</a></td>
+<td>0..* <br/> <a href="../String/">String</a></td>
+<td>One or more 'tags' slot values (inherited from TestEntity) should generally b...</td>
+<td><a href="../TestEntity/">TestEntity</a></td>
+</tr>
 </tbody>
 </table>
-<h2 id="aliases">Aliases</h2>
-<ul>
-<li>BlockList</li>
-</ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
@@ -295,11 +332,11 @@
 <tbody>
 <tr>
 <td>self</td>
-<td>ttm:TestAssetCollection</td>
+<td>ttm:OneHopTestCase</td>
 </tr>
 <tr>
 <td>native</td>
-<td>ttm:TestAssetCollection</td>
+<td>ttm:OneHopTestCase</td>
 </tr>
 </tbody>
 </table>
@@ -307,73 +344,79 @@
 <!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
 <h3 id="direct">Direct</h3>
 <details>
-<pre><code class="language-yaml">name: TestAssetCollection
-description: Represents an ad hoc list of Test Assets.
+<pre><code class="language-yaml">name: OneHopTestCase
+description: '''One Hop'' Knowledge Graph navigation integration test'
 from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
-aliases:
-- BlockList
-is_a: TestEntity
-slots:
-- test_assets
-- tags
-slot_usage:
-  tags:
-    name: tags
-    description: 'One or more ''tags'' slot values (inherited from TestEntity) should
-      generally be defined as filters to specify TestAsset membership in a "Block
-      List" collection  '
-    domain_of:
-    - TestEntity
-    - TestAssetCollection
+is_a: KnowledgeGraphNavigationTestCase
 
 </code></pre>
 </details>
 <h3 id="induced">Induced</h3>
 <details>
-<pre><code class="language-yaml">name: TestAssetCollection
-description: Represents an ad hoc list of Test Assets.
+<pre><code class="language-yaml">name: OneHopTestCase
+description: '''One Hop'' Knowledge Graph navigation integration test'
 from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
-aliases:
-- BlockList
-is_a: TestEntity
-slot_usage:
-  tags:
-    name: tags
-    description: 'One or more ''tags'' slot values (inherited from TestEntity) should
-      generally be defined as filters to specify TestAsset membership in a "Block
-      List" collection  '
-    domain_of:
-    - TestEntity
-    - TestAssetCollection
+is_a: KnowledgeGraphNavigationTestCase
 attributes:
+  test_env:
+    name: test_env
+    description: Deployment environment within which the associated TestSuite is run.
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    alias: test_env
+    owner: OneHopTestCase
+    domain_of:
+    - TestCase
+    range: TestEnvEnum
+  test_case_type:
+    name: test_case_type
+    description: Is this valid or even necessary with the class names already available
+      from classes of 'test_assets' used (seems redundant?)
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    alias: test_case_type
+    owner: OneHopTestCase
+    domain_of:
+    - TestCase
+    range: TestCaseTypeEnum
+  query_type:
+    name: query_type
+    description: Type of TestCase query.
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    alias: query_type
+    owner: OneHopTestCase
+    domain_of:
+    - TestCase
+    range: QueryTypeEnum
   test_assets:
     name: test_assets
-    description: List of explicitly enumerated Test Assets.
+    description: One or more 'tags' slot values (inherited from TestEntity) should
+      generally be defined as filters to specify TestAsset membership in 'test_assets'
+      slot ("Block List") collection.
     from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    aliases:
+    - Block List
     rank: 1000
     multivalued: true
     alias: test_assets
-    owner: TestAssetCollection
+    owner: OneHopTestCase
     domain_of:
-    - TestAssetCollection
+    - TestCase
     range: TestCase
     required: true
     inlined: true
-  tags:
-    name: tags
-    description: 'One or more ''tags'' slot values (inherited from TestEntity) should
-      generally be defined as filters to specify TestAsset membership in a "Block
-      List" collection  '
+    inlined_as_list: true
+  preconditions:
+    name: preconditions
     from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
     rank: 1000
-    slot_uri: schema:additionalType
     multivalued: true
-    alias: tags
-    owner: TestAssetCollection
+    alias: preconditions
+    owner: OneHopTestCase
     domain_of:
-    - TestEntity
-    - TestAssetCollection
-    range: string
+    - TestCase
+    range: Precondition
   id:
     name: id
     description: A unique identifier for a Test Entity
@@ -382,7 +425,7 @@ attributes:
     slot_uri: schema:identifier
     identifier: true
     alias: id
-    owner: TestAssetCollection
+    owner: OneHopTestCase
     domain_of:
     - TestEntity
     range: uriorcurie
@@ -394,7 +437,7 @@ attributes:
     rank: 1000
     slot_uri: schema:name
     alias: name
-    owner: TestAssetCollection
+    owner: OneHopTestCase
     domain_of:
     - TestEntity
     range: string
@@ -405,7 +448,21 @@ attributes:
     rank: 1000
     slot_uri: schema:description
     alias: description
-    owner: TestAssetCollection
+    owner: OneHopTestCase
+    domain_of:
+    - TestEntity
+    range: string
+  tags:
+    name: tags
+    description: One or more 'tags' slot values (inherited from TestEntity) should
+      generally be defined as filters to specify TestAsset membership in a "Block
+      List" collection.
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    slot_uri: schema:additionalType
+    multivalued: true
+    alias: tags
+    owner: OneHopTestCase
     domain_of:
     - TestEntity
     range: string

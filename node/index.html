@@ -256,42 +256,29 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#applicable-classes" class="md-nav__link">
-    Applicable Classes
+  <a href="#domain-and-range" class="md-nav__link">
+    Domain and Range
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
-    Properties
+  <a href="#parents" class="md-nav__link">
+    Parents
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#identifier-and-mapping-information" class="md-nav__link">
-    Identifier and Mapping Information
+  <a href="#children" class="md-nav__link">
+    Children
   </a>
-  
-    <nav class="md-nav" aria-label="Identifier and Mapping Information">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#schema-source" class="md-nav__link">
-    Schema Source
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#linkml-source" class="md-nav__link">
-    LinkML Source
+  <a href="#used-by" class="md-nav__link">
+    Used by
   </a>
   
 </li>
@@ -317,51 +304,16 @@
 
 
 <h1 id="slot-node">Slot: node</h1>
-<p><em>The node of the TRAPI query to replace.</em></p>
+<p>The node of the TRAPI query to replace.</p>
 <p>URI: <a href="https://w3id.org/TranslatorSRI/TranslatorTestingModel/node">ttm:node</a></p>
-<!-- no inheritance hierarchy -->
-
-<h2 id="applicable-classes">Applicable Classes</h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-<th>Modifies Slot</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../SemanticSmokeTestInput/">SemanticSmokeTestInput</a></td>
-<td>Lifting schema from Shervin's runner JSON here as an example</td>
-<td>no</td>
-</tr>
-</tbody>
-</table>
-<h2 id="properties">Properties</h2>
+<h2 id="domain-and-range">Domain and Range</h2>
+<p>None &#8594;  <sub>0..1</sub> <a href="types/String.md">String</a></p>
+<h2 id="parents">Parents</h2>
+<h2 id="children">Children</h2>
+<h2 id="used-by">Used by</h2>
 <ul>
-<li>Range: <a href="../String/">String</a></li>
+<li><a href="../SemanticSmokeTestInput/">SemanticSmokeTestInput</a></li>
 </ul>
-<h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="schema-source">Schema Source</h3>
-<ul>
-<li>from schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel</li>
-</ul>
-<h2 id="linkml-source">LinkML Source</h2>
-<details>
-
-<pre><code class="language-yaml">name: node
-description: The node of the TRAPI query to replace.
-from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
-rank: 1000
-alias: node
-domain_of:
-- SemanticSmokeTestInput
-range: string
-
-</code></pre>
-
-</details>
 
 
 

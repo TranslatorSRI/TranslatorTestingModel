@@ -324,7 +324,7 @@
 
 
 <h1 id="slot-must_pass_environment">Slot: must_pass_environment</h1>
-<p><em>The environment in which this test must pass</em></p>
+<p><em>The deployment environment within which this test must pass.</em></p>
 <p>URI: <a href="https://w3id.org/TranslatorSRI/TranslatorTestingModel/must_pass_environment">ttm:must_pass_environment</a></p>
 <!-- no inheritance hierarchy -->
 
@@ -339,7 +339,7 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../SemanticSmokeTestInput/">SemanticSmokeTestInput</a></td>
+<td><a href="../AcceptanceTestAsset/">AcceptanceTestAsset</a></td>
 <td>Lifting schema from Shervin's runner JSON here as an example</td>
 <td>no</td>
 </tr>
@@ -347,7 +347,7 @@
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
-<li>Range: <a href="../EnvironmentEnum/">EnvironmentEnum</a></li>
+<li>Range: <a href="../TestEnvEnum/">TestEnvEnum</a></li>
 </ul>
 <h2 id="examples">Examples</h2>
 <table>
@@ -358,13 +358,13 @@
 </thead>
 <tbody>
 <tr>
-<td>PROD</td>
+<td>prod</td>
 </tr>
 <tr>
-<td>CI</td>
+<td>ci</td>
 </tr>
 <tr>
-<td>TEST</td>
+<td>test</td>
 </tr>
 </tbody>
 </table>
@@ -377,17 +377,17 @@
 <details>
 
 <pre><code class="language-yaml">name: must_pass_environment
-description: The environment in which this test must pass
+description: The deployment environment within which this test must pass.
 examples:
-- value: PROD
-- value: CI
-- value: TEST
+- value: prod
+- value: ci
+- value: test
 from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
 rank: 1000
 alias: must_pass_environment
 domain_of:
-- SemanticSmokeTestInput
-range: EnvironmentEnum
+- AcceptanceTestAsset
+range: TestEnvEnum
 
 </code></pre>
 

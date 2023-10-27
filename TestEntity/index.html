@@ -209,12 +209,9 @@
     class TestEntity
       TestEntity &lt;|-- TestMetadata
       TestEntity &lt;|-- TestAsset
-      TestEntity &lt;|-- TestAssetCollection
       TestEntity &lt;|-- TestCase
       TestEntity &lt;|-- TestCaseSpecification
       TestEntity &lt;|-- TestSuite
-      TestEntity &lt;|-- Input
-      TestEntity &lt;|-- Output
       TestEntity &lt;|-- Precondition
 
       TestEntity : description
@@ -232,12 +229,9 @@
 <li><strong>TestEntity</strong><ul>
 <li><a href="../TestMetadata/">TestMetadata</a></li>
 <li><a href="../TestAsset/">TestAsset</a></li>
-<li><a href="../TestAssetCollection/">TestAssetCollection</a></li>
 <li><a href="../TestCase/">TestCase</a></li>
 <li><a href="../TestCaseSpecification/">TestCaseSpecification</a></li>
 <li><a href="../TestSuite/">TestSuite</a></li>
-<li><a href="../Input/">Input</a></li>
-<li><a href="../Output/">Output</a></li>
 <li><a href="../Precondition/">Precondition</a></li>
 </ul>
 </li>
@@ -376,7 +370,6 @@ attributes:
     owner: TestEntity
     domain_of:
     - TestEntity
-    - TestAssetCollection
     range: string
 tree_root: true
 

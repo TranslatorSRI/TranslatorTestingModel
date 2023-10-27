@@ -207,7 +207,7 @@
       TestEntity &lt;|-- TestAsset
 
 
-      TestAsset &lt;|-- QueryAnswerPair
+      TestAsset &lt;|-- AcceptanceTestAsset
       TestAsset &lt;|-- TestEdgeData
 
 
@@ -231,6 +231,8 @@
 
       TestAsset : output_name
 
+      TestAsset : predicate
+
       TestAsset : semantic_severity
 
           TestAsset --|&gt; SemanticSeverityEnum : semantic_severity
@@ -249,7 +251,7 @@
 <ul>
 <li><a href="../TestEntity/">TestEntity</a><ul>
 <li><strong>TestAsset</strong><ul>
-<li><a href="../QueryAnswerPair/">QueryAnswerPair</a></li>
+<li><a href="../AcceptanceTestAsset/">AcceptanceTestAsset</a></li>
 <li><a href="../TestEdgeData/">TestEdgeData</a></li>
 </ul>
 </li>
@@ -275,6 +277,12 @@
 </tr>
 <tr>
 <td><a href="../input_name/">input_name</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../predicate/">predicate</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td></td>
 <td>direct</td>
@@ -384,6 +392,7 @@ is_a: TestEntity
 slots:
 - input_id
 - input_name
+- predicate
 - output_id
 - output_name
 - expected_output
@@ -405,7 +414,6 @@ slot_usage:
       generally be defined to specify TestAsset membership in a "Block List" collection  '
     domain_of:
     - TestEntity
-    - TestAssetCollection
 
 </code></pre>
 </details>
@@ -431,7 +439,6 @@ slot_usage:
       generally be defined to specify TestAsset membership in a "Block List" collection  '
     domain_of:
     - TestEntity
-    - TestAssetCollection
 attributes:
   input_id:
     name: input_id
@@ -451,6 +458,17 @@ attributes:
     - InputName (user choice)
     rank: 1000
     alias: input_name
+    owner: TestAsset
+    domain_of:
+    - TestAsset
+    range: string
+  predicate:
+    name: predicate
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    aliases:
+    - Query
+    rank: 1000
+    alias: predicate
     owner: TestAsset
     domain_of:
     - TestAsset
@@ -581,7 +599,6 @@ attributes:
     owner: TestAsset
     domain_of:
     - TestEntity
-    - TestAssetCollection
     range: string
 
 </code></pre>
