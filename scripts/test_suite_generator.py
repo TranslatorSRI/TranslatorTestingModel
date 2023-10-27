@@ -2,9 +2,15 @@
 """
 CLI Script to generate a TestSuite of TestCases from specified TestAssets
 """
+from typing import List
 from argparse import ArgumentParser
-import json
 from urllib.parse import urlparse
+from linkml_runtime.loaders import tsv_loader, json_loader, yaml_loader
+from src.translator_testing_model.datamodel.translator_testing_model import (
+    TestAsset,
+    TestCase,
+    TestSuite
+)
 
 
 def url_type(arg):
@@ -18,8 +24,17 @@ def main(args):
     test_suite_id = args["test_suite_id"]
     test_suite_name = args["test_suite_name"]
     test_assets_url = args["test_assets_url"]
-    test_assets_format = args["test_assets_format"]
+    test_assets_format = test_assets_url.split('.')[-1]
     test_suite_url = args["test_suite_url"]
+
+    if test_assets_format == "tsv":
+        test_assets: List[TestAsset] = tsv_loader.load(test_assets_url, target_class=TestAsset)
+    elif test_assets_format == "json":
+        test_assets: List[TestAsset] = json_loader.load(test_assets_url, target_class=TestAsset)
+    elif test_assets_format == "yaml":
+        test_assets: List[TestAsset] = yaml_loader.load(test_assets_url, target_class=TestAsset)
+    else:
+        raise RuntimeError(f"Unknown TestAsset file format: {test_assets_format}")
 
 
 def cli():
@@ -44,15 +59,9 @@ def cli():
         "-a", "--test_assets_url",
         type=url_type,
         required=True,
-        help="Input source URL location of test assets.",
-    )
-
-    parser.add_argument(
-        "-f", "--test_assets_format",
-        type=str,
-        choices=["tsv", "json", "yaml"],
-        default="tsv",
-        help="File format of test assets (Default: 'tsv').",
+        help="Input source URL location of test assets file. " +
+             "File format discerned from file extension " +
+             "(One of 'tsv', 'json' or 'yaml' assumed).",
     )
 
     parser.add_argument(
