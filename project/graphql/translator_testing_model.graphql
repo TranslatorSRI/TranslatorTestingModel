@@ -16,7 +16,7 @@ type AcceptanceTestAsset
     tags: [String]
     mustPassDate: Date
     mustPassEnvironment: TestEnvEnum
-    query: String
+    scientificQuestion: String
     stringEntry: String
     direction: DirectionEnum
     answerInformalConcept: String

@@ -76,11 +76,11 @@ classes:
   AcceptanceTestAsset:
     is_a: TestAsset
     description: >-
-      Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.
+      Model derived from Jenn's test asset design and Shervin's runner JSON here as an example.
     slots:
       - must_pass_date
       - must_pass_environment
-      - query
+      - scientific_question
       - string_entry
       - direction
       - answer_informal_concept
@@ -150,7 +150,7 @@ classes:
   QuantitativeTestCase:
     is_a: TestCase
     description: >-
-      Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.
+      Assumed additional model from Shervin's runner JSON here as an example.  This schema is not yet complete.
     slot_usage:
 #      test_assets:
 #        range: QuantitativeTestAsset
@@ -344,9 +344,10 @@ slots:
       - value: "ci"
       - value: "test"
 
-  query:
+  scientific_question:
     description: >-
-      The question a SME would ask
+      The full human-readable scientific question a SME would ask,
+      which is encoded into the test asset.
     range: string
     examples:
       - value: "What drugs may treat multiple sclerosis?"

@@ -233,11 +233,11 @@ class TestAsset(TestEntity):
 
 class AcceptanceTestAsset(TestAsset):
     """
-    Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.
+    Model derived from Jenn's test asset design and Shervin's runner JSON here as an example.
     """
     must_pass_date: Optional[date] = Field(None, description="""The date by which this test must pass""")
     must_pass_environment: Optional[TestEnvEnum] = Field(None, description="""The deployment environment within which this test must pass.""")
-    query: Optional[str] = Field(None, description="""The question a SME would ask""")
+    scientific_question: Optional[str] = Field(None, description="""The full human-readable scientific question a SME would ask, which is encoded into the test asset.""")
     string_entry: Optional[str] = Field(None, description="""The object of the core triple to be tested""")
     direction: Optional[DirectionEnum] = Field(None, description="""The direction of the expected query result triple""")
     answer_informal_concept: Optional[str] = Field(None, description="""An answer that is returned from the test case, note: this must be combined with the expected_result to form a complete answer.  It might make sense to couple these in their own object instead of strictly sticking to the flat schema introduced by the spreadsheet here: https://docs.google.com/spreadsheets/d/1yj7zIchFeVl1OHqL_kE_pqvzNLmGml_FLbHDs-8Yvig/edit#gid=0""")
@@ -323,7 +323,7 @@ class AcceptanceTestCase(TestCase):
 
 class QuantitativeTestCase(TestCase):
     """
-    Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.
+    Assumed additional model from Shervin's runner JSON here as an example.  This schema is not yet complete.
     """
     test_env: Optional[TestEnvEnum] = Field(None, description="""Deployment environment within which the associated TestSuite is run.""")
     test_case_type: Optional[TestCaseTypeEnum] = Field(None, description="""Is this valid or even necessary with the class names already available from classes of 'test_assets' used (seems redundant?)""")

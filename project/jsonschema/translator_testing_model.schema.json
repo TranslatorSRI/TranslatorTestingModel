@@ -2,7 +2,7 @@
     "$defs": {
         "AcceptanceTestAsset": {
             "additionalProperties": false,
-            "description": "Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.",
+            "description": "Model derived from Jenn's test asset design and Shervin's runner JSON here as an example.",
             "properties": {
                 "answer_informal_concept": {
                     "description": "An answer that is returned from the test case, note: this must be combined with the expected_result to form a complete answer.  It might make sense to couple these in their own object instead of strictly sticking to the flat schema introduced by the spreadsheet here: https://docs.google.com/spreadsheets/d/1yj7zIchFeVl1OHqL_kE_pqvzNLmGml_FLbHDs-8Yvig/edit#gid=0",
@@ -62,13 +62,13 @@
                 "predicate": {
                     "type": "string"
                 },
-                "query": {
-                    "description": "The question a SME would ask",
-                    "type": "string"
-                },
                 "query_node": {
                     "$ref": "#/$defs/NodeEnum",
                     "description": "The node of the (templated) TRAPI query to replace"
+                },
+                "scientific_question": {
+                    "description": "The full human-readable scientific question a SME would ask, which is encoded into the test asset.",
+                    "type": "string"
                 },
                 "semantic_severity": {
                     "$ref": "#/$defs/SemanticSeverityEnum"
@@ -501,7 +501,7 @@
         },
         "QuantitativeTestCase": {
             "additionalProperties": false,
-            "description": "Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.",
+            "description": "Assumed additional model from Shervin's runner JSON here as an example.  This schema is not yet complete.",
             "properties": {
                 "description": {
                     "description": "A human-readable description for a Test Entity",

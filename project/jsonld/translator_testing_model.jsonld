@@ -980,9 +980,9 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "query",
-      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/query",
-      "description": "The question a SME would ask",
+      "name": "scientific_question",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/scientific_question",
+      "description": "The full human-readable scientific question a SME would ask, which is encoded into the test asset.",
       "examples": [
         {
           "value": "What drugs may treat multiple sclerosis?",
@@ -994,7 +994,7 @@
         }
       ],
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
-      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/query",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/scientific_question",
       "owner": "AcceptanceTestAsset",
       "domain_of": [
         "AcceptanceTestAsset"
@@ -1388,7 +1388,7 @@
     {
       "name": "AcceptanceTestAsset",
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/AcceptanceTestAsset",
-      "description": "Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.",
+      "description": "Model derived from Jenn's test asset design and Shervin's runner JSON here as an example.",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "is_a": "TestAsset",
       "slots": [
@@ -1408,7 +1408,7 @@
         "TestAsset_tags",
         "must_pass_date",
         "must_pass_environment",
-        "query",
+        "scientific_question",
         "string_entry",
         "direction",
         "answer_informal_concept",
@@ -1508,7 +1508,7 @@
     {
       "name": "QuantitativeTestCase",
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/QuantitativeTestCase",
-      "description": "Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.",
+      "description": "Assumed additional model from Shervin's runner JSON here as an example.  This schema is not yet complete.",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "is_a": "TestCase",
       "slots": [
@@ -1696,9 +1696,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "translator_testing_model.yaml",
-  "source_file_date": "2023-10-26T21:50:36",
-  "source_file_size": 16629,
-  "generation_date": "2023-10-26T21:50:39",
+  "source_file_date": "2023-10-26T22:13:15",
+  "source_file_size": 16738,
+  "generation_date": "2023-10-26T22:13:18",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",

@@ -12,10 +12,10 @@ ttm:AcceptanceTestCase a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "AcceptanceTestCase" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 1 ;
+            owl:allValuesFrom ttm:AcceptanceTestAsset ;
             owl:onProperty ttm:test_assets ],
         [ a owl:Restriction ;
-            owl:allValuesFrom ttm:AcceptanceTestAsset ;
+            owl:minCardinality 1 ;
             owl:onProperty ttm:test_assets ],
         ttm:TestCase ;
     skos:definition "See AcceptanceTestAsset above for more details." ;
@@ -58,7 +58,7 @@ ttm:QuantitativeTestCase a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "QuantitativeTestCase" ;
     rdfs:subClassOf ttm:TestCase ;
-    skos:definition "Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete." ;
+    skos:definition "Assumed additional model from Shervin's runner JSON here as an example.  This schema is not yet complete." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:StandardsComplianceTestSuite a owl:Class,
@@ -181,13 +181,6 @@ ttm:predicate a owl:ObjectProperty,
     skos:altLabel "Query" ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
-ttm:query a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "query" ;
-    rdfs:range linkml:String ;
-    skos:definition "The question a SME would ask" ;
-    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
-
 ttm:query_node a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "query_node" ;
@@ -207,6 +200,13 @@ ttm:requires_trapi a owl:ObjectProperty,
     rdfs:label "requires_trapi" ;
     rdfs:range linkml:Boolean ;
     skos:definition "Does this test require a TRAPI-compliant query to run?" ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
+ttm:scientific_question a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "scientific_question" ;
+    rdfs:range linkml:String ;
+    skos:definition "The full human-readable scientific question a SME would ask, which is encoded into the test asset." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:semantic_severity a owl:ObjectProperty,
@@ -307,7 +307,7 @@ ttm:AcceptanceTestAsset a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "AcceptanceTestAsset" ;
     rdfs:subClassOf ttm:TestAsset ;
-    skos:definition "Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete." ;
+    skos:definition "Model derived from Jenn's test asset design and Shervin's runner JSON here as an example." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:KnowledgeGraphNavigationTestCase a owl:Class,
@@ -410,20 +410,20 @@ ttm:TestAsset a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "TestAsset" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:tags ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Uriorcurie ;
             owl:onProperty ttm:id ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty ttm:id ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:Uriorcurie ;
             owl:onProperty ttm:id ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
             owl:onProperty ttm:tags ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:tags ],
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:id ],
         ttm:TestEntity ;
     skos:definition "Represents a Test Asset, which is a single specific instance of TestCase-agnostic semantic parameters representing the specification of a Translator test target with inputs and (expected) outputs." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
@@ -618,26 +618,26 @@ ttm:TestCase a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "TestCase" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom linkml:String ;
             owl:onProperty ttm:tags ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:test_case_type ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:allValuesFrom linkml:String ;
             owl:onProperty ttm:test_case_type ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
             owl:onProperty ttm:test_assets ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:tags ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:test_case_type ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
             owl:onProperty ttm:test_assets ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:test_case_type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:tags ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:test_case_type ],
         ttm:TestEntity ;
     skos:definition "Represents a single enumerated instance of Test Case, derived from a  given collection of one or more TestAsset instances (the value of the 'test_assets' slot) which define the 'inputs' and 'outputs' of the TestCase, used to probe a particular test condition." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .

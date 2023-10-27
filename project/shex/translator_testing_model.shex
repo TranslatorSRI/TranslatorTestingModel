@@ -48,7 +48,7 @@ linkml:Sparqlpath xsd:string
           rdf:type [ <TestAsset> ] ? ;
           <must_pass_date> @linkml:Date ? ;
           <must_pass_environment> @<TestEnvEnum> ? ;
-          <query> @linkml:String ? ;
+          <scientific_question> @linkml:String ? ;
           <string_entry> @linkml:String ? ;
           <direction> @<DirectionEnum> ? ;
           <answer_informal_concept> @linkml:String ? ;

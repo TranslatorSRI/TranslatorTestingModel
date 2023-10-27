@@ -1,4 +1,4 @@
-// Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.
+// Model derived from Jenn's test asset design and Shervin's runner JSON here as an example.
 message AcceptanceTestAsset
  {
   string name = 0
@@ -17,7 +17,7 @@ message AcceptanceTestAsset
  repeated  string tags = 0
   date mustPassDate = 0
   testEnvEnum mustPassEnvironment = 0
-  string query = 0
+  string scientificQuestion = 0
   string stringEntry = 0
   directionEnum direction = 0
   string answerInformalConcept = 0
@@ -109,7 +109,7 @@ message Precondition
   string description = 0
  repeated  string tags = 0
  }
-// Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.
+// Assumed additional model from Shervin's runner JSON here as an example.  This schema is not yet complete.
 message QuantitativeTestCase
  {
   uriorcurie id = 0

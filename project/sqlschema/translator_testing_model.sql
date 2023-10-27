@@ -145,7 +145,7 @@ CREATE TABLE "AcceptanceTestAsset" (
 	id TEXT NOT NULL, 
 	must_pass_date DATE, 
 	must_pass_environment VARCHAR(4), 
-	"query" TEXT, 
+	scientific_question TEXT, 
 	string_entry TEXT, 
 	direction VARCHAR(9), 
 	answer_informal_concept TEXT, 

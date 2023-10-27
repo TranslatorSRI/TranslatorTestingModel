@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2023-10-26T21:50:42
+# Generation date: 2023-10-26T22:13:21
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -256,7 +256,7 @@ class TestAsset(TestEntity):
 @dataclass
 class AcceptanceTestAsset(TestAsset):
     """
-    Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.
+    Model derived from Jenn's test asset design and Shervin's runner JSON here as an example.
     """
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -268,7 +268,7 @@ class AcceptanceTestAsset(TestAsset):
     id: Union[str, AcceptanceTestAssetId] = None
     must_pass_date: Optional[Union[str, XSDDate]] = None
     must_pass_environment: Optional[Union[str, "TestEnvEnum"]] = None
-    query: Optional[str] = None
+    scientific_question: Optional[str] = None
     string_entry: Optional[str] = None
     direction: Optional[Union[str, "DirectionEnum"]] = None
     answer_informal_concept: Optional[str] = None
@@ -289,8 +289,8 @@ class AcceptanceTestAsset(TestAsset):
         if self.must_pass_environment is not None and not isinstance(self.must_pass_environment, TestEnvEnum):
             self.must_pass_environment = TestEnvEnum(self.must_pass_environment)
 
-        if self.query is not None and not isinstance(self.query, str):
-            self.query = str(self.query)
+        if self.scientific_question is not None and not isinstance(self.scientific_question, str):
+            self.scientific_question = str(self.scientific_question)
 
         if self.string_entry is not None and not isinstance(self.string_entry, str):
             self.string_entry = str(self.string_entry)
@@ -447,7 +447,7 @@ class AcceptanceTestCase(TestCase):
 @dataclass
 class QuantitativeTestCase(TestCase):
     """
-    Lifting schema from Shervin's runner JSON here as an example.  This schema is not yet complete.
+    Assumed additional model from Shervin's runner JSON here as an example.  This schema is not yet complete.
     """
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -969,8 +969,8 @@ slots.must_pass_date = Slot(uri=TTM.must_pass_date, name="must_pass_date", curie
 slots.must_pass_environment = Slot(uri=TTM.must_pass_environment, name="must_pass_environment", curie=TTM.curie('must_pass_environment'),
                    model_uri=TTM.must_pass_environment, domain=None, range=Optional[Union[str, "TestEnvEnum"]])
 
-slots.query = Slot(uri=TTM.query, name="query", curie=TTM.curie('query'),
-                   model_uri=TTM.query, domain=None, range=Optional[str])
+slots.scientific_question = Slot(uri=TTM.scientific_question, name="scientific_question", curie=TTM.curie('scientific_question'),
+                   model_uri=TTM.scientific_question, domain=None, range=Optional[str])
 
 slots.string_entry = Slot(uri=TTM.string_entry, name="string_entry", curie=TTM.curie('string_entry'),
                    model_uri=TTM.string_entry, domain=None, range=Optional[str])
