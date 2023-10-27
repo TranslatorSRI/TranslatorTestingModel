@@ -1,4 +1,4 @@
-# Example TestCase data object
+# Example TestCaseSpecification data object
 ---
 # TODO: the TestCaseSpecification example data needs further elaboration
 #
@@ -10,4 +10,4 @@
 #
 id: example:TestCaseSpecification001
 name: foo bar
-description: This is a test case
+description: This is a test case specification

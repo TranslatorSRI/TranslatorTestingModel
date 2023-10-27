@@ -170,7 +170,7 @@ linkml:Sparqlpath xsd:string
              <test_env> @<TestEnvEnum> ? ;
              <test_case_type> @<TestCaseTypeEnum> ? ;
              <query_type> @<QueryTypeEnum> ? ;
-             <test_assets> @<TestCase> + ;
+             <test_assets> @<TestAsset> + ;
              <preconditions> @<Precondition> * ;
              schema1:additionalType @linkml:String *
           ) ;

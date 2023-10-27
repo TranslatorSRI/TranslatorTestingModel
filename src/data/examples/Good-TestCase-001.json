@@ -1,0 +1,12 @@
+{
+  "id": "example:TestCase001",
+  "name": "foo bar",
+  "description": "This is a test case",
+  "test_assets": [
+    {
+      "id": "example:TestAsset001",
+      "name": "foo bar",
+      "description": "This is a test asset"
+    }
+  ]
+}

@@ -63,7 +63,7 @@ type ComplianceTestCase
     testEnv: TestEnvEnum
     testCaseType: TestCaseTypeEnum
     queryType: QueryTypeEnum
-    testAssets: [TestCase]!
+    testAssets: [TestAsset]!
     preconditions: [Precondition]
     tags: [String]
   }
@@ -76,7 +76,7 @@ type KnowledgeGraphNavigationTestCase
     testEnv: TestEnvEnum
     testCaseType: TestCaseTypeEnum
     queryType: QueryTypeEnum
-    testAssets: [TestCase]!
+    testAssets: [TestAsset]!
     preconditions: [Precondition]
     tags: [String]
   }
@@ -89,7 +89,7 @@ type OneHopTestCase
     testEnv: TestEnvEnum
     testCaseType: TestCaseTypeEnum
     queryType: QueryTypeEnum
-    testAssets: [TestCase]!
+    testAssets: [TestAsset]!
     preconditions: [Precondition]
     tags: [String]
   }
@@ -122,7 +122,7 @@ type QuantitativeTestCase
     testEnv: TestEnvEnum
     testCaseType: TestCaseTypeEnum
     queryType: QueryTypeEnum
-    testAssets: [TestCase]!
+    testAssets: [TestAsset]!
     preconditions: [Precondition]
     tags: [String]
   }
@@ -165,7 +165,7 @@ type TestCase
     testEnv: TestEnvEnum
     testCaseType: TestCaseTypeEnum
     queryType: QueryTypeEnum
-    testAssets: [TestCase]!
+    testAssets: [TestAsset]!
     preconditions: [Precondition]
     tags: [String]
   }

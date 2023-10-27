@@ -12,10 +12,10 @@ ttm:AcceptanceTestCase a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "AcceptanceTestCase" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom ttm:AcceptanceTestAsset ;
+            owl:minCardinality 1 ;
             owl:onProperty ttm:test_assets ],
         [ a owl:Restriction ;
-            owl:minCardinality 1 ;
+            owl:allValuesFrom ttm:AcceptanceTestAsset ;
             owl:onProperty ttm:test_assets ],
         ttm:TestCase ;
     skos:definition "See AcceptanceTestAsset above for more details." ;
@@ -406,28 +406,6 @@ ttm:QueryTypeEnum a owl:Class,
         ttm:SemanticSeverityEnum ;
     rdfs:label "NotApplicable" .
 
-ttm:TestAsset a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "TestAsset" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:tags ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:Uriorcurie ;
-            owl:onProperty ttm:id ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:id ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:tags ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:id ],
-        ttm:TestEntity ;
-    skos:definition "Represents a Test Asset, which is a single specific instance of TestCase-agnostic semantic parameters representing the specification of a Translator test target with inputs and (expected) outputs." ;
-    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
-
 <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestCaseTypeEnum#acceptance> a owl:Class,
         ttm:TestCaseTypeEnum ;
     rdfs:label "acceptance" .
@@ -558,6 +536,28 @@ ttm:NodeEnum a owl:Class,
     linkml:permissible_values <https://w3id.org/TranslatorSRI/TranslatorTestingModel/NodeEnum#object>,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/NodeEnum#subject> .
 
+ttm:TestAsset a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "TestAsset" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Uriorcurie ;
+            owl:onProperty ttm:id ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:tags ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:tags ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:id ],
+        ttm:TestEntity ;
+    skos:definition "Represents a Test Asset, which is a single specific instance of TestCase-agnostic semantic parameters representing the specification of a Translator test target with inputs and (expected) outputs." ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
 ttm:TestSuite a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "TestSuite" ;
@@ -602,8 +602,36 @@ ttm:tags a owl:ObjectProperty,
 ttm:test_assets a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "test_assets" ;
-    rdfs:range ttm:TestCase ;
+    rdfs:range ttm:TestAsset ;
     skos:definition "List of explicitly enumerated Test Assets. The class attributes of TestAsset would be included in the TestCase versus being referred to by the identifier (curie) of the TestAsset. That is, this would be a list of objects (in JSONSchema serialization) versus a list of strings (where each string is an identifier pointing to another class)." ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
+ttm:TestCase a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "TestCase" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:test_assets ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty ttm:test_assets ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:test_case_type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:tags ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:tags ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:test_case_type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:test_case_type ],
+        ttm:TestEntity ;
+    skos:definition "Represents a single enumerated instance of Test Case, derived from a  given collection of one or more TestAsset instances (the value of the 'test_assets' slot) which define the 'inputs' and 'outputs' of the TestCase, used to probe a particular test condition." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:TestPersonaEnum a owl:Class,
@@ -613,34 +641,6 @@ ttm:TestPersonaEnum a owl:Class,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestPersonaEnum#Clinical>,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestPersonaEnum#LookUp>,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestPersonaEnum#Mechanistic> .
-
-ttm:TestCase a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "TestCase" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:tags ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:test_case_type ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:test_assets ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty ttm:test_assets ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:test_case_type ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:tags ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:test_case_type ],
-        ttm:TestEntity ;
-    skos:definition "Represents a single enumerated instance of Test Case, derived from a  given collection of one or more TestAsset instances (the value of the 'test_assets' slot) which define the 'inputs' and 'outputs' of the TestCase, used to probe a particular test condition." ;
-    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:TestCaseTypeEnum a owl:Class,
         linkml:EnumDefinition ;

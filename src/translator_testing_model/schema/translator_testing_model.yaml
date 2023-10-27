@@ -308,7 +308,7 @@ slots:
       the identifier (curie) of the TestAsset. That is, this would be a list of
       objects (in JSONSchema serialization) versus a list of strings (where
       each string is an identifier pointing to another class).
-    range: TestCase
+    range: TestAsset
     multivalued: true
     inlined: true
     inlined_as_list: true

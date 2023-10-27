@@ -29,7 +29,7 @@
 #    description: A human-readable description for a Test Entity
 #
 
-id: example:TestEntity
+id: example:TestEntity001
 name: foo bar
-description: This is a test case
+description: This is a test entity
 

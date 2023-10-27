@@ -899,7 +899,7 @@
       "domain_of": [
         "TestCase"
       ],
-      "range": "TestCase",
+      "range": "TestAsset",
       "required": true,
       "inlined": true,
       "inlined_as_list": true,
@@ -1271,7 +1271,7 @@
       ],
       "is_usage_slot": true,
       "usage_slot_name": "test_assets",
-      "range": "TestCase",
+      "range": "TestAsset",
       "required": true,
       "inlined": true,
       "inlined_as_list": true,
@@ -1696,9 +1696,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "translator_testing_model.yaml",
-  "source_file_date": "2023-10-26T22:13:15",
-  "source_file_size": 16738,
-  "generation_date": "2023-10-26T22:13:18",
+  "source_file_date": "2023-10-27T13:18:27",
+  "source_file_size": 16739,
+  "generation_date": "2023-10-27T13:18:57",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",

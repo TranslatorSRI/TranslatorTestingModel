@@ -248,7 +248,7 @@
                 "test_assets": {
                     "description": "One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection.",
                     "items": {
-                        "$ref": "#/$defs/TestCase"
+                        "$ref": "#/$defs/TestAsset"
                     },
                     "type": "array"
                 },
@@ -335,7 +335,7 @@
                 "test_assets": {
                     "description": "One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection.",
                     "items": {
-                        "$ref": "#/$defs/TestCase"
+                        "$ref": "#/$defs/TestAsset"
                     },
                     "type": "array"
                 },
@@ -400,7 +400,7 @@
                 "test_assets": {
                     "description": "One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection.",
                     "items": {
-                        "$ref": "#/$defs/TestCase"
+                        "$ref": "#/$defs/TestAsset"
                     },
                     "type": "array"
                 },
@@ -535,7 +535,7 @@
                 "test_assets": {
                     "description": "One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection.",
                     "items": {
-                        "$ref": "#/$defs/TestCase"
+                        "$ref": "#/$defs/TestAsset"
                     },
                     "type": "array"
                 },
@@ -718,7 +718,7 @@
                 "test_assets": {
                     "description": "One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection.",
                     "items": {
-                        "$ref": "#/$defs/TestCase"
+                        "$ref": "#/$defs/TestAsset"
                     },
                     "type": "array"
                 },
@@ -816,7 +816,7 @@
                 "test_assets": {
                     "description": "One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection.",
                     "items": {
-                        "$ref": "#/$defs/TestCase"
+                        "$ref": "#/$defs/TestAsset"
                     },
                     "type": "array"
                 },

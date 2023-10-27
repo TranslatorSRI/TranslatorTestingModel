@@ -59,7 +59,7 @@ message ComplianceTestCase
   testEnvEnum testEnv = 0
   testCaseTypeEnum testCaseType = 0
   queryTypeEnum queryType = 0
- repeated  testCase testAssets = 0
+ repeated  testAsset testAssets = 0
  repeated  precondition preconditions = 0
  repeated  string tags = 0
  }
@@ -72,7 +72,7 @@ message KnowledgeGraphNavigationTestCase
   testEnvEnum testEnv = 0
   testCaseTypeEnum testCaseType = 0
   queryTypeEnum queryType = 0
- repeated  testCase testAssets = 0
+ repeated  testAsset testAssets = 0
  repeated  precondition preconditions = 0
  repeated  string tags = 0
  }
@@ -85,7 +85,7 @@ message OneHopTestCase
   testEnvEnum testEnv = 0
   testCaseTypeEnum testCaseType = 0
   queryTypeEnum queryType = 0
- repeated  testCase testAssets = 0
+ repeated  testAsset testAssets = 0
  repeated  precondition preconditions = 0
  repeated  string tags = 0
  }
@@ -118,7 +118,7 @@ message QuantitativeTestCase
   testEnvEnum testEnv = 0
   testCaseTypeEnum testCaseType = 0
   queryTypeEnum queryType = 0
- repeated  testCase testAssets = 0
+ repeated  testAsset testAssets = 0
  repeated  precondition preconditions = 0
  repeated  string tags = 0
  }
@@ -161,7 +161,7 @@ message TestCase
   testEnvEnum testEnv = 0
   testCaseTypeEnum testCaseType = 0
   queryTypeEnum queryType = 0
- repeated  testCase testAssets = 0
+ repeated  testAsset testAssets = 0
  repeated  precondition preconditions = 0
  repeated  string tags = 0
  }

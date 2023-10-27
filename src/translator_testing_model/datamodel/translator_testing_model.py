@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2023-10-26T22:13:21
+# Generation date: 2023-10-27T13:19:01
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -355,7 +355,7 @@ class TestCase(TestEntity):
     class_model_uri: ClassVar[URIRef] = TTM.TestCase
 
     id: Union[str, TestCaseId] = None
-    test_assets: Union[Dict[Union[str, TestCaseId], Union[dict, "TestCase"]], List[Union[dict, "TestCase"]]] = empty_dict()
+    test_assets: Union[Dict[Union[str, TestAssetId], Union[dict, TestAsset]], List[Union[dict, TestAsset]]] = empty_dict()
     test_env: Optional[Union[str, "TestEnvEnum"]] = None
     test_case_type: Optional[Union[str, "TestCaseTypeEnum"]] = None
     query_type: Optional[Union[str, "QueryTypeEnum"]] = None
@@ -370,7 +370,7 @@ class TestCase(TestEntity):
 
         if self._is_empty(self.test_assets):
             self.MissingRequiredField("test_assets")
-        self._normalize_inlined_as_list(slot_name="test_assets", slot_type=TestCase, key_name="id", keyed=True)
+        self._normalize_inlined_as_list(slot_name="test_assets", slot_type=TestAsset, key_name="id", keyed=True)
 
         if self.test_env is not None and not isinstance(self.test_env, TestEnvEnum):
             self.test_env = TestEnvEnum(self.test_env)
@@ -457,7 +457,7 @@ class QuantitativeTestCase(TestCase):
     class_model_uri: ClassVar[URIRef] = TTM.QuantitativeTestCase
 
     id: Union[str, QuantitativeTestCaseId] = None
-    test_assets: Union[Dict[Union[str, TestCaseId], Union[dict, TestCase]], List[Union[dict, TestCase]]] = empty_dict()
+    test_assets: Union[Dict[Union[str, TestAssetId], Union[dict, TestAsset]], List[Union[dict, TestAsset]]] = empty_dict()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -481,7 +481,7 @@ class ComplianceTestCase(TestCase):
     class_model_uri: ClassVar[URIRef] = TTM.ComplianceTestCase
 
     id: Union[str, ComplianceTestCaseId] = None
-    test_assets: Union[Dict[Union[str, TestCaseId], Union[dict, TestCase]], List[Union[dict, TestCase]]] = empty_dict()
+    test_assets: Union[Dict[Union[str, TestAssetId], Union[dict, TestAsset]], List[Union[dict, TestAsset]]] = empty_dict()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -505,7 +505,7 @@ class KnowledgeGraphNavigationTestCase(TestCase):
     class_model_uri: ClassVar[URIRef] = TTM.KnowledgeGraphNavigationTestCase
 
     id: Union[str, KnowledgeGraphNavigationTestCaseId] = None
-    test_assets: Union[Dict[Union[str, TestCaseId], Union[dict, TestCase]], List[Union[dict, TestCase]]] = empty_dict()
+    test_assets: Union[Dict[Union[str, TestAssetId], Union[dict, TestAsset]], List[Union[dict, TestAsset]]] = empty_dict()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -529,7 +529,7 @@ class OneHopTestCase(KnowledgeGraphNavigationTestCase):
     class_model_uri: ClassVar[URIRef] = TTM.OneHopTestCase
 
     id: Union[str, OneHopTestCaseId] = None
-    test_assets: Union[Dict[Union[str, TestCaseId], Union[dict, TestCase]], List[Union[dict, TestCase]]] = empty_dict()
+    test_assets: Union[Dict[Union[str, TestAssetId], Union[dict, TestAsset]], List[Union[dict, TestAsset]]] = empty_dict()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -955,7 +955,7 @@ slots.test_persona = Slot(uri=TTM.test_persona, name="test_persona", curie=TTM.c
                    model_uri=TTM.test_persona, domain=None, range=Optional[Union[str, "TestPersonaEnum"]])
 
 slots.test_assets = Slot(uri=TTM.test_assets, name="test_assets", curie=TTM.curie('test_assets'),
-                   model_uri=TTM.test_assets, domain=None, range=Union[Dict[Union[str, TestCaseId], Union[dict, TestCase]], List[Union[dict, TestCase]]])
+                   model_uri=TTM.test_assets, domain=None, range=Union[Dict[Union[str, TestAssetId], Union[dict, TestAsset]], List[Union[dict, TestAsset]]])
 
 slots.test_cases = Slot(uri=TTM.test_cases, name="test_cases", curie=TTM.curie('test_cases'),
                    model_uri=TTM.test_cases, domain=None, range=Optional[Union[Dict[Union[str, TestCaseId], Union[dict, TestCase]], List[Union[dict, TestCase]]]])
@@ -1018,7 +1018,7 @@ slots.TestCase_test_case_type = Slot(uri=TTM.test_case_type, name="TestCase_test
                    model_uri=TTM.TestCase_test_case_type, domain=TestCase, range=Optional[Union[str, "TestCaseTypeEnum"]])
 
 slots.TestCase_test_assets = Slot(uri=TTM.test_assets, name="TestCase_test_assets", curie=TTM.curie('test_assets'),
-                   model_uri=TTM.TestCase_test_assets, domain=TestCase, range=Union[Dict[Union[str, TestCaseId], Union[dict, "TestCase"]], List[Union[dict, "TestCase"]]])
+                   model_uri=TTM.TestCase_test_assets, domain=TestCase, range=Union[Dict[Union[str, TestAssetId], Union[dict, TestAsset]], List[Union[dict, TestAsset]]])
 
 slots.TestCase_tags = Slot(uri=SCHEMA.additionalType, name="TestCase_tags", curie=SCHEMA.curie('additionalType'),
                    model_uri=TTM.TestCase_tags, domain=TestCase, range=Optional[Union[str, List[str]]])
