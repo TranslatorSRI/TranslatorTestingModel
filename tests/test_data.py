@@ -9,7 +9,9 @@ from src.translator_testing_model.datamodel.translator_testing_model import (
     TestEntity,
     TestMetadata,
     TestAsset,
+    AcceptanceTestAsset,
     TestCase,
+    AcceptanceTestCase,
     TestSuite
 )
 
@@ -17,7 +19,15 @@ from src.translator_testing_model.datamodel.translator_testing_model import (
 ROOT = os.path.join(os.path.dirname(__file__), '..')
 DATA_DIR = os.path.join(ROOT, "src", "data", "examples")
 
-model_classes: List[str] = ["TestEntity", "TestMetadata", "TestAsset", "TestCase", "TestSuite"]
+model_classes: List[str] = [
+    "TestEntity",
+    "TestMetadata",
+    "TestAsset",
+    "AcceptanceTestAsset",
+    "TestCase",
+    "AcceptanceTestCase",
+    "TestSuite"
+]
 good_model_example_data_files: Dict[str, str] = {
     model_class_name: glob.glob(os.path.join(DATA_DIR, f'Good-{model_class_name}-*.yaml'))
     for model_class_name in model_classes
@@ -68,6 +78,18 @@ class TestData(unittest.TestCase):
             with self.assertRaises(ValueError):
                 yaml_loader.load(path, target_class=TestAsset)
 
+    def test_good_acceptance_test_asset(self):
+        """Good TestAsset test."""
+        for path in good_model_example_data_files["AcceptanceTestAsset"]:
+            obj = yaml_loader.load(path, target_class=AcceptanceTestAsset)
+            assert obj
+
+    def test_bad_acceptance_test_asset(self):
+        """Bad AcceptanceTestAsset test."""
+        for path in bad_model_example_data_files["AcceptanceTestAsset"]:
+            with self.assertRaises(ValueError):
+                yaml_loader.load(path, target_class=AcceptanceTestAsset)
+
     def test_good_test_case(self):
         """Good TestCase test."""
         for path in good_model_example_data_files["TestCase"]:
@@ -80,14 +102,26 @@ class TestData(unittest.TestCase):
             with self.assertRaises(ValueError):
                 yaml_loader.load(path, target_class=TestCase)
 
+    def test_good_acceptance_test_case(self):
+        """Good AcceptanceTestCase test."""
+        for path in good_model_example_data_files["AcceptanceTestCase"]:
+            obj = yaml_loader.load(path, target_class=AcceptanceTestCase)
+            assert obj
+
+    def test_bad_acceptance_test_case(self):
+        """Bad AcceptanceTestCase test."""
+        for path in bad_model_example_data_files["AcceptanceTestCase"]:
+            with self.assertRaises(ValueError):
+                yaml_loader.load(path, target_class=AcceptanceTestCase)
+
     def test_good_test_suite(self):
         """Good TestSuite test."""
-        for path in good_model_example_data_files["TestCase"]:
-            obj = yaml_loader.load(path, target_class=TestCase)
+        for path in good_model_example_data_files["TestSuite"]:
+            obj = yaml_loader.load(path, target_class=TestSuite)
             assert obj
 
     def test_bad_test_suite(self):
         """Bad TestSuite test."""
-        for path in bad_model_example_data_files["TestCase"]:
+        for path in bad_model_example_data_files["TestSuite"]:
             with self.assertRaises(ValueError):
-                yaml_loader.load(path, target_class=TestCase)
+                yaml_loader.load(path, target_class=TestSuite)
