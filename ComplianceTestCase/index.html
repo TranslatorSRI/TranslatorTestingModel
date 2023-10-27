@@ -224,7 +224,7 @@
 
       ComplianceTestCase : test_assets
 
-          ComplianceTestCase --|&gt; TestCase : test_assets
+          ComplianceTestCase --|&gt; TestAsset : test_assets
 
       ComplianceTestCase : test_case_type
 
@@ -277,7 +277,7 @@
 </tr>
 <tr>
 <td><a href="../test_assets/">test_assets</a></td>
-<td>1..* <br/> <a href="../TestCase/">TestCase</a></td>
+<td>1..* <br/> <a href="../TestAsset/">TestAsset</a></td>
 <td>One or more 'tags' slot values (inherited from TestEntity) should generally b...</td>
 <td><a href="../TestCase/">TestCase</a></td>
 </tr>
@@ -400,7 +400,7 @@ attributes:
     owner: ComplianceTestCase
     domain_of:
     - TestCase
-    range: TestCase
+    range: TestAsset
     required: true
     inlined: true
     inlined_as_list: true

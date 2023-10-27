@@ -236,7 +236,7 @@
 
       TestCase : test_assets
 
-          TestCase --|&gt; TestCase : test_assets
+          TestCase --|&gt; TestAsset : test_assets
 
       TestCase : test_case_type
 
@@ -292,7 +292,7 @@
 </tr>
 <tr>
 <td><a href="../test_assets/">test_assets</a></td>
-<td>1..* <br/> <a href="./">TestCase</a></td>
+<td>1..* <br/> <a href="../TestAsset/">TestAsset</a></td>
 <td>One or more 'tags' slot values (inherited from TestEntity) should generally b...</td>
 <td>direct</td>
 </tr>
@@ -339,36 +339,6 @@
 </tr>
 </thead>
 <tbody>
-<tr>
-<td><a href="./">TestCase</a></td>
-<td><a href="../test_assets/">test_assets</a></td>
-<td>range</td>
-<td><a href="./">TestCase</a></td>
-</tr>
-<tr>
-<td><a href="../QuantitativeTestCase/">QuantitativeTestCase</a></td>
-<td><a href="../test_assets/">test_assets</a></td>
-<td>range</td>
-<td><a href="./">TestCase</a></td>
-</tr>
-<tr>
-<td><a href="../ComplianceTestCase/">ComplianceTestCase</a></td>
-<td><a href="../test_assets/">test_assets</a></td>
-<td>range</td>
-<td><a href="./">TestCase</a></td>
-</tr>
-<tr>
-<td><a href="../KnowledgeGraphNavigationTestCase/">KnowledgeGraphNavigationTestCase</a></td>
-<td><a href="../test_assets/">test_assets</a></td>
-<td>range</td>
-<td><a href="./">TestCase</a></td>
-</tr>
-<tr>
-<td><a href="../OneHopTestCase/">OneHopTestCase</a></td>
-<td><a href="../test_assets/">test_assets</a></td>
-<td>range</td>
-<td><a href="./">TestCase</a></td>
-</tr>
 <tr>
 <td><a href="../TestSuite/">TestSuite</a></td>
 <td><a href="../test_cases/">test_cases</a></td>
@@ -540,7 +510,7 @@ attributes:
     owner: TestCase
     domain_of:
     - TestCase
-    range: TestCase
+    range: TestAsset
     required: true
     inlined: true
     inlined_as_list: true
