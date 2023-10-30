@@ -238,6 +238,8 @@
 
       TestAsset : predicate
 
+      TestAsset : runner_settings
+
       TestAsset : semantic_severity
 
           TestAsset --|&gt; SemanticSeverityEnum : semantic_severity
@@ -332,6 +334,12 @@
 <td><a href="../well_known/">well_known</a></td>
 <td>0..1 <br/> <a href="../Boolean/">Boolean</a></td>
 <td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../runner_settings/">runner_settings</a></td>
+<td>1..* <br/> <a href="../String/">String</a></td>
+<td>Settings for the test harness, e</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -448,6 +456,7 @@ slots:
 - semantic_severity
 - in_v1
 - well_known
+- runner_settings
 slot_usage:
   id:
     name: id
@@ -458,10 +467,15 @@ slot_usage:
     range: uriorcurie
   tags:
     name: tags
-    description: 'One or more ''tags'' slot values (inherited from TestEntity) should
-      generally be defined to specify TestAsset membership in a "Block List" collection  '
+    description: One or more 'tags' slot values (inherited from TestEntity) should
+      generally be defined to specify TestAsset membership in a "Block List" collection
     domain_of:
     - TestEntity
+  runner_settings:
+    name: runner_settings
+    description: Settings for the test harness, e.g. "inferred"
+    domain_of:
+    - TestAsset
 
 </code></pre>
 </details>
@@ -483,10 +497,15 @@ slot_usage:
     range: uriorcurie
   tags:
     name: tags
-    description: 'One or more ''tags'' slot values (inherited from TestEntity) should
-      generally be defined to specify TestAsset membership in a "Block List" collection  '
+    description: One or more 'tags' slot values (inherited from TestEntity) should
+      generally be defined to specify TestAsset membership in a "Block List" collection
     domain_of:
     - TestEntity
+  runner_settings:
+    name: runner_settings
+    description: Settings for the test harness, e.g. "inferred"
+    domain_of:
+    - TestAsset
 attributes:
   input_id:
     name: input_id
@@ -598,6 +617,18 @@ attributes:
     domain_of:
     - TestAsset
     range: boolean
+  runner_settings:
+    name: runner_settings
+    description: Settings for the test harness, e.g. "inferred"
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    multivalued: true
+    alias: runner_settings
+    owner: TestAsset
+    domain_of:
+    - TestAsset
+    range: string
+    required: true
   id:
     name: id
     description: A unique identifier for a Test Entity
@@ -637,8 +668,8 @@ attributes:
     range: string
   tags:
     name: tags
-    description: 'One or more ''tags'' slot values (inherited from TestEntity) should
-      generally be defined to specify TestAsset membership in a "Block List" collection  '
+    description: One or more 'tags' slot values (inherited from TestEntity) should
+      generally be defined to specify TestAsset membership in a "Block List" collection
     from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
     rank: 1000
     slot_uri: schema:additionalType

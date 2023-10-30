@@ -8,14 +8,14 @@
       
       
       
-        <link rel="canonical" href="https://TranslatorSRI.github.io/TranslatorTestingModel/ExpectedOutputEnum/">
+        <link rel="canonical" href="https://TranslatorSRI.github.io/TranslatorTestingModel/runner_settings/">
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-8.5.10">
     
     
       
-        <title>Enum: ExpectedOutputEnum - Translator Testing Model</title>
+        <title>Slot: runner_settings - Translator Testing Model</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#enum-expectedoutputenum" class="md-skip">
+        <a href="#slot-runner_settings" class="md-skip">
           Skip to content
         </a>
       
@@ -97,7 +97,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Enum: ExpectedOutputEnum
+              Slot: runner_settings
             
           </span>
         </div>
@@ -256,15 +256,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#permissible-values" class="md-nav__link">
-    Permissible Values
+  <a href="#applicable-classes" class="md-nav__link">
+    Applicable Classes
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#slots" class="md-nav__link">
-    Slots
+  <a href="#properties" class="md-nav__link">
+    Properties
   </a>
   
 </li>
@@ -310,82 +310,56 @@
                 
                   
 
-  <a href="https://github.com/TranslatorSRI/TranslatorTestingModel/edit/master/docs/ExpectedOutputEnum.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/TranslatorSRI/TranslatorTestingModel/edit/master/docs/runner_settings.md" title="Edit this page" class="md-content__button md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
-<h1 id="enum-expectedoutputenum">Enum: ExpectedOutputEnum</h1>
-<p><em>Expected output values for instances of Test Asset or Test Cases(?). (Note: does this Enum overlap with 'ExpectedResultsEnum' below?)</em></p>
-<p>URI: <a href="ExpectedOutputEnum">ExpectedOutputEnum</a></p>
-<h2 id="permissible-values">Permissible Values</h2>
-<table>
-<thead>
-<tr>
-<th>Value</th>
-<th>Meaning</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Top_Answer</td>
-<td>None</td>
-<td></td>
-</tr>
-<tr>
-<td>Acceptable</td>
-<td>None</td>
-<td></td>
-</tr>
-<tr>
-<td>BadButForgivable</td>
-<td>None</td>
-<td></td>
-</tr>
-<tr>
-<td>NeverShow</td>
-<td>None</td>
-<td></td>
-</tr>
-<tr>
-<td>number_1_TopAnswer</td>
-<td>None</td>
-<td></td>
-</tr>
-<tr>
-<td>number_2_Acceptable</td>
-<td>None</td>
-<td></td>
-</tr>
-<tr>
-<td>number_3_BadButForgivable</td>
-<td>None</td>
-<td></td>
-</tr>
-<tr>
-<td>number_4_NeverShow</td>
-<td>None</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h2 id="slots">Slots</h2>
+<h1 id="slot-runner_settings">Slot: runner_settings</h1>
+<p><em>Settings for the test harness</em></p>
+<p>URI: <a href="https://w3id.org/TranslatorSRI/TranslatorTestingModel/runner_settings">ttm:runner_settings</a></p>
+<!-- no inheritance hierarchy -->
+
+<h2 id="applicable-classes">Applicable Classes</h2>
 <table>
 <thead>
 <tr>
 <th>Name</th>
 <th>Description</th>
+<th>Modifies Slot</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><a href="../expected_output/">expected_output</a></td>
-<td></td>
+<td><a href="../TestAsset/">TestAsset</a></td>
+<td>Represents a Test Asset, which is a single specific instance of TestCase-agno...</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><a href="../AcceptanceTestAsset/">AcceptanceTestAsset</a></td>
+<td>Model derived from Jenn's test asset design and Shervin's runner JSON here as...</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../TestEdgeData/">TestEdgeData</a></td>
+<td>Represents a single Biolink Model compliant instance of a subject-predicate-o...</td>
+<td>no</td>
 </tr>
 </tbody>
 </table>
+<h2 id="properties">Properties</h2>
+<ul>
+<li>
+<p>Range: <a href="../String/">String</a></p>
+</li>
+<li>
+<p>Multivalued: True</p>
+</li>
+<li>
+<p>Required: True</p>
+</li>
+</ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
@@ -394,32 +368,16 @@
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: ExpectedOutputEnum
-description: 'Expected output values for instances of Test Asset or Test Cases(?).
-  (Note: does this Enum overlap with ''ExpectedResultsEnum'' below?)'
+<pre><code class="language-yaml">name: runner_settings
+description: Settings for the test harness
 from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
 rank: 1000
-permissible_values:
-  Top_Answer:
-    text: Top_Answer
-  Acceptable:
-    text: Acceptable
-  BadButForgivable:
-    text: BadButForgivable
-  NeverShow:
-    text: NeverShow
-  number_1_TopAnswer:
-    text: number_1_TopAnswer
-    is_a: Top_Answer
-  number_2_Acceptable:
-    text: number_2_Acceptable
-    is_a: Acceptable
-  number_3_BadButForgivable:
-    text: number_3_BadButForgivable
-    is_a: BadButForgivable
-  number_4_NeverShow:
-    text: number_4_NeverShow
-    is_a: NeverShow
+multivalued: true
+alias: runner_settings
+domain_of:
+- TestAsset
+range: string
+required: true
 
 </code></pre>
 
