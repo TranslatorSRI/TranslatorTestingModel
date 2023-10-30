@@ -12,6 +12,7 @@ type AcceptanceTestAsset
     semanticSeverity: SemanticSeverityEnum
     inV1: Boolean
     wellKnown: Boolean
+    runnerSettings: [String]!
     id: Uriorcurie!
     tags: [String]
     mustPassDate: Date
@@ -153,6 +154,7 @@ type TestAsset
     semanticSeverity: SemanticSeverityEnum
     inV1: Boolean
     wellKnown: Boolean
+    runnerSettings: [String]!
     id: Uriorcurie!
     tags: [String]
   }
@@ -192,6 +194,7 @@ type TestEdgeData
     semanticSeverity: SemanticSeverityEnum
     inV1: Boolean
     wellKnown: Boolean
+    runnerSettings: [String]!
     id: Uriorcurie!
     tags: [String]
   }

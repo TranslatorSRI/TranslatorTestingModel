@@ -252,6 +252,13 @@ CREATE TABLE "QuantitativeTestCase_tags" (
 	FOREIGN KEY(backref_id) REFERENCES "QuantitativeTestCase" (id)
 );
 
+CREATE TABLE "TestAsset_runner_settings" (
+	backref_id TEXT, 
+	runner_settings TEXT NOT NULL, 
+	PRIMARY KEY (backref_id, runner_settings), 
+	FOREIGN KEY(backref_id) REFERENCES "TestAsset" (id)
+);
+
 CREATE TABLE "TestAsset_tags" (
 	backref_id TEXT, 
 	tags TEXT, 
@@ -273,6 +280,13 @@ CREATE TABLE "TestCaseSpecification_tags" (
 	FOREIGN KEY(backref_id) REFERENCES "TestCaseSpecification" (id)
 );
 
+CREATE TABLE "TestEdgeData_runner_settings" (
+	backref_id TEXT, 
+	runner_settings TEXT NOT NULL, 
+	PRIMARY KEY (backref_id, runner_settings), 
+	FOREIGN KEY(backref_id) REFERENCES "TestEdgeData" (id)
+);
+
 CREATE TABLE "TestEdgeData_tags" (
 	backref_id TEXT, 
 	tags TEXT, 
@@ -285,6 +299,13 @@ CREATE TABLE "TestMetadata_tags" (
 	tags TEXT, 
 	PRIMARY KEY (backref_id, tags), 
 	FOREIGN KEY(backref_id) REFERENCES "TestMetadata" (id)
+);
+
+CREATE TABLE "AcceptanceTestAsset_runner_settings" (
+	backref_id TEXT, 
+	runner_settings TEXT NOT NULL, 
+	PRIMARY KEY (backref_id, runner_settings), 
+	FOREIGN KEY(backref_id) REFERENCES "AcceptanceTestAsset" (id)
 );
 
 CREATE TABLE "AcceptanceTestAsset_tags" (

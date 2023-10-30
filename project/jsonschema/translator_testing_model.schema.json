@@ -66,6 +66,13 @@
                     "$ref": "#/$defs/NodeEnum",
                     "description": "The node of the (templated) TRAPI query to replace"
                 },
+                "runner_settings": {
+                    "description": "Settings for the test harness, e.g. \"inferred\"",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
                 "scientific_question": {
                     "description": "The full human-readable scientific question a SME would ask, which is encoded into the test asset.",
                     "type": "string"
@@ -78,7 +85,7 @@
                     "type": "string"
                 },
                 "tags": {
-                    "description": "One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a \"Block List\" collection  ",
+                    "description": "One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a \"Block List\" collection",
                     "items": {
                         "type": "string"
                     },
@@ -96,6 +103,7 @@
                 }
             },
             "required": [
+                "runner_settings",
                 "id"
             ],
             "title": "AcceptanceTestAsset",
@@ -661,11 +669,18 @@
                 "predicate": {
                     "type": "string"
                 },
+                "runner_settings": {
+                    "description": "Settings for the test harness, e.g. \"inferred\"",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
                 "semantic_severity": {
                     "$ref": "#/$defs/SemanticSeverityEnum"
                 },
                 "tags": {
-                    "description": "One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a \"Block List\" collection  ",
+                    "description": "One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a \"Block List\" collection",
                     "items": {
                         "type": "string"
                     },
@@ -679,6 +694,7 @@
                 }
             },
             "required": [
+                "runner_settings",
                 "id"
             ],
             "title": "TestAsset",
@@ -874,11 +890,18 @@
                 "predicate": {
                     "type": "string"
                 },
+                "runner_settings": {
+                    "description": "Settings for the test harness, e.g. \"inferred\"",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
                 "semantic_severity": {
                     "$ref": "#/$defs/SemanticSeverityEnum"
                 },
                 "tags": {
-                    "description": "One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a \"Block List\" collection  ",
+                    "description": "One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a \"Block List\" collection",
                     "items": {
                         "type": "string"
                     },
@@ -892,6 +915,7 @@
                 }
             },
             "required": [
+                "runner_settings",
                 "id"
             ],
             "title": "TestEdgeData",

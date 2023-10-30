@@ -156,6 +156,7 @@ linkml:Sparqlpath xsd:string
              <semantic_severity> @<SemanticSeverityEnum> ? ;
              <in_v1> @linkml:Boolean ? ;
              <well_known> @linkml:Boolean ? ;
+             <runner_settings> @linkml:String + ;
              schema1:additionalType @linkml:String *
           ) ;
           rdf:type [ <TestAsset> ]

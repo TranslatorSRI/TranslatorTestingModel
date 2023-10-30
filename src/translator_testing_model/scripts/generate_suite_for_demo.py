@@ -32,6 +32,7 @@ def create_test_assets_from_tsv(test_assets):
         ta.predicate = row.get("Query")
         ta.output_id = row.get("OutputID")
         ta.output_name = row.get("OutputName")
+        ta.runner_settings = [row.get("Settings").lower()]
         if row.get("Expected Result / Suggested Comparitor") == "4_NeverShow":
             ta.expected_output = "number_4_NeverShow"
         elif row.get("Expected Result / Suggested Comparitor") == "3_BadButForgivable":
@@ -86,19 +87,18 @@ test_suite_json = test_suite.json(indent=4)
 
 
 suite_json_output_path = 'test_suite_output.json'
-assets_json_output_path = 'test_assets_output.json'
 
 with open(suite_json_output_path, 'w') as file:
     file.write(test_suite_json)
 
-# for i, item in enumerate(test_cases):
-#     file_prefix = item.id
-#     filename = f"{file_prefix}.json"
-#     with open(filename, 'w', encoding='utf-8') as file:
-#         json.dump(item.dict(), file, ensure_ascii=False, indent=4)
-#
-# for i, item in enumerate(test_assets):
-#     file_prefix = item.id
-#     filename = f"{file_prefix}.json"
-#     with open(filename, 'w', encoding='utf-8') as file:
-#         json.dump(item.dict(), file, ensure_ascii=False, indent=4)
+for i, item in enumerate(test_cases):
+    file_prefix = item.id
+    filename = f"{file_prefix}.json"
+    with open(filename, 'w', encoding='utf-8') as file:
+        json.dump(item.dict(), file, ensure_ascii=False, indent=4)
+
+for i, item in enumerate(test_assets):
+    file_prefix = item.id
+    filename = f"{file_prefix}.json"
+    with open(filename, 'w', encoding='utf-8') as file:
+        json.dump(item.dict(), file, ensure_ascii=False, indent=4)

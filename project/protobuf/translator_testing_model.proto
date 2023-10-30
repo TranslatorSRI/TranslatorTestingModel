@@ -13,6 +13,7 @@ message AcceptanceTestAsset
   semanticSeverityEnum semanticSeverity = 0
   boolean inV1 = 0
   boolean wellKnown = 0
+ repeated  string runnerSettings = 0
   uriorcurie id = 0
  repeated  string tags = 0
   date mustPassDate = 0
@@ -149,6 +150,7 @@ message TestAsset
   semanticSeverityEnum semanticSeverity = 0
   boolean inV1 = 0
   boolean wellKnown = 0
+ repeated  string runnerSettings = 0
   uriorcurie id = 0
  repeated  string tags = 0
  }
@@ -188,6 +190,7 @@ message TestEdgeData
   semanticSeverityEnum semanticSeverity = 0
   boolean inV1 = 0
   boolean wellKnown = 0
+ repeated  string runnerSettings = 0
   uriorcurie id = 0
  repeated  string tags = 0
  }

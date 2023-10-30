@@ -615,6 +615,21 @@
   ],
   "slots": [
     {
+      "name": "runner_settings",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/runner_settings",
+      "description": "Settings for the test harness",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/runner_settings",
+      "multivalued": true,
+      "owner": "TestAsset",
+      "domain_of": [
+        "TestAsset"
+      ],
+      "range": "string",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "id",
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/id",
       "description": "A unique identifier for a Test Entity",
@@ -1226,7 +1241,7 @@
     {
       "name": "TestAsset_tags",
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/tags",
-      "description": "One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a \"Block List\" collection  ",
+      "description": "One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a \"Block List\" collection",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "mappings": [
         "http://schema.org/additionalType"
@@ -1243,6 +1258,26 @@
       "is_usage_slot": true,
       "usage_slot_name": "tags",
       "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "TestAsset_runner_settings",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/runner_settings",
+      "description": "Settings for the test harness, e.g. \"inferred\"",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "is_a": "runner_settings",
+      "domain": "TestAsset",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/runner_settings",
+      "multivalued": true,
+      "alias": "runner_settings",
+      "owner": "TestAsset",
+      "domain_of": [
+        "TestAsset"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "runner_settings",
+      "range": "string",
+      "required": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1389,6 +1424,7 @@
         "semantic_severity",
         "in_v1",
         "well_known",
+        "TestAsset_runner_settings",
         "TestAsset_id",
         "TestAsset_tags"
       ],
@@ -1415,6 +1451,7 @@
         "semantic_severity",
         "in_v1",
         "well_known",
+        "TestAsset_runner_settings",
         "TestAsset_id",
         "TestAsset_tags",
         "must_pass_date",
@@ -1451,6 +1488,7 @@
         "semantic_severity",
         "in_v1",
         "well_known",
+        "TestAsset_runner_settings",
         "TestAsset_id",
         "TestAsset_tags"
       ],
@@ -1707,9 +1745,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "translator_testing_model.yaml",
-  "source_file_date": "2023-10-30T13:48:47",
-  "source_file_size": 16371,
-  "generation_date": "2023-10-30T13:48:51",
+  "source_file_date": "2023-10-30T15:08:10",
+  "source_file_size": 16632,
+  "generation_date": "2023-10-30T15:09:01",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",
