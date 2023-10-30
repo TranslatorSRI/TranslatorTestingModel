@@ -2,6 +2,7 @@ from src.translator_testing_model.datamodel.pydanticmodel import TestAsset, Test
 import csv
 import json
 
+
 def parse_tsv(filename):
     """
     Parse a TSV file and return a list of dictionaries.
@@ -19,18 +20,6 @@ def parse_tsv(filename):
 
 # Functions to create TestAssets, TestCases, and TestSuite
 def create_test_assets_from_tsv(test_assets):
-    column_mapping = {
-        'input_id': 'InputID, node normalized',
-        'input_name': 'InputName (user choice)',
-        'predicate': 'Query',
-        'output_id': 'OutputID',
-        'output_name': 'OutputName',
-        'expected_output': 'Expected Result / Suggested Comparitor',
-        'test_issue': 'GitHubIssue',
-        'semantic_severity': 'Semantic Severity',
-        'in_v1': 'In First 50',  # Or 'In Acceptance'
-        'well_known': 'Well Known'
-    }
     assets = []
     for row in test_assets:
         if row.get("Query") == "":
@@ -102,14 +91,14 @@ assets_json_output_path = 'test_assets_output.json'
 with open(suite_json_output_path, 'w') as file:
     file.write(test_suite_json)
 
-for i, item in enumerate(test_cases):
-    file_prefix = item.id
-    filename = f"{file_prefix}.json"
-    with open(filename, 'w', encoding='utf-8') as file:
-        json.dump(item.dict(), file, ensure_ascii=False, indent=4)
-
-for i, item in enumerate(test_assets):
-    file_prefix = item.id
-    filename = f"{file_prefix}.json"
-    with open(filename, 'w', encoding='utf-8') as file:
-        json.dump(item.dict(), file, ensure_ascii=False, indent=4)
+# for i, item in enumerate(test_cases):
+#     file_prefix = item.id
+#     filename = f"{file_prefix}.json"
+#     with open(filename, 'w', encoding='utf-8') as file:
+#         json.dump(item.dict(), file, ensure_ascii=False, indent=4)
+#
+# for i, item in enumerate(test_assets):
+#     file_prefix = item.id
+#     filename = f"{file_prefix}.json"
+#     with open(filename, 'w', encoding='utf-8') as file:
+#         json.dump(item.dict(), file, ensure_ascii=False, indent=4)
