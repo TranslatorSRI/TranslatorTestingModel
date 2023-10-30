@@ -64,6 +64,7 @@ classes:
       - semantic_severity
       - in_v1
       - well_known
+      - runner_settings
     slot_usage:
       id:
         aliases: ["AssetIdentifier"]
@@ -71,7 +72,10 @@ classes:
       tags:
         description: >-
           One or more 'tags' slot values (inherited from TestEntity) should generally
-          be defined to specify TestAsset membership in a "Block List" collection  
+          be defined to specify TestAsset membership in a "Block List" collection
+      runner_settings:
+        description: >-
+          Settings for the test harness, e.g. "inferred"
 
   AcceptanceTestAsset:
     is_a: TestAsset
@@ -216,6 +220,13 @@ classes:
     slots:
 
 slots:
+
+  runner_settings:
+    description: >-
+      Settings for the test harness
+    range: string
+    multivalued: true
+    required: true
 
   id:
     identifier: true
@@ -494,10 +505,16 @@ enums:
         description:
       NeverShow:
         description:
-      1_TopAnswer:
+      number_1_TopAnswer:
         is_a: Top_Answer
         description:
-      4_NeverShow:
+      number_2_Acceptable:
+        is_a: Acceptable
+        description:
+      number_3_BadButForgivable:
+        is_a: BadButForgivable
+        description:
+      number_4_NeverShow:
         is_a: NeverShow
         description:
 
@@ -561,6 +578,8 @@ enums:
       contraindications:
         description:
       chemical roles:
+        description:
+      test_issue:
         description:
 
   SemanticSeverityEnum:

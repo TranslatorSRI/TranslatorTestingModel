@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2023-10-27T13:19:01
+# Generation date: 2023-10-30T15:09:04
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -198,6 +198,7 @@ class TestAsset(TestEntity):
     class_model_uri: ClassVar[URIRef] = TTM.TestAsset
 
     id: Union[str, TestAssetId] = None
+    runner_settings: Union[str, List[str]] = None
     input_id: Optional[Union[str, URIorCURIE]] = None
     input_name: Optional[str] = None
     predicate: Optional[str] = None
@@ -215,6 +216,12 @@ class TestAsset(TestEntity):
             self.MissingRequiredField("id")
         if not isinstance(self.id, TestAssetId):
             self.id = TestAssetId(self.id)
+
+        if self._is_empty(self.runner_settings):
+            self.MissingRequiredField("runner_settings")
+        if not isinstance(self.runner_settings, list):
+            self.runner_settings = [self.runner_settings] if self.runner_settings is not None else []
+        self.runner_settings = [v if isinstance(v, str) else str(v) for v in self.runner_settings]
 
         if self.input_id is not None and not isinstance(self.input_id, URIorCURIE):
             self.input_id = URIorCURIE(self.input_id)
@@ -266,6 +273,7 @@ class AcceptanceTestAsset(TestAsset):
     class_model_uri: ClassVar[URIRef] = TTM.AcceptanceTestAsset
 
     id: Union[str, AcceptanceTestAssetId] = None
+    runner_settings: Union[str, List[str]] = None
     must_pass_date: Optional[Union[str, XSDDate]] = None
     must_pass_environment: Optional[Union[str, "TestEnvEnum"]] = None
     scientific_question: Optional[str] = None
@@ -330,6 +338,7 @@ class TestEdgeData(TestAsset):
     class_model_uri: ClassVar[URIRef] = TTM.TestEdgeData
 
     id: Union[str, TestEdgeDataId] = None
+    runner_settings: Union[str, List[str]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -763,18 +772,15 @@ class ExpectedOutputEnum(EnumDefinitionImpl):
     Acceptable = PermissibleValue(text="Acceptable")
     BadButForgivable = PermissibleValue(text="BadButForgivable")
     NeverShow = PermissibleValue(text="NeverShow")
+    number_1_TopAnswer = PermissibleValue(text="number_1_TopAnswer")
+    number_2_Acceptable = PermissibleValue(text="number_2_Acceptable")
+    number_3_BadButForgivable = PermissibleValue(text="number_3_BadButForgivable")
+    number_4_NeverShow = PermissibleValue(text="number_4_NeverShow")
 
     _defn = EnumDefinition(
         name="ExpectedOutputEnum",
         description="""Expected output values for instances of Test Asset or Test Cases(?). (Note: does this Enum overlap with 'ExpectedResultsEnum' below?)""",
     )
-
-    @classmethod
-    def _addvals(cls):
-        setattr(cls, "1_TopAnswer",
-            PermissibleValue(text="1_TopAnswer"))
-        setattr(cls, "4_NeverShow",
-            PermissibleValue(text="4_NeverShow"))
 
 class ExpectedResultsEnum(EnumDefinitionImpl):
     """
@@ -857,6 +863,7 @@ class TestIssueEnum(EnumDefinitionImpl):
         text="TMKP",
         description="'Text Mining Knowledge Provider' generated relationship?")
     contraindications = PermissibleValue(text="contraindications")
+    test_issue = PermissibleValue(text="test_issue")
 
     _defn = EnumDefinition(
         name="TestIssueEnum",
@@ -896,6 +903,9 @@ class DirectionEnum(EnumDefinitionImpl):
 # Slots
 class slots:
     pass
+
+slots.runner_settings = Slot(uri=TTM.runner_settings, name="runner_settings", curie=TTM.curie('runner_settings'),
+                   model_uri=TTM.runner_settings, domain=None, range=Union[str, List[str]])
 
 slots.id = Slot(uri=SCHEMA.identifier, name="id", curie=SCHEMA.curie('identifier'),
                    model_uri=TTM.id, domain=None, range=URIRef)
@@ -1013,6 +1023,9 @@ slots.TestAsset_id = Slot(uri=SCHEMA.identifier, name="TestAsset_id", curie=SCHE
 
 slots.TestAsset_tags = Slot(uri=SCHEMA.additionalType, name="TestAsset_tags", curie=SCHEMA.curie('additionalType'),
                    model_uri=TTM.TestAsset_tags, domain=TestAsset, range=Optional[Union[str, List[str]]])
+
+slots.TestAsset_runner_settings = Slot(uri=TTM.runner_settings, name="TestAsset_runner_settings", curie=TTM.curie('runner_settings'),
+                   model_uri=TTM.TestAsset_runner_settings, domain=TestAsset, range=Union[str, List[str]])
 
 slots.TestCase_test_case_type = Slot(uri=TTM.test_case_type, name="TestCase_test_case_type", curie=TTM.curie('test_case_type'),
                    model_uri=TTM.TestCase_test_case_type, domain=TestCase, range=Optional[Union[str, "TestCaseTypeEnum"]])

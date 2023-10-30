@@ -350,14 +350,6 @@ ttm:TestMetadata a owl:Class,
         ttm:DirectionEnum ;
     rdfs:label "increased" .
 
-<https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#1_TopAnswer> a owl:Class,
-        ttm:ExpectedOutputEnum ;
-    rdfs:label "1_TopAnswer" .
-
-<https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#4_NeverShow> a owl:Class,
-        ttm:ExpectedOutputEnum ;
-    rdfs:label "4_NeverShow" .
-
 <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#Acceptable> a owl:Class,
         ttm:ExpectedOutputEnum ;
     rdfs:label "Acceptable" .
@@ -373,6 +365,22 @@ ttm:TestMetadata a owl:Class,
 <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#Top_Answer> a owl:Class,
         ttm:ExpectedOutputEnum ;
     rdfs:label "Top_Answer" .
+
+<https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#number_1_TopAnswer> a owl:Class,
+        ttm:ExpectedOutputEnum ;
+    rdfs:label "number_1_TopAnswer" .
+
+<https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#number_2_Acceptable> a owl:Class,
+        ttm:ExpectedOutputEnum ;
+    rdfs:label "number_2_Acceptable" .
+
+<https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#number_3_BadButForgivable> a owl:Class,
+        ttm:ExpectedOutputEnum ;
+    rdfs:label "number_3_BadButForgivable" .
+
+<https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#number_4_NeverShow> a owl:Class,
+        ttm:ExpectedOutputEnum ;
+    rdfs:label "number_4_NeverShow" .
 
 <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedResultsEnum#exclude_bad> a owl:Class,
         ttm:ExpectedResultsEnum ;
@@ -462,6 +470,10 @@ ttm:QueryTypeEnum a owl:Class,
         ttm:TestIssueEnum ;
     rdfs:label "contraindications" .
 
+<https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#test_issue> a owl:Class,
+        ttm:TestIssueEnum ;
+    rdfs:label "test_issue" .
+
 <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#AcceptanceTest> a owl:Class,
         ttm:TestObjectiveEnum ;
     rdfs:label "AcceptanceTest" .
@@ -518,6 +530,13 @@ ttm:QueryTypeEnum a owl:Class,
         ttm:TestSourceEnum ;
     rdfs:label "TranslatorTeam" .
 
+ttm:runner_settings a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "runner_settings" ;
+    rdfs:range linkml:String ;
+    skos:definition "Settings for the test harness" ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
 ttm:DirectionEnum a owl:Class,
         linkml:EnumDefinition ;
     owl:unionOf ( <https://w3id.org/TranslatorSRI/TranslatorTestingModel/DirectionEnum#increased> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/DirectionEnum#decreased> ) ;
@@ -540,19 +559,25 @@ ttm:TestAsset a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "TestAsset" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom linkml:Uriorcurie ;
-            owl:onProperty ttm:id ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:id ],
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:runner_settings ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty ttm:tags ],
+            owl:onProperty ttm:id ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
             owl:onProperty ttm:tags ],
         [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty ttm:runner_settings ],
+        [ a owl:Restriction ;
             owl:minCardinality 0 ;
+            owl:onProperty ttm:tags ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Uriorcurie ;
+            owl:onProperty ttm:id ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty ttm:id ],
         ttm:TestEntity ;
     skos:definition "Represents a Test Asset, which is a single specific instance of TestCase-agnostic semantic parameters representing the specification of a Translator test target with inputs and (expected) outputs." ;
@@ -610,8 +635,17 @@ ttm:TestCase a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "TestCase" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:test_case_type ],
+        [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:test_assets ],
+            owl:onProperty ttm:test_case_type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:tags ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:tags ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
             owl:onProperty ttm:test_assets ],
@@ -620,16 +654,7 @@ ttm:TestCase a owl:Class,
             owl:onProperty ttm:test_case_type ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:tags ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:tags ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:test_case_type ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:test_case_type ],
+            owl:onProperty ttm:test_assets ],
         ttm:TestEntity ;
     skos:definition "Represents a single enumerated instance of Test Case, derived from a  given collection of one or more TestAsset instances (the value of the 'test_assets' slot) which define the 'inputs' and 'outputs' of the TestCase, used to probe a particular test condition." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
@@ -667,22 +692,13 @@ ttm:TestEnvEnum a owl:Class,
 
 ttm:TestIssueEnum a owl:Class,
         linkml:EnumDefinition ;
-    owl:unionOf ( <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#causes+not+treats> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#TMKP> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#category+too+generic> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#contraindications> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#chemical+roles> ) ;
+    owl:unionOf ( <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#causes+not+treats> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#TMKP> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#category+too+generic> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#contraindications> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#chemical+roles> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#test_issue> ) ;
     linkml:permissible_values <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#TMKP>,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#category+too+generic>,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#causes+not+treats>,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#chemical+roles>,
-        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#contraindications> .
-
-ttm:ExpectedOutputEnum a owl:Class,
-        linkml:EnumDefinition ;
-    owl:unionOf ( <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#Top_Answer> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#Acceptable> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#BadButForgivable> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#NeverShow> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#1_TopAnswer> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#4_NeverShow> ) ;
-    linkml:permissible_values <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#1_TopAnswer>,
-        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#4_NeverShow>,
-        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#Acceptable>,
-        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#BadButForgivable>,
-        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#NeverShow>,
-        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#Top_Answer> .
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#contraindications>,
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#test_issue> .
 
 ttm:TestSourceEnum a owl:Class,
         linkml:EnumDefinition ;
@@ -694,6 +710,18 @@ ttm:TestSourceEnum a owl:Class,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestSourceEnum#TACT>,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestSourceEnum#TestDataLocation>,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestSourceEnum#TranslatorTeam> .
+
+ttm:ExpectedOutputEnum a owl:Class,
+        linkml:EnumDefinition ;
+    owl:unionOf ( <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#Top_Answer> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#Acceptable> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#BadButForgivable> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#NeverShow> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#number_1_TopAnswer> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#number_2_Acceptable> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#number_3_BadButForgivable> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#number_4_NeverShow> ) ;
+    linkml:permissible_values <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#Acceptable>,
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#BadButForgivable>,
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#NeverShow>,
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#Top_Answer>,
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#number_1_TopAnswer>,
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#number_2_Acceptable>,
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#number_3_BadButForgivable>,
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#number_4_NeverShow> .
 
 <https://w3id.org/TranslatorSRI/TranslatorTestingModel> a owl:Ontology ;
     rdfs:label "Translator-Testing-Model" ;

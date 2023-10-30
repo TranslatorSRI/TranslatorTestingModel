@@ -91,9 +91,13 @@ class ExpectedOutputEnum(str, Enum):
     
     NeverShow = "NeverShow"
     
-    number_1_TopAnswer = "1_TopAnswer"
+    number_1_TopAnswer = "number_1_TopAnswer"
     
-    number_4_NeverShow = "4_NeverShow"
+    number_2_Acceptable = "number_2_Acceptable"
+    
+    number_3_BadButForgivable = "number_3_BadButForgivable"
+    
+    number_4_NeverShow = "number_4_NeverShow"
     
     
 
@@ -164,6 +168,8 @@ class TestIssueEnum(str, Enum):
     
     chemical_roles = "chemical roles"
     
+    test_issue = "test_issue"
+    
     
 
 class SemanticSeverityEnum(str, Enum):
@@ -225,10 +231,11 @@ class TestAsset(TestEntity):
     semantic_severity: Optional[SemanticSeverityEnum] = Field(None)
     in_v1: Optional[bool] = Field(None)
     well_known: Optional[bool] = Field(None)
+    runner_settings: List[str] = Field(default_factory=list, description="""Settings for the test harness, e.g. \"inferred\"""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
-    tags: Optional[List[str]] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a \"Block List\" collection  """)
+    tags: Optional[List[str]] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a \"Block List\" collection""")
     
 
 class AcceptanceTestAsset(TestAsset):
@@ -255,10 +262,11 @@ class AcceptanceTestAsset(TestAsset):
     semantic_severity: Optional[SemanticSeverityEnum] = Field(None)
     in_v1: Optional[bool] = Field(None)
     well_known: Optional[bool] = Field(None)
+    runner_settings: List[str] = Field(default_factory=list, description="""Settings for the test harness, e.g. \"inferred\"""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
-    tags: Optional[List[str]] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a \"Block List\" collection  """)
+    tags: Optional[List[str]] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a \"Block List\" collection""")
     
 
 class TestEdgeData(TestAsset):
@@ -275,10 +283,11 @@ class TestEdgeData(TestAsset):
     semantic_severity: Optional[SemanticSeverityEnum] = Field(None)
     in_v1: Optional[bool] = Field(None)
     well_known: Optional[bool] = Field(None)
+    runner_settings: List[str] = Field(default_factory=list, description="""Settings for the test harness, e.g. \"inferred\"""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
-    tags: Optional[List[str]] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a \"Block List\" collection  """)
+    tags: Optional[List[str]] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a \"Block List\" collection""")
     
 
 class TestCase(TestEntity):

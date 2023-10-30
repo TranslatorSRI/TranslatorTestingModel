@@ -22,4 +22,7 @@
 #
 id: example:AcceptanceTestAsset001
 name: foo bar
-description: This is a acceptance test case
+description: This is a acceptance test case'
+runner_settings:
+  - "inferred"
+  - "test"
