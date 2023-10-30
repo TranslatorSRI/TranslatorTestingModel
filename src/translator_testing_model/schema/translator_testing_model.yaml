@@ -494,10 +494,16 @@ enums:
         description:
       NeverShow:
         description:
-      1_TopAnswer:
+      number_1_TopAnswer:
         is_a: Top_Answer
         description:
-      4_NeverShow:
+      number_2_Acceptable:
+        is_a: Acceptable
+        description:
+      number_3_BadButForgivable:
+        is_a: BadButForgivable
+        description:
+      number_4_NeverShow:
         is_a: NeverShow
         description:
 
@@ -561,6 +567,8 @@ enums:
       contraindications:
         description:
       chemical roles:
+        description:
+      test_issue:
         description:
 
   SemanticSeverityEnum:

@@ -43,7 +43,7 @@ def main(args):
     else:
         raise RuntimeError(f"Unknown TestAsset file format: {test_assets_format}")
 
-    # TODO: Filter out TestAssets if required (need more CLI params and methodology
+    # TODO: Filter out TestAssets if required (need more CLI params and methodology)
 
     # Build the list of TestCases
     test_cases: List[TestCase] = list()

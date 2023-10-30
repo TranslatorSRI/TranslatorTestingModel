@@ -456,11 +456,19 @@
           "text": "NeverShow"
         },
         {
-          "text": "1_TopAnswer",
+          "text": "number_1_TopAnswer",
           "is_a": "Top_Answer"
         },
         {
-          "text": "4_NeverShow",
+          "text": "number_2_Acceptable",
+          "is_a": "Acceptable"
+        },
+        {
+          "text": "number_3_BadButForgivable",
+          "is_a": "BadButForgivable"
+        },
+        {
+          "text": "number_4_NeverShow",
           "is_a": "NeverShow"
         }
       ]
@@ -568,6 +576,9 @@
         },
         {
           "text": "chemical roles"
+        },
+        {
+          "text": "test_issue"
         }
       ]
     },
@@ -1696,9 +1707,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "translator_testing_model.yaml",
-  "source_file_date": "2023-10-27T13:18:27",
-  "source_file_size": 16739,
-  "generation_date": "2023-10-27T13:18:57",
+  "source_file_date": "2023-10-30T13:48:47",
+  "source_file_size": 16371,
+  "generation_date": "2023-10-30T13:48:51",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",

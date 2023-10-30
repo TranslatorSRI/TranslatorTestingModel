@@ -284,8 +284,10 @@
                 "Acceptable",
                 "BadButForgivable",
                 "NeverShow",
-                "1_TopAnswer",
-                "4_NeverShow"
+                "number_1_TopAnswer",
+                "number_2_Acceptable",
+                "number_3_BadButForgivable",
+                "number_4_NeverShow"
             ],
             "title": "ExpectedOutputEnum",
             "type": "string"
@@ -913,7 +915,8 @@
                 "TMKP",
                 "category too generic",
                 "contraindications",
-                "chemical roles"
+                "chemical roles",
+                "test_issue"
             ],
             "title": "TestIssueEnum",
             "type": "string"

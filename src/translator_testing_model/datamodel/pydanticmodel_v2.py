@@ -87,9 +87,13 @@ class ExpectedOutputEnum(str, Enum):
     
     NeverShow = "NeverShow"
     
-    number_1_TopAnswer = "1_TopAnswer"
+    number_1_TopAnswer = "number_1_TopAnswer"
     
-    number_4_NeverShow = "4_NeverShow"
+    number_2_Acceptable = "number_2_Acceptable"
+    
+    number_3_BadButForgivable = "number_3_BadButForgivable"
+    
+    number_4_NeverShow = "number_4_NeverShow"
     
     
 
@@ -159,6 +163,8 @@ class TestIssueEnum(str, Enum):
     contraindications = "contraindications"
     
     chemical_roles = "chemical roles"
+    
+    test_issue = "test_issue"
     
     
 

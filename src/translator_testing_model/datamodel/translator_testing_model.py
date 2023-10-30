@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2023-10-27T13:19:01
+# Generation date: 2023-10-30T13:48:54
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -763,18 +763,15 @@ class ExpectedOutputEnum(EnumDefinitionImpl):
     Acceptable = PermissibleValue(text="Acceptable")
     BadButForgivable = PermissibleValue(text="BadButForgivable")
     NeverShow = PermissibleValue(text="NeverShow")
+    number_1_TopAnswer = PermissibleValue(text="number_1_TopAnswer")
+    number_2_Acceptable = PermissibleValue(text="number_2_Acceptable")
+    number_3_BadButForgivable = PermissibleValue(text="number_3_BadButForgivable")
+    number_4_NeverShow = PermissibleValue(text="number_4_NeverShow")
 
     _defn = EnumDefinition(
         name="ExpectedOutputEnum",
         description="""Expected output values for instances of Test Asset or Test Cases(?). (Note: does this Enum overlap with 'ExpectedResultsEnum' below?)""",
     )
-
-    @classmethod
-    def _addvals(cls):
-        setattr(cls, "1_TopAnswer",
-            PermissibleValue(text="1_TopAnswer"))
-        setattr(cls, "4_NeverShow",
-            PermissibleValue(text="4_NeverShow"))
 
 class ExpectedResultsEnum(EnumDefinitionImpl):
     """
@@ -857,6 +854,7 @@ class TestIssueEnum(EnumDefinitionImpl):
         text="TMKP",
         description="'Text Mining Knowledge Provider' generated relationship?")
     contraindications = PermissibleValue(text="contraindications")
+    test_issue = PermissibleValue(text="test_issue")
 
     _defn = EnumDefinition(
         name="TestIssueEnum",
