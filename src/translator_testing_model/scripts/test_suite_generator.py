@@ -6,7 +6,7 @@ from typing import Optional, List
 from argparse import ArgumentParser
 from urllib.parse import urlparse
 from linkml_runtime.loaders import tsv_loader, json_loader, yaml_loader
-from linkml_runtime.dumpers import  json_dumper
+from linkml_runtime.dumpers import json_dumper
 
 from src.translator_testing_model.datamodel.translator_testing_model import (
     TestAsset,
@@ -23,7 +23,7 @@ def url_type(arg):
 
 
 def main(args):
-    test_suite_id:str = args["test_suite_id"]
+    test_suite_id: str = args["test_suite_id"]
     test_suite_name: str = args["test_suite_name"]
 
     test_assets_url: str = args["test_assets_url"]
