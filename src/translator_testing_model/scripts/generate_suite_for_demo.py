@@ -22,7 +22,7 @@ def parse_tsv(filename):
 def create_test_assets_from_tsv(test_assets):
     assets = []
     for row in test_assets:
-        if row.get("Query") == "":
+        if row.get("Relationship") == "":
             continue
         ta = TestAsset(id=row.get("id"),
                        name=row.get("id"),
@@ -33,16 +33,16 @@ def create_test_assets_from_tsv(test_assets):
         ta.output_id = row.get("OutputID")
         ta.output_name = row.get("OutputName")
         ta.runner_settings = [row.get("Settings").lower()]
-        if row.get("Expected Result / Suggested Comparitor") == "4_NeverShow":
+        if row.get("Expected Result / Suggested Comparator") == "4_NeverShow":
             ta.expected_output = "number_4_NeverShow"
-        elif row.get("Expected Result / Suggested Comparitor") == "3_BadButForgivable":
+        elif row.get("Expected Result / Suggested Comparator") == "3_BadButForgivable":
             ta.expected_output = "number_3_BadButForgivable"
-        elif row.get("Expected Result / Suggested Comparitor") == "2_Acceptable":
+        elif row.get("Expected Result / Suggested Comparator") == "2_Acceptable":
             ta.expected_output = "number_2_Acceptable"
-        elif row.get("Expected Result / Suggested Comparitor") == "1_TopAnswer":
+        elif row.get("Expected Result / Suggested Comparator") == "1_TopAnswer":
             ta.expected_output = "number_1_TopAnswer"
         else:
-            print(row.get("Expected Result / Suggested Comparitor"))
+            print(row.get("Expected Result / Suggested Comparator"))
 
         if row.get("Well Known") == "yes":
             ta.well_known = True

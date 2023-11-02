@@ -5,7 +5,6 @@ CREATE TABLE "AcceptanceTestCase" (
 	name TEXT, 
 	description TEXT, 
 	test_env VARCHAR(4), 
-	test_case_type VARCHAR(13), 
 	query_type VARCHAR(6), 
 	preconditions TEXT, 
 	PRIMARY KEY (id)
@@ -16,7 +15,6 @@ CREATE TABLE "ComplianceTestCase" (
 	name TEXT, 
 	description TEXT, 
 	test_env VARCHAR(4), 
-	test_case_type VARCHAR(13), 
 	query_type VARCHAR(6), 
 	test_assets TEXT NOT NULL, 
 	preconditions TEXT, 
@@ -28,7 +26,6 @@ CREATE TABLE "KnowledgeGraphNavigationTestCase" (
 	name TEXT, 
 	description TEXT, 
 	test_env VARCHAR(4), 
-	test_case_type VARCHAR(13), 
 	query_type VARCHAR(6), 
 	test_assets TEXT NOT NULL, 
 	preconditions TEXT, 
@@ -40,7 +37,6 @@ CREATE TABLE "OneHopTestCase" (
 	name TEXT, 
 	description TEXT, 
 	test_env VARCHAR(4), 
-	test_case_type VARCHAR(13), 
 	query_type VARCHAR(6), 
 	test_assets TEXT NOT NULL, 
 	preconditions TEXT, 
@@ -59,7 +55,6 @@ CREATE TABLE "QuantitativeTestCase" (
 	name TEXT, 
 	description TEXT, 
 	test_env VARCHAR(4), 
-	test_case_type VARCHAR(13), 
 	query_type VARCHAR(6), 
 	test_assets TEXT NOT NULL, 
 	preconditions TEXT, 
@@ -89,17 +84,9 @@ CREATE TABLE "TestCase" (
 	name TEXT, 
 	description TEXT, 
 	test_env VARCHAR(4), 
-	test_case_type VARCHAR(13), 
 	query_type VARCHAR(6), 
 	test_assets TEXT NOT NULL, 
 	preconditions TEXT, 
-	PRIMARY KEY (id)
-);
-
-CREATE TABLE "TestCaseSpecification" (
-	id TEXT NOT NULL, 
-	name TEXT, 
-	description TEXT, 
 	PRIMARY KEY (id)
 );
 
@@ -128,6 +115,15 @@ CREATE TABLE "TestMetadata" (
 	test_source VARCHAR(18), 
 	test_reference TEXT, 
 	test_objective VARCHAR(16), 
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE "TestSuiteSpecification" (
+	id TEXT NOT NULL, 
+	name TEXT, 
+	description TEXT, 
+	test_data_file_locator TEXT, 
+	test_data_file_format VARCHAR(4), 
 	PRIMARY KEY (id)
 );
 
@@ -168,10 +164,10 @@ CREATE TABLE "AcceptanceTestSuite" (
 	test_metadata TEXT, 
 	test_persona VARCHAR(11), 
 	test_cases TEXT, 
-	test_case_specification TEXT, 
+	test_suite_specification TEXT, 
 	PRIMARY KEY (id), 
 	FOREIGN KEY(test_metadata) REFERENCES "TestMetadata" (id), 
-	FOREIGN KEY(test_case_specification) REFERENCES "TestCaseSpecification" (id)
+	FOREIGN KEY(test_suite_specification) REFERENCES "TestSuiteSpecification" (id)
 );
 
 CREATE TABLE "OneHopTestSuite" (
@@ -181,10 +177,10 @@ CREATE TABLE "OneHopTestSuite" (
 	test_metadata TEXT, 
 	test_persona VARCHAR(11), 
 	test_cases TEXT, 
-	test_case_specification TEXT, 
+	test_suite_specification TEXT, 
 	PRIMARY KEY (id), 
 	FOREIGN KEY(test_metadata) REFERENCES "TestMetadata" (id), 
-	FOREIGN KEY(test_case_specification) REFERENCES "TestCaseSpecification" (id)
+	FOREIGN KEY(test_suite_specification) REFERENCES "TestSuiteSpecification" (id)
 );
 
 CREATE TABLE "StandardsComplianceTestSuite" (
@@ -194,10 +190,10 @@ CREATE TABLE "StandardsComplianceTestSuite" (
 	test_metadata TEXT, 
 	test_persona VARCHAR(11), 
 	test_cases TEXT, 
-	test_case_specification TEXT, 
+	test_suite_specification TEXT, 
 	PRIMARY KEY (id), 
 	FOREIGN KEY(test_metadata) REFERENCES "TestMetadata" (id), 
-	FOREIGN KEY(test_case_specification) REFERENCES "TestCaseSpecification" (id)
+	FOREIGN KEY(test_suite_specification) REFERENCES "TestSuiteSpecification" (id)
 );
 
 CREATE TABLE "TestSuite" (
@@ -207,10 +203,10 @@ CREATE TABLE "TestSuite" (
 	test_metadata TEXT, 
 	test_persona VARCHAR(11), 
 	test_cases TEXT, 
-	test_case_specification TEXT, 
+	test_suite_specification TEXT, 
 	PRIMARY KEY (id), 
 	FOREIGN KEY(test_metadata) REFERENCES "TestMetadata" (id), 
-	FOREIGN KEY(test_case_specification) REFERENCES "TestCaseSpecification" (id)
+	FOREIGN KEY(test_suite_specification) REFERENCES "TestSuiteSpecification" (id)
 );
 
 CREATE TABLE "AcceptanceTestCase_tags" (
@@ -276,13 +272,6 @@ CREATE TABLE "TestCase_tags" (
 	FOREIGN KEY(backref_id) REFERENCES "TestCase" (id)
 );
 
-CREATE TABLE "TestCaseSpecification_tags" (
-	backref_id TEXT, 
-	tags TEXT, 
-	PRIMARY KEY (backref_id, tags), 
-	FOREIGN KEY(backref_id) REFERENCES "TestCaseSpecification" (id)
-);
-
 CREATE TABLE "TestEdgeData_runner_settings" (
 	backref_id TEXT, 
 	runner_settings TEXT NOT NULL, 
@@ -302,6 +291,13 @@ CREATE TABLE "TestMetadata_tags" (
 	tags TEXT, 
 	PRIMARY KEY (backref_id, tags), 
 	FOREIGN KEY(backref_id) REFERENCES "TestMetadata" (id)
+);
+
+CREATE TABLE "TestSuiteSpecification_tags" (
+	backref_id TEXT, 
+	tags TEXT, 
+	PRIMARY KEY (backref_id, tags), 
+	FOREIGN KEY(backref_id) REFERENCES "TestSuiteSpecification" (id)
 );
 
 CREATE TABLE "AcceptanceTestAsset_runner_settings" (

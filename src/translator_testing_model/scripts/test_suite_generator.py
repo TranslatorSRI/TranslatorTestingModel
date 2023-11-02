@@ -2,7 +2,7 @@
 """
 CLI Script to generate a TestSuite of TestCases from specified TestAssets
 """
-from typing import Optional, List
+from typing import List
 from argparse import ArgumentParser
 from urllib.parse import urlparse
 from linkml_runtime.loaders import tsv_loader, json_loader, yaml_loader

@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2023-11-01T20:10:12
+# Generation date: 2023-11-02T16:47:40
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -63,11 +63,11 @@ class TestEdgeDataId(TestAssetId):
     pass
 
 
-class TestCaseId(TestEntityId):
+class PreconditionId(TestEntityId):
     pass
 
 
-class TestCaseSpecificationId(TestEntityId):
+class TestCaseId(TestEntityId):
     pass
 
 
@@ -107,7 +107,7 @@ class OneHopTestSuiteId(TestSuiteId):
     pass
 
 
-class PreconditionId(TestEntityId):
+class TestSuiteSpecificationId(TestEntityId):
     pass
 
 
@@ -354,6 +354,29 @@ class TestEdgeData(TestAsset):
 
 
 @dataclass
+class Precondition(TestEntity):
+    """
+    Represents a precondition for a TestCase
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = TTM.Precondition
+    class_class_curie: ClassVar[str] = "ttm:Precondition"
+    class_name: ClassVar[str] = "Precondition"
+    class_model_uri: ClassVar[URIRef] = TTM.Precondition
+
+    id: Union[str, PreconditionId] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, PreconditionId):
+            self.id = PreconditionId(self.id)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
 class TestCase(TestEntity):
     """
     Represents a single enumerated instance of Test Case, derived from a given collection of one or more TestAsset
@@ -370,9 +393,8 @@ class TestCase(TestEntity):
     id: Union[str, TestCaseId] = None
     test_assets: Union[Dict[Union[str, TestAssetId], Union[dict, TestAsset]], List[Union[dict, TestAsset]]] = empty_dict()
     test_env: Optional[Union[str, "TestEnvEnum"]] = None
-    test_case_type: Optional[Union[str, "TestCaseTypeEnum"]] = None
     query_type: Optional[Union[str, "QueryTypeEnum"]] = None
-    preconditions: Optional[Union[Union[str, PreconditionId], List[Union[str, PreconditionId]]]] = empty_list()
+    preconditions: Optional[Union[Dict[Union[str, PreconditionId], Union[dict, Precondition]], List[Union[dict, Precondition]]]] = empty_dict()
     tags: Optional[Union[str, List[str]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
@@ -388,43 +410,14 @@ class TestCase(TestEntity):
         if self.test_env is not None and not isinstance(self.test_env, TestEnvEnum):
             self.test_env = TestEnvEnum(self.test_env)
 
-        if self.test_case_type is not None and not isinstance(self.test_case_type, TestCaseTypeEnum):
-            self.test_case_type = TestCaseTypeEnum(self.test_case_type)
-
         if self.query_type is not None and not isinstance(self.query_type, QueryTypeEnum):
             self.query_type = QueryTypeEnum(self.query_type)
 
-        if not isinstance(self.preconditions, list):
-            self.preconditions = [self.preconditions] if self.preconditions is not None else []
-        self.preconditions = [v if isinstance(v, PreconditionId) else PreconditionId(v) for v in self.preconditions]
+        self._normalize_inlined_as_dict(slot_name="preconditions", slot_type=Precondition, key_name="id", keyed=True)
 
         if not isinstance(self.tags, list):
             self.tags = [self.tags] if self.tags is not None else []
         self.tags = [v if isinstance(v, str) else str(v) for v in self.tags]
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass
-class TestCaseSpecification(TestEntity):
-    """
-    Parameterized declaration of the Test Case generator which dynamically generates a collection of Test Cases from
-    Test Assets, using applicable heuristics.
-    """
-    _inherited_slots: ClassVar[List[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = TTM.TestCaseSpecification
-    class_class_curie: ClassVar[str] = "ttm:TestCaseSpecification"
-    class_name: ClassVar[str] = "TestCaseSpecification"
-    class_model_uri: ClassVar[URIRef] = TTM.TestCaseSpecification
-
-    id: Union[str, TestCaseSpecificationId] = None
-
-    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, TestCaseSpecificationId):
-            self.id = TestCaseSpecificationId(self.id)
 
         super().__post_init__(**kwargs)
 
@@ -557,8 +550,8 @@ class OneHopTestCase(KnowledgeGraphNavigationTestCase):
 class TestSuite(TestEntity):
     """
     Specification of a set of Test Cases, one of either with a static list of 'test_cases' or a dynamic
-    'test_case_specification' slot values. Note: at least one slot or the other, but generally not both(?) needs to be
-    present.
+    'test_suite_specification' slot values. Note: at least one slot or the other, but generally not both(?) needs to
+    be present.
     """
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -568,10 +561,10 @@ class TestSuite(TestEntity):
     class_model_uri: ClassVar[URIRef] = TTM.TestSuite
 
     id: Union[str, TestSuiteId] = None
-    test_metadata: Optional[Union[str, TestMetadataId]] = None
+    test_metadata: Optional[Union[dict, TestMetadata]] = None
     test_persona: Optional[Union[str, "TestPersonaEnum"]] = None
     test_cases: Optional[Union[Dict[Union[str, TestCaseId], Union[dict, TestCase]], List[Union[dict, TestCase]]]] = empty_dict()
-    test_case_specification: Optional[Union[str, TestCaseSpecificationId]] = None
+    test_suite_specification: Optional[Union[dict, "TestSuiteSpecification"]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -579,16 +572,16 @@ class TestSuite(TestEntity):
         if not isinstance(self.id, TestSuiteId):
             self.id = TestSuiteId(self.id)
 
-        if self.test_metadata is not None and not isinstance(self.test_metadata, TestMetadataId):
-            self.test_metadata = TestMetadataId(self.test_metadata)
+        if self.test_metadata is not None and not isinstance(self.test_metadata, TestMetadata):
+            self.test_metadata = TestMetadata(**as_dict(self.test_metadata))
 
         if self.test_persona is not None and not isinstance(self.test_persona, TestPersonaEnum):
             self.test_persona = TestPersonaEnum(self.test_persona)
 
         self._normalize_inlined_as_dict(slot_name="test_cases", slot_type=TestCase, key_name="id", keyed=True)
 
-        if self.test_case_specification is not None and not isinstance(self.test_case_specification, TestCaseSpecificationId):
-            self.test_case_specification = TestCaseSpecificationId(self.test_case_specification)
+        if self.test_suite_specification is not None and not isinstance(self.test_suite_specification, TestSuiteSpecification):
+            self.test_suite_specification = TestSuiteSpecification(**as_dict(self.test_suite_specification))
 
         super().__post_init__(**kwargs)
 
@@ -672,24 +665,32 @@ class OneHopTestSuite(TestSuite):
 
 
 @dataclass
-class Precondition(TestEntity):
+class TestSuiteSpecification(TestEntity):
     """
-    Represents a precondition for a TestCase
+    Parameters for a Test Case instances either dynamically generated from some external source of Test Assets.
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM.Precondition
-    class_class_curie: ClassVar[str] = "ttm:Precondition"
-    class_name: ClassVar[str] = "Precondition"
-    class_model_uri: ClassVar[URIRef] = TTM.Precondition
+    class_class_uri: ClassVar[URIRef] = TTM.TestSuiteSpecification
+    class_class_curie: ClassVar[str] = "ttm:TestSuiteSpecification"
+    class_name: ClassVar[str] = "TestSuiteSpecification"
+    class_model_uri: ClassVar[URIRef] = TTM.TestSuiteSpecification
 
-    id: Union[str, PreconditionId] = None
+    id: Union[str, TestSuiteSpecificationId] = None
+    test_data_file_locator: Optional[Union[str, URIorCURIE]] = None
+    test_data_file_format: Optional[Union[str, "FileFormatEnum"]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
             self.MissingRequiredField("id")
-        if not isinstance(self.id, PreconditionId):
-            self.id = PreconditionId(self.id)
+        if not isinstance(self.id, TestSuiteSpecificationId):
+            self.id = TestSuiteSpecificationId(self.id)
+
+        if self.test_data_file_locator is not None and not isinstance(self.test_data_file_locator, URIorCURIE):
+            self.test_data_file_locator = URIorCURIE(self.test_data_file_locator)
+
+        if self.test_data_file_format is not None and not isinstance(self.test_data_file_format, FileFormatEnum):
+            self.test_data_file_format = FileFormatEnum(self.test_data_file_format)
 
         super().__post_init__(**kwargs)
 
@@ -740,7 +741,9 @@ class TestObjectiveEnum(EnumDefinitionImpl):
     )
 
 class TestPersonaEnum(EnumDefinitionImpl):
-
+    """
+    User persona context of a given test.
+    """
     All = PermissibleValue(text="All")
     Clinical = PermissibleValue(
         text="Clinical",
@@ -754,6 +757,20 @@ class TestPersonaEnum(EnumDefinitionImpl):
 
     _defn = EnumDefinition(
         name="TestPersonaEnum",
+        description="User persona context of a given test.",
+    )
+
+class FileFormatEnum(EnumDefinitionImpl):
+    """
+    Text file formats for test data sources.
+    """
+    TSV = PermissibleValue(text="TSV")
+    YAML = PermissibleValue(text="YAML")
+    JSON = PermissibleValue(text="JSON")
+
+    _defn = EnumDefinition(
+        name="FileFormatEnum",
+        description="Text file formats for test data sources.",
     )
 
 class QueryTypeEnum(EnumDefinitionImpl):
@@ -834,31 +851,6 @@ class TestEnvEnum(EnumDefinitionImpl):
     _defn = EnumDefinition(
         name="TestEnvEnum",
         description="Testing environments within which a TestSuite is run by a TestRunner scheduled by the TestHarness.",
-    )
-
-class TestCaseTypeEnum(EnumDefinitionImpl):
-    """
-    Enumerated tags for types of test (generally applied to a TestCase).
-    """
-    acceptance = PermissibleValue(
-        text="acceptance",
-        description="Acceptance test")
-    quantitative = PermissibleValue(
-        text="quantitative",
-        description="Quantitative test")
-    compliance = PermissibleValue(
-        text="compliance",
-        description="Standards compliance test")
-    kg_navigation = PermissibleValue(
-        text="kg_navigation",
-        description="Knowledge Graph navigation integration test")
-    one_hop = PermissibleValue(
-        text="one_hop",
-        description="One Hop navigation test")
-
-    _defn = EnumDefinition(
-        name="TestCaseTypeEnum",
-        description="Enumerated tags for types of test (generally applied to a TestCase).",
     )
 
 class TestIssueEnum(EnumDefinitionImpl):
@@ -963,10 +955,16 @@ slots.well_known = Slot(uri=TTM.well_known, name="well_known", curie=TTM.curie('
                    model_uri=TTM.well_known, domain=None, range=Optional[Union[bool, Bool]])
 
 slots.test_metadata = Slot(uri=TTM.test_metadata, name="test_metadata", curie=TTM.curie('test_metadata'),
-                   model_uri=TTM.test_metadata, domain=None, range=Optional[Union[str, TestMetadataId]])
+                   model_uri=TTM.test_metadata, domain=None, range=Optional[Union[dict, TestMetadata]])
 
 slots.test_persona = Slot(uri=TTM.test_persona, name="test_persona", curie=TTM.curie('test_persona'),
                    model_uri=TTM.test_persona, domain=None, range=Optional[Union[str, "TestPersonaEnum"]])
+
+slots.test_data_file_locator = Slot(uri=TTM.test_data_file_locator, name="test_data_file_locator", curie=TTM.curie('test_data_file_locator'),
+                   model_uri=TTM.test_data_file_locator, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.test_data_file_format = Slot(uri=TTM.test_data_file_format, name="test_data_file_format", curie=TTM.curie('test_data_file_format'),
+                   model_uri=TTM.test_data_file_format, domain=None, range=Optional[Union[str, "FileFormatEnum"]])
 
 slots.test_assets = Slot(uri=TTM.test_assets, name="test_assets", curie=TTM.curie('test_assets'),
                    model_uri=TTM.test_assets, domain=None, range=Union[Dict[Union[str, TestAssetId], Union[dict, TestAsset]], List[Union[dict, TestAsset]]])
@@ -974,8 +972,8 @@ slots.test_assets = Slot(uri=TTM.test_assets, name="test_assets", curie=TTM.curi
 slots.test_cases = Slot(uri=TTM.test_cases, name="test_cases", curie=TTM.curie('test_cases'),
                    model_uri=TTM.test_cases, domain=None, range=Optional[Union[Dict[Union[str, TestCaseId], Union[dict, TestCase]], List[Union[dict, TestCase]]]])
 
-slots.test_case_specification = Slot(uri=TTM.test_case_specification, name="test_case_specification", curie=TTM.curie('test_case_specification'),
-                   model_uri=TTM.test_case_specification, domain=None, range=Optional[Union[str, TestCaseSpecificationId]])
+slots.test_suite_specification = Slot(uri=TTM.test_suite_specification, name="test_suite_specification", curie=TTM.curie('test_suite_specification'),
+                   model_uri=TTM.test_suite_specification, domain=None, range=Optional[Union[dict, TestSuiteSpecification]])
 
 slots.must_pass_date = Slot(uri=TTM.must_pass_date, name="must_pass_date", curie=TTM.curie('must_pass_date'),
                    model_uri=TTM.must_pass_date, domain=None, range=Optional[Union[str, XSDDate]])
@@ -1013,14 +1011,11 @@ slots.requires_trapi = Slot(uri=TTM.requires_trapi, name="requires_trapi", curie
 slots.test_env = Slot(uri=TTM.test_env, name="test_env", curie=TTM.curie('test_env'),
                    model_uri=TTM.test_env, domain=None, range=Optional[Union[str, "TestEnvEnum"]])
 
-slots.test_case_type = Slot(uri=TTM.test_case_type, name="test_case_type", curie=TTM.curie('test_case_type'),
-                   model_uri=TTM.test_case_type, domain=None, range=Optional[Union[str, "TestCaseTypeEnum"]])
-
 slots.query_type = Slot(uri=TTM.query_type, name="query_type", curie=TTM.curie('query_type'),
                    model_uri=TTM.query_type, domain=None, range=Optional[Union[str, "QueryTypeEnum"]])
 
 slots.preconditions = Slot(uri=TTM.preconditions, name="preconditions", curie=TTM.curie('preconditions'),
-                   model_uri=TTM.preconditions, domain=None, range=Optional[Union[Union[str, PreconditionId], List[Union[str, PreconditionId]]]])
+                   model_uri=TTM.preconditions, domain=None, range=Optional[Union[Dict[Union[str, PreconditionId], Union[dict, Precondition]], List[Union[dict, Precondition]]]])
 
 slots.TestAsset_id = Slot(uri=SCHEMA.identifier, name="TestAsset_id", curie=SCHEMA.curie('identifier'),
                    model_uri=TTM.TestAsset_id, domain=TestAsset, range=Union[str, TestAssetId])
@@ -1030,9 +1025,6 @@ slots.TestAsset_tags = Slot(uri=SCHEMA.additionalType, name="TestAsset_tags", cu
 
 slots.TestAsset_runner_settings = Slot(uri=TTM.runner_settings, name="TestAsset_runner_settings", curie=TTM.curie('runner_settings'),
                    model_uri=TTM.TestAsset_runner_settings, domain=TestAsset, range=Union[str, List[str]])
-
-slots.TestCase_test_case_type = Slot(uri=TTM.test_case_type, name="TestCase_test_case_type", curie=TTM.curie('test_case_type'),
-                   model_uri=TTM.TestCase_test_case_type, domain=TestCase, range=Optional[Union[str, "TestCaseTypeEnum"]])
 
 slots.TestCase_test_assets = Slot(uri=TTM.test_assets, name="TestCase_test_assets", curie=TTM.curie('test_assets'),
                    model_uri=TTM.TestCase_test_assets, domain=TestCase, range=Union[Dict[Union[str, TestAssetId], Union[dict, TestAsset]], List[Union[dict, TestAsset]]])

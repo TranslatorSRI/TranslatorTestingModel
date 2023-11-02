@@ -170,7 +170,6 @@ linkml:Sparqlpath xsd:string
        (  $<TestCase_tes> (  &<TestEntity_tes> ;
              rdf:type [ <TestEntity> ] ? ;
              <test_env> @<TestEnvEnum> ? ;
-             <test_case_type> @<TestCaseTypeEnum> ? ;
              <query_type> @<QueryTypeEnum> ? ;
              <test_assets> @<TestAsset> + ;
              <preconditions> @<Precondition> * ;
@@ -181,14 +180,6 @@ linkml:Sparqlpath xsd:string
     } OR @<AcceptanceTestCase> OR @<ComplianceTestCase> OR @<KnowledgeGraphNavigationTestCase> OR @<QuantitativeTestCase>
 )
 
-<TestCaseSpecification> CLOSED {
-    (  $<TestCaseSpecification_tes> (  &<TestEntity_tes> ;
-          rdf:type [ <TestEntity> ] ?
-       ) ;
-       rdf:type [ <TestCaseSpecification> ]
-    )
-}
-
 <TestEdgeData> CLOSED {
     (  $<TestEdgeData_tes> (  &<TestAsset_tes> ;
           rdf:type [ <TestAsset> ] ?
@@ -198,7 +189,7 @@ linkml:Sparqlpath xsd:string
 }
 
 <TestEntity>  (
-    @<Precondition> OR @<TestAsset> OR @<TestCase> OR @<TestCaseSpecification> OR @<TestMetadata> OR @<TestSuite>
+    @<Precondition> OR @<TestAsset> OR @<TestCase> OR @<TestMetadata> OR @<TestSuite> OR @<TestSuiteSpecification>
 )
 
 <TestEntity_struct> {
@@ -228,11 +219,21 @@ linkml:Sparqlpath xsd:string
              <test_metadata> @<TestMetadata> ? ;
              <test_persona> @<TestPersonaEnum> ? ;
              <test_cases> @<TestCase> * ;
-             <test_case_specification> @<TestCaseSpecification> ?
+             <test_suite_specification> @<TestSuiteSpecification> ?
           ) ;
           rdf:type [ <TestSuite> ]
        )
     } OR @<AcceptanceTestSuite> OR @<OneHopTestSuite> OR @<StandardsComplianceTestSuite>
 )
+
+<TestSuiteSpecification> CLOSED {
+    (  $<TestSuiteSpecification_tes> (  &<TestEntity_tes> ;
+          rdf:type [ <TestEntity> ] ? ;
+          <test_data_file_locator> @linkml:Uriorcurie ? ;
+          <test_data_file_format> @<FileFormatEnum> ?
+       ) ;
+       rdf:type [ <TestSuiteSpecification> ]
+    )
+}
 
 

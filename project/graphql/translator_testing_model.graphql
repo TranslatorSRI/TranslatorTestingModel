@@ -34,7 +34,6 @@ type AcceptanceTestCase
     name: String
     description: String
     testEnv: TestEnvEnum
-    testCaseType: TestCaseTypeEnum
     queryType: QueryTypeEnum
     preconditions: [Precondition]
     tags: [String]
@@ -50,7 +49,7 @@ type AcceptanceTestSuite
     testMetadata: TestMetadata
     testPersona: TestPersonaEnum
     testCases: [TestCase]
-    testCaseSpecification: TestCaseSpecification
+    testSuiteSpecification: TestSuiteSpecification
   }
 
 type BenchmarkTestSuite
@@ -63,7 +62,6 @@ type ComplianceTestCase
     name: String
     description: String
     testEnv: TestEnvEnum
-    testCaseType: TestCaseTypeEnum
     queryType: QueryTypeEnum
     testAssets: [TestAsset]!
     preconditions: [Precondition]
@@ -76,7 +74,6 @@ type KnowledgeGraphNavigationTestCase
     name: String
     description: String
     testEnv: TestEnvEnum
-    testCaseType: TestCaseTypeEnum
     queryType: QueryTypeEnum
     testAssets: [TestAsset]!
     preconditions: [Precondition]
@@ -89,7 +86,6 @@ type OneHopTestCase
     name: String
     description: String
     testEnv: TestEnvEnum
-    testCaseType: TestCaseTypeEnum
     queryType: QueryTypeEnum
     testAssets: [TestAsset]!
     preconditions: [Precondition]
@@ -105,7 +101,7 @@ type OneHopTestSuite
     testMetadata: TestMetadata
     testPersona: TestPersonaEnum
     testCases: [TestCase]
-    testCaseSpecification: TestCaseSpecification
+    testSuiteSpecification: TestSuiteSpecification
   }
 
 type Precondition
@@ -122,7 +118,6 @@ type QuantitativeTestCase
     name: String
     description: String
     testEnv: TestEnvEnum
-    testCaseType: TestCaseTypeEnum
     queryType: QueryTypeEnum
     testAssets: [TestAsset]!
     preconditions: [Precondition]
@@ -138,7 +133,7 @@ type StandardsComplianceTestSuite
     testMetadata: TestMetadata
     testPersona: TestPersonaEnum
     testCases: [TestCase]
-    testCaseSpecification: TestCaseSpecification
+    testSuiteSpecification: TestSuiteSpecification
   }
 
 type TestAsset
@@ -167,18 +162,9 @@ type TestCase
     name: String
     description: String
     testEnv: TestEnvEnum
-    testCaseType: TestCaseTypeEnum
     queryType: QueryTypeEnum
     testAssets: [TestAsset]!
     preconditions: [Precondition]
-    tags: [String]
-  }
-
-type TestCaseSpecification
-  {
-    id: Uriorcurie!
-    name: String
-    description: String
     tags: [String]
   }
 
@@ -230,6 +216,16 @@ type TestSuite
     testMetadata: TestMetadata
     testPersona: TestPersonaEnum
     testCases: [TestCase]
-    testCaseSpecification: TestCaseSpecification
+    testSuiteSpecification: TestSuiteSpecification
+  }
+
+type TestSuiteSpecification
+  {
+    id: Uriorcurie!
+    name: String
+    description: String
+    tags: [String]
+    testDataFileLocator: Uriorcurie
+    testDataFileFormat: FileFormatEnum
   }
 
