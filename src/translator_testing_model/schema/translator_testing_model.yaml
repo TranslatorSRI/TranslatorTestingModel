@@ -222,6 +222,7 @@ classes:
 slots:
 
   runner_settings:
+    aliases: ["Settings"]
     description: >-
       Settings for the test harness
     range: string
