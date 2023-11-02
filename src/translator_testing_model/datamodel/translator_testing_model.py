@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2023-10-30T15:09:04
+# Generation date: 2023-11-01T20:10:12
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -209,6 +209,7 @@ class TestAsset(TestEntity):
     semantic_severity: Optional[Union[str, "SemanticSeverityEnum"]] = None
     in_v1: Optional[Union[bool, Bool]] = None
     well_known: Optional[Union[bool, Bool]] = None
+    test_reference: Optional[Union[str, URIorCURIE]] = None
     tags: Optional[Union[str, List[str]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
@@ -252,6 +253,9 @@ class TestAsset(TestEntity):
 
         if self.well_known is not None and not isinstance(self.well_known, Bool):
             self.well_known = Bool(self.well_known)
+
+        if self.test_reference is not None and not isinstance(self.test_reference, URIorCURIE):
+            self.test_reference = URIorCURIE(self.test_reference)
 
         if not isinstance(self.tags, list):
             self.tags = [self.tags] if self.tags is not None else []
