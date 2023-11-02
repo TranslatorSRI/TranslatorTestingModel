@@ -64,6 +64,7 @@ classes:
       - semantic_severity
       - in_v1
       - well_known
+      - test_reference
       - runner_settings
     slot_usage:
       id:
@@ -257,7 +258,7 @@ slots:
   test_reference:
     aliases: ["GitHubIssue"]
     description: >-
-      Source documentation where original test particulars are registered (e.g. Github repo)
+      Documentation URL where original test source particulars are registered (e.g. Github repo)
     range: uriorcurie
 
   test_objective:
