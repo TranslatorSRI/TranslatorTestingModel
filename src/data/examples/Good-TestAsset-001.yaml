@@ -42,7 +42,7 @@ predicate: Treats
 output_id: DRUGBANK:DB01592
 output_name: Iron (PUBCHEM)
 expected_output: number_4_NeverShow
-test_issue: https://github.com/NCATSTranslator/Feedback/issues/506
+test_reference: https://github.com/NCATSTranslator/Feedback/issues/506
 semantic_severity: NotApplicable
 in_v1: True
 well_known: False
