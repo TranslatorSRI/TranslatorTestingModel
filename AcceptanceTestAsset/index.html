@@ -271,6 +271,8 @@
 
           AcceptanceTestAsset --|&gt; TestIssueEnum : test_issue
 
+      AcceptanceTestAsset : test_reference
+
       AcceptanceTestAsset : top_level
 
       AcceptanceTestAsset : well_known
@@ -416,6 +418,12 @@
 <td><a href="../well_known/">well_known</a></td>
 <td>0..1 <br/> <a href="../Boolean/">Boolean</a></td>
 <td></td>
+<td><a href="../TestAsset/">TestAsset</a></td>
+</tr>
+<tr>
+<td><a href="../test_reference/">test_reference</a></td>
+<td>0..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>Documentation URL where original test source particulars are registered (e</td>
 <td><a href="../TestAsset/">TestAsset</a></td>
 </tr>
 <tr>
@@ -763,6 +771,20 @@ attributes:
     domain_of:
     - TestAsset
     range: boolean
+  test_reference:
+    name: test_reference
+    description: Documentation URL where original test source particulars are registered
+      (e.g. Github repo)
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    aliases:
+    - GitHubIssue
+    rank: 1000
+    alias: test_reference
+    owner: AcceptanceTestAsset
+    domain_of:
+    - TestMetadata
+    - TestAsset
+    range: uriorcurie
   runner_settings:
     name: runner_settings
     description: Settings for the test harness, e.g. "inferred"

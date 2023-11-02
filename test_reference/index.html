@@ -324,7 +324,7 @@
 
 
 <h1 id="slot-test_reference">Slot: test_reference</h1>
-<p><em>Source documentation where original test particulars are registered (e.g. Github repo)</em></p>
+<p><em>Documentation URL where original test source particulars are registered (e.g. Github repo)</em></p>
 <p>URI: <a href="https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_reference">ttm:test_reference</a></p>
 <!-- no inheritance hierarchy -->
 
@@ -341,6 +341,21 @@
 <tr>
 <td><a href="../TestMetadata/">TestMetadata</a></td>
 <td>Represents metadata related to (external SME, SMURF, Translator feedback,  la...</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../TestAsset/">TestAsset</a></td>
+<td>Represents a Test Asset, which is a single specific instance of TestCase-agno...</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../AcceptanceTestAsset/">AcceptanceTestAsset</a></td>
+<td>Model derived from Jenn's test asset design and Shervin's runner JSON here as...</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../TestEdgeData/">TestEdgeData</a></td>
+<td>Represents a single Biolink Model compliant instance of a subject-predicate-o...</td>
 <td>no</td>
 </tr>
 </tbody>
@@ -362,8 +377,8 @@
 <details>
 
 <pre><code class="language-yaml">name: test_reference
-description: Source documentation where original test particulars are registered (e.g.
-  Github repo)
+description: Documentation URL where original test source particulars are registered
+  (e.g. Github repo)
 from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
 aliases:
 - GitHubIssue
@@ -371,6 +386,7 @@ rank: 1000
 alias: test_reference
 domain_of:
 - TestMetadata
+- TestAsset
 range: uriorcurie
 
 </code></pre>

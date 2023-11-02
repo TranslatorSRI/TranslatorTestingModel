@@ -258,7 +258,7 @@
 <tr>
 <td><a href="../test_reference/">test_reference</a></td>
 <td>0..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
-<td>Source documentation where original test particulars are registered (e</td>
+<td>Documentation URL where original test source particulars are registered (e</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -390,7 +390,7 @@ attributes:
     range: TestSourceEnum
   test_reference:
     name: test_reference
-    description: Source documentation where original test particulars are registered
+    description: Documentation URL where original test source particulars are registered
       (e.g. Github repo)
     from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
     aliases:
@@ -400,6 +400,7 @@ attributes:
     owner: TestMetadata
     domain_of:
     - TestMetadata
+    - TestAsset
     range: uriorcurie
   test_objective:
     name: test_objective
