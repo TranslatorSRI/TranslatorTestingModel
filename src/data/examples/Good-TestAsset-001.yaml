@@ -20,6 +20,7 @@
 #      - semantic_severity
 #      - in_v1
 #      - well_known
+#      - runner_settings
 #    slot_usage:
 #      id:
 #        aliases: ["AssetIdentifier"]
@@ -28,18 +29,21 @@
 #        description: >-
 #          One or more 'tags' slot values (inherited from TestEntity) should generally
 #          be defined to specify TestAsset membership in a "Block List" collection
+#      runner_settings:
+#        description: >-
+#          Settings for the test harness, e.g. "inferred"
 #
 id: example:TestAsset001
-name: foo bar
-description: This is a test asset
-input_id:
-input_name:
-predicate:
-output_id:
-output_name:
-expected_output:
-test_issue:
-semantic_severity:
+name: TestAsset001
+description: Iron treats Aceruloplasminemia
+input_id: MONDO:0011426
+input_name: Aceruloplasminemia
+predicate: Treats
+output_id: DRUGBANK:DB01592
+output_name: Iron (PUBCHEM)
+expected_output: number_4_NeverShow
+test_issue: https://github.com/NCATSTranslator/Feedback/issues/506
+semantic_severity: NotApplicable
 in_v1: True
 well_known: False
 runner_settings:
