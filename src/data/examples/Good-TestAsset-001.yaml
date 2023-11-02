@@ -32,6 +32,16 @@
 id: example:TestAsset001
 name: foo bar
 description: This is a test asset
+input_id:
+input_name:
+predicate:
+output_id:
+output_name:
+expected_output:
+test_issue:
+semantic_severity:
+in_v1: True
+well_known: False
 runner_settings:
   - "inferred"
   - "test"
