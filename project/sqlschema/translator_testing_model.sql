@@ -79,6 +79,7 @@ CREATE TABLE "TestAsset" (
 	semantic_severity VARCHAR(13), 
 	in_v1 BOOLEAN, 
 	well_known BOOLEAN, 
+	test_reference TEXT, 
 	id TEXT NOT NULL, 
 	PRIMARY KEY (id)
 );
@@ -115,6 +116,7 @@ CREATE TABLE "TestEdgeData" (
 	semantic_severity VARCHAR(13), 
 	in_v1 BOOLEAN, 
 	well_known BOOLEAN, 
+	test_reference TEXT, 
 	id TEXT NOT NULL, 
 	PRIMARY KEY (id)
 );
@@ -142,6 +144,7 @@ CREATE TABLE "AcceptanceTestAsset" (
 	semantic_severity VARCHAR(13), 
 	in_v1 BOOLEAN, 
 	well_known BOOLEAN, 
+	test_reference TEXT, 
 	id TEXT NOT NULL, 
 	must_pass_date DATE, 
 	must_pass_environment VARCHAR(4), 
