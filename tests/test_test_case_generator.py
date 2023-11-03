@@ -39,7 +39,7 @@ def create_test_case_generator() -> TestCaseGenerator:
     return tests
 
 
-class TestTestSuiteFactory(unittest.TestCase):
+class TestTestCaseGenerator(unittest.TestCase):
     """Testing Test Suite Factory functionality."""
 
     def test_factory_creation(self):
