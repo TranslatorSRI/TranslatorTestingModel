@@ -10,6 +10,10 @@ from src.translator_testing_model.adaptor.test_case_generator import (
 from src.translator_testing_model.datamodel.pydanticmodel import (
     TestMetadata,
     TestSuite,
+    AcceptanceTestSuite,
+    BenchmarkTestSuite,
+    StandardsComplianceTestSuite,
+    OneHopTestSuite,
     TestSuiteSpecification,
     FileFormatEnum
 )
@@ -20,34 +24,57 @@ SAMPLE_TEST_ASSET_FILE = "https://raw.githubusercontent.com/TranslatorSRI/Transl
                          "main/src/data/examples/SampleTestAssetList.json"
 
 
-def create_test_case_generator() -> TestCaseGenerator:
-    """
-    Shared mock TestCaseGenerator constructor
-    """
-    test_suite_specification = TestSuiteSpecification(
-        id="example:json_sample_test_assets",
-        test_data_file_locator=SAMPLE_TEST_ASSET_FILE,
-        test_data_file_format=FileFormatEnum.JSON
-    )
-    test_suite = TestSuite(
-        id="example:TestSuite",
-        test_suite_specification=test_suite_specification
-    )
-    tests = TestCaseGenerator(
-        test_suite=test_suite
-    )
-    return tests
+class TestCaseGeneratorWrapper:
+    
+    def __init__(self, target_test_suite_class=TestSuite):
+        """
+        TestCaseGeneratorWrapper constructor
+        """
+        self.target_test_suite_class = target_test_suite_class
+        self.test_suite_specification = TestSuiteSpecification(
+            id="example:json_sample_test_assets",
+            test_data_file_locator=SAMPLE_TEST_ASSET_FILE,
+            test_data_file_format=FileFormatEnum.JSON
+        )
+        self.test_suite = self.target_test_suite_class(
+            id=f"example:{target_test_suite_class.__class__.__name__}",
+            test_suite_specification=self.test_suite_specification
+        )
+    
+    def create_test_case_generator(self) -> TestCaseGenerator:
+        """
+        TestCaseGenerator factory
+        """
+        tests = TestCaseGenerator(
+            test_suite=self.test_suite
+        )
+        return tests
 
 
 class TestTestCaseGenerator(unittest.TestCase):
-    """Testing Test Suite Factory functionality."""
+    """Testing Test Case Generator functionality."""
 
-    def test_factory_creation(self):
-        """Test Suite Factory creation test."""
-        create_test_case_generator()
+    def test_default_generator_wrapper(self):
+        """Test Suite Generator creation test."""
+        test_suite_wrapper = TestCaseGeneratorWrapper()
+        test_suite_wrapper.create_test_case_generator()
+        isinstance(test_suite_wrapper.target_test_suite_class, TestSuite)
+
+    def test_acceptance_test_case_generator_wrapper(self):
+        """Acceptance Test Suite Wrapper creation test."""
+        test_suite_wrapper = TestCaseGeneratorWrapper(target_test_suite_class=AcceptanceTestSuite)
+        test_suite_wrapper.create_test_case_generator()
+        isinstance(test_suite_wrapper.target_test_suite_class, AcceptanceTestSuite)
+
+    def test_generator_creation(self):
+        """Test Case Generator creation test."""
+        test_suite_wrapper = TestCaseGeneratorWrapper()
+        tests = test_suite_wrapper.create_test_case_generator()
+        isinstance(tests, TestCaseGenerator)
 
     def test_case_generator_load(self):
-        """Test Suite load test."""
-        tests = create_test_case_generator()
+        """Test Case Generator load test."""
+        test_suite_wrapper = TestCaseGeneratorWrapper()
+        tests = test_suite_wrapper.create_test_case_generator()
         for test in tests.load():
             assert test
