@@ -3,7 +3,7 @@ Unit Tests for TestSuiteFactory functionality
 """
 import unittest
 
-from src.translator_testing_model.adaptor.test_suite_factory import (
+from src.translator_testing_model.adaptor.test_case_generator import (
     TestSuiteInputException,
     TestCaseGenerator
 )
