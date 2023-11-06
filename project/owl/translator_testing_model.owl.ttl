@@ -12,10 +12,10 @@ ttm:AcceptanceTestCase a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "AcceptanceTestCase" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 1 ;
+            owl:allValuesFrom ttm:AcceptanceTestAsset ;
             owl:onProperty ttm:test_assets ],
         [ a owl:Restriction ;
-            owl:allValuesFrom ttm:AcceptanceTestAsset ;
+            owl:minCardinality 1 ;
             owl:onProperty ttm:test_assets ],
         ttm:TestCase ;
     skos:definition "See AcceptanceTestAsset above for more details." ;
@@ -80,6 +80,13 @@ ttm:answer_informal_concept a owl:ObjectProperty,
     rdfs:label "answer_informal_concept" ;
     rdfs:range linkml:String ;
     skos:definition "An answer that is returned from the test case, note: this must be combined with the expected_result to form a complete answer.  It might make sense to couple these in their own object instead of strictly sticking to the flat schema introduced by the spreadsheet here: https://docs.google.com/spreadsheets/d/1yj7zIchFeVl1OHqL_kE_pqvzNLmGml_FLbHDs-8Yvig/edit#gid=0" ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
+ttm:components a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "components" ;
+    rdfs:range ttm:ComponentEnum ;
+    skos:definition "The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:description a owl:ObjectProperty,
@@ -301,6 +308,13 @@ ttm:top_level a owl:ObjectProperty,
     skos:definition "The answer must return in these many results" ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
+ttm:trapi_template a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "trapi_template" ;
+    rdfs:range ttm:TrapiTemplateEnum ;
+    skos:definition "A template for a query, which can be used to generate a query for a test case.  note: the current enumerated values for this slot come from the Benchmarks repo config/benchmarks.json \"templates\" collection and refer to the \"name\" field of each template.  Templates themselves are currently stored in the config/[source_name]/templates directory." ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
 ttm:well_known a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "well_known" ;
@@ -346,6 +360,26 @@ ttm:TestMetadata a owl:Class,
     rdfs:subClassOf ttm:TestEntity ;
     skos:definition "Represents metadata related to (external SME, SMURF, Translator feedback,  large scale batch, etc.) like the provenance of test assets, cases and/or suites." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
+<https://w3id.org/TranslatorSRI/TranslatorTestingModel/ComponentEnum#aragorn> a owl:Class,
+        ttm:ComponentEnum ;
+    rdfs:label "aragorn" .
+
+<https://w3id.org/TranslatorSRI/TranslatorTestingModel/ComponentEnum#arax> a owl:Class,
+        ttm:ComponentEnum ;
+    rdfs:label "arax" .
+
+<https://w3id.org/TranslatorSRI/TranslatorTestingModel/ComponentEnum#ars> a owl:Class,
+        ttm:ComponentEnum ;
+    rdfs:label "ars" .
+
+<https://w3id.org/TranslatorSRI/TranslatorTestingModel/ComponentEnum#bte> a owl:Class,
+        ttm:ComponentEnum ;
+    rdfs:label "bte" .
+
+<https://w3id.org/TranslatorSRI/TranslatorTestingModel/ComponentEnum#improving> a owl:Class,
+        ttm:ComponentEnum ;
+    rdfs:label "improving" .
 
 <https://w3id.org/TranslatorSRI/TranslatorTestingModel/DirectionEnum#decreased> a owl:Class,
         ttm:DirectionEnum ;
@@ -535,6 +569,26 @@ ttm:QueryTypeEnum a owl:Class,
         ttm:TestSourceEnum ;
     rdfs:label "TranslatorTeam" .
 
+<https://w3id.org/TranslatorSRI/TranslatorTestingModel/TrapiTemplateEnum#ameliorates> a owl:Class,
+        ttm:TrapiTemplateEnum ;
+    rdfs:label "ameliorates" .
+
+<https://w3id.org/TranslatorSRI/TranslatorTestingModel/TrapiTemplateEnum#drug-to-gene> a owl:Class,
+        ttm:TrapiTemplateEnum ;
+    rdfs:label "drug-to-gene" .
+
+<https://w3id.org/TranslatorSRI/TranslatorTestingModel/TrapiTemplateEnum#drug_treats_rare_disease> a owl:Class,
+        ttm:TrapiTemplateEnum ;
+    rdfs:label "drug_treats_rare_disease" .
+
+<https://w3id.org/TranslatorSRI/TranslatorTestingModel/TrapiTemplateEnum#three_hop> a owl:Class,
+        ttm:TrapiTemplateEnum ;
+    rdfs:label "three_hop" .
+
+<https://w3id.org/TranslatorSRI/TranslatorTestingModel/TrapiTemplateEnum#treats> a owl:Class,
+        ttm:TrapiTemplateEnum ;
+    rdfs:label "treats" .
+
 ttm:runner_settings a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "runner_settings" ;
@@ -568,23 +622,23 @@ ttm:TestAsset a owl:Class,
             owl:minCardinality 1 ;
             owl:onProperty ttm:runner_settings ],
         [ a owl:Restriction ;
-            owl:allValuesFrom linkml:Uriorcurie ;
+            owl:minCardinality 0 ;
             owl:onProperty ttm:id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:tags ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
             owl:onProperty ttm:tags ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:allValuesFrom linkml:Uriorcurie ;
             owl:onProperty ttm:id ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
             owl:onProperty ttm:runner_settings ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:maxCardinality 1 ;
             owl:onProperty ttm:id ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:tags ],
         ttm:TestEntity ;
     skos:definition "Represents a Test Asset, which is a single specific instance of TestCase-agnostic semantic parameters representing the specification of a Translator test target with inputs and (expected) outputs." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
@@ -641,25 +695,25 @@ ttm:TestCase a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "TestCase" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty ttm:test_assets ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty ttm:tags ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:tags ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:test_assets ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:test_case_type ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty ttm:test_case_type ],
         [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty ttm:test_assets ],
+        [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:test_case_type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:test_assets ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:tags ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty ttm:test_case_type ],
         ttm:TestEntity ;
     skos:definition "Represents a single enumerated instance of Test Case, derived from a  given collection of one or more TestAsset instances (the value of the 'test_assets' slot) which define the 'inputs' and 'outputs' of the TestCase, used to probe a particular test condition." ;
@@ -672,6 +726,15 @@ ttm:TestPersonaEnum a owl:Class,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestPersonaEnum#Clinical>,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestPersonaEnum#LookUp>,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestPersonaEnum#Mechanistic> .
+
+ttm:ComponentEnum a owl:Class,
+        linkml:EnumDefinition ;
+    owl:unionOf ( <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ComponentEnum#arax> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ComponentEnum#aragorn> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ComponentEnum#ars> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ComponentEnum#bte> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ComponentEnum#improving> ) ;
+    linkml:permissible_values <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ComponentEnum#aragorn>,
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ComponentEnum#arax>,
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ComponentEnum#ars>,
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ComponentEnum#bte>,
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ComponentEnum#improving> .
 
 ttm:TestCaseTypeEnum a owl:Class,
         linkml:EnumDefinition ;
@@ -695,6 +758,15 @@ ttm:TestEnvEnum a owl:Class,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#dev>,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#prod>,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#test> .
+
+ttm:TrapiTemplateEnum a owl:Class,
+        linkml:EnumDefinition ;
+    owl:unionOf ( <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TrapiTemplateEnum#ameliorates> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TrapiTemplateEnum#treats> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TrapiTemplateEnum#three_hop> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TrapiTemplateEnum#drug_treats_rare_disease> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TrapiTemplateEnum#drug-to-gene> ) ;
+    linkml:permissible_values <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TrapiTemplateEnum#ameliorates>,
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TrapiTemplateEnum#drug-to-gene>,
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TrapiTemplateEnum#drug_treats_rare_disease>,
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TrapiTemplateEnum#three_hop>,
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TrapiTemplateEnum#treats> .
 
 ttm:TestIssueEnum a owl:Class,
         linkml:EnumDefinition ;

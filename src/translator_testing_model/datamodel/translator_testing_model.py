@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2023-11-01T20:10:12
+# Generation date: 2023-11-06T14:51:14
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -373,6 +373,8 @@ class TestCase(TestEntity):
     test_case_type: Optional[Union[str, "TestCaseTypeEnum"]] = None
     query_type: Optional[Union[str, "QueryTypeEnum"]] = None
     preconditions: Optional[Union[Union[str, PreconditionId], List[Union[str, PreconditionId]]]] = empty_list()
+    trapi_template: Optional[Union[str, "TrapiTemplateEnum"]] = None
+    components: Optional[Union[Union[str, "ComponentEnum"], List[Union[str, "ComponentEnum"]]]] = empty_list()
     tags: Optional[Union[str, List[str]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
@@ -397,6 +399,13 @@ class TestCase(TestEntity):
         if not isinstance(self.preconditions, list):
             self.preconditions = [self.preconditions] if self.preconditions is not None else []
         self.preconditions = [v if isinstance(v, PreconditionId) else PreconditionId(v) for v in self.preconditions]
+
+        if self.trapi_template is not None and not isinstance(self.trapi_template, TrapiTemplateEnum):
+            self.trapi_template = TrapiTemplateEnum(self.trapi_template)
+
+        if not isinstance(self.components, list):
+            self.components = [self.components] if self.components is not None else []
+        self.components = [v if isinstance(v, ComponentEnum) else ComponentEnum(v) for v in self.components]
 
         if not isinstance(self.tags, list):
             self.tags = [self.tags] if self.tags is not None else []
@@ -904,9 +913,43 @@ class DirectionEnum(EnumDefinitionImpl):
         name="DirectionEnum",
     )
 
+class TrapiTemplateEnum(EnumDefinitionImpl):
+
+    ameliorates = PermissibleValue(text="ameliorates")
+    treats = PermissibleValue(text="treats")
+    three_hop = PermissibleValue(text="three_hop")
+    drug_treats_rare_disease = PermissibleValue(text="drug_treats_rare_disease")
+
+    _defn = EnumDefinition(
+        name="TrapiTemplateEnum",
+    )
+
+    @classmethod
+    def _addvals(cls):
+        setattr(cls, "drug-to-gene",
+            PermissibleValue(text="drug-to-gene"))
+
+class ComponentEnum(EnumDefinitionImpl):
+
+    arax = PermissibleValue(text="arax")
+    aragorn = PermissibleValue(text="aragorn")
+    ars = PermissibleValue(text="ars")
+    bte = PermissibleValue(text="bte")
+    improving = PermissibleValue(text="improving")
+
+    _defn = EnumDefinition(
+        name="ComponentEnum",
+    )
+
 # Slots
 class slots:
     pass
+
+slots.components = Slot(uri=TTM.components, name="components", curie=TTM.curie('components'),
+                   model_uri=TTM.components, domain=None, range=Optional[Union[Union[str, "ComponentEnum"], List[Union[str, "ComponentEnum"]]]])
+
+slots.trapi_template = Slot(uri=TTM.trapi_template, name="trapi_template", curie=TTM.curie('trapi_template'),
+                   model_uri=TTM.trapi_template, domain=None, range=Optional[Union[str, "TrapiTemplateEnum"]])
 
 slots.runner_settings = Slot(uri=TTM.runner_settings, name="runner_settings", curie=TTM.curie('runner_settings'),
                    model_uri=TTM.runner_settings, domain=None, range=Union[str, List[str]])

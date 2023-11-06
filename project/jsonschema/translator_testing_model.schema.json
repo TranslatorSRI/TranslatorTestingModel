@@ -117,6 +117,13 @@
             "additionalProperties": false,
             "description": "See AcceptanceTestAsset above for more details.",
             "properties": {
+                "components": {
+                    "description": "The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.",
+                    "items": {
+                        "$ref": "#/$defs/ComponentEnum"
+                    },
+                    "type": "array"
+                },
                 "description": {
                     "description": "A human-readable description for a Test Entity",
                     "type": "string"
@@ -160,6 +167,10 @@
                 "test_env": {
                     "$ref": "#/$defs/TestEnvEnum",
                     "description": "Deployment environment within which the associated TestSuite is run."
+                },
+                "trapi_template": {
+                    "$ref": "#/$defs/TrapiTemplateEnum",
+                    "description": "A template for a query, which can be used to generate a query for a test case.  note: the current enumerated values for this slot come from the Benchmarks repo config/benchmarks.json \"templates\" collection and refer to the \"name\" field of each template.  Templates themselves are currently stored in the config/[source_name]/templates directory."
                 }
             },
             "required": [
@@ -228,6 +239,13 @@
             "additionalProperties": false,
             "description": "TRAPI and Biolink Model standards compliance test",
             "properties": {
+                "components": {
+                    "description": "The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.",
+                    "items": {
+                        "$ref": "#/$defs/ComponentEnum"
+                    },
+                    "type": "array"
+                },
                 "description": {
                     "description": "A human-readable description for a Test Entity",
                     "type": "string"
@@ -271,6 +289,10 @@
                 "test_env": {
                     "$ref": "#/$defs/TestEnvEnum",
                     "description": "Deployment environment within which the associated TestSuite is run."
+                },
+                "trapi_template": {
+                    "$ref": "#/$defs/TrapiTemplateEnum",
+                    "description": "A template for a query, which can be used to generate a query for a test case.  note: the current enumerated values for this slot come from the Benchmarks repo config/benchmarks.json \"templates\" collection and refer to the \"name\" field of each template.  Templates themselves are currently stored in the config/[source_name]/templates directory."
                 }
             },
             "required": [
@@ -279,6 +301,18 @@
             ],
             "title": "ComplianceTestCase",
             "type": "object"
+        },
+        "ComponentEnum": {
+            "description": "",
+            "enum": [
+                "arax",
+                "aragorn",
+                "ars",
+                "bte",
+                "improving"
+            ],
+            "title": "ComponentEnum",
+            "type": "string"
         },
         "DirectionEnum": {
             "description": "",
@@ -317,6 +351,13 @@
             "additionalProperties": false,
             "description": "Knowledge Graph navigation integration test",
             "properties": {
+                "components": {
+                    "description": "The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.",
+                    "items": {
+                        "$ref": "#/$defs/ComponentEnum"
+                    },
+                    "type": "array"
+                },
                 "description": {
                     "description": "A human-readable description for a Test Entity",
                     "type": "string"
@@ -360,6 +401,10 @@
                 "test_env": {
                     "$ref": "#/$defs/TestEnvEnum",
                     "description": "Deployment environment within which the associated TestSuite is run."
+                },
+                "trapi_template": {
+                    "$ref": "#/$defs/TrapiTemplateEnum",
+                    "description": "A template for a query, which can be used to generate a query for a test case.  note: the current enumerated values for this slot come from the Benchmarks repo config/benchmarks.json \"templates\" collection and refer to the \"name\" field of each template.  Templates themselves are currently stored in the config/[source_name]/templates directory."
                 }
             },
             "required": [
@@ -382,6 +427,13 @@
             "additionalProperties": false,
             "description": "'One Hop' Knowledge Graph navigation integration test",
             "properties": {
+                "components": {
+                    "description": "The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.",
+                    "items": {
+                        "$ref": "#/$defs/ComponentEnum"
+                    },
+                    "type": "array"
+                },
                 "description": {
                     "description": "A human-readable description for a Test Entity",
                     "type": "string"
@@ -425,6 +477,10 @@
                 "test_env": {
                     "$ref": "#/$defs/TestEnvEnum",
                     "description": "Deployment environment within which the associated TestSuite is run."
+                },
+                "trapi_template": {
+                    "$ref": "#/$defs/TrapiTemplateEnum",
+                    "description": "A template for a query, which can be used to generate a query for a test case.  note: the current enumerated values for this slot come from the Benchmarks repo config/benchmarks.json \"templates\" collection and refer to the \"name\" field of each template.  Templates themselves are currently stored in the config/[source_name]/templates directory."
                 }
             },
             "required": [
@@ -517,6 +573,13 @@
             "additionalProperties": false,
             "description": "Assumed additional model from Shervin's runner JSON here as an example.  This schema is not yet complete.",
             "properties": {
+                "components": {
+                    "description": "The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.",
+                    "items": {
+                        "$ref": "#/$defs/ComponentEnum"
+                    },
+                    "type": "array"
+                },
                 "description": {
                     "description": "A human-readable description for a Test Entity",
                     "type": "string"
@@ -560,6 +623,10 @@
                 "test_env": {
                     "$ref": "#/$defs/TestEnvEnum",
                     "description": "Deployment environment within which the associated TestSuite is run."
+                },
+                "trapi_template": {
+                    "$ref": "#/$defs/TrapiTemplateEnum",
+                    "description": "A template for a query, which can be used to generate a query for a test case.  note: the current enumerated values for this slot come from the Benchmarks repo config/benchmarks.json \"templates\" collection and refer to the \"name\" field of each template.  Templates themselves are currently stored in the config/[source_name]/templates directory."
                 }
             },
             "required": [
@@ -712,6 +779,13 @@
             "additionalProperties": false,
             "description": "Represents a single enumerated instance of Test Case, derived from a  given collection of one or more TestAsset instances (the value of the 'test_assets' slot) which define the 'inputs' and 'outputs' of the TestCase, used to probe a particular test condition.",
             "properties": {
+                "components": {
+                    "description": "The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.",
+                    "items": {
+                        "$ref": "#/$defs/ComponentEnum"
+                    },
+                    "type": "array"
+                },
                 "description": {
                     "description": "A human-readable description for a Test Entity",
                     "type": "string"
@@ -755,6 +829,10 @@
                 "test_env": {
                     "$ref": "#/$defs/TestEnvEnum",
                     "description": "Deployment environment within which the associated TestSuite is run."
+                },
+                "trapi_template": {
+                    "$ref": "#/$defs/TrapiTemplateEnum",
+                    "description": "A template for a query, which can be used to generate a query for a test case.  note: the current enumerated values for this slot come from the Benchmarks repo config/benchmarks.json \"templates\" collection and refer to the \"name\" field of each template.  Templates themselves are currently stored in the config/[source_name]/templates directory."
                 }
             },
             "required": [
@@ -810,6 +888,13 @@
             "additionalProperties": false,
             "description": "Represents a single enumerated instance of Test Case, derived from a  given collection of one or more TestAsset instances (the value of the 'test_assets' slot) which define the 'inputs' and 'outputs' of the TestCase, used to probe a particular test condition.",
             "properties": {
+                "components": {
+                    "description": "The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.",
+                    "items": {
+                        "$ref": "#/$defs/ComponentEnum"
+                    },
+                    "type": "array"
+                },
                 "description": {
                     "description": "A human-readable description for a Test Entity",
                     "type": "string"
@@ -853,6 +938,10 @@
                 "test_env": {
                     "$ref": "#/$defs/TestEnvEnum",
                     "description": "Deployment environment within which the associated TestSuite is run."
+                },
+                "trapi_template": {
+                    "$ref": "#/$defs/TrapiTemplateEnum",
+                    "description": "A template for a query, which can be used to generate a query for a test case.  note: the current enumerated values for this slot come from the Benchmarks repo config/benchmarks.json \"templates\" collection and refer to the \"name\" field of each template.  Templates themselves are currently stored in the config/[source_name]/templates directory."
                 }
             },
             "required": [
@@ -1082,6 +1171,18 @@
             ],
             "title": "TestSuite",
             "type": "object"
+        },
+        "TrapiTemplateEnum": {
+            "description": "",
+            "enum": [
+                "ameliorates",
+                "treats",
+                "three_hop",
+                "drug_treats_rare_disease",
+                "drug-to-gene"
+            ],
+            "title": "TrapiTemplateEnum",
+            "type": "string"
         }
     },
     "$id": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
