@@ -25,6 +25,10 @@ imports:
 
 classes:
 
+  ##################
+  # General Models #
+  ##################
+
   TestEntity:
     description: >-
       Abstract global 'identification' class shared as a parent with
@@ -46,6 +50,10 @@ classes:
       - test_source
       - test_reference
       - test_objective
+
+  #####################
+  # Test Asset Models #
+  #####################
 
   TestAsset:
     description: >-
@@ -109,6 +117,10 @@ classes:
       subject-predicate-object edge that can be used for testing.
     is_a: TestAsset
 
+  ####################
+  # Test Case Models #
+  ####################
+
   Precondition:
     description: >-
       Represents a precondition for a TestCase
@@ -136,7 +148,7 @@ classes:
           membership in 'test_assets' slot ("Block List") collection.
       tags:
         description: >-
-          One or more 'tags' slot values (inherited from TestEntity) should generally
+          One or more 'tags' slot values (slot inherited from TestEntity) should generally
           be defined as filters to specify TestAsset membership in a "Block List" collection.
 
   AcceptanceTestCase:
@@ -179,6 +191,10 @@ classes:
 #      test_assets:
 #        range: OneHopTestAsset
 
+  #####################
+  # Test Suite Models #
+  #####################
+
   TestSuite:
     is_a: TestEntity
     description: >-
@@ -218,15 +234,61 @@ classes:
       - test_data_file_locator
       - test_data_file_format
 
+  ###################
+  # Test Run Models #
+  ###################
+
+  TestRunParameter:
+    description: >-
+      A single 'tag = value' pair (where 'value' is a simple string).
+    slots:
+      - parameter
+      - value
+
+  TestRunnerConfiguration:
+    description: >-
+      General configuration parameters and test data input for a single invocation of a TestRunner.
+    is_a: TestEntity
+    slots:
+      - test_run_parameters
+      - test_entities
+    slot_usage:
+      tags:
+        description: >-
+          One or more 'tags' slot values (slot inherited from TestEntity) should generally identify the
+          TestRunner(s) which can run the tests implied by all the instances specified in this configuration.
+      test_entities:
+        description: >-
+          Different TestRunners may expect specific kinds of TestEntity as input.
+          These 'test_entities' one or more instances of TestAsset, TestCase or TestSuite.
+
+  TestRunSession:
+    description: >-
+      A single invocation of a TestRunner.
+    is_a: TestEntity
+    slots:
+      - test_runner_configuration
+      - test_case_results
+      - timestamp
+    slot_usage:
+      id:
+        description: >-
+          Session identifier of the TestRun.
+        range: uriorcurie
+
   TestCaseResult:
     description: >-
-      Wrapper for the outcome of a TestRunner executing one TestCase
+      Wrapper for the outcome of a TestRunner running a one specific TestCase.
     is_a: TestEntity
     slots:
       - test_suite_id
       - test_case
       - test_case_result
-      - timestamp
+
+
+###############
+# Model slots #
+###############
 
 slots:
 
@@ -460,6 +522,46 @@ slots:
     range: Precondition
     multivalued: true
 
+  timestamp:
+    description: >-
+      Date time when a given entity was created.
+    range: datetime
+
+  parameter:
+    description: >-
+      Name of a TestParameter.
+
+  value:
+    description: >-
+      (String) value of a TestParameter.
+
+  test_entities:
+    description: >-
+      One or more instances of TestEntity, generally of class TestAsset, TestCase or TestSuite.
+    range: TestEntity
+    multivalued: true
+    inlined: true
+
+  test_run_parameters:
+    description: >-
+      One or more instances of TestRunParameter, forming a part of a TestRunnerConfiguration
+      and that inform the TestHarness and TestRunners about the target characteristics of a TestRun
+    range: TestRunParameter
+    multivalued: true
+    inlined: true
+
+  test_runner_configuration:
+    description: >-
+      General TestRunner (metadata) configuration parameters to set up a TestRun.
+    range: TestRunnerConfiguration
+
+  test_case_results:
+    description: >-
+      One or more instances of TestCaseResult.
+    range: TestCaseResult
+    multivalued: true
+    inlined: true
+
   test_suite_id:
     description: >-
       CURIE id of a TestSuite registered in the system.
@@ -475,11 +577,6 @@ slots:
     description: >-
       Encoded result of a single test run of a given test case
     range: TestCaseResultEnum
-
-  timestamp:
-    description: >-
-      Date time when a given entity was created.
-    range: datetime
 
 enums:
 

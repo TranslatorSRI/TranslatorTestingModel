@@ -140,7 +140,7 @@
                     "description": "Type of TestCase query."
                 },
                 "tags": {
-                    "description": "One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection.",
+                    "description": "One or more 'tags' slot values (slot inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection.",
                     "items": {
                         "type": "string"
                     },
@@ -247,7 +247,7 @@
                     "description": "Type of TestCase query."
                 },
                 "tags": {
-                    "description": "One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection.",
+                    "description": "One or more 'tags' slot values (slot inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection.",
                     "items": {
                         "type": "string"
                     },
@@ -342,7 +342,7 @@
                     "description": "Type of TestCase query."
                 },
                 "tags": {
-                    "description": "One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection.",
+                    "description": "One or more 'tags' slot values (slot inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection.",
                     "items": {
                         "type": "string"
                     },
@@ -403,7 +403,7 @@
                     "description": "Type of TestCase query."
                 },
                 "tags": {
-                    "description": "One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection.",
+                    "description": "One or more 'tags' slot values (slot inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection.",
                     "items": {
                         "type": "string"
                     },
@@ -534,7 +534,7 @@
                     "description": "Type of TestCase query."
                 },
                 "tags": {
-                    "description": "One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection.",
+                    "description": "One or more 'tags' slot values (slot inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection.",
                     "items": {
                         "type": "string"
                     },
@@ -725,7 +725,7 @@
                     "description": "Type of TestCase query."
                 },
                 "tags": {
-                    "description": "One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection.",
+                    "description": "One or more 'tags' slot values (slot inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection.",
                     "items": {
                         "type": "string"
                     },
@@ -752,7 +752,7 @@
         },
         "TestCaseResult": {
             "additionalProperties": false,
-            "description": "Wrapper for the outcome of a TestRunner executing one TestCase",
+            "description": "Wrapper for the outcome of a TestRunner running a one specific TestCase.",
             "properties": {
                 "description": {
                     "description": "A human-readable description for a Test Entity",
@@ -784,11 +784,6 @@
                 "test_suite_id": {
                     "description": "CURIE id of a TestSuite registered in the system.",
                     "type": "string"
-                },
-                "timestamp": {
-                    "description": "Date time when a given entity was created.",
-                    "format": "date-time",
-                    "type": "string"
                 }
             },
             "required": [
@@ -806,6 +801,46 @@
             ],
             "title": "TestCaseResultEnum",
             "type": "string"
+        },
+        "TestCaseResult__identifier_optional": {
+            "additionalProperties": false,
+            "description": "Wrapper for the outcome of a TestRunner running a one specific TestCase.",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a Test Entity",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a Test Entity",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a Test Entity",
+                    "type": "string"
+                },
+                "tags": {
+                    "description": "A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "test_case": {
+                    "$ref": "#/$defs/TestCase",
+                    "description": "Slot referencing a single TestCase."
+                },
+                "test_case_result": {
+                    "$ref": "#/$defs/TestCaseResultEnum",
+                    "description": "Encoded result of a single test run of a given test case"
+                },
+                "test_suite_id": {
+                    "description": "CURIE id of a TestSuite registered in the system.",
+                    "type": "string"
+                }
+            },
+            "required": [],
+            "title": "TestCaseResult",
+            "type": "object"
         },
         "TestCase__identifier_optional": {
             "additionalProperties": false,
@@ -834,7 +869,7 @@
                     "description": "Type of TestCase query."
                 },
                 "tags": {
-                    "description": "One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection.",
+                    "description": "One or more 'tags' slot values (slot inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection.",
                     "items": {
                         "type": "string"
                     },
@@ -1016,6 +1051,126 @@
             ],
             "title": "TestPersonaEnum",
             "type": "string"
+        },
+        "TestRunParameter": {
+            "additionalProperties": false,
+            "description": "A single 'tag = value' pair (where 'value' is a simple string).",
+            "properties": {
+                "parameter": {
+                    "description": "Name of a TestParameter.",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "(String) value of a TestParameter.",
+                    "type": "string"
+                }
+            },
+            "title": "TestRunParameter",
+            "type": "object"
+        },
+        "TestRunSession": {
+            "additionalProperties": false,
+            "description": "A single invocation of a TestRunner.",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a Test Entity",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "Session identifier of the TestRun.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a Test Entity",
+                    "type": "string"
+                },
+                "tags": {
+                    "description": "A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "test_case_results": {
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/TestCaseResult__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "description": "One or more instances of TestCaseResult.",
+                    "type": "object"
+                },
+                "test_runner_configuration": {
+                    "description": "General TestRunner (metadata) configuration parameters to set up a TestRun.",
+                    "type": "string"
+                },
+                "timestamp": {
+                    "description": "Date time when a given entity was created.",
+                    "format": "date-time",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "TestRunSession",
+            "type": "object"
+        },
+        "TestRunnerConfiguration": {
+            "additionalProperties": false,
+            "description": "General configuration parameters and test data input for a single invocation of a TestRunner.",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a Test Entity",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a Test Entity",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a Test Entity",
+                    "type": "string"
+                },
+                "tags": {
+                    "description": "One or more 'tags' slot values (slot inherited from TestEntity) should generally identify the TestRunner(s) which can run the tests implied by all the instances specified in this configuration.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "test_entities": {
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/TestEntity__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "description": "Different TestRunners may expect specific kinds of TestEntity as input. These 'test_entities' one or more instances of TestAsset, TestCase or TestSuite.",
+                    "type": "object"
+                },
+                "test_run_parameters": {
+                    "description": "One or more instances of TestRunParameter, forming a part of a TestRunnerConfiguration and that inform the TestHarness and TestRunners about the target characteristics of a TestRun",
+                    "items": {
+                        "$ref": "#/$defs/TestRunParameter"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "TestRunnerConfiguration",
+            "type": "object"
         },
         "TestSourceEnum": {
             "description": "",

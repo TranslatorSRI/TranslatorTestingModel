@@ -163,7 +163,7 @@ message TestCase
  repeated  precondition preconditions = 0
  repeated  string tags = 0
  }
-// Wrapper for the outcome of a TestRunner executing one TestCase
+// Wrapper for the outcome of a TestRunner running a one specific TestCase.
 message TestCaseResult
  {
   uriorcurie id = 0
@@ -173,7 +173,6 @@ message TestCaseResult
   uriorcurie testSuiteId = 0
   testCase testCase = 0
   testCaseResultEnum testCaseResult = 0
-  datetime timestamp = 0
  }
 // Represents a single Biolink Model compliant instance of a subject-predicate-object edge that can be used for testing.
 message TestEdgeData
@@ -205,6 +204,33 @@ message TestMetadata
   testSourceEnum testSource = 0
   uriorcurie testReference = 0
   testObjectiveEnum testObjective = 0
+ }
+// General configuration parameters and test data input for a single invocation of a TestRunner.
+message TestRunnerConfiguration
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+ repeated  testRunParameter testRunParameters = 0
+ repeated  testEntity testEntities = 0
+ repeated  string tags = 0
+ }
+// A single 'tag = value' pair (where 'value' is a simple string).
+message TestRunParameter
+ {
+  string parameter = 0
+  string value = 0
+ }
+// A single invocation of a TestRunner.
+message TestRunSession
+ {
+  string name = 0
+  string description = 0
+ repeated  string tags = 0
+  testRunnerConfiguration testRunnerConfiguration = 0
+ repeated  testCaseResult testCaseResults = 0
+  datetime timestamp = 0
+  uriorcurie id = 0
  }
 // Specification of a set of Test Cases, one of either with a static list of 'test_cases' or a dynamic 'test_suite_specification' slot values. Note: at least one slot or the other, but generally not both(?) needs to be present.
 message TestSuite

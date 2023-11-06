@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2023-11-06T13:16:31
+# Generation date: 2023-11-06T14:39:51
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -108,6 +108,14 @@ class OneHopTestSuiteId(TestSuiteId):
 
 
 class TestSuiteSpecificationId(TestEntityId):
+    pass
+
+
+class TestRunnerConfigurationId(TestEntityId):
+    pass
+
+
+class TestRunSessionId(TestEntityId):
     pass
 
 
@@ -702,9 +710,104 @@ class TestSuiteSpecification(TestEntity):
 
 
 @dataclass
+class TestRunParameter(YAMLRoot):
+    """
+    A single 'tag = value' pair (where 'value' is a simple string).
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = TTM["TestRunParameter"]
+    class_class_curie: ClassVar[str] = "ttm:TestRunParameter"
+    class_name: ClassVar[str] = "TestRunParameter"
+    class_model_uri: ClassVar[URIRef] = TTM.TestRunParameter
+
+    parameter: Optional[str] = None
+    value: Optional[str] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.parameter is not None and not isinstance(self.parameter, str):
+            self.parameter = str(self.parameter)
+
+        if self.value is not None and not isinstance(self.value, str):
+            self.value = str(self.value)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class TestRunnerConfiguration(TestEntity):
+    """
+    General configuration parameters and test data input for a single invocation of a TestRunner.
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = TTM["TestRunnerConfiguration"]
+    class_class_curie: ClassVar[str] = "ttm:TestRunnerConfiguration"
+    class_name: ClassVar[str] = "TestRunnerConfiguration"
+    class_model_uri: ClassVar[URIRef] = TTM.TestRunnerConfiguration
+
+    id: Union[str, TestRunnerConfigurationId] = None
+    test_run_parameters: Optional[Union[Union[dict, TestRunParameter], List[Union[dict, TestRunParameter]]]] = empty_list()
+    test_entities: Optional[Union[Dict[Union[str, TestEntityId], Union[dict, TestEntity]], List[Union[dict, TestEntity]]]] = empty_dict()
+    tags: Optional[Union[str, List[str]]] = empty_list()
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, TestRunnerConfigurationId):
+            self.id = TestRunnerConfigurationId(self.id)
+
+        if not isinstance(self.test_run_parameters, list):
+            self.test_run_parameters = [self.test_run_parameters] if self.test_run_parameters is not None else []
+        self.test_run_parameters = [v if isinstance(v, TestRunParameter) else TestRunParameter(**as_dict(v)) for v in self.test_run_parameters]
+
+        self._normalize_inlined_as_dict(slot_name="test_entities", slot_type=TestEntity, key_name="id", keyed=True)
+
+        if not isinstance(self.tags, list):
+            self.tags = [self.tags] if self.tags is not None else []
+        self.tags = [v if isinstance(v, str) else str(v) for v in self.tags]
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class TestRunSession(TestEntity):
+    """
+    A single invocation of a TestRunner.
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = TTM["TestRunSession"]
+    class_class_curie: ClassVar[str] = "ttm:TestRunSession"
+    class_name: ClassVar[str] = "TestRunSession"
+    class_model_uri: ClassVar[URIRef] = TTM.TestRunSession
+
+    id: Union[str, TestRunSessionId] = None
+    test_runner_configuration: Optional[Union[str, TestRunnerConfigurationId]] = None
+    test_case_results: Optional[Union[Dict[Union[str, TestCaseResultId], Union[dict, "TestCaseResult"]], List[Union[dict, "TestCaseResult"]]]] = empty_dict()
+    timestamp: Optional[Union[str, XSDDateTime]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, TestRunSessionId):
+            self.id = TestRunSessionId(self.id)
+
+        if self.test_runner_configuration is not None and not isinstance(self.test_runner_configuration, TestRunnerConfigurationId):
+            self.test_runner_configuration = TestRunnerConfigurationId(self.test_runner_configuration)
+
+        self._normalize_inlined_as_dict(slot_name="test_case_results", slot_type=TestCaseResult, key_name="id", keyed=True)
+
+        if self.timestamp is not None and not isinstance(self.timestamp, XSDDateTime):
+            self.timestamp = XSDDateTime(self.timestamp)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
 class TestCaseResult(TestEntity):
     """
-    Wrapper for the outcome of a TestRunner executing one TestCase
+    Wrapper for the outcome of a TestRunner running a one specific TestCase.
     """
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -717,7 +820,6 @@ class TestCaseResult(TestEntity):
     test_suite_id: Optional[Union[str, URIorCURIE]] = None
     test_case: Optional[Union[dict, TestCase]] = None
     test_case_result: Optional[Union[str, "TestCaseResultEnum"]] = None
-    timestamp: Optional[Union[str, XSDDateTime]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -733,9 +835,6 @@ class TestCaseResult(TestEntity):
 
         if self.test_case_result is not None and not isinstance(self.test_case_result, TestCaseResultEnum):
             self.test_case_result = TestCaseResultEnum(self.test_case_result)
-
-        if self.timestamp is not None and not isinstance(self.timestamp, XSDDateTime):
-            self.timestamp = XSDDateTime(self.timestamp)
 
         super().__post_init__(**kwargs)
 
@@ -1072,6 +1171,27 @@ slots.query_type = Slot(uri=TTM.query_type, name="query_type", curie=TTM.curie('
 slots.preconditions = Slot(uri=TTM.preconditions, name="preconditions", curie=TTM.curie('preconditions'),
                    model_uri=TTM.preconditions, domain=None, range=Optional[Union[Union[str, PreconditionId], List[Union[str, PreconditionId]]]])
 
+slots.timestamp = Slot(uri=TTM.timestamp, name="timestamp", curie=TTM.curie('timestamp'),
+                   model_uri=TTM.timestamp, domain=None, range=Optional[Union[str, XSDDateTime]])
+
+slots.parameter = Slot(uri=TTM.parameter, name="parameter", curie=TTM.curie('parameter'),
+                   model_uri=TTM.parameter, domain=None, range=Optional[str])
+
+slots.value = Slot(uri=TTM.value, name="value", curie=TTM.curie('value'),
+                   model_uri=TTM.value, domain=None, range=Optional[str])
+
+slots.test_entities = Slot(uri=TTM.test_entities, name="test_entities", curie=TTM.curie('test_entities'),
+                   model_uri=TTM.test_entities, domain=None, range=Optional[Union[Dict[Union[str, TestEntityId], Union[dict, TestEntity]], List[Union[dict, TestEntity]]]])
+
+slots.test_run_parameters = Slot(uri=TTM.test_run_parameters, name="test_run_parameters", curie=TTM.curie('test_run_parameters'),
+                   model_uri=TTM.test_run_parameters, domain=None, range=Optional[Union[Union[dict, TestRunParameter], List[Union[dict, TestRunParameter]]]])
+
+slots.test_runner_configuration = Slot(uri=TTM.test_runner_configuration, name="test_runner_configuration", curie=TTM.curie('test_runner_configuration'),
+                   model_uri=TTM.test_runner_configuration, domain=None, range=Optional[Union[str, TestRunnerConfigurationId]])
+
+slots.test_case_results = Slot(uri=TTM.test_case_results, name="test_case_results", curie=TTM.curie('test_case_results'),
+                   model_uri=TTM.test_case_results, domain=None, range=Optional[Union[Dict[Union[str, TestCaseResultId], Union[dict, TestCaseResult]], List[Union[dict, TestCaseResult]]]])
+
 slots.test_suite_id = Slot(uri=TTM.test_suite_id, name="test_suite_id", curie=TTM.curie('test_suite_id'),
                    model_uri=TTM.test_suite_id, domain=None, range=Optional[Union[str, URIorCURIE]])
 
@@ -1080,9 +1200,6 @@ slots.test_case = Slot(uri=TTM.test_case, name="test_case", curie=TTM.curie('tes
 
 slots.test_case_result = Slot(uri=TTM.test_case_result, name="test_case_result", curie=TTM.curie('test_case_result'),
                    model_uri=TTM.test_case_result, domain=None, range=Optional[Union[str, "TestCaseResultEnum"]])
-
-slots.timestamp = Slot(uri=TTM.timestamp, name="timestamp", curie=TTM.curie('timestamp'),
-                   model_uri=TTM.timestamp, domain=None, range=Optional[Union[str, XSDDateTime]])
 
 slots.TestAsset_id = Slot(uri=SCHEMA.identifier, name="TestAsset_id", curie=SCHEMA.curie('identifier'),
                    model_uri=TTM.TestAsset_id, domain=TestAsset, range=Union[str, TestAssetId])
@@ -1101,3 +1218,12 @@ slots.TestCase_tags = Slot(uri=SCHEMA.additionalType, name="TestCase_tags", curi
 
 slots.AcceptanceTestCase_test_assets = Slot(uri=TTM.test_assets, name="AcceptanceTestCase_test_assets", curie=TTM.curie('test_assets'),
                    model_uri=TTM.AcceptanceTestCase_test_assets, domain=AcceptanceTestCase, range=Union[Dict[Union[str, AcceptanceTestAssetId], Union[dict, AcceptanceTestAsset]], List[Union[dict, AcceptanceTestAsset]]])
+
+slots.TestRunnerConfiguration_tags = Slot(uri=SCHEMA.additionalType, name="TestRunnerConfiguration_tags", curie=SCHEMA.curie('additionalType'),
+                   model_uri=TTM.TestRunnerConfiguration_tags, domain=TestRunnerConfiguration, range=Optional[Union[str, List[str]]])
+
+slots.TestRunnerConfiguration_test_entities = Slot(uri=TTM.test_entities, name="TestRunnerConfiguration_test_entities", curie=TTM.curie('test_entities'),
+                   model_uri=TTM.TestRunnerConfiguration_test_entities, domain=TestRunnerConfiguration, range=Optional[Union[Dict[Union[str, TestEntityId], Union[dict, TestEntity]], List[Union[dict, TestEntity]]]])
+
+slots.TestRunSession_id = Slot(uri=SCHEMA.identifier, name="TestRunSession_id", curie=SCHEMA.curie('identifier'),
+                   model_uri=TTM.TestRunSession_id, domain=TestRunSession, range=Union[str, TestRunSessionId])

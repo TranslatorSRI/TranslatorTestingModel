@@ -177,7 +177,6 @@ type TestCaseResult
     testSuiteId: Uriorcurie
     testCase: TestCase
     testCaseResult: TestCaseResultEnum
-    timestamp: Datetime
   }
 
 type TestEdgeData
@@ -217,6 +216,33 @@ type TestMetadata
     testSource: TestSourceEnum
     testReference: Uriorcurie
     testObjective: TestObjectiveEnum
+  }
+
+type TestRunnerConfiguration
+  {
+    id: Uriorcurie!
+    name: String
+    description: String
+    testRunParameters: [TestRunParameter]
+    testEntities: [TestEntity]
+    tags: [String]
+  }
+
+type TestRunParameter
+  {
+    parameter: String
+    value: String
+  }
+
+type TestRunSession
+  {
+    name: String
+    description: String
+    tags: [String]
+    testRunnerConfiguration: TestRunnerConfiguration
+    testCaseResults: [TestCaseResult]
+    timestamp: Datetime
+    id: Uriorcurie!
   }
 
 type TestSuite
