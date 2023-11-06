@@ -26,11 +26,12 @@ def create_test_assets_from_tsv(test_assets):
         if row.get("Query") == "":
             continue
         ta = TestAsset(id=row.get("id").replace(":", "_"),
-                       name=row.get("id"),
-                       description=row.get("id"))
+                       name=row.get("OutputName").replace(" ", "_") + "_" + row.get("Query").lower() + "_" + row.get("InputName (user choice)").replace(" ", "_"),
+                       description=row.get("OutputName").replace(" ", "_") + "_" + row.get("Query").lower() + "_" + row.get("InputName (user choice)").replace(" ", "_")
+                       )
         ta.input_id = row.get("InputID, node normalized")
         ta.input_name = row.get("InputName (user choice)")
-        ta.predicate = row.get("Query")
+        ta.predicate = row.get("Query").lower()
         ta.output_id = row.get("OutputID")
         ta.output_name = row.get("OutputName")
         ta.runner_settings = [row.get("Settings").lower()]
@@ -67,6 +68,7 @@ def create_test_cases_from_test_assets(test_assets, test_case_model):
                                     components=["ars"]
                                     )
         test_cases.append(test_case)
+        print(test_case)
     return test_cases
 
 
@@ -85,6 +87,7 @@ if __name__ == '__main__':
 
     # Create TestAsset objects
     test_assets = create_test_assets_from_tsv(tsv_data)
+    print(test_assets[0].dict())
 
     # Create TestCase objects
     test_cases = create_test_cases_from_test_assets(test_assets, TestCase)
@@ -121,22 +124,26 @@ if __name__ == '__main__':
     if response.status_code == 200:
         # Parse the response content as JSON
         data = response.json()
-        for k, v in data:
+        for k, v in data.items():
             print(k, v)
             for item in v:
-                if len(item.get("template")) > 1:
+                if len(item.get("templates")) > 1:
                     raise ValueError("More than one template found")
                 tc = TestCase(id=k,
                               name=item.get("source"),
-                              description=k+"_"+item,
-                              test_case_type="benchmark",
+                              description=k+"_"+item.get("source"),
+                              test_case_type="quantitative",
                               test_assets=[],
                               test_env="ci",
                               # note the hack here to get the template,
                               # there is only ever one, but....
-                              trapi_template=item.get("template")[0],
+                              trapi_template=item.get("templates")[0],
                               components=["ars", "arax", "bte", "improving", "aragorn"]
                               )
+                file_prefix = k+"_"+item.get("source")
+                filename = f"{file_prefix}.json"
+                with open(filename, 'w', encoding='utf-8') as file:
+                    json.dump(tc.dict(), file, ensure_ascii=False, indent=4)
 
     else:
         print(f'Failed to retrieve the file. Status code: {response.status_code}')
