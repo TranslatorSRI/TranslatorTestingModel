@@ -173,6 +173,8 @@ linkml:Sparqlpath xsd:string
              <query_type> @<QueryTypeEnum> ? ;
              <test_assets> @<TestAsset> + ;
              <preconditions> @<Precondition> * ;
+             <trapi_template> @<TrapiTemplateEnum> ? ;
+             <components> @<ComponentEnum> * ;
              schema1:additionalType @linkml:String *
           ) ;
           rdf:type [ <TestCase> ]

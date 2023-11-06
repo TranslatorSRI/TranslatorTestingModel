@@ -611,9 +611,80 @@
           "text": "decreased"
         }
       ]
+    },
+    {
+      "name": "TrapiTemplateEnum",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TrapiTemplateEnum",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "permissible_values": [
+        {
+          "text": "ameliorates"
+        },
+        {
+          "text": "treats"
+        },
+        {
+          "text": "three_hop"
+        },
+        {
+          "text": "drug_treats_rare_disease"
+        },
+        {
+          "text": "drug-to-gene"
+        }
+      ]
+    },
+    {
+      "name": "ComponentEnum",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/ComponentEnum",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "permissible_values": [
+        {
+          "text": "arax"
+        },
+        {
+          "text": "aragorn"
+        },
+        {
+          "text": "ars"
+        },
+        {
+          "text": "bte"
+        },
+        {
+          "text": "improving"
+        }
+      ]
     }
   ],
   "slots": [
+    {
+      "name": "components",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/components",
+      "description": "The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/components",
+      "multivalued": true,
+      "owner": "TestCase",
+      "domain_of": [
+        "TestCase"
+      ],
+      "range": "ComponentEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "trapi_template",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/trapi_template",
+      "description": "A template for a query, which can be used to generate a query for a test case.  note: the current enumerated values for this slot come from the Benchmarks repo config/benchmarks.json \"templates\" collection and refer to the \"name\" field of each template.  Templates themselves are currently stored in the config/[source_name]/templates directory.",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/trapi_template",
+      "owner": "TestCase",
+      "domain_of": [
+        "TestCase"
+      ],
+      "range": "TrapiTemplateEnum",
+      "@type": "SlotDefinition"
+    },
     {
       "name": "runner_settings",
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/runner_settings",
@@ -1511,6 +1582,8 @@
         "query_type",
         "TestCase_test_assets",
         "preconditions",
+        "trapi_template",
+        "components",
         "TestCase_tags"
       ],
       "slot_usage": {},
@@ -1547,6 +1620,8 @@
         "TestCase_test_case_type",
         "query_type",
         "preconditions",
+        "trapi_template",
+        "components",
         "TestCase_tags",
         "AcceptanceTestCase_test_assets"
       ],
@@ -1569,6 +1644,8 @@
         "query_type",
         "TestCase_test_assets",
         "preconditions",
+        "trapi_template",
+        "components",
         "TestCase_tags"
       ],
       "slot_usage": {},
@@ -1590,6 +1667,8 @@
         "query_type",
         "TestCase_test_assets",
         "preconditions",
+        "trapi_template",
+        "components",
         "TestCase_tags"
       ],
       "slot_usage": {},
@@ -1611,6 +1690,8 @@
         "query_type",
         "TestCase_test_assets",
         "preconditions",
+        "trapi_template",
+        "components",
         "TestCase_tags"
       ],
       "slot_usage": {},
@@ -1632,6 +1713,8 @@
         "query_type",
         "TestCase_test_assets",
         "preconditions",
+        "trapi_template",
+        "components",
         "TestCase_tags"
       ],
       "slot_usage": {},
@@ -1745,9 +1828,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "translator_testing_model.yaml",
-  "source_file_date": "2023-10-30T15:08:10",
-  "source_file_size": 16632,
-  "generation_date": "2023-10-30T15:09:01",
+  "source_file_date": "2023-11-06T14:11:54",
+  "source_file_size": 17704,
+  "generation_date": "2023-11-06T14:11:59",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",

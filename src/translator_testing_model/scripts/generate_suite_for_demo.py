@@ -1,7 +1,8 @@
 from src.translator_testing_model.datamodel.pydanticmodel import TestAsset, TestCase, TestSuite
 import csv
 import json
-
+import os
+import requests
 
 def parse_tsv(filename):
     """
@@ -24,7 +25,7 @@ def create_test_assets_from_tsv(test_assets):
     for row in test_assets:
         if row.get("Query") == "":
             continue
-        ta = TestAsset(id=row.get("id"),
+        ta = TestAsset(id=row.get("id").replace(":", "_"),
                        name=row.get("id"),
                        description=row.get("id"))
         ta.input_id = row.get("InputID, node normalized")
@@ -57,7 +58,14 @@ def create_test_cases_from_test_assets(test_assets, test_case_model):
     test_cases = []
     for idx, test_asset in enumerate(test_assets):
         test_case_id = f"TestCase_{idx}"
-        test_case = test_case_model(id=test_case_id, test_assets=[test_asset])
+        test_case = test_case_model(id=test_case_id,
+                                    test_assets=[test_asset],
+                                    name=test_asset.name,
+                                    description=test_asset.description,
+                                    test_case_type="acceptance",
+                                    test_env="ci",
+                                    components=["ars"]
+                                    )
         test_cases.append(test_case)
     return test_cases
 
@@ -68,37 +76,67 @@ def create_test_suite_from_test_cases(test_cases, test_suite_model):
     return test_suite_model(id=test_suite_id, test_cases=test_cases_dict)
 
 
-# Reading the TSV file
-tsv_file_path = 'pf_test_assets_2023_10_30.tsv'
+if __name__ == '__main__':
 
-tsv_data = parse_tsv(tsv_file_path)
+    # Reading the TSV file
+    tsv_file_path = 'pf_test_assets_2023_10_30.tsv'
+    print(f"Error: The file {tsv_file_path} does not exist in the directory {os.getcwd()}.")
+    tsv_data = parse_tsv(tsv_file_path)
 
-# Create TestAsset objects
-test_assets = create_test_assets_from_tsv(tsv_data)
+    # Create TestAsset objects
+    test_assets = create_test_assets_from_tsv(tsv_data)
 
-# Create TestCase objects
-test_cases = create_test_cases_from_test_assets(test_assets, TestCase)
-#
-# Assemble into a TestSuite
-test_suite = create_test_suite_from_test_cases(test_cases, TestSuite)
-#
-# Convert to JSON and save to file
-test_suite_json = test_suite.json(indent=4)
+    # Create TestCase objects
+    test_cases = create_test_cases_from_test_assets(test_assets, TestCase)
+    #
+    # Assemble into a TestSuite
+    test_suite = create_test_suite_from_test_cases(test_cases, TestSuite)
+    #
+    # Convert to JSON and save to file
+    test_suite_json = test_suite.json(indent=4)
 
+    suite_json_output_path = 'test_suite_output.json'
 
-suite_json_output_path = 'test_suite_output.json'
+    with open(suite_json_output_path, 'w') as file:
+        file.write(test_suite_json)
 
-with open(suite_json_output_path, 'w') as file:
-    file.write(test_suite_json)
+    for i, item in enumerate(test_cases):
+        file_prefix = item.id
+        filename = f"{file_prefix}.json"
+        with open(filename, 'w', encoding='utf-8') as file:
+            json.dump(item.dict(), file, ensure_ascii=False, indent=4)
 
-for i, item in enumerate(test_cases):
-    file_prefix = item.id
-    filename = f"{file_prefix}.json"
-    with open(filename, 'w', encoding='utf-8') as file:
-        json.dump(item.dict(), file, ensure_ascii=False, indent=4)
+    for i, item in enumerate(test_assets):
+        file_prefix = item.id
+        filename = f"{file_prefix}.json"
+        with open(filename, 'w', encoding='utf-8') as file:
+            json.dump(item.dict(), file, ensure_ascii=False, indent=4)
 
-for i, item in enumerate(test_assets):
-    file_prefix = item.id
-    filename = f"{file_prefix}.json"
-    with open(filename, 'w', encoding='utf-8') as file:
-        json.dump(item.dict(), file, ensure_ascii=False, indent=4)
+    url = 'https://raw.githubusercontent.com/TranslatorSRI/Benchmarks/main/config/benchmarks.json'
+
+    # Send a GET request to the URL
+    response = requests.get(url)
+
+    # Check if the request was successful
+    if response.status_code == 200:
+        # Parse the response content as JSON
+        data = response.json()
+        for k, v in data:
+            print(k, v)
+            for item in v:
+                if len(item.get("template")) > 1:
+                    raise ValueError("More than one template found")
+                tc = TestCase(id=k,
+                              name=item.get("source"),
+                              description=k+"_"+item,
+                              test_case_type="benchmark",
+                              test_assets=[],
+                              test_env="ci",
+                              # note the hack here to get the template,
+                              # there is only ever one, but....
+                              trapi_template=item.get("template")[0],
+                              components=["ars", "arax", "bte", "improving", "aragorn"]
+                              )
+
+    else:
+        print(f'Failed to retrieve the file. Status code: {response.status_code}')
