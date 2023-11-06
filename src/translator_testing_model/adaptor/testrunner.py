@@ -2,29 +2,41 @@
 This module provides a high level parent class interface/API
 for Translator TestRunner implementations.
 """
-from src.translator_testing_model.adaptor.test_case_generator import (
-    TestSuiteInputException,
-    TestCaseGenerator
-)
+from typing import Union, List
+from datetime import datetime
+
 from src.translator_testing_model.datamodel.pydanticmodel import (
     TestEntity,
-    TestMetadata,
-    TestSuite,
-    AcceptanceTestSuite,
-    BenchmarkTestSuite,
-    StandardsComplianceTestSuite,
-    OneHopTestSuite,
-    TestSuiteSpecification,
-    FileFormatEnum
+    TestCase,
+    TestCaseResult,
+    TestCaseResultEnum
 )
 
 
-class TestResult:
+class TestResults:
     """
     Wrapper of a Translator TestRunner result
-    TODO: this class *might* belong inside the TranslatorTestingModel?
     """
-    pass
+
+    def __init__(self, test_id: str):
+        """
+        TestResult constructor
+        """
+        self.id = test_id
+        self.test_case_results: List[TestCaseResult] = list()
+
+    def add_test_case_result(self, test_case: TestCase, test_case_result: TestCaseResultEnum):
+        self.test_case_results.append(
+            TestCaseResult(
+                test_suite_id=self.id,
+                test_case=test_case,
+                test_case_result=test_case_result,
+                timestamp=datetime.now()
+            )
+        )
+
+    def get_test_case_results(self) -> List[TestCaseResult]:
+        return self.test_case_results
 
 
 class TestRunner:
@@ -34,8 +46,18 @@ class TestRunner:
     specification allows for easy execution of TestRunners by the TestHarness.
     """
 
-    def __init__(self):
-        pass
+    def __init__(self, *args, **kwargs):
+        """
+        TestRunner constructor
+        """
+        raise NotImplementedError
 
-    def run(self, input: TestEntity) -> TestResult:
-        pass
+    def run(self, tests: Union[TestEntity, List[TestEntity]]) -> TestResults:
+        """
+
+        :param tests: Union[TestEntity, List[TestEntity]], may be any reasonable (TestRunner-specific) -
+                      possibly a List of - instance(s) of test data entity but generally constrained to
+                      be of a TestSuite, TestCase or TestAsset derived data type.
+        :return: TestResults, data wrapper for (full) reporting of the (TestSuite of) TestCase result(s).
+        """
+        raise NotImplementedError

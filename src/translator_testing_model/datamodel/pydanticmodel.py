@@ -2,7 +2,7 @@ from __future__ import annotations
 from datetime import datetime, date
 from enum import Enum
 from typing import List, Dict, Optional, Any, Union
-from pydantic import BaseModel as BaseModel, Field
+from pydantic import BaseModel as BaseModel, ConfigDict, Field
 import sys
 if sys.version_info >= (3, 8):
     from typing import Literal
@@ -192,6 +192,17 @@ class DirectionEnum(str, Enum):
     
     
 
+class TestCaseResultEnum(str, Enum):
+    
+    
+    test_passed = "test_passed"
+    
+    test_failed = "test_failed"
+    
+    test_skipped = "test_skipped"
+    
+    
+
 class TestEntity(ConfiguredBaseModel):
     """
     Abstract global 'identification' class shared as a parent with all major model classes within the data model for Translator testing.
@@ -308,7 +319,7 @@ class TestCase(TestEntity):
     test_env: Optional[TestEnvEnum] = Field(None, description="""Deployment environment within which the associated TestSuite is run.""")
     query_type: Optional[QueryTypeEnum] = Field(None, description="""Type of TestCase query.""")
     test_assets: List[TestAsset] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection.""")
-    preconditions: Optional[Dict[str, Precondition]] = Field(default_factory=dict)
+    preconditions: Optional[List[str]] = Field(default_factory=list)
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
@@ -322,7 +333,7 @@ class AcceptanceTestCase(TestCase):
     test_env: Optional[TestEnvEnum] = Field(None, description="""Deployment environment within which the associated TestSuite is run.""")
     query_type: Optional[QueryTypeEnum] = Field(None, description="""Type of TestCase query.""")
     test_assets: List[AcceptanceTestAsset] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection.""")
-    preconditions: Optional[Dict[str, Precondition]] = Field(default_factory=dict)
+    preconditions: Optional[List[str]] = Field(default_factory=list)
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
@@ -336,7 +347,7 @@ class QuantitativeTestCase(TestCase):
     test_env: Optional[TestEnvEnum] = Field(None, description="""Deployment environment within which the associated TestSuite is run.""")
     query_type: Optional[QueryTypeEnum] = Field(None, description="""Type of TestCase query.""")
     test_assets: List[TestAsset] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection.""")
-    preconditions: Optional[Dict[str, Precondition]] = Field(default_factory=dict)
+    preconditions: Optional[List[str]] = Field(default_factory=list)
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
@@ -350,7 +361,7 @@ class ComplianceTestCase(TestCase):
     test_env: Optional[TestEnvEnum] = Field(None, description="""Deployment environment within which the associated TestSuite is run.""")
     query_type: Optional[QueryTypeEnum] = Field(None, description="""Type of TestCase query.""")
     test_assets: List[TestAsset] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection.""")
-    preconditions: Optional[Dict[str, Precondition]] = Field(default_factory=dict)
+    preconditions: Optional[List[str]] = Field(default_factory=list)
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
@@ -364,7 +375,7 @@ class KnowledgeGraphNavigationTestCase(TestCase):
     test_env: Optional[TestEnvEnum] = Field(None, description="""Deployment environment within which the associated TestSuite is run.""")
     query_type: Optional[QueryTypeEnum] = Field(None, description="""Type of TestCase query.""")
     test_assets: List[TestAsset] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection.""")
-    preconditions: Optional[Dict[str, Precondition]] = Field(default_factory=dict)
+    preconditions: Optional[List[str]] = Field(default_factory=list)
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
@@ -378,7 +389,7 @@ class OneHopTestCase(KnowledgeGraphNavigationTestCase):
     test_env: Optional[TestEnvEnum] = Field(None, description="""Deployment environment within which the associated TestSuite is run.""")
     query_type: Optional[QueryTypeEnum] = Field(None, description="""Type of TestCase query.""")
     test_assets: List[TestAsset] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection.""")
-    preconditions: Optional[Dict[str, Precondition]] = Field(default_factory=dict)
+    preconditions: Optional[List[str]] = Field(default_factory=list)
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
@@ -458,6 +469,20 @@ class TestSuiteSpecification(TestEntity):
     tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
     
 
+class TestCaseResult(TestEntity):
+    """
+    Wrapper for the outcome of a TestRunner executing one TestCase
+    """
+    test_suite_id: Optional[str] = Field(None, description="""CURIE id of a TestSuite registered in the system.""")
+    test_case: Optional[TestCase] = Field(None, description="""Slot referencing a single TestCase.""")
+    test_case_result: Optional[TestCaseResultEnum] = Field(None, description="""Encoded result of a single test run of a given test case""")
+    timestamp: Optional[datetime ] = Field(None, description="""Date time when a given entity was created.""")
+    id: str = Field(..., description="""A unique identifier for a Test Entity""")
+    name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
+    description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
+    tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
+    
+
 
 # Update forward refs
 # see https://pydantic-docs.helpmanual.io/usage/postponed_annotations/
@@ -479,4 +504,5 @@ BenchmarkTestSuite.update_forward_refs()
 StandardsComplianceTestSuite.update_forward_refs()
 OneHopTestSuite.update_forward_refs()
 TestSuiteSpecification.update_forward_refs()
+TestCaseResult.update_forward_refs()
 

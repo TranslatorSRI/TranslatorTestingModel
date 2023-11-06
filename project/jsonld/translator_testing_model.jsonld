@@ -600,6 +600,22 @@
           "text": "decreased"
         }
       ]
+    },
+    {
+      "name": "TestCaseResultEnum",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestCaseResultEnum",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "permissible_values": [
+        {
+          "text": "test_passed"
+        },
+        {
+          "text": "test_failed"
+        },
+        {
+          "text": "test_skipped"
+        }
+      ]
     }
   ],
   "slots": [
@@ -1223,7 +1239,59 @@
         "TestCase"
       ],
       "range": "Precondition",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "test_suite_id",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_suite_id",
+      "description": "CURIE id of a TestSuite registered in the system.",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_suite_id",
+      "owner": "TestCaseResult",
+      "domain_of": [
+        "TestCaseResult"
+      ],
+      "range": "uriorcurie",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "test_case",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case",
+      "description": "Slot referencing a single TestCase.",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case",
+      "owner": "TestCaseResult",
+      "domain_of": [
+        "TestCaseResult"
+      ],
+      "range": "TestCase",
       "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "test_case_result",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case_result",
+      "description": "Encoded result of a single test run of a given test case",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case_result",
+      "owner": "TestCaseResult",
+      "domain_of": [
+        "TestCaseResult"
+      ],
+      "range": "TestCaseResultEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "timestamp",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/timestamp",
+      "description": "Date time when a given entity was created.",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/timestamp",
+      "owner": "TestCaseResult",
+      "domain_of": [
+        "TestCaseResult"
+      ],
+      "range": "datetime",
       "@type": "SlotDefinition"
     },
     {
@@ -1739,13 +1807,33 @@
       "slot_usage": {},
       "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestSuiteSpecification",
       "@type": "ClassDefinition"
+    },
+    {
+      "name": "TestCaseResult",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestCaseResult",
+      "description": "Wrapper for the outcome of a TestRunner executing one TestCase",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "is_a": "TestEntity",
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "tags",
+        "test_suite_id",
+        "test_case",
+        "test_case_result",
+        "timestamp"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestCaseResult",
+      "@type": "ClassDefinition"
     }
   ],
   "metamodel_version": "1.7.0",
   "source_file": "translator_testing_model.yaml",
-  "source_file_date": "2023-11-02T16:44:48",
-  "source_file_size": 17283,
-  "generation_date": "2023-11-02T16:47:37",
+  "source_file_date": "2023-11-06T12:28:03",
+  "source_file_size": 18096,
+  "generation_date": "2023-11-06T13:16:27",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",

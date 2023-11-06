@@ -218,6 +218,16 @@ classes:
       - test_data_file_locator
       - test_data_file_format
 
+  TestCaseResult:
+    description: >-
+      Wrapper for the outcome of a TestRunner executing one TestCase
+    is_a: TestEntity
+    slots:
+      - test_suite_id
+      - test_case
+      - test_case_result
+      - timestamp
+
 slots:
 
   runner_settings:
@@ -449,7 +459,27 @@ slots:
   preconditions:
     range: Precondition
     multivalued: true
+
+  test_suite_id:
+    description: >-
+      CURIE id of a TestSuite registered in the system.
+    range: uriorcurie
+
+  test_case:
+    description: >-
+      Slot referencing a single TestCase.
+    range: TestCase
     inlined: true
+
+  test_case_result:
+    description: >-
+      Encoded result of a single test run of a given test case
+    range: TestCaseResultEnum
+
+  timestamp:
+    description: >-
+      Date time when a given entity was created.
+    range: datetime
 
 enums:
 
@@ -600,3 +630,9 @@ enums:
     permissible_values:
       increased:
       decreased:
+
+  TestCaseResultEnum:
+    permissible_values:
+      test_passed:
+      test_failed:
+      test_skipped:

@@ -163,6 +163,18 @@ message TestCase
  repeated  precondition preconditions = 0
  repeated  string tags = 0
  }
+// Wrapper for the outcome of a TestRunner executing one TestCase
+message TestCaseResult
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+ repeated  string tags = 0
+  uriorcurie testSuiteId = 0
+  testCase testCase = 0
+  testCaseResultEnum testCaseResult = 0
+  datetime timestamp = 0
+ }
 // Represents a single Biolink Model compliant instance of a subject-predicate-object edge that can be used for testing.
 message TestEdgeData
  {

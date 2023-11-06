@@ -168,6 +168,18 @@ type TestCase
     tags: [String]
   }
 
+type TestCaseResult
+  {
+    id: Uriorcurie!
+    name: String
+    description: String
+    tags: [String]
+    testSuiteId: Uriorcurie
+    testCase: TestCase
+    testCaseResult: TestCaseResultEnum
+    timestamp: Datetime
+  }
+
 type TestEdgeData
   {
     name: String

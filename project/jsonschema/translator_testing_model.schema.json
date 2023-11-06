@@ -130,17 +130,10 @@
                     "type": "string"
                 },
                 "preconditions": {
-                    "additionalProperties": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/$defs/Precondition__identifier_optional"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ]
+                    "items": {
+                        "type": "string"
                     },
-                    "type": "object"
+                    "type": "array"
                 },
                 "query_type": {
                     "$ref": "#/$defs/QueryTypeEnum",
@@ -244,17 +237,10 @@
                     "type": "string"
                 },
                 "preconditions": {
-                    "additionalProperties": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/$defs/Precondition__identifier_optional"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ]
+                    "items": {
+                        "type": "string"
                     },
-                    "type": "object"
+                    "type": "array"
                 },
                 "query_type": {
                     "$ref": "#/$defs/QueryTypeEnum",
@@ -346,17 +332,10 @@
                     "type": "string"
                 },
                 "preconditions": {
-                    "additionalProperties": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/$defs/Precondition__identifier_optional"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ]
+                    "items": {
+                        "type": "string"
                     },
-                    "type": "object"
+                    "type": "array"
                 },
                 "query_type": {
                     "$ref": "#/$defs/QueryTypeEnum",
@@ -414,17 +393,10 @@
                     "type": "string"
                 },
                 "preconditions": {
-                    "additionalProperties": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/$defs/Precondition__identifier_optional"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ]
+                    "items": {
+                        "type": "string"
                     },
-                    "type": "object"
+                    "type": "array"
                 },
                 "query_type": {
                     "$ref": "#/$defs/QueryTypeEnum",
@@ -535,34 +507,6 @@
             "title": "Precondition",
             "type": "object"
         },
-        "Precondition__identifier_optional": {
-            "additionalProperties": false,
-            "description": "Represents a precondition for a TestCase",
-            "properties": {
-                "description": {
-                    "description": "A human-readable description for a Test Entity",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "A unique identifier for a Test Entity",
-                    "type": "string"
-                },
-                "name": {
-                    "description": "A human-readable name for a Test Entity",
-                    "type": "string"
-                },
-                "tags": {
-                    "description": "A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                }
-            },
-            "required": [],
-            "title": "Precondition",
-            "type": "object"
-        },
         "QuantitativeTestCase": {
             "additionalProperties": false,
             "description": "Assumed additional model from Shervin's runner JSON here as an example.  This schema is not yet complete.",
@@ -580,17 +524,10 @@
                     "type": "string"
                 },
                 "preconditions": {
-                    "additionalProperties": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/$defs/Precondition__identifier_optional"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ]
+                    "items": {
+                        "type": "string"
                     },
-                    "type": "object"
+                    "type": "array"
                 },
                 "query_type": {
                     "$ref": "#/$defs/QueryTypeEnum",
@@ -778,17 +715,10 @@
                     "type": "string"
                 },
                 "preconditions": {
-                    "additionalProperties": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/$defs/Precondition__identifier_optional"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ]
+                    "items": {
+                        "type": "string"
                     },
-                    "type": "object"
+                    "type": "array"
                 },
                 "query_type": {
                     "$ref": "#/$defs/QueryTypeEnum",
@@ -820,6 +750,63 @@
             "title": "TestCase",
             "type": "object"
         },
+        "TestCaseResult": {
+            "additionalProperties": false,
+            "description": "Wrapper for the outcome of a TestRunner executing one TestCase",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a Test Entity",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a Test Entity",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a Test Entity",
+                    "type": "string"
+                },
+                "tags": {
+                    "description": "A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "test_case": {
+                    "$ref": "#/$defs/TestCase",
+                    "description": "Slot referencing a single TestCase."
+                },
+                "test_case_result": {
+                    "$ref": "#/$defs/TestCaseResultEnum",
+                    "description": "Encoded result of a single test run of a given test case"
+                },
+                "test_suite_id": {
+                    "description": "CURIE id of a TestSuite registered in the system.",
+                    "type": "string"
+                },
+                "timestamp": {
+                    "description": "Date time when a given entity was created.",
+                    "format": "date-time",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "TestCaseResult",
+            "type": "object"
+        },
+        "TestCaseResultEnum": {
+            "description": "",
+            "enum": [
+                "test_passed",
+                "test_failed",
+                "test_skipped"
+            ],
+            "title": "TestCaseResultEnum",
+            "type": "string"
+        },
         "TestCase__identifier_optional": {
             "additionalProperties": false,
             "description": "Represents a single enumerated instance of Test Case, derived from a  given collection of one or more TestAsset instances (the value of the 'test_assets' slot) which define the 'inputs' and 'outputs' of the TestCase, used to probe a particular test condition.",
@@ -837,17 +824,10 @@
                     "type": "string"
                 },
                 "preconditions": {
-                    "additionalProperties": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/$defs/Precondition__identifier_optional"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ]
+                    "items": {
+                        "type": "string"
                     },
-                    "type": "object"
+                    "type": "array"
                 },
                 "query_type": {
                     "$ref": "#/$defs/QueryTypeEnum",

@@ -196,6 +196,18 @@ CREATE TABLE "StandardsComplianceTestSuite" (
 	FOREIGN KEY(test_suite_specification) REFERENCES "TestSuiteSpecification" (id)
 );
 
+CREATE TABLE "TestCaseResult" (
+	id TEXT NOT NULL, 
+	name TEXT, 
+	description TEXT, 
+	test_suite_id TEXT, 
+	test_case TEXT, 
+	test_case_result VARCHAR(12), 
+	timestamp DATETIME, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(test_case) REFERENCES "TestCase" (id)
+);
+
 CREATE TABLE "TestSuite" (
 	id TEXT NOT NULL, 
 	name TEXT, 
@@ -333,6 +345,13 @@ CREATE TABLE "StandardsComplianceTestSuite_tags" (
 	tags TEXT, 
 	PRIMARY KEY (backref_id, tags), 
 	FOREIGN KEY(backref_id) REFERENCES "StandardsComplianceTestSuite" (id)
+);
+
+CREATE TABLE "TestCaseResult_tags" (
+	backref_id TEXT, 
+	tags TEXT, 
+	PRIMARY KEY (backref_id, tags), 
+	FOREIGN KEY(backref_id) REFERENCES "TestCaseResult" (id)
 );
 
 CREATE TABLE "TestSuite_tags" (

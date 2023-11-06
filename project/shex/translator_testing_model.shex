@@ -180,6 +180,18 @@ linkml:Sparqlpath xsd:string
     } OR @<AcceptanceTestCase> OR @<ComplianceTestCase> OR @<KnowledgeGraphNavigationTestCase> OR @<QuantitativeTestCase>
 )
 
+<TestCaseResult> CLOSED {
+    (  $<TestCaseResult_tes> (  &<TestEntity_tes> ;
+          rdf:type [ <TestEntity> ] ? ;
+          <test_suite_id> @linkml:Uriorcurie ? ;
+          <test_case> @<TestCase> ? ;
+          <test_case_result> @<TestCaseResultEnum> ? ;
+          <timestamp> @linkml:Datetime ?
+       ) ;
+       rdf:type [ <TestCaseResult> ]
+    )
+}
+
 <TestEdgeData> CLOSED {
     (  $<TestEdgeData_tes> (  &<TestAsset_tes> ;
           rdf:type [ <TestAsset> ] ?
@@ -189,7 +201,8 @@ linkml:Sparqlpath xsd:string
 }
 
 <TestEntity>  (
-    @<Precondition> OR @<TestAsset> OR @<TestCase> OR @<TestMetadata> OR @<TestSuite> OR @<TestSuiteSpecification>
+    @<Precondition> OR @<TestAsset> OR @<TestCase> OR @<TestCaseResult> OR @<TestMetadata> OR @<TestSuite> OR
+    @<TestSuiteSpecification>
 )
 
 <TestEntity_struct> {
