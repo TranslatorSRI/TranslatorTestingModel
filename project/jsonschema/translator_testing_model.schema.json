@@ -94,6 +94,10 @@
                 "test_issue": {
                     "$ref": "#/$defs/TestIssueEnum"
                 },
+                "test_reference": {
+                    "description": "Documentation URL where original test source particulars are registered (e.g. Github repo)",
+                    "type": "string"
+                },
                 "top_level": {
                     "description": "The answer must return in these many results",
                     "type": "integer"
@@ -756,6 +760,10 @@
                 "test_issue": {
                     "$ref": "#/$defs/TestIssueEnum"
                 },
+                "test_reference": {
+                    "description": "Documentation URL where original test source particulars are registered (e.g. Github repo)",
+                    "type": "string"
+                },
                 "well_known": {
                     "type": "boolean"
                 }
@@ -999,6 +1007,10 @@
                 "test_issue": {
                     "$ref": "#/$defs/TestIssueEnum"
                 },
+                "test_reference": {
+                    "description": "Documentation URL where original test source particulars are registered (e.g. Github repo)",
+                    "type": "string"
+                },
                 "well_known": {
                     "type": "boolean"
                 }
@@ -1062,7 +1074,7 @@
                     "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)"
                 },
                 "test_reference": {
-                    "description": "Source documentation where original test particulars are registered (e.g. Github repo)",
+                    "description": "Documentation URL where original test source particulars are registered (e.g. Github repo)",
                     "type": "string"
                 },
                 "test_source": {

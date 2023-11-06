@@ -690,6 +690,9 @@
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/runner_settings",
       "description": "Settings for the test harness",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "aliases": [
+        "Settings"
+      ],
       "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/runner_settings",
       "multivalued": true,
       "owner": "TestAsset",
@@ -783,15 +786,16 @@
     {
       "name": "test_reference",
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_reference",
-      "description": "Source documentation where original test particulars are registered (e.g. Github repo)",
+      "description": "Documentation URL where original test source particulars are registered (e.g. Github repo)",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "aliases": [
         "GitHubIssue"
       ],
       "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_reference",
-      "owner": "TestMetadata",
+      "owner": "TestAsset",
       "domain_of": [
-        "TestMetadata"
+        "TestMetadata",
+        "TestAsset"
       ],
       "range": "uriorcurie",
       "@type": "SlotDefinition"
@@ -814,7 +818,8 @@
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/input_id",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "aliases": [
-        "InputID, node normalized"
+        "InputID, node normalized",
+        "SubjectID"
       ],
       "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/input_id",
       "owner": "TestAsset",
@@ -829,7 +834,8 @@
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/input_name",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "aliases": [
-        "InputName (user choice)"
+        "InputName (user choice)",
+        "SubjectName"
       ],
       "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/input_name",
       "owner": "TestAsset",
@@ -844,7 +850,8 @@
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/predicate",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "aliases": [
-        "Query"
+        "Query",
+        "Relationship"
       ],
       "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/predicate",
       "owner": "TestAsset",
@@ -859,7 +866,8 @@
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/output_id",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "aliases": [
-        "OutputID"
+        "OutputID",
+        "ObjectID"
       ],
       "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/output_id",
       "owner": "TestAsset",
@@ -874,7 +882,8 @@
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/output_name",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "aliases": [
-        "OutputName"
+        "OutputName",
+        "ObjectName"
       ],
       "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/output_name",
       "owner": "TestAsset",
@@ -1336,6 +1345,9 @@
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/runner_settings",
       "description": "Settings for the test harness, e.g. \"inferred\"",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "aliases": [
+        "Settings"
+      ],
       "is_a": "runner_settings",
       "domain": "TestAsset",
       "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/runner_settings",
@@ -1495,6 +1507,7 @@
         "semantic_severity",
         "in_v1",
         "well_known",
+        "test_reference",
         "TestAsset_runner_settings",
         "TestAsset_id",
         "TestAsset_tags"
@@ -1522,6 +1535,7 @@
         "semantic_severity",
         "in_v1",
         "well_known",
+        "test_reference",
         "TestAsset_runner_settings",
         "TestAsset_id",
         "TestAsset_tags",
@@ -1559,6 +1573,7 @@
         "semantic_severity",
         "in_v1",
         "well_known",
+        "test_reference",
         "TestAsset_runner_settings",
         "TestAsset_id",
         "TestAsset_tags"
@@ -1828,9 +1843,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "translator_testing_model.yaml",
-  "source_file_date": "2023-11-06T14:11:54",
-  "source_file_size": 17704,
-  "generation_date": "2023-11-06T14:11:59",
+  "source_file_date": "2023-11-06T14:50:26",
+  "source_file_size": 17827,
+  "generation_date": "2023-11-06T14:51:11",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",

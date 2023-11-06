@@ -12,10 +12,10 @@ ttm:AcceptanceTestCase a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "AcceptanceTestCase" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 1 ;
+            owl:allValuesFrom ttm:AcceptanceTestAsset ;
             owl:onProperty ttm:test_assets ],
         [ a owl:Restriction ;
-            owl:allValuesFrom ttm:AcceptanceTestAsset ;
+            owl:minCardinality 1 ;
             owl:onProperty ttm:test_assets ],
         ttm:TestCase ;
     skos:definition "See AcceptanceTestAsset above for more details." ;
@@ -127,13 +127,15 @@ ttm:input_id a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "input_id" ;
     rdfs:range linkml:Uriorcurie ;
-    skos:altLabel "InputID, node normalized" ;
+    skos:altLabel "InputID, node normalized",
+        "SubjectID" ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:input_name a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "input_name" ;
-    skos:altLabel "InputName (user choice)" ;
+    skos:altLabel "InputName (user choice)",
+        "SubjectName" ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:must_pass_date a owl:ObjectProperty,
@@ -167,13 +169,15 @@ ttm:output_id a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "output_id" ;
     rdfs:range linkml:Uriorcurie ;
-    skos:altLabel "OutputID" ;
+    skos:altLabel "ObjectID",
+        "OutputID" ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:output_name a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "output_name" ;
-    skos:altLabel "OutputName" ;
+    skos:altLabel "ObjectName",
+        "OutputName" ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:preconditions a owl:ObjectProperty,
@@ -185,7 +189,8 @@ ttm:preconditions a owl:ObjectProperty,
 ttm:predicate a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "predicate" ;
-    skos:altLabel "Query" ;
+    skos:altLabel "Query",
+        "Relationship" ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:query_node a owl:ObjectProperty,
@@ -286,7 +291,7 @@ ttm:test_reference a owl:ObjectProperty,
     rdfs:label "test_reference" ;
     rdfs:range linkml:Uriorcurie ;
     skos:altLabel "GitHubIssue" ;
-    skos:definition "Source documentation where original test particulars are registered (e.g. Github repo)" ;
+    skos:definition "Documentation URL where original test source particulars are registered (e.g. Github repo)" ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:test_source a owl:ObjectProperty,
@@ -588,6 +593,7 @@ ttm:runner_settings a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "runner_settings" ;
     rdfs:range linkml:String ;
+    skos:altLabel "Settings" ;
     skos:definition "Settings for the test harness" ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
@@ -613,25 +619,25 @@ ttm:TestAsset a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "TestAsset" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
+            owl:minCardinality 1 ;
             owl:onProperty ttm:runner_settings ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:id ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty ttm:tags ],
         [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty ttm:runner_settings ],
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:tags ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:Uriorcurie ;
             owl:onProperty ttm:id ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:tags ],
+            owl:onProperty ttm:runner_settings ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty ttm:id ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty ttm:id ],
         ttm:TestEntity ;
     skos:definition "Represents a Test Asset, which is a single specific instance of TestCase-agnostic semantic parameters representing the specification of a Translator test target with inputs and (expected) outputs." ;
@@ -690,10 +696,10 @@ ttm:TestCase a owl:Class,
     rdfs:label "TestCase" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty ttm:test_case_type ],
+            owl:onProperty ttm:tags ],
         [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:test_assets ],
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:test_case_type ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
             owl:onProperty ttm:test_assets ],
@@ -701,14 +707,14 @@ ttm:TestCase a owl:Class,
             owl:allValuesFrom linkml:String ;
             owl:onProperty ttm:test_case_type ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:tags ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:test_case_type ],
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:test_assets ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
             owl:onProperty ttm:tags ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:test_case_type ],
         ttm:TestEntity ;
     skos:definition "Represents a single enumerated instance of Test Case, derived from a  given collection of one or more TestAsset instances (the value of the 'test_assets' slot) which define the 'inputs' and 'outputs' of the TestCase, used to probe a particular test condition." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .

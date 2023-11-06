@@ -64,6 +64,7 @@ classes:
       - semantic_severity
       - in_v1
       - well_known
+      - test_reference
       - runner_settings
     slot_usage:
       id:
@@ -241,6 +242,7 @@ slots:
     range: TrapiTemplateEnum
 
   runner_settings:
+    aliases: ["Settings"]
     description: >-
       Settings for the test harness
     range: string
@@ -275,7 +277,7 @@ slots:
   test_reference:
     aliases: ["GitHubIssue"]
     description: >-
-      Source documentation where original test particulars are registered (e.g. Github repo)
+      Documentation URL where original test source particulars are registered (e.g. Github repo)
     range: uriorcurie
 
   test_objective:
@@ -285,21 +287,21 @@ slots:
     range: TestObjectiveEnum
 
   input_id:
-    aliases: ["InputID, node normalized"]
+    aliases: ["InputID, node normalized", "SubjectID"]
     range: uriorcurie
 
   input_name:
-    aliases: ["InputName (user choice)"]
+    aliases: ["InputName (user choice)", "SubjectName"]
 
   predicate:
-    aliases: ["Query"]
+    aliases: ["Query", "Relationship"]
 
   output_id:
-    aliases: ["OutputID"]
+    aliases: ["OutputID", "ObjectID"]
     range: uriorcurie
 
   output_name:
-    aliases: ["OutputName"]
+    aliases: ["OutputName", "ObjectName"]
 
   expected_output:
     aliases: ["Expected Output"]

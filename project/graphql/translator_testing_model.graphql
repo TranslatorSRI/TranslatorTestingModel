@@ -12,6 +12,7 @@ type AcceptanceTestAsset
     semanticSeverity: SemanticSeverityEnum
     inV1: Boolean
     wellKnown: Boolean
+    testReference: Uriorcurie
     runnerSettings: [String]!
     id: Uriorcurie!
     tags: [String]
@@ -164,6 +165,7 @@ type TestAsset
     semanticSeverity: SemanticSeverityEnum
     inV1: Boolean
     wellKnown: Boolean
+    testReference: Uriorcurie
     runnerSettings: [String]!
     id: Uriorcurie!
     tags: [String]
@@ -206,6 +208,7 @@ type TestEdgeData
     semanticSeverity: SemanticSeverityEnum
     inV1: Boolean
     wellKnown: Boolean
+    testReference: Uriorcurie
     runnerSettings: [String]!
     id: Uriorcurie!
     tags: [String]
