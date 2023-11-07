@@ -7,6 +7,7 @@ CREATE TABLE "AcceptanceTestCase" (
 	test_env VARCHAR(4), 
 	query_type VARCHAR(6), 
 	preconditions TEXT, 
+	trapi_template VARCHAR(24), 
 	PRIMARY KEY (id)
 );
 
@@ -18,6 +19,7 @@ CREATE TABLE "ComplianceTestCase" (
 	query_type VARCHAR(6), 
 	test_assets TEXT NOT NULL, 
 	preconditions TEXT, 
+	trapi_template VARCHAR(24), 
 	PRIMARY KEY (id)
 );
 
@@ -29,6 +31,7 @@ CREATE TABLE "KnowledgeGraphNavigationTestCase" (
 	query_type VARCHAR(6), 
 	test_assets TEXT NOT NULL, 
 	preconditions TEXT, 
+	trapi_template VARCHAR(24), 
 	PRIMARY KEY (id)
 );
 
@@ -40,6 +43,7 @@ CREATE TABLE "OneHopTestCase" (
 	query_type VARCHAR(6), 
 	test_assets TEXT NOT NULL, 
 	preconditions TEXT, 
+	trapi_template VARCHAR(24), 
 	PRIMARY KEY (id)
 );
 
@@ -58,6 +62,7 @@ CREATE TABLE "QuantitativeTestCase" (
 	query_type VARCHAR(6), 
 	test_assets TEXT NOT NULL, 
 	preconditions TEXT, 
+	trapi_template VARCHAR(24), 
 	PRIMARY KEY (id)
 );
 
@@ -87,6 +92,7 @@ CREATE TABLE "TestCase" (
 	query_type VARCHAR(6), 
 	test_assets TEXT NOT NULL, 
 	preconditions TEXT, 
+	trapi_template VARCHAR(24), 
 	PRIMARY KEY (id)
 );
 
@@ -234,11 +240,25 @@ CREATE TABLE "TestSuite" (
 	FOREIGN KEY(test_suite_specification) REFERENCES "TestSuiteSpecification" (id)
 );
 
+CREATE TABLE "AcceptanceTestCase_components" (
+	backref_id TEXT, 
+	components VARCHAR(9), 
+	PRIMARY KEY (backref_id, components), 
+	FOREIGN KEY(backref_id) REFERENCES "AcceptanceTestCase" (id)
+);
+
 CREATE TABLE "AcceptanceTestCase_tags" (
 	backref_id TEXT, 
 	tags TEXT, 
 	PRIMARY KEY (backref_id, tags), 
 	FOREIGN KEY(backref_id) REFERENCES "AcceptanceTestCase" (id)
+);
+
+CREATE TABLE "ComplianceTestCase_components" (
+	backref_id TEXT, 
+	components VARCHAR(9), 
+	PRIMARY KEY (backref_id, components), 
+	FOREIGN KEY(backref_id) REFERENCES "ComplianceTestCase" (id)
 );
 
 CREATE TABLE "ComplianceTestCase_tags" (
@@ -248,11 +268,25 @@ CREATE TABLE "ComplianceTestCase_tags" (
 	FOREIGN KEY(backref_id) REFERENCES "ComplianceTestCase" (id)
 );
 
+CREATE TABLE "KnowledgeGraphNavigationTestCase_components" (
+	backref_id TEXT, 
+	components VARCHAR(9), 
+	PRIMARY KEY (backref_id, components), 
+	FOREIGN KEY(backref_id) REFERENCES "KnowledgeGraphNavigationTestCase" (id)
+);
+
 CREATE TABLE "KnowledgeGraphNavigationTestCase_tags" (
 	backref_id TEXT, 
 	tags TEXT, 
 	PRIMARY KEY (backref_id, tags), 
 	FOREIGN KEY(backref_id) REFERENCES "KnowledgeGraphNavigationTestCase" (id)
+);
+
+CREATE TABLE "OneHopTestCase_components" (
+	backref_id TEXT, 
+	components VARCHAR(9), 
+	PRIMARY KEY (backref_id, components), 
+	FOREIGN KEY(backref_id) REFERENCES "OneHopTestCase" (id)
 );
 
 CREATE TABLE "OneHopTestCase_tags" (
@@ -267,6 +301,13 @@ CREATE TABLE "Precondition_tags" (
 	tags TEXT, 
 	PRIMARY KEY (backref_id, tags), 
 	FOREIGN KEY(backref_id) REFERENCES "Precondition" (id)
+);
+
+CREATE TABLE "QuantitativeTestCase_components" (
+	backref_id TEXT, 
+	components VARCHAR(9), 
+	PRIMARY KEY (backref_id, components), 
+	FOREIGN KEY(backref_id) REFERENCES "QuantitativeTestCase" (id)
 );
 
 CREATE TABLE "QuantitativeTestCase_tags" (
@@ -288,6 +329,13 @@ CREATE TABLE "TestAsset_tags" (
 	tags TEXT, 
 	PRIMARY KEY (backref_id, tags), 
 	FOREIGN KEY(backref_id) REFERENCES "TestAsset" (id)
+);
+
+CREATE TABLE "TestCase_components" (
+	backref_id TEXT, 
+	components VARCHAR(9), 
+	PRIMARY KEY (backref_id, components), 
+	FOREIGN KEY(backref_id) REFERENCES "TestCase" (id)
 );
 
 CREATE TABLE "TestCase_tags" (

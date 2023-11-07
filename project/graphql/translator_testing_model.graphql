@@ -36,6 +36,8 @@ type AcceptanceTestCase
     testEnv: TestEnvEnum
     queryType: QueryTypeEnum
     preconditions: [Precondition]
+    trapiTemplate: TrapiTemplateEnum
+    components: [ComponentEnum]
     tags: [String]
     testAssets: [AcceptanceTestAsset]!
   }
@@ -65,6 +67,8 @@ type ComplianceTestCase
     queryType: QueryTypeEnum
     testAssets: [TestAsset]!
     preconditions: [Precondition]
+    trapiTemplate: TrapiTemplateEnum
+    components: [ComponentEnum]
     tags: [String]
   }
 
@@ -77,6 +81,8 @@ type KnowledgeGraphNavigationTestCase
     queryType: QueryTypeEnum
     testAssets: [TestAsset]!
     preconditions: [Precondition]
+    trapiTemplate: TrapiTemplateEnum
+    components: [ComponentEnum]
     tags: [String]
   }
 
@@ -89,6 +95,8 @@ type OneHopTestCase
     queryType: QueryTypeEnum
     testAssets: [TestAsset]!
     preconditions: [Precondition]
+    trapiTemplate: TrapiTemplateEnum
+    components: [ComponentEnum]
     tags: [String]
   }
 
@@ -121,6 +129,8 @@ type QuantitativeTestCase
     queryType: QueryTypeEnum
     testAssets: [TestAsset]!
     preconditions: [Precondition]
+    trapiTemplate: TrapiTemplateEnum
+    components: [ComponentEnum]
     tags: [String]
   }
 
@@ -165,6 +175,8 @@ type TestCase
     queryType: QueryTypeEnum
     testAssets: [TestAsset]!
     preconditions: [Precondition]
+    trapiTemplate: TrapiTemplateEnum
+    components: [ComponentEnum]
     tags: [String]
   }
 

@@ -37,6 +37,8 @@ message AcceptanceTestCase
   testEnvEnum testEnv = 0
   queryTypeEnum queryType = 0
  repeated  precondition preconditions = 0
+  trapiTemplateEnum trapiTemplate = 0
+ repeated  componentEnum components = 0
  repeated  string tags = 0
  repeated  acceptanceTestAsset testAssets = 0
  }
@@ -61,6 +63,8 @@ message ComplianceTestCase
   queryTypeEnum queryType = 0
  repeated  testAsset testAssets = 0
  repeated  precondition preconditions = 0
+  trapiTemplateEnum trapiTemplate = 0
+ repeated  componentEnum components = 0
  repeated  string tags = 0
  }
 // Knowledge Graph navigation integration test
@@ -73,6 +77,8 @@ message KnowledgeGraphNavigationTestCase
   queryTypeEnum queryType = 0
  repeated  testAsset testAssets = 0
  repeated  precondition preconditions = 0
+  trapiTemplateEnum trapiTemplate = 0
+ repeated  componentEnum components = 0
  repeated  string tags = 0
  }
 // 'One Hop' Knowledge Graph navigation integration test
@@ -85,6 +91,8 @@ message OneHopTestCase
   queryTypeEnum queryType = 0
  repeated  testAsset testAssets = 0
  repeated  precondition preconditions = 0
+  trapiTemplateEnum trapiTemplate = 0
+ repeated  componentEnum components = 0
  repeated  string tags = 0
  }
 // Test case for testing the integrity of "One Hop" knowledge graph retrievals sensa legacy SRI_Testing harness.
@@ -117,6 +125,8 @@ message QuantitativeTestCase
   queryTypeEnum queryType = 0
  repeated  testAsset testAssets = 0
  repeated  precondition preconditions = 0
+  trapiTemplateEnum trapiTemplate = 0
+ repeated  componentEnum components = 0
  repeated  string tags = 0
  }
 // Test suite for testing Translator components against releases of standards like TRAPI and the Biolink Model.
@@ -161,6 +171,8 @@ message TestCase
   queryTypeEnum queryType = 0
  repeated  testAsset testAssets = 0
  repeated  precondition preconditions = 0
+  trapiTemplateEnum trapiTemplate = 0
+ repeated  componentEnum components = 0
  repeated  string tags = 0
  }
 // Wrapper for the outcome of a TestRunner running a one specific TestCase.
