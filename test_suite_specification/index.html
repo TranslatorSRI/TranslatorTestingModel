@@ -8,14 +8,14 @@
       
       
       
-        <link rel="canonical" href="https://TranslatorSRI.github.io/TranslatorTestingModel/TestCaseTypeEnum/">
+        <link rel="canonical" href="https://TranslatorSRI.github.io/TranslatorTestingModel/test_suite_specification/">
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-8.5.10">
     
     
       
-        <title>Enum: TestCaseTypeEnum - Translator Testing Model</title>
+        <title>Slot: test_suite_specification - Translator Testing Model</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#enum-testcasetypeenum" class="md-skip">
+        <a href="#slot-test_suite_specification" class="md-skip">
           Skip to content
         </a>
       
@@ -97,7 +97,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Enum: TestCaseTypeEnum
+              Slot: test_suite_specification
             
           </span>
         </div>
@@ -256,15 +256,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#permissible-values" class="md-nav__link">
-    Permissible Values
+  <a href="#applicable-classes" class="md-nav__link">
+    Applicable Classes
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#slots" class="md-nav__link">
-    Slots
+  <a href="#properties" class="md-nav__link">
+    Properties
   </a>
   
 </li>
@@ -310,67 +310,53 @@
                 
                   
 
-  <a href="https://github.com/TranslatorSRI/TranslatorTestingModel/edit/master/docs/TestCaseTypeEnum.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/TranslatorSRI/TranslatorTestingModel/edit/master/docs/test_suite_specification.md" title="Edit this page" class="md-content__button md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
-<h1 id="enum-testcasetypeenum">Enum: TestCaseTypeEnum</h1>
-<p><em>Enumerated tags for types of test (generally applied to a TestCase).</em></p>
-<p>URI: <a href="TestCaseTypeEnum">TestCaseTypeEnum</a></p>
-<h2 id="permissible-values">Permissible Values</h2>
-<table>
-<thead>
-<tr>
-<th>Value</th>
-<th>Meaning</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>acceptance</td>
-<td>None</td>
-<td>Acceptance test</td>
-</tr>
-<tr>
-<td>quantitative</td>
-<td>None</td>
-<td>Quantitative test</td>
-</tr>
-<tr>
-<td>compliance</td>
-<td>None</td>
-<td>Standards compliance test</td>
-</tr>
-<tr>
-<td>kg_navigation</td>
-<td>None</td>
-<td>Knowledge Graph navigation integration test</td>
-</tr>
-<tr>
-<td>one_hop</td>
-<td>None</td>
-<td>One Hop navigation test</td>
-</tr>
-</tbody>
-</table>
-<h2 id="slots">Slots</h2>
+<h1 id="slot-test_suite_specification">Slot: test_suite_specification</h1>
+<p><em>Declarative specification of a Test Suite of Test Cases whose generation is deferred, (i.e. within a Test Runner) or whose creation is achieved by stream processing of an external data source.</em></p>
+<p>URI: <a href="https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_suite_specification">ttm:test_suite_specification</a></p>
+<!-- no inheritance hierarchy -->
+
+<h2 id="applicable-classes">Applicable Classes</h2>
 <table>
 <thead>
 <tr>
 <th>Name</th>
 <th>Description</th>
+<th>Modifies Slot</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><a href="../test_case_type/">test_case_type</a></td>
-<td>Type of TestCase</td>
+<td><a href="../TestSuite/">TestSuite</a></td>
+<td>Specification of a set of Test Cases, one of either with a static list of 'te...</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../AcceptanceTestSuite/">AcceptanceTestSuite</a></td>
+<td></td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../StandardsComplianceTestSuite/">StandardsComplianceTestSuite</a></td>
+<td>Test suite for testing Translator components against releases of standards li...</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../OneHopTestSuite/">OneHopTestSuite</a></td>
+<td>Test case for testing the integrity of "One Hop" knowledge graph retrievals s...</td>
+<td>no</td>
 </tr>
 </tbody>
 </table>
+<h2 id="properties">Properties</h2>
+<ul>
+<li>Range: <a href="../TestSuiteSpecification/">TestSuiteSpecification</a></li>
+</ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
@@ -379,27 +365,18 @@
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: TestCaseTypeEnum
-description: Enumerated tags for types of test (generally applied to a TestCase).
+<pre><code class="language-yaml">name: test_suite_specification
+description: Declarative specification of a Test Suite of Test Cases whose generation
+  is deferred, (i.e. within a Test Runner) or whose creation is achieved by stream
+  processing of an external data source.
 from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
 rank: 1000
-permissible_values:
-  acceptance:
-    text: acceptance
-    description: Acceptance test
-  quantitative:
-    text: quantitative
-    description: Quantitative test
-  compliance:
-    text: compliance
-    description: Standards compliance test
-  kg_navigation:
-    text: kg_navigation
-    description: Knowledge Graph navigation integration test
-  one_hop:
-    text: one_hop
-    description: One Hop navigation test
-    is_a: kg_navigation
+alias: test_suite_specification
+domain_of:
+- TestSuite
+range: TestSuiteSpecification
+required: false
+inlined: true
 
 </code></pre>
 

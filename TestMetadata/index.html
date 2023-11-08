@@ -219,6 +219,10 @@
 
       TestMetadata : tags
 
+      TestMetadata : test_annotations
+
+          TestMetadata --|&gt; TestEntityParameter : test_annotations
+
       TestMetadata : test_objective
 
           TestMetadata --|&gt; TestObjectiveEnum : test_objective
@@ -258,13 +262,19 @@
 <tr>
 <td><a href="../test_reference/">test_reference</a></td>
 <td>0..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
-<td>Documentation URL where original test source particulars are registered (e</td>
+<td>Document URL where original test source particulars are registered (e</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../test_objective/">test_objective</a></td>
 <td>0..1 <br/> <a href="../TestObjectiveEnum/">TestObjectiveEnum</a></td>
 <td>Testing objective behind specified set of test particulars (e</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../test_annotations/">test_annotations</a></td>
+<td>0..* <br/> <a href="../TestEntityParameter/">TestEntityParameter</a></td>
+<td>Metadata annotation</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -367,6 +377,7 @@ slots:
 - test_source
 - test_reference
 - test_objective
+- test_annotations
 
 </code></pre>
 </details>
@@ -390,7 +401,7 @@ attributes:
     range: TestSourceEnum
   test_reference:
     name: test_reference
-    description: Documentation URL where original test source particulars are registered
+    description: Document URL where original test source particulars are registered
       (e.g. Github repo)
     from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
     aliases:
@@ -413,6 +424,19 @@ attributes:
     domain_of:
     - TestMetadata
     range: TestObjectiveEnum
+  test_annotations:
+    name: test_annotations
+    description: Metadata annotation.
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    is_a: test_entity_parameters
+    multivalued: true
+    alias: test_annotations
+    owner: TestMetadata
+    domain_of:
+    - TestMetadata
+    range: TestEntityParameter
+    inlined: true
   id:
     name: id
     description: A unique identifier for a Test Entity

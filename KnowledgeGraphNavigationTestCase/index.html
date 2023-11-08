@@ -234,10 +234,6 @@
 
           KnowledgeGraphNavigationTestCase --|&gt; TestAsset : test_assets
 
-      KnowledgeGraphNavigationTestCase : test_case_type
-
-          KnowledgeGraphNavigationTestCase --|&gt; TestCaseTypeEnum : test_case_type
-
       KnowledgeGraphNavigationTestCase : test_env
 
           KnowledgeGraphNavigationTestCase --|&gt; TestEnvEnum : test_env
@@ -276,12 +272,6 @@
 <td><a href="../test_env/">test_env</a></td>
 <td>0..1 <br/> <a href="../TestEnvEnum/">TestEnvEnum</a></td>
 <td>Deployment environment within which the associated TestSuite is run</td>
-<td><a href="../TestCase/">TestCase</a></td>
-</tr>
-<tr>
-<td><a href="../test_case_type/">test_case_type</a></td>
-<td>0..1 <br/> <a href="../TestCaseTypeEnum/">TestCaseTypeEnum</a></td>
-<td>Is this valid or even necessary with the class names already available from c...</td>
 <td><a href="../TestCase/">TestCase</a></td>
 </tr>
 <tr>
@@ -335,7 +325,7 @@
 <tr>
 <td><a href="../tags/">tags</a></td>
 <td>0..* <br/> <a href="../String/">String</a></td>
-<td>One or more 'tags' slot values (inherited from TestEntity) should generally b...</td>
+<td>One or more 'tags' slot values (slot inherited from TestEntity) should genera...</td>
 <td><a href="../TestEntity/">TestEntity</a></td>
 </tr>
 </tbody>
@@ -392,17 +382,6 @@ attributes:
     domain_of:
     - TestCase
     range: TestEnvEnum
-  test_case_type:
-    name: test_case_type
-    description: Is this valid or even necessary with the class names already available
-      from classes of 'test_assets' used (seems redundant?)
-    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
-    rank: 1000
-    alias: test_case_type
-    owner: KnowledgeGraphNavigationTestCase
-    domain_of:
-    - TestCase
-    range: TestCaseTypeEnum
   query_type:
     name: query_type
     description: Type of TestCase query.
@@ -505,7 +484,7 @@ attributes:
     range: string
   tags:
     name: tags
-    description: One or more 'tags' slot values (inherited from TestEntity) should
+    description: One or more 'tags' slot values (slot inherited from TestEntity) should
       generally be defined as filters to specify TestAsset membership in a "Block
       List" collection.
     from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel

@@ -256,42 +256,29 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#applicable-classes" class="md-nav__link">
-    Applicable Classes
+  <a href="#domain-and-range" class="md-nav__link">
+    Domain and Range
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
-    Properties
+  <a href="#parents" class="md-nav__link">
+    Parents
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#identifier-and-mapping-information" class="md-nav__link">
-    Identifier and Mapping Information
+  <a href="#children" class="md-nav__link">
+    Children
   </a>
-  
-    <nav class="md-nav" aria-label="Identifier and Mapping Information">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#schema-source" class="md-nav__link">
-    Schema Source
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#linkml-source" class="md-nav__link">
-    LinkML Source
+  <a href="#used-by" class="md-nav__link">
+    Used by
   </a>
   
 </li>
@@ -317,68 +304,19 @@
 
 
 <h1 id="slot-test_case_specification">Slot: test_case_specification</h1>
-<p><em>Declarative specification of a set of Test Cases generated elsewhere (i.e. within a Test Runner)</em></p>
+<p>Declarative specification of a set of Test Cases generated elsewhere (i.e. within a Test Runner)</p>
 <p>URI: <a href="https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case_specification">ttm:test_case_specification</a></p>
-<!-- no inheritance hierarchy -->
-
-<h2 id="applicable-classes">Applicable Classes</h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-<th>Modifies Slot</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../TestSuite/">TestSuite</a></td>
-<td>Specification of a set of Test Cases, one of either with a static list of 'te...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../AcceptanceTestSuite/">AcceptanceTestSuite</a></td>
-<td></td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../StandardsComplianceTestSuite/">StandardsComplianceTestSuite</a></td>
-<td>Test suite for testing Translator components against releases of standards li...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../OneHopTestSuite/">OneHopTestSuite</a></td>
-<td>Test case for testing the integrity of "One Hop" knowledge graph retrievals s...</td>
-<td>no</td>
-</tr>
-</tbody>
-</table>
-<h2 id="properties">Properties</h2>
+<h2 id="domain-and-range">Domain and Range</h2>
+<p>None &#8594;  <sub>0..1</sub> <a href="../TestCaseSpecification/">TestCaseSpecification</a></p>
+<h2 id="parents">Parents</h2>
+<h2 id="children">Children</h2>
+<h2 id="used-by">Used by</h2>
 <ul>
-<li>Range: <a href="../TestCaseSpecification/">TestCaseSpecification</a></li>
+<li><a href="../AcceptanceTestSuite/">AcceptanceTestSuite</a></li>
+<li><a href="../OneHopTestSuite/">OneHopTestSuite</a></li>
+<li><a href="../StandardsComplianceTestSuite/">StandardsComplianceTestSuite</a></li>
+<li><a href="../TestSuite/">TestSuite</a></li>
 </ul>
-<h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="schema-source">Schema Source</h3>
-<ul>
-<li>from schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel</li>
-</ul>
-<h2 id="linkml-source">LinkML Source</h2>
-<details>
-
-<pre><code class="language-yaml">name: test_case_specification
-description: Declarative specification of a set of Test Cases generated elsewhere
-  (i.e. within a Test Runner)
-from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
-rank: 1000
-alias: test_case_specification
-domain_of:
-- TestSuite
-range: TestCaseSpecification
-required: false
-
-</code></pre>
-
-</details>
 
 
 

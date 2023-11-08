@@ -214,10 +214,6 @@
 
       OneHopTestSuite : tags
 
-      OneHopTestSuite : test_case_specification
-
-          OneHopTestSuite --|&gt; TestCaseSpecification : test_case_specification
-
       OneHopTestSuite : test_cases
 
           OneHopTestSuite --|&gt; TestCase : test_cases
@@ -229,6 +225,10 @@
       OneHopTestSuite : test_persona
 
           OneHopTestSuite --|&gt; TestPersonaEnum : test_persona
+
+      OneHopTestSuite : test_suite_specification
+
+          OneHopTestSuite --|&gt; TestSuiteSpecification : test_suite_specification
 
 
 </div>
@@ -272,9 +272,9 @@
 <td><a href="../TestSuite/">TestSuite</a></td>
 </tr>
 <tr>
-<td><a href="../test_case_specification/">test_case_specification</a></td>
-<td>0..1 <br/> <a href="../TestCaseSpecification/">TestCaseSpecification</a></td>
-<td>Declarative specification of a set of Test Cases generated elsewhere (i</td>
+<td><a href="../test_suite_specification/">test_suite_specification</a></td>
+<td>0..1 <br/> <a href="../TestSuiteSpecification/">TestSuiteSpecification</a></td>
+<td>Declarative specification of a Test Suite of Test Cases whose generation is d...</td>
 <td><a href="../TestSuite/">TestSuite</a></td>
 </tr>
 <tr>
@@ -358,6 +358,7 @@ attributes:
     domain_of:
     - TestSuite
     range: TestMetadata
+    inlined: true
   test_persona:
     name: test_persona
     description: A Test persona describes the user or operational context of a given
@@ -382,18 +383,20 @@ attributes:
     range: TestCase
     required: false
     inlined: true
-  test_case_specification:
-    name: test_case_specification
-    description: Declarative specification of a set of Test Cases generated elsewhere
-      (i.e. within a Test Runner)
+  test_suite_specification:
+    name: test_suite_specification
+    description: Declarative specification of a Test Suite of Test Cases whose generation
+      is deferred, (i.e. within a Test Runner) or whose creation is achieved by stream
+      processing of an external data source.
     from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
     rank: 1000
-    alias: test_case_specification
+    alias: test_suite_specification
     owner: OneHopTestSuite
     domain_of:
     - TestSuite
-    range: TestCaseSpecification
+    range: TestSuiteSpecification
     required: false
+    inlined: true
   id:
     name: id
     description: A unique identifier for a Test Entity

@@ -200,7 +200,7 @@
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"></path></svg>
 </a>
 <h1 id="class-testsuite">Class: TestSuite</h1>
-<p><em>Specification of a set of Test Cases, one of either with a static list of 'test_cases' or a dynamic 'test_case_specification' slot values. Note: at least one slot or the other, but generally not both(?) needs to be present.</em></p>
+<p><em>Specification of a set of Test Cases, one of either with a static list of 'test_cases' or a dynamic 'test_suite_specification' slot values. Note: at least one slot or the other, but generally not both(?) needs to be present.</em></p>
 <p>URI: <a href="https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestSuite">ttm:TestSuite</a></p>
 <div class="mermaid"> classDiagram
     class TestSuite
@@ -220,10 +220,6 @@
 
       TestSuite : tags
 
-      TestSuite : test_case_specification
-
-          TestSuite --|&gt; TestCaseSpecification : test_case_specification
-
       TestSuite : test_cases
 
           TestSuite --|&gt; TestCase : test_cases
@@ -235,6 +231,10 @@
       TestSuite : test_persona
 
           TestSuite --|&gt; TestPersonaEnum : test_persona
+
+      TestSuite : test_suite_specification
+
+          TestSuite --|&gt; TestSuiteSpecification : test_suite_specification
 
 
 </div>
@@ -280,9 +280,9 @@
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../test_case_specification/">test_case_specification</a></td>
-<td>0..1 <br/> <a href="../TestCaseSpecification/">TestCaseSpecification</a></td>
-<td>Declarative specification of a set of Test Cases generated elsewhere (i</td>
+<td><a href="../test_suite_specification/">test_suite_specification</a></td>
+<td>0..1 <br/> <a href="../TestSuiteSpecification/">TestSuiteSpecification</a></td>
+<td>Declarative specification of a Test Suite of Test Cases whose generation is d...</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -341,7 +341,7 @@
 <details>
 <pre><code class="language-yaml">name: TestSuite
 description: 'Specification of a set of Test Cases, one of either with a static list
-  of ''test_cases'' or a dynamic ''test_case_specification'' slot values. Note: at
+  of ''test_cases'' or a dynamic ''test_suite_specification'' slot values. Note: at
   least one slot or the other, but generally not both(?) needs to be present.'
 from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
 is_a: TestEntity
@@ -349,7 +349,7 @@ slots:
 - test_metadata
 - test_persona
 - test_cases
-- test_case_specification
+- test_suite_specification
 
 </code></pre>
 </details>
@@ -357,7 +357,7 @@ slots:
 <details>
 <pre><code class="language-yaml">name: TestSuite
 description: 'Specification of a set of Test Cases, one of either with a static list
-  of ''test_cases'' or a dynamic ''test_case_specification'' slot values. Note: at
+  of ''test_cases'' or a dynamic ''test_suite_specification'' slot values. Note: at
   least one slot or the other, but generally not both(?) needs to be present.'
 from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
 is_a: TestEntity
@@ -373,6 +373,7 @@ attributes:
     domain_of:
     - TestSuite
     range: TestMetadata
+    inlined: true
   test_persona:
     name: test_persona
     description: A Test persona describes the user or operational context of a given
@@ -397,18 +398,20 @@ attributes:
     range: TestCase
     required: false
     inlined: true
-  test_case_specification:
-    name: test_case_specification
-    description: Declarative specification of a set of Test Cases generated elsewhere
-      (i.e. within a Test Runner)
+  test_suite_specification:
+    name: test_suite_specification
+    description: Declarative specification of a Test Suite of Test Cases whose generation
+      is deferred, (i.e. within a Test Runner) or whose creation is achieved by stream
+      processing of an external data source.
     from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
     rank: 1000
-    alias: test_case_specification
+    alias: test_suite_specification
     owner: TestSuite
     domain_of:
     - TestSuite
-    range: TestCaseSpecification
+    range: TestSuiteSpecification
     required: false
+    inlined: true
   id:
     name: id
     description: A unique identifier for a Test Entity

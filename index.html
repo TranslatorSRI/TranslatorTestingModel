@@ -442,16 +442,24 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <td>Assumed additional model from Shervin's runner JSON here as an example.  This schema is not yet complete.</td>
 </tr>
 <tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="TestCaseSpecification/">TestCaseSpecification</a></td>
-<td>Parameterized declaration of the Test Case generator which dynamically generates a collection of Test Cases from Test Assets, using applicable heuristics.</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="TestCaseResult/">TestCaseResult</a></td>
+<td>The outcome of a TestRunner run of one specific TestCase.</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="TestMetadata/">TestMetadata</a></td>
 <td>Represents metadata related to (external SME, SMURF, Translator feedback,  large scale batch, etc.) like the provenance of test assets, cases and/or suites.</td>
 </tr>
 <tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="TestRunnerConfiguration/">TestRunnerConfiguration</a></td>
+<td>General configuration parameters and test data input  for a single invocation of a TestRunner.</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="TestRunSession/">TestRunSession</a></td>
+<td>A single invocation of a TestRunner.</td>
+</tr>
+<tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="TestSuite/">TestSuite</a></td>
-<td>Specification of a set of Test Cases, one of either with a static list of 'test_cases' or a dynamic 'test_case_specification' slot values. Note: at least one slot or the other, but generally not both(?) needs to be present.</td>
+<td>Specification of a set of Test Cases, one of either with a static list of 'test_cases' or a dynamic 'test_suite_specification' slot values. Note: at least one slot or the other, but generally not both(?) needs to be present.</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="AcceptanceTestSuite/">AcceptanceTestSuite</a></td>
@@ -464,6 +472,14 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="StandardsComplianceTestSuite/">StandardsComplianceTestSuite</a></td>
 <td>Test suite for testing Translator components against releases of standards like TRAPI and the Biolink Model.</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="TestSuiteSpecification/">TestSuiteSpecification</a></td>
+<td>Parameters for a Test Case instances either dynamically generated from some external source of Test Assets.</td>
+</tr>
+<tr>
+<td><a href="TestEntityParameter/">TestEntityParameter</a></td>
+<td>A single 'tag = value' pair (where 'value' is a simple string).</td>
 </tr>
 </tbody>
 </table>
@@ -541,6 +557,10 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <td></td>
 </tr>
 <tr>
+<td><a href="parameter/">parameter</a></td>
+<td>Name of a TestParameter</td>
+</tr>
+<tr>
 <td><a href="preconditions/">preconditions</a></td>
 <td></td>
 </tr>
@@ -555,10 +575,6 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <tr>
 <td><a href="query_type/">query_type</a></td>
 <td>Type of TestCase query</td>
-</tr>
-<tr>
-<td><a href="requires_trapi/">requires_trapi</a></td>
-<td>Does this test require a TRAPI-compliant query to run?</td>
 </tr>
 <tr>
 <td><a href="runner_settings/">runner_settings</a></td>
@@ -581,20 +597,44 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <td>A human-readable tags for categorical memberships of a TestEntity (preferably...</td>
 </tr>
 <tr>
+<td><a href="test_annotations/">test_annotations</a></td>
+<td>Metadata annotation</td>
+</tr>
+<tr>
 <td><a href="test_assets/">test_assets</a></td>
 <td>List of explicitly enumerated Test Assets</td>
 </tr>
 <tr>
-<td><a href="test_case_specification/">test_case_specification</a></td>
-<td>Declarative specification of a set of Test Cases generated elsewhere (i</td>
+<td><a href="test_case/">test_case</a></td>
+<td>Slot referencing a single TestCase</td>
 </tr>
 <tr>
-<td><a href="test_case_type/">test_case_type</a></td>
-<td>Type of TestCase</td>
+<td><a href="test_case_result/">test_case_result</a></td>
+<td>Encoded result of a single test run of a given test case</td>
+</tr>
+<tr>
+<td><a href="test_case_results/">test_case_results</a></td>
+<td>One or more instances of TestCaseResult</td>
 </tr>
 <tr>
 <td><a href="test_cases/">test_cases</a></td>
 <td>List of explicitly enumerated Test Cases</td>
+</tr>
+<tr>
+<td><a href="test_data_file_format/">test_data_file_format</a></td>
+<td>File format of test entity data (e</td>
+</tr>
+<tr>
+<td><a href="test_data_file_locator/">test_data_file_locator</a></td>
+<td>An web accessible file resource link to test entity data (e</td>
+</tr>
+<tr>
+<td><a href="test_entities/">test_entities</a></td>
+<td>One or more instances of TestEntity, generally of class TestAsset, TestCase o...</td>
+</tr>
+<tr>
+<td><a href="test_entity_parameters/">test_entity_parameters</a></td>
+<td>One or more parameters documenting target characteristics of a TestEntity</td>
 </tr>
 <tr>
 <td><a href="test_env/">test_env</a></td>
@@ -618,11 +658,31 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 </tr>
 <tr>
 <td><a href="test_reference/">test_reference</a></td>
-<td>Documentation URL where original test source particulars are registered (e</td>
+<td>Document URL where original test source particulars are registered (e</td>
+</tr>
+<tr>
+<td><a href="test_run_parameters/">test_run_parameters</a></td>
+<td>Parameters for TestRunnerConfiguration that inform the TestHarness and TestRu...</td>
+</tr>
+<tr>
+<td><a href="test_runner_name/">test_runner_name</a></td>
+<td>Global system name of a TestRunner</td>
 </tr>
 <tr>
 <td><a href="test_source/">test_source</a></td>
 <td>Provenance of a specific set of test assets, cases and/or suites</td>
+</tr>
+<tr>
+<td><a href="test_suite_id/">test_suite_id</a></td>
+<td>CURIE id of a TestSuite registered in the system</td>
+</tr>
+<tr>
+<td><a href="test_suite_specification/">test_suite_specification</a></td>
+<td>Declarative specification of a Test Suite of Test Cases whose generation is d...</td>
+</tr>
+<tr>
+<td><a href="timestamp/">timestamp</a></td>
+<td>Date time when a given entity was created</td>
 </tr>
 <tr>
 <td><a href="top_level/">top_level</a></td>
@@ -631,6 +691,10 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <tr>
 <td><a href="trapi_template/">trapi_template</a></td>
 <td>A template for a query, which can be used to generate a query for a test case</td>
+</tr>
+<tr>
+<td><a href="value/">value</a></td>
+<td>(String) value of a TestParameter</td>
 </tr>
 <tr>
 <td><a href="well_known/">well_known</a></td>
@@ -664,6 +728,10 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <td>Does this Enum overlap with 'ExpectedOutputEnum' above?</td>
 </tr>
 <tr>
+<td><a href="FileFormatEnum/">FileFormatEnum</a></td>
+<td>Text file formats for test data sources</td>
+</tr>
+<tr>
 <td><a href="NodeEnum/">NodeEnum</a></td>
 <td>Target node of a Subject-Predicate-Object driven query</td>
 </tr>
@@ -676,8 +744,8 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <td>From Jenn's worksheet, empty or ill defined (needs elaboration)</td>
 </tr>
 <tr>
-<td><a href="TestCaseTypeEnum/">TestCaseTypeEnum</a></td>
-<td>Enumerated tags for types of test (generally applied to a TestCase)</td>
+<td><a href="TestCaseResultEnum/">TestCaseResultEnum</a></td>
+<td></td>
 </tr>
 <tr>
 <td><a href="TestEnvEnum/">TestEnvEnum</a></td>
@@ -693,7 +761,7 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 </tr>
 <tr>
 <td><a href="TestPersonaEnum/">TestPersonaEnum</a></td>
-<td></td>
+<td>User persona context of a given test</td>
 </tr>
 <tr>
 <td><a href="TestSourceEnum/">TestSourceEnum</a></td>
