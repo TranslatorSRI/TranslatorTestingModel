@@ -126,24 +126,18 @@ if __name__ == '__main__':
         data = response.json()
         for k, v in data.items():
             print(k, v)
-            for item in v:
-                if len(item.get("templates")) > 1:
-                    raise ValueError("More than one template found")
-                tc = TestCase(id=k,
-                              name=item.get("source"),
-                              description=k+"_"+item.get("source"),
-                              test_case_type="quantitative",
-                              test_assets=[],
-                              test_env="ci",
-                              # note the hack here to get the template,
-                              # there is only ever one, but....
-                              trapi_template=item.get("templates")[0],
-                              components=["ars", "arax", "bte", "improving", "aragorn"]
-                              )
-                file_prefix = k+"_"+item.get("source")
-                filename = f"{file_prefix}.json"
-                with open(filename, 'w', encoding='utf-8') as file:
-                    json.dump(tc.dict(), file, ensure_ascii=False, indent=4)
+            tc = TestCase(id=k,
+                          name=k,
+                          description=k,
+                          test_case_type="quantitative",
+                          test_assets=[],
+                          test_env="ci",
+                          components=["ars"]
+                          )
+            file_prefix = k
+            filename = f"{file_prefix}.json"
+            with open(filename, 'w', encoding='utf-8') as file:
+                json.dump(tc.dict(), file, ensure_ascii=False, indent=4)
 
     else:
         print(f'Failed to retrieve the file. Status code: {response.status_code}')
