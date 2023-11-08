@@ -249,11 +249,11 @@ classes:
 
   TestRunnerConfiguration:
     description: >-
-      General configuration parameters and test data input for a single invocation of a TestRunner.
+      General configuration parameters and test data input 
+      for a single invocation of a TestRunner.
     is_a: TestEntity
     slots:
       - test_run_parameters
-      - test_entities
     slot_usage:
       tags:
         description: >-
@@ -270,6 +270,7 @@ classes:
     is_a: TestEntity
     slots:
       - test_runner_configuration
+      - test_entities
       - test_case_results
       - timestamp
     slot_usage:
