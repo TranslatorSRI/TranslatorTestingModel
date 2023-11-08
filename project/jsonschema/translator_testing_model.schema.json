@@ -95,7 +95,7 @@
                     "$ref": "#/$defs/TestIssueEnum"
                 },
                 "test_reference": {
-                    "description": "Documentation URL where original test source particulars are registered (e.g. Github repo)",
+                    "description": "Document URL where original test source particulars are registered (e.g. Github repo)",
                     "type": "string"
                 },
                 "top_level": {
@@ -751,7 +751,7 @@
                     "$ref": "#/$defs/TestIssueEnum"
                 },
                 "test_reference": {
-                    "description": "Documentation URL where original test source particulars are registered (e.g. Github repo)",
+                    "description": "Document URL where original test source particulars are registered (e.g. Github repo)",
                     "type": "string"
                 },
                 "well_known": {
@@ -830,7 +830,7 @@
         },
         "TestCaseResult": {
             "additionalProperties": false,
-            "description": "Wrapper for the outcome of a TestRunner running a one specific TestCase.",
+            "description": "The outcome of a TestRunner run of one specific TestCase.",
             "properties": {
                 "description": {
                     "description": "A human-readable description for a Test Entity",
@@ -882,7 +882,7 @@
         },
         "TestCaseResult__identifier_optional": {
             "additionalProperties": false,
-            "description": "Wrapper for the outcome of a TestRunner running a one specific TestCase.",
+            "description": "The outcome of a TestRunner run of one specific TestCase.",
             "properties": {
                 "description": {
                     "description": "A human-readable description for a Test Entity",
@@ -1040,7 +1040,7 @@
                     "$ref": "#/$defs/TestIssueEnum"
                 },
                 "test_reference": {
-                    "description": "Documentation URL where original test source particulars are registered (e.g. Github repo)",
+                    "description": "Document URL where original test source particulars are registered (e.g. Github repo)",
                     "type": "string"
                 },
                 "well_known": {
@@ -1052,6 +1052,22 @@
                 "id"
             ],
             "title": "TestEdgeData",
+            "type": "object"
+        },
+        "TestEntityParameter": {
+            "additionalProperties": false,
+            "description": "A single 'tag = value' pair (where 'value' is a simple string).",
+            "properties": {
+                "parameter": {
+                    "description": "Name of a TestParameter.",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "(String) value of a TestParameter.",
+                    "type": "string"
+                }
+            },
+            "title": "TestEntityParameter",
             "type": "object"
         },
         "TestEnvEnum": {
@@ -1101,12 +1117,19 @@
                     },
                     "type": "array"
                 },
+                "test_annotations": {
+                    "description": "Metadata annotation.",
+                    "items": {
+                        "$ref": "#/$defs/TestEntityParameter"
+                    },
+                    "type": "array"
+                },
                 "test_objective": {
                     "$ref": "#/$defs/TestObjectiveEnum",
                     "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)"
                 },
                 "test_reference": {
-                    "description": "Documentation URL where original test source particulars are registered (e.g. Github repo)",
+                    "description": "Document URL where original test source particulars are registered (e.g. Github repo)",
                     "type": "string"
                 },
                 "test_source": {
@@ -1141,22 +1164,6 @@
             "title": "TestPersonaEnum",
             "type": "string"
         },
-        "TestRunParameter": {
-            "additionalProperties": false,
-            "description": "A single 'tag = value' pair (where 'value' is a simple string).",
-            "properties": {
-                "parameter": {
-                    "description": "Name of a TestParameter.",
-                    "type": "string"
-                },
-                "value": {
-                    "description": "(String) value of a TestParameter.",
-                    "type": "string"
-                }
-            },
-            "title": "TestRunParameter",
-            "type": "object"
-        },
         "TestRunSession": {
             "additionalProperties": false,
             "description": "A single invocation of a TestRunner.",
@@ -1166,7 +1173,7 @@
                     "type": "string"
                 },
                 "id": {
-                    "description": "Session identifier of the TestRun.",
+                    "description": "A unique identifier for a Test Entity",
                     "type": "string"
                 },
                 "name": {
@@ -1194,8 +1201,22 @@
                     "description": "One or more instances of TestCaseResult.",
                     "type": "object"
                 },
-                "test_runner_configuration": {
-                    "description": "General TestRunner (metadata) configuration parameters to set up a TestRun.",
+                "test_entities": {
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/TestEntity__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "description": "Different TestRunners may expect specific kinds of TestEntity as input. These 'test_entities' one or more instances of TestAsset, TestCase or TestSuite.",
+                    "type": "object"
+                },
+                "test_runner_name": {
+                    "description": "Global system name of a TestRunner.",
                     "type": "string"
                 },
                 "timestamp": {
@@ -1212,7 +1233,7 @@
         },
         "TestRunnerConfiguration": {
             "additionalProperties": false,
-            "description": "General configuration parameters and test data input for a single invocation of a TestRunner.",
+            "description": "General configuration parameters and test data input  for a single invocation of a TestRunner.",
             "properties": {
                 "description": {
                     "description": "A human-readable description for a Test Entity",
@@ -1227,30 +1248,16 @@
                     "type": "string"
                 },
                 "tags": {
-                    "description": "One or more 'tags' slot values (slot inherited from TestEntity) should generally identify the TestRunner(s) which can run the tests implied by all the instances specified in this configuration.",
+                    "description": "One or more 'tags' slot values (slot inherited from TestEntity)  should generally identify the TestRunner(s) using this configuration.",
                     "items": {
                         "type": "string"
                     },
                     "type": "array"
                 },
-                "test_entities": {
-                    "additionalProperties": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/$defs/TestEntity__identifier_optional"
-                            },
-                            {
-                                "type": "null"
-                            }
-                        ]
-                    },
-                    "description": "Different TestRunners may expect specific kinds of TestEntity as input. These 'test_entities' one or more instances of TestAsset, TestCase or TestSuite.",
-                    "type": "object"
-                },
                 "test_run_parameters": {
-                    "description": "One or more instances of TestRunParameter, forming a part of a TestRunnerConfiguration and that inform the TestHarness and TestRunners about the target characteristics of a TestRun",
+                    "description": "Parameters for TestRunnerConfiguration that inform the TestHarness and TestRunners about the general characteristics of a test run.",
                     "items": {
-                        "$ref": "#/$defs/TestRunParameter"
+                        "$ref": "#/$defs/TestEntityParameter"
                     },
                     "type": "array"
                 }

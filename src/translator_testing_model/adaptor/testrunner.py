@@ -38,20 +38,23 @@ class TestRunner:
 
     def get_session(self, session_id: str) -> Optional[TestRunSession]:
         """
-        Returns the TestRunner session corresponding to the given session identifier
+        Returns the TestRunner session corresponding to the given session identifier.
+
         :param session_id: valid session identifier of registered TestRunner session
-        :return: Optional[TestRunSession], session of a valid extant instance of TestRunner if known; None otherwise
+        :return: Optional[TestRunSession],
+                 session of a valid extant instance of TestRunner if known; None otherwise
         """
         return self.sessions[session_id] if session_id in self.sessions else None
 
     def run(self, tests: Union[TestEntity, List[TestEntity]]) -> TestRunSession:
         """
-        Method to set up asynchronous running of the specified collection of tests
-        by the configured TestRunner, returning the test results.
+        Method to initiate TestRunner processing of the specified collection of tests,
+        returning a session handle to manage the run and access test results.
 
         :param tests: Union[TestEntity, List[TestEntity]], may be any reasonable (TestRunner-specific) -
                       possibly a List of - instance(s) of test data entity but generally constrained to
                       be of a TestSuite, TestCase or TestAsset derived data type.
+
         :return: TestRunSession, data wrapper for an instance of TestRunner running the provided tests.
         """
         raise NotImplementedError

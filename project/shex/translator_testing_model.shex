@@ -215,12 +215,21 @@ linkml:Sparqlpath xsd:string
     )
 }
 
+<TestEntityParameter> CLOSED {
+    (  $<TestEntityParameter_tes> (  <parameter> @linkml:String ? ;
+          <value> @linkml:String ?
+       ) ;
+       rdf:type [ <TestEntityParameter> ] ?
+    )
+}
+
 <TestMetadata> CLOSED {
     (  $<TestMetadata_tes> (  &<TestEntity_tes> ;
           rdf:type [ <TestEntity> ] ? ;
           <test_source> @<TestSourceEnum> ? ;
           <test_reference> @linkml:Uriorcurie ? ;
-          <test_objective> @<TestObjectiveEnum> ?
+          <test_objective> @<TestObjectiveEnum> ? ;
+          <test_annotations> @<TestEntityParameter> *
        ) ;
        rdf:type [ <TestMetadata> ]
     )
@@ -229,26 +238,18 @@ linkml:Sparqlpath xsd:string
 <TestRunnerConfiguration> CLOSED {
     (  $<TestRunnerConfiguration_tes> (  &<TestEntity_tes> ;
           rdf:type [ <TestEntity> ] ? ;
-          <test_run_parameters> @<TestRunParameter> * ;
-          <test_entities> @<TestEntity> * ;
+          <test_run_parameters> @<TestEntityParameter> * ;
           schema1:additionalType @linkml:String *
        ) ;
        rdf:type [ <TestRunnerConfiguration> ]
     )
 }
 
-<TestRunParameter> CLOSED {
-    (  $<TestRunParameter_tes> (  <parameter> @linkml:String ? ;
-          <value> @linkml:String ?
-       ) ;
-       rdf:type [ <TestRunParameter> ] ?
-    )
-}
-
 <TestRunSession> CLOSED {
     (  $<TestRunSession_tes> (  &<TestEntity_tes> ;
           rdf:type [ <TestEntity> ] ? ;
-          <test_runner_configuration> @<TestRunnerConfiguration> ? ;
+          <test_runner_name> @linkml:String ? ;
+          <test_entities> @<TestEntity> * ;
           <test_case_results> @<TestCaseResult> * ;
           <timestamp> @linkml:Datetime ?
        ) ;

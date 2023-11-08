@@ -25,9 +25,16 @@ imports:
 
 classes:
 
-  ##################
-  # General Models #
-  ##################
+  ########################
+  # General Class Models #
+  ########################
+
+  TestEntityParameter:
+    description: >-
+      A single 'tag = value' pair (where 'value' is a simple string).
+    slots:
+      - parameter
+      - value
 
   TestEntity:
     description: >-
@@ -50,6 +57,7 @@ classes:
       - test_source
       - test_reference
       - test_objective
+      - test_annotations
 
   #####################
   # Test Asset Models #
@@ -117,9 +125,9 @@ classes:
       subject-predicate-object edge that can be used for testing.
     is_a: TestAsset
 
-  ####################
-  # Test Case Models #
-  ####################
+  ###################
+  # TestCase Models #
+  ###################
 
   Precondition:
     description: >-
@@ -197,6 +205,15 @@ classes:
   # Test Suite Models #
   #####################
 
+  TestSuiteSpecification:
+    description: >-
+      Parameters for a Test Case instances either dynamically
+      generated from some external source of Test Assets.
+    is_a: TestEntity
+    slots:
+      - test_data_file_locator
+      - test_data_file_format
+
   TestSuite:
     is_a: TestEntity
     description: >-
@@ -227,25 +244,9 @@ classes:
       Test case for testing the integrity of "One Hop" knowledge graph retrievals sensa legacy SRI_Testing harness.
     is_a: TestSuite
 
-  TestSuiteSpecification:
-    description: >-
-      Parameters for a Test Case instances either dynamically
-      generated from some external source of Test Assets.
-    is_a: TestEntity
-    slots:
-      - test_data_file_locator
-      - test_data_file_format
-
-  ###################
-  # Test Run Models #
-  ###################
-
-  TestRunParameter:
-    description: >-
-      A single 'tag = value' pair (where 'value' is a simple string).
-    slots:
-      - parameter
-      - value
+  #####################
+  # TestRunner Models #
+  #####################
 
   TestRunnerConfiguration:
     description: >-
@@ -257,36 +258,32 @@ classes:
     slot_usage:
       tags:
         description: >-
-          One or more 'tags' slot values (slot inherited from TestEntity) should generally identify the
-          TestRunner(s) which can run the tests implied by all the instances specified in this configuration.
-      test_entities:
-        description: >-
-          Different TestRunners may expect specific kinds of TestEntity as input.
-          These 'test_entities' one or more instances of TestAsset, TestCase or TestSuite.
+          One or more 'tags' slot values (slot inherited from TestEntity) 
+          should generally identify the TestRunner(s) using this configuration.
+
+  TestCaseResult:
+    description: >-
+      The outcome of a TestRunner run of one specific TestCase.
+    is_a: TestEntity
+    slots:
+      - test_suite_id
+      - test_case
+      - test_case_result
 
   TestRunSession:
     description: >-
       A single invocation of a TestRunner.
     is_a: TestEntity
     slots:
-      - test_runner_configuration
+      - test_runner_name
       - test_entities
       - test_case_results
       - timestamp
     slot_usage:
-      id:
+      test_entities:
         description: >-
-          Session identifier of the TestRun.
-        range: uriorcurie
-
-  TestCaseResult:
-    description: >-
-      Wrapper for the outcome of a TestRunner running a one specific TestCase.
-    is_a: TestEntity
-    slots:
-      - test_suite_id
-      - test_case
-      - test_case_result
+          Different TestRunners may expect specific kinds of TestEntity as input.
+          These 'test_entities' one or more instances of TestAsset, TestCase or TestSuite.
 
 
 ###############
@@ -295,30 +292,29 @@ classes:
 
 slots:
 
-  components:
-    description: >-
-      The component that this test case is intended to run against.  Most often this is the ARS for 
-      acceptance tests, but for the Benchmarks repo integration, this can also be individual components
-      of the system like Aragorn, or ARAX.
-    range: ComponentEnum
-    multivalued: true
+  #################
+  # General Slots #
+  #################
 
-  trapi_template:
+  parameter:
     description: >-
-      A template for a query, which can be used to generate a query
-      for a test case.  note: the current enumerated values for this slot
-      come from the Benchmarks repo config/benchmarks.json "templates" collection
-      and refer to the "name" field of each template.  Templates themselves
-      are currently stored in the config/[source_name]/templates directory.
-    range: TrapiTemplateEnum
+      Name of a TestParameter.
 
-  runner_settings:
-    aliases: ["Settings"]
+  value:
     description: >-
-      Settings for the test harness
-    range: string
+      (String) value of a TestParameter.
+
+  test_entity_parameters:
+    description: >-
+      One or more parameters documenting target characteristics of a TestEntity.
+    range: TestEntityParameter
     multivalued: true
-    required: true
+    inlined: true
+
+  timestamp:
+    description: >-
+      Date time when a given entity was created.
+    range: datetime
 
   id:
     identifier: true
@@ -348,7 +344,7 @@ slots:
   test_reference:
     aliases: ["GitHubIssue"]
     description: >-
-      Documentation URL where original test source particulars are registered (e.g. Github repo)
+      Document URL where original test source particulars are registered (e.g. Github repo)
     range: uriorcurie
 
   test_objective:
@@ -356,6 +352,15 @@ slots:
       Testing objective behind specified set of test particulars
       (e.g. acceptance pass/fail; benchmark; quantitative)
     range: TestObjectiveEnum
+
+  test_annotations:
+    description: >-
+      Metadata annotation.
+    is_a: test_entity_parameters
+
+  ###################
+  # TestAsset Slots #
+  ###################
 
   input_id:
     aliases: ["InputID, node normalized", "SubjectID"]
@@ -394,56 +399,13 @@ slots:
     aliases: ["Well Known"]
     range: boolean
 
-  test_metadata:
+  runner_settings:
+    aliases: ["Settings"]
     description: >-
-      Test metadata describes the external provenance, cross-references and objectives for a given test.
-    range: TestMetadata
-    inlined: true
-
-  test_persona:
-    description: >-
-      A Test persona describes the user or operational context of a given test.
-    range: TestPersonaEnum
-
-  test_data_file_locator:
-    description: >-
-      An web accessible file resource link to test entity data
-      (e.g. a web accessible text file of Test Asset entries)
-    range: uriorcurie
-
-  test_data_file_format:
-    description: >-
-      File format of test entity data (e.g. TSV, YAML or JSON)
-    range: FileFormatEnum
-
-  test_assets:
-    description: >-
-      List of explicitly enumerated Test Assets. The class attributes of
-      TestAsset would be included in the TestCase versus being referred to by
-      the identifier (curie) of the TestAsset. That is, this would be a list of
-      objects (in JSONSchema serialization) versus a list of strings (where
-      each string is an identifier pointing to another class).
-    range: TestAsset
+      Settings for the test harness
+    range: string
     multivalued: true
-    inlined: true
-    inlined_as_list: true
     required: true
-
-  test_cases:
-    description: >-
-      List of explicitly enumerated Test Cases.
-    range: TestCase
-    multivalued: true
-    inlined: true
-    required: false
-
-  test_suite_specification:
-    description: >-
-      Declarative specification of a Test Suite of Test Cases whose generation is deferred,
-      (i.e. within a Test Runner) or whose creation is achieved by stream processing of an external data source.
-    range: TestSuiteSpecification
-    inlined: true
-    required: false
 
   must_pass_date:
     description: >-
@@ -460,7 +422,6 @@ slots:
       - value: "prod"
       - value: "ci"
       - value: "test"
-
 
   scientific_question:
     description: >-
@@ -487,9 +448,10 @@ slots:
 
   answer_informal_concept:
     description: >-
-      An answer that is returned from the test case, note: this must be combined with the expected_result
-      to form a complete answer.  It might make sense to couple these in their own object instead of
-      strictly sticking to the flat schema introduced by the spreadsheet here:
+      An answer that is returned from the test case, note: this must be combined
+      with the expected_result to form a complete answer.  It might make sense
+      to couple these in their own object instead of strictly sticking to the
+      flat schema introduced by the spreadsheet here:
       https://docs.google.com/spreadsheets/d/1yj7zIchFeVl1OHqL_kE_pqvzNLmGml_FLbHDs-8Yvig/edit#gid=0
     range: string
     examples:
@@ -524,10 +486,9 @@ slots:
       The notes of the query
     range: string
 
-  requires_trapi:
-    description: >-
-      Does this test require a TRAPI-compliant query to run?
-    range: boolean
+  ##################
+  # TestCase Slots #
+  ##################
 
   test_env:
     description: >-
@@ -539,49 +500,92 @@ slots:
       Type of TestCase query.
     range: QueryTypeEnum
 
+  test_assets:
+    description: >-
+      List of explicitly enumerated Test Assets. The class attributes of
+      TestAsset would be included in the TestCase versus being referred to by
+      the identifier (curie) of the TestAsset. That is, this would be a list of
+      objects (in JSONSchema serialization) versus a list of strings (where
+      each string is an identifier pointing to another class).
+    range: TestAsset
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    required: true
+
   preconditions:
     range: Precondition
     multivalued: true
 
-  timestamp:
+  trapi_template:
     description: >-
-      Date time when a given entity was created.
-    range: datetime
+      A template for a query, which can be used to generate a query
+      for a test case.  note: the current enumerated values for this slot
+      come from the Benchmarks repo config/benchmarks.json "templates" collection
+      and refer to the "name" field of each template.  Templates themselves
+      are currently stored in the config/[source_name]/templates directory.
+    range: TrapiTemplateEnum
 
-  parameter:
+  components:
     description: >-
-      Name of a TestParameter.
+      The component that this test case is intended to run against.  Most often this is the ARS for 
+      acceptance tests, but for the Benchmarks repo integration, this can also be individual components
+      of the system like Aragorn, or ARAX.
+    range: ComponentEnum
+    multivalued: true
 
-  value:
-    description: >-
-      (String) value of a TestParameter.
+  ###################
+  # TestSuite Slots #
+  ###################
 
-  test_entities:
+  test_data_file_locator:
     description: >-
-      One or more instances of TestEntity, generally of class TestAsset, TestCase or TestSuite.
-    range: TestEntity
+      An web accessible file resource link to test entity data
+      (e.g. a web accessible text file of Test Asset entries)
+    range: uriorcurie
+
+  test_data_file_format:
+    description: >-
+      File format of test entity data (e.g. TSV, YAML or JSON)
+    range: FileFormatEnum
+
+  test_metadata:
+    description: >-
+      Test metadata describes the external provenance, cross-references and objectives for a given test.
+    range: TestMetadata
+    inlined: true
+
+  test_persona:
+    description: >-
+      A Test persona describes the user or operational context of a given test.
+    range: TestPersonaEnum
+
+  test_cases:
+    description: >-
+      List of explicitly enumerated Test Cases.
+    range: TestCase
     multivalued: true
     inlined: true
+    required: false
+
+  test_suite_specification:
+    description: >-
+      Declarative specification of a Test Suite of Test Cases whose
+      generation is deferred, (i.e. within a Test Runner) or whose creation
+      is achieved by stream processing of an external data source.
+    range: TestSuiteSpecification
+    inlined: true
+    required: false
+
+  ####################
+  # TestRunner Slots #
+  ####################
 
   test_run_parameters:
     description: >-
-      One or more instances of TestRunParameter, forming a part of a TestRunnerConfiguration
-      and that inform the TestHarness and TestRunners about the target characteristics of a TestRun
-    range: TestRunParameter
-    multivalued: true
-    inlined: true
-
-  test_runner_configuration:
-    description: >-
-      General TestRunner (metadata) configuration parameters to set up a TestRun.
-    range: TestRunnerConfiguration
-
-  test_case_results:
-    description: >-
-      One or more instances of TestCaseResult.
-    range: TestCaseResult
-    multivalued: true
-    inlined: true
+      Parameters for TestRunnerConfiguration that inform the TestHarness
+      and TestRunners about the general characteristics of a test run.
+    is_a: test_entity_parameters
 
   test_suite_id:
     description: >-
@@ -599,25 +603,64 @@ slots:
       Encoded result of a single test run of a given test case
     range: TestCaseResultEnum
 
+  # TODO: if there are only a finite set of TestRunners, should the range of this slot be an explicit enumeration?
+  test_runner_name:
+    description: >-
+      Global system name of a TestRunner.
+    
+  test_entities:
+    description: >-
+      One or more instances of TestEntity, generally
+      of class TestAsset, TestCase or TestSuite.
+    range: TestEntity
+    multivalued: true
+    inlined: true
+ 
+  test_case_results:
+    description: >-
+      One or more instances of TestCaseResult.
+    range: TestCaseResult
+    multivalued: true
+    inlined: true
+
+#########
+# Enums #
+#########
+
 enums:
+
+  #######################
+  # General Model Enums #
+  #######################
 
   TestSourceEnum:
     permissible_values:
       SME:
         description: (External) Subject Matter Expert
       SMURF:
-        description: Subject Matter User Reasonably Familiar, generally Translator-internal biomedical science expert
+        description: >-
+          Subject Matter User Reasonably Familiar, generally
+          Translator-internal biomedical science expert
       GitHubUserFeedback:
-        description: Git hub hosted issue from which a test asset/case/suite may be derived.
+        description: >-
+          Git hub hosted issue from which a
+          test asset/case/suite may be derived.
       TACT:
         is_a: GitHubUserFeedback
-        description: Technical Advisory Committee, generally posting semantic use cases as Translator Feedback issues
+        description: >-
+          Technical Advisory Committee, generally posting
+          semantic use cases as Translator Feedback issues
       BenchMark:
-        description: Curated benchmark tests
+        description: >-
+          Curated benchmark tests
       TranslatorTeam:
-        description: Translator funded KP or ARA team generating test assets/cases/suites for their resources.
+        description: >-
+          Translator funded KP or ARA team generating
+          test assets/cases/suites for their resources.
       TestDataLocation:
-        description: Current SRI_Testing-like test data edges specific to KP or ARA components
+        description: >-
+          Current SRI_Testing-like test data edges
+          specific to KP or ARA components
 
   TestObjectiveEnum:
     permissible_values:
@@ -628,21 +671,19 @@ enums:
       QuantitativeTest:
         description: Quantitative test
 
-  TestPersonaEnum:
+  TestEnvEnum:
     description: >-
-      User persona context of a given test.
+      Testing environments within which a TestSuite is
+      run by a TestRunner scheduled by the TestHarness.
     permissible_values:
-      All:
-      Clinical:
-        description: >-
-          An MD or someone working in the clinical field.
-      LookUp:
-        description: >-
-          Looking for an answer for a specific patient.
-      Mechanistic:
-        description: >-
-          Someone working on basic biology questions or drug discoveries
-          where the study of the biological mechanism.
+      dev:
+        description: Development
+      ci:
+        description: Continuous Integration
+      test:
+        description: Test
+      prod:
+        description: Production
 
   FileFormatEnum:
     description: >-
@@ -652,13 +693,9 @@ enums:
       YAML:
       JSON:
 
-  QueryTypeEnum:
-    description: >-
-      Query
-    permissible_values:
-      treats:
-        aliases: "treats(creative)"
-        description:
+  #########################
+  # TestAsset Model Enums #
+  #########################
 
   ExpectedOutputEnum:
     description: >-
@@ -685,38 +722,6 @@ enums:
       number_4_NeverShow:
         is_a: NeverShow
         description:
-
-  ExpectedResultsEnum:
-    description: >-
-      Does this Enum overlap with 'ExpectedOutputEnum' above?
-    permissible_values:
-      include_good:
-        description: >-
-          The query should return the result in this test case
-      exclude_bad:
-        description: >-
-          The query should not return the result in this test case
-
-  NodeEnum:
-    description: >-
-      Target node of a Subject-Predicate-Object driven query
-    permissible_values:
-      subject:
-      object:
-
-  TestEnvEnum:
-    description: >-
-      Testing environments within which a TestSuite is
-      run by a TestRunner scheduled by the TestHarness.
-    permissible_values:
-      dev:
-        description: Development
-      ci:
-        description: Continuous Integration
-      test:
-        description: Test
-      prod:
-        description: Production
 
   TestIssueEnum:
     permissible_values:
@@ -749,6 +754,36 @@ enums:
       increased:
       decreased:
 
+  ExpectedResultsEnum:
+    description: >-
+      Does this Enum overlap with 'ExpectedOutputEnum' above?
+    permissible_values:
+      include_good:
+        description: >-
+          The query should return the result in this test case
+      exclude_bad:
+        description: >-
+          The query should not return the result in this test case
+
+  NodeEnum:
+    description: >-
+      Target node of a Subject-Predicate-Object driven query
+    permissible_values:
+      subject:
+      object:
+
+  ########################
+  # TestCase Model Enums #
+  ########################
+
+  QueryTypeEnum:
+    description: >-
+      Query
+    permissible_values:
+      treats:
+        aliases: "treats(creative)"
+        description:
+
   TrapiTemplateEnum:
     permissible_values:
       ameliorates:
@@ -764,6 +799,30 @@ enums:
       ars:
       bte:
       improving:
+
+  #########################
+  # TestSuite Model Enums #
+  #########################
+
+  TestPersonaEnum:
+    description: >-
+      User persona context of a given test.
+    permissible_values:
+      All:
+      Clinical:
+        description: >-
+          An MD or someone working in the clinical field.
+      LookUp:
+        description: >-
+          Looking for an answer for a specific patient.
+      Mechanistic:
+        description: >-
+          Someone working on basic biology questions or drug discoveries
+          where the study of the biological mechanism.
+
+  ##########################
+  # TestRunner Model Enums #
+  ##########################
 
   TestCaseResultEnum:
     permissible_values:

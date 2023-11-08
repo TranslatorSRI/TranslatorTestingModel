@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2023-11-06T16:06:12
+# Generation date: 2023-11-08T11:17:26
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -91,6 +91,10 @@ class OneHopTestCaseId(KnowledgeGraphNavigationTestCaseId):
     pass
 
 
+class TestSuiteSpecificationId(TestEntityId):
+    pass
+
+
 class TestSuiteId(TestEntityId):
     pass
 
@@ -107,11 +111,11 @@ class OneHopTestSuiteId(TestSuiteId):
     pass
 
 
-class TestSuiteSpecificationId(TestEntityId):
+class TestRunnerConfigurationId(TestEntityId):
     pass
 
 
-class TestRunnerConfigurationId(TestEntityId):
+class TestCaseResultId(TestEntityId):
     pass
 
 
@@ -119,8 +123,29 @@ class TestRunSessionId(TestEntityId):
     pass
 
 
-class TestCaseResultId(TestEntityId):
-    pass
+@dataclass
+class TestEntityParameter(YAMLRoot):
+    """
+    A single 'tag = value' pair (where 'value' is a simple string).
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = TTM["TestEntityParameter"]
+    class_class_curie: ClassVar[str] = "ttm:TestEntityParameter"
+    class_name: ClassVar[str] = "TestEntityParameter"
+    class_model_uri: ClassVar[URIRef] = TTM.TestEntityParameter
+
+    parameter: Optional[str] = None
+    value: Optional[str] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.parameter is not None and not isinstance(self.parameter, str):
+            self.parameter = str(self.parameter)
+
+        if self.value is not None and not isinstance(self.value, str):
+            self.value = str(self.value)
+
+        super().__post_init__(**kwargs)
 
 
 @dataclass
@@ -177,6 +202,7 @@ class TestMetadata(TestEntity):
     test_source: Optional[Union[str, "TestSourceEnum"]] = None
     test_reference: Optional[Union[str, URIorCURIE]] = None
     test_objective: Optional[Union[str, "TestObjectiveEnum"]] = None
+    test_annotations: Optional[Union[Union[dict, TestEntityParameter], List[Union[dict, TestEntityParameter]]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -192,6 +218,10 @@ class TestMetadata(TestEntity):
 
         if self.test_objective is not None and not isinstance(self.test_objective, TestObjectiveEnum):
             self.test_objective = TestObjectiveEnum(self.test_objective)
+
+        if not isinstance(self.test_annotations, list):
+            self.test_annotations = [self.test_annotations] if self.test_annotations is not None else []
+        self.test_annotations = [v if isinstance(v, TestEntityParameter) else TestEntityParameter(**as_dict(v)) for v in self.test_annotations]
 
         super().__post_init__(**kwargs)
 
@@ -570,6 +600,37 @@ class OneHopTestCase(KnowledgeGraphNavigationTestCase):
 
 
 @dataclass
+class TestSuiteSpecification(TestEntity):
+    """
+    Parameters for a Test Case instances either dynamically generated from some external source of Test Assets.
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = TTM["TestSuiteSpecification"]
+    class_class_curie: ClassVar[str] = "ttm:TestSuiteSpecification"
+    class_name: ClassVar[str] = "TestSuiteSpecification"
+    class_model_uri: ClassVar[URIRef] = TTM.TestSuiteSpecification
+
+    id: Union[str, TestSuiteSpecificationId] = None
+    test_data_file_locator: Optional[Union[str, URIorCURIE]] = None
+    test_data_file_format: Optional[Union[str, "FileFormatEnum"]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, TestSuiteSpecificationId):
+            self.id = TestSuiteSpecificationId(self.id)
+
+        if self.test_data_file_locator is not None and not isinstance(self.test_data_file_locator, URIorCURIE):
+            self.test_data_file_locator = URIorCURIE(self.test_data_file_locator)
+
+        if self.test_data_file_format is not None and not isinstance(self.test_data_file_format, FileFormatEnum):
+            self.test_data_file_format = FileFormatEnum(self.test_data_file_format)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
 class TestSuite(TestEntity):
     """
     Specification of a set of Test Cases, one of either with a static list of 'test_cases' or a dynamic
@@ -587,7 +648,7 @@ class TestSuite(TestEntity):
     test_metadata: Optional[Union[dict, TestMetadata]] = None
     test_persona: Optional[Union[str, "TestPersonaEnum"]] = None
     test_cases: Optional[Union[Dict[Union[str, TestCaseId], Union[dict, TestCase]], List[Union[dict, TestCase]]]] = empty_dict()
-    test_suite_specification: Optional[Union[dict, "TestSuiteSpecification"]] = None
+    test_suite_specification: Optional[Union[dict, TestSuiteSpecification]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -688,65 +749,9 @@ class OneHopTestSuite(TestSuite):
 
 
 @dataclass
-class TestSuiteSpecification(TestEntity):
-    """
-    Parameters for a Test Case instances either dynamically generated from some external source of Test Assets.
-    """
-    _inherited_slots: ClassVar[List[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = TTM["TestSuiteSpecification"]
-    class_class_curie: ClassVar[str] = "ttm:TestSuiteSpecification"
-    class_name: ClassVar[str] = "TestSuiteSpecification"
-    class_model_uri: ClassVar[URIRef] = TTM.TestSuiteSpecification
-
-    id: Union[str, TestSuiteSpecificationId] = None
-    test_data_file_locator: Optional[Union[str, URIorCURIE]] = None
-    test_data_file_format: Optional[Union[str, "FileFormatEnum"]] = None
-
-    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, TestSuiteSpecificationId):
-            self.id = TestSuiteSpecificationId(self.id)
-
-        if self.test_data_file_locator is not None and not isinstance(self.test_data_file_locator, URIorCURIE):
-            self.test_data_file_locator = URIorCURIE(self.test_data_file_locator)
-
-        if self.test_data_file_format is not None and not isinstance(self.test_data_file_format, FileFormatEnum):
-            self.test_data_file_format = FileFormatEnum(self.test_data_file_format)
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass
-class TestRunParameter(YAMLRoot):
-    """
-    A single 'tag = value' pair (where 'value' is a simple string).
-    """
-    _inherited_slots: ClassVar[List[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = TTM["TestRunParameter"]
-    class_class_curie: ClassVar[str] = "ttm:TestRunParameter"
-    class_name: ClassVar[str] = "TestRunParameter"
-    class_model_uri: ClassVar[URIRef] = TTM.TestRunParameter
-
-    parameter: Optional[str] = None
-    value: Optional[str] = None
-
-    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.parameter is not None and not isinstance(self.parameter, str):
-            self.parameter = str(self.parameter)
-
-        if self.value is not None and not isinstance(self.value, str):
-            self.value = str(self.value)
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass
 class TestRunnerConfiguration(TestEntity):
     """
-    General configuration parameters and test data input for a single invocation of a TestRunner.
+    General configuration parameters and test data input  for a single invocation of a TestRunner.
     """
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -756,8 +761,7 @@ class TestRunnerConfiguration(TestEntity):
     class_model_uri: ClassVar[URIRef] = TTM.TestRunnerConfiguration
 
     id: Union[str, TestRunnerConfigurationId] = None
-    test_run_parameters: Optional[Union[Union[dict, TestRunParameter], List[Union[dict, TestRunParameter]]]] = empty_list()
-    test_entities: Optional[Union[Dict[Union[str, TestEntityId], Union[dict, TestEntity]], List[Union[dict, TestEntity]]]] = empty_dict()
+    test_run_parameters: Optional[Union[Union[dict, TestEntityParameter], List[Union[dict, TestEntityParameter]]]] = empty_list()
     tags: Optional[Union[str, List[str]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
@@ -768,9 +772,7 @@ class TestRunnerConfiguration(TestEntity):
 
         if not isinstance(self.test_run_parameters, list):
             self.test_run_parameters = [self.test_run_parameters] if self.test_run_parameters is not None else []
-        self.test_run_parameters = [v if isinstance(v, TestRunParameter) else TestRunParameter(**as_dict(v)) for v in self.test_run_parameters]
-
-        self._normalize_inlined_as_dict(slot_name="test_entities", slot_type=TestEntity, key_name="id", keyed=True)
+        self.test_run_parameters = [v if isinstance(v, TestEntityParameter) else TestEntityParameter(**as_dict(v)) for v in self.test_run_parameters]
 
         if not isinstance(self.tags, list):
             self.tags = [self.tags] if self.tags is not None else []
@@ -780,43 +782,9 @@ class TestRunnerConfiguration(TestEntity):
 
 
 @dataclass
-class TestRunSession(TestEntity):
-    """
-    A single invocation of a TestRunner.
-    """
-    _inherited_slots: ClassVar[List[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = TTM["TestRunSession"]
-    class_class_curie: ClassVar[str] = "ttm:TestRunSession"
-    class_name: ClassVar[str] = "TestRunSession"
-    class_model_uri: ClassVar[URIRef] = TTM.TestRunSession
-
-    id: Union[str, TestRunSessionId] = None
-    test_runner_configuration: Optional[Union[str, TestRunnerConfigurationId]] = None
-    test_case_results: Optional[Union[Dict[Union[str, TestCaseResultId], Union[dict, "TestCaseResult"]], List[Union[dict, "TestCaseResult"]]]] = empty_dict()
-    timestamp: Optional[Union[str, XSDDateTime]] = None
-
-    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, TestRunSessionId):
-            self.id = TestRunSessionId(self.id)
-
-        if self.test_runner_configuration is not None and not isinstance(self.test_runner_configuration, TestRunnerConfigurationId):
-            self.test_runner_configuration = TestRunnerConfigurationId(self.test_runner_configuration)
-
-        self._normalize_inlined_as_dict(slot_name="test_case_results", slot_type=TestCaseResult, key_name="id", keyed=True)
-
-        if self.timestamp is not None and not isinstance(self.timestamp, XSDDateTime):
-            self.timestamp = XSDDateTime(self.timestamp)
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass
 class TestCaseResult(TestEntity):
     """
-    Wrapper for the outcome of a TestRunner running a one specific TestCase.
+    The outcome of a TestRunner run of one specific TestCase.
     """
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -844,6 +812,43 @@ class TestCaseResult(TestEntity):
 
         if self.test_case_result is not None and not isinstance(self.test_case_result, TestCaseResultEnum):
             self.test_case_result = TestCaseResultEnum(self.test_case_result)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class TestRunSession(TestEntity):
+    """
+    A single invocation of a TestRunner.
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = TTM["TestRunSession"]
+    class_class_curie: ClassVar[str] = "ttm:TestRunSession"
+    class_name: ClassVar[str] = "TestRunSession"
+    class_model_uri: ClassVar[URIRef] = TTM.TestRunSession
+
+    id: Union[str, TestRunSessionId] = None
+    test_runner_name: Optional[str] = None
+    test_entities: Optional[Union[Dict[Union[str, TestEntityId], Union[dict, TestEntity]], List[Union[dict, TestEntity]]]] = empty_dict()
+    test_case_results: Optional[Union[Dict[Union[str, TestCaseResultId], Union[dict, TestCaseResult]], List[Union[dict, TestCaseResult]]]] = empty_dict()
+    timestamp: Optional[Union[str, XSDDateTime]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, TestRunSessionId):
+            self.id = TestRunSessionId(self.id)
+
+        if self.test_runner_name is not None and not isinstance(self.test_runner_name, str):
+            self.test_runner_name = str(self.test_runner_name)
+
+        self._normalize_inlined_as_dict(slot_name="test_entities", slot_type=TestEntity, key_name="id", keyed=True)
+
+        self._normalize_inlined_as_dict(slot_name="test_case_results", slot_type=TestCaseResult, key_name="id", keyed=True)
+
+        if self.timestamp is not None and not isinstance(self.timestamp, XSDDateTime):
+            self.timestamp = XSDDateTime(self.timestamp)
 
         super().__post_init__(**kwargs)
 
@@ -893,97 +898,6 @@ class TestObjectiveEnum(EnumDefinitionImpl):
         name="TestObjectiveEnum",
     )
 
-class TestPersonaEnum(EnumDefinitionImpl):
-    """
-    User persona context of a given test.
-    """
-    All = PermissibleValue(text="All")
-    Clinical = PermissibleValue(
-        text="Clinical",
-        description="An MD or someone working in the clinical field.")
-    LookUp = PermissibleValue(
-        text="LookUp",
-        description="Looking for an answer for a specific patient.")
-    Mechanistic = PermissibleValue(
-        text="Mechanistic",
-        description="""Someone working on basic biology questions or drug discoveries where the study of the biological mechanism.""")
-
-    _defn = EnumDefinition(
-        name="TestPersonaEnum",
-        description="User persona context of a given test.",
-    )
-
-class FileFormatEnum(EnumDefinitionImpl):
-    """
-    Text file formats for test data sources.
-    """
-    TSV = PermissibleValue(text="TSV")
-    YAML = PermissibleValue(text="YAML")
-    JSON = PermissibleValue(text="JSON")
-
-    _defn = EnumDefinition(
-        name="FileFormatEnum",
-        description="Text file formats for test data sources.",
-    )
-
-class QueryTypeEnum(EnumDefinitionImpl):
-    """
-    Query
-    """
-    treats = PermissibleValue(text="treats")
-
-    _defn = EnumDefinition(
-        name="QueryTypeEnum",
-        description="Query",
-    )
-
-class ExpectedOutputEnum(EnumDefinitionImpl):
-    """
-    Expected output values for instances of Test Asset or Test Cases(?). (Note: does this Enum overlap with
-    'ExpectedResultsEnum' below?)
-    """
-    Top_Answer = PermissibleValue(text="Top_Answer")
-    Acceptable = PermissibleValue(text="Acceptable")
-    BadButForgivable = PermissibleValue(text="BadButForgivable")
-    NeverShow = PermissibleValue(text="NeverShow")
-    number_1_TopAnswer = PermissibleValue(text="number_1_TopAnswer")
-    number_2_Acceptable = PermissibleValue(text="number_2_Acceptable")
-    number_3_BadButForgivable = PermissibleValue(text="number_3_BadButForgivable")
-    number_4_NeverShow = PermissibleValue(text="number_4_NeverShow")
-
-    _defn = EnumDefinition(
-        name="ExpectedOutputEnum",
-        description="""Expected output values for instances of Test Asset or Test Cases(?). (Note: does this Enum overlap with 'ExpectedResultsEnum' below?)""",
-    )
-
-class ExpectedResultsEnum(EnumDefinitionImpl):
-    """
-    Does this Enum overlap with 'ExpectedOutputEnum' above?
-    """
-    include_good = PermissibleValue(
-        text="include_good",
-        description="The query should return the result in this test case")
-    exclude_bad = PermissibleValue(
-        text="exclude_bad",
-        description="The query should not return the result in this test case")
-
-    _defn = EnumDefinition(
-        name="ExpectedResultsEnum",
-        description="Does this Enum overlap with 'ExpectedOutputEnum' above?",
-    )
-
-class NodeEnum(EnumDefinitionImpl):
-    """
-    Target node of a Subject-Predicate-Object driven query
-    """
-    subject = PermissibleValue(text="subject")
-    object = PermissibleValue(text="object")
-
-    _defn = EnumDefinition(
-        name="NodeEnum",
-        description="Target node of a Subject-Predicate-Object driven query",
-    )
-
 class TestEnvEnum(EnumDefinitionImpl):
     """
     Testing environments within which a TestSuite is run by a TestRunner scheduled by the TestHarness.
@@ -1004,6 +918,38 @@ class TestEnvEnum(EnumDefinitionImpl):
     _defn = EnumDefinition(
         name="TestEnvEnum",
         description="Testing environments within which a TestSuite is run by a TestRunner scheduled by the TestHarness.",
+    )
+
+class FileFormatEnum(EnumDefinitionImpl):
+    """
+    Text file formats for test data sources.
+    """
+    TSV = PermissibleValue(text="TSV")
+    YAML = PermissibleValue(text="YAML")
+    JSON = PermissibleValue(text="JSON")
+
+    _defn = EnumDefinition(
+        name="FileFormatEnum",
+        description="Text file formats for test data sources.",
+    )
+
+class ExpectedOutputEnum(EnumDefinitionImpl):
+    """
+    Expected output values for instances of Test Asset or Test Cases(?). (Note: does this Enum overlap with
+    'ExpectedResultsEnum' below?)
+    """
+    Top_Answer = PermissibleValue(text="Top_Answer")
+    Acceptable = PermissibleValue(text="Acceptable")
+    BadButForgivable = PermissibleValue(text="BadButForgivable")
+    NeverShow = PermissibleValue(text="NeverShow")
+    number_1_TopAnswer = PermissibleValue(text="number_1_TopAnswer")
+    number_2_Acceptable = PermissibleValue(text="number_2_Acceptable")
+    number_3_BadButForgivable = PermissibleValue(text="number_3_BadButForgivable")
+    number_4_NeverShow = PermissibleValue(text="number_4_NeverShow")
+
+    _defn = EnumDefinition(
+        name="ExpectedOutputEnum",
+        description="""Expected output values for instances of Test Asset or Test Cases(?). (Note: does this Enum overlap with 'ExpectedResultsEnum' below?)""",
     )
 
 class TestIssueEnum(EnumDefinitionImpl):
@@ -1049,6 +995,45 @@ class DirectionEnum(EnumDefinitionImpl):
         name="DirectionEnum",
     )
 
+class ExpectedResultsEnum(EnumDefinitionImpl):
+    """
+    Does this Enum overlap with 'ExpectedOutputEnum' above?
+    """
+    include_good = PermissibleValue(
+        text="include_good",
+        description="The query should return the result in this test case")
+    exclude_bad = PermissibleValue(
+        text="exclude_bad",
+        description="The query should not return the result in this test case")
+
+    _defn = EnumDefinition(
+        name="ExpectedResultsEnum",
+        description="Does this Enum overlap with 'ExpectedOutputEnum' above?",
+    )
+
+class NodeEnum(EnumDefinitionImpl):
+    """
+    Target node of a Subject-Predicate-Object driven query
+    """
+    subject = PermissibleValue(text="subject")
+    object = PermissibleValue(text="object")
+
+    _defn = EnumDefinition(
+        name="NodeEnum",
+        description="Target node of a Subject-Predicate-Object driven query",
+    )
+
+class QueryTypeEnum(EnumDefinitionImpl):
+    """
+    Query
+    """
+    treats = PermissibleValue(text="treats")
+
+    _defn = EnumDefinition(
+        name="QueryTypeEnum",
+        description="Query",
+    )
+
 class TrapiTemplateEnum(EnumDefinitionImpl):
 
     ameliorates = PermissibleValue(text="ameliorates")
@@ -1077,6 +1062,26 @@ class ComponentEnum(EnumDefinitionImpl):
         name="ComponentEnum",
     )
 
+class TestPersonaEnum(EnumDefinitionImpl):
+    """
+    User persona context of a given test.
+    """
+    All = PermissibleValue(text="All")
+    Clinical = PermissibleValue(
+        text="Clinical",
+        description="An MD or someone working in the clinical field.")
+    LookUp = PermissibleValue(
+        text="LookUp",
+        description="Looking for an answer for a specific patient.")
+    Mechanistic = PermissibleValue(
+        text="Mechanistic",
+        description="""Someone working on basic biology questions or drug discoveries where the study of the biological mechanism.""")
+
+    _defn = EnumDefinition(
+        name="TestPersonaEnum",
+        description="User persona context of a given test.",
+    )
+
 class TestCaseResultEnum(EnumDefinitionImpl):
 
     test_passed = PermissibleValue(text="test_passed")
@@ -1091,14 +1096,17 @@ class TestCaseResultEnum(EnumDefinitionImpl):
 class slots:
     pass
 
-slots.components = Slot(uri=TTM.components, name="components", curie=TTM.curie('components'),
-                   model_uri=TTM.components, domain=None, range=Optional[Union[Union[str, "ComponentEnum"], List[Union[str, "ComponentEnum"]]]])
+slots.parameter = Slot(uri=TTM.parameter, name="parameter", curie=TTM.curie('parameter'),
+                   model_uri=TTM.parameter, domain=None, range=Optional[str])
 
-slots.trapi_template = Slot(uri=TTM.trapi_template, name="trapi_template", curie=TTM.curie('trapi_template'),
-                   model_uri=TTM.trapi_template, domain=None, range=Optional[Union[str, "TrapiTemplateEnum"]])
+slots.value = Slot(uri=TTM.value, name="value", curie=TTM.curie('value'),
+                   model_uri=TTM.value, domain=None, range=Optional[str])
 
-slots.runner_settings = Slot(uri=TTM.runner_settings, name="runner_settings", curie=TTM.curie('runner_settings'),
-                   model_uri=TTM.runner_settings, domain=None, range=Union[str, List[str]])
+slots.test_entity_parameters = Slot(uri=TTM.test_entity_parameters, name="test_entity_parameters", curie=TTM.curie('test_entity_parameters'),
+                   model_uri=TTM.test_entity_parameters, domain=None, range=Optional[Union[Union[dict, TestEntityParameter], List[Union[dict, TestEntityParameter]]]])
+
+slots.timestamp = Slot(uri=TTM.timestamp, name="timestamp", curie=TTM.curie('timestamp'),
+                   model_uri=TTM.timestamp, domain=None, range=Optional[Union[str, XSDDateTime]])
 
 slots.id = Slot(uri=SCHEMA.identifier, name="id", curie=SCHEMA.curie('identifier'),
                    model_uri=TTM.id, domain=None, range=URIRef)
@@ -1120,6 +1128,9 @@ slots.test_reference = Slot(uri=TTM.test_reference, name="test_reference", curie
 
 slots.test_objective = Slot(uri=TTM.test_objective, name="test_objective", curie=TTM.curie('test_objective'),
                    model_uri=TTM.test_objective, domain=None, range=Optional[Union[str, "TestObjectiveEnum"]])
+
+slots.test_annotations = Slot(uri=TTM.test_annotations, name="test_annotations", curie=TTM.curie('test_annotations'),
+                   model_uri=TTM.test_annotations, domain=None, range=Optional[Union[Union[dict, TestEntityParameter], List[Union[dict, TestEntityParameter]]]])
 
 slots.input_id = Slot(uri=TTM.input_id, name="input_id", curie=TTM.curie('input_id'),
                    model_uri=TTM.input_id, domain=None, range=Optional[Union[str, URIorCURIE]])
@@ -1151,26 +1162,8 @@ slots.in_v1 = Slot(uri=TTM.in_v1, name="in_v1", curie=TTM.curie('in_v1'),
 slots.well_known = Slot(uri=TTM.well_known, name="well_known", curie=TTM.curie('well_known'),
                    model_uri=TTM.well_known, domain=None, range=Optional[Union[bool, Bool]])
 
-slots.test_metadata = Slot(uri=TTM.test_metadata, name="test_metadata", curie=TTM.curie('test_metadata'),
-                   model_uri=TTM.test_metadata, domain=None, range=Optional[Union[dict, TestMetadata]])
-
-slots.test_persona = Slot(uri=TTM.test_persona, name="test_persona", curie=TTM.curie('test_persona'),
-                   model_uri=TTM.test_persona, domain=None, range=Optional[Union[str, "TestPersonaEnum"]])
-
-slots.test_data_file_locator = Slot(uri=TTM.test_data_file_locator, name="test_data_file_locator", curie=TTM.curie('test_data_file_locator'),
-                   model_uri=TTM.test_data_file_locator, domain=None, range=Optional[Union[str, URIorCURIE]])
-
-slots.test_data_file_format = Slot(uri=TTM.test_data_file_format, name="test_data_file_format", curie=TTM.curie('test_data_file_format'),
-                   model_uri=TTM.test_data_file_format, domain=None, range=Optional[Union[str, "FileFormatEnum"]])
-
-slots.test_assets = Slot(uri=TTM.test_assets, name="test_assets", curie=TTM.curie('test_assets'),
-                   model_uri=TTM.test_assets, domain=None, range=Union[Dict[Union[str, TestAssetId], Union[dict, TestAsset]], List[Union[dict, TestAsset]]])
-
-slots.test_cases = Slot(uri=TTM.test_cases, name="test_cases", curie=TTM.curie('test_cases'),
-                   model_uri=TTM.test_cases, domain=None, range=Optional[Union[Dict[Union[str, TestCaseId], Union[dict, TestCase]], List[Union[dict, TestCase]]]])
-
-slots.test_suite_specification = Slot(uri=TTM.test_suite_specification, name="test_suite_specification", curie=TTM.curie('test_suite_specification'),
-                   model_uri=TTM.test_suite_specification, domain=None, range=Optional[Union[dict, TestSuiteSpecification]])
+slots.runner_settings = Slot(uri=TTM.runner_settings, name="runner_settings", curie=TTM.curie('runner_settings'),
+                   model_uri=TTM.runner_settings, domain=None, range=Union[str, List[str]])
 
 slots.must_pass_date = Slot(uri=TTM.must_pass_date, name="must_pass_date", curie=TTM.curie('must_pass_date'),
                    model_uri=TTM.must_pass_date, domain=None, range=Optional[Union[str, XSDDate]])
@@ -1202,38 +1195,44 @@ slots.query_node = Slot(uri=TTM.query_node, name="query_node", curie=TTM.curie('
 slots.notes = Slot(uri=TTM.notes, name="notes", curie=TTM.curie('notes'),
                    model_uri=TTM.notes, domain=None, range=Optional[str])
 
-slots.requires_trapi = Slot(uri=TTM.requires_trapi, name="requires_trapi", curie=TTM.curie('requires_trapi'),
-                   model_uri=TTM.requires_trapi, domain=None, range=Optional[Union[bool, Bool]])
-
 slots.test_env = Slot(uri=TTM.test_env, name="test_env", curie=TTM.curie('test_env'),
                    model_uri=TTM.test_env, domain=None, range=Optional[Union[str, "TestEnvEnum"]])
 
 slots.query_type = Slot(uri=TTM.query_type, name="query_type", curie=TTM.curie('query_type'),
                    model_uri=TTM.query_type, domain=None, range=Optional[Union[str, "QueryTypeEnum"]])
 
+slots.test_assets = Slot(uri=TTM.test_assets, name="test_assets", curie=TTM.curie('test_assets'),
+                   model_uri=TTM.test_assets, domain=None, range=Union[Dict[Union[str, TestAssetId], Union[dict, TestAsset]], List[Union[dict, TestAsset]]])
+
 slots.preconditions = Slot(uri=TTM.preconditions, name="preconditions", curie=TTM.curie('preconditions'),
                    model_uri=TTM.preconditions, domain=None, range=Optional[Union[Union[str, PreconditionId], List[Union[str, PreconditionId]]]])
 
-slots.timestamp = Slot(uri=TTM.timestamp, name="timestamp", curie=TTM.curie('timestamp'),
-                   model_uri=TTM.timestamp, domain=None, range=Optional[Union[str, XSDDateTime]])
+slots.trapi_template = Slot(uri=TTM.trapi_template, name="trapi_template", curie=TTM.curie('trapi_template'),
+                   model_uri=TTM.trapi_template, domain=None, range=Optional[Union[str, "TrapiTemplateEnum"]])
 
-slots.parameter = Slot(uri=TTM.parameter, name="parameter", curie=TTM.curie('parameter'),
-                   model_uri=TTM.parameter, domain=None, range=Optional[str])
+slots.components = Slot(uri=TTM.components, name="components", curie=TTM.curie('components'),
+                   model_uri=TTM.components, domain=None, range=Optional[Union[Union[str, "ComponentEnum"], List[Union[str, "ComponentEnum"]]]])
 
-slots.value = Slot(uri=TTM.value, name="value", curie=TTM.curie('value'),
-                   model_uri=TTM.value, domain=None, range=Optional[str])
+slots.test_data_file_locator = Slot(uri=TTM.test_data_file_locator, name="test_data_file_locator", curie=TTM.curie('test_data_file_locator'),
+                   model_uri=TTM.test_data_file_locator, domain=None, range=Optional[Union[str, URIorCURIE]])
 
-slots.test_entities = Slot(uri=TTM.test_entities, name="test_entities", curie=TTM.curie('test_entities'),
-                   model_uri=TTM.test_entities, domain=None, range=Optional[Union[Dict[Union[str, TestEntityId], Union[dict, TestEntity]], List[Union[dict, TestEntity]]]])
+slots.test_data_file_format = Slot(uri=TTM.test_data_file_format, name="test_data_file_format", curie=TTM.curie('test_data_file_format'),
+                   model_uri=TTM.test_data_file_format, domain=None, range=Optional[Union[str, "FileFormatEnum"]])
+
+slots.test_metadata = Slot(uri=TTM.test_metadata, name="test_metadata", curie=TTM.curie('test_metadata'),
+                   model_uri=TTM.test_metadata, domain=None, range=Optional[Union[dict, TestMetadata]])
+
+slots.test_persona = Slot(uri=TTM.test_persona, name="test_persona", curie=TTM.curie('test_persona'),
+                   model_uri=TTM.test_persona, domain=None, range=Optional[Union[str, "TestPersonaEnum"]])
+
+slots.test_cases = Slot(uri=TTM.test_cases, name="test_cases", curie=TTM.curie('test_cases'),
+                   model_uri=TTM.test_cases, domain=None, range=Optional[Union[Dict[Union[str, TestCaseId], Union[dict, TestCase]], List[Union[dict, TestCase]]]])
+
+slots.test_suite_specification = Slot(uri=TTM.test_suite_specification, name="test_suite_specification", curie=TTM.curie('test_suite_specification'),
+                   model_uri=TTM.test_suite_specification, domain=None, range=Optional[Union[dict, TestSuiteSpecification]])
 
 slots.test_run_parameters = Slot(uri=TTM.test_run_parameters, name="test_run_parameters", curie=TTM.curie('test_run_parameters'),
-                   model_uri=TTM.test_run_parameters, domain=None, range=Optional[Union[Union[dict, TestRunParameter], List[Union[dict, TestRunParameter]]]])
-
-slots.test_runner_configuration = Slot(uri=TTM.test_runner_configuration, name="test_runner_configuration", curie=TTM.curie('test_runner_configuration'),
-                   model_uri=TTM.test_runner_configuration, domain=None, range=Optional[Union[str, TestRunnerConfigurationId]])
-
-slots.test_case_results = Slot(uri=TTM.test_case_results, name="test_case_results", curie=TTM.curie('test_case_results'),
-                   model_uri=TTM.test_case_results, domain=None, range=Optional[Union[Dict[Union[str, TestCaseResultId], Union[dict, TestCaseResult]], List[Union[dict, TestCaseResult]]]])
+                   model_uri=TTM.test_run_parameters, domain=None, range=Optional[Union[Union[dict, TestEntityParameter], List[Union[dict, TestEntityParameter]]]])
 
 slots.test_suite_id = Slot(uri=TTM.test_suite_id, name="test_suite_id", curie=TTM.curie('test_suite_id'),
                    model_uri=TTM.test_suite_id, domain=None, range=Optional[Union[str, URIorCURIE]])
@@ -1243,6 +1242,15 @@ slots.test_case = Slot(uri=TTM.test_case, name="test_case", curie=TTM.curie('tes
 
 slots.test_case_result = Slot(uri=TTM.test_case_result, name="test_case_result", curie=TTM.curie('test_case_result'),
                    model_uri=TTM.test_case_result, domain=None, range=Optional[Union[str, "TestCaseResultEnum"]])
+
+slots.test_runner_name = Slot(uri=TTM.test_runner_name, name="test_runner_name", curie=TTM.curie('test_runner_name'),
+                   model_uri=TTM.test_runner_name, domain=None, range=Optional[str])
+
+slots.test_entities = Slot(uri=TTM.test_entities, name="test_entities", curie=TTM.curie('test_entities'),
+                   model_uri=TTM.test_entities, domain=None, range=Optional[Union[Dict[Union[str, TestEntityId], Union[dict, TestEntity]], List[Union[dict, TestEntity]]]])
+
+slots.test_case_results = Slot(uri=TTM.test_case_results, name="test_case_results", curie=TTM.curie('test_case_results'),
+                   model_uri=TTM.test_case_results, domain=None, range=Optional[Union[Dict[Union[str, TestCaseResultId], Union[dict, TestCaseResult]], List[Union[dict, TestCaseResult]]]])
 
 slots.TestAsset_id = Slot(uri=SCHEMA.identifier, name="TestAsset_id", curie=SCHEMA.curie('identifier'),
                    model_uri=TTM.TestAsset_id, domain=TestAsset, range=Union[str, TestAssetId])
@@ -1265,8 +1273,5 @@ slots.AcceptanceTestCase_test_assets = Slot(uri=TTM.test_assets, name="Acceptanc
 slots.TestRunnerConfiguration_tags = Slot(uri=SCHEMA.additionalType, name="TestRunnerConfiguration_tags", curie=SCHEMA.curie('additionalType'),
                    model_uri=TTM.TestRunnerConfiguration_tags, domain=TestRunnerConfiguration, range=Optional[Union[str, List[str]]])
 
-slots.TestRunnerConfiguration_test_entities = Slot(uri=TTM.test_entities, name="TestRunnerConfiguration_test_entities", curie=TTM.curie('test_entities'),
-                   model_uri=TTM.TestRunnerConfiguration_test_entities, domain=TestRunnerConfiguration, range=Optional[Union[Dict[Union[str, TestEntityId], Union[dict, TestEntity]], List[Union[dict, TestEntity]]]])
-
-slots.TestRunSession_id = Slot(uri=SCHEMA.identifier, name="TestRunSession_id", curie=SCHEMA.curie('identifier'),
-                   model_uri=TTM.TestRunSession_id, domain=TestRunSession, range=Union[str, TestRunSessionId])
+slots.TestRunSession_test_entities = Slot(uri=TTM.test_entities, name="TestRunSession_test_entities", curie=TTM.curie('test_entities'),
+                   model_uri=TTM.TestRunSession_test_entities, domain=TestRunSession, range=Optional[Union[Dict[Union[str, TestEntityId], Union[dict, TestEntity]], List[Union[dict, TestEntity]]]])

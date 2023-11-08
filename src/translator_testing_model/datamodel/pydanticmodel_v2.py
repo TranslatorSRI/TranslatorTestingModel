@@ -52,18 +52,18 @@ class TestObjectiveEnum(str, Enum):
     
     
 
-class TestPersonaEnum(str, Enum):
+class TestEnvEnum(str, Enum):
     """
-    User persona context of a given test.
+    Testing environments within which a TestSuite is run by a TestRunner scheduled by the TestHarness.
     """
-    
-    All = "All"
-    # An MD or someone working in the clinical field.
-    Clinical = "Clinical"
-    # Looking for an answer for a specific patient.
-    LookUp = "LookUp"
-    # Someone working on basic biology questions or drug discoveries where the study of the biological mechanism.
-    Mechanistic = "Mechanistic"
+    # Development
+    dev = "dev"
+    # Continuous Integration
+    ci = "ci"
+    # Test
+    test = "test"
+    # Production
+    prod = "prod"
     
     
 
@@ -77,15 +77,6 @@ class FileFormatEnum(str, Enum):
     YAML = "YAML"
     
     JSON = "JSON"
-    
-    
-
-class QueryTypeEnum(str, Enum):
-    """
-    Query
-    """
-    
-    treats = "treats"
     
     
 
@@ -109,43 +100,6 @@ class ExpectedOutputEnum(str, Enum):
     number_3_BadButForgivable = "number_3_BadButForgivable"
     
     number_4_NeverShow = "number_4_NeverShow"
-    
-    
-
-class ExpectedResultsEnum(str, Enum):
-    """
-    Does this Enum overlap with 'ExpectedOutputEnum' above?
-    """
-    # The query should return the result in this test case
-    include_good = "include_good"
-    # The query should not return the result in this test case
-    exclude_bad = "exclude_bad"
-    
-    
-
-class NodeEnum(str, Enum):
-    """
-    Target node of a Subject-Predicate-Object driven query
-    """
-    
-    subject = "subject"
-    
-    object = "object"
-    
-    
-
-class TestEnvEnum(str, Enum):
-    """
-    Testing environments within which a TestSuite is run by a TestRunner scheduled by the TestHarness.
-    """
-    # Development
-    dev = "dev"
-    # Continuous Integration
-    ci = "ci"
-    # Test
-    test = "test"
-    # Production
-    prod = "prod"
     
     
 
@@ -188,6 +142,37 @@ class DirectionEnum(str, Enum):
     
     
 
+class ExpectedResultsEnum(str, Enum):
+    """
+    Does this Enum overlap with 'ExpectedOutputEnum' above?
+    """
+    # The query should return the result in this test case
+    include_good = "include_good"
+    # The query should not return the result in this test case
+    exclude_bad = "exclude_bad"
+    
+    
+
+class NodeEnum(str, Enum):
+    """
+    Target node of a Subject-Predicate-Object driven query
+    """
+    
+    subject = "subject"
+    
+    object = "object"
+    
+    
+
+class QueryTypeEnum(str, Enum):
+    """
+    Query
+    """
+    
+    treats = "treats"
+    
+    
+
 class TrapiTemplateEnum(str, Enum):
     
     
@@ -218,6 +203,21 @@ class ComponentEnum(str, Enum):
     
     
 
+class TestPersonaEnum(str, Enum):
+    """
+    User persona context of a given test.
+    """
+    
+    All = "All"
+    # An MD or someone working in the clinical field.
+    Clinical = "Clinical"
+    # Looking for an answer for a specific patient.
+    LookUp = "LookUp"
+    # Someone working on basic biology questions or drug discoveries where the study of the biological mechanism.
+    Mechanistic = "Mechanistic"
+    
+    
+
 class TestCaseResultEnum(str, Enum):
     
     
@@ -227,6 +227,14 @@ class TestCaseResultEnum(str, Enum):
     
     test_skipped = "test_skipped"
     
+    
+
+class TestEntityParameter(ConfiguredBaseModel):
+    """
+    A single 'tag = value' pair (where 'value' is a simple string).
+    """
+    parameter: Optional[str] = Field(None, description="""Name of a TestParameter.""")
+    value: Optional[str] = Field(None, description="""(String) value of a TestParameter.""")
     
 
 class TestEntity(ConfiguredBaseModel):
@@ -244,8 +252,9 @@ class TestMetadata(TestEntity):
     Represents metadata related to (external SME, SMURF, Translator feedback,  large scale batch, etc.) like the provenance of test assets, cases and/or suites.
     """
     test_source: Optional[TestSourceEnum] = Field(None, description="""Provenance of a specific set of test assets, cases and/or suites.""")
-    test_reference: Optional[str] = Field(None, description="""Documentation URL where original test source particulars are registered (e.g. Github repo)""")
+    test_reference: Optional[str] = Field(None, description="""Document URL where original test source particulars are registered (e.g. Github repo)""")
     test_objective: Optional[TestObjectiveEnum] = Field(None, description="""Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)""")
+    test_annotations: Optional[List[TestEntityParameter]] = Field(default_factory=list, description="""Metadata annotation.""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
@@ -266,7 +275,7 @@ class TestAsset(TestEntity):
     semantic_severity: Optional[SemanticSeverityEnum] = Field(None)
     in_v1: Optional[bool] = Field(None)
     well_known: Optional[bool] = Field(None)
-    test_reference: Optional[str] = Field(None, description="""Documentation URL where original test source particulars are registered (e.g. Github repo)""")
+    test_reference: Optional[str] = Field(None, description="""Document URL where original test source particulars are registered (e.g. Github repo)""")
     runner_settings: List[str] = Field(default_factory=list, description="""Settings for the test harness, e.g. \"inferred\"""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
@@ -298,7 +307,7 @@ class AcceptanceTestAsset(TestAsset):
     semantic_severity: Optional[SemanticSeverityEnum] = Field(None)
     in_v1: Optional[bool] = Field(None)
     well_known: Optional[bool] = Field(None)
-    test_reference: Optional[str] = Field(None, description="""Documentation URL where original test source particulars are registered (e.g. Github repo)""")
+    test_reference: Optional[str] = Field(None, description="""Document URL where original test source particulars are registered (e.g. Github repo)""")
     runner_settings: List[str] = Field(default_factory=list, description="""Settings for the test harness, e.g. \"inferred\"""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
@@ -320,7 +329,7 @@ class TestEdgeData(TestAsset):
     semantic_severity: Optional[SemanticSeverityEnum] = Field(None)
     in_v1: Optional[bool] = Field(None)
     well_known: Optional[bool] = Field(None)
-    test_reference: Optional[str] = Field(None, description="""Documentation URL where original test source particulars are registered (e.g. Github repo)""")
+    test_reference: Optional[str] = Field(None, description="""Document URL where original test source particulars are registered (e.g. Github repo)""")
     runner_settings: List[str] = Field(default_factory=list, description="""Settings for the test harness, e.g. \"inferred\"""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
@@ -434,6 +443,18 @@ class OneHopTestCase(KnowledgeGraphNavigationTestCase):
     tags: Optional[List[str]] = Field(default_factory=list, description="""One or more 'tags' slot values (slot inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection.""")
     
 
+class TestSuiteSpecification(TestEntity):
+    """
+    Parameters for a Test Case instances either dynamically generated from some external source of Test Assets.
+    """
+    test_data_file_locator: Optional[str] = Field(None, description="""An web accessible file resource link to test entity data (e.g. a web accessible text file of Test Asset entries)""")
+    test_data_file_format: Optional[FileFormatEnum] = Field(None, description="""File format of test entity data (e.g. TSV, YAML or JSON)""")
+    id: str = Field(..., description="""A unique identifier for a Test Entity""")
+    name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
+    description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
+    tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
+    
+
 class TestSuite(TestEntity):
     """
     Specification of a set of Test Cases, one of either with a static list of 'test_cases' or a dynamic 'test_suite_specification' slot values. Note: at least one slot or the other, but generally not both(?) needs to be present.
@@ -495,54 +516,20 @@ class OneHopTestSuite(TestSuite):
     tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
     
 
-class TestSuiteSpecification(TestEntity):
-    """
-    Parameters for a Test Case instances either dynamically generated from some external source of Test Assets.
-    """
-    test_data_file_locator: Optional[str] = Field(None, description="""An web accessible file resource link to test entity data (e.g. a web accessible text file of Test Asset entries)""")
-    test_data_file_format: Optional[FileFormatEnum] = Field(None, description="""File format of test entity data (e.g. TSV, YAML or JSON)""")
-    id: str = Field(..., description="""A unique identifier for a Test Entity""")
-    name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
-    description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
-    tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
-    
-
-class TestRunParameter(ConfiguredBaseModel):
-    """
-    A single 'tag = value' pair (where 'value' is a simple string).
-    """
-    parameter: Optional[str] = Field(None, description="""Name of a TestParameter.""")
-    value: Optional[str] = Field(None, description="""(String) value of a TestParameter.""")
-    
-
 class TestRunnerConfiguration(TestEntity):
     """
-    General configuration parameters and test data input for a single invocation of a TestRunner.
+    General configuration parameters and test data input  for a single invocation of a TestRunner.
     """
-    test_run_parameters: Optional[List[TestRunParameter]] = Field(default_factory=list, description="""One or more instances of TestRunParameter, forming a part of a TestRunnerConfiguration and that inform the TestHarness and TestRunners about the target characteristics of a TestRun""")
-    test_entities: Optional[Dict[str, TestEntity]] = Field(default_factory=dict, description="""Different TestRunners may expect specific kinds of TestEntity as input. These 'test_entities' one or more instances of TestAsset, TestCase or TestSuite.""")
+    test_run_parameters: Optional[List[TestEntityParameter]] = Field(default_factory=list, description="""Parameters for TestRunnerConfiguration that inform the TestHarness and TestRunners about the general characteristics of a test run.""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
-    tags: Optional[List[str]] = Field(default_factory=list, description="""One or more 'tags' slot values (slot inherited from TestEntity) should generally identify the TestRunner(s) which can run the tests implied by all the instances specified in this configuration.""")
-    
-
-class TestRunSession(TestEntity):
-    """
-    A single invocation of a TestRunner.
-    """
-    test_runner_configuration: Optional[str] = Field(None, description="""General TestRunner (metadata) configuration parameters to set up a TestRun.""")
-    test_case_results: Optional[Dict[str, TestCaseResult]] = Field(default_factory=dict, description="""One or more instances of TestCaseResult.""")
-    timestamp: Optional[datetime ] = Field(None, description="""Date time when a given entity was created.""")
-    id: str = Field(..., description="""Session identifier of the TestRun.""")
-    name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
-    description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
-    tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
+    tags: Optional[List[str]] = Field(default_factory=list, description="""One or more 'tags' slot values (slot inherited from TestEntity)  should generally identify the TestRunner(s) using this configuration.""")
     
 
 class TestCaseResult(TestEntity):
     """
-    Wrapper for the outcome of a TestRunner running a one specific TestCase.
+    The outcome of a TestRunner run of one specific TestCase.
     """
     test_suite_id: Optional[str] = Field(None, description="""CURIE id of a TestSuite registered in the system.""")
     test_case: Optional[TestCase] = Field(None, description="""Slot referencing a single TestCase.""")
@@ -553,9 +540,24 @@ class TestCaseResult(TestEntity):
     tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
     
 
+class TestRunSession(TestEntity):
+    """
+    A single invocation of a TestRunner.
+    """
+    test_runner_name: Optional[str] = Field(None, description="""Global system name of a TestRunner.""")
+    test_entities: Optional[Dict[str, TestEntity]] = Field(default_factory=dict, description="""Different TestRunners may expect specific kinds of TestEntity as input. These 'test_entities' one or more instances of TestAsset, TestCase or TestSuite.""")
+    test_case_results: Optional[Dict[str, TestCaseResult]] = Field(default_factory=dict, description="""One or more instances of TestCaseResult.""")
+    timestamp: Optional[datetime ] = Field(None, description="""Date time when a given entity was created.""")
+    id: str = Field(..., description="""A unique identifier for a Test Entity""")
+    name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
+    description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
+    tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
+    
+
 
 # Model rebuild
 # see https://pydantic-docs.helpmanual.io/usage/models/#rebuilding-a-model
+TestEntityParameter.model_rebuild()
 TestEntity.model_rebuild()
 TestMetadata.model_rebuild()
 TestAsset.model_rebuild()
@@ -568,14 +570,13 @@ QuantitativeTestCase.model_rebuild()
 ComplianceTestCase.model_rebuild()
 KnowledgeGraphNavigationTestCase.model_rebuild()
 OneHopTestCase.model_rebuild()
+TestSuiteSpecification.model_rebuild()
 TestSuite.model_rebuild()
 AcceptanceTestSuite.model_rebuild()
 BenchmarkTestSuite.model_rebuild()
 StandardsComplianceTestSuite.model_rebuild()
 OneHopTestSuite.model_rebuild()
-TestSuiteSpecification.model_rebuild()
-TestRunParameter.model_rebuild()
 TestRunnerConfiguration.model_rebuild()
-TestRunSession.model_rebuild()
 TestCaseResult.model_rebuild()
+TestRunSession.model_rebuild()
 
