@@ -39,17 +39,21 @@ class TestTestRunner(unittest.TestCase):
         trc: TestRunnerConfiguration = _mock_config()
         _test_config(trc)
 
-    def test_testrunner_construction_with_get_config_and(self):
+    def test_testrunner_construction_with_get_config_and_empty_session(self):
         trc: TestRunnerConfiguration = _mock_config()
         runner = TestRunner(name="MockTestRunner", config=trc)
         assert runner.get_name() == "MockTestRunner"
         trc2 = runner.get_config()
         _test_config(trc2)
+        assert runner.get_session("fake-session") is None
 
     def test_testrunner_run_and_get_session(self):
         trc: TestRunnerConfiguration = _mock_config()
         runner = TestRunner(name="MockTestRunner", config=trc)
+        assert runner
         mock_test = _mock_test_data()
         trs: TestRunSession = runner.run(tests=mock_test)
+        assert trs.id
+        assert runner.get_session(trs.id) is not None
         print(file=stderr)
         print(trs.json(indent="\t"), file=stderr)

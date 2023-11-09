@@ -67,8 +67,9 @@ class TestRunner:
 
         :return: TestRunSession, data wrapper for an instance of TestRunner running the provided tests.
         """
+        session_id = f"ttm:{str(uuid4())}"
         session = TestRunSession(
-            id=f"ttm:{str(uuid4())}",
+            id=session_id,
             name="TestRunnerSession",
             test_runner_name=self._name,
             description="Test Runner Session",
@@ -77,4 +78,5 @@ class TestRunner:
             # test_entities=tests
             # test_case_results: Optional[Dict[str, TestCaseResult]] = Field(default_factory=dict, description="""One or more instances of TestCaseResult.""")
         )
+        self._sessions[session_id] = session
         return session
