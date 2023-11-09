@@ -56,6 +56,10 @@ class TestRunner:
         """
         return self._sessions[session_id] if session_id in self._sessions else None
 
+    @staticmethod
+    def is_data_type(instance, name: str) -> bool:
+        return str(type(instance)).endswith(f"{name}'>")
+
     def run(self, tests: Union[TestEntity, List[TestEntity]]) -> TestRunSession:
         """
         Method to initiate TestRunner processing of the specified collection of tests,
@@ -67,6 +71,17 @@ class TestRunner:
 
         :return: TestRunSession, data wrapper for an instance of TestRunner running the provided tests.
         """
+        # First iteration: blind loading of tests into dictionary of 'test_entities'
+        test_entities: Optional[Dict[str, TestEntity]] = dict()
+        if isinstance(tests, List):
+            for test in tests:
+                # TODO: how do I ensure that 'tests' is a valid TestEntity here?
+                test_entities[test.id] = test
+        else:
+            # TODO: how do I ensure that 'tests' is a valid TestEntity here?
+            test_entities[tests.id] = tests
+
+        # ...then configure and persist the TestRunner session...
         session_id = f"ttm:{str(uuid4())}"
         session = TestRunSession(
             id=session_id,
@@ -75,8 +90,10 @@ class TestRunner:
             description="Test Runner Session",
             timestamp=str(datetime.now()),
             tags=[],
-            # test_entities=tests
-            # test_case_results: Optional[Dict[str, TestCaseResult]] = Field(default_factory=dict, description="""One or more instances of TestCaseResult.""")
+            test_entities=test_entities
+            # Default initialization of empty dictionary of test_case_results
+            # test_case_results: Optional[Dict[str, TestCaseResult]] = dict()
         )
         self._sessions[session_id] = session
+
         return session

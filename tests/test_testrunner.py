@@ -51,9 +51,15 @@ class TestTestRunner(unittest.TestCase):
         trc: TestRunnerConfiguration = _mock_config()
         runner = TestRunner(name="MockTestRunner", config=trc)
         assert runner
-        mock_test = _mock_test_data()
-        trs: TestRunSession = runner.run(tests=mock_test)
+
+        # Simple TestEntity as test input
+        trs: TestRunSession = runner.run(tests=TestEntity(id="mock_entity"))
         assert trs.id
         assert runner.get_session(trs.id) is not None
+        print(file=stderr)
+        print(trs.json(indent="\t"), file=stderr)
+
+        # List[TestEntity] as test input
+        trs = runner.run(tests=[TestEntity(id="mock_entity-1"), TestEntity(id="mock_entity-2")])
         print(file=stderr)
         print(trs.json(indent="\t"), file=stderr)
