@@ -233,8 +233,8 @@ class TestEntityParameter(ConfiguredBaseModel):
     """
     A single 'tag = value' pair (where 'value' is a simple string).
     """
-    parameter: Optional[str] = Field(None, description="""Name of a TestParameter.""")
-    value: Optional[str] = Field(None, description="""(String) value of a TestParameter.""")
+    parameter_name: str = Field(..., description="""Name of a TestParameter.""")
+    parameter_value: str = Field(..., description="""(String) value of a TestParameter.""")
     
 
 class TestEntity(ConfiguredBaseModel):

@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2023-11-08T11:17:26
+# Generation date: 2023-11-09T13:33:28
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -135,15 +135,19 @@ class TestEntityParameter(YAMLRoot):
     class_name: ClassVar[str] = "TestEntityParameter"
     class_model_uri: ClassVar[URIRef] = TTM.TestEntityParameter
 
-    parameter: Optional[str] = None
-    value: Optional[str] = None
+    parameter_name: str = None
+    parameter_value: str = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.parameter is not None and not isinstance(self.parameter, str):
-            self.parameter = str(self.parameter)
+        if self._is_empty(self.parameter_name):
+            self.MissingRequiredField("parameter_name")
+        if not isinstance(self.parameter_name, str):
+            self.parameter_name = str(self.parameter_name)
 
-        if self.value is not None and not isinstance(self.value, str):
-            self.value = str(self.value)
+        if self._is_empty(self.parameter_value):
+            self.MissingRequiredField("parameter_value")
+        if not isinstance(self.parameter_value, str):
+            self.parameter_value = str(self.parameter_value)
 
         super().__post_init__(**kwargs)
 
@@ -219,9 +223,7 @@ class TestMetadata(TestEntity):
         if self.test_objective is not None and not isinstance(self.test_objective, TestObjectiveEnum):
             self.test_objective = TestObjectiveEnum(self.test_objective)
 
-        if not isinstance(self.test_annotations, list):
-            self.test_annotations = [self.test_annotations] if self.test_annotations is not None else []
-        self.test_annotations = [v if isinstance(v, TestEntityParameter) else TestEntityParameter(**as_dict(v)) for v in self.test_annotations]
+        self._normalize_inlined_as_dict(slot_name="test_annotations", slot_type=TestEntityParameter, key_name="parameter_name", keyed=False)
 
         super().__post_init__(**kwargs)
 
@@ -770,9 +772,7 @@ class TestRunnerConfiguration(TestEntity):
         if not isinstance(self.id, TestRunnerConfigurationId):
             self.id = TestRunnerConfigurationId(self.id)
 
-        if not isinstance(self.test_run_parameters, list):
-            self.test_run_parameters = [self.test_run_parameters] if self.test_run_parameters is not None else []
-        self.test_run_parameters = [v if isinstance(v, TestEntityParameter) else TestEntityParameter(**as_dict(v)) for v in self.test_run_parameters]
+        self._normalize_inlined_as_dict(slot_name="test_run_parameters", slot_type=TestEntityParameter, key_name="parameter_name", keyed=False)
 
         if not isinstance(self.tags, list):
             self.tags = [self.tags] if self.tags is not None else []
@@ -1096,11 +1096,11 @@ class TestCaseResultEnum(EnumDefinitionImpl):
 class slots:
     pass
 
-slots.parameter = Slot(uri=TTM.parameter, name="parameter", curie=TTM.curie('parameter'),
-                   model_uri=TTM.parameter, domain=None, range=Optional[str])
+slots.parameter_name = Slot(uri=TTM.parameter_name, name="parameter_name", curie=TTM.curie('parameter_name'),
+                   model_uri=TTM.parameter_name, domain=None, range=str)
 
-slots.value = Slot(uri=TTM.value, name="value", curie=TTM.curie('value'),
-                   model_uri=TTM.value, domain=None, range=Optional[str])
+slots.parameter_value = Slot(uri=TTM.parameter_value, name="parameter_value", curie=TTM.curie('parameter_value'),
+                   model_uri=TTM.parameter_value, domain=None, range=str)
 
 slots.test_entity_parameters = Slot(uri=TTM.test_entity_parameters, name="test_entity_parameters", curie=TTM.curie('test_entity_parameters'),
                    model_uri=TTM.test_entity_parameters, domain=None, range=Optional[Union[Union[dict, TestEntityParameter], List[Union[dict, TestEntityParameter]]]])

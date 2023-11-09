@@ -209,8 +209,8 @@ message TestEdgeData
 // A single 'tag = value' pair (where 'value' is a simple string).
 message TestEntityParameter
  {
-  string parameter = 0
-  string value = 0
+  string parameterName = 0
+  string parameterValue = 0
  }
 // Represents metadata related to (external SME, SMURF, Translator feedback,  large scale batch, etc.) like the provenance of test assets, cases and/or suites.
 message TestMetadata

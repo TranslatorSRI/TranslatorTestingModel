@@ -216,8 +216,8 @@ linkml:Sparqlpath xsd:string
 }
 
 <TestEntityParameter> CLOSED {
-    (  $<TestEntityParameter_tes> (  <parameter> @linkml:String ? ;
-          <value> @linkml:String ?
+    (  $<TestEntityParameter_tes> (  <parameter_name> @linkml:String ;
+          <parameter_value> @linkml:String
        ) ;
        rdf:type [ <TestEntityParameter> ] ?
     )

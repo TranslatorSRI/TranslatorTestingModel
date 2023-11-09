@@ -664,29 +664,31 @@
   ],
   "slots": [
     {
-      "name": "parameter",
-      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/parameter",
+      "name": "parameter_name",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/parameter_name",
       "description": "Name of a TestParameter.",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
-      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/parameter",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/parameter_name",
       "owner": "TestEntityParameter",
       "domain_of": [
         "TestEntityParameter"
       ],
       "range": "string",
+      "required": true,
       "@type": "SlotDefinition"
     },
     {
-      "name": "value",
-      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/value",
+      "name": "parameter_value",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/parameter_value",
       "description": "(String) value of a TestParameter.",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
-      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/value",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/parameter_value",
       "owner": "TestEntityParameter",
       "domain_of": [
         "TestEntityParameter"
       ],
       "range": "string",
+      "required": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1658,8 +1660,8 @@
       "description": "A single 'tag = value' pair (where 'value' is a simple string).",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "slots": [
-        "parameter",
-        "value"
+        "parameter_name",
+        "parameter_value"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEntityParameter",
@@ -2109,9 +2111,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "translator_testing_model.yaml",
-  "source_file_date": "2023-11-08T11:17:18",
-  "source_file_size": 22816,
-  "generation_date": "2023-11-08T11:17:22",
+  "source_file_date": "2023-11-09T13:33:20",
+  "source_file_size": 22886,
+  "generation_date": "2023-11-09T13:33:24",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",

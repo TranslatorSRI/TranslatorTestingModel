@@ -1058,15 +1058,19 @@
             "additionalProperties": false,
             "description": "A single 'tag = value' pair (where 'value' is a simple string).",
             "properties": {
-                "parameter": {
+                "parameter_name": {
                     "description": "Name of a TestParameter.",
                     "type": "string"
                 },
-                "value": {
+                "parameter_value": {
                     "description": "(String) value of a TestParameter.",
                     "type": "string"
                 }
             },
+            "required": [
+                "parameter_name",
+                "parameter_value"
+            ],
             "title": "TestEntityParameter",
             "type": "object"
         },

@@ -4,6 +4,7 @@ for Translator TestRunner implementations.
 """
 from typing import Union, List, Optional, Dict
 from datetime import datetime
+from uuid import uuid4
 
 from src.translator_testing_model.datamodel.pydanticmodel import (
     TestRunnerConfiguration,
@@ -22,21 +23,30 @@ class TestRunner:
     facilitates uniform execution of TestRunners by the TestHarness.
     """
 
-    def __init__(self, config: TestRunnerConfiguration):
+    def __init__(self, name: str, config: Optional[TestRunnerConfiguration]):
         """
         Constructor for an instance of TestRunner.
 
+        :param name: str, Global system name of a TestRunner
         :param config: TestRunnerConfiguration, general run configuration parameters for a specified TestRunner
         """
-        self.config = config
+        self._name = name
+        self._config: Optional[TestRunnerConfiguration] = config
 
         # catalog of registered sessions of the test runner.
-        self.sessions: Dict[
+        self._sessions: Dict[
             str,            # session_id
             TestRunSession  # session object
         ] = dict()
 
+    def get_name(self):
+        return self._name
+
+    def get_config(self) -> Optional[TestRunnerConfiguration]:
+        return self._config
+
     def get_session(self, session_id: str) -> Optional[TestRunSession]:
+
         """
         Returns the TestRunner session corresponding to the given session identifier.
 
@@ -44,7 +54,7 @@ class TestRunner:
         :return: Optional[TestRunSession],
                  session of a valid extant instance of TestRunner if known; None otherwise
         """
-        return self.sessions[session_id] if session_id in self.sessions else None
+        return self._sessions[session_id] if session_id in self._sessions else None
 
     def run(self, tests: Union[TestEntity, List[TestEntity]]) -> TestRunSession:
         """
@@ -57,4 +67,14 @@ class TestRunner:
 
         :return: TestRunSession, data wrapper for an instance of TestRunner running the provided tests.
         """
-        raise NotImplementedError
+        session = TestRunSession(
+            id=f"ttm:{str(uuid4())}",
+            name="TestRunnerSession",
+            test_runner_name=self._name,
+            description="Test Runner Session",
+            timestamp=str(datetime.now()),
+            tags=[],
+            # test_entities=tests
+            # test_case_results: Optional[Dict[str, TestCaseResult]] = Field(default_factory=dict, description="""One or more instances of TestCaseResult.""")
+        )
+        return session

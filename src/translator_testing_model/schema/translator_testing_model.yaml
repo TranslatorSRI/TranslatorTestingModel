@@ -33,8 +33,8 @@ classes:
     description: >-
       A single 'tag = value' pair (where 'value' is a simple string).
     slots:
-      - parameter
-      - value
+      - parameter_name
+      - parameter_value
 
   TestEntity:
     description: >-
@@ -296,13 +296,15 @@ slots:
   # General Slots #
   #################
 
-  parameter:
+  parameter_name:
     description: >-
       Name of a TestParameter.
+    required: True
 
-  value:
+  parameter_value:
     description: >-
       (String) value of a TestParameter.
+    required: True
 
   test_entity_parameters:
     description: >-

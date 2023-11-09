@@ -221,8 +221,8 @@ interface TestEntity
 
 type TestEntityParameter
   {
-    parameter: String
-    value: String
+    parameterName: String!
+    parameterValue: String!
   }
 
 type TestMetadata

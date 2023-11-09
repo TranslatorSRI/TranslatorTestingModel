@@ -115,9 +115,9 @@ CREATE TABLE "TestEdgeData" (
 );
 
 CREATE TABLE "TestEntityParameter" (
-	parameter TEXT, 
-	value TEXT, 
-	PRIMARY KEY (parameter, value)
+	parameter_name TEXT NOT NULL, 
+	parameter_value TEXT NOT NULL, 
+	PRIMARY KEY (parameter_name, parameter_value)
 );
 
 CREATE TABLE "TestMetadata" (
