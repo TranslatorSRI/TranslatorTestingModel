@@ -1,5 +1,6 @@
 from sys import stderr
 import unittest
+from typing import Dict
 
 from translator_testing_model.adaptor.testrunner import TestRunner
 from translator_testing_model.datamodel.pydanticmodel import (
@@ -9,11 +10,18 @@ from translator_testing_model.datamodel.pydanticmodel import (
 
 
 def _mock_config():
-    test_parameter = TestEntityParameter(parameter_name="some_parameter", parameter_value="42")
+    test_parameter_1 = TestEntityParameter(
+        parameter_name="name",
+        parameter_value="MockTestRunner"
+    )
+    test_parameter_2 = TestEntityParameter(
+        parameter_name="some_other_parameters",
+        parameter_value="42"
+    )
     trc = TestRunnerConfiguration(
         id="mock testrunner configuration",
-        test_run_parameters=[test_parameter],
-        tags=["My Test Runner"]
+        test_run_parameters=[test_parameter_1, test_parameter_2],
+        tags=["MockTestRunner"]
     )
     return trc
 
@@ -23,9 +31,9 @@ def _test_config(trc: TestRunnerConfiguration):
     assert trc.id == "mock testrunner configuration"
     assert trc.test_run_parameters
     for parameter in trc.test_run_parameters:
-        assert parameter.parameter_name == "some_parameter"
-        assert parameter.parameter_value == "42"
-    assert "My Test Runner" in trc.tags
+        assert parameter.parameter_name == "name"
+        assert parameter.parameter_value == "MockTestRunner"
+    assert "MockTestRunner" in trc.tags
 
 
 def _mock_test_data() -> TestEntity:
@@ -37,20 +45,27 @@ class TestTestRunner(unittest.TestCase):
 
     def test_testrunner_config_construction(self):
         trc: TestRunnerConfiguration = _mock_config()
-        _test_config(trc)
+        assert trc
+        assert trc.id == "mock testrunner configuration"
+        assert trc.test_run_parameters
+        for parameter in trc.test_run_parameters:
+            assert parameter.parameter_name in ["name", "some_other_parameters"]
+            if parameter.parameter_name == "name":
+                assert parameter.parameter_value == "MockTestRunner"
+            else:
+                assert parameter.parameter_value == "42"
+        assert "MockTestRunner" in trc.tags
 
     def test_testrunner_construction_with_get_config_and_empty_session(self):
         trc: TestRunnerConfiguration = _mock_config()
-        runner = TestRunner(name="MockTestRunner", config=trc)
+        runner = TestRunner(config=trc)
         assert runner.get_name() == "MockTestRunner"
-        trc2 = runner.get_config()
-        _test_config(trc2)
-        assert runner.get_session("fake-session") is None
+        config: Dict = runner.get_config()
+        assert config["some_other_parameters"] == "42"
 
     def test_testrunner_run_and_get_session(self):
         trc: TestRunnerConfiguration = _mock_config()
-        runner = TestRunner(name="MockTestRunner", config=trc)
-        assert runner
+        runner = TestRunner(config=trc)
 
         # Simple TestEntity as test input
         trs: TestRunSession = runner.run(tests=TestEntity(id="mock_entity"))

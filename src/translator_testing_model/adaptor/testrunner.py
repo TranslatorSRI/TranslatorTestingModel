@@ -6,7 +6,7 @@ from typing import Union, List, Optional, Dict
 from datetime import datetime
 from uuid import uuid4
 
-from src.translator_testing_model.datamodel.pydanticmodel import (
+from translator_testing_model.datamodel.pydanticmodel import (
     TestRunnerConfiguration,
     TestEntity,
     TestCase,
@@ -23,15 +23,16 @@ class TestRunner:
     facilitates uniform execution of TestRunners by the TestHarness.
     """
 
-    def __init__(self, name: str, config: Optional[TestRunnerConfiguration]):
+    def __init__(self,config: Optional[TestRunnerConfiguration]):
         """
         Constructor for an instance of TestRunner.
-
-        :param name: str, Global system name of a TestRunner
         :param config: TestRunnerConfiguration, general run configuration parameters for a specified TestRunner
         """
-        self._name = name
-        self._config: Optional[TestRunnerConfiguration] = config
+        self._config: Dict[str, str] = dict()
+        if config:
+            for parameter in config.test_run_parameters:
+                self._config[parameter.parameter_name] = parameter.parameter_value
+        self._name = self._config.pop("name") if "name" in self._config else "Unknown"
 
         # catalog of registered sessions of the test runner.
         self._sessions: Dict[
@@ -42,7 +43,7 @@ class TestRunner:
     def get_name(self):
         return self._name
 
-    def get_config(self) -> Optional[TestRunnerConfiguration]:
+    def get_config(self) -> Dict[str, str]:
         return self._config
 
     def get_session(self, session_id: str) -> Optional[TestRunSession]:
@@ -86,7 +87,7 @@ class TestRunner:
         session = TestRunSession(
             id=session_id,
             name="TestRunnerSession",
-            test_runner_name=self._name,
+            test_runner_name=self.get_name(),
             description="Test Runner Session",
             timestamp=str(datetime.now()),
             tags=[],
