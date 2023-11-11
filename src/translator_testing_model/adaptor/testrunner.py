@@ -2,7 +2,7 @@
 This module provides a high level parent class interface/API
 for Translator TestRunner implementations.
 """
-from typing import Union, List, Optional, Dict
+from typing import Union, List, Optional, Dict, Iterator
 from datetime import datetime
 from uuid import uuid4
 
@@ -61,7 +61,7 @@ class TestRunner:
     def is_data_type(instance, name: str) -> bool:
         return str(type(instance)).endswith(f"{name}'>")
 
-    def run(self, tests: Union[TestEntity, List[TestEntity]]) -> TestRunSession:
+    def run(self, tests: Iterator[TestCase]) -> TestRunSession:
         """
         Method to initiate TestRunner processing of the specified collection of tests,
         returning a session handle to manage the run and access test results.
@@ -98,3 +98,13 @@ class TestRunner:
         self._sessions[session_id] = session
 
         return session
+
+    def get_results(self, session: TestRunSession) -> Dict[str, TestCaseResult]:
+        """
+        Return test results.
+        TODO: may (eventually) need to be asynchronous?
+
+        :param session: TestRunSession within which the tests are being run.
+        :return: Dict[str, TestCaseResult], indexed dictionary of test case results
+        """
+        return dict()

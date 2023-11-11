@@ -5,15 +5,18 @@ Translator SRI Automated Test Harness using the
 TestRunner class and TranslatorTestingModel.
 """
 from argparse import ArgumentParser
+from typing import Iterator, Dict
 from urllib.parse import urlparse
 import json
 
 from translator_testing_model.adaptor.testrunner import TestRunner
-from translator_testing_model.datamodel.pydanticmodel import TestRunnerConfiguration, TestRunSession, TestEntity
+from translator_testing_model.adaptor.test_respository import access_tests
+from translator_testing_model.datamodel.pydanticmodel import TestRunnerConfiguration, TestRunSession, TestEntity, \
+    TestCase
 
-from logging import getLogger
+from logging import Logger, getLogger
 
-logger = getLogger()
+logger: Logger = getLogger()
 
 
 def url_type(arg):
@@ -23,42 +26,46 @@ def url_type(arg):
     raise TypeError("Invalid URL")
 
 
-def load_testrunner_configuration(args) -> TestRunnerConfiguration:
-    return TestRunnerConfiguration(id="MockTestRunnerConfiguration")
+def load_testrunner_configuration(args: Dict) -> Dict[str, TestRunnerConfiguration]:
+    """
+    Load configuration files for the various TestRunner to be used in the testing.
+
+    :param args: Dict, parameters pertinent to the selection of TestRunner configurations
+    :return: Dict[str, TestRunnerConfiguration], catalog of available TestRunners, indexed by name
+    """
+    return {
+        "MockTestRunner": TestRunnerConfiguration(id="MockTestRunnerConfiguration")
+    }
 
 
-def main(args):
+def main(kwargs: Dict):
     """Main Test Harness entrypoint."""
 
-    # qid = str(uuid4())[:8]
-    # logger = get_logger(qid, args["log_level"])
-    # tests = []
-    # if "tests_url" in args:
-    #     tests = download_tests(args["suite"], args["tests_url"], logger)
-    # elif "tests" in args:
-    #     tests = args["tests"]
-    # else:
-    #     return logger.error(
-    #         "Please run this command with `-h` to see the available options."
-    #     )
-    #
-    # report = run_tests(tests, logger)
+    # Load configured instances of TestRunner
+    testrunner_catalog: Dict[str, TestRunnerConfiguration] = load_testrunner_configuration(kwargs)
 
-    trc: TestRunnerConfiguration = load_testrunner_configuration(args)
+    runners: Dict[str, TestRunner] = dict()
+    for name, config in testrunner_catalog.items():
+        runners[name] = TestRunner(config=config)
 
-    runner = TestRunner(config=trc)
+    # Access TestCase data (as a 'just-in-time' Iterator)
+    # TODO: can this be repeatedly accessed or TestCase entries
+    #       streamed through the set of instantiated TestRunners(?)
+    tests: Iterator[TestCase] = access_tests(**kwargs, logger=logger)
 
-    # Simple TestEntity as test input
-    trs: TestRunSession = runner.run(tests=TestEntity(id="mock_entity"))
+    sessions: Dict[str, TestRunSession] = dict()
+    for name in runners.keys():
+        sessions[name] = runners[name].run(tests=tests)
 
-    if args["save_to_dashboard"]:
+    if kwargs["save_to_dashboard"]:
         logger.info("Saving to Testing Dashboard...")
         raise NotImplementedError()
 
-    if args["json_output"]:
+    if kwargs["json_output"]:
         logger.info("Saving report as JSON...")
-        with open("test_report.json", "w") as f:
-            json.dump(trs.test_case_results, f)
+        for name in sessions.keys():
+            with open(f"{name}_test_report.json", "w") as f:
+                json.dump(sessions[name].test_case_results, f)
 
     logger.info("All testing has completed!")
 
@@ -92,7 +99,7 @@ def cli():
     run_parser.add_argument(
         "tests",
         type=json.loads,
-        help="Path to a file of tests to be run. This would be the same output from downloading the tests via `download_tests()`",
+        help="Path to a file of tests to be run. This would be the same output from retrieving a test generator via `access_tests()`",
     )
 
     parser.add_argument(
