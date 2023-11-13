@@ -11,61 +11,61 @@ import json
 
 from translator_testing_model.adaptor.testrunner import TestRunner
 from translator_testing_model.adaptor.test_respository import access_tests
-from translator_testing_model.datamodel.pydanticmodel import TestRunnerConfiguration, TestRunSession, TestEntity, \
+from translator_testing_model.datamodel.pydanticmodel import (
+    TestRunnerConfiguration,
+    TestRunSession,
+    TestEntity,
     TestCase
+)
 
 from logging import Logger, getLogger
 
 logger: Logger = getLogger()
 
 
-def url_type(arg):
-    url = urlparse(arg)
+def url_type(candidate_url: str):
+    url = urlparse(candidate_url)
     if all((url.scheme, url.netloc)):
-        return arg
+        return url
     raise TypeError("Invalid URL")
 
 
-def load_testrunner_configuration(args: Dict) -> Dict[str, TestRunnerConfiguration]:
+def load_testrunners(args: Dict) -> Dict[str, TestRunner]:
     """
-    Load configuration files for the various TestRunner to be used in the testing.
-
+    Load the catalog of available instances of configured TestRunner.
     :param args: Dict, parameters pertinent to the selection of TestRunner configurations
     :return: Dict[str, TestRunnerConfiguration], catalog of available TestRunners, indexed by name
     """
-    return {
-        "MockTestRunner": TestRunnerConfiguration(id="MockTestRunnerConfiguration")
-    }
+    # TODO: stub... need to retrieve the TestRunner configurations from somewhere
+    tr_config: Dict = dict()
+    runners: Dict[str, TestRunner] = dict()
+    for name, config in tr_config.items():
+        runners[name] = TestRunner(config=config)
+    return runners
 
 
-def main(kwargs: Dict):
+def main(args: Dict):
     """Main Test Harness entrypoint."""
 
-    # Load configured instances of TestRunner
-    testrunner_catalog: Dict[str, TestRunnerConfiguration] = load_testrunner_configuration(kwargs)
-
-    runners: Dict[str, TestRunner] = dict()
-    for name, config in testrunner_catalog.items():
-        runners[name] = TestRunner(config=config)
+    # Load catalog of specified configured instances of TestRunner
+    testrunner_catalog: Dict[str, TestRunner] = load_testrunners(args)
 
     # Access TestCase data (as a 'just-in-time' Iterator)
-    # TODO: can this be repeatedly accessed or TestCase entries
-    #       streamed through the set of instantiated TestRunners(?)
-    tests: Iterator[TestCase] = access_tests(**kwargs, logger=logger)
+    tests: Iterator[TestCase] = access_tests(args, logger=logger)
 
-    sessions: Dict[str, TestRunSession] = dict()
-    for name in runners.keys():
-        sessions[name] = runners[name].run(tests=tests)
-
-    if kwargs["save_to_dashboard"]:
-        logger.info("Saving to Testing Dashboard...")
-        raise NotImplementedError()
-
-    if kwargs["json_output"]:
-        logger.info("Saving report as JSON...")
-        for name in sessions.keys():
-            with open(f"{name}_test_report.json", "w") as f:
-                json.dump(sessions[name].test_case_results, f)
+    # sessions: Dict[str, TestRunSession] = dict()
+    # for name in runners.keys():
+    #     sessions[name] = runners[name].run(tests=tests)
+    #
+    # if kwargs["save_to_dashboard"]:
+    #     logger.info("Saving to Testing Dashboard...")
+    #     raise NotImplementedError()
+    #
+    # if kwargs["json_output"]:
+    #     logger.info("Saving report as JSON...")
+    #     for name in sessions.keys():
+    #         with open(f"{name}_test_report.json", "w") as f:
+    #             json.dump(sessions[name].test_case_results, f)
 
     logger.info("All testing has completed!")
 
