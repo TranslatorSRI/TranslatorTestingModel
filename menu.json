@@ -1,7 +1,7 @@
 {
-  "translator_testing_model": {
-    "translator_testing_model": {
-      "name": "translator_testing_model",
+  "Translator-Testing-Model": {
+    "TestCase": {
+      "name": "TestCase",
       "status": "published",
       "display": true
     }
