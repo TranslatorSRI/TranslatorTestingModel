@@ -3,7 +3,7 @@ name: Build & Deploy
 on:
   push:
     branches:
-      - data_harmonizer_instance
+      - main
 
 concurrency:
   group: "pages"
