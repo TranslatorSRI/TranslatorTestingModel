@@ -13,26 +13,22 @@ ttm:AcceptanceTestCase a sh:NodeShape ;
             sh:maxCount 1 ;
             sh:order 7 ;
             sh:path schema1:name ],
-        [ sh:description "Deployment environment within which the associated TestSuite is run." ;
-            sh:in ( "dev" "ci" "test" "prod" ) ;
-            sh:maxCount 1 ;
-            sh:order 0 ;
-            sh:path ttm:test_env ],
+        [ sh:class ttm:AcceptanceTestAsset ;
+            sh:description "One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection." ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 2 ;
+            sh:path ttm:test_assets ],
         [ sh:description "A unique identifier for a Test Entity" ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:order 6 ;
             sh:path schema1:identifier ],
-        [ sh:description "A template for a query, which can be used to generate a query for a test case.  note: the current enumerated values for this slot come from the Benchmarks repo config/benchmarks.json \"templates\" collection and refer to the \"name\" field of each template.  Templates themselves are currently stored in the config/[source_name]/templates directory." ;
-            sh:in ( "ameliorates" "treats" "three_hop" "drug_treats_rare_disease" "drug-to-gene" ) ;
+        [ sh:description "Deployment environment within which the associated TestSuite is run." ;
+            sh:in ( "dev" "ci" "test" "prod" ) ;
             sh:maxCount 1 ;
-            sh:order 4 ;
-            sh:path ttm:trapi_template ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable description for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:order 8 ;
-            sh:path schema1:description ],
+            sh:order 0 ;
+            sh:path ttm:test_env ],
         [ sh:datatype xsd:string ;
             sh:description "One or more 'tags' slot values (slot inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection." ;
             sh:order 9 ;
@@ -41,6 +37,16 @@ ttm:AcceptanceTestCase a sh:NodeShape ;
             sh:in ( "arax" "aragorn" "ars" "bte" "improving" ) ;
             sh:order 5 ;
             sh:path ttm:components ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 8 ;
+            sh:path schema1:description ],
+        [ sh:description "A template for a query, which can be used to generate a query for a test case.  note: the current enumerated values for this slot come from the Benchmarks repo config/benchmarks.json \"templates\" collection and refer to the \"name\" field of each template.  Templates themselves are currently stored in the config/[source_name]/templates directory." ;
+            sh:in ( "ameliorates" "treats" "three_hop" "drug_treats_rare_disease" "drug-to-gene" ) ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path ttm:trapi_template ],
         [ sh:class ttm:Precondition ;
             sh:nodeKind sh:IRI ;
             sh:order 3 ;
@@ -49,13 +55,7 @@ ttm:AcceptanceTestCase a sh:NodeShape ;
             sh:in ( "treats" ) ;
             sh:maxCount 1 ;
             sh:order 1 ;
-            sh:path ttm:query_type ],
-        [ sh:class ttm:AcceptanceTestAsset ;
-            sh:description "One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection." ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:IRI ;
-            sh:order 2 ;
-            sh:path ttm:test_assets ] ;
+            sh:path ttm:query_type ] ;
     sh:targetClass ttm:AcceptanceTestCase .
 
 ttm:AcceptanceTestSuite a sh:NodeShape ;
@@ -67,41 +67,41 @@ ttm:AcceptanceTestSuite a sh:NodeShape ;
             sh:order 5 ;
             sh:path schema1:name ],
         [ sh:datatype xsd:string ;
-            sh:description "A human-readable description for a Test Entity" ;
+            sh:description "A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists." ;
+            sh:order 7 ;
+            sh:path schema1:additionalType ],
+        [ sh:description "A unique identifier for a Test Entity" ;
             sh:maxCount 1 ;
-            sh:order 6 ;
-            sh:path schema1:description ],
+            sh:minCount 1 ;
+            sh:order 4 ;
+            sh:path schema1:identifier ],
         [ sh:description "A Test persona describes the user or operational context of a given test." ;
             sh:in ( "All" "Clinical" "LookUp" "Mechanistic" ) ;
             sh:maxCount 1 ;
             sh:order 1 ;
             sh:path ttm:test_persona ],
         [ sh:datatype xsd:string ;
-            sh:description "A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists." ;
-            sh:order 7 ;
-            sh:path schema1:additionalType ],
+            sh:description "A human-readable description for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path schema1:description ],
         [ sh:class ttm:TestMetadata ;
             sh:description "Test metadata describes the external provenance, cross-references and objectives for a given test." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:IRI ;
             sh:order 0 ;
             sh:path ttm:test_metadata ],
-        [ sh:description "A unique identifier for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 4 ;
-            sh:path schema1:identifier ],
-        [ sh:class ttm:TestCase ;
-            sh:description "List of explicitly enumerated Test Cases." ;
-            sh:nodeKind sh:IRI ;
-            sh:order 2 ;
-            sh:path ttm:test_cases ],
         [ sh:class ttm:TestSuiteSpecification ;
             sh:description "Declarative specification of a Test Suite of Test Cases whose generation is deferred, (i.e. within a Test Runner) or whose creation is achieved by stream processing of an external data source." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:IRI ;
             sh:order 3 ;
-            sh:path ttm:test_suite_specification ] ;
+            sh:path ttm:test_suite_specification ],
+        [ sh:class ttm:TestCase ;
+            sh:description "List of explicitly enumerated Test Cases." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 2 ;
+            sh:path ttm:test_cases ] ;
     sh:targetClass ttm:AcceptanceTestSuite .
 
 ttm:BenchmarkTestSuite a sh:NodeShape ;
@@ -114,123 +114,123 @@ ttm:ComplianceTestCase a sh:NodeShape ;
     sh:closed true ;
     sh:description "TRAPI and Biolink Model standards compliance test" ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:datatype xsd:string ;
-            sh:description "A human-readable description for a Test Entity" ;
+    sh:property [ sh:class ttm:Precondition ;
+            sh:nodeKind sh:IRI ;
+            sh:order 3 ;
+            sh:path ttm:preconditions ],
+        [ sh:description "A unique identifier for a Test Entity" ;
             sh:maxCount 1 ;
-            sh:order 8 ;
-            sh:path schema1:description ],
-        [ sh:datatype xsd:string ;
-            sh:description "One or more 'tags' slot values (slot inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection." ;
-            sh:order 9 ;
-            sh:path schema1:additionalType ],
-        [ sh:description "Type of TestCase query." ;
-            sh:in ( "treats" ) ;
-            sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path ttm:query_type ],
+            sh:minCount 1 ;
+            sh:order 6 ;
+            sh:path schema1:identifier ],
         [ sh:description "A template for a query, which can be used to generate a query for a test case.  note: the current enumerated values for this slot come from the Benchmarks repo config/benchmarks.json \"templates\" collection and refer to the \"name\" field of each template.  Templates themselves are currently stored in the config/[source_name]/templates directory." ;
             sh:in ( "ameliorates" "treats" "three_hop" "drug_treats_rare_disease" "drug-to-gene" ) ;
             sh:maxCount 1 ;
             sh:order 4 ;
             sh:path ttm:trapi_template ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 7 ;
+            sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 8 ;
+            sh:path schema1:description ],
+        [ sh:description "The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX." ;
+            sh:in ( "arax" "aragorn" "ars" "bte" "improving" ) ;
+            sh:order 5 ;
+            sh:path ttm:components ],
+        [ sh:description "Deployment environment within which the associated TestSuite is run." ;
+            sh:in ( "dev" "ci" "test" "prod" ) ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path ttm:test_env ],
+        [ sh:datatype xsd:string ;
+            sh:description "One or more 'tags' slot values (slot inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection." ;
+            sh:order 9 ;
+            sh:path schema1:additionalType ],
         [ sh:class ttm:TestAsset ;
             sh:description "One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection." ;
             sh:minCount 1 ;
             sh:nodeKind sh:IRI ;
             sh:order 2 ;
             sh:path ttm:test_assets ],
-        [ sh:class ttm:Precondition ;
-            sh:nodeKind sh:IRI ;
-            sh:order 3 ;
-            sh:path ttm:preconditions ],
-        [ sh:description "The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX." ;
-            sh:in ( "arax" "aragorn" "ars" "bte" "improving" ) ;
-            sh:order 5 ;
-            sh:path ttm:components ],
-        [ sh:description "A unique identifier for a Test Entity" ;
+        [ sh:description "Type of TestCase query." ;
+            sh:in ( "treats" ) ;
             sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 6 ;
-            sh:path schema1:identifier ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable name for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:order 7 ;
-            sh:path schema1:name ],
-        [ sh:description "Deployment environment within which the associated TestSuite is run." ;
-            sh:in ( "dev" "ci" "test" "prod" ) ;
-            sh:maxCount 1 ;
-            sh:order 0 ;
-            sh:path ttm:test_env ] ;
+            sh:order 1 ;
+            sh:path ttm:query_type ] ;
     sh:targetClass ttm:ComplianceTestCase .
 
 ttm:KnowledgeGraphNavigationTestCase a sh:NodeShape ;
     sh:closed true ;
     sh:description "Knowledge Graph navigation integration test" ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:datatype xsd:string ;
-            sh:description "One or more 'tags' slot values (slot inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection." ;
-            sh:order 9 ;
-            sh:path schema1:additionalType ],
-        [ sh:description "The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX." ;
-            sh:in ( "arax" "aragorn" "ars" "bte" "improving" ) ;
-            sh:order 5 ;
-            sh:path ttm:components ],
-        [ sh:class ttm:Precondition ;
-            sh:nodeKind sh:IRI ;
-            sh:order 3 ;
-            sh:path ttm:preconditions ],
-        [ sh:description "Deployment environment within which the associated TestSuite is run." ;
-            sh:in ( "dev" "ci" "test" "prod" ) ;
-            sh:maxCount 1 ;
-            sh:order 0 ;
-            sh:path ttm:test_env ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable description for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:order 8 ;
-            sh:path schema1:description ],
-        [ sh:description "A unique identifier for a Test Entity" ;
+    sh:property [ sh:description "A unique identifier for a Test Entity" ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:order 6 ;
             sh:path schema1:identifier ],
-        [ sh:description "Type of TestCase query." ;
-            sh:in ( "treats" ) ;
-            sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path ttm:query_type ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable name for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:order 7 ;
-            sh:path schema1:name ],
-        [ sh:description "A template for a query, which can be used to generate a query for a test case.  note: the current enumerated values for this slot come from the Benchmarks repo config/benchmarks.json \"templates\" collection and refer to the \"name\" field of each template.  Templates themselves are currently stored in the config/[source_name]/templates directory." ;
-            sh:in ( "ameliorates" "treats" "three_hop" "drug_treats_rare_disease" "drug-to-gene" ) ;
-            sh:maxCount 1 ;
-            sh:order 4 ;
-            sh:path ttm:trapi_template ],
         [ sh:class ttm:TestAsset ;
             sh:description "One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection." ;
             sh:minCount 1 ;
             sh:nodeKind sh:IRI ;
             sh:order 2 ;
-            sh:path ttm:test_assets ] ;
+            sh:path ttm:test_assets ],
+        [ sh:datatype xsd:string ;
+            sh:description "One or more 'tags' slot values (slot inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection." ;
+            sh:order 9 ;
+            sh:path schema1:additionalType ],
+        [ sh:description "Deployment environment within which the associated TestSuite is run." ;
+            sh:in ( "dev" "ci" "test" "prod" ) ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path ttm:test_env ],
+        [ sh:description "A template for a query, which can be used to generate a query for a test case.  note: the current enumerated values for this slot come from the Benchmarks repo config/benchmarks.json \"templates\" collection and refer to the \"name\" field of each template.  Templates themselves are currently stored in the config/[source_name]/templates directory." ;
+            sh:in ( "ameliorates" "treats" "three_hop" "drug_treats_rare_disease" "drug-to-gene" ) ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path ttm:trapi_template ],
+        [ sh:class ttm:Precondition ;
+            sh:nodeKind sh:IRI ;
+            sh:order 3 ;
+            sh:path ttm:preconditions ],
+        [ sh:description "The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX." ;
+            sh:in ( "arax" "aragorn" "ars" "bte" "improving" ) ;
+            sh:order 5 ;
+            sh:path ttm:components ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 8 ;
+            sh:path schema1:description ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 7 ;
+            sh:path schema1:name ],
+        [ sh:description "Type of TestCase query." ;
+            sh:in ( "treats" ) ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path ttm:query_type ] ;
     sh:targetClass ttm:KnowledgeGraphNavigationTestCase .
 
 ttm:OneHopTestCase a sh:NodeShape ;
     sh:closed true ;
     sh:description "'One Hop' Knowledge Graph navigation integration test" ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:class ttm:Precondition ;
-            sh:nodeKind sh:IRI ;
-            sh:order 3 ;
-            sh:path ttm:preconditions ],
-        [ sh:description "A template for a query, which can be used to generate a query for a test case.  note: the current enumerated values for this slot come from the Benchmarks repo config/benchmarks.json \"templates\" collection and refer to the \"name\" field of each template.  Templates themselves are currently stored in the config/[source_name]/templates directory." ;
-            sh:in ( "ameliorates" "treats" "three_hop" "drug_treats_rare_disease" "drug-to-gene" ) ;
+    sh:property [ sh:description "A unique identifier for a Test Entity" ;
             sh:maxCount 1 ;
-            sh:order 4 ;
-            sh:path ttm:trapi_template ],
+            sh:minCount 1 ;
+            sh:order 6 ;
+            sh:path schema1:identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "One or more 'tags' slot values (slot inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection." ;
+            sh:order 9 ;
+            sh:path schema1:additionalType ],
         [ sh:description "Deployment environment within which the associated TestSuite is run." ;
             sh:in ( "dev" "ci" "test" "prod" ) ;
             sh:maxCount 1 ;
@@ -241,56 +241,42 @@ ttm:OneHopTestCase a sh:NodeShape ;
             sh:maxCount 1 ;
             sh:order 8 ;
             sh:path schema1:description ],
-        [ sh:description "A unique identifier for a Test Entity" ;
+        [ sh:description "A template for a query, which can be used to generate a query for a test case.  note: the current enumerated values for this slot come from the Benchmarks repo config/benchmarks.json \"templates\" collection and refer to the \"name\" field of each template.  Templates themselves are currently stored in the config/[source_name]/templates directory." ;
+            sh:in ( "ameliorates" "treats" "three_hop" "drug_treats_rare_disease" "drug-to-gene" ) ;
             sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 6 ;
-            sh:path schema1:identifier ],
-        [ sh:description "Type of TestCase query." ;
-            sh:in ( "treats" ) ;
-            sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path ttm:query_type ],
+            sh:order 4 ;
+            sh:path ttm:trapi_template ],
+        [ sh:class ttm:Precondition ;
+            sh:nodeKind sh:IRI ;
+            sh:order 3 ;
+            sh:path ttm:preconditions ],
         [ sh:description "The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX." ;
             sh:in ( "arax" "aragorn" "ars" "bte" "improving" ) ;
             sh:order 5 ;
             sh:path ttm:components ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable name for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:order 7 ;
-            sh:path schema1:name ],
-        [ sh:datatype xsd:string ;
-            sh:description "One or more 'tags' slot values (slot inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection." ;
-            sh:order 9 ;
-            sh:path schema1:additionalType ],
         [ sh:class ttm:TestAsset ;
             sh:description "One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection." ;
             sh:minCount 1 ;
             sh:nodeKind sh:IRI ;
             sh:order 2 ;
-            sh:path ttm:test_assets ] ;
+            sh:path ttm:test_assets ],
+        [ sh:description "Type of TestCase query." ;
+            sh:in ( "treats" ) ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path ttm:query_type ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 7 ;
+            sh:path schema1:name ] ;
     sh:targetClass ttm:OneHopTestCase .
 
 ttm:OneHopTestSuite a sh:NodeShape ;
     sh:closed true ;
     sh:description "Test case for testing the integrity of \"One Hop\" knowledge graph retrievals sensa legacy SRI_Testing harness." ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:datatype xsd:string ;
-            sh:description "A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists." ;
-            sh:order 7 ;
-            sh:path schema1:additionalType ],
-        [ sh:class ttm:TestCase ;
-            sh:description "List of explicitly enumerated Test Cases." ;
-            sh:nodeKind sh:IRI ;
-            sh:order 2 ;
-            sh:path ttm:test_cases ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable name for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:order 5 ;
-            sh:path schema1:name ],
-        [ sh:class ttm:TestSuiteSpecification ;
+    sh:property [ sh:class ttm:TestSuiteSpecification ;
             sh:description "Declarative specification of a Test Suite of Test Cases whose generation is deferred, (i.e. within a Test Runner) or whose creation is achieved by stream processing of an external data source." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:IRI ;
@@ -301,11 +287,6 @@ ttm:OneHopTestSuite a sh:NodeShape ;
             sh:minCount 1 ;
             sh:order 4 ;
             sh:path schema1:identifier ],
-        [ sh:description "A Test persona describes the user or operational context of a given test." ;
-            sh:in ( "All" "Clinical" "LookUp" "Mechanistic" ) ;
-            sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path ttm:test_persona ],
         [ sh:class ttm:TestMetadata ;
             sh:description "Test metadata describes the external provenance, cross-references and objectives for a given test." ;
             sh:maxCount 1 ;
@@ -313,10 +294,29 @@ ttm:OneHopTestSuite a sh:NodeShape ;
             sh:order 0 ;
             sh:path ttm:test_metadata ],
         [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path schema1:name ],
+        [ sh:class ttm:TestCase ;
+            sh:description "List of explicitly enumerated Test Cases." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 2 ;
+            sh:path ttm:test_cases ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists." ;
+            sh:order 7 ;
+            sh:path schema1:additionalType ],
+        [ sh:datatype xsd:string ;
             sh:description "A human-readable description for a Test Entity" ;
             sh:maxCount 1 ;
             sh:order 6 ;
-            sh:path schema1:description ] ;
+            sh:path schema1:description ],
+        [ sh:description "A Test persona describes the user or operational context of a given test." ;
+            sh:in ( "All" "Clinical" "LookUp" "Mechanistic" ) ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path ttm:test_persona ] ;
     sh:targetClass ttm:OneHopTestSuite .
 
 ttm:QuantitativeTestCase a sh:NodeShape ;
@@ -328,81 +328,70 @@ ttm:QuantitativeTestCase a sh:NodeShape ;
             sh:maxCount 1 ;
             sh:order 8 ;
             sh:path schema1:description ],
+        [ sh:description "Type of TestCase query." ;
+            sh:in ( "treats" ) ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path ttm:query_type ],
+        [ sh:description "Deployment environment within which the associated TestSuite is run." ;
+            sh:in ( "dev" "ci" "test" "prod" ) ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path ttm:test_env ],
+        [ sh:description "A template for a query, which can be used to generate a query for a test case.  note: the current enumerated values for this slot come from the Benchmarks repo config/benchmarks.json \"templates\" collection and refer to the \"name\" field of each template.  Templates themselves are currently stored in the config/[source_name]/templates directory." ;
+            sh:in ( "ameliorates" "treats" "three_hop" "drug_treats_rare_disease" "drug-to-gene" ) ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path ttm:trapi_template ],
+        [ sh:description "A unique identifier for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 6 ;
+            sh:path schema1:identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 7 ;
+            sh:path schema1:name ],
         [ sh:class ttm:TestAsset ;
             sh:description "One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection." ;
             sh:minCount 1 ;
             sh:nodeKind sh:IRI ;
             sh:order 2 ;
             sh:path ttm:test_assets ],
-        [ sh:class ttm:Precondition ;
-            sh:nodeKind sh:IRI ;
-            sh:order 3 ;
-            sh:path ttm:preconditions ],
-        [ sh:description "A unique identifier for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 6 ;
-            sh:path schema1:identifier ],
-        [ sh:description "Type of TestCase query." ;
-            sh:in ( "treats" ) ;
-            sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path ttm:query_type ],
-        [ sh:description "The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX." ;
-            sh:in ( "arax" "aragorn" "ars" "bte" "improving" ) ;
-            sh:order 5 ;
-            sh:path ttm:components ],
         [ sh:datatype xsd:string ;
             sh:description "One or more 'tags' slot values (slot inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection." ;
             sh:order 9 ;
             sh:path schema1:additionalType ],
-        [ sh:description "Deployment environment within which the associated TestSuite is run." ;
-            sh:in ( "dev" "ci" "test" "prod" ) ;
-            sh:maxCount 1 ;
-            sh:order 0 ;
-            sh:path ttm:test_env ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable name for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:order 7 ;
-            sh:path schema1:name ],
-        [ sh:description "A template for a query, which can be used to generate a query for a test case.  note: the current enumerated values for this slot come from the Benchmarks repo config/benchmarks.json \"templates\" collection and refer to the \"name\" field of each template.  Templates themselves are currently stored in the config/[source_name]/templates directory." ;
-            sh:in ( "ameliorates" "treats" "three_hop" "drug_treats_rare_disease" "drug-to-gene" ) ;
-            sh:maxCount 1 ;
-            sh:order 4 ;
-            sh:path ttm:trapi_template ] ;
+        [ sh:description "The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX." ;
+            sh:in ( "arax" "aragorn" "ars" "bte" "improving" ) ;
+            sh:order 5 ;
+            sh:path ttm:components ],
+        [ sh:class ttm:Precondition ;
+            sh:nodeKind sh:IRI ;
+            sh:order 3 ;
+            sh:path ttm:preconditions ] ;
     sh:targetClass ttm:QuantitativeTestCase .
 
 ttm:StandardsComplianceTestSuite a sh:NodeShape ;
     sh:closed true ;
     sh:description "Test suite for testing Translator components against releases of standards like TRAPI and the Biolink Model." ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:class ttm:TestMetadata ;
-            sh:description "Test metadata describes the external provenance, cross-references and objectives for a given test." ;
+    sh:property [ sh:description "A Test persona describes the user or operational context of a given test." ;
+            sh:in ( "All" "Clinical" "LookUp" "Mechanistic" ) ;
             sh:maxCount 1 ;
-            sh:nodeKind sh:IRI ;
-            sh:order 0 ;
-            sh:path ttm:test_metadata ],
+            sh:order 1 ;
+            sh:path ttm:test_persona ],
         [ sh:class ttm:TestSuiteSpecification ;
             sh:description "Declarative specification of a Test Suite of Test Cases whose generation is deferred, (i.e. within a Test Runner) or whose creation is achieved by stream processing of an external data source." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:IRI ;
             sh:order 3 ;
             sh:path ttm:test_suite_specification ],
-        [ sh:class ttm:TestCase ;
-            sh:description "List of explicitly enumerated Test Cases." ;
-            sh:nodeKind sh:IRI ;
-            sh:order 2 ;
-            sh:path ttm:test_cases ],
         [ sh:datatype xsd:string ;
             sh:description "A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists." ;
             sh:order 7 ;
             sh:path schema1:additionalType ],
-        [ sh:description "A Test persona describes the user or operational context of a given test." ;
-            sh:in ( "All" "Clinical" "LookUp" "Mechanistic" ) ;
-            sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path ttm:test_persona ],
         [ sh:description "A unique identifier for a Test Entity" ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
@@ -417,7 +406,18 @@ ttm:StandardsComplianceTestSuite a sh:NodeShape ;
             sh:description "A human-readable name for a Test Entity" ;
             sh:maxCount 1 ;
             sh:order 5 ;
-            sh:path schema1:name ] ;
+            sh:path schema1:name ],
+        [ sh:class ttm:TestCase ;
+            sh:description "List of explicitly enumerated Test Cases." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 2 ;
+            sh:path ttm:test_cases ],
+        [ sh:class ttm:TestMetadata ;
+            sh:description "Test metadata describes the external provenance, cross-references and objectives for a given test." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 0 ;
+            sh:path ttm:test_metadata ] ;
     sh:targetClass ttm:StandardsComplianceTestSuite .
 
 ttm:TestEdgeData a sh:NodeShape ;
@@ -425,49 +425,39 @@ ttm:TestEdgeData a sh:NodeShape ;
     sh:description "Represents a single Biolink Model compliant instance of a subject-predicate-object edge that can be used for testing." ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:datatype xsd:string ;
-            sh:description "A human-readable description for a Test Entity" ;
+            sh:description "A human-readable name for a Test Entity" ;
             sh:maxCount 1 ;
-            sh:order 14 ;
-            sh:path schema1:description ],
-        [ sh:in ( "High" "Low" "NotApplicable" ) ;
-            sh:maxCount 1 ;
-            sh:order 7 ;
-            sh:path ttm:semantic_severity ],
-        [ sh:datatype xsd:string ;
-            sh:maxCount 1 ;
-            sh:order 4 ;
-            sh:path ttm:output_name ],
+            sh:order 13 ;
+            sh:path schema1:name ],
         [ sh:in ( "Top_Answer" "Acceptable" "BadButForgivable" "NeverShow" "number_1_TopAnswer" "number_2_Acceptable" "number_3_BadButForgivable" "number_4_NeverShow" ) ;
             sh:maxCount 1 ;
             sh:order 5 ;
             sh:path ttm:expected_output ],
-        [ sh:datatype xsd:boolean ;
-            sh:maxCount 1 ;
-            sh:order 9 ;
-            sh:path ttm:well_known ],
         [ sh:datatype xsd:string ;
             sh:description "One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a \"Block List\" collection" ;
             sh:order 15 ;
             sh:path schema1:additionalType ],
-        [ sh:in ( "causes not treats" "TMKP" "category too generic" "contraindications" "chemical roles" "test_issue" ) ;
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a Test Entity" ;
             sh:maxCount 1 ;
-            sh:order 6 ;
-            sh:path ttm:test_issue ],
+            sh:order 14 ;
+            sh:path schema1:description ],
+        [ sh:datatype xsd:string ;
+            sh:description "Settings for the test harness, e.g. \"inferred\"" ;
+            sh:minCount 1 ;
+            sh:order 11 ;
+            sh:path ttm:runner_settings ],
         [ sh:datatype xsd:string ;
             sh:maxCount 1 ;
             sh:order 2 ;
             sh:path ttm:predicate ],
+        [ sh:datatype xsd:boolean ;
+            sh:maxCount 1 ;
+            sh:order 9 ;
+            sh:path ttm:well_known ],
         [ sh:maxCount 1 ;
             sh:order 3 ;
             sh:path ttm:output_id ],
-        [ sh:datatype xsd:string ;
-            sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path ttm:input_name ],
-        [ sh:datatype xsd:boolean ;
-            sh:maxCount 1 ;
-            sh:order 8 ;
-            sh:path ttm:in_v1 ],
         [ sh:maxCount 1 ;
             sh:order 0 ;
             sh:path ttm:input_id ],
@@ -476,65 +466,75 @@ ttm:TestEdgeData a sh:NodeShape ;
             sh:minCount 1 ;
             sh:order 12 ;
             sh:path schema1:identifier ],
-        [ sh:datatype xsd:string ;
-            sh:description "Settings for the test harness, e.g. \"inferred\"" ;
-            sh:minCount 1 ;
-            sh:order 11 ;
-            sh:path ttm:runner_settings ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable name for a Test Entity" ;
+        [ sh:datatype xsd:boolean ;
             sh:maxCount 1 ;
-            sh:order 13 ;
-            sh:path schema1:name ],
+            sh:order 8 ;
+            sh:path ttm:in_v1 ],
         [ sh:description "Document URL where original test source particulars are registered (e.g. Github repo)" ;
             sh:maxCount 1 ;
             sh:order 10 ;
-            sh:path ttm:test_reference ] ;
+            sh:path ttm:test_reference ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path ttm:output_name ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path ttm:input_name ],
+        [ sh:in ( "High" "Low" "NotApplicable" ) ;
+            sh:maxCount 1 ;
+            sh:order 7 ;
+            sh:path ttm:semantic_severity ],
+        [ sh:in ( "causes not treats" "TMKP" "category too generic" "contraindications" "chemical roles" "test_issue" ) ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path ttm:test_issue ] ;
     sh:targetClass ttm:TestEdgeData .
 
 ttm:TestRunSession a sh:NodeShape ;
     sh:closed true ;
     sh:description "A single invocation of a TestRunner." ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:datatype xsd:dateTime ;
-            sh:description "Date time when a given entity was created." ;
-            sh:maxCount 1 ;
-            sh:order 3 ;
-            sh:path ttm:timestamp ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable description for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:order 6 ;
-            sh:path schema1:description ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable name for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:order 5 ;
-            sh:path schema1:name ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists." ;
-            sh:order 7 ;
-            sh:path schema1:additionalType ],
+    sh:property [ sh:class ttm:TestEntity ;
+            sh:description "Different TestRunners may expect specific kinds of TestEntity as input. These 'test_entities' one or more instances of TestAsset, TestCase or TestSuite." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path ttm:test_entities ],
         [ sh:datatype xsd:string ;
             sh:description "Global system name of a TestRunner." ;
             sh:maxCount 1 ;
             sh:order 0 ;
             sh:path ttm:test_runner_name ],
-        [ sh:class ttm:TestEntity ;
-            sh:description "Different TestRunners may expect specific kinds of TestEntity as input. These 'test_entities' one or more instances of TestAsset, TestCase or TestSuite." ;
-            sh:nodeKind sh:IRI ;
-            sh:order 1 ;
-            sh:path ttm:test_entities ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists." ;
+            sh:order 7 ;
+            sh:path schema1:additionalType ],
         [ sh:class ttm:TestCaseResult ;
             sh:description "One or more instances of TestCaseResult." ;
             sh:nodeKind sh:IRI ;
             sh:order 2 ;
             sh:path ttm:test_case_results ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path schema1:description ],
+        [ sh:datatype xsd:dateTime ;
+            sh:description "Date time when a given entity was created." ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path ttm:timestamp ],
         [ sh:description "A unique identifier for a Test Entity" ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:order 4 ;
-            sh:path schema1:identifier ] ;
+            sh:path schema1:identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path schema1:name ] ;
     sh:targetClass ttm:TestRunSession .
 
 ttm:TestRunnerConfiguration a sh:NodeShape ;
@@ -542,51 +542,61 @@ ttm:TestRunnerConfiguration a sh:NodeShape ;
     sh:description "General configuration parameters and test data input  for a single invocation of a TestRunner." ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:datatype xsd:string ;
-            sh:description "A human-readable name for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:order 2 ;
-            sh:path schema1:name ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable description for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:order 3 ;
-            sh:path schema1:description ],
-        [ sh:class ttm:TestEntityParameter ;
-            sh:description "Parameters for TestRunnerConfiguration that inform the TestHarness and TestRunners about the general characteristics of a test run." ;
-            sh:nodeKind sh:BlankNode ;
-            sh:order 0 ;
-            sh:path ttm:test_run_parameters ],
+            sh:description "One or more 'tags' slot values (slot inherited from TestEntity)  should generally identify the TestRunner(s) using this configuration." ;
+            sh:order 4 ;
+            sh:path schema1:additionalType ],
         [ sh:description "A unique identifier for a Test Entity" ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:order 1 ;
             sh:path schema1:identifier ],
+        [ sh:class ttm:TestEntityParameter ;
+            sh:description "Parameters for TestRunnerConfiguration that inform the TestHarness and TestRunners about the general characteristics of a test run." ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 0 ;
+            sh:path ttm:test_run_parameters ],
         [ sh:datatype xsd:string ;
-            sh:description "One or more 'tags' slot values (slot inherited from TestEntity)  should generally identify the TestRunner(s) using this configuration." ;
-            sh:order 4 ;
-            sh:path schema1:additionalType ] ;
+            sh:description "A human-readable description for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path schema1:description ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path schema1:name ] ;
     sh:targetClass ttm:TestRunnerConfiguration .
 
 ttm:TestSuite a sh:NodeShape ;
     sh:closed true ;
     sh:description "Specification of a set of Test Cases, one of either with a static list of 'test_cases' or a dynamic 'test_suite_specification' slot values. Note: at least one slot or the other, but generally not both(?) needs to be present." ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "A unique identifier for a Test Entity" ;
+    sh:property [ sh:class ttm:TestSuiteSpecification ;
+            sh:description "Declarative specification of a Test Suite of Test Cases whose generation is deferred, (i.e. within a Test Runner) or whose creation is achieved by stream processing of an external data source." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 3 ;
+            sh:path ttm:test_suite_specification ],
+        [ sh:description "A unique identifier for a Test Entity" ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:order 4 ;
             sh:path schema1:identifier ],
-        [ sh:class ttm:TestMetadata ;
-            sh:description "Test metadata describes the external provenance, cross-references and objectives for a given test." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:IRI ;
-            sh:order 0 ;
-            sh:path ttm:test_metadata ],
         [ sh:description "A Test persona describes the user or operational context of a given test." ;
             sh:in ( "All" "Clinical" "LookUp" "Mechanistic" ) ;
             sh:maxCount 1 ;
             sh:order 1 ;
             sh:path ttm:test_persona ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path schema1:description ],
         [ sh:class ttm:TestCase ;
             sh:description "List of explicitly enumerated Test Cases." ;
             sh:nodeKind sh:IRI ;
@@ -596,151 +606,146 @@ ttm:TestSuite a sh:NodeShape ;
             sh:description "A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists." ;
             sh:order 7 ;
             sh:path schema1:additionalType ],
-        [ sh:class ttm:TestSuiteSpecification ;
-            sh:description "Declarative specification of a Test Suite of Test Cases whose generation is deferred, (i.e. within a Test Runner) or whose creation is achieved by stream processing of an external data source." ;
+        [ sh:class ttm:TestMetadata ;
+            sh:description "Test metadata describes the external provenance, cross-references and objectives for a given test." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:IRI ;
-            sh:order 3 ;
-            sh:path ttm:test_suite_specification ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable name for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:order 5 ;
-            sh:path schema1:name ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable description for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:order 6 ;
-            sh:path schema1:description ] ;
+            sh:order 0 ;
+            sh:path ttm:test_metadata ] ;
     sh:targetClass ttm:TestSuite .
 
 ttm:AcceptanceTestAsset a sh:NodeShape ;
     sh:closed true ;
     sh:description "Model derived from Jenn's test asset design and Shervin's runner JSON here as an example." ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:in ( "Top_Answer" "Acceptable" "BadButForgivable" "NeverShow" "number_1_TopAnswer" "number_2_Acceptable" "number_3_BadButForgivable" "number_4_NeverShow" ) ;
+    sh:property [ sh:datatype xsd:string ;
             sh:maxCount 1 ;
-            sh:order 15 ;
-            sh:path ttm:expected_output ],
-        [ sh:description "The expected result of the query" ;
-            sh:in ( "include_good" "exclude_bad" ) ;
+            sh:order 14 ;
+            sh:path ttm:output_name ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a Test Entity" ;
             sh:maxCount 1 ;
-            sh:order 6 ;
-            sh:path ttm:expected_result ],
-        [ sh:maxCount 1 ;
-            sh:order 13 ;
-            sh:path ttm:output_id ],
+            sh:order 24 ;
+            sh:path schema1:description ],
+        [ sh:description "The direction of the expected query result triple" ;
+            sh:in ( "increased" "decreased" ) ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path ttm:direction ],
+        [ sh:description "The node of the (templated) TRAPI query to replace" ;
+            sh:in ( "subject" "object" ) ;
+            sh:maxCount 1 ;
+            sh:order 8 ;
+            sh:path ttm:query_node ],
+        [ sh:datatype xsd:boolean ;
+            sh:maxCount 1 ;
+            sh:order 19 ;
+            sh:path ttm:well_known ],
         [ sh:datatype xsd:string ;
             sh:maxCount 1 ;
-            sh:order 11 ;
-            sh:path ttm:input_name ],
-        [ sh:description "The deployment environment within which this test must pass." ;
-            sh:in ( "dev" "ci" "test" "prod" ) ;
+            sh:order 12 ;
+            sh:path ttm:predicate ],
+        [ sh:description "Document URL where original test source particulars are registered (e.g. Github repo)" ;
             sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path ttm:must_pass_environment ],
+            sh:order 20 ;
+            sh:path ttm:test_reference ],
         [ sh:datatype xsd:string ;
             sh:description "An answer that is returned from the test case, note: this must be combined with the expected_result to form a complete answer.  It might make sense to couple these in their own object instead of strictly sticking to the flat schema introduced by the spreadsheet here: https://docs.google.com/spreadsheets/d/1yj7zIchFeVl1OHqL_kE_pqvzNLmGml_FLbHDs-8Yvig/edit#gid=0" ;
             sh:maxCount 1 ;
             sh:order 5 ;
             sh:path ttm:answer_informal_concept ],
         [ sh:maxCount 1 ;
-            sh:order 10 ;
-            sh:path ttm:input_id ],
-        [ sh:description "Document URL where original test source particulars are registered (e.g. Github repo)" ;
-            sh:maxCount 1 ;
-            sh:order 20 ;
-            sh:path ttm:test_reference ],
-        [ sh:datatype xsd:boolean ;
-            sh:maxCount 1 ;
-            sh:order 18 ;
-            sh:path ttm:in_v1 ],
-        [ sh:datatype xsd:integer ;
-            sh:description "The answer must return in these many results" ;
-            sh:maxCount 1 ;
-            sh:order 7 ;
-            sh:path ttm:top_level ],
-        [ sh:datatype xsd:string ;
-            sh:description "The full human-readable scientific question a SME would ask, which is encoded into the test asset." ;
-            sh:maxCount 1 ;
-            sh:order 2 ;
-            sh:path ttm:scientific_question ],
-        [ sh:datatype xsd:string ;
-            sh:maxCount 1 ;
-            sh:order 14 ;
-            sh:path ttm:output_name ],
-        [ sh:description "A unique identifier for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 22 ;
-            sh:path schema1:identifier ],
-        [ sh:datatype xsd:date ;
-            sh:description "The date by which this test must pass" ;
-            sh:maxCount 1 ;
-            sh:order 0 ;
-            sh:path ttm:must_pass_date ],
-        [ sh:description "The node of the (templated) TRAPI query to replace" ;
-            sh:in ( "subject" "object" ) ;
-            sh:maxCount 1 ;
-            sh:order 8 ;
-            sh:path ttm:query_node ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable name for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:order 23 ;
-            sh:path schema1:name ],
-        [ sh:description "The direction of the expected query result triple" ;
-            sh:in ( "increased" "decreased" ) ;
-            sh:maxCount 1 ;
-            sh:order 4 ;
-            sh:path ttm:direction ],
+            sh:order 13 ;
+            sh:path ttm:output_id ],
         [ sh:datatype xsd:string ;
             sh:description "Settings for the test harness, e.g. \"inferred\"" ;
             sh:minCount 1 ;
             sh:order 21 ;
             sh:path ttm:runner_settings ],
+        [ sh:in ( "Top_Answer" "Acceptable" "BadButForgivable" "NeverShow" "number_1_TopAnswer" "number_2_Acceptable" "number_3_BadButForgivable" "number_4_NeverShow" ) ;
+            sh:maxCount 1 ;
+            sh:order 15 ;
+            sh:path ttm:expected_output ],
+        [ sh:description "A unique identifier for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 22 ;
+            sh:path schema1:identifier ],
         [ sh:datatype xsd:string ;
-            sh:description "A human-readable description for a Test Entity" ;
+            sh:description "A human-readable name for a Test Entity" ;
             sh:maxCount 1 ;
-            sh:order 24 ;
-            sh:path schema1:description ],
-        [ sh:in ( "High" "Low" "NotApplicable" ) ;
-            sh:maxCount 1 ;
-            sh:order 17 ;
-            sh:path ttm:semantic_severity ],
-        [ sh:in ( "causes not treats" "TMKP" "category too generic" "contraindications" "chemical roles" "test_issue" ) ;
-            sh:maxCount 1 ;
-            sh:order 16 ;
-            sh:path ttm:test_issue ],
-        [ sh:datatype xsd:boolean ;
-            sh:maxCount 1 ;
-            sh:order 19 ;
-            sh:path ttm:well_known ],
+            sh:order 23 ;
+            sh:path schema1:name ],
         [ sh:datatype xsd:string ;
             sh:description "The notes of the query" ;
             sh:maxCount 1 ;
             sh:order 9 ;
             sh:path ttm:notes ],
+        [ sh:description "The deployment environment within which this test must pass." ;
+            sh:in ( "dev" "ci" "test" "prod" ) ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path ttm:must_pass_environment ],
+        [ sh:maxCount 1 ;
+            sh:order 10 ;
+            sh:path ttm:input_id ],
         [ sh:datatype xsd:string ;
             sh:description "The object of the core triple to be tested" ;
             sh:maxCount 1 ;
             sh:order 3 ;
             sh:path ttm:string_entry ],
-        [ sh:datatype xsd:string ;
+        [ sh:description "The expected result of the query" ;
+            sh:in ( "include_good" "exclude_bad" ) ;
             sh:maxCount 1 ;
-            sh:order 12 ;
-            sh:path ttm:predicate ],
+            sh:order 6 ;
+            sh:path ttm:expected_result ],
+        [ sh:datatype xsd:integer ;
+            sh:description "The answer must return in these many results" ;
+            sh:maxCount 1 ;
+            sh:order 7 ;
+            sh:path ttm:top_level ],
+        [ sh:datatype xsd:date ;
+            sh:description "The date by which this test must pass" ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path ttm:must_pass_date ],
         [ sh:datatype xsd:string ;
             sh:description "One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a \"Block List\" collection" ;
             sh:order 25 ;
-            sh:path schema1:additionalType ] ;
+            sh:path schema1:additionalType ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:order 11 ;
+            sh:path ttm:input_name ],
+        [ sh:datatype xsd:boolean ;
+            sh:maxCount 1 ;
+            sh:order 18 ;
+            sh:path ttm:in_v1 ],
+        [ sh:in ( "causes not treats" "TMKP" "category too generic" "contraindications" "chemical roles" "test_issue" ) ;
+            sh:maxCount 1 ;
+            sh:order 16 ;
+            sh:path ttm:test_issue ],
+        [ sh:in ( "High" "Low" "NotApplicable" ) ;
+            sh:maxCount 1 ;
+            sh:order 17 ;
+            sh:path ttm:semantic_severity ],
+        [ sh:datatype xsd:string ;
+            sh:description "The full human-readable scientific question a SME would ask, which is encoded into the test asset." ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path ttm:scientific_question ] ;
     sh:targetClass ttm:AcceptanceTestAsset .
 
 ttm:TestCaseResult a sh:NodeShape ;
     sh:closed true ;
     sh:description "The outcome of a TestRunner run of one specific TestCase." ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "CURIE id of a TestSuite registered in the system." ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path schema1:description ],
+        [ sh:description "CURIE id of a TestSuite registered in the system." ;
             sh:maxCount 1 ;
             sh:order 0 ;
             sh:path ttm:test_suite_id ],
@@ -750,30 +755,25 @@ ttm:TestCaseResult a sh:NodeShape ;
             sh:order 3 ;
             sh:path schema1:identifier ],
         [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
             sh:description "A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists." ;
             sh:order 6 ;
             sh:path schema1:additionalType ],
-        [ sh:description "Encoded result of a single test run of a given test case" ;
-            sh:in ( "test_passed" "test_failed" "test_skipped" ) ;
-            sh:maxCount 1 ;
-            sh:order 2 ;
-            sh:path ttm:test_case_result ],
         [ sh:class ttm:TestCase ;
             sh:description "Slot referencing a single TestCase." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:IRI ;
             sh:order 1 ;
             sh:path ttm:test_case ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable name for a Test Entity" ;
+        [ sh:description "Encoded result of a single test run of a given test case" ;
+            sh:in ( "test_passed" "test_failed" "test_skipped" ) ;
             sh:maxCount 1 ;
-            sh:order 4 ;
-            sh:path schema1:name ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable description for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:order 5 ;
-            sh:path schema1:description ] ;
+            sh:order 2 ;
+            sh:path ttm:test_case_result ] ;
     sh:targetClass ttm:TestCaseResult .
 
 ttm:TestEntity a sh:NodeShape ;
@@ -785,10 +785,6 @@ ttm:TestEntity a sh:NodeShape ;
             sh:maxCount 1 ;
             sh:order 2 ;
             sh:path schema1:description ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists." ;
-            sh:order 3 ;
-            sh:path schema1:additionalType ],
         [ sh:description "A unique identifier for a Test Entity" ;
             sh:maxCount 1 ;
             sh:order 0 ;
@@ -797,7 +793,11 @@ ttm:TestEntity a sh:NodeShape ;
             sh:description "A human-readable name for a Test Entity" ;
             sh:maxCount 1 ;
             sh:order 1 ;
-            sh:path schema1:name ] ;
+            sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists." ;
+            sh:order 3 ;
+            sh:path schema1:additionalType ] ;
     sh:targetClass ttm:TestEntity .
 
 ttm:TestEntityParameter a sh:NodeShape ;
@@ -805,69 +805,80 @@ ttm:TestEntityParameter a sh:NodeShape ;
     sh:description "A single 'tag = value' pair (where 'value' is a simple string)." ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:datatype xsd:string ;
-            sh:description "(String) value of a TestParameter." ;
-            sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path ttm:value ],
-        [ sh:datatype xsd:string ;
             sh:description "Name of a TestParameter." ;
             sh:maxCount 1 ;
             sh:order 0 ;
-            sh:path ttm:parameter ] ;
+            sh:path ttm:parameter ],
+        [ sh:datatype xsd:string ;
+            sh:description "(String) value of a TestParameter." ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path ttm:value ] ;
     sh:targetClass ttm:TestEntityParameter .
 
 ttm:TestMetadata a sh:NodeShape ;
     sh:closed true ;
     sh:description "Represents metadata related to (external SME, SMURF, Translator feedback,  large scale batch, etc.) like the provenance of test assets, cases and/or suites." ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)" ;
-            sh:in ( "AcceptanceTest" "BenchmarkTest" "QuantitativeTest" ) ;
-            sh:maxCount 1 ;
-            sh:order 2 ;
-            sh:path ttm:test_objective ],
-        [ sh:class ttm:TestEntityParameter ;
+    sh:property [ sh:class ttm:TestEntityParameter ;
             sh:description "Metadata annotation." ;
             sh:nodeKind sh:BlankNode ;
             sh:order 3 ;
             sh:path ttm:test_annotations ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable description for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:order 6 ;
-            sh:path schema1:description ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists." ;
-            sh:order 7 ;
-            sh:path schema1:additionalType ],
         [ sh:description "Provenance of a specific set of test assets, cases and/or suites." ;
             sh:in ( "SME" "SMURF" "GitHubUserFeedback" "TACT" "BenchMark" "TranslatorTeam" "TestDataLocation" ) ;
             sh:maxCount 1 ;
             sh:order 0 ;
             sh:path ttm:test_source ],
-        [ sh:description "Document URL where original test source particulars are registered (e.g. Github repo)" ;
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists." ;
+            sh:order 7 ;
+            sh:path schema1:additionalType ],
+        [ sh:description "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)" ;
+            sh:in ( "AcceptanceTest" "BenchmarkTest" "QuantitativeTest" ) ;
             sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path ttm:test_reference ],
+            sh:order 2 ;
+            sh:path ttm:test_objective ],
         [ sh:description "A unique identifier for a Test Entity" ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:order 4 ;
             sh:path schema1:identifier ],
         [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path schema1:description ],
+        [ sh:datatype xsd:string ;
             sh:description "A human-readable name for a Test Entity" ;
             sh:maxCount 1 ;
             sh:order 5 ;
-            sh:path schema1:name ] ;
+            sh:path schema1:name ],
+        [ sh:description "Document URL where original test source particulars are registered (e.g. Github repo)" ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path ttm:test_reference ] ;
     sh:targetClass ttm:TestMetadata .
 
 ttm:TestSuiteSpecification a sh:NodeShape ;
     sh:closed true ;
     sh:description "Parameters for a Test Case instances either dynamically generated from some external source of Test Assets." ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "An web accessible file resource link to test entity data (e.g. a web accessible text file of Test Asset entries)" ;
+    sh:property [ sh:description "A unique identifier for a Test Entity" ;
             sh:maxCount 1 ;
-            sh:order 0 ;
-            sh:path ttm:test_data_file_locator ],
+            sh:minCount 1 ;
+            sh:order 2 ;
+            sh:path schema1:identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path schema1:description ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path schema1:name ],
         [ sh:datatype xsd:string ;
             sh:description "A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists." ;
             sh:order 5 ;
@@ -877,41 +888,62 @@ ttm:TestSuiteSpecification a sh:NodeShape ;
             sh:maxCount 1 ;
             sh:order 1 ;
             sh:path ttm:test_data_file_format ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable description for a Test Entity" ;
+        [ sh:description "An web accessible file resource link to test entity data (e.g. a web accessible text file of Test Asset entries)" ;
             sh:maxCount 1 ;
-            sh:order 4 ;
-            sh:path schema1:description ],
-        [ sh:description "A unique identifier for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 2 ;
-            sh:path schema1:identifier ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable name for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:order 3 ;
-            sh:path schema1:name ] ;
+            sh:order 0 ;
+            sh:path ttm:test_data_file_locator ] ;
     sh:targetClass ttm:TestSuiteSpecification .
 
 ttm:TestAsset a sh:NodeShape ;
     sh:closed true ;
     sh:description "Represents a Test Asset, which is a single specific instance of TestCase-agnostic semantic parameters representing the specification of a Translator test target with inputs and (expected) outputs." ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:datatype xsd:string ;
-            sh:description "A human-readable name for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:order 13 ;
-            sh:path schema1:name ],
-        [ sh:description "A unique identifier for a Test Entity" ;
+    sh:property [ sh:description "A unique identifier for a Test Entity" ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:order 12 ;
             sh:path schema1:identifier ],
         [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 13 ;
+            sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path ttm:input_name ],
+        [ sh:in ( "causes not treats" "TMKP" "category too generic" "contraindications" "chemical roles" "test_issue" ) ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path ttm:test_issue ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path ttm:predicate ],
+        [ sh:in ( "Top_Answer" "Acceptable" "BadButForgivable" "NeverShow" "number_1_TopAnswer" "number_2_Acceptable" "number_3_BadButForgivable" "number_4_NeverShow" ) ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path ttm:expected_output ],
+        [ sh:description "Document URL where original test source particulars are registered (e.g. Github repo)" ;
+            sh:maxCount 1 ;
+            sh:order 10 ;
+            sh:path ttm:test_reference ],
+        [ sh:datatype xsd:string ;
             sh:maxCount 1 ;
             sh:order 4 ;
             sh:path ttm:output_name ],
+        [ sh:in ( "High" "Low" "NotApplicable" ) ;
+            sh:maxCount 1 ;
+            sh:order 7 ;
+            sh:path ttm:semantic_severity ],
+        [ sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path ttm:input_id ],
+        [ sh:datatype xsd:string ;
+            sh:description "Settings for the test harness, e.g. \"inferred\"" ;
+            sh:minCount 1 ;
+            sh:order 11 ;
+            sh:path ttm:runner_settings ],
         [ sh:datatype xsd:boolean ;
             sh:maxCount 1 ;
             sh:order 8 ;
@@ -921,103 +953,71 @@ ttm:TestAsset a sh:NodeShape ;
             sh:order 9 ;
             sh:path ttm:well_known ],
         [ sh:datatype xsd:string ;
-            sh:description "One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a \"Block List\" collection" ;
-            sh:order 15 ;
-            sh:path schema1:additionalType ],
-        [ sh:in ( "High" "Low" "NotApplicable" ) ;
-            sh:maxCount 1 ;
-            sh:order 7 ;
-            sh:path ttm:semantic_severity ],
-        [ sh:datatype xsd:string ;
             sh:description "A human-readable description for a Test Entity" ;
             sh:maxCount 1 ;
             sh:order 14 ;
             sh:path schema1:description ],
         [ sh:datatype xsd:string ;
-            sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path ttm:input_name ],
-        [ sh:in ( "Top_Answer" "Acceptable" "BadButForgivable" "NeverShow" "number_1_TopAnswer" "number_2_Acceptable" "number_3_BadButForgivable" "number_4_NeverShow" ) ;
-            sh:maxCount 1 ;
-            sh:order 5 ;
-            sh:path ttm:expected_output ],
+            sh:description "One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a \"Block List\" collection" ;
+            sh:order 15 ;
+            sh:path schema1:additionalType ],
         [ sh:maxCount 1 ;
             sh:order 3 ;
-            sh:path ttm:output_id ],
-        [ sh:datatype xsd:string ;
-            sh:maxCount 1 ;
-            sh:order 2 ;
-            sh:path ttm:predicate ],
-        [ sh:in ( "causes not treats" "TMKP" "category too generic" "contraindications" "chemical roles" "test_issue" ) ;
-            sh:maxCount 1 ;
-            sh:order 6 ;
-            sh:path ttm:test_issue ],
-        [ sh:datatype xsd:string ;
-            sh:description "Settings for the test harness, e.g. \"inferred\"" ;
-            sh:minCount 1 ;
-            sh:order 11 ;
-            sh:path ttm:runner_settings ],
-        [ sh:maxCount 1 ;
-            sh:order 0 ;
-            sh:path ttm:input_id ],
-        [ sh:description "Document URL where original test source particulars are registered (e.g. Github repo)" ;
-            sh:maxCount 1 ;
-            sh:order 10 ;
-            sh:path ttm:test_reference ] ;
+            sh:path ttm:output_id ] ;
     sh:targetClass ttm:TestAsset .
 
 ttm:TestCase a sh:NodeShape ;
     sh:closed true ;
     sh:description "Represents a single enumerated instance of Test Case, derived from a  given collection of one or more TestAsset instances (the value of the 'test_assets' slot) which define the 'inputs' and 'outputs' of the TestCase, used to probe a particular test condition." ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "A template for a query, which can be used to generate a query for a test case.  note: the current enumerated values for this slot come from the Benchmarks repo config/benchmarks.json \"templates\" collection and refer to the \"name\" field of each template.  Templates themselves are currently stored in the config/[source_name]/templates directory." ;
-            sh:in ( "ameliorates" "treats" "three_hop" "drug_treats_rare_disease" "drug-to-gene" ) ;
-            sh:maxCount 1 ;
-            sh:order 4 ;
-            sh:path ttm:trapi_template ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable name for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:order 7 ;
-            sh:path schema1:name ],
-        [ sh:datatype xsd:string ;
-            sh:description "A human-readable description for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:order 8 ;
-            sh:path schema1:description ],
-        [ sh:datatype xsd:string ;
-            sh:description "One or more 'tags' slot values (slot inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection." ;
-            sh:order 9 ;
-            sh:path schema1:additionalType ],
-        [ sh:description "Type of TestCase query." ;
-            sh:in ( "treats" ) ;
-            sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path ttm:query_type ],
-        [ sh:description "A unique identifier for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 6 ;
-            sh:path schema1:identifier ],
-        [ sh:class ttm:Precondition ;
-            sh:nodeKind sh:IRI ;
-            sh:order 3 ;
-            sh:path ttm:preconditions ],
-        [ sh:class ttm:TestAsset ;
+    sh:property [ sh:class ttm:TestAsset ;
             sh:description "One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection." ;
             sh:minCount 1 ;
             sh:nodeKind sh:IRI ;
             sh:order 2 ;
             sh:path ttm:test_assets ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 8 ;
+            sh:path schema1:description ],
+        [ sh:description "The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX." ;
+            sh:in ( "arax" "aragorn" "ars" "bte" "improving" ) ;
+            sh:order 5 ;
+            sh:path ttm:components ],
+        [ sh:datatype xsd:string ;
+            sh:description "One or more 'tags' slot values (slot inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection." ;
+            sh:order 9 ;
+            sh:path schema1:additionalType ],
+        [ sh:class ttm:Precondition ;
+            sh:nodeKind sh:IRI ;
+            sh:order 3 ;
+            sh:path ttm:preconditions ],
         [ sh:description "Deployment environment within which the associated TestSuite is run." ;
             sh:in ( "dev" "ci" "test" "prod" ) ;
             sh:maxCount 1 ;
             sh:order 0 ;
             sh:path ttm:test_env ],
-        [ sh:description "The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX." ;
-            sh:in ( "arax" "aragorn" "ars" "bte" "improving" ) ;
-            sh:order 5 ;
-            sh:path ttm:components ] ;
+        [ sh:description "A template for a query, which can be used to generate a query for a test case.  note: the current enumerated values for this slot come from the Benchmarks repo config/benchmarks.json \"templates\" collection and refer to the \"name\" field of each template.  Templates themselves are currently stored in the config/[source_name]/templates directory." ;
+            sh:in ( "ameliorates" "treats" "three_hop" "drug_treats_rare_disease" "drug-to-gene" ) ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path ttm:trapi_template ],
+        [ sh:description "A unique identifier for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 6 ;
+            sh:path schema1:identifier ],
+        [ sh:description "Type of TestCase query." ;
+            sh:in ( "treats" ) ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path ttm:query_type ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 7 ;
+            sh:path schema1:name ] ;
     sh:targetClass ttm:TestCase .
 
 ttm:Precondition a sh:NodeShape ;
@@ -1030,18 +1030,18 @@ ttm:Precondition a sh:NodeShape ;
             sh:order 0 ;
             sh:path schema1:identifier ],
         [ sh:datatype xsd:string ;
-            sh:description "A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists." ;
-            sh:order 3 ;
-            sh:path schema1:additionalType ],
+            sh:description "A human-readable description for a Test Entity" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path schema1:description ],
         [ sh:datatype xsd:string ;
             sh:description "A human-readable name for a Test Entity" ;
             sh:maxCount 1 ;
             sh:order 1 ;
             sh:path schema1:name ],
         [ sh:datatype xsd:string ;
-            sh:description "A human-readable description for a Test Entity" ;
-            sh:maxCount 1 ;
-            sh:order 2 ;
-            sh:path schema1:description ] ;
+            sh:description "A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists." ;
+            sh:order 3 ;
+            sh:path schema1:additionalType ] ;
     sh:targetClass ttm:Precondition .
 
