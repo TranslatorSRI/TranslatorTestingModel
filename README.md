@@ -6,7 +6,7 @@ Capturing these details in metadata that is parsable and usable by test runners 
 
 ## Website
 
-[https://TranslatorSRI.github.io/translator_testing_model](https://TranslatorSRI.github.io/TranslatorTestingModel)
+[https://TranslatorSRI.github.io/TranslatorTestingModel](https://TranslatorSRI.github.io/TranslatorTestingModel)
 
 ## Repository Structure
 
