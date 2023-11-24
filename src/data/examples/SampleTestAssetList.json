@@ -1,20 +1,22 @@
 [
   {
     "id": "example:TestAsset001",
-    "name": "foo bar",
-    "description": "This is a test asset",
-    "runner_settings": ["inferred","test_setting"]
+    "name": "TestAsset001",
+    "description": "Fingolimod treats multiple sclerosis",
+    "input_id": "PUBCHEM.COMPOUND:107970",
+    "predicate": "treats",
+    "output_id": "MONDO:0005301",
+    "expected_output": "Acceptable",
+    "runner_settings": ["inferred", "test"]
   },
   {
     "id": "example:TestAsset002",
-    "name": "tweedle dee",
-    "description": "This is another test asset",
-    "runner_settings": ["inferred","test_setting"]
-  },
-  {
-    "id": "example:TestAsset003",
-    "name": "tweedle dum",
-    "description": "This is yetanuder test asset",
-    "runner_settings": ["inferred","test_setting"]
+    "name": "TestAsset002",
+    "description": "Carbamazepine treats Cerebral palsy",
+    "input_id": "PUBCHEM.COMPOUND:2554",
+    "predicate": "treats",
+    "output_id": "MONDO:0006497",
+    "expected_output": "number_2_Acceptable",
+    "runner_settings": ["inferred", "test"]
   }
 ]
