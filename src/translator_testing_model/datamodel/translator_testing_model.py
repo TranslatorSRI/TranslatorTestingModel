@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2023-11-23T13:56:51
+# Generation date: 2023-11-25T10:06:23
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -243,9 +243,13 @@ class TestAsset(TestEntity):
     runner_settings: Union[str, List[str]] = None
     input_id: Optional[Union[str, URIorCURIE]] = None
     input_name: Optional[str] = None
+    input_category: Optional[str] = None
     predicate: Optional[str] = None
     output_id: Optional[Union[str, URIorCURIE]] = None
     output_name: Optional[str] = None
+    output_category: Optional[str] = None
+    association: Optional[str] = None
+    qualifiers: Optional[Union[Union[dict, TestEntityParameter], List[Union[dict, TestEntityParameter]]]] = empty_list()
     expected_output: Optional[Union[str, "ExpectedOutputEnum"]] = None
     test_issue: Optional[Union[str, "TestIssueEnum"]] = None
     semantic_severity: Optional[Union[str, "SemanticSeverityEnum"]] = None
@@ -272,6 +276,9 @@ class TestAsset(TestEntity):
         if self.input_name is not None and not isinstance(self.input_name, str):
             self.input_name = str(self.input_name)
 
+        if self.input_category is not None and not isinstance(self.input_category, str):
+            self.input_category = str(self.input_category)
+
         if self.predicate is not None and not isinstance(self.predicate, str):
             self.predicate = str(self.predicate)
 
@@ -280,6 +287,16 @@ class TestAsset(TestEntity):
 
         if self.output_name is not None and not isinstance(self.output_name, str):
             self.output_name = str(self.output_name)
+
+        if self.output_category is not None and not isinstance(self.output_category, str):
+            self.output_category = str(self.output_category)
+
+        if self.association is not None and not isinstance(self.association, str):
+            self.association = str(self.association)
+
+        if not isinstance(self.qualifiers, list):
+            self.qualifiers = [self.qualifiers] if self.qualifiers is not None else []
+        self.qualifiers = [v if isinstance(v, TestEntityParameter) else TestEntityParameter(**as_dict(v)) for v in self.qualifiers]
 
         if self.expected_output is not None and not isinstance(self.expected_output, ExpectedOutputEnum):
             self.expected_output = ExpectedOutputEnum(self.expected_output)
@@ -541,12 +558,20 @@ class ComplianceTestCase(TestCase):
 
     id: Union[str, ComplianceTestCaseId] = None
     test_assets: Union[Dict[Union[str, TestAssetId], Union[dict, TestAsset]], List[Union[dict, TestAsset]]] = empty_dict()
+    trapi_version: Optional[str] = None
+    biolink_version: Optional[str] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
             self.MissingRequiredField("id")
         if not isinstance(self.id, ComplianceTestCaseId):
             self.id = ComplianceTestCaseId(self.id)
+
+        if self.trapi_version is not None and not isinstance(self.trapi_version, str):
+            self.trapi_version = str(self.trapi_version)
+
+        if self.biolink_version is not None and not isinstance(self.biolink_version, str):
+            self.biolink_version = str(self.biolink_version)
 
         super().__post_init__(**kwargs)
 
@@ -1138,6 +1163,9 @@ slots.input_id = Slot(uri=TTM.input_id, name="input_id", curie=TTM.curie('input_
 slots.input_name = Slot(uri=TTM.input_name, name="input_name", curie=TTM.curie('input_name'),
                    model_uri=TTM.input_name, domain=None, range=Optional[str])
 
+slots.input_category = Slot(uri=TTM.input_category, name="input_category", curie=TTM.curie('input_category'),
+                   model_uri=TTM.input_category, domain=None, range=Optional[str])
+
 slots.predicate = Slot(uri=TTM.predicate, name="predicate", curie=TTM.curie('predicate'),
                    model_uri=TTM.predicate, domain=None, range=Optional[str])
 
@@ -1146,6 +1174,15 @@ slots.output_id = Slot(uri=TTM.output_id, name="output_id", curie=TTM.curie('out
 
 slots.output_name = Slot(uri=TTM.output_name, name="output_name", curie=TTM.curie('output_name'),
                    model_uri=TTM.output_name, domain=None, range=Optional[str])
+
+slots.output_category = Slot(uri=TTM.output_category, name="output_category", curie=TTM.curie('output_category'),
+                   model_uri=TTM.output_category, domain=None, range=Optional[str])
+
+slots.association = Slot(uri=TTM.association, name="association", curie=TTM.curie('association'),
+                   model_uri=TTM.association, domain=None, range=Optional[str])
+
+slots.qualifiers = Slot(uri=TTM.qualifiers, name="qualifiers", curie=TTM.curie('qualifiers'),
+                   model_uri=TTM.qualifiers, domain=None, range=Optional[Union[Union[dict, TestEntityParameter], List[Union[dict, TestEntityParameter]]]])
 
 slots.expected_output = Slot(uri=TTM.expected_output, name="expected_output", curie=TTM.curie('expected_output'),
                    model_uri=TTM.expected_output, domain=None, range=Optional[Union[str, "ExpectedOutputEnum"]])
@@ -1212,6 +1249,12 @@ slots.trapi_template = Slot(uri=TTM.trapi_template, name="trapi_template", curie
 
 slots.components = Slot(uri=TTM.components, name="components", curie=TTM.curie('components'),
                    model_uri=TTM.components, domain=None, range=Optional[Union[Union[str, "ComponentEnum"], List[Union[str, "ComponentEnum"]]]])
+
+slots.trapi_version = Slot(uri=TTM.trapi_version, name="trapi_version", curie=TTM.curie('trapi_version'),
+                   model_uri=TTM.trapi_version, domain=None, range=Optional[str])
+
+slots.biolink_version = Slot(uri=TTM.biolink_version, name="biolink_version", curie=TTM.curie('biolink_version'),
+                   model_uri=TTM.biolink_version, domain=None, range=Optional[str])
 
 slots.test_data_file_locator = Slot(uri=TTM.test_data_file_locator, name="test_data_file_locator", curie=TTM.curie('test_data_file_locator'),
                    model_uri=TTM.test_data_file_locator, domain=None, range=Optional[Union[str, URIorCURIE]])

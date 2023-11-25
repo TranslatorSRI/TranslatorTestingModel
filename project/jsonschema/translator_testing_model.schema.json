@@ -8,6 +8,10 @@
                     "description": "An answer that is returned from the test case, note: this must be combined with the expected_result to form a complete answer.  It might make sense to couple these in their own object instead of strictly sticking to the flat schema introduced by the spreadsheet here: https://docs.google.com/spreadsheets/d/1yj7zIchFeVl1OHqL_kE_pqvzNLmGml_FLbHDs-8Yvig/edit#gid=0",
                     "type": "string"
                 },
+                "association": {
+                    "description": "Specific Biolink Model association 'category' which applies to the test asset defined knowledge statement",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a Test Entity",
                     "type": "string"
@@ -29,6 +33,9 @@
                 },
                 "in_v1": {
                     "type": "boolean"
+                },
+                "input_category": {
+                    "type": "string"
                 },
                 "input_id": {
                     "type": "string"
@@ -53,6 +60,9 @@
                     "description": "The notes of the query",
                     "type": "string"
                 },
+                "output_category": {
+                    "type": "string"
+                },
                 "output_id": {
                     "type": "string"
                 },
@@ -61,6 +71,13 @@
                 },
                 "predicate": {
                     "type": "string"
+                },
+                "qualifiers": {
+                    "description": "Optional qualifiers which constrain to the test asset defined knowledge statement. Note that this field records such qualifiers as tag=value pairs in which the tag is the Biolink Model qualifier slot and the value is an acceptable (Biolink Model enum?) value of the said qualifier slot.",
+                    "items": {
+                        "$ref": "#/$defs/TestEntityParameter"
+                    },
+                    "type": "array"
                 },
                 "query_node": {
                     "$ref": "#/$defs/NodeEnum",
@@ -235,6 +252,10 @@
             "additionalProperties": false,
             "description": "TRAPI and Biolink Model standards compliance test",
             "properties": {
+                "biolink_version": {
+                    "description": "Biolink Model release (SemVer string)",
+                    "type": "string"
+                },
                 "components": {
                     "description": "The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.",
                     "items": {
@@ -285,6 +306,10 @@
                 "trapi_template": {
                     "$ref": "#/$defs/TrapiTemplateEnum",
                     "description": "A template for a query, which can be used to generate a query for a test case.  note: the current enumerated values for this slot come from the Benchmarks repo config/benchmarks.json \"templates\" collection and refer to the \"name\" field of each template.  Templates themselves are currently stored in the config/[source_name]/templates directory."
+                },
+                "trapi_version": {
+                    "description": "TRAPI version (SemVer string)",
+                    "type": "string"
                 }
             },
             "required": [
@@ -697,6 +722,10 @@
             "additionalProperties": false,
             "description": "Represents a Test Asset, which is a single specific instance of TestCase-agnostic semantic parameters representing the specification of a Translator test target with inputs and (expected) outputs.",
             "properties": {
+                "association": {
+                    "description": "Specific Biolink Model association 'category' which applies to the test asset defined knowledge statement",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a Test Entity",
                     "type": "string"
@@ -711,6 +740,9 @@
                 "in_v1": {
                     "type": "boolean"
                 },
+                "input_category": {
+                    "type": "string"
+                },
                 "input_id": {
                     "type": "string"
                 },
@@ -721,6 +753,9 @@
                     "description": "A human-readable name for a Test Entity",
                     "type": "string"
                 },
+                "output_category": {
+                    "type": "string"
+                },
                 "output_id": {
                     "type": "string"
                 },
@@ -729,6 +764,13 @@
                 },
                 "predicate": {
                     "type": "string"
+                },
+                "qualifiers": {
+                    "description": "Optional qualifiers which constrain to the test asset defined knowledge statement. Note that this field records such qualifiers as tag=value pairs in which the tag is the Biolink Model qualifier slot and the value is an acceptable (Biolink Model enum?) value of the said qualifier slot.",
+                    "items": {
+                        "$ref": "#/$defs/TestEntityParameter"
+                    },
+                    "type": "array"
                 },
                 "runner_settings": {
                     "description": "Settings for the test harness, e.g. \"inferred\"",
@@ -986,6 +1028,10 @@
             "additionalProperties": false,
             "description": "Represents a single Biolink Model compliant instance of a subject-predicate-object edge that can be used for testing.",
             "properties": {
+                "association": {
+                    "description": "Specific Biolink Model association 'category' which applies to the test asset defined knowledge statement",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a Test Entity",
                     "type": "string"
@@ -1000,6 +1046,9 @@
                 "in_v1": {
                     "type": "boolean"
                 },
+                "input_category": {
+                    "type": "string"
+                },
                 "input_id": {
                     "type": "string"
                 },
@@ -1010,6 +1059,9 @@
                     "description": "A human-readable name for a Test Entity",
                     "type": "string"
                 },
+                "output_category": {
+                    "type": "string"
+                },
                 "output_id": {
                     "type": "string"
                 },
@@ -1018,6 +1070,13 @@
                 },
                 "predicate": {
                     "type": "string"
+                },
+                "qualifiers": {
+                    "description": "Optional qualifiers which constrain to the test asset defined knowledge statement. Note that this field records such qualifiers as tag=value pairs in which the tag is the Biolink Model qualifier slot and the value is an acceptable (Biolink Model enum?) value of the said qualifier slot.",
+                    "items": {
+                        "$ref": "#/$defs/TestEntityParameter"
+                    },
+                    "type": "array"
                 },
                 "runner_settings": {
                     "description": "Settings for the test harness, e.g. \"inferred\"",

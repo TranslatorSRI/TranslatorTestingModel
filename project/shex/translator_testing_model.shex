@@ -86,7 +86,9 @@ linkml:Sparqlpath xsd:string
 
 <ComplianceTestCase> CLOSED {
     (  $<ComplianceTestCase_tes> (  &<TestCase_tes> ;
-          rdf:type [ <TestCase> ] ?
+          rdf:type [ <TestCase> ] ? ;
+          <trapi_version> @linkml:String ? ;
+          <biolink_version> @linkml:String ?
        ) ;
        rdf:type [ <ComplianceTestCase> ]
     )
@@ -148,9 +150,13 @@ linkml:Sparqlpath xsd:string
              rdf:type [ <TestEntity> ] ? ;
              <input_id> @linkml:Uriorcurie ? ;
              <input_name> @linkml:String ? ;
+             <input_category> @linkml:String ? ;
              <predicate> @linkml:String ? ;
              <output_id> @linkml:Uriorcurie ? ;
              <output_name> @linkml:String ? ;
+             <output_category> @linkml:String ? ;
+             <association> @linkml:String ? ;
+             <qualifiers> @<TestEntityParameter> * ;
              <expected_output> @<ExpectedOutputEnum> ? ;
              <test_issue> @<TestIssueEnum> ? ;
              <semantic_severity> @<SemanticSeverityEnum> ? ;

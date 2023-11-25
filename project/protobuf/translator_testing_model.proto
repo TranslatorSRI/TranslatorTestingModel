@@ -5,9 +5,13 @@ message AcceptanceTestAsset
   string description = 0
   uriorcurie inputId = 0
   string inputName = 0
+  string inputCategory = 0
   string predicate = 0
   uriorcurie outputId = 0
   string outputName = 0
+  string outputCategory = 0
+  string association = 0
+ repeated  testEntityParameter qualifiers = 0
   expectedOutputEnum expectedOutput = 0
   testIssueEnum testIssue = 0
   semanticSeverityEnum semanticSeverity = 0
@@ -66,6 +70,8 @@ message ComplianceTestCase
   trapiTemplateEnum trapiTemplate = 0
  repeated  componentEnum components = 0
  repeated  string tags = 0
+  string trapiVersion = 0
+  string biolinkVersion = 0
  }
 // Knowledge Graph navigation integration test
 message KnowledgeGraphNavigationTestCase
@@ -148,9 +154,13 @@ message TestAsset
   string description = 0
   uriorcurie inputId = 0
   string inputName = 0
+  string inputCategory = 0
   string predicate = 0
   uriorcurie outputId = 0
   string outputName = 0
+  string outputCategory = 0
+  string association = 0
+ repeated  testEntityParameter qualifiers = 0
   expectedOutputEnum expectedOutput = 0
   testIssueEnum testIssue = 0
   semanticSeverityEnum semanticSeverity = 0
@@ -193,9 +203,13 @@ message TestEdgeData
   string description = 0
   uriorcurie inputId = 0
   string inputName = 0
+  string inputCategory = 0
   string predicate = 0
   uriorcurie outputId = 0
   string outputName = 0
+  string outputCategory = 0
+  string association = 0
+ repeated  testEntityParameter qualifiers = 0
   expectedOutputEnum expectedOutput = 0
   testIssueEnum testIssue = 0
   semanticSeverityEnum semanticSeverity = 0

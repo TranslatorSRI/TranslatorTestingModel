@@ -4,9 +4,13 @@ type AcceptanceTestAsset
     description: String
     inputId: Uriorcurie
     inputName: String
+    inputCategory: String
     predicate: String
     outputId: Uriorcurie
     outputName: String
+    outputCategory: String
+    association: String
+    qualifiers: [TestEntityParameter]
     expectedOutput: ExpectedOutputEnum
     testIssue: TestIssueEnum
     semanticSeverity: SemanticSeverityEnum
@@ -70,6 +74,8 @@ type ComplianceTestCase
     trapiTemplate: TrapiTemplateEnum
     components: [ComponentEnum]
     tags: [String]
+    trapiVersion: String
+    biolinkVersion: String
   }
 
 type KnowledgeGraphNavigationTestCase
@@ -152,9 +158,13 @@ type TestAsset
     description: String
     inputId: Uriorcurie
     inputName: String
+    inputCategory: String
     predicate: String
     outputId: Uriorcurie
     outputName: String
+    outputCategory: String
+    association: String
+    qualifiers: [TestEntityParameter]
     expectedOutput: ExpectedOutputEnum
     testIssue: TestIssueEnum
     semanticSeverity: SemanticSeverityEnum
@@ -197,9 +207,13 @@ type TestEdgeData
     description: String
     inputId: Uriorcurie
     inputName: String
+    inputCategory: String
     predicate: String
     outputId: Uriorcurie
     outputName: String
+    outputCategory: String
+    association: String
+    qualifiers: [TestEntityParameter]
     expectedOutput: ExpectedOutputEnum
     testIssue: TestIssueEnum
     semanticSeverity: SemanticSeverityEnum

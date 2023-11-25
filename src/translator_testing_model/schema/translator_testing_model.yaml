@@ -72,9 +72,13 @@ classes:
     slots:
       - input_id
       - input_name
+      - input_category
       - predicate
       - output_id
       - output_name
+      - output_category
+      - association
+      - qualifiers
       - expected_output
       - test_issue
       - semantic_severity
@@ -313,6 +317,7 @@ slots:
     range: TestEntityParameter
     multivalued: true
     inlined: true
+    inlined_as_list: true
 
   timestamp:
     description: >-
@@ -372,6 +377,9 @@ slots:
   input_name:
     aliases: ["InputName (user choice)", "SubjectName"]
 
+  input_category:
+    aliases: ["SubjectCategory"]
+
   predicate:
     aliases: ["Query", "Relationship"]
 
@@ -381,6 +389,26 @@ slots:
 
   output_name:
     aliases: ["OutputName", "ObjectName"]
+
+  output_category:
+    aliases: ["ObjectCategory"]
+
+  association:
+    description: >-
+      Specific Biolink Model association 'category' which
+      applies to the test asset defined knowledge statement
+
+  qualifiers:
+    description: >-
+      Optional qualifiers which constrain to the test asset
+      defined knowledge statement. Note that this field records
+      such qualifiers as tag=value pairs in which the tag is the
+      Biolink Model qualifier slot and the value is an acceptable
+      (Biolink Model enum?) value of the said qualifier slot.
+    range: TestEntityParameter
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
 
   expected_output:
     aliases: ["Expected Output"]

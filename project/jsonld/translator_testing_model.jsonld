@@ -698,6 +698,7 @@
       "multivalued": true,
       "range": "TestEntityParameter",
       "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -837,6 +838,7 @@
       ],
       "range": "TestEntityParameter",
       "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -864,6 +866,21 @@
         "SubjectName"
       ],
       "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/input_name",
+      "owner": "TestAsset",
+      "domain_of": [
+        "TestAsset"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "input_category",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/input_category",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "aliases": [
+        "SubjectCategory"
+      ],
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/input_category",
       "owner": "TestAsset",
       "domain_of": [
         "TestAsset"
@@ -917,6 +934,50 @@
         "TestAsset"
       ],
       "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "output_category",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/output_category",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "aliases": [
+        "ObjectCategory"
+      ],
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/output_category",
+      "owner": "TestAsset",
+      "domain_of": [
+        "TestAsset"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "association",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/association",
+      "description": "Specific Biolink Model association 'category' which applies to the test asset defined knowledge statement",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/association",
+      "owner": "TestAsset",
+      "domain_of": [
+        "TestAsset"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "qualifiers",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/qualifiers",
+      "description": "Optional qualifiers which constrain to the test asset defined knowledge statement. Note that this field records such qualifiers as tag=value pairs in which the tag is the Biolink Model qualifier slot and the value is an acceptable (Biolink Model enum?) value of the said qualifier slot.",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/qualifiers",
+      "multivalued": true,
+      "owner": "TestAsset",
+      "domain_of": [
+        "TestAsset"
+      ],
+      "range": "TestEntityParameter",
+      "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1288,6 +1349,32 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "trapi_version",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/trapi_version",
+      "description": "TRAPI version (SemVer string)",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/trapi_version",
+      "owner": "ComplianceTestCase",
+      "domain_of": [
+        "ComplianceTestCase"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "biolink_version",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/biolink_version",
+      "description": "Biolink Model release (SemVer string)",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/biolink_version",
+      "owner": "ComplianceTestCase",
+      "domain_of": [
+        "ComplianceTestCase"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "test_data_file_locator",
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_data_file_locator",
       "description": "An web accessible file resource link to test entity data (e.g. a web accessible text file of Test Asset entries)",
@@ -1383,6 +1470,7 @@
       ],
       "range": "TestEntityParameter",
       "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1713,9 +1801,13 @@
         "description",
         "input_id",
         "input_name",
+        "input_category",
         "predicate",
         "output_id",
         "output_name",
+        "output_category",
+        "association",
+        "qualifiers",
         "expected_output",
         "test_issue",
         "semantic_severity",
@@ -1741,9 +1833,13 @@
         "description",
         "input_id",
         "input_name",
+        "input_category",
         "predicate",
         "output_id",
         "output_name",
+        "output_category",
+        "association",
+        "qualifiers",
         "expected_output",
         "test_issue",
         "semantic_severity",
@@ -1779,9 +1875,13 @@
         "description",
         "input_id",
         "input_name",
+        "input_category",
         "predicate",
         "output_id",
         "output_name",
+        "output_category",
+        "association",
+        "qualifiers",
         "expected_output",
         "test_issue",
         "semantic_severity",
@@ -1894,7 +1994,9 @@
         "preconditions",
         "trapi_template",
         "components",
-        "TestCase_tags"
+        "TestCase_tags",
+        "trapi_version",
+        "biolink_version"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/ComplianceTestCase",
@@ -2109,9 +2211,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "translator_testing_model.yaml",
-  "source_file_date": "2023-11-23T13:53:43",
-  "source_file_size": 22816,
-  "generation_date": "2023-11-23T13:56:46",
+  "source_file_date": "2023-11-25T10:05:30",
+  "source_file_size": 23869,
+  "generation_date": "2023-11-25T10:06:19",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",
