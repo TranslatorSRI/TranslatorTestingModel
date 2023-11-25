@@ -127,6 +127,10 @@
                 }
             },
             "required": [
+                "input_id",
+                "predicate_name",
+                "output_id",
+                "expected_output",
                 "runner_settings",
                 "id"
             ],
@@ -823,6 +827,10 @@
                 }
             },
             "required": [
+                "input_id",
+                "predicate_name",
+                "output_id",
+                "expected_output",
                 "runner_settings",
                 "id"
             ],
@@ -1132,6 +1140,10 @@
                 }
             },
             "required": [
+                "input_id",
+                "predicate_name",
+                "output_id",
+                "expected_output",
                 "runner_settings",
                 "id"
             ],

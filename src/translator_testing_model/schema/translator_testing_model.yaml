@@ -414,6 +414,7 @@ slots:
 
   input_id:
     aliases: ["InputID, node normalized", "SubjectID"]
+    required: true
     range: uriorcurie
 
   input_name:
@@ -429,9 +430,11 @@ slots:
 
   predicate_name:
     aliases: ["Query", "Relationship"]
+    required: true
 
   output_id:
     aliases: ["OutputID", "ObjectID"]
+    required: true
     range: uriorcurie
 
   output_name:
@@ -462,6 +465,7 @@ slots:
   expected_output:
     aliases: ["Expected Output"]
     range: ExpectedOutputEnum
+    required: true
 
   test_issue:
     aliases: ["issue label"]

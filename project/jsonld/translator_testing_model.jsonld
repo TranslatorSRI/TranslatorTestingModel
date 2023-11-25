@@ -899,6 +899,7 @@
         "TestAsset"
       ],
       "range": "uriorcurie",
+      "required": true,
       "@type": "SlotDefinition"
     },
     {
@@ -961,6 +962,7 @@
         "TestAsset"
       ],
       "range": "string",
+      "required": true,
       "@type": "SlotDefinition"
     },
     {
@@ -977,6 +979,7 @@
         "TestAsset"
       ],
       "range": "uriorcurie",
+      "required": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1052,6 +1055,7 @@
         "TestAsset"
       ],
       "range": "ExpectedOutputEnum",
+      "required": true,
       "@type": "SlotDefinition"
     },
     {
@@ -2322,9 +2326,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "translator_testing_model.yaml",
-  "source_file_date": "2023-11-25T10:45:16",
-  "source_file_size": 25514,
-  "generation_date": "2023-11-25T10:45:20",
+  "source_file_date": "2023-11-25T10:51:53",
+  "source_file_size": 25594,
+  "generation_date": "2023-11-25T10:59:15",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",

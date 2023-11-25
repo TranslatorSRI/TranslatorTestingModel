@@ -2,17 +2,17 @@ type AcceptanceTestAsset
   {
     name: String
     description: String
-    inputId: Uriorcurie
+    inputId: Uriorcurie!
     inputName: String
     inputCategory: ConceptCategory
     predicateId: PredicateType
-    predicateName: String
-    outputId: Uriorcurie
+    predicateName: String!
+    outputId: Uriorcurie!
     outputName: String
     outputCategory: ConceptCategory
     association: AssociationCategory
     qualifiers: [Qualifier]
-    expectedOutput: ExpectedOutputEnum
+    expectedOutput: ExpectedOutputEnum!
     testIssue: TestIssueEnum
     semanticSeverity: SemanticSeverityEnum
     inV1: Boolean
@@ -163,17 +163,17 @@ type TestAsset
   {
     name: String
     description: String
-    inputId: Uriorcurie
+    inputId: Uriorcurie!
     inputName: String
     inputCategory: ConceptCategory
     predicateId: PredicateType
-    predicateName: String
-    outputId: Uriorcurie
+    predicateName: String!
+    outputId: Uriorcurie!
     outputName: String
     outputCategory: ConceptCategory
     association: AssociationCategory
     qualifiers: [Qualifier]
-    expectedOutput: ExpectedOutputEnum
+    expectedOutput: ExpectedOutputEnum!
     testIssue: TestIssueEnum
     semanticSeverity: SemanticSeverityEnum
     inV1: Boolean
@@ -213,17 +213,17 @@ type TestEdgeData
   {
     name: String
     description: String
-    inputId: Uriorcurie
+    inputId: Uriorcurie!
     inputName: String
     inputCategory: ConceptCategory
     predicateId: PredicateType
-    predicateName: String
-    outputId: Uriorcurie
+    predicateName: String!
+    outputId: Uriorcurie!
     outputName: String
     outputCategory: ConceptCategory
     association: AssociationCategory
     qualifiers: [Qualifier]
-    expectedOutput: ExpectedOutputEnum
+    expectedOutput: ExpectedOutputEnum!
     testIssue: TestIssueEnum
     semanticSeverity: SemanticSeverityEnum
     inV1: Boolean
