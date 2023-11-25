@@ -69,13 +69,16 @@
                 "output_name": {
                     "type": "string"
                 },
-                "predicate": {
+                "predicate_id": {
+                    "type": "string"
+                },
+                "predicate_name": {
                     "type": "string"
                 },
                 "qualifiers": {
-                    "description": "Optional qualifiers which constrain to the test asset defined knowledge statement. Note that this field records such qualifiers as tag=value pairs in which the tag is the Biolink Model qualifier slot and the value is an acceptable (Biolink Model enum?) value of the said qualifier slot.",
+                    "description": "Optional qualifiers which constrain to the test asset defined knowledge statement. Note that this field records such qualifier slots and values as tag=value pairs, where the tag is the Biolink Model qualifier slot named and the value is an acceptable (Biolink Model enum?) value of the said qualifier slot.",
                     "items": {
-                        "$ref": "#/$defs/TestEntityParameter"
+                        "$ref": "#/$defs/Qualifier"
                     },
                     "type": "array"
                 },
@@ -588,6 +591,22 @@
             "title": "Precondition",
             "type": "object"
         },
+        "Qualifier": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "parameter": {
+                    "description": "The 'parameter' of a Qualifier should be a `qualifier` slot name from the Biolink Model ('biolink' namespace) 'biolink:qualifier' hierarchy.",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "The 'value' of should be a suitable value generally drawn from an applicable Biolink Model (\"Enum\") value set of the specified Qualifier.",
+                    "type": "string"
+                }
+            },
+            "title": "Qualifier",
+            "type": "object"
+        },
         "QuantitativeTestCase": {
             "additionalProperties": false,
             "description": "Assumed additional model from Shervin's runner JSON here as an example.  This schema is not yet complete.",
@@ -762,13 +781,16 @@
                 "output_name": {
                     "type": "string"
                 },
-                "predicate": {
+                "predicate_id": {
+                    "type": "string"
+                },
+                "predicate_name": {
                     "type": "string"
                 },
                 "qualifiers": {
-                    "description": "Optional qualifiers which constrain to the test asset defined knowledge statement. Note that this field records such qualifiers as tag=value pairs in which the tag is the Biolink Model qualifier slot and the value is an acceptable (Biolink Model enum?) value of the said qualifier slot.",
+                    "description": "Optional qualifiers which constrain to the test asset defined knowledge statement. Note that this field records such qualifier slots and values as tag=value pairs, where the tag is the Biolink Model qualifier slot named and the value is an acceptable (Biolink Model enum?) value of the said qualifier slot.",
                     "items": {
-                        "$ref": "#/$defs/TestEntityParameter"
+                        "$ref": "#/$defs/Qualifier"
                     },
                     "type": "array"
                 },
@@ -1068,13 +1090,16 @@
                 "output_name": {
                     "type": "string"
                 },
-                "predicate": {
+                "predicate_id": {
+                    "type": "string"
+                },
+                "predicate_name": {
                     "type": "string"
                 },
                 "qualifiers": {
-                    "description": "Optional qualifiers which constrain to the test asset defined knowledge statement. Note that this field records such qualifiers as tag=value pairs in which the tag is the Biolink Model qualifier slot and the value is an acceptable (Biolink Model enum?) value of the said qualifier slot.",
+                    "description": "Optional qualifiers which constrain to the test asset defined knowledge statement. Note that this field records such qualifier slots and values as tag=value pairs, where the tag is the Biolink Model qualifier slot named and the value is an acceptable (Biolink Model enum?) value of the said qualifier slot.",
                     "items": {
-                        "$ref": "#/$defs/TestEntityParameter"
+                        "$ref": "#/$defs/Qualifier"
                     },
                     "type": "array"
                 },

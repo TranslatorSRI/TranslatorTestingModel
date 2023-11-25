@@ -4,13 +4,14 @@ type AcceptanceTestAsset
     description: String
     inputId: Uriorcurie
     inputName: String
-    inputCategory: String
-    predicate: String
+    inputCategory: ConceptCategory
+    predicateId: PredicateType
+    predicateName: String
     outputId: Uriorcurie
     outputName: String
-    outputCategory: String
-    association: String
-    qualifiers: [TestEntityParameter]
+    outputCategory: ConceptCategory
+    association: AssociationCategory
+    qualifiers: [Qualifier]
     expectedOutput: ExpectedOutputEnum
     testIssue: TestIssueEnum
     semanticSeverity: SemanticSeverityEnum
@@ -126,6 +127,12 @@ type Precondition
     tags: [String]
   }
 
+type Qualifier
+  {
+    parameter: String
+    value: String
+  }
+
 type QuantitativeTestCase
   {
     id: Uriorcurie!
@@ -158,13 +165,14 @@ type TestAsset
     description: String
     inputId: Uriorcurie
     inputName: String
-    inputCategory: String
-    predicate: String
+    inputCategory: ConceptCategory
+    predicateId: PredicateType
+    predicateName: String
     outputId: Uriorcurie
     outputName: String
-    outputCategory: String
-    association: String
-    qualifiers: [TestEntityParameter]
+    outputCategory: ConceptCategory
+    association: AssociationCategory
+    qualifiers: [Qualifier]
     expectedOutput: ExpectedOutputEnum
     testIssue: TestIssueEnum
     semanticSeverity: SemanticSeverityEnum
@@ -207,13 +215,14 @@ type TestEdgeData
     description: String
     inputId: Uriorcurie
     inputName: String
-    inputCategory: String
-    predicate: String
+    inputCategory: ConceptCategory
+    predicateId: PredicateType
+    predicateName: String
     outputId: Uriorcurie
     outputName: String
-    outputCategory: String
-    association: String
-    qualifiers: [TestEntityParameter]
+    outputCategory: ConceptCategory
+    association: AssociationCategory
+    qualifiers: [Qualifier]
     expectedOutput: ExpectedOutputEnum
     testIssue: TestIssueEnum
     semanticSeverity: SemanticSeverityEnum

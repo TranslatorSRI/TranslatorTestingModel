@@ -56,6 +56,12 @@ CREATE TABLE "Precondition" (
 	PRIMARY KEY (id)
 );
 
+CREATE TABLE "Qualifier" (
+	parameter TEXT, 
+	value TEXT, 
+	PRIMARY KEY (parameter, value)
+);
+
 CREATE TABLE "QuantitativeTestCase" (
 	id TEXT NOT NULL, 
 	name TEXT, 
@@ -74,7 +80,8 @@ CREATE TABLE "TestAsset" (
 	input_id TEXT, 
 	input_name TEXT, 
 	input_category TEXT, 
-	predicate TEXT, 
+	predicate_id TEXT, 
+	predicate_name TEXT, 
 	output_id TEXT, 
 	output_name TEXT, 
 	output_category TEXT, 
@@ -108,7 +115,8 @@ CREATE TABLE "TestEdgeData" (
 	input_id TEXT, 
 	input_name TEXT, 
 	input_category TEXT, 
-	predicate TEXT, 
+	predicate_id TEXT, 
+	predicate_name TEXT, 
 	output_id TEXT, 
 	output_name TEXT, 
 	output_category TEXT, 
@@ -173,7 +181,8 @@ CREATE TABLE "AcceptanceTestAsset" (
 	input_id TEXT, 
 	input_name TEXT, 
 	input_category TEXT, 
-	predicate TEXT, 
+	predicate_id TEXT, 
+	predicate_name TEXT, 
 	output_id TEXT, 
 	output_name TEXT, 
 	output_category TEXT, 

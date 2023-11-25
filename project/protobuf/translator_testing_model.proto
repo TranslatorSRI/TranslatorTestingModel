@@ -5,13 +5,14 @@ message AcceptanceTestAsset
   string description = 0
   uriorcurie inputId = 0
   string inputName = 0
-  string inputCategory = 0
-  string predicate = 0
+  conceptCategory inputCategory = 0
+  predicateType predicateId = 0
+  string predicateName = 0
   uriorcurie outputId = 0
   string outputName = 0
-  string outputCategory = 0
-  string association = 0
- repeated  testEntityParameter qualifiers = 0
+  conceptCategory outputCategory = 0
+  associationCategory association = 0
+ repeated  qualifier qualifiers = 0
   expectedOutputEnum expectedOutput = 0
   testIssueEnum testIssue = 0
   semanticSeverityEnum semanticSeverity = 0
@@ -121,6 +122,11 @@ message Precondition
   string description = 0
  repeated  string tags = 0
  }
+message Qualifier
+ {
+  string parameter = 0
+  string value = 0
+ }
 // Assumed additional model from Shervin's runner JSON here as an example.  This schema is not yet complete.
 message QuantitativeTestCase
  {
@@ -154,13 +160,14 @@ message TestAsset
   string description = 0
   uriorcurie inputId = 0
   string inputName = 0
-  string inputCategory = 0
-  string predicate = 0
+  conceptCategory inputCategory = 0
+  predicateType predicateId = 0
+  string predicateName = 0
   uriorcurie outputId = 0
   string outputName = 0
-  string outputCategory = 0
-  string association = 0
- repeated  testEntityParameter qualifiers = 0
+  conceptCategory outputCategory = 0
+  associationCategory association = 0
+ repeated  qualifier qualifiers = 0
   expectedOutputEnum expectedOutput = 0
   testIssueEnum testIssue = 0
   semanticSeverityEnum semanticSeverity = 0
@@ -203,13 +210,14 @@ message TestEdgeData
   string description = 0
   uriorcurie inputId = 0
   string inputName = 0
-  string inputCategory = 0
-  string predicate = 0
+  conceptCategory inputCategory = 0
+  predicateType predicateId = 0
+  string predicateName = 0
   uriorcurie outputId = 0
   string outputName = 0
-  string outputCategory = 0
-  string association = 0
- repeated  testEntityParameter qualifiers = 0
+  conceptCategory outputCategory = 0
+  associationCategory association = 0
+ repeated  qualifier qualifiers = 0
   expectedOutputEnum expectedOutput = 0
   testIssueEnum testIssue = 0
   semanticSeverityEnum semanticSeverity = 0
