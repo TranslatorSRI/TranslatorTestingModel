@@ -181,6 +181,9 @@ classes:
     is_a: TestCase
     description: >-
       TRAPI and Biolink Model standards compliance test
+    slots:
+      - trapi_version
+      - biolink_version
     slot_usage:
 #      test_assets:
 #        range: ComplianceTestAsset
@@ -533,6 +536,12 @@ slots:
       of the system like Aragorn, or ARAX.
     range: ComponentEnum
     multivalued: true
+
+  trapi_version:
+    description: TRAPI version (SemVer string)
+
+  biolink_version:
+    description: Biolink Model release (SemVer string)
 
   ###################
   # TestSuite Slots #
