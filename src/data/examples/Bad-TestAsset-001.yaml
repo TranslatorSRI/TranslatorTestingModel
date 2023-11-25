@@ -12,14 +12,21 @@
 #    slots:
 #      - input_id
 #      - input_name
-#      - predicate
+#      - input_category
+#      - predicate_id
+#      - predicate_name
 #      - output_id
 #      - output_name
+#      - output_category
+#      - association
+#      - qualifiers
 #      - expected_output
 #      - test_issue
 #      - semantic_severity
 #      - in_v1
 #      - well_known
+#      - test_reference
+#      - runner_settings
 #    slot_usage:
 #      id:
 #        aliases: ["AssetIdentifier"]
@@ -28,6 +35,9 @@
 #        description: >-
 #          One or more 'tags' slot values (inherited from TestEntity) should generally
 #          be defined to specify TestAsset membership in a "Block List" collection
+#      runner_settings:
+#        description: >-
+#          Settings for the test harness, e.g. "inferred"
 #
 # Bad Query 1 - Missing required identifier?
 
