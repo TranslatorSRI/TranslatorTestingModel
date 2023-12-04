@@ -2,7 +2,7 @@ from __future__ import annotations
 from datetime import datetime, date
 from enum import Enum
 from typing import List, Dict, Optional, Any, Union
-from pydantic import BaseModel as BaseModel, ConfigDict, Field
+from pydantic import BaseModel as BaseModel, Field
 import sys
 if sys.version_info >= (3, 8):
     from typing import Literal
@@ -13,13 +13,13 @@ else:
 metamodel_version = "None"
 version = "0.0.0"
 
-class ConfiguredBaseModel(BaseModel):
-    model_config = ConfigDict(
-        validate_assignment=True,
-        validate_default=True,
-        extra='forbid',
-        arbitrary_types_allowed=True,
-        use_enum_values = True)
+class ConfiguredBaseModel(BaseModel,
+                validate_assignment = True,
+                validate_default = True,
+                extra = 'forbid',
+                arbitrary_types_allowed = True,
+                use_enum_values = True):
+    pass
 
 
 class TestSourceEnum(str, Enum):
@@ -85,21 +85,13 @@ class ExpectedOutputEnum(str, Enum):
     Expected output values for instances of Test Asset or Test Cases(?). (Note: does this Enum overlap with 'ExpectedResultsEnum' below?)
     """
     
-    Top_Answer = "Top_Answer"
-    
     Acceptable = "Acceptable"
     
     BadButForgivable = "BadButForgivable"
     
     NeverShow = "NeverShow"
     
-    number_1_TopAnswer = "number_1_TopAnswer"
-    
-    number_2_Acceptable = "number_2_Acceptable"
-    
-    number_3_BadButForgivable = "number_3_BadButForgivable"
-    
-    number_4_NeverShow = "number_4_NeverShow"
+    TopAnswer = "TopAnswer"
     
     
 
@@ -251,7 +243,7 @@ class TestMetadata(TestEntity):
     """
     Represents metadata related to (external SME, SMURF, Translator feedback,  large scale batch, etc.) like the provenance of test assets, cases and/or suites.
     """
-    test_source: Optional[TestSourceEnum] = Field(None, description="""Provenance of a specific set of test assets, cases and/or suites.""")
+    test_source: Optional[TestSourceEnum] = Field(None, description="""Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string.""")
     test_reference: Optional[str] = Field(None, description="""Document URL where original test source particulars are registered (e.g. Github repo)""")
     test_objective: Optional[TestObjectiveEnum] = Field(None, description="""Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)""")
     test_annotations: Optional[List[TestEntityParameter]] = Field(default_factory=list, description="""Metadata annotation.""")
@@ -277,6 +269,7 @@ class TestAsset(TestEntity):
     well_known: Optional[bool] = Field(None)
     test_reference: Optional[str] = Field(None, description="""Document URL where original test source particulars are registered (e.g. Github repo)""")
     runner_settings: List[str] = Field(default_factory=list, description="""Settings for the test harness, e.g. \"inferred\"""")
+    test_metadata: Optional[TestMetadata] = Field(None, description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
@@ -309,6 +302,7 @@ class AcceptanceTestAsset(TestAsset):
     well_known: Optional[bool] = Field(None)
     test_reference: Optional[str] = Field(None, description="""Document URL where original test source particulars are registered (e.g. Github repo)""")
     runner_settings: List[str] = Field(default_factory=list, description="""Settings for the test harness, e.g. \"inferred\"""")
+    test_metadata: Optional[TestMetadata] = Field(None, description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
@@ -331,6 +325,7 @@ class TestEdgeData(TestAsset):
     well_known: Optional[bool] = Field(None)
     test_reference: Optional[str] = Field(None, description="""Document URL where original test source particulars are registered (e.g. Github repo)""")
     runner_settings: List[str] = Field(default_factory=list, description="""Settings for the test harness, e.g. \"inferred\"""")
+    test_metadata: Optional[TestMetadata] = Field(None, description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
@@ -554,6 +549,36 @@ class TestRunSession(TestEntity):
     tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
     
 
+class TestOutput(TestEntity):
+    """
+    The output of a TestRunner run of one specific TestCase.
+    """
+    test_suite_id: Optional[str] = Field(None, description="""CURIE id of a TestSuite registered in the system.""")
+    test_case: Optional[TestCase] = Field(None, description="""Slot referencing a single TestCase.""")
+    pks: Optional[List[str]] = Field(default_factory=list, description="""Primary keys for a given ARA result set from a SmokeTest result for a given TestCase.""")
+    id: str = Field(..., description="""A unique identifier for a Test Entity""")
+    name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
+    description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
+    tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
+    
+
+class TestResultPKSet(TestEntity):
+    """
+    Primary keys for a given ARA result set from a SmokeTest result for a given TestCase.
+    """
+    parent_pk: Optional[str] = Field(None)
+    merged_pk: Optional[str] = Field(None)
+    aragorn: Optional[str] = Field(None)
+    arax: Optional[str] = Field(None)
+    unsecret: Optional[str] = Field(None)
+    bte: Optional[str] = Field(None)
+    improving: Optional[str] = Field(None)
+    id: str = Field(..., description="""A unique identifier for a Test Entity""")
+    name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
+    description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
+    tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
+    
+
 
 # Model rebuild
 # see https://pydantic-docs.helpmanual.io/usage/models/#rebuilding-a-model
@@ -579,4 +604,6 @@ OneHopTestSuite.model_rebuild()
 TestRunnerConfiguration.model_rebuild()
 TestCaseResult.model_rebuild()
 TestRunSession.model_rebuild()
-
+TestOutput.model_rebuild()
+TestResultPKSet.model_rebuild()
+    

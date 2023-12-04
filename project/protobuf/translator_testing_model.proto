@@ -15,6 +15,7 @@ message AcceptanceTestAsset
   boolean wellKnown = 0
   uriorcurie testReference = 0
  repeated  string runnerSettings = 0
+  testMetadata testMetadata = 0
   uriorcurie id = 0
  repeated  string tags = 0
   date mustPassDate = 0
@@ -158,6 +159,7 @@ message TestAsset
   boolean wellKnown = 0
   uriorcurie testReference = 0
  repeated  string runnerSettings = 0
+  testMetadata testMetadata = 0
   uriorcurie id = 0
  repeated  string tags = 0
  }
@@ -203,6 +205,7 @@ message TestEdgeData
   boolean wellKnown = 0
   uriorcurie testReference = 0
  repeated  string runnerSettings = 0
+  testMetadata testMetadata = 0
   uriorcurie id = 0
  repeated  string tags = 0
  }
@@ -223,6 +226,32 @@ message TestMetadata
   uriorcurie testReference = 0
   testObjectiveEnum testObjective = 0
  repeated  testEntityParameter testAnnotations = 0
+ }
+// The output of a TestRunner run of one specific TestCase.
+message TestOutput
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+ repeated  string tags = 0
+  uriorcurie testSuiteId = 0
+  testCase testCase = 0
+ repeated  testResultPKSet pks = 0
+ }
+// Primary keys for a given ARA result set from a SmokeTest result for a given TestCase.
+message TestResultPKSet
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+ repeated  string tags = 0
+  string parentPk = 0
+  string mergedPk = 0
+  string aragorn = 0
+  string arax = 0
+  string unsecret = 0
+  string bte = 0
+  string improving = 0
  }
 // General configuration parameters and test data input  for a single invocation of a TestRunner.
 message TestRunnerConfiguration
