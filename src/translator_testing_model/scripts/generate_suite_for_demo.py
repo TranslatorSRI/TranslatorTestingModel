@@ -1,4 +1,4 @@
-from src.translator_testing_model.datamodel.pydanticmodel import TestAsset, TestCase, TestSuite
+from src.translator_testing_model.datamodel.pydanticmodel import TestAsset, TestCase, TestSuite, TestMetadata
 import csv
 import json
 import os
@@ -34,13 +34,16 @@ def create_test_assets_from_tsv(test_assets):
         ta.input_id = row.get("InputID, node normalized")
         ta.input_name = row.get("InputName (user choice)")
         if row.get("GitHubIssue") != "" and row.get("GitHubIssue") is not None:
-            ta.test_metadata = {"test_source": "SMURF",
-                                "test_reference": row.get("GitHubIssue"),
-                                "test_objective": "AcceptanceTest"}
+            tmd = TestMetadata(id=1,
+                               test_source="SMURF",
+                               test_reference=row.get("GitHubIssue"),
+                               test_objective="AcceptanceTest")
+            ta.test_metadata = tmd
         else:
-            ta.test_metadata = {"test_source": "SMURF",
-                                "test_reference": row.get("GitHubIssue"),
-                                "test_objective": "AcceptanceTest"}
+            tmd = TestMetadata(id=1,
+                               test_source="SMURF",
+                               test_objective="AcceptanceTest")
+            ta.test_metadata = tmd
         ta.predicate = row.get("Relationship").lower()
         ta.output_id = row.get("OutputID")
         ta.output_name = row.get("OutputName")
@@ -70,9 +73,10 @@ def create_test_cases_from_test_assets(test_assets, test_case_model):
     # Group test assets based on input_id and relationship
     grouped_assets = {}
     for test_asset in test_assets:
-        key = (test_asset.input_id, test_asset.relationship)
+        key = (test_asset.input_id, test_asset.predicate)
         if key not in grouped_assets:
             grouped_assets[key] = []
+            print(key)
         grouped_assets[key].append(test_asset)
 
     # Create test cases from grouped test assets
