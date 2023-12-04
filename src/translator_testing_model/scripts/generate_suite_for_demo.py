@@ -153,12 +153,21 @@ if __name__ == '__main__':
         data = response.json()
         for k, v in data.items():
             print(k, v)
+            tmd = TestMetadata(id=1,
+                               test_source="SMURF",
+                               test_objective="QuantitativeTest")
+            ta = TestAsset(id=k,
+                            name=k,
+                            description=k,
+                            test_metadata=tmd
+                            )
             tc = TestCase(id=k,
                           name=k,
                           description=k,
-                          test_assets=[],
+                          test_assets=[ta],
                           test_env="ci",
                           components=["ars"]
+
                           )
             file_prefix = k
             filename = f"{file_prefix}.json"
