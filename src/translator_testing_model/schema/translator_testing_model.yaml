@@ -883,12 +883,13 @@ enums:
       drug-to-gene:
 
   ComponentEnum:
-    permissible_values:
-      arax:
-      aragorn:
-      ars:
-      bte:
-      improving:
+    description: >-
+      Translator components are identified by their InfoRes identifiers.
+    reachable_from:
+      source_ontology: biolink
+      source_nodes:
+        - biolink:infores
+      include_self:  false
 
   #########################
   # TestSuite Model Enums #
