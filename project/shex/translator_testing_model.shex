@@ -5,6 +5,14 @@ PREFIX linkml: <https://w3id.org/linkml/>
 PREFIX schema1: <http://schema.org/>
 
 
+<CategoryType> IRI
+
+<ConceptCategory> IRI
+
+<AssociationCategory> IRI
+
+<PredicateType> IRI
+
 linkml:String xsd:string
 
 linkml:Integer xsd:integer
@@ -86,7 +94,9 @@ linkml:Sparqlpath xsd:string
 
 <ComplianceTestCase> CLOSED {
     (  $<ComplianceTestCase_tes> (  &<TestCase_tes> ;
-          rdf:type [ <TestCase> ] ?
+          rdf:type [ <TestCase> ] ? ;
+          <trapi_version> @linkml:String ? ;
+          <biolink_version> @linkml:String ?
        ) ;
        rdf:type [ <ComplianceTestCase> ]
     )
@@ -126,6 +136,16 @@ linkml:Sparqlpath xsd:string
     )
 }
 
+<Qualifier> CLOSED {
+    (  $<Qualifier_tes> (  &<TestEntityParameter_tes> ;
+          rdf:type [ <TestEntityParameter> ] ? ;
+          <parameter> @linkml:String ? ;
+          <value> @linkml:String ?
+       ) ;
+       rdf:type [ <Qualifier> ] ?
+    )
+}
+
 <QuantitativeTestCase> CLOSED {
     (  $<QuantitativeTestCase_tes> (  &<TestCase_tes> ;
           rdf:type [ <TestCase> ] ?
@@ -146,12 +166,17 @@ linkml:Sparqlpath xsd:string
     CLOSED {
        (  $<TestAsset_tes> (  &<TestEntity_tes> ;
              rdf:type [ <TestEntity> ] ? ;
-             <input_id> @linkml:Uriorcurie ? ;
+             <input_id> @linkml:Uriorcurie ;
              <input_name> @linkml:String ? ;
-             <predicate> @linkml:String ? ;
-             <output_id> @linkml:Uriorcurie ? ;
+             <input_category> @<ConceptCategory> ? ;
+             <predicate_id> @<PredicateType> ? ;
+             <predicate_name> @linkml:String ;
+             <output_id> @linkml:Uriorcurie ;
              <output_name> @linkml:String ? ;
-             <expected_output> @<ExpectedOutputEnum> ? ;
+             <output_category> @<ConceptCategory> ? ;
+             <association> @<AssociationCategory> ? ;
+             <qualifiers> @<Qualifier> * ;
+             <expected_output> @<ExpectedOutputEnum> ;
              <test_issue> @<TestIssueEnum> ? ;
              <semantic_severity> @<SemanticSeverityEnum> ? ;
              <in_v1> @linkml:Boolean ? ;
@@ -216,13 +241,15 @@ linkml:Sparqlpath xsd:string
     )
 }
 
-<TestEntityParameter> CLOSED {
-    (  $<TestEntityParameter_tes> (  <parameter> @linkml:String ? ;
-          <value> @linkml:String ?
-       ) ;
-       rdf:type [ <TestEntityParameter> ] ?
-    )
-}
+<TestEntityParameter>  (
+    CLOSED {
+       (  $<TestEntityParameter_tes> (  <parameter> @linkml:String ? ;
+             <value> @linkml:String ?
+          ) ;
+          rdf:type [ <TestEntityParameter> ] ?
+       )
+    } OR @<Qualifier>
+)
 
 <TestMetadata> CLOSED {
     (  $<TestMetadata_tes> (  &<TestEntity_tes> ;

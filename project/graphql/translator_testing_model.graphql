@@ -2,12 +2,17 @@ type AcceptanceTestAsset
   {
     name: String
     description: String
-    inputId: Uriorcurie
+    inputId: Uriorcurie!
     inputName: String
-    predicate: String
-    outputId: Uriorcurie
+    inputCategory: ConceptCategory
+    predicateId: PredicateType
+    predicateName: String!
+    outputId: Uriorcurie!
     outputName: String
-    expectedOutput: ExpectedOutputEnum
+    outputCategory: ConceptCategory
+    association: AssociationCategory
+    qualifiers: [Qualifier]
+    expectedOutput: ExpectedOutputEnum!
     testIssue: TestIssueEnum
     semanticSeverity: SemanticSeverityEnum
     inV1: Boolean
@@ -71,6 +76,8 @@ type ComplianceTestCase
     trapiTemplate: TrapiTemplateEnum
     components: [ComponentEnum]
     tags: [String]
+    trapiVersion: String
+    biolinkVersion: String
   }
 
 type KnowledgeGraphNavigationTestCase
@@ -121,6 +128,12 @@ type Precondition
     tags: [String]
   }
 
+type Qualifier
+  {
+    parameter: String
+    value: String
+  }
+
 type QuantitativeTestCase
   {
     id: Uriorcurie!
@@ -151,12 +164,17 @@ type TestAsset
   {
     name: String
     description: String
-    inputId: Uriorcurie
+    inputId: Uriorcurie!
     inputName: String
-    predicate: String
-    outputId: Uriorcurie
+    inputCategory: ConceptCategory
+    predicateId: PredicateType
+    predicateName: String!
+    outputId: Uriorcurie!
     outputName: String
-    expectedOutput: ExpectedOutputEnum
+    outputCategory: ConceptCategory
+    association: AssociationCategory
+    qualifiers: [Qualifier]
+    expectedOutput: ExpectedOutputEnum!
     testIssue: TestIssueEnum
     semanticSeverity: SemanticSeverityEnum
     inV1: Boolean
@@ -197,12 +215,17 @@ type TestEdgeData
   {
     name: String
     description: String
-    inputId: Uriorcurie
+    inputId: Uriorcurie!
     inputName: String
-    predicate: String
-    outputId: Uriorcurie
+    inputCategory: ConceptCategory
+    predicateId: PredicateType
+    predicateName: String!
+    outputId: Uriorcurie!
     outputName: String
-    expectedOutput: ExpectedOutputEnum
+    outputCategory: ConceptCategory
+    association: AssociationCategory
+    qualifiers: [Qualifier]
+    expectedOutput: ExpectedOutputEnum!
     testIssue: TestIssueEnum
     semanticSeverity: SemanticSeverityEnum
     inV1: Boolean

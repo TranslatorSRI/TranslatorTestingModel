@@ -23,6 +23,35 @@ default_range: string
 imports:
   - linkml:types
 
+types:
+
+  ##################################
+  # Testing Model Types            #
+  # (Mainly Biolink Model related) #
+  ##################################
+
+  category_type:
+    typeof: uriorcurie
+    description: >-
+      A primitive type in which the value denotes a class within the biolink model.
+      The value must be a URI or a CURIE within the 'biolink' namespace.
+
+  concept_category:
+    typeof: category_type
+    description: >-
+      A category type within the Biolink Model ('biolink' namespace) 'biolink:NamedThing' hierarchy.
+
+  association_category:
+    typeof: category_type
+    description: >-
+      A category type within the Biolink Model ('biolink' namespace) 'biolink:Association' hierarchy.
+
+  predicate_type:
+    typeof: uriorcurie
+    description: >-
+      A CURIE from the Biolink Model ('biolink' namespace) 'biolink:related_to' hierarchy.
+      For example, biolink:related_to, biolink:causes, biolink:treats.
+
 classes:
 
   ########################
@@ -35,6 +64,18 @@ classes:
     slots:
       - parameter
       - value
+
+  Qualifier:
+    is_a: TestEntityParameter
+    slot_usage:
+      parameter:
+        description: >-
+          The 'parameter' of a Qualifier should be a `qualifier` slot name from the
+          Biolink Model ('biolink' namespace) 'biolink:qualifier' hierarchy.
+      value:
+        description: >-
+          The 'value' of should be a suitable value generally drawn from an
+          applicable Biolink Model ("Enum") value set of the specified Qualifier.
 
   TestEntity:
     description: >-
@@ -72,9 +113,14 @@ classes:
     slots:
       - input_id
       - input_name
-      - predicate
+      - input_category
+      - predicate_id
+      - predicate_name
       - output_id
       - output_name
+      - output_category
+      - association
+      - qualifiers
       - expected_output
       - test_issue
       - semantic_severity
@@ -182,6 +228,9 @@ classes:
     is_a: TestCase
     description: >-
       TRAPI and Biolink Model standards compliance test
+    slots:
+      - trapi_version
+      - biolink_version
     slot_usage:
 #      test_assets:
 #        range: ComplianceTestAsset
@@ -356,6 +405,7 @@ slots:
     range: TestEntityParameter
     multivalued: true
     inlined: true
+    inlined_as_list: true
 
   timestamp:
     description: >-
@@ -412,24 +462,58 @@ slots:
 
   input_id:
     aliases: ["InputID, node normalized", "SubjectID"]
+    required: true
     range: uriorcurie
 
   input_name:
     aliases: ["InputName (user choice)", "SubjectName"]
 
-  predicate:
+  input_category:
+    aliases: ["SubjectCategory"]
+    range: concept_category
+
+  predicate_id:
+    aliases: ["Predicate"]
+    range: predicate_type
+
+  predicate_name:
     aliases: ["Query", "Relationship"]
+    required: true
 
   output_id:
     aliases: ["OutputID", "ObjectID"]
+    required: true
     range: uriorcurie
 
   output_name:
     aliases: ["OutputName", "ObjectName"]
 
+  output_category:
+    aliases: ["ObjectCategory"]
+    range: concept_category
+
+  association:
+    description: >-
+      Specific Biolink Model association 'category' which
+      applies to the test asset defined knowledge statement
+    range: association_category
+
+  qualifiers:
+    description: >-
+      Optional qualifiers which constrain to the test asset defined
+      knowledge statement. Note that this field records such qualifier
+      slots and values as tag=value pairs, where the tag is the
+      Biolink Model qualifier slot named and the value is an acceptable
+      (Biolink Model enum?) value of the said qualifier slot.
+    range: Qualifier
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+
   expected_output:
     aliases: ["Expected Output"]
     range: ExpectedOutputEnum
+    required: true
 
   test_issue:
     aliases: ["issue label"]
@@ -581,6 +665,12 @@ slots:
       of the system like Aragorn, or ARAX.
     range: ComponentEnum
     multivalued: true
+
+  trapi_version:
+    description: TRAPI version (SemVer string)
+
+  biolink_version:
+    description: Biolink Model release (SemVer string)
 
   ###################
   # TestSuite Slots #

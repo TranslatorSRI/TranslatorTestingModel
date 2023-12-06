@@ -229,6 +229,12 @@ class TestEntityParameter(ConfiguredBaseModel):
     value: Optional[str] = Field(None, description="""(String) value of a TestParameter.""")
     
 
+class Qualifier(TestEntityParameter):
+    
+    parameter: Optional[str] = Field(None, description="""The 'parameter' of a Qualifier should be a `qualifier` slot name from the Biolink Model ('biolink' namespace) 'biolink:qualifier' hierarchy.""")
+    value: Optional[str] = Field(None, description="""The 'value' of should be a suitable value generally drawn from an applicable Biolink Model (\"Enum\") value set of the specified Qualifier.""")
+    
+
 class TestEntity(ConfiguredBaseModel):
     """
     Abstract global 'identification' class shared as a parent with all major model classes within the data model for Translator testing.
@@ -257,12 +263,17 @@ class TestAsset(TestEntity):
     """
     Represents a Test Asset, which is a single specific instance of TestCase-agnostic semantic parameters representing the specification of a Translator test target with inputs and (expected) outputs.
     """
-    input_id: Optional[str] = Field(None)
+    input_id: str = Field(...)
     input_name: Optional[str] = Field(None)
-    predicate: Optional[str] = Field(None)
-    output_id: Optional[str] = Field(None)
+    input_category: Optional[str] = Field(None)
+    predicate_id: Optional[str] = Field(None)
+    predicate_name: str = Field(...)
+    output_id: str = Field(...)
     output_name: Optional[str] = Field(None)
-    expected_output: Optional[ExpectedOutputEnum] = Field(None)
+    output_category: Optional[str] = Field(None)
+    association: Optional[str] = Field(None, description="""Specific Biolink Model association 'category' which applies to the test asset defined knowledge statement""")
+    qualifiers: Optional[List[Qualifier]] = Field(default_factory=list, description="""Optional qualifiers which constrain to the test asset defined knowledge statement. Note that this field records such qualifier slots and values as tag=value pairs, where the tag is the Biolink Model qualifier slot named and the value is an acceptable (Biolink Model enum?) value of the said qualifier slot.""")
+    expected_output: ExpectedOutputEnum = Field(...)
     test_issue: Optional[TestIssueEnum] = Field(None)
     semantic_severity: Optional[SemanticSeverityEnum] = Field(None)
     in_v1: Optional[bool] = Field(None)
@@ -290,12 +301,17 @@ class AcceptanceTestAsset(TestAsset):
     top_level: Optional[int] = Field(None, description="""The answer must return in these many results""")
     query_node: Optional[NodeEnum] = Field(None, description="""The node of the (templated) TRAPI query to replace""")
     notes: Optional[str] = Field(None, description="""The notes of the query""")
-    input_id: Optional[str] = Field(None)
+    input_id: str = Field(...)
     input_name: Optional[str] = Field(None)
-    predicate: Optional[str] = Field(None)
-    output_id: Optional[str] = Field(None)
+    input_category: Optional[str] = Field(None)
+    predicate_id: Optional[str] = Field(None)
+    predicate_name: str = Field(...)
+    output_id: str = Field(...)
     output_name: Optional[str] = Field(None)
-    expected_output: Optional[ExpectedOutputEnum] = Field(None)
+    output_category: Optional[str] = Field(None)
+    association: Optional[str] = Field(None, description="""Specific Biolink Model association 'category' which applies to the test asset defined knowledge statement""")
+    qualifiers: Optional[List[Qualifier]] = Field(default_factory=list, description="""Optional qualifiers which constrain to the test asset defined knowledge statement. Note that this field records such qualifier slots and values as tag=value pairs, where the tag is the Biolink Model qualifier slot named and the value is an acceptable (Biolink Model enum?) value of the said qualifier slot.""")
+    expected_output: ExpectedOutputEnum = Field(...)
     test_issue: Optional[TestIssueEnum] = Field(None)
     semantic_severity: Optional[SemanticSeverityEnum] = Field(None)
     in_v1: Optional[bool] = Field(None)
@@ -313,12 +329,17 @@ class TestEdgeData(TestAsset):
     """
     Represents a single Biolink Model compliant instance of a subject-predicate-object edge that can be used for testing.
     """
-    input_id: Optional[str] = Field(None)
+    input_id: str = Field(...)
     input_name: Optional[str] = Field(None)
-    predicate: Optional[str] = Field(None)
-    output_id: Optional[str] = Field(None)
+    input_category: Optional[str] = Field(None)
+    predicate_id: Optional[str] = Field(None)
+    predicate_name: str = Field(...)
+    output_id: str = Field(...)
     output_name: Optional[str] = Field(None)
-    expected_output: Optional[ExpectedOutputEnum] = Field(None)
+    output_category: Optional[str] = Field(None)
+    association: Optional[str] = Field(None, description="""Specific Biolink Model association 'category' which applies to the test asset defined knowledge statement""")
+    qualifiers: Optional[List[Qualifier]] = Field(default_factory=list, description="""Optional qualifiers which constrain to the test asset defined knowledge statement. Note that this field records such qualifier slots and values as tag=value pairs, where the tag is the Biolink Model qualifier slot named and the value is an acceptable (Biolink Model enum?) value of the said qualifier slot.""")
+    expected_output: ExpectedOutputEnum = Field(...)
     test_issue: Optional[TestIssueEnum] = Field(None)
     semantic_severity: Optional[SemanticSeverityEnum] = Field(None)
     in_v1: Optional[bool] = Field(None)
@@ -394,6 +415,8 @@ class ComplianceTestCase(TestCase):
     """
     TRAPI and Biolink Model standards compliance test
     """
+    trapi_version: Optional[str] = Field(None, description="""TRAPI version (SemVer string)""")
+    biolink_version: Optional[str] = Field(None, description="""Biolink Model release (SemVer string)""")
     test_env: Optional[TestEnvEnum] = Field(None, description="""Deployment environment within which the associated TestSuite is run.""")
     query_type: Optional[QueryTypeEnum] = Field(None, description="""Type of TestCase query.""")
     test_assets: List[TestAsset] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection.""")
@@ -582,6 +605,7 @@ class TestResultPKSet(TestEntity):
 # Model rebuild
 # see https://pydantic-docs.helpmanual.io/usage/models/#rebuilding-a-model
 TestEntityParameter.model_rebuild()
+Qualifier.model_rebuild()
 TestEntity.model_rebuild()
 TestMetadata.model_rebuild()
 TestAsset.model_rebuild()

@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2023-12-05T16:27:02
+# Generation date: 2023-12-05T16:28:07
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -37,10 +37,42 @@ EXAMPLE = CurieNamespace('example', 'https://example.org/')
 LINKML = CurieNamespace('linkml', 'https://w3id.org/linkml/')
 SCHEMA = CurieNamespace('schema', 'http://schema.org/')
 TTM = CurieNamespace('ttm', 'https://w3id.org/TranslatorSRI/TranslatorTestingModel/')
+XSD = CurieNamespace('xsd', 'http://www.w3.org/2001/XMLSchema#')
 DEFAULT_ = TTM
 
 
 # Types
+class CategoryType(Uriorcurie):
+    """ A primitive type in which the value denotes a class within the biolink model. The value must be a URI or a CURIE within the 'biolink' namespace. """
+    type_class_uri = XSD.anyURI
+    type_class_curie = "xsd:anyURI"
+    type_name = "category_type"
+    type_model_uri = TTM.CategoryType
+
+
+class PredicateType(Uriorcurie):
+    """ A CURIE from the Biolink Model ('biolink' namespace) 'biolink:related_to' hierarchy. For example, biolink:related_to, biolink:causes, biolink:treats. """
+    type_class_uri = XSD.anyURI
+    type_class_curie = "xsd:anyURI"
+    type_name = "predicate_type"
+    type_model_uri = TTM.PredicateType
+
+
+class ConceptCategory(CategoryType):
+    """ A category type within the Biolink Model ('biolink' namespace) 'biolink:NamedThing' hierarchy. """
+    type_class_uri = XSD.anyURI
+    type_class_curie = "xsd:anyURI"
+    type_name = "concept_category"
+    type_model_uri = TTM.ConceptCategory
+
+
+class AssociationCategory(CategoryType):
+    """ A category type within the Biolink Model ('biolink' namespace) 'biolink:Association' hierarchy. """
+    type_class_uri = XSD.anyURI
+    type_class_curie = "xsd:anyURI"
+    type_name = "association_category"
+    type_model_uri = TTM.AssociationCategory
+
 
 # Class references
 class TestEntityId(URIorCURIE):
@@ -157,6 +189,28 @@ class TestEntityParameter(YAMLRoot):
 
 
 @dataclass
+class Qualifier(TestEntityParameter):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = TTM.Qualifier
+    class_class_curie: ClassVar[str] = "ttm:Qualifier"
+    class_name: ClassVar[str] = "Qualifier"
+    class_model_uri: ClassVar[URIRef] = TTM.Qualifier
+
+    parameter: Optional[str] = None
+    value: Optional[str] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.parameter is not None and not isinstance(self.parameter, str):
+            self.parameter = str(self.parameter)
+
+        if self.value is not None and not isinstance(self.value, str):
+            self.value = str(self.value)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
 class TestEntity(YAMLRoot):
     """
     Abstract global 'identification' class shared as a parent with all major model classes within the data model for
@@ -248,13 +302,18 @@ class TestAsset(TestEntity):
     class_model_uri: ClassVar[URIRef] = TTM.TestAsset
 
     id: Union[str, TestAssetId] = None
+    input_id: Union[str, URIorCURIE] = None
+    predicate_name: str = None
+    output_id: Union[str, URIorCURIE] = None
+    expected_output: Union[str, "ExpectedOutputEnum"] = None
     runner_settings: Union[str, List[str]] = None
-    input_id: Optional[Union[str, URIorCURIE]] = None
     input_name: Optional[str] = None
-    predicate: Optional[str] = None
-    output_id: Optional[Union[str, URIorCURIE]] = None
+    input_category: Optional[Union[str, ConceptCategory]] = None
+    predicate_id: Optional[Union[str, PredicateType]] = None
     output_name: Optional[str] = None
-    expected_output: Optional[Union[str, "ExpectedOutputEnum"]] = None
+    output_category: Optional[Union[str, ConceptCategory]] = None
+    association: Optional[Union[str, AssociationCategory]] = None
+    qualifiers: Optional[Union[Union[dict, Qualifier], List[Union[dict, Qualifier]]]] = empty_list()
     test_issue: Optional[Union[str, "TestIssueEnum"]] = None
     semantic_severity: Optional[Union[str, "SemanticSeverityEnum"]] = None
     in_v1: Optional[Union[bool, Bool]] = None
@@ -269,29 +328,53 @@ class TestAsset(TestEntity):
         if not isinstance(self.id, TestAssetId):
             self.id = TestAssetId(self.id)
 
+        if self._is_empty(self.input_id):
+            self.MissingRequiredField("input_id")
+        if not isinstance(self.input_id, URIorCURIE):
+            self.input_id = URIorCURIE(self.input_id)
+
+        if self._is_empty(self.predicate_name):
+            self.MissingRequiredField("predicate_name")
+        if not isinstance(self.predicate_name, str):
+            self.predicate_name = str(self.predicate_name)
+
+        if self._is_empty(self.output_id):
+            self.MissingRequiredField("output_id")
+        if not isinstance(self.output_id, URIorCURIE):
+            self.output_id = URIorCURIE(self.output_id)
+
+        if self._is_empty(self.expected_output):
+            self.MissingRequiredField("expected_output")
+        if not isinstance(self.expected_output, ExpectedOutputEnum):
+            self.expected_output = ExpectedOutputEnum(self.expected_output)
+
         if self._is_empty(self.runner_settings):
             self.MissingRequiredField("runner_settings")
         if not isinstance(self.runner_settings, list):
             self.runner_settings = [self.runner_settings] if self.runner_settings is not None else []
         self.runner_settings = [v if isinstance(v, str) else str(v) for v in self.runner_settings]
 
-        if self.input_id is not None and not isinstance(self.input_id, URIorCURIE):
-            self.input_id = URIorCURIE(self.input_id)
-
         if self.input_name is not None and not isinstance(self.input_name, str):
             self.input_name = str(self.input_name)
 
-        if self.predicate is not None and not isinstance(self.predicate, str):
-            self.predicate = str(self.predicate)
+        if self.input_category is not None and not isinstance(self.input_category, ConceptCategory):
+            self.input_category = ConceptCategory(self.input_category)
 
-        if self.output_id is not None and not isinstance(self.output_id, URIorCURIE):
-            self.output_id = URIorCURIE(self.output_id)
+        if self.predicate_id is not None and not isinstance(self.predicate_id, PredicateType):
+            self.predicate_id = PredicateType(self.predicate_id)
 
         if self.output_name is not None and not isinstance(self.output_name, str):
             self.output_name = str(self.output_name)
 
-        if self.expected_output is not None and not isinstance(self.expected_output, ExpectedOutputEnum):
-            self.expected_output = ExpectedOutputEnum(self.expected_output)
+        if self.output_category is not None and not isinstance(self.output_category, ConceptCategory):
+            self.output_category = ConceptCategory(self.output_category)
+
+        if self.association is not None and not isinstance(self.association, AssociationCategory):
+            self.association = AssociationCategory(self.association)
+
+        if not isinstance(self.qualifiers, list):
+            self.qualifiers = [self.qualifiers] if self.qualifiers is not None else []
+        self.qualifiers = [v if isinstance(v, Qualifier) else Qualifier(**as_dict(v)) for v in self.qualifiers]
 
         if self.test_issue is not None and not isinstance(self.test_issue, TestIssueEnum):
             self.test_issue = TestIssueEnum(self.test_issue)
@@ -331,6 +414,10 @@ class AcceptanceTestAsset(TestAsset):
     class_model_uri: ClassVar[URIRef] = TTM.AcceptanceTestAsset
 
     id: Union[str, AcceptanceTestAssetId] = None
+    input_id: Union[str, URIorCURIE] = None
+    predicate_name: str = None
+    output_id: Union[str, URIorCURIE] = None
+    expected_output: Union[str, "ExpectedOutputEnum"] = None
     runner_settings: Union[str, List[str]] = None
     must_pass_date: Optional[Union[str, XSDDate]] = None
     must_pass_environment: Optional[Union[str, "TestEnvEnum"]] = None
@@ -396,6 +483,10 @@ class TestEdgeData(TestAsset):
     class_model_uri: ClassVar[URIRef] = TTM.TestEdgeData
 
     id: Union[str, TestEdgeDataId] = None
+    input_id: Union[str, URIorCURIE] = None
+    predicate_name: str = None
+    output_id: Union[str, URIorCURIE] = None
+    expected_output: Union[str, "ExpectedOutputEnum"] = None
     runner_settings: Union[str, List[str]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
@@ -553,12 +644,20 @@ class ComplianceTestCase(TestCase):
 
     id: Union[str, ComplianceTestCaseId] = None
     test_assets: Union[Dict[Union[str, TestAssetId], Union[dict, TestAsset]], List[Union[dict, TestAsset]]] = empty_dict()
+    trapi_version: Optional[str] = None
+    biolink_version: Optional[str] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
             self.MissingRequiredField("id")
         if not isinstance(self.id, ComplianceTestCaseId):
             self.id = ComplianceTestCaseId(self.id)
+
+        if self.trapi_version is not None and not isinstance(self.trapi_version, str):
+            self.trapi_version = str(self.trapi_version)
+
+        if self.biolink_version is not None and not isinstance(self.biolink_version, str):
+            self.biolink_version = str(self.biolink_version)
 
         super().__post_init__(**kwargs)
 
@@ -1254,22 +1353,37 @@ slots.test_annotations = Slot(uri=TTM.test_annotations, name="test_annotations",
                    model_uri=TTM.test_annotations, domain=None, range=Optional[Union[Union[dict, TestEntityParameter], List[Union[dict, TestEntityParameter]]]])
 
 slots.input_id = Slot(uri=TTM.input_id, name="input_id", curie=TTM.curie('input_id'),
-                   model_uri=TTM.input_id, domain=None, range=Optional[Union[str, URIorCURIE]])
+                   model_uri=TTM.input_id, domain=None, range=Union[str, URIorCURIE])
 
 slots.input_name = Slot(uri=TTM.input_name, name="input_name", curie=TTM.curie('input_name'),
                    model_uri=TTM.input_name, domain=None, range=Optional[str])
 
-slots.predicate = Slot(uri=TTM.predicate, name="predicate", curie=TTM.curie('predicate'),
-                   model_uri=TTM.predicate, domain=None, range=Optional[str])
+slots.input_category = Slot(uri=TTM.input_category, name="input_category", curie=TTM.curie('input_category'),
+                   model_uri=TTM.input_category, domain=None, range=Optional[Union[str, ConceptCategory]])
+
+slots.predicate_id = Slot(uri=TTM.predicate_id, name="predicate_id", curie=TTM.curie('predicate_id'),
+                   model_uri=TTM.predicate_id, domain=None, range=Optional[Union[str, PredicateType]])
+
+slots.predicate_name = Slot(uri=TTM.predicate_name, name="predicate_name", curie=TTM.curie('predicate_name'),
+                   model_uri=TTM.predicate_name, domain=None, range=str)
 
 slots.output_id = Slot(uri=TTM.output_id, name="output_id", curie=TTM.curie('output_id'),
-                   model_uri=TTM.output_id, domain=None, range=Optional[Union[str, URIorCURIE]])
+                   model_uri=TTM.output_id, domain=None, range=Union[str, URIorCURIE])
 
 slots.output_name = Slot(uri=TTM.output_name, name="output_name", curie=TTM.curie('output_name'),
                    model_uri=TTM.output_name, domain=None, range=Optional[str])
 
+slots.output_category = Slot(uri=TTM.output_category, name="output_category", curie=TTM.curie('output_category'),
+                   model_uri=TTM.output_category, domain=None, range=Optional[Union[str, ConceptCategory]])
+
+slots.association = Slot(uri=TTM.association, name="association", curie=TTM.curie('association'),
+                   model_uri=TTM.association, domain=None, range=Optional[Union[str, AssociationCategory]])
+
+slots.qualifiers = Slot(uri=TTM.qualifiers, name="qualifiers", curie=TTM.curie('qualifiers'),
+                   model_uri=TTM.qualifiers, domain=None, range=Optional[Union[Union[dict, Qualifier], List[Union[dict, Qualifier]]]])
+
 slots.expected_output = Slot(uri=TTM.expected_output, name="expected_output", curie=TTM.curie('expected_output'),
-                   model_uri=TTM.expected_output, domain=None, range=Optional[Union[str, "ExpectedOutputEnum"]])
+                   model_uri=TTM.expected_output, domain=None, range=Union[str, "ExpectedOutputEnum"])
 
 slots.test_issue = Slot(uri=TTM.test_issue, name="test_issue", curie=TTM.curie('test_issue'),
                    model_uri=TTM.test_issue, domain=None, range=Optional[Union[str, "TestIssueEnum"]])
@@ -1334,6 +1448,12 @@ slots.trapi_template = Slot(uri=TTM.trapi_template, name="trapi_template", curie
 slots.components = Slot(uri=TTM.components, name="components", curie=TTM.curie('components'),
                    model_uri=TTM.components, domain=None, range=Optional[Union[Union[str, "ComponentEnum"], List[Union[str, "ComponentEnum"]]]])
 
+slots.trapi_version = Slot(uri=TTM.trapi_version, name="trapi_version", curie=TTM.curie('trapi_version'),
+                   model_uri=TTM.trapi_version, domain=None, range=Optional[str])
+
+slots.biolink_version = Slot(uri=TTM.biolink_version, name="biolink_version", curie=TTM.curie('biolink_version'),
+                   model_uri=TTM.biolink_version, domain=None, range=Optional[str])
+
 slots.test_data_file_locator = Slot(uri=TTM.test_data_file_locator, name="test_data_file_locator", curie=TTM.curie('test_data_file_locator'),
                    model_uri=TTM.test_data_file_locator, domain=None, range=Optional[Union[str, URIorCURIE]])
 
@@ -1372,6 +1492,12 @@ slots.test_entities = Slot(uri=TTM.test_entities, name="test_entities", curie=TT
 
 slots.test_case_results = Slot(uri=TTM.test_case_results, name="test_case_results", curie=TTM.curie('test_case_results'),
                    model_uri=TTM.test_case_results, domain=None, range=Optional[Union[Dict[Union[str, TestCaseResultId], Union[dict, TestCaseResult]], List[Union[dict, TestCaseResult]]]])
+
+slots.Qualifier_parameter = Slot(uri=TTM.parameter, name="Qualifier_parameter", curie=TTM.curie('parameter'),
+                   model_uri=TTM.Qualifier_parameter, domain=Qualifier, range=Optional[str])
+
+slots.Qualifier_value = Slot(uri=TTM.value, name="Qualifier_value", curie=TTM.curie('value'),
+                   model_uri=TTM.Qualifier_value, domain=Qualifier, range=Optional[str])
 
 slots.TestAsset_id = Slot(uri=SCHEMA.identifier, name="TestAsset_id", curie=SCHEMA.curie('identifier'),
                    model_uri=TTM.TestAsset_id, domain=TestAsset, range=Union[str, TestAssetId])

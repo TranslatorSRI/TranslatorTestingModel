@@ -1,7 +1,8 @@
 # Example TestAsset data object
 ---
-# TODO: the TestAsset example data needs further elaboration
+# TODO: the TestAsset example data may need further elaboration
 
+#
 #
 #   TestAsset:
 #    description: >-
@@ -12,14 +13,20 @@
 #    slots:
 #      - input_id
 #      - input_name
-#      - predicate
+#      - input_category
+#      - predicate_id
+#      - predicate_name
 #      - output_id
 #      - output_name
+#      - output_category
+#      - association
+#      - qualifiers
 #      - expected_output
 #      - test_issue
 #      - semantic_severity
 #      - in_v1
 #      - well_known
+#      - test_reference
 #      - runner_settings
 #    slot_usage:
 #      id:
@@ -38,7 +45,7 @@ name: TestAsset001
 description: Iron treats Aceruloplasminemia
 input_id: MONDO:0011426
 input_name: Aceruloplasminemia
-predicate: Treats
+predicate_name: treats
 output_id: DRUGBANK:DB01592
 output_name: Iron (PUBCHEM)
 expected_output: number_4_NeverShow

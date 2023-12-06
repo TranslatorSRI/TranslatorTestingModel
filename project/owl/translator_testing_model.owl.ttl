@@ -12,10 +12,10 @@ ttm:AcceptanceTestCase a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "AcceptanceTestCase" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 1 ;
+            owl:allValuesFrom ttm:AcceptanceTestAsset ;
             owl:onProperty ttm:test_assets ],
         [ a owl:Restriction ;
-            owl:allValuesFrom ttm:AcceptanceTestAsset ;
+            owl:minCardinality 1 ;
             owl:onProperty ttm:test_assets ],
         ttm:TestCase ;
     skos:definition "See AcceptanceTestAsset above for more details." ;
@@ -118,6 +118,19 @@ ttm:arax a owl:ObjectProperty,
     rdfs:label "arax" ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
+ttm:association a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "association" ;
+    rdfs:range ttm:association_category ;
+    skos:definition "Specific Biolink Model association 'category' which applies to the test asset defined knowledge statement" ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
+ttm:biolink_version a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "biolink_version" ;
+    skos:definition "Biolink Model release (SemVer string)" ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
 ttm:bte a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "bte" ;
@@ -169,6 +182,13 @@ ttm:in_v1 a owl:ObjectProperty,
     skos:altLabel "In v1" ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
+ttm:input_category a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "input_category" ;
+    rdfs:range ttm:concept_category ;
+    skos:altLabel "SubjectCategory" ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
 ttm:input_id a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "input_id" ;
@@ -216,6 +236,13 @@ ttm:notes a owl:ObjectProperty,
     skos:definition "The notes of the query" ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
+ttm:output_category a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "output_category" ;
+    rdfs:range ttm:concept_category ;
+    skos:altLabel "ObjectCategory" ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
 ttm:output_id a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "output_id" ;
@@ -229,12 +256,6 @@ ttm:output_name a owl:ObjectProperty,
     rdfs:label "output_name" ;
     skos:altLabel "ObjectName",
         "OutputName" ;
-    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
-
-ttm:parameter a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "parameter" ;
-    skos:definition "Name of a TestParameter." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:parent_pk a owl:ObjectProperty,
@@ -255,11 +276,25 @@ ttm:preconditions a owl:ObjectProperty,
     rdfs:range ttm:Precondition ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
-ttm:predicate a owl:ObjectProperty,
+ttm:predicate_id a owl:ObjectProperty,
         linkml:SlotDefinition ;
-    rdfs:label "predicate" ;
+    rdfs:label "predicate_id" ;
+    rdfs:range ttm:predicate_type ;
+    skos:altLabel "Predicate" ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
+ttm:predicate_name a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "predicate_name" ;
     skos:altLabel "Query",
         "Relationship" ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
+ttm:qualifiers a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "qualifiers" ;
+    rdfs:range ttm:Qualifier ;
+    skos:definition "Optional qualifiers which constrain to the test asset defined knowledge statement. Note that this field records such qualifier slots and values as tag=value pairs, where the tag is the Biolink Model qualifier slot named and the value is an acceptable (Biolink Model enum?) value of the said qualifier slot." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:query_node a owl:ObjectProperty,
@@ -460,15 +495,15 @@ ttm:trapi_template a owl:ObjectProperty,
     skos:definition "A template for a query, which can be used to generate a query for a test case.  note: the current enumerated values for this slot come from the Benchmarks repo config/benchmarks.json \"templates\" collection and refer to the \"name\" field of each template.  Templates themselves are currently stored in the config/[source_name]/templates directory." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
+ttm:trapi_version a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "trapi_version" ;
+    skos:definition "TRAPI version (SemVer string)" ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
 ttm:unsecret a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "unsecret" ;
-    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
-
-ttm:value a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "value" ;
-    skos:definition "(String) value of a TestParameter." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:well_known a owl:ObjectProperty,
@@ -499,6 +534,30 @@ ttm:Precondition a owl:Class,
     skos:definition "Represents a precondition for a TestCase" ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
+ttm:Qualifier a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Qualifier" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:parameter ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:parameter ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:parameter ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:value ],
+        ttm:TestEntityParameter ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
 <https://w3id.org/TranslatorSRI/TranslatorTestingModel/QueryTypeEnum#treats> a owl:Class,
         ttm:QueryTypeEnum ;
     rdfs:label "treats" .
@@ -508,12 +567,6 @@ ttm:TestCaseResult a owl:Class,
     rdfs:label "TestCaseResult" ;
     rdfs:subClassOf ttm:TestEntity ;
     skos:definition "The outcome of a TestRunner run of one specific TestCase." ;
-    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
-
-ttm:TestEntityParameter a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "TestEntityParameter" ;
-    skos:definition "A single 'tag = value' pair (where 'value' is a simple string)." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:TestMetadata a owl:Class,
@@ -543,6 +596,14 @@ ttm:TestSuiteSpecification a owl:Class,
     rdfs:subClassOf ttm:TestEntity ;
     skos:definition "Parameters for a Test Case instances either dynamically generated from some external source of Test Assets." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
+ttm:association_category a owl:Class,
+        linkml:TypeDefinition ;
+    rdfs:subClassOf ttm:category_type .
+
+ttm:predicate_type a owl:Class,
+        linkml:TypeDefinition ;
+    rdfs:subClassOf linkml:Uriorcurie .
 
 <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ComponentEnum#aragorn> a owl:Class,
         ttm:ComponentEnum ;
@@ -643,6 +704,12 @@ ttm:QueryTypeEnum a owl:Class,
 <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestCaseResultEnum#test_skipped> a owl:Class,
         ttm:TestCaseResultEnum ;
     rdfs:label "test_skipped" .
+
+ttm:TestEntityParameter a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "TestEntityParameter" ;
+    skos:definition "A single 'tag = value' pair (where 'value' is a simple string)." ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#ci> a owl:Class,
         ttm:TestEnvEnum ;
@@ -760,6 +827,14 @@ ttm:QueryTypeEnum a owl:Class,
         ttm:TrapiTemplateEnum ;
     rdfs:label "treats" .
 
+ttm:category_type a owl:Class,
+        linkml:TypeDefinition ;
+    rdfs:subClassOf linkml:Uriorcurie .
+
+ttm:concept_category a owl:Class,
+        linkml:TypeDefinition ;
+    rdfs:subClassOf ttm:category_type .
+
 ttm:runner_settings a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "runner_settings" ;
@@ -807,23 +882,23 @@ ttm:TestAsset a owl:Class,
             owl:allValuesFrom linkml:String ;
             owl:onProperty ttm:tags ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:tags ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty ttm:id ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
             owl:onProperty ttm:runner_settings ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:minCardinality 1 ;
+            owl:onProperty ttm:runner_settings ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty ttm:id ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:Uriorcurie ;
             owl:onProperty ttm:id ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:tags ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty ttm:runner_settings ],
         ttm:TestEntity ;
     skos:definition "Represents a Test Asset, which is a single specific instance of TestCase-agnostic semantic parameters representing the specification of a Translator test target with inputs and (expected) outputs." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
@@ -840,6 +915,18 @@ ttm:id a owl:ObjectProperty,
     rdfs:label "id" ;
     rdfs:range linkml:Uriorcurie ;
     skos:definition "A unique identifier for a Test Entity" ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
+ttm:parameter a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "parameter" ;
+    skos:definition "Name of a TestParameter." ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
+ttm:value a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "value" ;
+    skos:definition "(String) value of a TestParameter." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:FileFormatEnum a owl:Class,
@@ -909,13 +996,13 @@ ttm:TestCase a owl:Class,
             owl:allValuesFrom linkml:String ;
             owl:onProperty ttm:test_assets ],
         [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:tags ],
-        [ a owl:Restriction ;
             owl:minCardinality 1 ;
             owl:onProperty ttm:test_assets ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
+            owl:onProperty ttm:tags ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
             owl:onProperty ttm:tags ],
         ttm:TestEntity ;
     skos:definition "Represents a single enumerated instance of Test Case, derived from a  given collection of one or more TestAsset instances (the value of the 'test_assets' slot) which define the 'inputs' and 'outputs' of the TestCase, used to probe a particular test condition." ;
