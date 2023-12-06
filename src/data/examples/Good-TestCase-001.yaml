@@ -40,7 +40,7 @@ test_assets:
   - id: example:TestAsset001
     name: TestAsset001
     input_id: MONDO:0011426
-    predicate: Treats
+    predicate_name: treats
     output_id: DRUGBANK:DB01592
     expected_output: number_4_NeverShow
     runner_settings:

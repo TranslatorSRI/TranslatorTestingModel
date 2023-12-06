@@ -20,6 +20,8 @@ CREATE TABLE "ComplianceTestCase" (
 	test_assets TEXT NOT NULL, 
 	preconditions TEXT, 
 	trapi_template VARCHAR(24), 
+	trapi_version TEXT, 
+	biolink_version TEXT, 
 	PRIMARY KEY (id)
 );
 
@@ -54,6 +56,12 @@ CREATE TABLE "Precondition" (
 	PRIMARY KEY (id)
 );
 
+CREATE TABLE "Qualifier" (
+	parameter TEXT, 
+	value TEXT, 
+	PRIMARY KEY (parameter, value)
+);
+
 CREATE TABLE "QuantitativeTestCase" (
 	id TEXT NOT NULL, 
 	name TEXT, 
@@ -71,9 +79,14 @@ CREATE TABLE "TestAsset" (
 	description TEXT, 
 	input_id TEXT NOT NULL, 
 	input_name TEXT, 
-	predicate TEXT NOT NULL, 
+	input_category TEXT, 
+	predicate_id TEXT, 
+	predicate_name TEXT NOT NULL, 
 	output_id TEXT NOT NULL, 
 	output_name TEXT, 
+	output_category TEXT, 
+	association TEXT, 
+	qualifiers TEXT, 
 	expected_output VARCHAR(25) NOT NULL, 
 	test_issue VARCHAR(20), 
 	semantic_severity VARCHAR(13), 
@@ -101,9 +114,14 @@ CREATE TABLE "TestEdgeData" (
 	description TEXT, 
 	input_id TEXT NOT NULL, 
 	input_name TEXT, 
-	predicate TEXT NOT NULL, 
+	input_category TEXT, 
+	predicate_id TEXT, 
+	predicate_name TEXT NOT NULL, 
 	output_id TEXT NOT NULL, 
 	output_name TEXT, 
+	output_category TEXT, 
+	association TEXT, 
+	qualifiers TEXT, 
 	expected_output VARCHAR(25) NOT NULL, 
 	test_issue VARCHAR(20), 
 	semantic_severity VARCHAR(13), 
@@ -162,9 +180,14 @@ CREATE TABLE "AcceptanceTestAsset" (
 	description TEXT, 
 	input_id TEXT NOT NULL, 
 	input_name TEXT, 
-	predicate TEXT NOT NULL, 
+	input_category TEXT, 
+	predicate_id TEXT, 
+	predicate_name TEXT NOT NULL, 
 	output_id TEXT NOT NULL, 
 	output_name TEXT, 
+	output_category TEXT, 
+	association TEXT, 
+	qualifiers TEXT, 
 	expected_output VARCHAR(25) NOT NULL, 
 	test_issue VARCHAR(20), 
 	semantic_severity VARCHAR(13), 

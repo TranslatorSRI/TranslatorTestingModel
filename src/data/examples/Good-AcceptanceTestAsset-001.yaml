@@ -25,7 +25,7 @@ id: example:AcceptanceTestAsset001
 name: AcceptanceTestAsset001
 description: Iron treats Aceruloplasminemia
 input_id: MONDO:0011426
-predicate: Treats
+predicate_name: treats
 output_id: DRUGBANK:DB01592
 expected_output: number_4_NeverShow
 runner_settings:

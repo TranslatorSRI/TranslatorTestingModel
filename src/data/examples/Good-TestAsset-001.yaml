@@ -3,6 +3,7 @@
 # TODO: the TestAsset example data may need further elaboration
 
 #
+#
 #   TestAsset:
 #    description: >-
 #      Represents a Test Asset, which is a single specific instance of
@@ -10,20 +11,25 @@
 #      specification of a Translator test target with inputs and (expected) outputs.
 #    is_a: TestEntity
 #    slots:
-#      - input_id  # required: true
+#      - input_id
 #      - input_name
-#      - predicate  # required: true
-#      - output_id  # required: true
+#      - input_category
+#      - predicate_id
+#      - predicate_name
+#      - output_id
 #      - output_name
-#      - expected_output  # required: true
+#      - output_category
+#      - association
+#      - qualifiers
+#      - expected_output
 #      - test_issue
 #      - semantic_severity
 #      - in_v1
 #      - well_known
 #      - test_reference
-#      - runner_settings  # required: true
+#      - runner_settings
 #    slot_usage:
-#      id:  # required: true
+#      id:
 #        aliases: ["AssetIdentifier"]
 #        range: uriorcurie
 #      tags:
@@ -39,7 +45,7 @@ name: TestAsset001
 description: Iron treats Aceruloplasminemia
 input_id: MONDO:0011426
 input_name: Aceruloplasminemia
-predicate: Treats
+predicate_name: treats
 output_id: DRUGBANK:DB01592
 output_name: Iron (PUBCHEM)
 expected_output: number_4_NeverShow
