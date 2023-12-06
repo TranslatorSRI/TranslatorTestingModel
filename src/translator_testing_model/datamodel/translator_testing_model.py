@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2023-11-25T10:59:19
+# Generation date: 2023-12-05T16:28:07
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -44,7 +44,7 @@ DEFAULT_ = TTM
 # Types
 class CategoryType(Uriorcurie):
     """ A primitive type in which the value denotes a class within the biolink model. The value must be a URI or a CURIE within the 'biolink' namespace. """
-    type_class_uri = XSD["anyURI"]
+    type_class_uri = XSD.anyURI
     type_class_curie = "xsd:anyURI"
     type_name = "category_type"
     type_model_uri = TTM.CategoryType
@@ -52,7 +52,7 @@ class CategoryType(Uriorcurie):
 
 class PredicateType(Uriorcurie):
     """ A CURIE from the Biolink Model ('biolink' namespace) 'biolink:related_to' hierarchy. For example, biolink:related_to, biolink:causes, biolink:treats. """
-    type_class_uri = XSD["anyURI"]
+    type_class_uri = XSD.anyURI
     type_class_curie = "xsd:anyURI"
     type_name = "predicate_type"
     type_model_uri = TTM.PredicateType
@@ -60,7 +60,7 @@ class PredicateType(Uriorcurie):
 
 class ConceptCategory(CategoryType):
     """ A category type within the Biolink Model ('biolink' namespace) 'biolink:NamedThing' hierarchy. """
-    type_class_uri = XSD["anyURI"]
+    type_class_uri = XSD.anyURI
     type_class_curie = "xsd:anyURI"
     type_name = "concept_category"
     type_model_uri = TTM.ConceptCategory
@@ -68,7 +68,7 @@ class ConceptCategory(CategoryType):
 
 class AssociationCategory(CategoryType):
     """ A category type within the Biolink Model ('biolink' namespace) 'biolink:Association' hierarchy. """
-    type_class_uri = XSD["anyURI"]
+    type_class_uri = XSD.anyURI
     type_class_curie = "xsd:anyURI"
     type_name = "association_category"
     type_model_uri = TTM.AssociationCategory
@@ -155,6 +155,14 @@ class TestRunSessionId(TestEntityId):
     pass
 
 
+class TestOutputId(TestEntityId):
+    pass
+
+
+class TestResultPKSetId(TestEntityId):
+    pass
+
+
 @dataclass
 class TestEntityParameter(YAMLRoot):
     """
@@ -162,7 +170,7 @@ class TestEntityParameter(YAMLRoot):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM["TestEntityParameter"]
+    class_class_uri: ClassVar[URIRef] = TTM.TestEntityParameter
     class_class_curie: ClassVar[str] = "ttm:TestEntityParameter"
     class_name: ClassVar[str] = "TestEntityParameter"
     class_model_uri: ClassVar[URIRef] = TTM.TestEntityParameter
@@ -184,7 +192,7 @@ class TestEntityParameter(YAMLRoot):
 class Qualifier(TestEntityParameter):
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM["Qualifier"]
+    class_class_uri: ClassVar[URIRef] = TTM.Qualifier
     class_class_curie: ClassVar[str] = "ttm:Qualifier"
     class_name: ClassVar[str] = "Qualifier"
     class_model_uri: ClassVar[URIRef] = TTM.Qualifier
@@ -210,7 +218,7 @@ class TestEntity(YAMLRoot):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM["TestEntity"]
+    class_class_uri: ClassVar[URIRef] = TTM.TestEntity
     class_class_curie: ClassVar[str] = "ttm:TestEntity"
     class_name: ClassVar[str] = "TestEntity"
     class_model_uri: ClassVar[URIRef] = TTM.TestEntity
@@ -247,7 +255,7 @@ class TestMetadata(TestEntity):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM["TestMetadata"]
+    class_class_uri: ClassVar[URIRef] = TTM.TestMetadata
     class_class_curie: ClassVar[str] = "ttm:TestMetadata"
     class_name: ClassVar[str] = "TestMetadata"
     class_model_uri: ClassVar[URIRef] = TTM.TestMetadata
@@ -288,7 +296,7 @@ class TestAsset(TestEntity):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM["TestAsset"]
+    class_class_uri: ClassVar[URIRef] = TTM.TestAsset
     class_class_curie: ClassVar[str] = "ttm:TestAsset"
     class_name: ClassVar[str] = "TestAsset"
     class_model_uri: ClassVar[URIRef] = TTM.TestAsset
@@ -311,6 +319,7 @@ class TestAsset(TestEntity):
     in_v1: Optional[Union[bool, Bool]] = None
     well_known: Optional[Union[bool, Bool]] = None
     test_reference: Optional[Union[str, URIorCURIE]] = None
+    test_metadata: Optional[Union[dict, TestMetadata]] = None
     tags: Optional[Union[str, List[str]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
@@ -382,6 +391,9 @@ class TestAsset(TestEntity):
         if self.test_reference is not None and not isinstance(self.test_reference, URIorCURIE):
             self.test_reference = URIorCURIE(self.test_reference)
 
+        if self.test_metadata is not None and not isinstance(self.test_metadata, TestMetadata):
+            self.test_metadata = TestMetadata(**as_dict(self.test_metadata))
+
         if not isinstance(self.tags, list):
             self.tags = [self.tags] if self.tags is not None else []
         self.tags = [v if isinstance(v, str) else str(v) for v in self.tags]
@@ -396,7 +408,7 @@ class AcceptanceTestAsset(TestAsset):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM["AcceptanceTestAsset"]
+    class_class_uri: ClassVar[URIRef] = TTM.AcceptanceTestAsset
     class_class_curie: ClassVar[str] = "ttm:AcceptanceTestAsset"
     class_name: ClassVar[str] = "AcceptanceTestAsset"
     class_model_uri: ClassVar[URIRef] = TTM.AcceptanceTestAsset
@@ -465,7 +477,7 @@ class TestEdgeData(TestAsset):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM["TestEdgeData"]
+    class_class_uri: ClassVar[URIRef] = TTM.TestEdgeData
     class_class_curie: ClassVar[str] = "ttm:TestEdgeData"
     class_name: ClassVar[str] = "TestEdgeData"
     class_model_uri: ClassVar[URIRef] = TTM.TestEdgeData
@@ -493,7 +505,7 @@ class Precondition(TestEntity):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM["Precondition"]
+    class_class_uri: ClassVar[URIRef] = TTM.Precondition
     class_class_curie: ClassVar[str] = "ttm:Precondition"
     class_name: ClassVar[str] = "Precondition"
     class_model_uri: ClassVar[URIRef] = TTM.Precondition
@@ -518,7 +530,7 @@ class TestCase(TestEntity):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM["TestCase"]
+    class_class_uri: ClassVar[URIRef] = TTM.TestCase
     class_class_curie: ClassVar[str] = "ttm:TestCase"
     class_name: ClassVar[str] = "TestCase"
     class_model_uri: ClassVar[URIRef] = TTM.TestCase
@@ -573,7 +585,7 @@ class AcceptanceTestCase(TestCase):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM["AcceptanceTestCase"]
+    class_class_uri: ClassVar[URIRef] = TTM.AcceptanceTestCase
     class_class_curie: ClassVar[str] = "ttm:AcceptanceTestCase"
     class_name: ClassVar[str] = "AcceptanceTestCase"
     class_model_uri: ClassVar[URIRef] = TTM.AcceptanceTestCase
@@ -601,7 +613,7 @@ class QuantitativeTestCase(TestCase):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM["QuantitativeTestCase"]
+    class_class_uri: ClassVar[URIRef] = TTM.QuantitativeTestCase
     class_class_curie: ClassVar[str] = "ttm:QuantitativeTestCase"
     class_name: ClassVar[str] = "QuantitativeTestCase"
     class_model_uri: ClassVar[URIRef] = TTM.QuantitativeTestCase
@@ -625,7 +637,7 @@ class ComplianceTestCase(TestCase):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM["ComplianceTestCase"]
+    class_class_uri: ClassVar[URIRef] = TTM.ComplianceTestCase
     class_class_curie: ClassVar[str] = "ttm:ComplianceTestCase"
     class_name: ClassVar[str] = "ComplianceTestCase"
     class_model_uri: ClassVar[URIRef] = TTM.ComplianceTestCase
@@ -657,7 +669,7 @@ class KnowledgeGraphNavigationTestCase(TestCase):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM["KnowledgeGraphNavigationTestCase"]
+    class_class_uri: ClassVar[URIRef] = TTM.KnowledgeGraphNavigationTestCase
     class_class_curie: ClassVar[str] = "ttm:KnowledgeGraphNavigationTestCase"
     class_name: ClassVar[str] = "KnowledgeGraphNavigationTestCase"
     class_model_uri: ClassVar[URIRef] = TTM.KnowledgeGraphNavigationTestCase
@@ -681,7 +693,7 @@ class OneHopTestCase(KnowledgeGraphNavigationTestCase):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM["OneHopTestCase"]
+    class_class_uri: ClassVar[URIRef] = TTM.OneHopTestCase
     class_class_curie: ClassVar[str] = "ttm:OneHopTestCase"
     class_name: ClassVar[str] = "OneHopTestCase"
     class_model_uri: ClassVar[URIRef] = TTM.OneHopTestCase
@@ -705,7 +717,7 @@ class TestSuiteSpecification(TestEntity):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM["TestSuiteSpecification"]
+    class_class_uri: ClassVar[URIRef] = TTM.TestSuiteSpecification
     class_class_curie: ClassVar[str] = "ttm:TestSuiteSpecification"
     class_name: ClassVar[str] = "TestSuiteSpecification"
     class_model_uri: ClassVar[URIRef] = TTM.TestSuiteSpecification
@@ -738,7 +750,7 @@ class TestSuite(TestEntity):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM["TestSuite"]
+    class_class_uri: ClassVar[URIRef] = TTM.TestSuite
     class_class_curie: ClassVar[str] = "ttm:TestSuite"
     class_name: ClassVar[str] = "TestSuite"
     class_model_uri: ClassVar[URIRef] = TTM.TestSuite
@@ -773,7 +785,7 @@ class TestSuite(TestEntity):
 class AcceptanceTestSuite(TestSuite):
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM["AcceptanceTestSuite"]
+    class_class_uri: ClassVar[URIRef] = TTM.AcceptanceTestSuite
     class_class_curie: ClassVar[str] = "ttm:AcceptanceTestSuite"
     class_name: ClassVar[str] = "AcceptanceTestSuite"
     class_model_uri: ClassVar[URIRef] = TTM.AcceptanceTestSuite
@@ -795,7 +807,7 @@ class BenchmarkTestSuite(YAMLRoot):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM["BenchmarkTestSuite"]
+    class_class_uri: ClassVar[URIRef] = TTM.BenchmarkTestSuite
     class_class_curie: ClassVar[str] = "ttm:BenchmarkTestSuite"
     class_name: ClassVar[str] = "BenchmarkTestSuite"
     class_model_uri: ClassVar[URIRef] = TTM.BenchmarkTestSuite
@@ -808,7 +820,7 @@ class StandardsComplianceTestSuite(TestSuite):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM["StandardsComplianceTestSuite"]
+    class_class_uri: ClassVar[URIRef] = TTM.StandardsComplianceTestSuite
     class_class_curie: ClassVar[str] = "ttm:StandardsComplianceTestSuite"
     class_name: ClassVar[str] = "StandardsComplianceTestSuite"
     class_model_uri: ClassVar[URIRef] = TTM.StandardsComplianceTestSuite
@@ -831,7 +843,7 @@ class OneHopTestSuite(TestSuite):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM["OneHopTestSuite"]
+    class_class_uri: ClassVar[URIRef] = TTM.OneHopTestSuite
     class_class_curie: ClassVar[str] = "ttm:OneHopTestSuite"
     class_name: ClassVar[str] = "OneHopTestSuite"
     class_model_uri: ClassVar[URIRef] = TTM.OneHopTestSuite
@@ -854,7 +866,7 @@ class TestRunnerConfiguration(TestEntity):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM["TestRunnerConfiguration"]
+    class_class_uri: ClassVar[URIRef] = TTM.TestRunnerConfiguration
     class_class_curie: ClassVar[str] = "ttm:TestRunnerConfiguration"
     class_name: ClassVar[str] = "TestRunnerConfiguration"
     class_model_uri: ClassVar[URIRef] = TTM.TestRunnerConfiguration
@@ -887,7 +899,7 @@ class TestCaseResult(TestEntity):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM["TestCaseResult"]
+    class_class_uri: ClassVar[URIRef] = TTM.TestCaseResult
     class_class_curie: ClassVar[str] = "ttm:TestCaseResult"
     class_name: ClassVar[str] = "TestCaseResult"
     class_model_uri: ClassVar[URIRef] = TTM.TestCaseResult
@@ -922,7 +934,7 @@ class TestRunSession(TestEntity):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM["TestRunSession"]
+    class_class_uri: ClassVar[URIRef] = TTM.TestRunSession
     class_class_curie: ClassVar[str] = "ttm:TestRunSession"
     class_name: ClassVar[str] = "TestRunSession"
     class_model_uri: ClassVar[URIRef] = TTM.TestRunSession
@@ -948,6 +960,89 @@ class TestRunSession(TestEntity):
 
         if self.timestamp is not None and not isinstance(self.timestamp, XSDDateTime):
             self.timestamp = XSDDateTime(self.timestamp)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class TestOutput(TestEntity):
+    """
+    The output of a TestRunner run of one specific TestCase.
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = TTM.TestOutput
+    class_class_curie: ClassVar[str] = "ttm:TestOutput"
+    class_name: ClassVar[str] = "TestOutput"
+    class_model_uri: ClassVar[URIRef] = TTM.TestOutput
+
+    id: Union[str, TestOutputId] = None
+    test_case_id: Optional[str] = None
+    pks: Optional[Union[Union[str, TestResultPKSetId], List[Union[str, TestResultPKSetId]]]] = empty_list()
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, TestOutputId):
+            self.id = TestOutputId(self.id)
+
+        if self.test_case_id is not None and not isinstance(self.test_case_id, str):
+            self.test_case_id = str(self.test_case_id)
+
+        if not isinstance(self.pks, list):
+            self.pks = [self.pks] if self.pks is not None else []
+        self.pks = [v if isinstance(v, TestResultPKSetId) else TestResultPKSetId(v) for v in self.pks]
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class TestResultPKSet(TestEntity):
+    """
+    Primary keys for a given ARA result set from a SmokeTest result for a given TestCase.
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = TTM.TestResultPKSet
+    class_class_curie: ClassVar[str] = "ttm:TestResultPKSet"
+    class_name: ClassVar[str] = "TestResultPKSet"
+    class_model_uri: ClassVar[URIRef] = TTM.TestResultPKSet
+
+    id: Union[str, TestResultPKSetId] = None
+    parent_pk: Optional[str] = None
+    merged_pk: Optional[str] = None
+    aragorn: Optional[str] = None
+    arax: Optional[str] = None
+    unsecret: Optional[str] = None
+    bte: Optional[str] = None
+    improving: Optional[str] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, TestResultPKSetId):
+            self.id = TestResultPKSetId(self.id)
+
+        if self.parent_pk is not None and not isinstance(self.parent_pk, str):
+            self.parent_pk = str(self.parent_pk)
+
+        if self.merged_pk is not None and not isinstance(self.merged_pk, str):
+            self.merged_pk = str(self.merged_pk)
+
+        if self.aragorn is not None and not isinstance(self.aragorn, str):
+            self.aragorn = str(self.aragorn)
+
+        if self.arax is not None and not isinstance(self.arax, str):
+            self.arax = str(self.arax)
+
+        if self.unsecret is not None and not isinstance(self.unsecret, str):
+            self.unsecret = str(self.unsecret)
+
+        if self.bte is not None and not isinstance(self.bte, str):
+            self.bte = str(self.bte)
+
+        if self.improving is not None and not isinstance(self.improving, str):
+            self.improving = str(self.improving)
 
         super().__post_init__(**kwargs)
 
@@ -1037,14 +1132,10 @@ class ExpectedOutputEnum(EnumDefinitionImpl):
     Expected output values for instances of Test Asset or Test Cases(?). (Note: does this Enum overlap with
     'ExpectedResultsEnum' below?)
     """
-    Top_Answer = PermissibleValue(text="Top_Answer")
     Acceptable = PermissibleValue(text="Acceptable")
     BadButForgivable = PermissibleValue(text="BadButForgivable")
     NeverShow = PermissibleValue(text="NeverShow")
-    number_1_TopAnswer = PermissibleValue(text="number_1_TopAnswer")
-    number_2_Acceptable = PermissibleValue(text="number_2_Acceptable")
-    number_3_BadButForgivable = PermissibleValue(text="number_3_BadButForgivable")
-    number_4_NeverShow = PermissibleValue(text="number_4_NeverShow")
+    TopAnswer = PermissibleValue(text="TopAnswer")
 
     _defn = EnumDefinition(
         name="ExpectedOutputEnum",
@@ -1194,6 +1285,36 @@ class TestCaseResultEnum(EnumDefinitionImpl):
 # Slots
 class slots:
     pass
+
+slots.parent_pk = Slot(uri=TTM.parent_pk, name="parent_pk", curie=TTM.curie('parent_pk'),
+                   model_uri=TTM.parent_pk, domain=None, range=Optional[str])
+
+slots.merged_pk = Slot(uri=TTM.merged_pk, name="merged_pk", curie=TTM.curie('merged_pk'),
+                   model_uri=TTM.merged_pk, domain=None, range=Optional[str])
+
+slots.aragorn = Slot(uri=TTM.aragorn, name="aragorn", curie=TTM.curie('aragorn'),
+                   model_uri=TTM.aragorn, domain=None, range=Optional[str])
+
+slots.arax = Slot(uri=TTM.arax, name="arax", curie=TTM.curie('arax'),
+                   model_uri=TTM.arax, domain=None, range=Optional[str])
+
+slots.unsecret = Slot(uri=TTM.unsecret, name="unsecret", curie=TTM.curie('unsecret'),
+                   model_uri=TTM.unsecret, domain=None, range=Optional[str])
+
+slots.bte = Slot(uri=TTM.bte, name="bte", curie=TTM.curie('bte'),
+                   model_uri=TTM.bte, domain=None, range=Optional[str])
+
+slots.improving = Slot(uri=TTM.improving, name="improving", curie=TTM.curie('improving'),
+                   model_uri=TTM.improving, domain=None, range=Optional[str])
+
+slots.pks = Slot(uri=TTM.pks, name="pks", curie=TTM.curie('pks'),
+                   model_uri=TTM.pks, domain=None, range=Optional[Union[Union[str, TestResultPKSetId], List[Union[str, TestResultPKSetId]]]])
+
+slots.results = Slot(uri=TTM.results, name="results", curie=TTM.curie('results'),
+                   model_uri=TTM.results, domain=None, range=Optional[Union[Union[str, TestOutputId], List[Union[str, TestOutputId]]]])
+
+slots.test_case_id = Slot(uri=TTM.test_case_id, name="test_case_id", curie=TTM.curie('test_case_id'),
+                   model_uri=TTM.test_case_id, domain=None, range=Optional[str])
 
 slots.parameter = Slot(uri=TTM.parameter, name="parameter", curie=TTM.curie('parameter'),
                    model_uri=TTM.parameter, domain=None, range=Optional[str])

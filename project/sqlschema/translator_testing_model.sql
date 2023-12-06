@@ -74,29 +74,6 @@ CREATE TABLE "QuantitativeTestCase" (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE "TestAsset" (
-	name TEXT, 
-	description TEXT, 
-	input_id TEXT NOT NULL, 
-	input_name TEXT, 
-	input_category TEXT, 
-	predicate_id TEXT, 
-	predicate_name TEXT NOT NULL, 
-	output_id TEXT NOT NULL, 
-	output_name TEXT, 
-	output_category TEXT, 
-	association TEXT, 
-	qualifiers TEXT, 
-	expected_output VARCHAR(25) NOT NULL, 
-	test_issue VARCHAR(20), 
-	semantic_severity VARCHAR(13), 
-	in_v1 BOOLEAN, 
-	well_known BOOLEAN, 
-	test_reference TEXT, 
-	id TEXT NOT NULL, 
-	PRIMARY KEY (id)
-);
-
 CREATE TABLE "TestCase" (
 	id TEXT NOT NULL, 
 	name TEXT, 
@@ -106,29 +83,6 @@ CREATE TABLE "TestCase" (
 	test_assets TEXT NOT NULL, 
 	preconditions TEXT, 
 	trapi_template VARCHAR(24), 
-	PRIMARY KEY (id)
-);
-
-CREATE TABLE "TestEdgeData" (
-	name TEXT, 
-	description TEXT, 
-	input_id TEXT NOT NULL, 
-	input_name TEXT, 
-	input_category TEXT, 
-	predicate_id TEXT, 
-	predicate_name TEXT NOT NULL, 
-	output_id TEXT NOT NULL, 
-	output_name TEXT, 
-	output_category TEXT, 
-	association TEXT, 
-	qualifiers TEXT, 
-	expected_output VARCHAR(25) NOT NULL, 
-	test_issue VARCHAR(20), 
-	semantic_severity VARCHAR(13), 
-	in_v1 BOOLEAN, 
-	well_known BOOLEAN, 
-	test_reference TEXT, 
-	id TEXT NOT NULL, 
 	PRIMARY KEY (id)
 );
 
@@ -146,6 +100,14 @@ CREATE TABLE "TestMetadata" (
 	test_reference TEXT, 
 	test_objective VARCHAR(16), 
 	test_annotations TEXT, 
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE "TestOutput" (
+	id TEXT NOT NULL, 
+	name TEXT, 
+	description TEXT, 
+	test_case_id TEXT, 
 	PRIMARY KEY (id)
 );
 
@@ -188,12 +150,13 @@ CREATE TABLE "AcceptanceTestAsset" (
 	output_category TEXT, 
 	association TEXT, 
 	qualifiers TEXT, 
-	expected_output VARCHAR(25) NOT NULL, 
+	expected_output VARCHAR(16) NOT NULL, 
 	test_issue VARCHAR(20), 
 	semantic_severity VARCHAR(13), 
 	in_v1 BOOLEAN, 
 	well_known BOOLEAN, 
 	test_reference TEXT, 
+	test_metadata TEXT, 
 	id TEXT NOT NULL, 
 	must_pass_date DATE, 
 	must_pass_environment VARCHAR(4), 
@@ -207,6 +170,7 @@ CREATE TABLE "AcceptanceTestAsset" (
 	notes TEXT, 
 	"AcceptanceTestCase_id" TEXT, 
 	PRIMARY KEY (id), 
+	FOREIGN KEY(test_metadata) REFERENCES "TestMetadata" (id), 
 	FOREIGN KEY("AcceptanceTestCase_id") REFERENCES "AcceptanceTestCase" (id)
 );
 
@@ -249,6 +213,31 @@ CREATE TABLE "StandardsComplianceTestSuite" (
 	FOREIGN KEY(test_suite_specification) REFERENCES "TestSuiteSpecification" (id)
 );
 
+CREATE TABLE "TestAsset" (
+	name TEXT, 
+	description TEXT, 
+	input_id TEXT NOT NULL, 
+	input_name TEXT, 
+	input_category TEXT, 
+	predicate_id TEXT, 
+	predicate_name TEXT NOT NULL, 
+	output_id TEXT NOT NULL, 
+	output_name TEXT, 
+	output_category TEXT, 
+	association TEXT, 
+	qualifiers TEXT, 
+	expected_output VARCHAR(16) NOT NULL, 
+	test_issue VARCHAR(20), 
+	semantic_severity VARCHAR(13), 
+	in_v1 BOOLEAN, 
+	well_known BOOLEAN, 
+	test_reference TEXT, 
+	test_metadata TEXT, 
+	id TEXT NOT NULL, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(test_metadata) REFERENCES "TestMetadata" (id)
+);
+
 CREATE TABLE "TestCaseResult" (
 	id TEXT NOT NULL, 
 	name TEXT, 
@@ -260,6 +249,47 @@ CREATE TABLE "TestCaseResult" (
 	PRIMARY KEY (id), 
 	FOREIGN KEY(test_case) REFERENCES "TestCase" (id), 
 	FOREIGN KEY("TestRunSession_id") REFERENCES "TestRunSession" (id)
+);
+
+CREATE TABLE "TestEdgeData" (
+	name TEXT, 
+	description TEXT, 
+	input_id TEXT NOT NULL, 
+	input_name TEXT, 
+	input_category TEXT, 
+	predicate_id TEXT, 
+	predicate_name TEXT NOT NULL, 
+	output_id TEXT NOT NULL, 
+	output_name TEXT, 
+	output_category TEXT, 
+	association TEXT, 
+	qualifiers TEXT, 
+	expected_output VARCHAR(16) NOT NULL, 
+	test_issue VARCHAR(20), 
+	semantic_severity VARCHAR(13), 
+	in_v1 BOOLEAN, 
+	well_known BOOLEAN, 
+	test_reference TEXT, 
+	test_metadata TEXT, 
+	id TEXT NOT NULL, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(test_metadata) REFERENCES "TestMetadata" (id)
+);
+
+CREATE TABLE "TestResultPKSet" (
+	id TEXT NOT NULL, 
+	name TEXT, 
+	description TEXT, 
+	parent_pk TEXT, 
+	merged_pk TEXT, 
+	aragorn TEXT, 
+	arax TEXT, 
+	unsecret TEXT, 
+	bte TEXT, 
+	improving TEXT, 
+	"TestOutput_id" TEXT, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY("TestOutput_id") REFERENCES "TestOutput" (id)
 );
 
 CREATE TABLE "TestSuite" (
@@ -352,20 +382,6 @@ CREATE TABLE "QuantitativeTestCase_tags" (
 	FOREIGN KEY(backref_id) REFERENCES "QuantitativeTestCase" (id)
 );
 
-CREATE TABLE "TestAsset_runner_settings" (
-	backref_id TEXT, 
-	runner_settings TEXT NOT NULL, 
-	PRIMARY KEY (backref_id, runner_settings), 
-	FOREIGN KEY(backref_id) REFERENCES "TestAsset" (id)
-);
-
-CREATE TABLE "TestAsset_tags" (
-	backref_id TEXT, 
-	tags TEXT, 
-	PRIMARY KEY (backref_id, tags), 
-	FOREIGN KEY(backref_id) REFERENCES "TestAsset" (id)
-);
-
 CREATE TABLE "TestCase_components" (
 	backref_id TEXT, 
 	components VARCHAR(9), 
@@ -380,25 +396,18 @@ CREATE TABLE "TestCase_tags" (
 	FOREIGN KEY(backref_id) REFERENCES "TestCase" (id)
 );
 
-CREATE TABLE "TestEdgeData_runner_settings" (
-	backref_id TEXT, 
-	runner_settings TEXT NOT NULL, 
-	PRIMARY KEY (backref_id, runner_settings), 
-	FOREIGN KEY(backref_id) REFERENCES "TestEdgeData" (id)
-);
-
-CREATE TABLE "TestEdgeData_tags" (
-	backref_id TEXT, 
-	tags TEXT, 
-	PRIMARY KEY (backref_id, tags), 
-	FOREIGN KEY(backref_id) REFERENCES "TestEdgeData" (id)
-);
-
 CREATE TABLE "TestMetadata_tags" (
 	backref_id TEXT, 
 	tags TEXT, 
 	PRIMARY KEY (backref_id, tags), 
 	FOREIGN KEY(backref_id) REFERENCES "TestMetadata" (id)
+);
+
+CREATE TABLE "TestOutput_tags" (
+	backref_id TEXT, 
+	tags TEXT, 
+	PRIMARY KEY (backref_id, tags), 
+	FOREIGN KEY(backref_id) REFERENCES "TestOutput" (id)
 );
 
 CREATE TABLE "TestRunnerConfiguration_tags" (
@@ -464,11 +473,46 @@ CREATE TABLE "StandardsComplianceTestSuite_tags" (
 	FOREIGN KEY(backref_id) REFERENCES "StandardsComplianceTestSuite" (id)
 );
 
+CREATE TABLE "TestAsset_runner_settings" (
+	backref_id TEXT, 
+	runner_settings TEXT NOT NULL, 
+	PRIMARY KEY (backref_id, runner_settings), 
+	FOREIGN KEY(backref_id) REFERENCES "TestAsset" (id)
+);
+
+CREATE TABLE "TestAsset_tags" (
+	backref_id TEXT, 
+	tags TEXT, 
+	PRIMARY KEY (backref_id, tags), 
+	FOREIGN KEY(backref_id) REFERENCES "TestAsset" (id)
+);
+
 CREATE TABLE "TestCaseResult_tags" (
 	backref_id TEXT, 
 	tags TEXT, 
 	PRIMARY KEY (backref_id, tags), 
 	FOREIGN KEY(backref_id) REFERENCES "TestCaseResult" (id)
+);
+
+CREATE TABLE "TestEdgeData_runner_settings" (
+	backref_id TEXT, 
+	runner_settings TEXT NOT NULL, 
+	PRIMARY KEY (backref_id, runner_settings), 
+	FOREIGN KEY(backref_id) REFERENCES "TestEdgeData" (id)
+);
+
+CREATE TABLE "TestEdgeData_tags" (
+	backref_id TEXT, 
+	tags TEXT, 
+	PRIMARY KEY (backref_id, tags), 
+	FOREIGN KEY(backref_id) REFERENCES "TestEdgeData" (id)
+);
+
+CREATE TABLE "TestResultPKSet_tags" (
+	backref_id TEXT, 
+	tags TEXT, 
+	PRIMARY KEY (backref_id, tags), 
+	FOREIGN KEY(backref_id) REFERENCES "TestResultPKSet" (id)
 );
 
 CREATE TABLE "TestSuite_tags" (

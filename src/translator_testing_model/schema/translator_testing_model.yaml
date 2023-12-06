@@ -128,6 +128,7 @@ classes:
       - well_known
       - test_reference
       - runner_settings
+      - test_metadata
     slot_usage:
       id:
         aliases: ["AssetIdentifier"]
@@ -334,6 +335,26 @@ classes:
           Different TestRunners may expect specific kinds of TestEntity as input.
           These 'test_entities' one or more instances of TestAsset, TestCase or TestSuite.
 
+  TestOutput:
+    description: >-
+      The output of a TestRunner run of one specific TestCase.
+    is_a: TestEntity
+    slots:
+      - test_case_id
+      - pks
+
+  TestResultPKSet:
+    description: >-
+      Primary keys for a given ARA result set from a SmokeTest result for a given TestCase.
+    is_a: TestEntity
+    slots:
+      - parent_pk
+      - merged_pk
+      - aragorn
+      - arax
+      - unsecret
+      - bte
+      - improving
 
 ###############
 # Model slots #
@@ -341,9 +362,34 @@ classes:
 
 slots:
 
+  parent_pk:
+  merged_pk:
+  aragorn:
+  arax:
+  unsecret:
+  bte:
+  improving:
+
+  pks:
+    description: >-
+      Primary keys for a given ARA result set from a SmokeTest result for a given TestCase.
+    range: TestResultPKSet
+    multivalued: true
+
+  results:
+    description: >-
+      The results of a TestRunner run of one specific TestCase.
+    range: TestOutput
+    multivalued: true
+
   #################
   # General Slots #
   #################
+
+  test_case_id:
+    description: >-
+      CURIE id of a TestCase registered in the system.
+    range: string
 
   parameter:
     description: >-
@@ -388,7 +434,9 @@ slots:
     multivalued: true
 
   test_source:
-    description: Provenance of a specific set of test assets, cases and/or suites.
+    description: >-
+      Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this, 
+      know about this.  We would like this to be an ORCID eventually, but currently it is just a string.
     range: TestSourceEnum
 
   test_reference:
@@ -792,25 +840,13 @@ enums:
       Expected output values for instances of Test Asset or Test Cases(?).
       (Note: does this Enum overlap with 'ExpectedResultsEnum' below?)
     permissible_values:
-      Top_Answer:
-        description:
       Acceptable:
         description:
       BadButForgivable:
         description:
       NeverShow:
         description:
-      number_1_TopAnswer:
-        is_a: Top_Answer
-        description:
-      number_2_Acceptable:
-        is_a: Acceptable
-        description:
-      number_3_BadButForgivable:
-        is_a: BadButForgivable
-        description:
-      number_4_NeverShow:
-        is_a: NeverShow
+      TopAnswer:
         description:
 
   TestIssueEnum:

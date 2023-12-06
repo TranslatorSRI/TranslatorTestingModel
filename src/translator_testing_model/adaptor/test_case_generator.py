@@ -71,17 +71,20 @@ class TestCaseGenerator:
             )
 
         if loader:
+
             for asset in loader.load_any(
-                   source=self.test_suite.test_suite_specification.test_data_file_locator,
-                    # the target class here is for the TestAssets you are loading, not the TestSuite!
-                    target_class=self.test_asset_class()
-            ):
+                                         source=self.test_suite.test_suite_specification.test_data_file_locator,
+                                         # the target class here is for the TestAssets you are loading,
+                                         # not the TestSuite!
+                                         target_class=self.test_asset_class()
+                                         ):
                 yield asset
 
     def load(self) -> Generator:
         # Generate the list of TestCases from the specified input test assets.
         n = 0
         for asset in self.test_assets():
+            print(asset)
             n += 1
             tc_id = f"TestCase:{n}"
             test_case = TestCase(id=tc_id, test_assets=[asset])

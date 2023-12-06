@@ -183,6 +183,7 @@ linkml:Sparqlpath xsd:string
              <well_known> @linkml:Boolean ? ;
              <test_reference> @linkml:Uriorcurie ? ;
              <runner_settings> @linkml:String + ;
+             <test_metadata> @<TestMetadata> ? ;
              schema1:additionalType @linkml:String *
           ) ;
           rdf:type [ <TestAsset> ]
@@ -227,8 +228,8 @@ linkml:Sparqlpath xsd:string
 }
 
 <TestEntity>  (
-    @<Precondition> OR @<TestAsset> OR @<TestCase> OR @<TestCaseResult> OR @<TestMetadata> OR @<TestRunSession> OR
-    @<TestRunnerConfiguration> OR @<TestSuite> OR @<TestSuiteSpecification>
+    @<Precondition> OR @<TestAsset> OR @<TestCase> OR @<TestCaseResult> OR @<TestMetadata> OR @<TestOutput> OR @<TestResultPKSet>
+    OR @<TestRunSession> OR @<TestRunnerConfiguration> OR @<TestSuite> OR @<TestSuiteSpecification>
 )
 
 <TestEntity_struct> {
@@ -259,6 +260,31 @@ linkml:Sparqlpath xsd:string
           <test_annotations> @<TestEntityParameter> *
        ) ;
        rdf:type [ <TestMetadata> ]
+    )
+}
+
+<TestOutput> CLOSED {
+    (  $<TestOutput_tes> (  &<TestEntity_tes> ;
+          rdf:type [ <TestEntity> ] ? ;
+          <test_case_id> @linkml:String ? ;
+          <pks> @<TestResultPKSet> *
+       ) ;
+       rdf:type [ <TestOutput> ]
+    )
+}
+
+<TestResultPKSet> CLOSED {
+    (  $<TestResultPKSet_tes> (  &<TestEntity_tes> ;
+          rdf:type [ <TestEntity> ] ? ;
+          <parent_pk> @linkml:String ? ;
+          <merged_pk> @linkml:String ? ;
+          <aragorn> @linkml:String ? ;
+          <arax> @linkml:String ? ;
+          <unsecret> @linkml:String ? ;
+          <bte> @linkml:String ? ;
+          <improving> @linkml:String ?
+       ) ;
+       rdf:type [ <TestResultPKSet> ]
     )
 }
 

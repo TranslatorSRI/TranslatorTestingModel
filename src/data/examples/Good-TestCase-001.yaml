@@ -42,7 +42,7 @@ test_assets:
     input_id: MONDO:0011426
     predicate_name: treats
     output_id: DRUGBANK:DB01592
-    expected_output: number_4_NeverShow
+    expected_output: NeverShow
     runner_settings:
       - "inferred"
       - "test"

@@ -493,9 +493,6 @@
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "permissible_values": [
         {
-          "text": "Top_Answer"
-        },
-        {
           "text": "Acceptable"
         },
         {
@@ -505,20 +502,7 @@
           "text": "NeverShow"
         },
         {
-          "text": "number_1_TopAnswer",
-          "is_a": "Top_Answer"
-        },
-        {
-          "text": "number_2_Acceptable",
-          "is_a": "Acceptable"
-        },
-        {
-          "text": "number_3_BadButForgivable",
-          "is_a": "BadButForgivable"
-        },
-        {
-          "text": "number_4_NeverShow",
-          "is_a": "NeverShow"
+          "text": "TopAnswer"
         }
       ]
     },
@@ -708,6 +692,127 @@
   ],
   "slots": [
     {
+      "name": "parent_pk",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/parent_pk",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/parent_pk",
+      "owner": "TestResultPKSet",
+      "domain_of": [
+        "TestResultPKSet"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "merged_pk",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/merged_pk",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/merged_pk",
+      "owner": "TestResultPKSet",
+      "domain_of": [
+        "TestResultPKSet"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "aragorn",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/aragorn",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/aragorn",
+      "owner": "TestResultPKSet",
+      "domain_of": [
+        "TestResultPKSet"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "arax",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/arax",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/arax",
+      "owner": "TestResultPKSet",
+      "domain_of": [
+        "TestResultPKSet"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "unsecret",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/unsecret",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/unsecret",
+      "owner": "TestResultPKSet",
+      "domain_of": [
+        "TestResultPKSet"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "bte",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/bte",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/bte",
+      "owner": "TestResultPKSet",
+      "domain_of": [
+        "TestResultPKSet"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "improving",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/improving",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/improving",
+      "owner": "TestResultPKSet",
+      "domain_of": [
+        "TestResultPKSet"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "pks",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/pks",
+      "description": "Primary keys for a given ARA result set from a SmokeTest result for a given TestCase.",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/pks",
+      "multivalued": true,
+      "owner": "TestOutput",
+      "domain_of": [
+        "TestOutput"
+      ],
+      "range": "TestResultPKSet",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "results",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/results",
+      "description": "The results of a TestRunner run of one specific TestCase.",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/results",
+      "multivalued": true,
+      "range": "TestOutput",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "test_case_id",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case_id",
+      "description": "CURIE id of a TestCase registered in the system.",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case_id",
+      "owner": "TestOutput",
+      "domain_of": [
+        "TestOutput"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "parameter",
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/parameter",
       "description": "Name of a TestParameter.",
@@ -828,7 +933,7 @@
     {
       "name": "test_source",
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_source",
-      "description": "Provenance of a specific set of test assets, cases and/or suites.",
+      "description": "Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string.",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_source",
       "owner": "TestMetadata",
@@ -1471,6 +1576,7 @@
       "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_metadata",
       "owner": "TestSuite",
       "domain_of": [
+        "TestAsset",
         "TestSuite"
       ],
       "range": "TestMetadata",
@@ -1928,6 +2034,7 @@
         "well_known",
         "test_reference",
         "TestAsset_runner_settings",
+        "test_metadata",
         "TestAsset_id",
         "TestAsset_tags"
       ],
@@ -1961,6 +2068,7 @@
         "well_known",
         "test_reference",
         "TestAsset_runner_settings",
+        "test_metadata",
         "TestAsset_id",
         "TestAsset_tags",
         "must_pass_date",
@@ -2004,6 +2112,7 @@
         "well_known",
         "test_reference",
         "TestAsset_runner_settings",
+        "test_metadata",
         "TestAsset_id",
         "TestAsset_tags"
       ],
@@ -2322,13 +2431,54 @@
       "slot_usage": {},
       "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestRunSession",
       "@type": "ClassDefinition"
+    },
+    {
+      "name": "TestOutput",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestOutput",
+      "description": "The output of a TestRunner run of one specific TestCase.",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "is_a": "TestEntity",
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "tags",
+        "test_case_id",
+        "pks"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestOutput",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "TestResultPKSet",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestResultPKSet",
+      "description": "Primary keys for a given ARA result set from a SmokeTest result for a given TestCase.",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "is_a": "TestEntity",
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "tags",
+        "parent_pk",
+        "merged_pk",
+        "aragorn",
+        "arax",
+        "unsecret",
+        "bte",
+        "improving"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestResultPKSet",
+      "@type": "ClassDefinition"
     }
   ],
   "metamodel_version": "1.7.0",
   "source_file": "translator_testing_model.yaml",
-  "source_file_date": "2023-11-25T10:51:53",
-  "source_file_size": 25594,
-  "generation_date": "2023-11-25T10:59:15",
+  "source_file_date": "2023-12-05T16:27:54",
+  "source_file_size": 25481,
+  "generation_date": "2023-12-05T16:28:01",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",

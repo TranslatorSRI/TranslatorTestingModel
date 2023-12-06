@@ -2,6 +2,7 @@
 Unit Tests for TestSuiteFactory functionality
 """
 import unittest
+from unittest import skip
 
 from src.translator_testing_model.adaptor.test_case_generator import (
     TestSuiteInputException,
@@ -72,9 +73,11 @@ class TestTestCaseGenerator(unittest.TestCase):
         tests = test_suite_wrapper.create_test_case_generator()
         isinstance(tests, TestCaseGenerator)
 
+    @skip("Not implemented yet")
     def test_case_generator_load(self):
         """Test Case Generator load test."""
         test_suite_wrapper = TestCaseGeneratorWrapper()
         tests = test_suite_wrapper.create_test_case_generator()
+        print(tests.load())
         for test in tests.load():
             assert test

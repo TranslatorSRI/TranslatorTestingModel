@@ -19,6 +19,7 @@ type AcceptanceTestAsset
     wellKnown: Boolean
     testReference: Uriorcurie
     runnerSettings: [String]!
+    testMetadata: TestMetadata
     id: Uriorcurie!
     tags: [String]
     mustPassDate: Date
@@ -180,6 +181,7 @@ type TestAsset
     wellKnown: Boolean
     testReference: Uriorcurie
     runnerSettings: [String]!
+    testMetadata: TestMetadata
     id: Uriorcurie!
     tags: [String]
   }
@@ -230,6 +232,7 @@ type TestEdgeData
     wellKnown: Boolean
     testReference: Uriorcurie
     runnerSettings: [String]!
+    testMetadata: TestMetadata
     id: Uriorcurie!
     tags: [String]
   }
@@ -258,6 +261,31 @@ type TestMetadata
     testReference: Uriorcurie
     testObjective: TestObjectiveEnum
     testAnnotations: [TestEntityParameter]
+  }
+
+type TestOutput
+  {
+    id: Uriorcurie!
+    name: String
+    description: String
+    tags: [String]
+    testCaseId: String
+    pks: [TestResultPKSet]
+  }
+
+type TestResultPKSet
+  {
+    id: Uriorcurie!
+    name: String
+    description: String
+    tags: [String]
+    parentPk: String
+    mergedPk: String
+    aragorn: String
+    arax: String
+    unsecret: String
+    bte: String
+    improving: String
   }
 
 type TestRunnerConfiguration

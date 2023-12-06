@@ -1,8 +1,9 @@
-from src.translator_testing_model.datamodel.pydanticmodel import TestAsset, TestCase, TestSuite
+from src.translator_testing_model.datamodel.pydanticmodel import TestAsset, TestCase, TestSuite, TestMetadata
 import csv
 import json
 import os
 import requests
+
 
 def parse_tsv(filename):
     """
@@ -25,26 +26,39 @@ def create_test_assets_from_tsv(test_assets):
     for row in test_assets:
         if row.get("Relationship") == "":
             continue
+        print(row)
         ta = TestAsset(id=row.get("id").replace(":", "_"),
-                       name=row.get("OutputName").replace(" ", "_") + "_" + row.get("Query").lower() + "_" + row.get("InputName (user choice)").replace(" ", "_"),
-                       description=row.get("OutputName").replace(" ", "_") + "_" + row.get("Query").lower() + "_" + row.get("InputName (user choice)").replace(" ", "_")
+                       name=row.get("OutputName").replace(" ", "_") + "_" + row.get("Relationship").lower() + "_" + row.get("InputName (user choice)").replace(" ", "_"),
+                       description=row.get("OutputName").replace(" ", "_") + "_" + row.get("Relationship").lower() + "_" + row.get("InputName (user choice)").replace(" ", "_")
                        )
         ta.input_id = row.get("InputID, node normalized")
         ta.input_name = row.get("InputName (user choice)")
-        ta.predicate = row.get("Query").lower()
+        if row.get("GitHubIssue") != "" and row.get("GitHubIssue") is not None:
+            tmd = TestMetadata(id=1,
+                               test_source="SMURF",
+                               test_reference=row.get("GitHubIssue"),
+                               test_objective="AcceptanceTest")
+            ta.test_metadata = tmd
+        else:
+            tmd = TestMetadata(id=1,
+                               test_source="SMURF",
+                               test_objective="AcceptanceTest")
+            ta.test_metadata = tmd
+        ta.predicate_name = row.get("Relationship").lower()
         ta.output_id = row.get("OutputID")
         ta.output_name = row.get("OutputName")
         ta.runner_settings = [row.get("Settings").lower()]
         if row.get("Expected Result / Suggested Comparator") == "4_NeverShow":
-            ta.expected_output = "number_4_NeverShow"
+            ta.expected_output = "NeverShow"
         elif row.get("Expected Result / Suggested Comparator") == "3_BadButForgivable":
-            ta.expected_output = "number_3_BadButForgivable"
+            ta.expected_output = "BadButForgivable"
         elif row.get("Expected Result / Suggested Comparator") == "2_Acceptable":
-            ta.expected_output = "number_2_Acceptable"
+            ta.expected_output = "Acceptable"
         elif row.get("Expected Result / Suggested Comparator") == "1_TopAnswer":
-            ta.expected_output = "number_1_TopAnswer"
+            ta.expected_output = "TopAnswer"
         else:
             print(row.get("Expected Result / Suggested Comparator"))
+
 
         if row.get("Well Known") == "yes":
             ta.well_known = True
@@ -56,19 +70,32 @@ def create_test_assets_from_tsv(test_assets):
 
 
 def create_test_cases_from_test_assets(test_assets, test_case_model):
+    # Group test assets based on input_id and relationship
+    grouped_assets = {}
+    for test_asset in test_assets:
+        key = (test_asset.input_id, test_asset.predicate_name)
+        if key not in grouped_assets:
+            grouped_assets[key] = []
+            print(key)
+        grouped_assets[key].append(test_asset)
+
+    # Create test cases from grouped test assets
     test_cases = []
-    for idx, test_asset in enumerate(test_assets):
+    for idx, (key, assets) in enumerate(grouped_assets.items()):
         test_case_id = f"TestCase_{idx}"
+        descriptions = '; '.join(asset.description for asset in assets)
+
         test_case = test_case_model(id=test_case_id,
-                                    test_assets=[test_asset],
-                                    name=test_asset.name,
-                                    description=test_asset.description,
-                                    test_case_type="acceptance",
+                                    test_assets=assets,
+                                    name="what " + key,
+                                    description=descriptions,
                                     test_env="ci",
                                     components=["ars"]
                                     )
+        print(test_case.name)
         test_cases.append(test_case)
         print(test_case)
+
     return test_cases
 
 
@@ -81,7 +108,7 @@ def create_test_suite_from_test_cases(test_cases, test_suite_model):
 if __name__ == '__main__':
 
     # Reading the TSV file
-    tsv_file_path = 'pf_test_assets_2023_10_30.tsv'
+    tsv_file_path = 'pf_test_assets_2023_11_28.tsv'
     print(f"Error: The file {tsv_file_path} does not exist in the directory {os.getcwd()}.")
     tsv_data = parse_tsv(tsv_file_path)
 
@@ -126,13 +153,21 @@ if __name__ == '__main__':
         data = response.json()
         for k, v in data.items():
             print(k, v)
+            tmd = TestMetadata(id=1,
+                               test_source="SMURF",
+                               test_objective="QuantitativeTest")
+            ta = TestAsset(id=k,
+                            name=k,
+                            description=k,
+                            test_metadata=tmd
+                            )
             tc = TestCase(id=k,
                           name=k,
                           description=k,
-                          test_case_type="quantitative",
-                          test_assets=[],
+                          test_assets=[ta],
                           test_env="ci",
                           components=["ars"]
+
                           )
             file_prefix = k
             filename = f"{file_prefix}.json"
