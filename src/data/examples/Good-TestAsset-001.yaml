@@ -1,6 +1,6 @@
 # Example TestAsset data object
 ---
-# TODO: the TestAsset example data needs further elaboration
+# TODO: the TestAsset example data may need further elaboration
 
 #
 #   TestAsset:
@@ -10,19 +10,20 @@
 #      specification of a Translator test target with inputs and (expected) outputs.
 #    is_a: TestEntity
 #    slots:
-#      - input_id
+#      - input_id  # required: true
 #      - input_name
-#      - predicate
-#      - output_id
+#      - predicate  # required: true
+#      - output_id  # required: true
 #      - output_name
-#      - expected_output
+#      - expected_output  # required: true
 #      - test_issue
 #      - semantic_severity
 #      - in_v1
 #      - well_known
-#      - runner_settings
+#      - test_reference
+#      - runner_settings  # required: true
 #    slot_usage:
-#      id:
+#      id:  # required: true
 #        aliases: ["AssetIdentifier"]
 #        range: uriorcurie
 #      tags:

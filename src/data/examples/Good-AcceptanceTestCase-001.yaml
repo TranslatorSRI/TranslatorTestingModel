@@ -14,9 +14,13 @@ id: example:AcceptanceTestCase001
 name: foo bar
 description: This is an acceptance test case
 test_assets:
-  - id: example:TestAsset001
-    name: foo bar
-    description: This is a test asset
+  - id: example:AcceptanceTestAsset001
+    name: AcceptanceTestAsset001
+    description: Iron treats Aceruloplasminemia
+    input_id: MONDO:0011426
+    predicate: Treats
+    output_id: DRUGBANK:DB01592
+    expected_output: number_4_NeverShow
     runner_settings:
       - "inferred"
       - "test"

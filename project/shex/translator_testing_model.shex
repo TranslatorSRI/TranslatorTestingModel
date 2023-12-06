@@ -146,12 +146,12 @@ linkml:Sparqlpath xsd:string
     CLOSED {
        (  $<TestAsset_tes> (  &<TestEntity_tes> ;
              rdf:type [ <TestEntity> ] ? ;
-             <input_id> @linkml:Uriorcurie ? ;
+             <input_id> @linkml:Uriorcurie ;
              <input_name> @linkml:String ? ;
-             <predicate> @linkml:String ? ;
-             <output_id> @linkml:Uriorcurie ? ;
+             <predicate> @linkml:String ;
+             <output_id> @linkml:Uriorcurie ;
              <output_name> @linkml:String ? ;
-             <expected_output> @<ExpectedOutputEnum> ? ;
+             <expected_output> @<ExpectedOutputEnum> ;
              <test_issue> @<TestIssueEnum> ? ;
              <semantic_severity> @<SemanticSeverityEnum> ? ;
              <in_v1> @linkml:Boolean ? ;
