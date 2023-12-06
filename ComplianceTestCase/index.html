@@ -206,6 +206,8 @@
     class ComplianceTestCase
       TestCase &lt;|-- ComplianceTestCase
 
+      ComplianceTestCase : biolink_version
+
       ComplianceTestCase : components
 
           ComplianceTestCase --|&gt; ComponentEnum : components
@@ -238,6 +240,8 @@
 
           ComplianceTestCase --|&gt; TrapiTemplateEnum : trapi_template
 
+      ComplianceTestCase : trapi_version
+
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
@@ -261,6 +265,18 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><a href="../trapi_version/">trapi_version</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>TRAPI version (SemVer string)</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../biolink_version/">biolink_version</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>Biolink Model release (SemVer string)</td>
+<td>direct</td>
+</tr>
 <tr>
 <td><a href="../test_env/">test_env</a></td>
 <td>0..1 <br/> <a href="../TestEnvEnum/">TestEnvEnum</a></td>
@@ -355,6 +371,9 @@
 description: TRAPI and Biolink Model standards compliance test
 from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
 is_a: TestCase
+slots:
+- trapi_version
+- biolink_version
 
 </code></pre>
 </details>
@@ -365,6 +384,26 @@ description: TRAPI and Biolink Model standards compliance test
 from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
 is_a: TestCase
 attributes:
+  trapi_version:
+    name: trapi_version
+    description: TRAPI version (SemVer string)
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    alias: trapi_version
+    owner: ComplianceTestCase
+    domain_of:
+    - ComplianceTestCase
+    range: string
+  biolink_version:
+    name: biolink_version
+    description: Biolink Model release (SemVer string)
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    alias: biolink_version
+    owner: ComplianceTestCase
+    domain_of:
+    - ComplianceTestCase
+    range: string
   test_env:
     name: test_env
     description: Deployment environment within which the associated TestSuite is run.

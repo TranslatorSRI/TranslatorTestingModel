@@ -31,6 +31,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/AssociationCategory/</loc>
+         <lastmod>2023-12-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/BenchmarkTestSuite/</loc>
          <lastmod>2023-12-06</lastmod>
          <changefreq>daily</changefreq>
@@ -41,12 +46,22 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/CategoryType/</loc>
+         <lastmod>2023-12-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/ComplianceTestCase/</loc>
          <lastmod>2023-12-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/ComponentEnum/</loc>
+         <lastmod>2023-12-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/ConceptCategory/</loc>
          <lastmod>2023-12-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -176,6 +191,16 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/PredicateType/</loc>
+         <lastmod>2023-12-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/Qualifier/</loc>
+         <lastmod>2023-12-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/QuantitativeTestCase/</loc>
          <lastmod>2023-12-06</lastmod>
          <changefreq>daily</changefreq>
@@ -291,7 +316,17 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/TestOutput/</loc>
+         <lastmod>2023-12-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/TestPersonaEnum/</loc>
+         <lastmod>2023-12-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/TestResultPKSet/</loc>
          <lastmod>2023-12-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -356,6 +391,31 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/aragorn/</loc>
+         <lastmod>2023-12-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/arax/</loc>
+         <lastmod>2023-12-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/association/</loc>
+         <lastmod>2023-12-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/biolink_version/</loc>
+         <lastmod>2023-12-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/bte/</loc>
+         <lastmod>2023-12-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/components/</loc>
          <lastmod>2023-12-06</lastmod>
          <changefreq>daily</changefreq>
@@ -391,7 +451,17 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/improving/</loc>
+         <lastmod>2023-12-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/in_v1/</loc>
+         <lastmod>2023-12-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/input_category/</loc>
          <lastmod>2023-12-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -407,6 +477,11 @@
     </url>
     <url>
          <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/inputs/</loc>
+         <lastmod>2023-12-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/merged_pk/</loc>
          <lastmod>2023-12-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -441,6 +516,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/output_category/</loc>
+         <lastmod>2023-12-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/output_id/</loc>
          <lastmod>2023-12-06</lastmod>
          <changefreq>daily</changefreq>
@@ -461,12 +541,32 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/parent_pk/</loc>
+         <lastmod>2023-12-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/pks/</loc>
+         <lastmod>2023-12-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/preconditions/</loc>
          <lastmod>2023-12-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/predicate/</loc>
+         <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/predicate_id/</loc>
+         <lastmod>2023-12-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/predicate_name/</loc>
+         <lastmod>2023-12-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/qualifiers/</loc>
          <lastmod>2023-12-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -487,6 +587,11 @@
     </url>
     <url>
          <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/requires_trapi/</loc>
+         <lastmod>2023-12-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/results/</loc>
          <lastmod>2023-12-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -527,6 +632,11 @@
     </url>
     <url>
          <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/test_case/</loc>
+         <lastmod>2023-12-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/test_case_id/</loc>
          <lastmod>2023-12-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -642,6 +752,16 @@
     </url>
     <url>
          <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/trapi_template/</loc>
+         <lastmod>2023-12-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/trapi_version/</loc>
+         <lastmod>2023-12-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/unsecret/</loc>
          <lastmod>2023-12-06</lastmod>
          <changefreq>daily</changefreq>
     </url>

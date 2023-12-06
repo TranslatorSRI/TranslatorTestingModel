@@ -450,6 +450,14 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <td>Represents metadata related to (external SME, SMURF, Translator feedback,  large scale batch, etc.) like the provenance of test assets, cases and/or suites.</td>
 </tr>
 <tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="TestOutput/">TestOutput</a></td>
+<td>The output of a TestRunner run of one specific TestCase.</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="TestResultPKSet/">TestResultPKSet</a></td>
+<td>Primary keys for a given ARA result set from a SmokeTest result for a given TestCase.</td>
+</tr>
+<tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="TestRunnerConfiguration/">TestRunnerConfiguration</a></td>
 <td>General configuration parameters and test data input  for a single invocation of a TestRunner.</td>
 </tr>
@@ -481,6 +489,10 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <td><a href="TestEntityParameter/">TestEntityParameter</a></td>
 <td>A single 'tag = value' pair (where 'value' is a simple string).</td>
 </tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="Qualifier/">Qualifier</a></td>
+<td>None</td>
+</tr>
 </tbody>
 </table>
 <h2 id="slots">Slots</h2>
@@ -495,6 +507,26 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <tr>
 <td><a href="answer_informal_concept/">answer_informal_concept</a></td>
 <td>An answer that is returned from the test case, note: this must be combined wi...</td>
+</tr>
+<tr>
+<td><a href="aragorn/">aragorn</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="arax/">arax</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="association/">association</a></td>
+<td>Specific Biolink Model association 'category' which applies to the test asset...</td>
+</tr>
+<tr>
+<td><a href="biolink_version/">biolink_version</a></td>
+<td>Biolink Model release (SemVer string)</td>
+</tr>
+<tr>
+<td><a href="bte/">bte</a></td>
+<td></td>
 </tr>
 <tr>
 <td><a href="components/">components</a></td>
@@ -521,7 +553,15 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <td>A unique identifier for a Test Entity</td>
 </tr>
 <tr>
+<td><a href="improving/">improving</a></td>
+<td></td>
+</tr>
+<tr>
 <td><a href="in_v1/">in_v1</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="input_category/">input_category</a></td>
 <td></td>
 </tr>
 <tr>
@@ -530,6 +570,10 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 </tr>
 <tr>
 <td><a href="input_name/">input_name</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="merged_pk/">merged_pk</a></td>
 <td></td>
 </tr>
 <tr>
@@ -549,6 +593,10 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <td>The notes of the query</td>
 </tr>
 <tr>
+<td><a href="output_category/">output_category</a></td>
+<td></td>
+</tr>
+<tr>
 <td><a href="output_id/">output_id</a></td>
 <td></td>
 </tr>
@@ -561,12 +609,28 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <td>Name of a TestParameter</td>
 </tr>
 <tr>
+<td><a href="parent_pk/">parent_pk</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="pks/">pks</a></td>
+<td>Primary keys for a given ARA result set from a SmokeTest result for a given T...</td>
+</tr>
+<tr>
 <td><a href="preconditions/">preconditions</a></td>
 <td></td>
 </tr>
 <tr>
-<td><a href="predicate/">predicate</a></td>
+<td><a href="predicate_id/">predicate_id</a></td>
 <td></td>
+</tr>
+<tr>
+<td><a href="predicate_name/">predicate_name</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="qualifiers/">qualifiers</a></td>
+<td>Optional qualifiers which constrain to the test asset defined knowledge state...</td>
 </tr>
 <tr>
 <td><a href="query_node/">query_node</a></td>
@@ -575,6 +639,10 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <tr>
 <td><a href="query_type/">query_type</a></td>
 <td>Type of TestCase query</td>
+</tr>
+<tr>
+<td><a href="results/">results</a></td>
+<td>The results of a TestRunner run of one specific TestCase</td>
 </tr>
 <tr>
 <td><a href="runner_settings/">runner_settings</a></td>
@@ -607,6 +675,10 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <tr>
 <td><a href="test_case/">test_case</a></td>
 <td>Slot referencing a single TestCase</td>
+</tr>
+<tr>
+<td><a href="test_case_id/">test_case_id</a></td>
+<td>CURIE id of a TestCase registered in the system</td>
 </tr>
 <tr>
 <td><a href="test_case_result/">test_case_result</a></td>
@@ -691,6 +763,14 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <tr>
 <td><a href="trapi_template/">trapi_template</a></td>
 <td>A template for a query, which can be used to generate a query for a test case</td>
+</tr>
+<tr>
+<td><a href="trapi_version/">trapi_version</a></td>
+<td>TRAPI version (SemVer string)</td>
+</tr>
+<tr>
+<td><a href="unsecret/">unsecret</a></td>
+<td></td>
 </tr>
 <tr>
 <td><a href="value/">value</a></td>
@@ -783,8 +863,20 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 </thead>
 <tbody>
 <tr>
+<td><a href="AssociationCategory/">AssociationCategory</a></td>
+<td>A category type within the Biolink Model ('biolink' namespace) 'biolink:Assoc...</td>
+</tr>
+<tr>
 <td><a href="Boolean/">Boolean</a></td>
 <td>A binary (true or false) value</td>
+</tr>
+<tr>
+<td><a href="CategoryType/">CategoryType</a></td>
+<td>A primitive type in which the value denotes a class within the biolink model</td>
+</tr>
+<tr>
+<td><a href="ConceptCategory/">ConceptCategory</a></td>
+<td>A category type within the Biolink Model ('biolink' namespace) 'biolink:Named...</td>
 </tr>
 <tr>
 <td><a href="Curie/">Curie</a></td>
@@ -837,6 +929,10 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <tr>
 <td><a href="Objectidentifier/">Objectidentifier</a></td>
 <td>A URI or CURIE that represents an object in the model</td>
+</tr>
+<tr>
+<td><a href="PredicateType/">PredicateType</a></td>
+<td>A CURIE from the Biolink Model ('biolink' namespace) 'biolink:related_to' hie...</td>
 </tr>
 <tr>
 <td><a href="Sparqlpath/">Sparqlpath</a></td>

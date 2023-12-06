@@ -206,6 +206,8 @@
     class TestEdgeData
       TestAsset &lt;|-- TestEdgeData
 
+      TestEdgeData : association
+
       TestEdgeData : description
 
       TestEdgeData : expected_output
@@ -216,17 +218,27 @@
 
       TestEdgeData : in_v1
 
+      TestEdgeData : input_category
+
       TestEdgeData : input_id
 
       TestEdgeData : input_name
 
       TestEdgeData : name
 
+      TestEdgeData : output_category
+
       TestEdgeData : output_id
 
       TestEdgeData : output_name
 
-      TestEdgeData : predicate
+      TestEdgeData : predicate_id
+
+      TestEdgeData : predicate_name
+
+      TestEdgeData : qualifiers
+
+          TestEdgeData --|&gt; Qualifier : qualifiers
 
       TestEdgeData : runner_settings
 
@@ -239,6 +251,10 @@
       TestEdgeData : test_issue
 
           TestEdgeData --|&gt; TestIssueEnum : test_issue
+
+      TestEdgeData : test_metadata
+
+          TestEdgeData --|&gt; TestMetadata : test_metadata
 
       TestEdgeData : test_reference
 
@@ -280,7 +296,19 @@
 <td><a href="../TestAsset/">TestAsset</a></td>
 </tr>
 <tr>
-<td><a href="../predicate/">predicate</a></td>
+<td><a href="../input_category/">input_category</a></td>
+<td>0..1 <br/> <a href="../ConceptCategory/">ConceptCategory</a></td>
+<td></td>
+<td><a href="../TestAsset/">TestAsset</a></td>
+</tr>
+<tr>
+<td><a href="../predicate_id/">predicate_id</a></td>
+<td>0..1 <br/> <a href="../PredicateType/">PredicateType</a></td>
+<td></td>
+<td><a href="../TestAsset/">TestAsset</a></td>
+</tr>
+<tr>
+<td><a href="../predicate_name/">predicate_name</a></td>
 <td>1..1 <br/> <a href="../String/">String</a></td>
 <td></td>
 <td><a href="../TestAsset/">TestAsset</a></td>
@@ -295,6 +323,24 @@
 <td><a href="../output_name/">output_name</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td></td>
+<td><a href="../TestAsset/">TestAsset</a></td>
+</tr>
+<tr>
+<td><a href="../output_category/">output_category</a></td>
+<td>0..1 <br/> <a href="../ConceptCategory/">ConceptCategory</a></td>
+<td></td>
+<td><a href="../TestAsset/">TestAsset</a></td>
+</tr>
+<tr>
+<td><a href="../association/">association</a></td>
+<td>0..1 <br/> <a href="../AssociationCategory/">AssociationCategory</a></td>
+<td>Specific Biolink Model association 'category' which applies to the test asset...</td>
+<td><a href="../TestAsset/">TestAsset</a></td>
+</tr>
+<tr>
+<td><a href="../qualifiers/">qualifiers</a></td>
+<td>0..* <br/> <a href="../Qualifier/">Qualifier</a></td>
+<td>Optional qualifiers which constrain to the test asset defined knowledge state...</td>
 <td><a href="../TestAsset/">TestAsset</a></td>
 </tr>
 <tr>
@@ -337,6 +383,12 @@
 <td><a href="../runner_settings/">runner_settings</a></td>
 <td>1..* <br/> <a href="../String/">String</a></td>
 <td>Settings for the test harness, e</td>
+<td><a href="../TestAsset/">TestAsset</a></td>
+</tr>
+<tr>
+<td><a href="../test_metadata/">test_metadata</a></td>
+<td>0..1 <br/> <a href="../TestMetadata/">TestMetadata</a></td>
+<td>Test metadata describes the external provenance, cross-references and objecti...</td>
 <td><a href="../TestAsset/">TestAsset</a></td>
 </tr>
 <tr>
@@ -434,14 +486,36 @@ attributes:
     domain_of:
     - TestAsset
     range: string
-  predicate:
-    name: predicate
+  input_category:
+    name: input_category
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    aliases:
+    - SubjectCategory
+    rank: 1000
+    alias: input_category
+    owner: TestEdgeData
+    domain_of:
+    - TestAsset
+    range: concept_category
+  predicate_id:
+    name: predicate_id
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    aliases:
+    - Predicate
+    rank: 1000
+    alias: predicate_id
+    owner: TestEdgeData
+    domain_of:
+    - TestAsset
+    range: predicate_type
+  predicate_name:
+    name: predicate_name
     from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
     aliases:
     - Query
     - Relationship
     rank: 1000
-    alias: predicate
+    alias: predicate_name
     owner: TestEdgeData
     domain_of:
     - TestAsset
@@ -472,6 +546,44 @@ attributes:
     domain_of:
     - TestAsset
     range: string
+  output_category:
+    name: output_category
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    aliases:
+    - ObjectCategory
+    rank: 1000
+    alias: output_category
+    owner: TestEdgeData
+    domain_of:
+    - TestAsset
+    range: concept_category
+  association:
+    name: association
+    description: Specific Biolink Model association 'category' which applies to the
+      test asset defined knowledge statement
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    alias: association
+    owner: TestEdgeData
+    domain_of:
+    - TestAsset
+    range: association_category
+  qualifiers:
+    name: qualifiers
+    description: Optional qualifiers which constrain to the test asset defined knowledge
+      statement. Note that this field records such qualifier slots and values as tag=value
+      pairs, where the tag is the Biolink Model qualifier slot named and the value
+      is an acceptable (Biolink Model enum?) value of the said qualifier slot.
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    multivalued: true
+    alias: qualifiers
+    owner: TestEdgeData
+    domain_of:
+    - TestAsset
+    range: Qualifier
+    inlined: true
+    inlined_as_list: true
   expected_output:
     name: expected_output
     from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -554,6 +666,19 @@ attributes:
     - TestAsset
     range: string
     required: true
+  test_metadata:
+    name: test_metadata
+    description: Test metadata describes the external provenance, cross-references
+      and objectives for a given test.
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    alias: test_metadata
+    owner: TestEdgeData
+    domain_of:
+    - TestAsset
+    - TestSuite
+    range: TestMetadata
+    inlined: true
   id:
     name: id
     description: A unique identifier for a Test Entity

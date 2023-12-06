@@ -315,6 +315,24 @@
 </thead>
 <tbody>
 <tr>
+<td><a href="../TestAsset/">TestAsset</a></td>
+<td><a href="../test_metadata/">test_metadata</a></td>
+<td>range</td>
+<td><a href="./">TestMetadata</a></td>
+</tr>
+<tr>
+<td><a href="../AcceptanceTestAsset/">AcceptanceTestAsset</a></td>
+<td><a href="../test_metadata/">test_metadata</a></td>
+<td>range</td>
+<td><a href="./">TestMetadata</a></td>
+</tr>
+<tr>
+<td><a href="../TestEdgeData/">TestEdgeData</a></td>
+<td><a href="../test_metadata/">test_metadata</a></td>
+<td>range</td>
+<td><a href="./">TestMetadata</a></td>
+</tr>
+<tr>
 <td><a href="../TestSuite/">TestSuite</a></td>
 <td><a href="../test_metadata/">test_metadata</a></td>
 <td>range</td>
@@ -391,7 +409,9 @@ is_a: TestEntity
 attributes:
   test_source:
     name: test_source
-    description: Provenance of a specific set of test assets, cases and/or suites.
+    description: Provenance of a specific set of test assets, cases and/or suites.  Or,
+      the person who cares about this,  know about this.  We would like this to be
+      an ORCID eventually, but currently it is just a string.
     from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
     rank: 1000
     alias: test_source
@@ -437,6 +457,7 @@ attributes:
     - TestMetadata
     range: TestEntityParameter
     inlined: true
+    inlined_as_list: true
   id:
     name: id
     description: A unique identifier for a Test Entity

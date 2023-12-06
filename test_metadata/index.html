@@ -332,8 +332,23 @@
 </thead>
 <tbody>
 <tr>
+<td><a href="../TestAsset/">TestAsset</a></td>
+<td>Represents a Test Asset, which is a single specific instance of TestCase-agno...</td>
+<td>no</td>
+</tr>
+<tr>
 <td><a href="../TestSuite/">TestSuite</a></td>
 <td>Specification of a set of Test Cases, one of either with a static list of 'te...</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../AcceptanceTestAsset/">AcceptanceTestAsset</a></td>
+<td>Model derived from Jenn's test asset design and Shervin's runner JSON here as...</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../TestEdgeData/">TestEdgeData</a></td>
+<td>Represents a single Biolink Model compliant instance of a subject-predicate-o...</td>
 <td>no</td>
 </tr>
 <tr>
@@ -372,6 +387,7 @@ from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
 rank: 1000
 alias: test_metadata
 domain_of:
+- TestAsset
 - TestSuite
 range: TestMetadata
 inlined: true
