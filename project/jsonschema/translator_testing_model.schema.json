@@ -1191,12 +1191,8 @@
                     },
                     "type": "array"
                 },
-                "test_case": {
-                    "$ref": "#/$defs/TestCase",
-                    "description": "Slot referencing a single TestCase."
-                },
-                "test_suite_id": {
-                    "description": "CURIE id of a TestSuite registered in the system.",
+                "test_case_id": {
+                    "description": "CURIE id of a TestCase registered in the system.",
                     "type": "string"
                 }
             },

@@ -95,6 +95,14 @@ CREATE TABLE "TestMetadata" (
 	PRIMARY KEY (id)
 );
 
+CREATE TABLE "TestOutput" (
+	id TEXT NOT NULL, 
+	name TEXT, 
+	description TEXT, 
+	test_case_id TEXT, 
+	PRIMARY KEY (id)
+);
+
 CREATE TABLE "TestRunnerConfiguration" (
 	id TEXT NOT NULL, 
 	name TEXT, 
@@ -245,14 +253,20 @@ CREATE TABLE "TestEdgeData" (
 	FOREIGN KEY(test_metadata) REFERENCES "TestMetadata" (id)
 );
 
-CREATE TABLE "TestOutput" (
+CREATE TABLE "TestResultPKSet" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	description TEXT, 
-	test_suite_id TEXT, 
-	test_case TEXT, 
+	parent_pk TEXT, 
+	merged_pk TEXT, 
+	aragorn TEXT, 
+	arax TEXT, 
+	unsecret TEXT, 
+	bte TEXT, 
+	improving TEXT, 
+	"TestOutput_id" TEXT, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(test_case) REFERENCES "TestCase" (id)
+	FOREIGN KEY("TestOutput_id") REFERENCES "TestOutput" (id)
 );
 
 CREATE TABLE "TestSuite" (
@@ -366,6 +380,13 @@ CREATE TABLE "TestMetadata_tags" (
 	FOREIGN KEY(backref_id) REFERENCES "TestMetadata" (id)
 );
 
+CREATE TABLE "TestOutput_tags" (
+	backref_id TEXT, 
+	tags TEXT, 
+	PRIMARY KEY (backref_id, tags), 
+	FOREIGN KEY(backref_id) REFERENCES "TestOutput" (id)
+);
+
 CREATE TABLE "TestRunnerConfiguration_tags" (
 	backref_id TEXT, 
 	tags TEXT, 
@@ -392,22 +413,6 @@ CREATE TABLE "TestSuiteSpecification_tags" (
 	tags TEXT, 
 	PRIMARY KEY (backref_id, tags), 
 	FOREIGN KEY(backref_id) REFERENCES "TestSuiteSpecification" (id)
-);
-
-CREATE TABLE "TestResultPKSet" (
-	id TEXT NOT NULL, 
-	name TEXT, 
-	description TEXT, 
-	parent_pk TEXT, 
-	merged_pk TEXT, 
-	aragorn TEXT, 
-	arax TEXT, 
-	unsecret TEXT, 
-	bte TEXT, 
-	improving TEXT, 
-	"TestOutput_id" TEXT, 
-	PRIMARY KEY (id), 
-	FOREIGN KEY("TestOutput_id") REFERENCES "TestOutput" (id)
 );
 
 CREATE TABLE "AcceptanceTestAsset_runner_settings" (
@@ -480,11 +485,11 @@ CREATE TABLE "TestEdgeData_tags" (
 	FOREIGN KEY(backref_id) REFERENCES "TestEdgeData" (id)
 );
 
-CREATE TABLE "TestOutput_tags" (
+CREATE TABLE "TestResultPKSet_tags" (
 	backref_id TEXT, 
 	tags TEXT, 
 	PRIMARY KEY (backref_id, tags), 
-	FOREIGN KEY(backref_id) REFERENCES "TestOutput" (id)
+	FOREIGN KEY(backref_id) REFERENCES "TestResultPKSet" (id)
 );
 
 CREATE TABLE "TestSuite_tags" (
@@ -492,11 +497,4 @@ CREATE TABLE "TestSuite_tags" (
 	tags TEXT, 
 	PRIMARY KEY (backref_id, tags), 
 	FOREIGN KEY(backref_id) REFERENCES "TestSuite" (id)
-);
-
-CREATE TABLE "TestResultPKSet_tags" (
-	backref_id TEXT, 
-	tags TEXT, 
-	PRIMARY KEY (backref_id, tags), 
-	FOREIGN KEY(backref_id) REFERENCES "TestResultPKSet" (id)
 );

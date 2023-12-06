@@ -44,7 +44,7 @@ def create_test_assets_from_tsv(test_assets):
                                test_source="SMURF",
                                test_objective="AcceptanceTest")
             ta.test_metadata = tmd
-        ta.predicate = row.get("Relationship").lower()
+        ta.predicate_name = row.get("Relationship").lower()
         ta.output_id = row.get("OutputID")
         ta.output_name = row.get("OutputName")
         ta.runner_settings = [row.get("Settings").lower()]
@@ -73,7 +73,7 @@ def create_test_cases_from_test_assets(test_assets, test_case_model):
     # Group test assets based on input_id and relationship
     grouped_assets = {}
     for test_asset in test_assets:
-        key = (test_asset.input_id, test_asset.predicate)
+        key = (test_asset.input_id, test_asset.predicate_name)
         if key not in grouped_assets:
             grouped_assets[key] = []
             print(key)
@@ -83,16 +83,16 @@ def create_test_cases_from_test_assets(test_assets, test_case_model):
     test_cases = []
     for idx, (key, assets) in enumerate(grouped_assets.items()):
         test_case_id = f"TestCase_{idx}"
-        names = ', '.join(asset.name for asset in assets)
         descriptions = '; '.join(asset.description for asset in assets)
 
         test_case = test_case_model(id=test_case_id,
                                     test_assets=assets,
-                                    name=names,
+                                    name="what " + key,
                                     description=descriptions,
                                     test_env="ci",
                                     components=["ars"]
                                     )
+        print(test_case.name)
         test_cases.append(test_case)
         print(test_case)
 

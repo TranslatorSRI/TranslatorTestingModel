@@ -553,8 +553,7 @@ class TestOutput(TestEntity):
     """
     The output of a TestRunner run of one specific TestCase.
     """
-    test_suite_id: Optional[str] = Field(None, description="""CURIE id of a TestSuite registered in the system.""")
-    test_case: Optional[TestCase] = Field(None, description="""Slot referencing a single TestCase.""")
+    test_case_id: Optional[str] = Field(None, description="""CURIE id of a TestCase registered in the system.""")
     pks: Optional[List[str]] = Field(default_factory=list, description="""Primary keys for a given ARA result set from a SmokeTest result for a given TestCase.""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")

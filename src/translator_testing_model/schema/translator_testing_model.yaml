@@ -337,6 +337,11 @@ slots:
   # General Slots #
   #################
 
+  test_case_id:
+    description: >-
+      CURIE id of a TestCase registered in the system.
+    range: string
+
   parameter:
     description: >-
       Name of a TestParameter.

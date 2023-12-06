@@ -234,8 +234,7 @@ message TestOutput
   string name = 0
   string description = 0
  repeated  string tags = 0
-  uriorcurie testSuiteId = 0
-  testCase testCase = 0
+  string testCaseId = 0
  repeated  testResultPKSet pks = 0
  }
 // Primary keys for a given ARA result set from a SmokeTest result for a given TestCase.

@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2023-12-04T11:45:48
+# Generation date: 2023-12-05T16:27:02
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -878,8 +878,7 @@ class TestOutput(TestEntity):
     class_model_uri: ClassVar[URIRef] = TTM.TestOutput
 
     id: Union[str, TestOutputId] = None
-    test_suite_id: Optional[Union[str, URIorCURIE]] = None
-    test_case: Optional[Union[dict, TestCase]] = None
+    test_case_id: Optional[str] = None
     pks: Optional[Union[Union[str, TestResultPKSetId], List[Union[str, TestResultPKSetId]]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
@@ -888,11 +887,8 @@ class TestOutput(TestEntity):
         if not isinstance(self.id, TestOutputId):
             self.id = TestOutputId(self.id)
 
-        if self.test_suite_id is not None and not isinstance(self.test_suite_id, URIorCURIE):
-            self.test_suite_id = URIorCURIE(self.test_suite_id)
-
-        if self.test_case is not None and not isinstance(self.test_case, TestCase):
-            self.test_case = TestCase(**as_dict(self.test_case))
+        if self.test_case_id is not None and not isinstance(self.test_case_id, str):
+            self.test_case_id = str(self.test_case_id)
 
         if not isinstance(self.pks, list):
             self.pks = [self.pks] if self.pks is not None else []
@@ -1217,6 +1213,9 @@ slots.pks = Slot(uri=TTM.pks, name="pks", curie=TTM.curie('pks'),
 
 slots.results = Slot(uri=TTM.results, name="results", curie=TTM.curie('results'),
                    model_uri=TTM.results, domain=None, range=Optional[Union[Union[str, TestOutputId], List[Union[str, TestOutputId]]]])
+
+slots.test_case_id = Slot(uri=TTM.test_case_id, name="test_case_id", curie=TTM.curie('test_case_id'),
+                   model_uri=TTM.test_case_id, domain=None, range=Optional[str])
 
 slots.parameter = Slot(uri=TTM.parameter, name="parameter", curie=TTM.curie('parameter'),
                    model_uri=TTM.parameter, domain=None, range=Optional[str])

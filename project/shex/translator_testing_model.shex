@@ -239,8 +239,7 @@ linkml:Sparqlpath xsd:string
 <TestOutput> CLOSED {
     (  $<TestOutput_tes> (  &<TestEntity_tes> ;
           rdf:type [ <TestEntity> ] ? ;
-          <test_suite_id> @linkml:Uriorcurie ? ;
-          <test_case> @<TestCase> ? ;
+          <test_case_id> @linkml:String ? ;
           <pks> @<TestResultPKSet> *
        ) ;
        rdf:type [ <TestOutput> ]

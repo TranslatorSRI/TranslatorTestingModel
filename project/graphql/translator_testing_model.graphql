@@ -246,8 +246,7 @@ type TestOutput
     name: String
     description: String
     tags: [String]
-    testSuiteId: Uriorcurie
-    testCase: TestCase
+    testCaseId: String
     pks: [TestResultPKSet]
   }
 

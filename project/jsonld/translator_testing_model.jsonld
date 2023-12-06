@@ -756,6 +756,19 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "test_case_id",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case_id",
+      "description": "CURIE id of a TestCase registered in the system.",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case_id",
+      "owner": "TestOutput",
+      "domain_of": [
+        "TestOutput"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "parameter",
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/parameter",
       "description": "Name of a TestParameter.",
@@ -1484,10 +1497,9 @@
       "description": "CURIE id of a TestSuite registered in the system.",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_suite_id",
-      "owner": "TestOutput",
+      "owner": "TestCaseResult",
       "domain_of": [
-        "TestCaseResult",
-        "TestOutput"
+        "TestCaseResult"
       ],
       "range": "uriorcurie",
       "@type": "SlotDefinition"
@@ -1498,10 +1510,9 @@
       "description": "Slot referencing a single TestCase.",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case",
-      "owner": "TestOutput",
+      "owner": "TestCaseResult",
       "domain_of": [
-        "TestCaseResult",
-        "TestOutput"
+        "TestCaseResult"
       ],
       "range": "TestCase",
       "inlined": true,
@@ -2215,8 +2226,7 @@
         "name",
         "description",
         "tags",
-        "test_suite_id",
-        "test_case",
+        "test_case_id",
         "pks"
       ],
       "slot_usage": {},
@@ -2249,9 +2259,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "translator_testing_model.yaml",
-  "source_file_date": "2023-12-04T11:45:40",
-  "source_file_size": 22702,
-  "generation_date": "2023-12-04T11:45:44",
+  "source_file_date": "2023-12-05T16:26:18",
+  "source_file_size": 22793,
+  "generation_date": "2023-12-05T16:26:59",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",
