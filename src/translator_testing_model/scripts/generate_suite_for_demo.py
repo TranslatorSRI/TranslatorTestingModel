@@ -84,7 +84,6 @@ def create_test_cases_from_test_assets(test_assets, test_case_model):
         key = (test_asset.input_id, test_asset.predicate_name)
         if key not in grouped_assets:
             grouped_assets[key] = []
-            print(key)
         grouped_assets[key].append(test_asset)
 
     # Create test cases from grouped test assets
@@ -105,18 +104,10 @@ def create_test_cases_from_test_assets(test_assets, test_case_model):
         test_input_id = ""
         test_case_predicate = ""
         for asset in assets:
-            if test_input_id != "" and test_input_id != asset.input_id:
-                print("two assets with different input ids", asset.input_id, test_input_id)
-                continue
-            else:
-                test_input_id = asset.input_id
-            if asset.predicate != "" and test_case_predicate != asset.predicate:
-                print("two assets with different predicates", asset.predicate, test_case_predicate)
-                continue
-            else:
-                test_case_predicate = asset.predicate
-        test_case.test_input_id = test_input_id
-        test_case.test_predicate = test_case_predicate
+            test_input_id = asset.input_id
+            test_case_predicate = asset.predicate_name
+        test_case.test_case_input_id = test_input_id
+        test_case.test_case_predicate = test_case_predicate
         test_cases.append(test_case)
 
 
@@ -176,7 +167,6 @@ if __name__ == '__main__':
         # Parse the response content as JSON
         data = response.json()
         for k, v in data.items():
-            print(k, v)
             tmd = TestMetadata(id=1,
                                test_source="SMURF",
                                test_objective="QuantitativeTest")

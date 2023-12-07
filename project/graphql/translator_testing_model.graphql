@@ -48,6 +48,7 @@ type AcceptanceTestCase
     testCaseSource: TestSourceEnum
     testCasePredicate: String
     testCaseInputId: Uriorcurie
+    testCaseRunnerSettings: [String]!
     tags: [String]
     testAssets: [AcceptanceTestAsset]!
   }
@@ -83,6 +84,7 @@ type ComplianceTestCase
     testCaseSource: TestSourceEnum
     testCasePredicate: String
     testCaseInputId: Uriorcurie
+    testCaseRunnerSettings: [String]!
     tags: [String]
     trapiVersion: String
     biolinkVersion: String
@@ -103,6 +105,7 @@ type KnowledgeGraphNavigationTestCase
     testCaseSource: TestSourceEnum
     testCasePredicate: String
     testCaseInputId: Uriorcurie
+    testCaseRunnerSettings: [String]!
     tags: [String]
   }
 
@@ -121,6 +124,7 @@ type OneHopTestCase
     testCaseSource: TestSourceEnum
     testCasePredicate: String
     testCaseInputId: Uriorcurie
+    testCaseRunnerSettings: [String]!
     tags: [String]
   }
 
@@ -165,6 +169,7 @@ type QuantitativeTestCase
     testCaseSource: TestSourceEnum
     testCasePredicate: String
     testCaseInputId: Uriorcurie
+    testCaseRunnerSettings: [String]!
     tags: [String]
   }
 
@@ -221,6 +226,7 @@ type TestCase
     testCaseSource: TestSourceEnum
     testCasePredicate: String
     testCaseInputId: Uriorcurie
+    testCaseRunnerSettings: [String]!
     tags: [String]
   }
 

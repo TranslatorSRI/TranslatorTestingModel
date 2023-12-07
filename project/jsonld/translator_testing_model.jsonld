@@ -1279,7 +1279,7 @@
     {
       "name": "runner_settings",
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/runner_settings",
-      "description": "Settings for the test harness",
+      "description": "Settings for the test harness for TestAsset",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "aliases": [
         "Settings"
@@ -1289,6 +1289,24 @@
       "owner": "TestAsset",
       "domain_of": [
         "TestAsset"
+      ],
+      "range": "string",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "test_case_runner_settings",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case_runner_settings",
+      "description": "Settings for the test harness for TestCase",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "aliases": [
+        "Settings"
+      ],
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case_runner_settings",
+      "multivalued": true,
+      "owner": "TestCase",
+      "domain_of": [
+        "TestCase"
       ],
       "range": "string",
       "required": true,
@@ -2209,6 +2227,7 @@
         "test_case_source",
         "test_case_predicate",
         "test_case_input_id",
+        "test_case_runner_settings",
         "TestCase_tags"
       ],
       "slot_usage": {},
@@ -2234,6 +2253,7 @@
         "test_case_source",
         "test_case_predicate",
         "test_case_input_id",
+        "test_case_runner_settings",
         "TestCase_tags",
         "AcceptanceTestCase_test_assets"
       ],
@@ -2261,6 +2281,7 @@
         "test_case_source",
         "test_case_predicate",
         "test_case_input_id",
+        "test_case_runner_settings",
         "TestCase_tags"
       ],
       "slot_usage": {},
@@ -2287,6 +2308,7 @@
         "test_case_source",
         "test_case_predicate",
         "test_case_input_id",
+        "test_case_runner_settings",
         "TestCase_tags",
         "trapi_version",
         "biolink_version"
@@ -2315,6 +2337,7 @@
         "test_case_source",
         "test_case_predicate",
         "test_case_input_id",
+        "test_case_runner_settings",
         "TestCase_tags"
       ],
       "slot_usage": {},
@@ -2341,6 +2364,7 @@
         "test_case_source",
         "test_case_predicate",
         "test_case_input_id",
+        "test_case_runner_settings",
         "TestCase_tags"
       ],
       "slot_usage": {},
@@ -2553,9 +2577,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "translator_testing_model.yaml",
-  "source_file_date": "2023-12-07T09:06:31",
-  "source_file_size": 26114,
-  "generation_date": "2023-12-07T09:06:49",
+  "source_file_date": "2023-12-07T09:11:20",
+  "source_file_size": 26346,
+  "generation_date": "2023-12-07T09:13:36",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",

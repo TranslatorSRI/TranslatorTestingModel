@@ -79,10 +79,10 @@ ttm:TestRunSession a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "TestRunSession" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom linkml:String ;
             owl:onProperty ttm:test_entities ],
         [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
+            owl:minCardinality 0 ;
             owl:onProperty ttm:test_entities ],
         ttm:TestEntity ;
     skos:definition "A single invocation of a TestRunner." ;
@@ -92,10 +92,10 @@ ttm:TestRunnerConfiguration a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "TestRunnerConfiguration" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom linkml:String ;
             owl:onProperty ttm:tags ],
         [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
+            owl:minCardinality 0 ;
             owl:onProperty ttm:tags ],
         ttm:TestEntity ;
     skos:definition "General configuration parameters and test data input  for a single invocation of a TestRunner." ;
@@ -396,6 +396,14 @@ ttm:test_case_results a owl:ObjectProperty,
     skos:definition "One or more instances of TestCaseResult." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
+ttm:test_case_runner_settings a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "test_case_runner_settings" ;
+    rdfs:range linkml:String ;
+    skos:altLabel "Settings" ;
+    skos:definition "Settings for the test harness for TestCase" ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
 ttm:test_case_source a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "test_case_source" ;
@@ -566,19 +574,19 @@ ttm:Qualifier a owl:Class,
     rdfs:label "Qualifier" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty ttm:parameter ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:value ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty ttm:parameter ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:parameter ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:value ],
-        [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:value ],
+            owl:onProperty ttm:parameter ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty ttm:value ],
@@ -867,7 +875,7 @@ ttm:runner_settings a owl:ObjectProperty,
     rdfs:label "runner_settings" ;
     rdfs:range linkml:String ;
     skos:altLabel "Settings" ;
-    skos:definition "Settings for the test harness" ;
+    skos:definition "Settings for the test harness for TestAsset" ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:test_entities a owl:ObjectProperty,
@@ -906,9 +914,6 @@ ttm:TestAsset a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "TestAsset" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:tags ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty ttm:id ],
         [ a owl:Restriction ;
@@ -917,6 +922,9 @@ ttm:TestAsset a owl:Class,
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
             owl:onProperty ttm:runner_settings ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:tags ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:Uriorcurie ;
             owl:onProperty ttm:id ],
@@ -1023,14 +1031,14 @@ ttm:TestCase a owl:Class,
             owl:allValuesFrom linkml:String ;
             owl:onProperty ttm:tags ],
         [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty ttm:test_assets ],
-        [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
             owl:onProperty ttm:test_assets ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty ttm:tags ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty ttm:test_assets ],
         ttm:TestEntity ;
     skos:definition "Represents a single enumerated instance of Test Case, derived from a  given collection of one or more TestAsset instances (the value of the 'test_assets' slot) which define the 'inputs' and 'outputs' of the TestCase, used to probe a particular test condition." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .

@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2023-12-07T09:06:52
+# Generation date: 2023-12-07T09:13:40
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -521,6 +521,7 @@ class TestCase(TestEntity):
 
     id: Union[str, TestCaseId] = None
     test_assets: Union[Dict[Union[str, TestAssetId], Union[dict, TestAsset]], List[Union[dict, TestAsset]]] = empty_dict()
+    test_case_runner_settings: Union[str, List[str]] = None
     test_env: Optional[Union[str, "TestEnvEnum"]] = None
     query_type: Optional[Union[str, "QueryTypeEnum"]] = None
     preconditions: Optional[Union[Union[str, PreconditionId], List[Union[str, PreconditionId]]]] = empty_list()
@@ -541,6 +542,12 @@ class TestCase(TestEntity):
         if self._is_empty(self.test_assets):
             self.MissingRequiredField("test_assets")
         self._normalize_inlined_as_list(slot_name="test_assets", slot_type=TestAsset, key_name="id", keyed=True)
+
+        if self._is_empty(self.test_case_runner_settings):
+            self.MissingRequiredField("test_case_runner_settings")
+        if not isinstance(self.test_case_runner_settings, list):
+            self.test_case_runner_settings = [self.test_case_runner_settings] if self.test_case_runner_settings is not None else []
+        self.test_case_runner_settings = [v if isinstance(v, str) else str(v) for v in self.test_case_runner_settings]
 
         if self.test_env is not None and not isinstance(self.test_env, TestEnvEnum):
             self.test_env = TestEnvEnum(self.test_env)
@@ -591,6 +598,7 @@ class AcceptanceTestCase(TestCase):
     class_model_uri: ClassVar[URIRef] = TTM.AcceptanceTestCase
 
     id: Union[str, AcceptanceTestCaseId] = None
+    test_case_runner_settings: Union[str, List[str]] = None
     test_assets: Union[Dict[Union[str, AcceptanceTestAssetId], Union[dict, AcceptanceTestAsset]], List[Union[dict, AcceptanceTestAsset]]] = empty_dict()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
@@ -620,6 +628,7 @@ class QuantitativeTestCase(TestCase):
 
     id: Union[str, QuantitativeTestCaseId] = None
     test_assets: Union[Dict[Union[str, TestAssetId], Union[dict, TestAsset]], List[Union[dict, TestAsset]]] = empty_dict()
+    test_case_runner_settings: Union[str, List[str]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -644,6 +653,7 @@ class ComplianceTestCase(TestCase):
 
     id: Union[str, ComplianceTestCaseId] = None
     test_assets: Union[Dict[Union[str, TestAssetId], Union[dict, TestAsset]], List[Union[dict, TestAsset]]] = empty_dict()
+    test_case_runner_settings: Union[str, List[str]] = None
     trapi_version: Optional[str] = None
     biolink_version: Optional[str] = None
 
@@ -676,6 +686,7 @@ class KnowledgeGraphNavigationTestCase(TestCase):
 
     id: Union[str, KnowledgeGraphNavigationTestCaseId] = None
     test_assets: Union[Dict[Union[str, TestAssetId], Union[dict, TestAsset]], List[Union[dict, TestAsset]]] = empty_dict()
+    test_case_runner_settings: Union[str, List[str]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -700,6 +711,7 @@ class OneHopTestCase(KnowledgeGraphNavigationTestCase):
 
     id: Union[str, OneHopTestCaseId] = None
     test_assets: Union[Dict[Union[str, TestAssetId], Union[dict, TestAsset]], List[Union[dict, TestAsset]]] = empty_dict()
+    test_case_runner_settings: Union[str, List[str]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -1411,6 +1423,9 @@ slots.well_known = Slot(uri=TTM.well_known, name="well_known", curie=TTM.curie('
 
 slots.runner_settings = Slot(uri=TTM.runner_settings, name="runner_settings", curie=TTM.curie('runner_settings'),
                    model_uri=TTM.runner_settings, domain=None, range=Union[str, List[str]])
+
+slots.test_case_runner_settings = Slot(uri=TTM.test_case_runner_settings, name="test_case_runner_settings", curie=TTM.curie('test_case_runner_settings'),
+                   model_uri=TTM.test_case_runner_settings, domain=None, range=Union[str, List[str]])
 
 slots.must_pass_date = Slot(uri=TTM.must_pass_date, name="must_pass_date", curie=TTM.curie('must_pass_date'),
                    model_uri=TTM.must_pass_date, domain=None, range=Optional[Union[str, XSDDate]])

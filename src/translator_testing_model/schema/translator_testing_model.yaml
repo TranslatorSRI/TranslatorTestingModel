@@ -200,6 +200,7 @@ classes:
       - test_case_source
       - test_case_predicate
       - test_case_input_id
+      - test_case_runner_settings
     slot_usage:
       test_assets:
         aliases: ["Block List"]
@@ -552,7 +553,15 @@ slots:
   runner_settings:
     aliases: ["Settings"]
     description: >-
-      Settings for the test harness
+      Settings for the test harness for TestAsset
+    range: string
+    multivalued: true
+    required: true
+
+  test_case_runner_settings:
+    aliases: ["Settings"]
+    description: >-
+      Settings for the test harness for TestCase
     range: string
     multivalued: true
     required: true
