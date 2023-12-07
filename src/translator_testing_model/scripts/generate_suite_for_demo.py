@@ -31,7 +31,7 @@ def create_test_assets_from_tsv(test_assets):
                        description=row.get("OutputName").replace(" ", "_") + "_" + row.get("Relationship").lower() + "_" + row.get("InputName (user choice)").replace(" ", "_"),
                        input_id=row.get("InputID, node normalized"),
                        predicate_name=row.get("Relationship").lower(),
-                       predicate_id="biolink:"+row.get("RelationshipID").lower(),
+                       predicate_id="biolink:"+row.get("Relationship").lower(),
                        output_id=row.get("OutputID"),
                        expected_output="NeverShow",
                        )
@@ -95,7 +95,6 @@ def create_test_cases_from_test_assets(test_assets, test_case_model):
         for asset in assets:
             print(asset)
         test_case = test_case_model(id=test_case_id,
-                                    test_assets=assets,
                                     name="what " + key[1] + " " + key[0],
                                     description=descriptions,
                                     test_env="ci",

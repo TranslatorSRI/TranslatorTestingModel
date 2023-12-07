@@ -523,7 +523,6 @@ slots:
 
   expected_output:
     aliases: ["Expected Output"]
-    required: true
 
   test_issue:
     aliases: ["issue label"]
