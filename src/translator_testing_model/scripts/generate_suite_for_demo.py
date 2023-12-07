@@ -89,7 +89,6 @@ def create_test_cases_from_test_assets(test_assets, test_case_model):
                                     test_env="ci",
                                     components=["ars"],
                                     test_case_objective="AcceptanceTest",
-                                    test_case_source="SMURF",
                                     test_assets=assets,
                                     test_case_runner_settings=["inferred"]
                                     )
@@ -178,7 +177,6 @@ if __name__ == '__main__':
                           test_env="ci",
                           components=["ars"],
                           test_case_objective="QuantitativeTest",
-                          test_case_source="SMURF"
                           )
             file_prefix = k
             filename = f"{file_prefix}.json"
