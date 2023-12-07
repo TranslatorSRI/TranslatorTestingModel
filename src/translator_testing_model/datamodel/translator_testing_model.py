@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2023-12-07T08:45:12
+# Generation date: 2023-12-07T08:48:56
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -302,7 +302,6 @@ class TestAsset(TestEntity):
     class_model_uri: ClassVar[URIRef] = TTM.TestAsset
 
     id: Union[str, TestAssetId] = None
-    expected_output: str = None
     runner_settings: Union[str, List[str]] = None
     input_id: Optional[Union[str, URIorCURIE]] = None
     input_name: Optional[str] = None
@@ -314,6 +313,7 @@ class TestAsset(TestEntity):
     output_category: Optional[Union[str, ConceptCategory]] = None
     association: Optional[Union[str, AssociationCategory]] = None
     qualifiers: Optional[Union[Union[dict, Qualifier], List[Union[dict, Qualifier]]]] = empty_list()
+    expected_output: Optional[str] = None
     test_issue: Optional[Union[str, "TestIssueEnum"]] = None
     semantic_severity: Optional[Union[str, "SemanticSeverityEnum"]] = None
     in_v1: Optional[Union[bool, Bool]] = None
@@ -327,11 +327,6 @@ class TestAsset(TestEntity):
             self.MissingRequiredField("id")
         if not isinstance(self.id, TestAssetId):
             self.id = TestAssetId(self.id)
-
-        if self._is_empty(self.expected_output):
-            self.MissingRequiredField("expected_output")
-        if not isinstance(self.expected_output, str):
-            self.expected_output = str(self.expected_output)
 
         if self._is_empty(self.runner_settings):
             self.MissingRequiredField("runner_settings")
@@ -369,6 +364,9 @@ class TestAsset(TestEntity):
         if not isinstance(self.qualifiers, list):
             self.qualifiers = [self.qualifiers] if self.qualifiers is not None else []
         self.qualifiers = [v if isinstance(v, Qualifier) else Qualifier(**as_dict(v)) for v in self.qualifiers]
+
+        if self.expected_output is not None and not isinstance(self.expected_output, str):
+            self.expected_output = str(self.expected_output)
 
         if self.test_issue is not None and not isinstance(self.test_issue, TestIssueEnum):
             self.test_issue = TestIssueEnum(self.test_issue)
@@ -408,7 +406,6 @@ class AcceptanceTestAsset(TestAsset):
     class_model_uri: ClassVar[URIRef] = TTM.AcceptanceTestAsset
 
     id: Union[str, AcceptanceTestAssetId] = None
-    expected_output: str = None
     runner_settings: Union[str, List[str]] = None
     must_pass_date: Optional[Union[str, XSDDate]] = None
     must_pass_environment: Optional[Union[str, "TestEnvEnum"]] = None
@@ -474,7 +471,6 @@ class TestEdgeData(TestAsset):
     class_model_uri: ClassVar[URIRef] = TTM.TestEdgeData
 
     id: Union[str, TestEdgeDataId] = None
-    expected_output: str = None
     runner_settings: Union[str, List[str]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
@@ -1385,7 +1381,7 @@ slots.qualifiers = Slot(uri=TTM.qualifiers, name="qualifiers", curie=TTM.curie('
                    model_uri=TTM.qualifiers, domain=None, range=Optional[Union[Union[dict, Qualifier], List[Union[dict, Qualifier]]]])
 
 slots.expected_output = Slot(uri=TTM.expected_output, name="expected_output", curie=TTM.curie('expected_output'),
-                   model_uri=TTM.expected_output, domain=None, range=str)
+                   model_uri=TTM.expected_output, domain=None, range=Optional[str])
 
 slots.test_issue = Slot(uri=TTM.test_issue, name="test_issue", curie=TTM.curie('test_issue'),
                    model_uri=TTM.test_issue, domain=None, range=Optional[Union[str, "TestIssueEnum"]])

@@ -12,7 +12,7 @@ type AcceptanceTestAsset
     outputCategory: ConceptCategory
     association: AssociationCategory
     qualifiers: [Qualifier]
-    expectedOutput: String!
+    expectedOutput: String
     testIssue: TestIssueEnum
     semanticSeverity: SemanticSeverityEnum
     inV1: Boolean
@@ -184,7 +184,7 @@ type TestAsset
     outputCategory: ConceptCategory
     association: AssociationCategory
     qualifiers: [Qualifier]
-    expectedOutput: String!
+    expectedOutput: String
     testIssue: TestIssueEnum
     semanticSeverity: SemanticSeverityEnum
     inV1: Boolean
@@ -237,7 +237,7 @@ type TestEdgeData
     outputCategory: ConceptCategory
     association: AssociationCategory
     qualifiers: [Qualifier]
-    expectedOutput: String!
+    expectedOutput: String
     testIssue: TestIssueEnum
     semanticSeverity: SemanticSeverityEnum
     inV1: Boolean

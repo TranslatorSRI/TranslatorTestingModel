@@ -1183,7 +1183,6 @@
         "TestAsset"
       ],
       "range": "string",
-      "required": true,
       "@type": "SlotDefinition"
     },
     {
@@ -2511,9 +2510,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "translator_testing_model.yaml",
-  "source_file_date": "2023-12-07T08:45:03",
-  "source_file_size": 25927,
-  "generation_date": "2023-12-07T08:45:09",
+  "source_file_date": "2023-12-07T08:48:40",
+  "source_file_size": 25908,
+  "generation_date": "2023-12-07T08:48:53",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",

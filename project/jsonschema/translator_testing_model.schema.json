@@ -131,7 +131,6 @@
                 }
             },
             "required": [
-                "expected_output",
                 "runner_settings",
                 "id"
             ],
@@ -868,7 +867,6 @@
                 }
             },
             "required": [
-                "expected_output",
                 "runner_settings",
                 "id"
             ],
@@ -1198,7 +1196,6 @@
                 }
             },
             "required": [
-                "expected_output",
                 "runner_settings",
                 "id"
             ],

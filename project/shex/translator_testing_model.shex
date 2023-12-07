@@ -176,7 +176,7 @@ linkml:Sparqlpath xsd:string
              <output_category> @<ConceptCategory> ? ;
              <association> @<AssociationCategory> ? ;
              <qualifiers> @<Qualifier> * ;
-             <expected_output> @linkml:String ;
+             <expected_output> @linkml:String ? ;
              <test_issue> @<TestIssueEnum> ? ;
              <semantic_severity> @<SemanticSeverityEnum> ? ;
              <in_v1> @linkml:Boolean ? ;

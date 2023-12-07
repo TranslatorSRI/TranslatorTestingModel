@@ -100,7 +100,8 @@ def create_test_cases_from_test_assets(test_assets, test_case_model):
                                     test_env="ci",
                                     components=["ars"],
                                     test_case_objective="AcceptanceTest",
-                                    test_case_source="SMURF"
+                                    test_case_source="SMURF",
+                                    test_assets=assets,
                                     )
         test_cases.append(test_case)
 
