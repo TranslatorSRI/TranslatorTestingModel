@@ -2,17 +2,17 @@ type AcceptanceTestAsset
   {
     name: String
     description: String
-    inputId: Uriorcurie!
+    inputId: Uriorcurie
     inputName: String
     inputCategory: ConceptCategory
     predicateId: PredicateType
-    predicateName: String!
-    outputId: Uriorcurie!
+    predicateName: String
+    outputId: Uriorcurie
     outputName: String
     outputCategory: ConceptCategory
     association: AssociationCategory
     qualifiers: [Qualifier]
-    expectedOutput: ExpectedOutputEnum!
+    expectedOutput: String!
     testIssue: TestIssueEnum
     semanticSeverity: SemanticSeverityEnum
     inV1: Boolean
@@ -44,6 +44,8 @@ type AcceptanceTestCase
     preconditions: [Precondition]
     trapiTemplate: TrapiTemplateEnum
     components: [ComponentEnum]
+    testCaseObjective: TestObjectiveEnum
+    testCaseSource: TestSourceEnum
     tags: [String]
     testAssets: [AcceptanceTestAsset]!
   }
@@ -75,6 +77,8 @@ type ComplianceTestCase
     preconditions: [Precondition]
     trapiTemplate: TrapiTemplateEnum
     components: [ComponentEnum]
+    testCaseObjective: TestObjectiveEnum
+    testCaseSource: TestSourceEnum
     tags: [String]
     trapiVersion: String
     biolinkVersion: String
@@ -91,6 +95,8 @@ type KnowledgeGraphNavigationTestCase
     preconditions: [Precondition]
     trapiTemplate: TrapiTemplateEnum
     components: [ComponentEnum]
+    testCaseObjective: TestObjectiveEnum
+    testCaseSource: TestSourceEnum
     tags: [String]
   }
 
@@ -105,6 +111,8 @@ type OneHopTestCase
     preconditions: [Precondition]
     trapiTemplate: TrapiTemplateEnum
     components: [ComponentEnum]
+    testCaseObjective: TestObjectiveEnum
+    testCaseSource: TestSourceEnum
     tags: [String]
   }
 
@@ -145,6 +153,8 @@ type QuantitativeTestCase
     preconditions: [Precondition]
     trapiTemplate: TrapiTemplateEnum
     components: [ComponentEnum]
+    testCaseObjective: TestObjectiveEnum
+    testCaseSource: TestSourceEnum
     tags: [String]
   }
 
@@ -164,17 +174,17 @@ type TestAsset
   {
     name: String
     description: String
-    inputId: Uriorcurie!
+    inputId: Uriorcurie
     inputName: String
     inputCategory: ConceptCategory
     predicateId: PredicateType
-    predicateName: String!
-    outputId: Uriorcurie!
+    predicateName: String
+    outputId: Uriorcurie
     outputName: String
     outputCategory: ConceptCategory
     association: AssociationCategory
     qualifiers: [Qualifier]
-    expectedOutput: ExpectedOutputEnum!
+    expectedOutput: String!
     testIssue: TestIssueEnum
     semanticSeverity: SemanticSeverityEnum
     inV1: Boolean
@@ -197,6 +207,8 @@ type TestCase
     preconditions: [Precondition]
     trapiTemplate: TrapiTemplateEnum
     components: [ComponentEnum]
+    testCaseObjective: TestObjectiveEnum
+    testCaseSource: TestSourceEnum
     tags: [String]
   }
 
@@ -215,17 +227,17 @@ type TestEdgeData
   {
     name: String
     description: String
-    inputId: Uriorcurie!
+    inputId: Uriorcurie
     inputName: String
     inputCategory: ConceptCategory
     predicateId: PredicateType
-    predicateName: String!
-    outputId: Uriorcurie!
+    predicateName: String
+    outputId: Uriorcurie
     outputName: String
     outputCategory: ConceptCategory
     association: AssociationCategory
     qualifiers: [Qualifier]
-    expectedOutput: ExpectedOutputEnum!
+    expectedOutput: String!
     testIssue: TestIssueEnum
     semanticSeverity: SemanticSeverityEnum
     inV1: Boolean

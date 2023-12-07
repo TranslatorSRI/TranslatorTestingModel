@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2023-12-05T16:28:07
+# Generation date: 2023-12-07T08:45:12
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -302,14 +302,14 @@ class TestAsset(TestEntity):
     class_model_uri: ClassVar[URIRef] = TTM.TestAsset
 
     id: Union[str, TestAssetId] = None
-    input_id: Union[str, URIorCURIE] = None
-    predicate_name: str = None
-    output_id: Union[str, URIorCURIE] = None
-    expected_output: Union[str, "ExpectedOutputEnum"] = None
+    expected_output: str = None
     runner_settings: Union[str, List[str]] = None
+    input_id: Optional[Union[str, URIorCURIE]] = None
     input_name: Optional[str] = None
     input_category: Optional[Union[str, ConceptCategory]] = None
     predicate_id: Optional[Union[str, PredicateType]] = None
+    predicate_name: Optional[str] = None
+    output_id: Optional[Union[str, URIorCURIE]] = None
     output_name: Optional[str] = None
     output_category: Optional[Union[str, ConceptCategory]] = None
     association: Optional[Union[str, AssociationCategory]] = None
@@ -328,31 +328,19 @@ class TestAsset(TestEntity):
         if not isinstance(self.id, TestAssetId):
             self.id = TestAssetId(self.id)
 
-        if self._is_empty(self.input_id):
-            self.MissingRequiredField("input_id")
-        if not isinstance(self.input_id, URIorCURIE):
-            self.input_id = URIorCURIE(self.input_id)
-
-        if self._is_empty(self.predicate_name):
-            self.MissingRequiredField("predicate_name")
-        if not isinstance(self.predicate_name, str):
-            self.predicate_name = str(self.predicate_name)
-
-        if self._is_empty(self.output_id):
-            self.MissingRequiredField("output_id")
-        if not isinstance(self.output_id, URIorCURIE):
-            self.output_id = URIorCURIE(self.output_id)
-
         if self._is_empty(self.expected_output):
             self.MissingRequiredField("expected_output")
-        if not isinstance(self.expected_output, ExpectedOutputEnum):
-            self.expected_output = ExpectedOutputEnum(self.expected_output)
+        if not isinstance(self.expected_output, str):
+            self.expected_output = str(self.expected_output)
 
         if self._is_empty(self.runner_settings):
             self.MissingRequiredField("runner_settings")
         if not isinstance(self.runner_settings, list):
             self.runner_settings = [self.runner_settings] if self.runner_settings is not None else []
         self.runner_settings = [v if isinstance(v, str) else str(v) for v in self.runner_settings]
+
+        if self.input_id is not None and not isinstance(self.input_id, URIorCURIE):
+            self.input_id = URIorCURIE(self.input_id)
 
         if self.input_name is not None and not isinstance(self.input_name, str):
             self.input_name = str(self.input_name)
@@ -362,6 +350,12 @@ class TestAsset(TestEntity):
 
         if self.predicate_id is not None and not isinstance(self.predicate_id, PredicateType):
             self.predicate_id = PredicateType(self.predicate_id)
+
+        if self.predicate_name is not None and not isinstance(self.predicate_name, str):
+            self.predicate_name = str(self.predicate_name)
+
+        if self.output_id is not None and not isinstance(self.output_id, URIorCURIE):
+            self.output_id = URIorCURIE(self.output_id)
 
         if self.output_name is not None and not isinstance(self.output_name, str):
             self.output_name = str(self.output_name)
@@ -414,10 +408,7 @@ class AcceptanceTestAsset(TestAsset):
     class_model_uri: ClassVar[URIRef] = TTM.AcceptanceTestAsset
 
     id: Union[str, AcceptanceTestAssetId] = None
-    input_id: Union[str, URIorCURIE] = None
-    predicate_name: str = None
-    output_id: Union[str, URIorCURIE] = None
-    expected_output: Union[str, "ExpectedOutputEnum"] = None
+    expected_output: str = None
     runner_settings: Union[str, List[str]] = None
     must_pass_date: Optional[Union[str, XSDDate]] = None
     must_pass_environment: Optional[Union[str, "TestEnvEnum"]] = None
@@ -483,10 +474,7 @@ class TestEdgeData(TestAsset):
     class_model_uri: ClassVar[URIRef] = TTM.TestEdgeData
 
     id: Union[str, TestEdgeDataId] = None
-    input_id: Union[str, URIorCURIE] = None
-    predicate_name: str = None
-    output_id: Union[str, URIorCURIE] = None
-    expected_output: Union[str, "ExpectedOutputEnum"] = None
+    expected_output: str = None
     runner_settings: Union[str, List[str]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
@@ -542,6 +530,8 @@ class TestCase(TestEntity):
     preconditions: Optional[Union[Union[str, PreconditionId], List[Union[str, PreconditionId]]]] = empty_list()
     trapi_template: Optional[Union[str, "TrapiTemplateEnum"]] = None
     components: Optional[Union[Union[str, "ComponentEnum"], List[Union[str, "ComponentEnum"]]]] = empty_list()
+    test_case_objective: Optional[Union[str, "TestObjectiveEnum"]] = None
+    test_case_source: Optional[Union[str, "TestSourceEnum"]] = None
     tags: Optional[Union[str, List[str]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
@@ -570,6 +560,12 @@ class TestCase(TestEntity):
         if not isinstance(self.components, list):
             self.components = [self.components] if self.components is not None else []
         self.components = [v if isinstance(v, ComponentEnum) else ComponentEnum(v) for v in self.components]
+
+        if self.test_case_objective is not None and not isinstance(self.test_case_objective, TestObjectiveEnum):
+            self.test_case_objective = TestObjectiveEnum(self.test_case_objective)
+
+        if self.test_case_source is not None and not isinstance(self.test_case_source, TestSourceEnum):
+            self.test_case_source = TestSourceEnum(self.test_case_source)
 
         if not isinstance(self.tags, list):
             self.tags = [self.tags] if self.tags is not None else []
@@ -1349,11 +1345,17 @@ slots.test_reference = Slot(uri=TTM.test_reference, name="test_reference", curie
 slots.test_objective = Slot(uri=TTM.test_objective, name="test_objective", curie=TTM.curie('test_objective'),
                    model_uri=TTM.test_objective, domain=None, range=Optional[Union[str, "TestObjectiveEnum"]])
 
+slots.test_case_objective = Slot(uri=TTM.test_case_objective, name="test_case_objective", curie=TTM.curie('test_case_objective'),
+                   model_uri=TTM.test_case_objective, domain=None, range=Optional[Union[str, "TestObjectiveEnum"]])
+
+slots.test_case_source = Slot(uri=TTM.test_case_source, name="test_case_source", curie=TTM.curie('test_case_source'),
+                   model_uri=TTM.test_case_source, domain=None, range=Optional[Union[str, "TestSourceEnum"]])
+
 slots.test_annotations = Slot(uri=TTM.test_annotations, name="test_annotations", curie=TTM.curie('test_annotations'),
                    model_uri=TTM.test_annotations, domain=None, range=Optional[Union[Union[dict, TestEntityParameter], List[Union[dict, TestEntityParameter]]]])
 
 slots.input_id = Slot(uri=TTM.input_id, name="input_id", curie=TTM.curie('input_id'),
-                   model_uri=TTM.input_id, domain=None, range=Union[str, URIorCURIE])
+                   model_uri=TTM.input_id, domain=None, range=Optional[Union[str, URIorCURIE]])
 
 slots.input_name = Slot(uri=TTM.input_name, name="input_name", curie=TTM.curie('input_name'),
                    model_uri=TTM.input_name, domain=None, range=Optional[str])
@@ -1365,10 +1367,10 @@ slots.predicate_id = Slot(uri=TTM.predicate_id, name="predicate_id", curie=TTM.c
                    model_uri=TTM.predicate_id, domain=None, range=Optional[Union[str, PredicateType]])
 
 slots.predicate_name = Slot(uri=TTM.predicate_name, name="predicate_name", curie=TTM.curie('predicate_name'),
-                   model_uri=TTM.predicate_name, domain=None, range=str)
+                   model_uri=TTM.predicate_name, domain=None, range=Optional[str])
 
 slots.output_id = Slot(uri=TTM.output_id, name="output_id", curie=TTM.curie('output_id'),
-                   model_uri=TTM.output_id, domain=None, range=Union[str, URIorCURIE])
+                   model_uri=TTM.output_id, domain=None, range=Optional[Union[str, URIorCURIE]])
 
 slots.output_name = Slot(uri=TTM.output_name, name="output_name", curie=TTM.curie('output_name'),
                    model_uri=TTM.output_name, domain=None, range=Optional[str])
@@ -1383,7 +1385,7 @@ slots.qualifiers = Slot(uri=TTM.qualifiers, name="qualifiers", curie=TTM.curie('
                    model_uri=TTM.qualifiers, domain=None, range=Optional[Union[Union[dict, Qualifier], List[Union[dict, Qualifier]]]])
 
 slots.expected_output = Slot(uri=TTM.expected_output, name="expected_output", curie=TTM.curie('expected_output'),
-                   model_uri=TTM.expected_output, domain=None, range=Union[str, "ExpectedOutputEnum"])
+                   model_uri=TTM.expected_output, domain=None, range=str)
 
 slots.test_issue = Slot(uri=TTM.test_issue, name="test_issue", curie=TTM.curie('test_issue'),
                    model_uri=TTM.test_issue, domain=None, range=Optional[Union[str, "TestIssueEnum"]])

@@ -26,12 +26,15 @@ def create_test_assets_from_tsv(test_assets):
     for row in test_assets:
         if row.get("Relationship") == "":
             continue
-        print(row)
         ta = TestAsset(id=row.get("id").replace(":", "_"),
                        name=row.get("OutputName").replace(" ", "_") + "_" + row.get("Relationship").lower() + "_" + row.get("InputName (user choice)").replace(" ", "_"),
-                       description=row.get("OutputName").replace(" ", "_") + "_" + row.get("Relationship").lower() + "_" + row.get("InputName (user choice)").replace(" ", "_")
+                       description=row.get("OutputName").replace(" ", "_") + "_" + row.get("Relationship").lower() + "_" + row.get("InputName (user choice)").replace(" ", "_"),
+                       input_id=row.get("InputID, node normalized"),
+                       predicate_name=row.get("Relationship").lower(),
+                       predicate_id="biolink:"+row.get("RelationshipID").lower(),
+                       output_id=row.get("OutputID"),
+                       expected_output="NeverShow",
                        )
-        ta.input_id = row.get("InputID, node normalized")
         ta.input_name = row.get("InputName (user choice)")
         if row.get("GitHubIssue") != "" and row.get("GitHubIssue") is not None:
             tmd = TestMetadata(id=1,
@@ -44,8 +47,6 @@ def create_test_assets_from_tsv(test_assets):
                                test_source="SMURF",
                                test_objective="AcceptanceTest")
             ta.test_metadata = tmd
-        ta.predicate_name = row.get("Relationship").lower()
-        ta.output_id = row.get("OutputID")
         ta.output_name = row.get("OutputName")
         ta.runner_settings = [row.get("Settings").lower()]
         if row.get("Expected Result / Suggested Comparator") == "4_NeverShow":
@@ -57,14 +58,21 @@ def create_test_assets_from_tsv(test_assets):
         elif row.get("Expected Result / Suggested Comparator") == "1_TopAnswer":
             ta.expected_output = "TopAnswer"
         else:
-            print(row.get("Expected Result / Suggested Comparator"))
-
+            ta.expected_output = "NeverShow"
+            print(ta)
 
         if row.get("Well Known") == "yes":
             ta.well_known = True
         else:
             ta.well_known = False
-        assets.append(ta)
+        if ((ta.input_id is None or ta.input_id == "")
+                or (ta.output_id is None or ta.output_id == "")
+                or (ta.predicate_name is None or ta.predicate_name == "")
+                or (ta.expected_output is None or ta.expected_output == "")):
+            print("somethign is missing", ta)
+            continue
+        else:
+            assets.append(ta)
 
     return assets
 
@@ -84,17 +92,19 @@ def create_test_cases_from_test_assets(test_assets, test_case_model):
     for idx, (key, assets) in enumerate(grouped_assets.items()):
         test_case_id = f"TestCase_{idx}"
         descriptions = '; '.join(asset.description for asset in assets)
-
+        for asset in assets:
+            print(asset)
         test_case = test_case_model(id=test_case_id,
                                     test_assets=assets,
-                                    name="what " + key,
+                                    name="what " + key[1] + " " + key[0],
                                     description=descriptions,
                                     test_env="ci",
-                                    components=["ars"]
+                                    components=["ars"],
+                                    test_case_objective="AcceptanceTest",
+                                    test_case_source="SMURF"
                                     )
-        print(test_case.name)
         test_cases.append(test_case)
-        print(test_case)
+
 
     return test_cases
 
@@ -166,8 +176,9 @@ if __name__ == '__main__':
                           description=k,
                           test_assets=[ta],
                           test_env="ci",
-                          components=["ars"]
-
+                          components=["ars"],
+                          test_case_objective="QuantitativeTest",
+                          test_case_source="SMURF"
                           )
             file_prefix = k
             filename = f"{file_prefix}.json"

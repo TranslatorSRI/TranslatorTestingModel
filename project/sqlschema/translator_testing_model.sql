@@ -8,6 +8,8 @@ CREATE TABLE "AcceptanceTestCase" (
 	query_type VARCHAR(6), 
 	preconditions TEXT, 
 	trapi_template VARCHAR(24), 
+	test_case_objective VARCHAR(16), 
+	test_case_source VARCHAR(18), 
 	PRIMARY KEY (id)
 );
 
@@ -20,6 +22,8 @@ CREATE TABLE "ComplianceTestCase" (
 	test_assets TEXT NOT NULL, 
 	preconditions TEXT, 
 	trapi_template VARCHAR(24), 
+	test_case_objective VARCHAR(16), 
+	test_case_source VARCHAR(18), 
 	trapi_version TEXT, 
 	biolink_version TEXT, 
 	PRIMARY KEY (id)
@@ -34,6 +38,8 @@ CREATE TABLE "KnowledgeGraphNavigationTestCase" (
 	test_assets TEXT NOT NULL, 
 	preconditions TEXT, 
 	trapi_template VARCHAR(24), 
+	test_case_objective VARCHAR(16), 
+	test_case_source VARCHAR(18), 
 	PRIMARY KEY (id)
 );
 
@@ -46,6 +52,8 @@ CREATE TABLE "OneHopTestCase" (
 	test_assets TEXT NOT NULL, 
 	preconditions TEXT, 
 	trapi_template VARCHAR(24), 
+	test_case_objective VARCHAR(16), 
+	test_case_source VARCHAR(18), 
 	PRIMARY KEY (id)
 );
 
@@ -71,6 +79,8 @@ CREATE TABLE "QuantitativeTestCase" (
 	test_assets TEXT NOT NULL, 
 	preconditions TEXT, 
 	trapi_template VARCHAR(24), 
+	test_case_objective VARCHAR(16), 
+	test_case_source VARCHAR(18), 
 	PRIMARY KEY (id)
 );
 
@@ -83,6 +93,8 @@ CREATE TABLE "TestCase" (
 	test_assets TEXT NOT NULL, 
 	preconditions TEXT, 
 	trapi_template VARCHAR(24), 
+	test_case_objective VARCHAR(16), 
+	test_case_source VARCHAR(18), 
 	PRIMARY KEY (id)
 );
 
@@ -140,17 +152,17 @@ CREATE TABLE "TestSuiteSpecification" (
 CREATE TABLE "AcceptanceTestAsset" (
 	name TEXT, 
 	description TEXT, 
-	input_id TEXT NOT NULL, 
+	input_id TEXT, 
 	input_name TEXT, 
 	input_category TEXT, 
 	predicate_id TEXT, 
-	predicate_name TEXT NOT NULL, 
-	output_id TEXT NOT NULL, 
+	predicate_name TEXT, 
+	output_id TEXT, 
 	output_name TEXT, 
 	output_category TEXT, 
 	association TEXT, 
 	qualifiers TEXT, 
-	expected_output VARCHAR(16) NOT NULL, 
+	expected_output TEXT NOT NULL, 
 	test_issue VARCHAR(20), 
 	semantic_severity VARCHAR(13), 
 	in_v1 BOOLEAN, 
@@ -216,17 +228,17 @@ CREATE TABLE "StandardsComplianceTestSuite" (
 CREATE TABLE "TestAsset" (
 	name TEXT, 
 	description TEXT, 
-	input_id TEXT NOT NULL, 
+	input_id TEXT, 
 	input_name TEXT, 
 	input_category TEXT, 
 	predicate_id TEXT, 
-	predicate_name TEXT NOT NULL, 
-	output_id TEXT NOT NULL, 
+	predicate_name TEXT, 
+	output_id TEXT, 
 	output_name TEXT, 
 	output_category TEXT, 
 	association TEXT, 
 	qualifiers TEXT, 
-	expected_output VARCHAR(16) NOT NULL, 
+	expected_output TEXT NOT NULL, 
 	test_issue VARCHAR(20), 
 	semantic_severity VARCHAR(13), 
 	in_v1 BOOLEAN, 
@@ -254,17 +266,17 @@ CREATE TABLE "TestCaseResult" (
 CREATE TABLE "TestEdgeData" (
 	name TEXT, 
 	description TEXT, 
-	input_id TEXT NOT NULL, 
+	input_id TEXT, 
 	input_name TEXT, 
 	input_category TEXT, 
 	predicate_id TEXT, 
-	predicate_name TEXT NOT NULL, 
-	output_id TEXT NOT NULL, 
+	predicate_name TEXT, 
+	output_id TEXT, 
 	output_name TEXT, 
 	output_category TEXT, 
 	association TEXT, 
 	qualifiers TEXT, 
-	expected_output VARCHAR(16) NOT NULL, 
+	expected_output TEXT NOT NULL, 
 	test_issue VARCHAR(20), 
 	semantic_severity VARCHAR(13), 
 	in_v1 BOOLEAN, 

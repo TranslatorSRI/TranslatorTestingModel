@@ -166,17 +166,17 @@ linkml:Sparqlpath xsd:string
     CLOSED {
        (  $<TestAsset_tes> (  &<TestEntity_tes> ;
              rdf:type [ <TestEntity> ] ? ;
-             <input_id> @linkml:Uriorcurie ;
+             <input_id> @linkml:Uriorcurie ? ;
              <input_name> @linkml:String ? ;
              <input_category> @<ConceptCategory> ? ;
              <predicate_id> @<PredicateType> ? ;
-             <predicate_name> @linkml:String ;
-             <output_id> @linkml:Uriorcurie ;
+             <predicate_name> @linkml:String ? ;
+             <output_id> @linkml:Uriorcurie ? ;
              <output_name> @linkml:String ? ;
              <output_category> @<ConceptCategory> ? ;
              <association> @<AssociationCategory> ? ;
              <qualifiers> @<Qualifier> * ;
-             <expected_output> @<ExpectedOutputEnum> ;
+             <expected_output> @linkml:String ;
              <test_issue> @<TestIssueEnum> ? ;
              <semantic_severity> @<SemanticSeverityEnum> ? ;
              <in_v1> @linkml:Boolean ? ;
@@ -201,6 +201,8 @@ linkml:Sparqlpath xsd:string
              <preconditions> @<Precondition> * ;
              <trapi_template> @<TrapiTemplateEnum> ? ;
              <components> @<ComponentEnum> * ;
+             <test_case_objective> @<TestObjectiveEnum> ? ;
+             <test_case_source> @<TestSourceEnum> ? ;
              schema1:additionalType @linkml:String *
           ) ;
           rdf:type [ <TestCase> ]
