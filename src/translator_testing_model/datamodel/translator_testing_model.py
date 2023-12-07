@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2023-12-07T09:13:40
+# Generation date: 2023-12-07T10:08:58
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel

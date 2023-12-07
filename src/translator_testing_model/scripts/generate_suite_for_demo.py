@@ -59,20 +59,12 @@ def create_test_assets_from_tsv(test_assets):
             ta.expected_output = "TopAnswer"
         else:
             ta.expected_output = "NeverShow"
-            print(ta)
 
         if row.get("Well Known") == "yes":
             ta.well_known = True
         else:
             ta.well_known = False
-        if ((ta.input_id is None or ta.input_id == "")
-                or (ta.output_id is None or ta.output_id == "")
-                or (ta.predicate_name is None or ta.predicate_name == "")
-                or (ta.expected_output is None or ta.expected_output == "")):
-            print("somethign is missing", ta)
-            continue
-        else:
-            assets.append(ta)
+        assets.append(ta)
 
     return assets
 
@@ -101,14 +93,19 @@ def create_test_cases_from_test_assets(test_assets, test_case_model):
                                     test_assets=assets,
                                     test_case_runner_settings=["inferred"]
                                     )
-        test_input_id = ""
-        test_case_predicate = ""
-        for asset in assets:
-            test_input_id = asset.input_id
-            test_case_predicate = asset.predicate_name
-        test_case.test_case_input_id = test_input_id
-        test_case.test_case_predicate = test_case_predicate
-        test_cases.append(test_case)
+        if test_case.test_assets is None:
+            print("test case has no assets", test_case)
+
+        if test_case.test_case_objective == "AcceptanceTest":
+            test_input_id = ""
+            test_case_predicate = ""
+            for asset in assets:
+                test_input_id = asset.input_id
+                test_case_predicate = asset.predicate_name
+
+            test_case.test_case_input_id = test_input_id
+            test_case.test_case_predicate = test_case_predicate
+            test_cases.append(test_case)
 
 
     return test_cases
@@ -129,7 +126,6 @@ if __name__ == '__main__':
 
     # Create TestAsset objects
     test_assets = create_test_assets_from_tsv(tsv_data)
-    print(test_assets[0].dict())
 
     # Create TestCase objects
     test_cases = create_test_cases_from_test_assets(test_assets, TestCase)
