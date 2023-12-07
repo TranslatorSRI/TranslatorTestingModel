@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2023-12-07T08:48:56
+# Generation date: 2023-12-07T09:06:52
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -528,6 +528,8 @@ class TestCase(TestEntity):
     components: Optional[Union[Union[str, "ComponentEnum"], List[Union[str, "ComponentEnum"]]]] = empty_list()
     test_case_objective: Optional[Union[str, "TestObjectiveEnum"]] = None
     test_case_source: Optional[Union[str, "TestSourceEnum"]] = None
+    test_case_predicate: Optional[str] = None
+    test_case_input_id: Optional[Union[str, URIorCURIE]] = None
     tags: Optional[Union[str, List[str]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
@@ -562,6 +564,12 @@ class TestCase(TestEntity):
 
         if self.test_case_source is not None and not isinstance(self.test_case_source, TestSourceEnum):
             self.test_case_source = TestSourceEnum(self.test_case_source)
+
+        if self.test_case_predicate is not None and not isinstance(self.test_case_predicate, str):
+            self.test_case_predicate = str(self.test_case_predicate)
+
+        if self.test_case_input_id is not None and not isinstance(self.test_case_input_id, URIorCURIE):
+            self.test_case_input_id = URIorCURIE(self.test_case_input_id)
 
         if not isinstance(self.tags, list):
             self.tags = [self.tags] if self.tags is not None else []
@@ -1349,6 +1357,12 @@ slots.test_case_source = Slot(uri=TTM.test_case_source, name="test_case_source",
 
 slots.test_annotations = Slot(uri=TTM.test_annotations, name="test_annotations", curie=TTM.curie('test_annotations'),
                    model_uri=TTM.test_annotations, domain=None, range=Optional[Union[Union[dict, TestEntityParameter], List[Union[dict, TestEntityParameter]]]])
+
+slots.test_case_input_id = Slot(uri=TTM.test_case_input_id, name="test_case_input_id", curie=TTM.curie('test_case_input_id'),
+                   model_uri=TTM.test_case_input_id, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.test_case_predicate = Slot(uri=TTM.test_case_predicate, name="test_case_predicate", curie=TTM.curie('test_case_predicate'),
+                   model_uri=TTM.test_case_predicate, domain=None, range=Optional[str])
 
 slots.input_id = Slot(uri=TTM.input_id, name="input_id", curie=TTM.curie('input_id'),
                    model_uri=TTM.input_id, domain=None, range=Optional[Union[str, URIorCURIE]])

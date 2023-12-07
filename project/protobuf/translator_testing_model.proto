@@ -47,6 +47,8 @@ message AcceptanceTestCase
  repeated  componentEnum components = 0
   testObjectiveEnum testCaseObjective = 0
   testSourceEnum testCaseSource = 0
+  string testCasePredicate = 0
+  uriorcurie testCaseInputId = 0
  repeated  string tags = 0
  repeated  acceptanceTestAsset testAssets = 0
  }
@@ -75,6 +77,8 @@ message ComplianceTestCase
  repeated  componentEnum components = 0
   testObjectiveEnum testCaseObjective = 0
   testSourceEnum testCaseSource = 0
+  string testCasePredicate = 0
+  uriorcurie testCaseInputId = 0
  repeated  string tags = 0
   string trapiVersion = 0
   string biolinkVersion = 0
@@ -93,6 +97,8 @@ message KnowledgeGraphNavigationTestCase
  repeated  componentEnum components = 0
   testObjectiveEnum testCaseObjective = 0
   testSourceEnum testCaseSource = 0
+  string testCasePredicate = 0
+  uriorcurie testCaseInputId = 0
  repeated  string tags = 0
  }
 // 'One Hop' Knowledge Graph navigation integration test
@@ -109,6 +115,8 @@ message OneHopTestCase
  repeated  componentEnum components = 0
   testObjectiveEnum testCaseObjective = 0
   testSourceEnum testCaseSource = 0
+  string testCasePredicate = 0
+  uriorcurie testCaseInputId = 0
  repeated  string tags = 0
  }
 // Test case for testing the integrity of "One Hop" knowledge graph retrievals sensa legacy SRI_Testing harness.
@@ -150,6 +158,8 @@ message QuantitativeTestCase
  repeated  componentEnum components = 0
   testObjectiveEnum testCaseObjective = 0
   testSourceEnum testCaseSource = 0
+  string testCasePredicate = 0
+  uriorcurie testCaseInputId = 0
  repeated  string tags = 0
  }
 // Test suite for testing Translator components against releases of standards like TRAPI and the Biolink Model.
@@ -204,6 +214,8 @@ message TestCase
  repeated  componentEnum components = 0
   testObjectiveEnum testCaseObjective = 0
   testSourceEnum testCaseSource = 0
+  string testCasePredicate = 0
+  uriorcurie testCaseInputId = 0
  repeated  string tags = 0
  }
 // The outcome of a TestRunner run of one specific TestCase.

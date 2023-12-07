@@ -1017,6 +1017,37 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "test_case_input_id",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case_input_id",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "aliases": [
+        "InputID, node normalized",
+        "SubjectID"
+      ],
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case_input_id",
+      "owner": "TestCase",
+      "domain_of": [
+        "TestCase"
+      ],
+      "range": "uriorcurie",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "test_case_predicate",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case_predicate",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "aliases": [
+        "Predicate"
+      ],
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case_predicate",
+      "owner": "TestCase",
+      "domain_of": [
+        "TestCase"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "input_id",
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/input_id",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
@@ -2176,6 +2207,8 @@
         "components",
         "test_case_objective",
         "test_case_source",
+        "test_case_predicate",
+        "test_case_input_id",
         "TestCase_tags"
       ],
       "slot_usage": {},
@@ -2199,6 +2232,8 @@
         "components",
         "test_case_objective",
         "test_case_source",
+        "test_case_predicate",
+        "test_case_input_id",
         "TestCase_tags",
         "AcceptanceTestCase_test_assets"
       ],
@@ -2224,6 +2259,8 @@
         "components",
         "test_case_objective",
         "test_case_source",
+        "test_case_predicate",
+        "test_case_input_id",
         "TestCase_tags"
       ],
       "slot_usage": {},
@@ -2248,6 +2285,8 @@
         "components",
         "test_case_objective",
         "test_case_source",
+        "test_case_predicate",
+        "test_case_input_id",
         "TestCase_tags",
         "trapi_version",
         "biolink_version"
@@ -2274,6 +2313,8 @@
         "components",
         "test_case_objective",
         "test_case_source",
+        "test_case_predicate",
+        "test_case_input_id",
         "TestCase_tags"
       ],
       "slot_usage": {},
@@ -2298,6 +2339,8 @@
         "components",
         "test_case_objective",
         "test_case_source",
+        "test_case_predicate",
+        "test_case_input_id",
         "TestCase_tags"
       ],
       "slot_usage": {},
@@ -2510,9 +2553,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "translator_testing_model.yaml",
-  "source_file_date": "2023-12-07T08:48:40",
-  "source_file_size": 25908,
-  "generation_date": "2023-12-07T08:48:53",
+  "source_file_date": "2023-12-07T09:06:31",
+  "source_file_size": 26114,
+  "generation_date": "2023-12-07T09:06:49",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",

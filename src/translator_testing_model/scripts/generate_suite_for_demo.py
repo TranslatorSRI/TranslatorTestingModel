@@ -92,8 +92,6 @@ def create_test_cases_from_test_assets(test_assets, test_case_model):
     for idx, (key, assets) in enumerate(grouped_assets.items()):
         test_case_id = f"TestCase_{idx}"
         descriptions = '; '.join(asset.description for asset in assets)
-        for asset in assets:
-            print(asset)
         test_case = test_case_model(id=test_case_id,
                                     name="what " + key[1] + " " + key[0],
                                     description=descriptions,
@@ -102,7 +100,23 @@ def create_test_cases_from_test_assets(test_assets, test_case_model):
                                     test_case_objective="AcceptanceTest",
                                     test_case_source="SMURF",
                                     test_assets=assets,
+                                    test_case_runner_settings=["inferred"]
                                     )
+        test_input_id = ""
+        test_case_predicate = ""
+        for asset in assets:
+            if test_input_id != "" and test_input_id != asset.input_id:
+                print("two assets with different input ids", asset.input_id, test_input_id)
+                continue
+            else:
+                test_input_id = asset.input_id
+            if asset.predicate != "" and test_case_predicate != asset.predicate:
+                print("two assets with different predicates", asset.predicate, test_case_predicate)
+                continue
+            else:
+                test_case_predicate = asset.predicate
+        test_case.test_input_id = test_input_id
+        test_case.test_predicate = test_case_predicate
         test_cases.append(test_case)
 
 

@@ -10,6 +10,8 @@ CREATE TABLE "AcceptanceTestCase" (
 	trapi_template VARCHAR(24), 
 	test_case_objective VARCHAR(16), 
 	test_case_source VARCHAR(18), 
+	test_case_predicate TEXT, 
+	test_case_input_id TEXT, 
 	PRIMARY KEY (id)
 );
 
@@ -24,6 +26,8 @@ CREATE TABLE "ComplianceTestCase" (
 	trapi_template VARCHAR(24), 
 	test_case_objective VARCHAR(16), 
 	test_case_source VARCHAR(18), 
+	test_case_predicate TEXT, 
+	test_case_input_id TEXT, 
 	trapi_version TEXT, 
 	biolink_version TEXT, 
 	PRIMARY KEY (id)
@@ -40,6 +44,8 @@ CREATE TABLE "KnowledgeGraphNavigationTestCase" (
 	trapi_template VARCHAR(24), 
 	test_case_objective VARCHAR(16), 
 	test_case_source VARCHAR(18), 
+	test_case_predicate TEXT, 
+	test_case_input_id TEXT, 
 	PRIMARY KEY (id)
 );
 
@@ -54,6 +60,8 @@ CREATE TABLE "OneHopTestCase" (
 	trapi_template VARCHAR(24), 
 	test_case_objective VARCHAR(16), 
 	test_case_source VARCHAR(18), 
+	test_case_predicate TEXT, 
+	test_case_input_id TEXT, 
 	PRIMARY KEY (id)
 );
 
@@ -81,6 +89,8 @@ CREATE TABLE "QuantitativeTestCase" (
 	trapi_template VARCHAR(24), 
 	test_case_objective VARCHAR(16), 
 	test_case_source VARCHAR(18), 
+	test_case_predicate TEXT, 
+	test_case_input_id TEXT, 
 	PRIMARY KEY (id)
 );
 
@@ -95,6 +105,8 @@ CREATE TABLE "TestCase" (
 	trapi_template VARCHAR(24), 
 	test_case_objective VARCHAR(16), 
 	test_case_source VARCHAR(18), 
+	test_case_predicate TEXT, 
+	test_case_input_id TEXT, 
 	PRIMARY KEY (id)
 );
 

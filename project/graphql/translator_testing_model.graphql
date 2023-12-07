@@ -46,6 +46,8 @@ type AcceptanceTestCase
     components: [ComponentEnum]
     testCaseObjective: TestObjectiveEnum
     testCaseSource: TestSourceEnum
+    testCasePredicate: String
+    testCaseInputId: Uriorcurie
     tags: [String]
     testAssets: [AcceptanceTestAsset]!
   }
@@ -79,6 +81,8 @@ type ComplianceTestCase
     components: [ComponentEnum]
     testCaseObjective: TestObjectiveEnum
     testCaseSource: TestSourceEnum
+    testCasePredicate: String
+    testCaseInputId: Uriorcurie
     tags: [String]
     trapiVersion: String
     biolinkVersion: String
@@ -97,6 +101,8 @@ type KnowledgeGraphNavigationTestCase
     components: [ComponentEnum]
     testCaseObjective: TestObjectiveEnum
     testCaseSource: TestSourceEnum
+    testCasePredicate: String
+    testCaseInputId: Uriorcurie
     tags: [String]
   }
 
@@ -113,6 +119,8 @@ type OneHopTestCase
     components: [ComponentEnum]
     testCaseObjective: TestObjectiveEnum
     testCaseSource: TestSourceEnum
+    testCasePredicate: String
+    testCaseInputId: Uriorcurie
     tags: [String]
   }
 
@@ -155,6 +163,8 @@ type QuantitativeTestCase
     components: [ComponentEnum]
     testCaseObjective: TestObjectiveEnum
     testCaseSource: TestSourceEnum
+    testCasePredicate: String
+    testCaseInputId: Uriorcurie
     tags: [String]
   }
 
@@ -209,6 +219,8 @@ type TestCase
     components: [ComponentEnum]
     testCaseObjective: TestObjectiveEnum
     testCaseSource: TestSourceEnum
+    testCasePredicate: String
+    testCaseInputId: Uriorcurie
     tags: [String]
   }
 

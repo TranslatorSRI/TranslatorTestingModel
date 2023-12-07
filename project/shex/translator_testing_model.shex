@@ -203,6 +203,8 @@ linkml:Sparqlpath xsd:string
              <components> @<ComponentEnum> * ;
              <test_case_objective> @<TestObjectiveEnum> ? ;
              <test_case_source> @<TestSourceEnum> ? ;
+             <test_case_predicate> @linkml:String ? ;
+             <test_case_input_id> @linkml:Uriorcurie ? ;
              schema1:additionalType @linkml:String *
           ) ;
           rdf:type [ <TestCase> ]

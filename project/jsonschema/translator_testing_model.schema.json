@@ -184,9 +184,15 @@
                     },
                     "type": "array"
                 },
+                "test_case_input_id": {
+                    "type": "string"
+                },
                 "test_case_objective": {
                     "$ref": "#/$defs/TestObjectiveEnum",
                     "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)"
+                },
+                "test_case_predicate": {
+                    "type": "string"
                 },
                 "test_case_source": {
                     "$ref": "#/$defs/TestSourceEnum",
@@ -314,9 +320,15 @@
                     },
                     "type": "array"
                 },
+                "test_case_input_id": {
+                    "type": "string"
+                },
                 "test_case_objective": {
                     "$ref": "#/$defs/TestObjectiveEnum",
                     "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)"
+                },
+                "test_case_predicate": {
+                    "type": "string"
                 },
                 "test_case_source": {
                     "$ref": "#/$defs/TestSourceEnum",
@@ -440,9 +452,15 @@
                     },
                     "type": "array"
                 },
+                "test_case_input_id": {
+                    "type": "string"
+                },
                 "test_case_objective": {
                     "$ref": "#/$defs/TestObjectiveEnum",
                     "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)"
+                },
+                "test_case_predicate": {
+                    "type": "string"
                 },
                 "test_case_source": {
                     "$ref": "#/$defs/TestSourceEnum",
@@ -520,9 +538,15 @@
                     },
                     "type": "array"
                 },
+                "test_case_input_id": {
+                    "type": "string"
+                },
                 "test_case_objective": {
                     "$ref": "#/$defs/TestObjectiveEnum",
                     "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)"
+                },
+                "test_case_predicate": {
+                    "type": "string"
                 },
                 "test_case_source": {
                     "$ref": "#/$defs/TestSourceEnum",
@@ -686,9 +710,15 @@
                     },
                     "type": "array"
                 },
+                "test_case_input_id": {
+                    "type": "string"
+                },
                 "test_case_objective": {
                     "$ref": "#/$defs/TestObjectiveEnum",
                     "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)"
+                },
+                "test_case_predicate": {
+                    "type": "string"
                 },
                 "test_case_source": {
                     "$ref": "#/$defs/TestSourceEnum",
@@ -920,9 +950,15 @@
                     },
                     "type": "array"
                 },
+                "test_case_input_id": {
+                    "type": "string"
+                },
                 "test_case_objective": {
                     "$ref": "#/$defs/TestObjectiveEnum",
                     "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)"
+                },
+                "test_case_predicate": {
+                    "type": "string"
                 },
                 "test_case_source": {
                     "$ref": "#/$defs/TestSourceEnum",
@@ -1083,9 +1119,15 @@
                     },
                     "type": "array"
                 },
+                "test_case_input_id": {
+                    "type": "string"
+                },
                 "test_case_objective": {
                     "$ref": "#/$defs/TestObjectiveEnum",
                     "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)"
+                },
+                "test_case_predicate": {
+                    "type": "string"
                 },
                 "test_case_source": {
                     "$ref": "#/$defs/TestSourceEnum",

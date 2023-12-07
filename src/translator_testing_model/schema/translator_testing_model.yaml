@@ -198,6 +198,8 @@ classes:
       - components
       - test_case_objective
       - test_case_source
+      - test_case_predicate
+      - test_case_input_id
     slot_usage:
       test_assets:
         aliases: ["Block List"]
@@ -473,6 +475,13 @@ slots:
   ###################
   # TestAsset Slots #
   ###################
+
+  test_case_input_id:
+    aliases: ["InputID, node normalized", "SubjectID"]
+    range: uriorcurie
+
+  test_case_predicate:
+    aliases: ["Predicate"]
 
   input_id:
     aliases: ["InputID, node normalized", "SubjectID"]
