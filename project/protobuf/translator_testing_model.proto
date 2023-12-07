@@ -47,7 +47,8 @@ message AcceptanceTestCase
  repeated  componentEnum components = 0
   testObjectiveEnum testCaseObjective = 0
   testSourceEnum testCaseSource = 0
-  string testCasePredicate = 0
+  string testCasePredicateName = 0
+  string testCasePredicateId = 0
   uriorcurie testCaseInputId = 0
  repeated  string testCaseRunnerSettings = 0
  repeated  string tags = 0
@@ -78,7 +79,8 @@ message ComplianceTestCase
  repeated  componentEnum components = 0
   testObjectiveEnum testCaseObjective = 0
   testSourceEnum testCaseSource = 0
-  string testCasePredicate = 0
+  string testCasePredicateName = 0
+  string testCasePredicateId = 0
   uriorcurie testCaseInputId = 0
  repeated  string testCaseRunnerSettings = 0
  repeated  string tags = 0
@@ -99,7 +101,8 @@ message KnowledgeGraphNavigationTestCase
  repeated  componentEnum components = 0
   testObjectiveEnum testCaseObjective = 0
   testSourceEnum testCaseSource = 0
-  string testCasePredicate = 0
+  string testCasePredicateName = 0
+  string testCasePredicateId = 0
   uriorcurie testCaseInputId = 0
  repeated  string testCaseRunnerSettings = 0
  repeated  string tags = 0
@@ -118,7 +121,8 @@ message OneHopTestCase
  repeated  componentEnum components = 0
   testObjectiveEnum testCaseObjective = 0
   testSourceEnum testCaseSource = 0
-  string testCasePredicate = 0
+  string testCasePredicateName = 0
+  string testCasePredicateId = 0
   uriorcurie testCaseInputId = 0
  repeated  string testCaseRunnerSettings = 0
  repeated  string tags = 0
@@ -162,7 +166,8 @@ message QuantitativeTestCase
  repeated  componentEnum components = 0
   testObjectiveEnum testCaseObjective = 0
   testSourceEnum testCaseSource = 0
-  string testCasePredicate = 0
+  string testCasePredicateName = 0
+  string testCasePredicateId = 0
   uriorcurie testCaseInputId = 0
  repeated  string testCaseRunnerSettings = 0
  repeated  string tags = 0
@@ -219,7 +224,8 @@ message TestCase
  repeated  componentEnum components = 0
   testObjectiveEnum testCaseObjective = 0
   testSourceEnum testCaseSource = 0
-  string testCasePredicate = 0
+  string testCasePredicateName = 0
+  string testCasePredicateId = 0
   uriorcurie testCaseInputId = 0
  repeated  string testCaseRunnerSettings = 0
  repeated  string tags = 0

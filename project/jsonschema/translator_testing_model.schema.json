@@ -132,6 +132,7 @@
             },
             "required": [
                 "runner_settings",
+                "test_metadata",
                 "id"
             ],
             "title": "AcceptanceTestAsset",
@@ -191,7 +192,10 @@
                     "$ref": "#/$defs/TestObjectiveEnum",
                     "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)"
                 },
-                "test_case_predicate": {
+                "test_case_predicate_id": {
+                    "type": "string"
+                },
+                "test_case_predicate_name": {
                     "type": "string"
                 },
                 "test_case_runner_settings": {
@@ -266,6 +270,7 @@
                 }
             },
             "required": [
+                "test_metadata",
                 "id"
             ],
             "title": "AcceptanceTestSuite",
@@ -335,7 +340,10 @@
                     "$ref": "#/$defs/TestObjectiveEnum",
                     "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)"
                 },
-                "test_case_predicate": {
+                "test_case_predicate_id": {
+                    "type": "string"
+                },
+                "test_case_predicate_name": {
                     "type": "string"
                 },
                 "test_case_runner_settings": {
@@ -475,7 +483,10 @@
                     "$ref": "#/$defs/TestObjectiveEnum",
                     "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)"
                 },
-                "test_case_predicate": {
+                "test_case_predicate_id": {
+                    "type": "string"
+                },
+                "test_case_predicate_name": {
                     "type": "string"
                 },
                 "test_case_runner_settings": {
@@ -569,7 +580,10 @@
                     "$ref": "#/$defs/TestObjectiveEnum",
                     "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)"
                 },
-                "test_case_predicate": {
+                "test_case_predicate_id": {
+                    "type": "string"
+                },
+                "test_case_predicate_name": {
                     "type": "string"
                 },
                 "test_case_runner_settings": {
@@ -644,6 +658,7 @@
                 }
             },
             "required": [
+                "test_metadata",
                 "id"
             ],
             "title": "OneHopTestSuite",
@@ -749,7 +764,10 @@
                     "$ref": "#/$defs/TestObjectiveEnum",
                     "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)"
                 },
-                "test_case_predicate": {
+                "test_case_predicate_id": {
+                    "type": "string"
+                },
+                "test_case_predicate_name": {
                     "type": "string"
                 },
                 "test_case_runner_settings": {
@@ -842,6 +860,7 @@
                 }
             },
             "required": [
+                "test_metadata",
                 "id"
             ],
             "title": "StandardsComplianceTestSuite",
@@ -938,6 +957,7 @@
             },
             "required": [
                 "runner_settings",
+                "test_metadata",
                 "id"
             ],
             "title": "TestAsset",
@@ -997,7 +1017,10 @@
                     "$ref": "#/$defs/TestObjectiveEnum",
                     "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)"
                 },
-                "test_case_predicate": {
+                "test_case_predicate_id": {
+                    "type": "string"
+                },
+                "test_case_predicate_name": {
                     "type": "string"
                 },
                 "test_case_runner_settings": {
@@ -1174,7 +1197,10 @@
                     "$ref": "#/$defs/TestObjectiveEnum",
                     "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)"
                 },
-                "test_case_predicate": {
+                "test_case_predicate_id": {
+                    "type": "string"
+                },
+                "test_case_predicate_name": {
                     "type": "string"
                 },
                 "test_case_runner_settings": {
@@ -1295,6 +1321,7 @@
             },
             "required": [
                 "runner_settings",
+                "test_metadata",
                 "id"
             ],
             "title": "TestEdgeData",
@@ -1664,6 +1691,7 @@
                 }
             },
             "required": [
+                "test_metadata",
                 "id"
             ],
             "title": "TestSuite",

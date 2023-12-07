@@ -34,6 +34,7 @@ def create_test_assets_from_tsv(test_assets):
                        predicate_id="biolink:"+row.get("Relationship").lower(),
                        output_id=row.get("OutputID"),
                        expected_output="NeverShow",
+                       test_metadata=TestMetadata(id=1),
                        )
         ta.input_name = row.get("InputName (user choice)")
         if row.get("GitHubIssue") != "" and row.get("GitHubIssue") is not None:
@@ -97,15 +98,15 @@ def create_test_cases_from_test_assets(test_assets, test_case_model):
 
         if test_case.test_case_objective == "AcceptanceTest":
             test_input_id = ""
-            test_case_predicate = ""
+            test_case_predicate_name = ""
             for asset in assets:
                 test_input_id = asset.input_id
-                test_case_predicate = asset.predicate_name
+                test_case_predicate_name = asset.predicate_name
 
             test_case.test_case_input_id = test_input_id
-            test_case.test_case_predicate = test_case_predicate
+            test_case.test_case_predicate_name = test_case_predicate_name
+            test_case.test_case_predicate_id = "biolink:" + test_case_predicate_name
             test_cases.append(test_case)
-
 
     return test_cases
 
@@ -113,7 +114,10 @@ def create_test_cases_from_test_assets(test_assets, test_case_model):
 def create_test_suite_from_test_cases(test_cases, test_suite_model):
     test_suite_id = "TestSuite_1"
     test_cases_dict = {test_case.id: test_case for test_case in test_cases}
-    return test_suite_model(id=test_suite_id, test_cases=test_cases_dict)
+    tmd = TestMetadata(id=1,
+                          test_source="SMURF",
+                          test_objective="AcceptanceTest")
+    return test_suite_model(id=test_suite_id, test_cases=test_cases_dict, test_metadata=tmd)
 
 
 if __name__ == '__main__':
@@ -125,9 +129,15 @@ if __name__ == '__main__':
 
     # Create TestAsset objects
     test_assets = create_test_assets_from_tsv(tsv_data)
+    for asset in test_assets:
+        if asset.test_metadata is None or asset.test_metadata == "":
+            print(asset)
 
     # Create TestCase objects
     test_cases = create_test_cases_from_test_assets(test_assets, TestCase)
+    for case in test_cases:
+        if case.test_assets is None or case.test_assets == "":
+            print(case)
     #
     # Assemble into a TestSuite
     test_suite = create_test_suite_from_test_cases(test_cases, TestSuite)

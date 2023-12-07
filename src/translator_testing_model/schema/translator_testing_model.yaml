@@ -198,7 +198,8 @@ classes:
       - components
       - test_case_objective
       - test_case_source
-      - test_case_predicate
+      - test_case_predicate_name
+      - test_case_predicate_id
       - test_case_input_id
       - test_case_runner_settings
     slot_usage:
@@ -481,7 +482,10 @@ slots:
     aliases: ["InputID, node normalized", "SubjectID"]
     range: uriorcurie
 
-  test_case_predicate:
+  test_case_predicate_name:
+    aliases: ["Predicate"]
+
+  test_case_predicate_id:
     aliases: ["Predicate"]
 
   input_id:
@@ -719,6 +723,7 @@ slots:
       Test metadata describes the external provenance, cross-references and objectives for a given test.
     range: TestMetadata
     inlined: true
+    required: true
 
   test_persona:
     description: >-

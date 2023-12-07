@@ -284,7 +284,7 @@ class TestAsset(TestEntity):
     well_known: Optional[bool] = Field(None)
     test_reference: Optional[str] = Field(None, description="""Document URL where original test source particulars are registered (e.g. Github repo)""")
     runner_settings: List[str] = Field(default_factory=list, description="""Settings for the test harness, e.g. \"inferred\"""")
-    test_metadata: Optional[TestMetadata] = Field(None, description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
+    test_metadata: TestMetadata = Field(..., description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
@@ -322,7 +322,7 @@ class AcceptanceTestAsset(TestAsset):
     well_known: Optional[bool] = Field(None)
     test_reference: Optional[str] = Field(None, description="""Document URL where original test source particulars are registered (e.g. Github repo)""")
     runner_settings: List[str] = Field(default_factory=list, description="""Settings for the test harness, e.g. \"inferred\"""")
-    test_metadata: Optional[TestMetadata] = Field(None, description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
+    test_metadata: TestMetadata = Field(..., description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
@@ -350,7 +350,7 @@ class TestEdgeData(TestAsset):
     well_known: Optional[bool] = Field(None)
     test_reference: Optional[str] = Field(None, description="""Document URL where original test source particulars are registered (e.g. Github repo)""")
     runner_settings: List[str] = Field(default_factory=list, description="""Settings for the test harness, e.g. \"inferred\"""")
-    test_metadata: Optional[TestMetadata] = Field(None, description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
+    test_metadata: TestMetadata = Field(..., description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
@@ -379,7 +379,8 @@ class TestCase(TestEntity):
     components: Optional[List[ComponentEnum]] = Field(default_factory=list, description="""The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.""")
     test_case_objective: Optional[TestObjectiveEnum] = Field(None, description="""Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)""")
     test_case_source: Optional[TestSourceEnum] = Field(None, description="""Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string.""")
-    test_case_predicate: Optional[str] = Field(None)
+    test_case_predicate_name: Optional[str] = Field(None)
+    test_case_predicate_id: Optional[str] = Field(None)
     test_case_input_id: Optional[str] = Field(None)
     test_case_runner_settings: List[str] = Field(default_factory=list, description="""Settings for the test harness for TestCase""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
@@ -400,7 +401,8 @@ class AcceptanceTestCase(TestCase):
     components: Optional[List[ComponentEnum]] = Field(default_factory=list, description="""The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.""")
     test_case_objective: Optional[TestObjectiveEnum] = Field(None, description="""Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)""")
     test_case_source: Optional[TestSourceEnum] = Field(None, description="""Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string.""")
-    test_case_predicate: Optional[str] = Field(None)
+    test_case_predicate_name: Optional[str] = Field(None)
+    test_case_predicate_id: Optional[str] = Field(None)
     test_case_input_id: Optional[str] = Field(None)
     test_case_runner_settings: List[str] = Field(default_factory=list, description="""Settings for the test harness for TestCase""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
@@ -421,7 +423,8 @@ class QuantitativeTestCase(TestCase):
     components: Optional[List[ComponentEnum]] = Field(default_factory=list, description="""The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.""")
     test_case_objective: Optional[TestObjectiveEnum] = Field(None, description="""Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)""")
     test_case_source: Optional[TestSourceEnum] = Field(None, description="""Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string.""")
-    test_case_predicate: Optional[str] = Field(None)
+    test_case_predicate_name: Optional[str] = Field(None)
+    test_case_predicate_id: Optional[str] = Field(None)
     test_case_input_id: Optional[str] = Field(None)
     test_case_runner_settings: List[str] = Field(default_factory=list, description="""Settings for the test harness for TestCase""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
@@ -444,7 +447,8 @@ class ComplianceTestCase(TestCase):
     components: Optional[List[ComponentEnum]] = Field(default_factory=list, description="""The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.""")
     test_case_objective: Optional[TestObjectiveEnum] = Field(None, description="""Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)""")
     test_case_source: Optional[TestSourceEnum] = Field(None, description="""Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string.""")
-    test_case_predicate: Optional[str] = Field(None)
+    test_case_predicate_name: Optional[str] = Field(None)
+    test_case_predicate_id: Optional[str] = Field(None)
     test_case_input_id: Optional[str] = Field(None)
     test_case_runner_settings: List[str] = Field(default_factory=list, description="""Settings for the test harness for TestCase""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
@@ -465,7 +469,8 @@ class KnowledgeGraphNavigationTestCase(TestCase):
     components: Optional[List[ComponentEnum]] = Field(default_factory=list, description="""The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.""")
     test_case_objective: Optional[TestObjectiveEnum] = Field(None, description="""Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)""")
     test_case_source: Optional[TestSourceEnum] = Field(None, description="""Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string.""")
-    test_case_predicate: Optional[str] = Field(None)
+    test_case_predicate_name: Optional[str] = Field(None)
+    test_case_predicate_id: Optional[str] = Field(None)
     test_case_input_id: Optional[str] = Field(None)
     test_case_runner_settings: List[str] = Field(default_factory=list, description="""Settings for the test harness for TestCase""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
@@ -486,7 +491,8 @@ class OneHopTestCase(KnowledgeGraphNavigationTestCase):
     components: Optional[List[ComponentEnum]] = Field(default_factory=list, description="""The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.""")
     test_case_objective: Optional[TestObjectiveEnum] = Field(None, description="""Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)""")
     test_case_source: Optional[TestSourceEnum] = Field(None, description="""Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string.""")
-    test_case_predicate: Optional[str] = Field(None)
+    test_case_predicate_name: Optional[str] = Field(None)
+    test_case_predicate_id: Optional[str] = Field(None)
     test_case_input_id: Optional[str] = Field(None)
     test_case_runner_settings: List[str] = Field(default_factory=list, description="""Settings for the test harness for TestCase""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
@@ -511,7 +517,7 @@ class TestSuite(TestEntity):
     """
     Specification of a set of Test Cases, one of either with a static list of 'test_cases' or a dynamic 'test_suite_specification' slot values. Note: at least one slot or the other, but generally not both(?) needs to be present.
     """
-    test_metadata: Optional[TestMetadata] = Field(None, description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
+    test_metadata: TestMetadata = Field(..., description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
     test_persona: Optional[TestPersonaEnum] = Field(None, description="""A Test persona describes the user or operational context of a given test.""")
     test_cases: Optional[Dict[str, TestCase]] = Field(default_factory=dict, description="""List of explicitly enumerated Test Cases.""")
     test_suite_specification: Optional[TestSuiteSpecification] = Field(None, description="""Declarative specification of a Test Suite of Test Cases whose generation is deferred, (i.e. within a Test Runner) or whose creation is achieved by stream processing of an external data source.""")
@@ -523,7 +529,7 @@ class TestSuite(TestEntity):
 
 class AcceptanceTestSuite(TestSuite):
     
-    test_metadata: Optional[TestMetadata] = Field(None, description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
+    test_metadata: TestMetadata = Field(..., description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
     test_persona: Optional[TestPersonaEnum] = Field(None, description="""A Test persona describes the user or operational context of a given test.""")
     test_cases: Optional[Dict[str, TestCase]] = Field(default_factory=dict, description="""List of explicitly enumerated Test Cases.""")
     test_suite_specification: Optional[TestSuiteSpecification] = Field(None, description="""Declarative specification of a Test Suite of Test Cases whose generation is deferred, (i.e. within a Test Runner) or whose creation is achieved by stream processing of an external data source.""")
@@ -544,7 +550,7 @@ class StandardsComplianceTestSuite(TestSuite):
     """
     Test suite for testing Translator components against releases of standards like TRAPI and the Biolink Model.
     """
-    test_metadata: Optional[TestMetadata] = Field(None, description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
+    test_metadata: TestMetadata = Field(..., description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
     test_persona: Optional[TestPersonaEnum] = Field(None, description="""A Test persona describes the user or operational context of a given test.""")
     test_cases: Optional[Dict[str, TestCase]] = Field(default_factory=dict, description="""List of explicitly enumerated Test Cases.""")
     test_suite_specification: Optional[TestSuiteSpecification] = Field(None, description="""Declarative specification of a Test Suite of Test Cases whose generation is deferred, (i.e. within a Test Runner) or whose creation is achieved by stream processing of an external data source.""")
@@ -558,7 +564,7 @@ class OneHopTestSuite(TestSuite):
     """
     Test case for testing the integrity of \"One Hop\" knowledge graph retrievals sensa legacy SRI_Testing harness.
     """
-    test_metadata: Optional[TestMetadata] = Field(None, description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
+    test_metadata: TestMetadata = Field(..., description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
     test_persona: Optional[TestPersonaEnum] = Field(None, description="""A Test persona describes the user or operational context of a given test.""")
     test_cases: Optional[Dict[str, TestCase]] = Field(default_factory=dict, description="""List of explicitly enumerated Test Cases.""")
     test_suite_specification: Optional[TestSuiteSpecification] = Field(None, description="""Declarative specification of a Test Suite of Test Cases whose generation is deferred, (i.e. within a Test Runner) or whose creation is achieved by stream processing of an external data source.""")

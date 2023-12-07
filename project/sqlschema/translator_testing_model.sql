@@ -10,7 +10,8 @@ CREATE TABLE "AcceptanceTestCase" (
 	trapi_template VARCHAR(24), 
 	test_case_objective VARCHAR(16), 
 	test_case_source VARCHAR(18), 
-	test_case_predicate TEXT, 
+	test_case_predicate_name TEXT, 
+	test_case_predicate_id TEXT, 
 	test_case_input_id TEXT, 
 	PRIMARY KEY (id)
 );
@@ -26,7 +27,8 @@ CREATE TABLE "ComplianceTestCase" (
 	trapi_template VARCHAR(24), 
 	test_case_objective VARCHAR(16), 
 	test_case_source VARCHAR(18), 
-	test_case_predicate TEXT, 
+	test_case_predicate_name TEXT, 
+	test_case_predicate_id TEXT, 
 	test_case_input_id TEXT, 
 	trapi_version TEXT, 
 	biolink_version TEXT, 
@@ -44,7 +46,8 @@ CREATE TABLE "KnowledgeGraphNavigationTestCase" (
 	trapi_template VARCHAR(24), 
 	test_case_objective VARCHAR(16), 
 	test_case_source VARCHAR(18), 
-	test_case_predicate TEXT, 
+	test_case_predicate_name TEXT, 
+	test_case_predicate_id TEXT, 
 	test_case_input_id TEXT, 
 	PRIMARY KEY (id)
 );
@@ -60,7 +63,8 @@ CREATE TABLE "OneHopTestCase" (
 	trapi_template VARCHAR(24), 
 	test_case_objective VARCHAR(16), 
 	test_case_source VARCHAR(18), 
-	test_case_predicate TEXT, 
+	test_case_predicate_name TEXT, 
+	test_case_predicate_id TEXT, 
 	test_case_input_id TEXT, 
 	PRIMARY KEY (id)
 );
@@ -89,7 +93,8 @@ CREATE TABLE "QuantitativeTestCase" (
 	trapi_template VARCHAR(24), 
 	test_case_objective VARCHAR(16), 
 	test_case_source VARCHAR(18), 
-	test_case_predicate TEXT, 
+	test_case_predicate_name TEXT, 
+	test_case_predicate_id TEXT, 
 	test_case_input_id TEXT, 
 	PRIMARY KEY (id)
 );
@@ -105,7 +110,8 @@ CREATE TABLE "TestCase" (
 	trapi_template VARCHAR(24), 
 	test_case_objective VARCHAR(16), 
 	test_case_source VARCHAR(18), 
-	test_case_predicate TEXT, 
+	test_case_predicate_name TEXT, 
+	test_case_predicate_id TEXT, 
 	test_case_input_id TEXT, 
 	PRIMARY KEY (id)
 );
@@ -180,7 +186,7 @@ CREATE TABLE "AcceptanceTestAsset" (
 	in_v1 BOOLEAN, 
 	well_known BOOLEAN, 
 	test_reference TEXT, 
-	test_metadata TEXT, 
+	test_metadata TEXT NOT NULL, 
 	id TEXT NOT NULL, 
 	must_pass_date DATE, 
 	must_pass_environment VARCHAR(4), 
@@ -202,7 +208,7 @@ CREATE TABLE "AcceptanceTestSuite" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	description TEXT, 
-	test_metadata TEXT, 
+	test_metadata TEXT NOT NULL, 
 	test_persona VARCHAR(11), 
 	test_cases TEXT, 
 	test_suite_specification TEXT, 
@@ -215,7 +221,7 @@ CREATE TABLE "OneHopTestSuite" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	description TEXT, 
-	test_metadata TEXT, 
+	test_metadata TEXT NOT NULL, 
 	test_persona VARCHAR(11), 
 	test_cases TEXT, 
 	test_suite_specification TEXT, 
@@ -228,7 +234,7 @@ CREATE TABLE "StandardsComplianceTestSuite" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	description TEXT, 
-	test_metadata TEXT, 
+	test_metadata TEXT NOT NULL, 
 	test_persona VARCHAR(11), 
 	test_cases TEXT, 
 	test_suite_specification TEXT, 
@@ -256,7 +262,7 @@ CREATE TABLE "TestAsset" (
 	in_v1 BOOLEAN, 
 	well_known BOOLEAN, 
 	test_reference TEXT, 
-	test_metadata TEXT, 
+	test_metadata TEXT NOT NULL, 
 	id TEXT NOT NULL, 
 	PRIMARY KEY (id), 
 	FOREIGN KEY(test_metadata) REFERENCES "TestMetadata" (id)
@@ -294,7 +300,7 @@ CREATE TABLE "TestEdgeData" (
 	in_v1 BOOLEAN, 
 	well_known BOOLEAN, 
 	test_reference TEXT, 
-	test_metadata TEXT, 
+	test_metadata TEXT NOT NULL, 
 	id TEXT NOT NULL, 
 	PRIMARY KEY (id), 
 	FOREIGN KEY(test_metadata) REFERENCES "TestMetadata" (id)
@@ -320,7 +326,7 @@ CREATE TABLE "TestSuite" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	description TEXT, 
-	test_metadata TEXT, 
+	test_metadata TEXT NOT NULL, 
 	test_persona VARCHAR(11), 
 	test_cases TEXT, 
 	test_suite_specification TEXT, 

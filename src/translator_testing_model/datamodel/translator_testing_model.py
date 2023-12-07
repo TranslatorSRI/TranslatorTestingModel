@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2023-12-07T10:08:58
+# Generation date: 2023-12-07T10:24:11
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -303,6 +303,7 @@ class TestAsset(TestEntity):
 
     id: Union[str, TestAssetId] = None
     runner_settings: Union[str, List[str]] = None
+    test_metadata: Union[dict, TestMetadata] = None
     input_id: Optional[Union[str, URIorCURIE]] = None
     input_name: Optional[str] = None
     input_category: Optional[Union[str, ConceptCategory]] = None
@@ -319,7 +320,6 @@ class TestAsset(TestEntity):
     in_v1: Optional[Union[bool, Bool]] = None
     well_known: Optional[Union[bool, Bool]] = None
     test_reference: Optional[Union[str, URIorCURIE]] = None
-    test_metadata: Optional[Union[dict, TestMetadata]] = None
     tags: Optional[Union[str, List[str]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
@@ -333,6 +333,11 @@ class TestAsset(TestEntity):
         if not isinstance(self.runner_settings, list):
             self.runner_settings = [self.runner_settings] if self.runner_settings is not None else []
         self.runner_settings = [v if isinstance(v, str) else str(v) for v in self.runner_settings]
+
+        if self._is_empty(self.test_metadata):
+            self.MissingRequiredField("test_metadata")
+        if not isinstance(self.test_metadata, TestMetadata):
+            self.test_metadata = TestMetadata(**as_dict(self.test_metadata))
 
         if self.input_id is not None and not isinstance(self.input_id, URIorCURIE):
             self.input_id = URIorCURIE(self.input_id)
@@ -383,9 +388,6 @@ class TestAsset(TestEntity):
         if self.test_reference is not None and not isinstance(self.test_reference, URIorCURIE):
             self.test_reference = URIorCURIE(self.test_reference)
 
-        if self.test_metadata is not None and not isinstance(self.test_metadata, TestMetadata):
-            self.test_metadata = TestMetadata(**as_dict(self.test_metadata))
-
         if not isinstance(self.tags, list):
             self.tags = [self.tags] if self.tags is not None else []
         self.tags = [v if isinstance(v, str) else str(v) for v in self.tags]
@@ -407,6 +409,7 @@ class AcceptanceTestAsset(TestAsset):
 
     id: Union[str, AcceptanceTestAssetId] = None
     runner_settings: Union[str, List[str]] = None
+    test_metadata: Union[dict, TestMetadata] = None
     must_pass_date: Optional[Union[str, XSDDate]] = None
     must_pass_environment: Optional[Union[str, "TestEnvEnum"]] = None
     scientific_question: Optional[str] = None
@@ -472,6 +475,7 @@ class TestEdgeData(TestAsset):
 
     id: Union[str, TestEdgeDataId] = None
     runner_settings: Union[str, List[str]] = None
+    test_metadata: Union[dict, TestMetadata] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -529,7 +533,8 @@ class TestCase(TestEntity):
     components: Optional[Union[Union[str, "ComponentEnum"], List[Union[str, "ComponentEnum"]]]] = empty_list()
     test_case_objective: Optional[Union[str, "TestObjectiveEnum"]] = None
     test_case_source: Optional[Union[str, "TestSourceEnum"]] = None
-    test_case_predicate: Optional[str] = None
+    test_case_predicate_name: Optional[str] = None
+    test_case_predicate_id: Optional[str] = None
     test_case_input_id: Optional[Union[str, URIorCURIE]] = None
     tags: Optional[Union[str, List[str]]] = empty_list()
 
@@ -572,8 +577,11 @@ class TestCase(TestEntity):
         if self.test_case_source is not None and not isinstance(self.test_case_source, TestSourceEnum):
             self.test_case_source = TestSourceEnum(self.test_case_source)
 
-        if self.test_case_predicate is not None and not isinstance(self.test_case_predicate, str):
-            self.test_case_predicate = str(self.test_case_predicate)
+        if self.test_case_predicate_name is not None and not isinstance(self.test_case_predicate_name, str):
+            self.test_case_predicate_name = str(self.test_case_predicate_name)
+
+        if self.test_case_predicate_id is not None and not isinstance(self.test_case_predicate_id, str):
+            self.test_case_predicate_id = str(self.test_case_predicate_id)
 
         if self.test_case_input_id is not None and not isinstance(self.test_case_input_id, URIorCURIE):
             self.test_case_input_id = URIorCURIE(self.test_case_input_id)
@@ -768,7 +776,7 @@ class TestSuite(TestEntity):
     class_model_uri: ClassVar[URIRef] = TTM.TestSuite
 
     id: Union[str, TestSuiteId] = None
-    test_metadata: Optional[Union[dict, TestMetadata]] = None
+    test_metadata: Union[dict, TestMetadata] = None
     test_persona: Optional[Union[str, "TestPersonaEnum"]] = None
     test_cases: Optional[Union[Dict[Union[str, TestCaseId], Union[dict, TestCase]], List[Union[dict, TestCase]]]] = empty_dict()
     test_suite_specification: Optional[Union[dict, TestSuiteSpecification]] = None
@@ -779,7 +787,9 @@ class TestSuite(TestEntity):
         if not isinstance(self.id, TestSuiteId):
             self.id = TestSuiteId(self.id)
 
-        if self.test_metadata is not None and not isinstance(self.test_metadata, TestMetadata):
+        if self._is_empty(self.test_metadata):
+            self.MissingRequiredField("test_metadata")
+        if not isinstance(self.test_metadata, TestMetadata):
             self.test_metadata = TestMetadata(**as_dict(self.test_metadata))
 
         if self.test_persona is not None and not isinstance(self.test_persona, TestPersonaEnum):
@@ -803,6 +813,7 @@ class AcceptanceTestSuite(TestSuite):
     class_model_uri: ClassVar[URIRef] = TTM.AcceptanceTestSuite
 
     id: Union[str, AcceptanceTestSuiteId] = None
+    test_metadata: Union[dict, TestMetadata] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -838,6 +849,7 @@ class StandardsComplianceTestSuite(TestSuite):
     class_model_uri: ClassVar[URIRef] = TTM.StandardsComplianceTestSuite
 
     id: Union[str, StandardsComplianceTestSuiteId] = None
+    test_metadata: Union[dict, TestMetadata] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -861,6 +873,7 @@ class OneHopTestSuite(TestSuite):
     class_model_uri: ClassVar[URIRef] = TTM.OneHopTestSuite
 
     id: Union[str, OneHopTestSuiteId] = None
+    test_metadata: Union[dict, TestMetadata] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -1373,8 +1386,11 @@ slots.test_annotations = Slot(uri=TTM.test_annotations, name="test_annotations",
 slots.test_case_input_id = Slot(uri=TTM.test_case_input_id, name="test_case_input_id", curie=TTM.curie('test_case_input_id'),
                    model_uri=TTM.test_case_input_id, domain=None, range=Optional[Union[str, URIorCURIE]])
 
-slots.test_case_predicate = Slot(uri=TTM.test_case_predicate, name="test_case_predicate", curie=TTM.curie('test_case_predicate'),
-                   model_uri=TTM.test_case_predicate, domain=None, range=Optional[str])
+slots.test_case_predicate_name = Slot(uri=TTM.test_case_predicate_name, name="test_case_predicate_name", curie=TTM.curie('test_case_predicate_name'),
+                   model_uri=TTM.test_case_predicate_name, domain=None, range=Optional[str])
+
+slots.test_case_predicate_id = Slot(uri=TTM.test_case_predicate_id, name="test_case_predicate_id", curie=TTM.curie('test_case_predicate_id'),
+                   model_uri=TTM.test_case_predicate_id, domain=None, range=Optional[str])
 
 slots.input_id = Slot(uri=TTM.input_id, name="input_id", curie=TTM.curie('input_id'),
                    model_uri=TTM.input_id, domain=None, range=Optional[Union[str, URIorCURIE]])
@@ -1488,7 +1504,7 @@ slots.test_data_file_format = Slot(uri=TTM.test_data_file_format, name="test_dat
                    model_uri=TTM.test_data_file_format, domain=None, range=Optional[Union[str, "FileFormatEnum"]])
 
 slots.test_metadata = Slot(uri=TTM.test_metadata, name="test_metadata", curie=TTM.curie('test_metadata'),
-                   model_uri=TTM.test_metadata, domain=None, range=Optional[Union[dict, TestMetadata]])
+                   model_uri=TTM.test_metadata, domain=None, range=Union[dict, TestMetadata])
 
 slots.test_persona = Slot(uri=TTM.test_persona, name="test_persona", curie=TTM.curie('test_persona'),
                    model_uri=TTM.test_persona, domain=None, range=Optional[Union[str, "TestPersonaEnum"]])

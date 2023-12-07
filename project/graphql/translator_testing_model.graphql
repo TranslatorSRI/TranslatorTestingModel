@@ -19,7 +19,7 @@ type AcceptanceTestAsset
     wellKnown: Boolean
     testReference: Uriorcurie
     runnerSettings: [String]!
-    testMetadata: TestMetadata
+    testMetadata: TestMetadata!
     id: Uriorcurie!
     tags: [String]
     mustPassDate: Date
@@ -46,7 +46,8 @@ type AcceptanceTestCase
     components: [ComponentEnum]
     testCaseObjective: TestObjectiveEnum
     testCaseSource: TestSourceEnum
-    testCasePredicate: String
+    testCasePredicateName: String
+    testCasePredicateId: String
     testCaseInputId: Uriorcurie
     testCaseRunnerSettings: [String]!
     tags: [String]
@@ -59,7 +60,7 @@ type AcceptanceTestSuite
     name: String
     description: String
     tags: [String]
-    testMetadata: TestMetadata
+    testMetadata: TestMetadata!
     testPersona: TestPersonaEnum
     testCases: [TestCase]
     testSuiteSpecification: TestSuiteSpecification
@@ -82,7 +83,8 @@ type ComplianceTestCase
     components: [ComponentEnum]
     testCaseObjective: TestObjectiveEnum
     testCaseSource: TestSourceEnum
-    testCasePredicate: String
+    testCasePredicateName: String
+    testCasePredicateId: String
     testCaseInputId: Uriorcurie
     testCaseRunnerSettings: [String]!
     tags: [String]
@@ -103,7 +105,8 @@ type KnowledgeGraphNavigationTestCase
     components: [ComponentEnum]
     testCaseObjective: TestObjectiveEnum
     testCaseSource: TestSourceEnum
-    testCasePredicate: String
+    testCasePredicateName: String
+    testCasePredicateId: String
     testCaseInputId: Uriorcurie
     testCaseRunnerSettings: [String]!
     tags: [String]
@@ -122,7 +125,8 @@ type OneHopTestCase
     components: [ComponentEnum]
     testCaseObjective: TestObjectiveEnum
     testCaseSource: TestSourceEnum
-    testCasePredicate: String
+    testCasePredicateName: String
+    testCasePredicateId: String
     testCaseInputId: Uriorcurie
     testCaseRunnerSettings: [String]!
     tags: [String]
@@ -134,7 +138,7 @@ type OneHopTestSuite
     name: String
     description: String
     tags: [String]
-    testMetadata: TestMetadata
+    testMetadata: TestMetadata!
     testPersona: TestPersonaEnum
     testCases: [TestCase]
     testSuiteSpecification: TestSuiteSpecification
@@ -167,7 +171,8 @@ type QuantitativeTestCase
     components: [ComponentEnum]
     testCaseObjective: TestObjectiveEnum
     testCaseSource: TestSourceEnum
-    testCasePredicate: String
+    testCasePredicateName: String
+    testCasePredicateId: String
     testCaseInputId: Uriorcurie
     testCaseRunnerSettings: [String]!
     tags: [String]
@@ -179,7 +184,7 @@ type StandardsComplianceTestSuite
     name: String
     description: String
     tags: [String]
-    testMetadata: TestMetadata
+    testMetadata: TestMetadata!
     testPersona: TestPersonaEnum
     testCases: [TestCase]
     testSuiteSpecification: TestSuiteSpecification
@@ -206,7 +211,7 @@ type TestAsset
     wellKnown: Boolean
     testReference: Uriorcurie
     runnerSettings: [String]!
-    testMetadata: TestMetadata
+    testMetadata: TestMetadata!
     id: Uriorcurie!
     tags: [String]
   }
@@ -224,7 +229,8 @@ type TestCase
     components: [ComponentEnum]
     testCaseObjective: TestObjectiveEnum
     testCaseSource: TestSourceEnum
-    testCasePredicate: String
+    testCasePredicateName: String
+    testCasePredicateId: String
     testCaseInputId: Uriorcurie
     testCaseRunnerSettings: [String]!
     tags: [String]
@@ -262,7 +268,7 @@ type TestEdgeData
     wellKnown: Boolean
     testReference: Uriorcurie
     runnerSettings: [String]!
-    testMetadata: TestMetadata
+    testMetadata: TestMetadata!
     id: Uriorcurie!
     tags: [String]
   }
@@ -345,7 +351,7 @@ type TestSuite
     name: String
     description: String
     tags: [String]
-    testMetadata: TestMetadata
+    testMetadata: TestMetadata!
     testPersona: TestPersonaEnum
     testCases: [TestCase]
     testSuiteSpecification: TestSuiteSpecification

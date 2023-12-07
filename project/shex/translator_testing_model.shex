@@ -183,7 +183,7 @@ linkml:Sparqlpath xsd:string
              <well_known> @linkml:Boolean ? ;
              <test_reference> @linkml:Uriorcurie ? ;
              <runner_settings> @linkml:String + ;
-             <test_metadata> @<TestMetadata> ? ;
+             <test_metadata> @<TestMetadata> ;
              schema1:additionalType @linkml:String *
           ) ;
           rdf:type [ <TestAsset> ]
@@ -203,7 +203,8 @@ linkml:Sparqlpath xsd:string
              <components> @<ComponentEnum> * ;
              <test_case_objective> @<TestObjectiveEnum> ? ;
              <test_case_source> @<TestSourceEnum> ? ;
-             <test_case_predicate> @linkml:String ? ;
+             <test_case_predicate_name> @linkml:String ? ;
+             <test_case_predicate_id> @linkml:String ? ;
              <test_case_input_id> @linkml:Uriorcurie ? ;
              <test_case_runner_settings> @linkml:String + ;
              schema1:additionalType @linkml:String *
@@ -319,7 +320,7 @@ linkml:Sparqlpath xsd:string
     CLOSED {
        (  $<TestSuite_tes> (  &<TestEntity_tes> ;
              rdf:type [ <TestEntity> ] ? ;
-             <test_metadata> @<TestMetadata> ? ;
+             <test_metadata> @<TestMetadata> ;
              <test_persona> @<TestPersonaEnum> ? ;
              <test_cases> @<TestCase> * ;
              <test_suite_specification> @<TestSuiteSpecification> ?
