@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "translator_testing_model"
-version = "0.0.0"
+version = "0.2.2.post28.dev0+1eda32f"
 description = "This is the project description."
 authors = ["Sierra Moxon <sierra.taylor@gmail.com>", "Richard Bruskiewich <richard.bruskiewich@delphinai.com>"]
 license = "MIT"
@@ -21,7 +21,7 @@ pandas = "^2.1.2"
 pydantic = "^1.10.13"
 
 [tool.poetry-dynamic-versioning]
-enable = true
+enable = false
 vcs = "git"
 style = "pep440"
 

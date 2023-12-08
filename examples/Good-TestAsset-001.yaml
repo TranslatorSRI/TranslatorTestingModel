@@ -41,7 +41,7 @@ input_name: Aceruloplasminemia
 predicate: Treats
 output_id: DRUGBANK:DB01592
 output_name: Iron (PUBCHEM)
-expected_output: number_4_NeverShow
+expected_output: NeverShow
 test_reference: https://github.com/NCATSTranslator/Feedback/issues/506
 semantic_severity: NotApplicable
 in_v1: True
@@ -49,3 +49,8 @@ well_known: False
 runner_settings:
   - "inferred"
   - "test"
+test_metadata:
+  id: 1
+  test_source: SMURF,
+  test_reference: https://github.com/NCATSTranslator/Feedback/issues/506
+  test_objective: AcceptanceTest
