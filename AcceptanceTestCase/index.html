@@ -230,6 +230,22 @@
 
           AcceptanceTestCase --|&gt; AcceptanceTestAsset : test_assets
 
+      AcceptanceTestCase : test_case_input_id
+
+      AcceptanceTestCase : test_case_objective
+
+          AcceptanceTestCase --|&gt; TestObjectiveEnum : test_case_objective
+
+      AcceptanceTestCase : test_case_predicate_id
+
+      AcceptanceTestCase : test_case_predicate_name
+
+      AcceptanceTestCase : test_case_runner_settings
+
+      AcceptanceTestCase : test_case_source
+
+          AcceptanceTestCase --|&gt; TestSourceEnum : test_case_source
+
       AcceptanceTestCase : test_env
 
           AcceptanceTestCase --|&gt; TestEnvEnum : test_env
@@ -295,6 +311,42 @@
 <td><a href="../components/">components</a></td>
 <td>0..* <br/> <a href="../ComponentEnum/">ComponentEnum</a></td>
 <td>The component that this test case is intended to run against</td>
+<td><a href="../TestCase/">TestCase</a></td>
+</tr>
+<tr>
+<td><a href="../test_case_objective/">test_case_objective</a></td>
+<td>0..1 <br/> <a href="../TestObjectiveEnum/">TestObjectiveEnum</a></td>
+<td>Testing objective behind specified set of test particulars (e</td>
+<td><a href="../TestCase/">TestCase</a></td>
+</tr>
+<tr>
+<td><a href="../test_case_source/">test_case_source</a></td>
+<td>0..1 <br/> <a href="../TestSourceEnum/">TestSourceEnum</a></td>
+<td>Provenance of a specific set of test assets, cases and/or suites</td>
+<td><a href="../TestCase/">TestCase</a></td>
+</tr>
+<tr>
+<td><a href="../test_case_predicate_name/">test_case_predicate_name</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td></td>
+<td><a href="../TestCase/">TestCase</a></td>
+</tr>
+<tr>
+<td><a href="../test_case_predicate_id/">test_case_predicate_id</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td></td>
+<td><a href="../TestCase/">TestCase</a></td>
+</tr>
+<tr>
+<td><a href="../test_case_input_id/">test_case_input_id</a></td>
+<td>0..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td></td>
+<td><a href="../TestCase/">TestCase</a></td>
+</tr>
+<tr>
+<td><a href="../test_case_runner_settings/">test_case_runner_settings</a></td>
+<td>1..* <br/> <a href="../String/">String</a></td>
+<td>Settings for the test harness for TestCase</td>
 <td><a href="../TestCase/">TestCase</a></td>
 </tr>
 <tr>
@@ -450,6 +502,77 @@ attributes:
     domain_of:
     - TestCase
     range: ComponentEnum
+  test_case_objective:
+    name: test_case_objective
+    description: Testing objective behind specified set of test particulars (e.g.
+      acceptance pass/fail; benchmark; quantitative)
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    alias: test_case_objective
+    owner: AcceptanceTestCase
+    domain_of:
+    - TestCase
+    range: TestObjectiveEnum
+  test_case_source:
+    name: test_case_source
+    description: Provenance of a specific set of test assets, cases and/or suites.  Or,
+      the person who cares about this,  know about this.  We would like this to be
+      an ORCID eventually, but currently it is just a string.
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    alias: test_case_source
+    owner: AcceptanceTestCase
+    domain_of:
+    - TestCase
+    range: TestSourceEnum
+  test_case_predicate_name:
+    name: test_case_predicate_name
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    aliases:
+    - Predicate
+    rank: 1000
+    alias: test_case_predicate_name
+    owner: AcceptanceTestCase
+    domain_of:
+    - TestCase
+    range: string
+  test_case_predicate_id:
+    name: test_case_predicate_id
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    aliases:
+    - Predicate
+    rank: 1000
+    alias: test_case_predicate_id
+    owner: AcceptanceTestCase
+    domain_of:
+    - TestCase
+    range: string
+  test_case_input_id:
+    name: test_case_input_id
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    aliases:
+    - InputID, node normalized
+    - SubjectID
+    rank: 1000
+    alias: test_case_input_id
+    owner: AcceptanceTestCase
+    domain_of:
+    - TestCase
+    range: uriorcurie
+  test_case_runner_settings:
+    name: test_case_runner_settings
+    description: Settings for the test harness for TestCase
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    aliases:
+    - Settings
+    rank: 1000
+    multivalued: true
+    alias: test_case_runner_settings
+    owner: AcceptanceTestCase
+    domain_of:
+    - TestCase
+    range: string
+    required: true
   id:
     name: id
     description: A unique identifier for a Test Entity

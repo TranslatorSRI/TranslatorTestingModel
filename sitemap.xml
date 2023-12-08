@@ -641,12 +641,42 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/test_case_input_id/</loc>
+         <lastmod>2023-12-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/test_case_objective/</loc>
+         <lastmod>2023-12-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/test_case_predicate_id/</loc>
+         <lastmod>2023-12-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/test_case_predicate_name/</loc>
+         <lastmod>2023-12-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/test_case_result/</loc>
          <lastmod>2023-12-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/test_case_results/</loc>
+         <lastmod>2023-12-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/test_case_runner_settings/</loc>
+         <lastmod>2023-12-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://TranslatorSRI.github.io/TranslatorTestingModel/test_case_source/</loc>
          <lastmod>2023-12-08</lastmod>
          <changefreq>daily</changefreq>
     </url>

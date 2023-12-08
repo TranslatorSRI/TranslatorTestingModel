@@ -223,8 +223,6 @@
 
       AcceptanceTestAsset : expected_output
 
-          AcceptanceTestAsset --|&gt; ExpectedOutputEnum : expected_output
-
       AcceptanceTestAsset : expected_result
 
           AcceptanceTestAsset --|&gt; ExpectedResultsEnum : expected_result
@@ -378,7 +376,7 @@
 </tr>
 <tr>
 <td><a href="../input_id/">input_id</a></td>
-<td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>0..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td></td>
 <td><a href="../TestAsset/">TestAsset</a></td>
 </tr>
@@ -402,13 +400,13 @@
 </tr>
 <tr>
 <td><a href="../predicate_name/">predicate_name</a></td>
-<td>1..1 <br/> <a href="../String/">String</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
 <td></td>
 <td><a href="../TestAsset/">TestAsset</a></td>
 </tr>
 <tr>
 <td><a href="../output_id/">output_id</a></td>
-<td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>0..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td></td>
 <td><a href="../TestAsset/">TestAsset</a></td>
 </tr>
@@ -438,7 +436,7 @@
 </tr>
 <tr>
 <td><a href="../expected_output/">expected_output</a></td>
-<td>1..1 <br/> <a href="../ExpectedOutputEnum/">ExpectedOutputEnum</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
 <td></td>
 <td><a href="../TestAsset/">TestAsset</a></td>
 </tr>
@@ -480,7 +478,7 @@
 </tr>
 <tr>
 <td><a href="../test_metadata/">test_metadata</a></td>
-<td>0..1 <br/> <a href="../TestMetadata/">TestMetadata</a></td>
+<td>1..1 <br/> <a href="../TestMetadata/">TestMetadata</a></td>
 <td>Test metadata describes the external provenance, cross-references and objecti...</td>
 <td><a href="../TestAsset/">TestAsset</a></td>
 </tr>
@@ -720,7 +718,6 @@ attributes:
     domain_of:
     - TestAsset
     range: uriorcurie
-    required: true
   input_name:
     name: input_name
     from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -767,7 +764,6 @@ attributes:
     domain_of:
     - TestAsset
     range: string
-    required: true
   output_id:
     name: output_id
     from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -780,7 +776,6 @@ attributes:
     domain_of:
     - TestAsset
     range: uriorcurie
-    required: true
   output_name:
     name: output_name
     from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -841,8 +836,7 @@ attributes:
     owner: AcceptanceTestAsset
     domain_of:
     - TestAsset
-    range: ExpectedOutputEnum
-    required: true
+    range: string
   test_issue:
     name: test_issue
     from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -925,6 +919,7 @@ attributes:
     - TestAsset
     - TestSuite
     range: TestMetadata
+    required: true
     inlined: true
   id:
     name: id

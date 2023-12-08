@@ -8,14 +8,14 @@
       
       
       
-        <link rel="canonical" href="https://TranslatorSRI.github.io/TranslatorTestingModel/expected_output/">
+        <link rel="canonical" href="https://TranslatorSRI.github.io/TranslatorTestingModel/test_case_input_id/">
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-8.5.10">
     
     
       
-        <title>Slot: expected_output - Translator Testing Model</title>
+        <title>Slot: test_case_input_id - Translator Testing Model</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-expected_output" class="md-skip">
+        <a href="#slot-test_case_input_id" class="md-skip">
           Skip to content
         </a>
       
@@ -97,7 +97,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: expected_output
+              Slot: test_case_input_id
             
           </span>
         </div>
@@ -317,14 +317,14 @@
                 
                   
 
-  <a href="https://github.com/TranslatorSRI/TranslatorTestingModel/edit/master/docs/expected_output.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/TranslatorSRI/TranslatorTestingModel/edit/master/docs/test_case_input_id.md" title="Edit this page" class="md-content__button md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
-<h1 id="slot-expected_output">Slot: expected_output</h1>
-<p>URI: <a href="https://w3id.org/TranslatorSRI/TranslatorTestingModel/expected_output">ttm:expected_output</a></p>
+<h1 id="slot-test_case_input_id">Slot: test_case_input_id</h1>
+<p>URI: <a href="https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case_input_id">ttm:test_case_input_id</a></p>
 <!-- no inheritance hierarchy -->
 
 <h2 id="applicable-classes">Applicable Classes</h2>
@@ -338,29 +338,45 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../TestAsset/">TestAsset</a></td>
-<td>Represents a Test Asset, which is a single specific instance of TestCase-agno...</td>
+<td><a href="../TestCase/">TestCase</a></td>
+<td>Represents a single enumerated instance of Test Case, derived from a  given c...</td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../AcceptanceTestAsset/">AcceptanceTestAsset</a></td>
-<td>Model derived from Jenn's test asset design and Shervin's runner JSON here as...</td>
+<td><a href="../AcceptanceTestCase/">AcceptanceTestCase</a></td>
+<td>See AcceptanceTestAsset above for more details</td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../TestEdgeData/">TestEdgeData</a></td>
-<td>Represents a single Biolink Model compliant instance of a subject-predicate-o...</td>
+<td><a href="../QuantitativeTestCase/">QuantitativeTestCase</a></td>
+<td>Assumed additional model from Shervin's runner JSON here as an example</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../ComplianceTestCase/">ComplianceTestCase</a></td>
+<td>TRAPI and Biolink Model standards compliance test</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../KnowledgeGraphNavigationTestCase/">KnowledgeGraphNavigationTestCase</a></td>
+<td>Knowledge Graph navigation integration test</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../OneHopTestCase/">OneHopTestCase</a></td>
+<td>'One Hop' Knowledge Graph navigation integration test</td>
 <td>no</td>
 </tr>
 </tbody>
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
-<li>Range: <a href="../String/">String</a></li>
+<li>Range: <a href="../Uriorcurie/">Uriorcurie</a></li>
 </ul>
 <h2 id="aliases">Aliases</h2>
 <ul>
-<li>Expected Output</li>
+<li>InputID, node normalized</li>
+<li>SubjectID</li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
@@ -370,15 +386,16 @@
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: expected_output
+<pre><code class="language-yaml">name: test_case_input_id
 from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
 aliases:
-- Expected Output
+- InputID, node normalized
+- SubjectID
 rank: 1000
-alias: expected_output
+alias: test_case_input_id
 domain_of:
-- TestAsset
-range: string
+- TestCase
+range: uriorcurie
 
 </code></pre>
 
