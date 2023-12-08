@@ -196,6 +196,12 @@ classes:
       - preconditions
       - trapi_template
       - components
+      - test_case_objective
+      - test_case_source
+      - test_case_predicate_name
+      - test_case_predicate_id
+      - test_case_input_id
+      - test_case_runner_settings
     slot_usage:
       test_assets:
         aliases: ["Block List"]
@@ -451,6 +457,18 @@ slots:
       (e.g. acceptance pass/fail; benchmark; quantitative)
     range: TestObjectiveEnum
 
+  test_case_objective:
+    description: >-
+      Testing objective behind specified set of test particulars
+      (e.g. acceptance pass/fail; benchmark; quantitative)
+    range: TestObjectiveEnum
+
+  test_case_source:
+    description: >-
+      Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this, 
+      know about this.  We would like this to be an ORCID eventually, but currently it is just a string.
+    range: TestSourceEnum
+
   test_annotations:
     description: >-
       Metadata annotation.
@@ -460,9 +478,18 @@ slots:
   # TestAsset Slots #
   ###################
 
+  test_case_input_id:
+    aliases: ["InputID, node normalized", "SubjectID"]
+    range: uriorcurie
+
+  test_case_predicate_name:
+    aliases: ["Predicate"]
+
+  test_case_predicate_id:
+    aliases: ["Predicate"]
+
   input_id:
     aliases: ["InputID, node normalized", "SubjectID"]
-    required: true
     range: uriorcurie
 
   input_name:
@@ -478,11 +505,9 @@ slots:
 
   predicate_name:
     aliases: ["Query", "Relationship"]
-    required: true
 
   output_id:
     aliases: ["OutputID", "ObjectID"]
-    required: true
     range: uriorcurie
 
   output_name:
@@ -512,8 +537,6 @@ slots:
 
   expected_output:
     aliases: ["Expected Output"]
-    range: ExpectedOutputEnum
-    required: true
 
   test_issue:
     aliases: ["issue label"]
@@ -534,7 +557,15 @@ slots:
   runner_settings:
     aliases: ["Settings"]
     description: >-
-      Settings for the test harness
+      Settings for the test harness for TestAsset
+    range: string
+    multivalued: true
+    required: true
+
+  test_case_runner_settings:
+    aliases: ["Settings"]
+    description: >-
+      Settings for the test harness for TestCase
     range: string
     multivalued: true
     required: true
@@ -692,6 +723,7 @@ slots:
       Test metadata describes the external provenance, cross-references and objectives for a given test.
     range: TestMetadata
     inlined: true
+    required: true
 
   test_persona:
     description: >-

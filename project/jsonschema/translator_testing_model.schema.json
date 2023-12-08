@@ -21,7 +21,7 @@
                     "description": "The direction of the expected query result triple"
                 },
                 "expected_output": {
-                    "$ref": "#/$defs/ExpectedOutputEnum"
+                    "type": "string"
                 },
                 "expected_result": {
                     "$ref": "#/$defs/ExpectedResultsEnum",
@@ -131,11 +131,8 @@
                 }
             },
             "required": [
-                "input_id",
-                "predicate_name",
-                "output_id",
-                "expected_output",
                 "runner_settings",
+                "test_metadata",
                 "id"
             ],
             "title": "AcceptanceTestAsset",
@@ -188,6 +185,30 @@
                     },
                     "type": "array"
                 },
+                "test_case_input_id": {
+                    "type": "string"
+                },
+                "test_case_objective": {
+                    "$ref": "#/$defs/TestObjectiveEnum",
+                    "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)"
+                },
+                "test_case_predicate_id": {
+                    "type": "string"
+                },
+                "test_case_predicate_name": {
+                    "type": "string"
+                },
+                "test_case_runner_settings": {
+                    "description": "Settings for the test harness for TestCase",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "test_case_source": {
+                    "$ref": "#/$defs/TestSourceEnum",
+                    "description": "Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string."
+                },
                 "test_env": {
                     "$ref": "#/$defs/TestEnvEnum",
                     "description": "Deployment environment within which the associated TestSuite is run."
@@ -199,6 +220,7 @@
             },
             "required": [
                 "test_assets",
+                "test_case_runner_settings",
                 "id"
             ],
             "title": "AcceptanceTestCase",
@@ -248,6 +270,7 @@
                 }
             },
             "required": [
+                "test_metadata",
                 "id"
             ],
             "title": "AcceptanceTestSuite",
@@ -310,6 +333,30 @@
                     },
                     "type": "array"
                 },
+                "test_case_input_id": {
+                    "type": "string"
+                },
+                "test_case_objective": {
+                    "$ref": "#/$defs/TestObjectiveEnum",
+                    "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)"
+                },
+                "test_case_predicate_id": {
+                    "type": "string"
+                },
+                "test_case_predicate_name": {
+                    "type": "string"
+                },
+                "test_case_runner_settings": {
+                    "description": "Settings for the test harness for TestCase",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "test_case_source": {
+                    "$ref": "#/$defs/TestSourceEnum",
+                    "description": "Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string."
+                },
                 "test_env": {
                     "$ref": "#/$defs/TestEnvEnum",
                     "description": "Deployment environment within which the associated TestSuite is run."
@@ -325,6 +372,7 @@
             },
             "required": [
                 "test_assets",
+                "test_case_runner_settings",
                 "id"
             ],
             "title": "ComplianceTestCase",
@@ -428,6 +476,30 @@
                     },
                     "type": "array"
                 },
+                "test_case_input_id": {
+                    "type": "string"
+                },
+                "test_case_objective": {
+                    "$ref": "#/$defs/TestObjectiveEnum",
+                    "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)"
+                },
+                "test_case_predicate_id": {
+                    "type": "string"
+                },
+                "test_case_predicate_name": {
+                    "type": "string"
+                },
+                "test_case_runner_settings": {
+                    "description": "Settings for the test harness for TestCase",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "test_case_source": {
+                    "$ref": "#/$defs/TestSourceEnum",
+                    "description": "Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string."
+                },
                 "test_env": {
                     "$ref": "#/$defs/TestEnvEnum",
                     "description": "Deployment environment within which the associated TestSuite is run."
@@ -439,6 +511,7 @@
             },
             "required": [
                 "test_assets",
+                "test_case_runner_settings",
                 "id"
             ],
             "title": "KnowledgeGraphNavigationTestCase",
@@ -500,6 +573,30 @@
                     },
                     "type": "array"
                 },
+                "test_case_input_id": {
+                    "type": "string"
+                },
+                "test_case_objective": {
+                    "$ref": "#/$defs/TestObjectiveEnum",
+                    "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)"
+                },
+                "test_case_predicate_id": {
+                    "type": "string"
+                },
+                "test_case_predicate_name": {
+                    "type": "string"
+                },
+                "test_case_runner_settings": {
+                    "description": "Settings for the test harness for TestCase",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "test_case_source": {
+                    "$ref": "#/$defs/TestSourceEnum",
+                    "description": "Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string."
+                },
                 "test_env": {
                     "$ref": "#/$defs/TestEnvEnum",
                     "description": "Deployment environment within which the associated TestSuite is run."
@@ -511,6 +608,7 @@
             },
             "required": [
                 "test_assets",
+                "test_case_runner_settings",
                 "id"
             ],
             "title": "OneHopTestCase",
@@ -560,6 +658,7 @@
                 }
             },
             "required": [
+                "test_metadata",
                 "id"
             ],
             "title": "OneHopTestSuite",
@@ -658,6 +757,30 @@
                     },
                     "type": "array"
                 },
+                "test_case_input_id": {
+                    "type": "string"
+                },
+                "test_case_objective": {
+                    "$ref": "#/$defs/TestObjectiveEnum",
+                    "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)"
+                },
+                "test_case_predicate_id": {
+                    "type": "string"
+                },
+                "test_case_predicate_name": {
+                    "type": "string"
+                },
+                "test_case_runner_settings": {
+                    "description": "Settings for the test harness for TestCase",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "test_case_source": {
+                    "$ref": "#/$defs/TestSourceEnum",
+                    "description": "Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string."
+                },
                 "test_env": {
                     "$ref": "#/$defs/TestEnvEnum",
                     "description": "Deployment environment within which the associated TestSuite is run."
@@ -669,6 +792,7 @@
             },
             "required": [
                 "test_assets",
+                "test_case_runner_settings",
                 "id"
             ],
             "title": "QuantitativeTestCase",
@@ -736,6 +860,7 @@
                 }
             },
             "required": [
+                "test_metadata",
                 "id"
             ],
             "title": "StandardsComplianceTestSuite",
@@ -754,7 +879,7 @@
                     "type": "string"
                 },
                 "expected_output": {
-                    "$ref": "#/$defs/ExpectedOutputEnum"
+                    "type": "string"
                 },
                 "id": {
                     "description": "A unique identifier for a Test Entity",
@@ -831,11 +956,8 @@
                 }
             },
             "required": [
-                "input_id",
-                "predicate_name",
-                "output_id",
-                "expected_output",
                 "runner_settings",
+                "test_metadata",
                 "id"
             ],
             "title": "TestAsset",
@@ -888,6 +1010,30 @@
                     },
                     "type": "array"
                 },
+                "test_case_input_id": {
+                    "type": "string"
+                },
+                "test_case_objective": {
+                    "$ref": "#/$defs/TestObjectiveEnum",
+                    "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)"
+                },
+                "test_case_predicate_id": {
+                    "type": "string"
+                },
+                "test_case_predicate_name": {
+                    "type": "string"
+                },
+                "test_case_runner_settings": {
+                    "description": "Settings for the test harness for TestCase",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "test_case_source": {
+                    "$ref": "#/$defs/TestSourceEnum",
+                    "description": "Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string."
+                },
                 "test_env": {
                     "$ref": "#/$defs/TestEnvEnum",
                     "description": "Deployment environment within which the associated TestSuite is run."
@@ -899,6 +1045,7 @@
             },
             "required": [
                 "test_assets",
+                "test_case_runner_settings",
                 "id"
             ],
             "title": "TestCase",
@@ -1043,6 +1190,30 @@
                     },
                     "type": "array"
                 },
+                "test_case_input_id": {
+                    "type": "string"
+                },
+                "test_case_objective": {
+                    "$ref": "#/$defs/TestObjectiveEnum",
+                    "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)"
+                },
+                "test_case_predicate_id": {
+                    "type": "string"
+                },
+                "test_case_predicate_name": {
+                    "type": "string"
+                },
+                "test_case_runner_settings": {
+                    "description": "Settings for the test harness for TestCase",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "test_case_source": {
+                    "$ref": "#/$defs/TestSourceEnum",
+                    "description": "Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string."
+                },
                 "test_env": {
                     "$ref": "#/$defs/TestEnvEnum",
                     "description": "Deployment environment within which the associated TestSuite is run."
@@ -1053,7 +1224,8 @@
                 }
             },
             "required": [
-                "test_assets"
+                "test_assets",
+                "test_case_runner_settings"
             ],
             "title": "TestCase",
             "type": "object"
@@ -1071,7 +1243,7 @@
                     "type": "string"
                 },
                 "expected_output": {
-                    "$ref": "#/$defs/ExpectedOutputEnum"
+                    "type": "string"
                 },
                 "id": {
                     "description": "A unique identifier for a Test Entity",
@@ -1148,11 +1320,8 @@
                 }
             },
             "required": [
-                "input_id",
-                "predicate_name",
-                "output_id",
-                "expected_output",
                 "runner_settings",
+                "test_metadata",
                 "id"
             ],
             "title": "TestEdgeData",
@@ -1522,6 +1691,7 @@
                 }
             },
             "required": [
+                "test_metadata",
                 "id"
             ],
             "title": "TestSuite",

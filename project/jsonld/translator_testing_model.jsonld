@@ -974,6 +974,32 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "test_case_objective",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case_objective",
+      "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case_objective",
+      "owner": "TestCase",
+      "domain_of": [
+        "TestCase"
+      ],
+      "range": "TestObjectiveEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "test_case_source",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case_source",
+      "description": "Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string.",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case_source",
+      "owner": "TestCase",
+      "domain_of": [
+        "TestCase"
+      ],
+      "range": "TestSourceEnum",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "test_annotations",
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_annotations",
       "description": "Metadata annotation.",
@@ -991,6 +1017,52 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "test_case_input_id",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case_input_id",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "aliases": [
+        "InputID, node normalized",
+        "SubjectID"
+      ],
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case_input_id",
+      "owner": "TestCase",
+      "domain_of": [
+        "TestCase"
+      ],
+      "range": "uriorcurie",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "test_case_predicate_name",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case_predicate_name",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "aliases": [
+        "Predicate"
+      ],
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case_predicate_name",
+      "owner": "TestCase",
+      "domain_of": [
+        "TestCase"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "test_case_predicate_id",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case_predicate_id",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "aliases": [
+        "Predicate"
+      ],
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case_predicate_id",
+      "owner": "TestCase",
+      "domain_of": [
+        "TestCase"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "input_id",
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/input_id",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
@@ -1004,7 +1076,6 @@
         "TestAsset"
       ],
       "range": "uriorcurie",
-      "required": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1067,7 +1138,6 @@
         "TestAsset"
       ],
       "range": "string",
-      "required": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1084,7 +1154,6 @@
         "TestAsset"
       ],
       "range": "uriorcurie",
-      "required": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1159,8 +1228,7 @@
       "domain_of": [
         "TestAsset"
       ],
-      "range": "ExpectedOutputEnum",
-      "required": true,
+      "range": "string",
       "@type": "SlotDefinition"
     },
     {
@@ -1226,7 +1294,7 @@
     {
       "name": "runner_settings",
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/runner_settings",
-      "description": "Settings for the test harness",
+      "description": "Settings for the test harness for TestAsset",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "aliases": [
         "Settings"
@@ -1236,6 +1304,24 @@
       "owner": "TestAsset",
       "domain_of": [
         "TestAsset"
+      ],
+      "range": "string",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "test_case_runner_settings",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case_runner_settings",
+      "description": "Settings for the test harness for TestCase",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "aliases": [
+        "Settings"
+      ],
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case_runner_settings",
+      "multivalued": true,
+      "owner": "TestCase",
+      "domain_of": [
+        "TestCase"
       ],
       "range": "string",
       "required": true,
@@ -1580,6 +1666,7 @@
         "TestSuite"
       ],
       "range": "TestMetadata",
+      "required": true,
       "inlined": true,
       "@type": "SlotDefinition"
     },
@@ -2152,6 +2239,12 @@
         "preconditions",
         "trapi_template",
         "components",
+        "test_case_objective",
+        "test_case_source",
+        "test_case_predicate_name",
+        "test_case_predicate_id",
+        "test_case_input_id",
+        "test_case_runner_settings",
         "TestCase_tags"
       ],
       "slot_usage": {},
@@ -2173,6 +2266,12 @@
         "preconditions",
         "trapi_template",
         "components",
+        "test_case_objective",
+        "test_case_source",
+        "test_case_predicate_name",
+        "test_case_predicate_id",
+        "test_case_input_id",
+        "test_case_runner_settings",
         "TestCase_tags",
         "AcceptanceTestCase_test_assets"
       ],
@@ -2196,6 +2295,12 @@
         "preconditions",
         "trapi_template",
         "components",
+        "test_case_objective",
+        "test_case_source",
+        "test_case_predicate_name",
+        "test_case_predicate_id",
+        "test_case_input_id",
+        "test_case_runner_settings",
         "TestCase_tags"
       ],
       "slot_usage": {},
@@ -2218,6 +2323,12 @@
         "preconditions",
         "trapi_template",
         "components",
+        "test_case_objective",
+        "test_case_source",
+        "test_case_predicate_name",
+        "test_case_predicate_id",
+        "test_case_input_id",
+        "test_case_runner_settings",
         "TestCase_tags",
         "trapi_version",
         "biolink_version"
@@ -2242,6 +2353,12 @@
         "preconditions",
         "trapi_template",
         "components",
+        "test_case_objective",
+        "test_case_source",
+        "test_case_predicate_name",
+        "test_case_predicate_id",
+        "test_case_input_id",
+        "test_case_runner_settings",
         "TestCase_tags"
       ],
       "slot_usage": {},
@@ -2264,6 +2381,12 @@
         "preconditions",
         "trapi_template",
         "components",
+        "test_case_objective",
+        "test_case_source",
+        "test_case_predicate_name",
+        "test_case_predicate_id",
+        "test_case_input_id",
+        "test_case_runner_settings",
         "TestCase_tags"
       ],
       "slot_usage": {},
@@ -2476,9 +2599,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "translator_testing_model.yaml",
-  "source_file_date": "2023-12-05T16:27:54",
-  "source_file_size": 25481,
-  "generation_date": "2023-12-05T16:28:01",
+  "source_file_date": "2023-12-07T10:23:17",
+  "source_file_size": 26460,
+  "generation_date": "2023-12-07T10:24:08",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",

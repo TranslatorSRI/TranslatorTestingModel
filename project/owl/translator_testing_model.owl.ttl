@@ -12,10 +12,10 @@ ttm:AcceptanceTestCase a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "AcceptanceTestCase" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom ttm:AcceptanceTestAsset ;
+            owl:minCardinality 1 ;
             owl:onProperty ttm:test_assets ],
         [ a owl:Restriction ;
-            owl:minCardinality 1 ;
+            owl:allValuesFrom ttm:AcceptanceTestAsset ;
             owl:onProperty ttm:test_assets ],
         ttm:TestCase ;
     skos:definition "See AcceptanceTestAsset above for more details." ;
@@ -159,7 +159,6 @@ ttm:direction a owl:ObjectProperty,
 ttm:expected_output a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "expected_output" ;
-    rdfs:range ttm:ExpectedOutputEnum ;
     skos:altLabel "Expected Output" ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
@@ -362,6 +361,33 @@ ttm:test_case_id a owl:ObjectProperty,
     skos:definition "CURIE id of a TestCase registered in the system." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
+ttm:test_case_input_id a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "test_case_input_id" ;
+    rdfs:range linkml:Uriorcurie ;
+    skos:altLabel "InputID, node normalized",
+        "SubjectID" ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
+ttm:test_case_objective a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "test_case_objective" ;
+    rdfs:range ttm:TestObjectiveEnum ;
+    skos:definition "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)" ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
+ttm:test_case_predicate_id a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "test_case_predicate_id" ;
+    skos:altLabel "Predicate" ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
+ttm:test_case_predicate_name a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "test_case_predicate_name" ;
+    skos:altLabel "Predicate" ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
 ttm:test_case_result a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "test_case_result" ;
@@ -374,6 +400,21 @@ ttm:test_case_results a owl:ObjectProperty,
     rdfs:label "test_case_results" ;
     rdfs:range ttm:TestCaseResult ;
     skos:definition "One or more instances of TestCaseResult." ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
+ttm:test_case_runner_settings a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "test_case_runner_settings" ;
+    rdfs:range linkml:String ;
+    skos:altLabel "Settings" ;
+    skos:definition "Settings for the test harness for TestCase" ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
+ttm:test_case_source a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "test_case_source" ;
+    rdfs:range ttm:TestSourceEnum ;
+    skos:definition "Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:test_cases a owl:ObjectProperty,
@@ -538,23 +579,23 @@ ttm:Qualifier a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "Qualifier" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:value ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
+            owl:maxCardinality 1 ;
             owl:onProperty ttm:parameter ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom linkml:String ;
             owl:onProperty ttm:parameter ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty ttm:value ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:parameter ],
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:value ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
             owl:onProperty ttm:value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:parameter ],
         ttm:TestEntityParameter ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
@@ -840,7 +881,7 @@ ttm:runner_settings a owl:ObjectProperty,
     rdfs:label "runner_settings" ;
     rdfs:range linkml:String ;
     skos:altLabel "Settings" ;
-    skos:definition "Settings for the test harness" ;
+    skos:definition "Settings for the test harness for TestAsset" ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:test_entities a owl:ObjectProperty,
@@ -879,26 +920,26 @@ ttm:TestAsset a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "TestAsset" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:tags ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:tags ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:id ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:runner_settings ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty ttm:runner_settings ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty ttm:id ],
         [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:tags ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:runner_settings ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:tags ],
+        [ a owl:Restriction ;
             owl:allValuesFrom linkml:Uriorcurie ;
             owl:onProperty ttm:id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty ttm:runner_settings ],
         ttm:TestEntity ;
     skos:definition "Represents a Test Asset, which is a single specific instance of TestCase-agnostic semantic parameters representing the specification of a Translator test target with inputs and (expected) outputs." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
@@ -929,6 +970,14 @@ ttm:value a owl:ObjectProperty,
     skos:definition "(String) value of a TestParameter." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
+ttm:ExpectedOutputEnum a owl:Class,
+        linkml:EnumDefinition ;
+    owl:unionOf ( <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#Acceptable> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#BadButForgivable> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#NeverShow> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#TopAnswer> ) ;
+    linkml:permissible_values <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#Acceptable>,
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#BadButForgivable>,
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#NeverShow>,
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#TopAnswer> .
+
 ttm:FileFormatEnum a owl:Class,
         linkml:EnumDefinition ;
     owl:unionOf ( <https://w3id.org/TranslatorSRI/TranslatorTestingModel/FileFormatEnum#TSV> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/FileFormatEnum#YAML> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/FileFormatEnum#JSON> ) ;
@@ -950,13 +999,6 @@ ttm:TestCaseResultEnum a owl:Class,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestCaseResultEnum#test_passed>,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestCaseResultEnum#test_skipped> .
 
-ttm:TestObjectiveEnum a owl:Class,
-        linkml:EnumDefinition ;
-    owl:unionOf ( <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#AcceptanceTest> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#BenchmarkTest> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#QuantitativeTest> ) ;
-    linkml:permissible_values <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#AcceptanceTest>,
-        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#BenchmarkTest>,
-        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#QuantitativeTest> .
-
 ttm:test_assets a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "test_assets" ;
@@ -964,13 +1006,12 @@ ttm:test_assets a owl:ObjectProperty,
     skos:definition "List of explicitly enumerated Test Assets. The class attributes of TestAsset would be included in the TestCase versus being referred to by the identifier (curie) of the TestAsset. That is, this would be a list of objects (in JSONSchema serialization) versus a list of strings (where each string is an identifier pointing to another class)." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
-ttm:ExpectedOutputEnum a owl:Class,
+ttm:TestObjectiveEnum a owl:Class,
         linkml:EnumDefinition ;
-    owl:unionOf ( <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#Acceptable> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#BadButForgivable> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#NeverShow> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#TopAnswer> ) ;
-    linkml:permissible_values <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#Acceptable>,
-        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#BadButForgivable>,
-        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#NeverShow>,
-        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#TopAnswer> .
+    owl:unionOf ( <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#AcceptanceTest> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#BenchmarkTest> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#QuantitativeTest> ) ;
+    linkml:permissible_values <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#AcceptanceTest>,
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#BenchmarkTest>,
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#QuantitativeTest> .
 
 ttm:TestPersonaEnum a owl:Class,
         linkml:EnumDefinition ;
@@ -993,14 +1034,14 @@ ttm:TestCase a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "TestCase" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:test_assets ],
-        [ a owl:Restriction ;
             owl:minCardinality 1 ;
             owl:onProperty ttm:test_assets ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty ttm:tags ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:test_assets ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
             owl:onProperty ttm:tags ],

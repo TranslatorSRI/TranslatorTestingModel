@@ -63,18 +63,21 @@ class TestData(unittest.TestCase):
     def test_bad_test_metadata(self):
         """Bad TestMetadata test."""
         for path in bad_model_example_data_files["TestMetadata"]:
+            print(path)
             with self.assertRaises(ValueError):
                 json_loader.load(path, target_class=TestMetadata)
 
     def test_good_test_asset(self):
         """Good TestAsset test."""
         for path in good_model_example_data_files["TestAsset"]:
+            print(path)
             obj = json_loader.load(path, target_class=TestAsset)
             assert obj
 
     def test_bad_test_asset(self):
         """Bad TestAsset test."""
         for path in bad_model_example_data_files["TestAsset"]:
+            print(path)
             with self.assertRaises(ValueError):
                 json_loader.load(path, target_class=TestAsset)
 
@@ -87,24 +90,28 @@ class TestData(unittest.TestCase):
     def test_bad_acceptance_test_asset(self):
         """Bad AcceptanceTestAsset test."""
         for path in bad_model_example_data_files["AcceptanceTestAsset"]:
+            print(path)
             with self.assertRaises(ValueError):
                 json_loader.load(path, target_class=AcceptanceTestAsset)
 
     def test_good_test_case(self):
         """Good TestCase test."""
         for path in good_model_example_data_files["TestCase"]:
+            print(path)
             obj = json_loader.load(path, target_class=TestCase)
             assert obj
 
     def test_bad_test_case(self):
         """Bad TestCase test."""
         for path in bad_model_example_data_files["TestCase"]:
+            print(path)
             with self.assertRaises(ValueError):
                 json_loader.load(path, target_class=TestCase)
 
     def test_good_acceptance_test_case(self):
         """Good AcceptanceTestCase test."""
         for path in good_model_example_data_files["AcceptanceTestCase"]:
+            print(path)
             obj = json_loader.load(path, target_class=AcceptanceTestCase)
             assert obj
 

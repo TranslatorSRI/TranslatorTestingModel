@@ -166,24 +166,24 @@ linkml:Sparqlpath xsd:string
     CLOSED {
        (  $<TestAsset_tes> (  &<TestEntity_tes> ;
              rdf:type [ <TestEntity> ] ? ;
-             <input_id> @linkml:Uriorcurie ;
+             <input_id> @linkml:Uriorcurie ? ;
              <input_name> @linkml:String ? ;
              <input_category> @<ConceptCategory> ? ;
              <predicate_id> @<PredicateType> ? ;
-             <predicate_name> @linkml:String ;
-             <output_id> @linkml:Uriorcurie ;
+             <predicate_name> @linkml:String ? ;
+             <output_id> @linkml:Uriorcurie ? ;
              <output_name> @linkml:String ? ;
              <output_category> @<ConceptCategory> ? ;
              <association> @<AssociationCategory> ? ;
              <qualifiers> @<Qualifier> * ;
-             <expected_output> @<ExpectedOutputEnum> ;
+             <expected_output> @linkml:String ? ;
              <test_issue> @<TestIssueEnum> ? ;
              <semantic_severity> @<SemanticSeverityEnum> ? ;
              <in_v1> @linkml:Boolean ? ;
              <well_known> @linkml:Boolean ? ;
              <test_reference> @linkml:Uriorcurie ? ;
              <runner_settings> @linkml:String + ;
-             <test_metadata> @<TestMetadata> ? ;
+             <test_metadata> @<TestMetadata> ;
              schema1:additionalType @linkml:String *
           ) ;
           rdf:type [ <TestAsset> ]
@@ -201,6 +201,12 @@ linkml:Sparqlpath xsd:string
              <preconditions> @<Precondition> * ;
              <trapi_template> @<TrapiTemplateEnum> ? ;
              <components> @<ComponentEnum> * ;
+             <test_case_objective> @<TestObjectiveEnum> ? ;
+             <test_case_source> @<TestSourceEnum> ? ;
+             <test_case_predicate_name> @linkml:String ? ;
+             <test_case_predicate_id> @linkml:String ? ;
+             <test_case_input_id> @linkml:Uriorcurie ? ;
+             <test_case_runner_settings> @linkml:String + ;
              schema1:additionalType @linkml:String *
           ) ;
           rdf:type [ <TestCase> ]
@@ -314,7 +320,7 @@ linkml:Sparqlpath xsd:string
     CLOSED {
        (  $<TestSuite_tes> (  &<TestEntity_tes> ;
              rdf:type [ <TestEntity> ] ? ;
-             <test_metadata> @<TestMetadata> ? ;
+             <test_metadata> @<TestMetadata> ;
              <test_persona> @<TestPersonaEnum> ? ;
              <test_cases> @<TestCase> * ;
              <test_suite_specification> @<TestSuiteSpecification> ?

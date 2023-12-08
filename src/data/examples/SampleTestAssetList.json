@@ -7,7 +7,11 @@
     "predicate_name": "treats",
     "output_id": "MONDO:0005301",
     "expected_output": "Acceptable",
-    "runner_settings": ["inferred", "test"]
+    "runner_settings": ["inferred", "test"],
+    "test_metadata": {
+      "id": "example:TestAsset001",
+      "source": "SMURF"
+    }
   },
   {
     "id": "example:TestAsset002",
@@ -17,6 +21,10 @@
     "predicate_name": "treats",
     "output_id": "MONDO:0006497",
     "expected_output": "number_2_Acceptable",
-    "runner_settings": ["inferred", "test"]
+    "runner_settings": ["inferred", "test"],
+    "test_metadata": {
+      "id": "example:TestAsset001",
+      "source": "SMURF"
+    }
   }
 ]
