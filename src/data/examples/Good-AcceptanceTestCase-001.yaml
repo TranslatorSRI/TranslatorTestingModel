@@ -13,6 +13,9 @@
 id: example:AcceptanceTestCase001
 name: foo bar
 description: This is an acceptance test case
+test_case_runner_settings:
+  - "inferred"
+  - "test"
 test_assets:
   - id: example:AcceptanceTestAsset001
     name: AcceptanceTestAsset001
@@ -24,3 +27,6 @@ test_assets:
     runner_settings:
       - "inferred"
       - "test"
+    test_metadata:
+        id: "test:1"
+        test_source: SMURF

@@ -53,6 +53,8 @@ test_reference: https://github.com/NCATSTranslator/Feedback/issues/506
 semantic_severity: NotApplicable
 in_v1: True
 well_known: False
+test_metadata:
+  id: "example:TestAsset001"
 runner_settings:
   - "inferred"
   - "test"

@@ -45,66 +45,77 @@ class TestData(unittest.TestCase):
     def test_good_test_entity(self):
         """Good TestEntity test."""
         for path in good_model_example_data_files["TestEntity"]:
+            print(path)
             obj = yaml_loader.load(path, target_class=TestEntity)
             assert obj
 
     def test_bad_test_entity(self):
         """Bad TestEntity test."""
         for path in bad_model_example_data_files["TestEntity"]:
+            print(path)
             with self.assertRaises(ValueError):
                 yaml_loader.load(path, target_class=TestEntity)
 
     def test_good_test_metadata(self):
         """Good TestMetadata test."""
         for path in good_model_example_data_files["TestMetadata"]:
+            print(path)
             obj = yaml_loader.load(path, target_class=TestMetadata)
             assert obj
 
     def test_bad_test_metadata(self):
         """Bad TestMetadata test."""
         for path in bad_model_example_data_files["TestMetadata"]:
+            print(path)
             with self.assertRaises(ValueError):
                 yaml_loader.load(path, target_class=TestMetadata)
 
     def test_good_test_asset(self):
         """Good TestAsset test."""
         for path in good_model_example_data_files["TestAsset"]:
+            print(path)
             obj = yaml_loader.load(path, target_class=TestAsset)
             assert obj
 
     def test_bad_test_asset(self):
         """Bad TestAsset test."""
         for path in bad_model_example_data_files["TestAsset"]:
+            print(path)
             with self.assertRaises(ValueError):
                 yaml_loader.load(path, target_class=TestAsset)
 
     def test_good_acceptance_test_asset(self):
         """Good TestAsset test."""
         for path in good_model_example_data_files["AcceptanceTestAsset"]:
+            print(path)
             obj = yaml_loader.load(path, target_class=AcceptanceTestAsset)
             assert obj
 
     def test_bad_acceptance_test_asset(self):
         """Bad AcceptanceTestAsset test."""
         for path in bad_model_example_data_files["AcceptanceTestAsset"]:
+            print(path)
             with self.assertRaises(ValueError):
                 yaml_loader.load(path, target_class=AcceptanceTestAsset)
 
     def test_good_test_case(self):
         """Good TestCase test."""
         for path in good_model_example_data_files["TestCase"]:
+            print(path)
             obj = yaml_loader.load(path, target_class=TestCase)
             assert obj
 
     def test_bad_test_case(self):
         """Bad TestCase test."""
         for path in bad_model_example_data_files["TestCase"]:
+            print(path)
             with self.assertRaises(ValueError):
                 yaml_loader.load(path, target_class=TestCase)
 
     def test_good_acceptance_test_case(self):
         """Good AcceptanceTestCase test."""
         for path in good_model_example_data_files["AcceptanceTestCase"]:
+            print(path)
             obj = yaml_loader.load(path, target_class=AcceptanceTestCase)
             assert obj
 
@@ -117,6 +128,7 @@ class TestData(unittest.TestCase):
     def test_good_test_suite(self):
         """Good TestSuite test."""
         for path in good_model_example_data_files["TestSuite"]:
+            print(path)
             obj = yaml_loader.load(path, target_class=TestSuite)
             assert obj
 

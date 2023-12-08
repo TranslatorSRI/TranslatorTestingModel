@@ -28,6 +28,10 @@ input_id: MONDO:0011426
 predicate_name: treats
 output_id: DRUGBANK:DB01592
 expected_output: NeverShow
+test_metadata:
+  id: "test:1"
+  test_source: SMURF
 runner_settings:
   - "inferred"
   - "test"
+

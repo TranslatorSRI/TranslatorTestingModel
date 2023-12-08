@@ -46,3 +46,9 @@ test_assets:
     runner_settings:
       - "inferred"
       - "test"
+    test_metadata:
+      id: test:1
+      test_source: SMURF
+test_case_runner_settings:
+  - "inferred"
+  - "test"
