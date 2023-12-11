@@ -139,16 +139,6 @@ if __name__ == '__main__':
         if case.test_assets is None or case.test_assets == "":
             print(case)
     #
-    # Assemble into a TestSuite
-    test_suite = create_test_suite_from_test_cases(test_cases, TestSuite)
-    #
-    # Convert to JSON and save to file
-    test_suite_json = test_suite.json(indent=4)
-
-    suite_json_output_path = 'test_suite_output.json'
-
-    with open(suite_json_output_path, 'w') as file:
-        file.write(test_suite_json)
 
     for i, item in enumerate(test_cases):
         file_prefix = item.id
@@ -189,9 +179,21 @@ if __name__ == '__main__':
                           test_case_objective="QuantitativeTest",
                           )
             file_prefix = k
+            test_cases.append(tc)
             filename = f"{file_prefix}.json"
             with open(filename, 'w', encoding='utf-8') as file:
                 json.dump(tc.dict(), file, ensure_ascii=False, indent=4)
 
     else:
         print(f'Failed to retrieve the file. Status code: {response.status_code}')
+
+    # Assemble into a TestSuite
+    test_suite = create_test_suite_from_test_cases(test_cases, TestSuite)
+    #
+    # Convert to JSON and save to file
+    test_suite_json = test_suite.json(indent=4)
+
+    suite_json_output_path = 'test_suite_output.json'
+
+    with open(suite_json_output_path, 'w') as file:
+        file.write(test_suite_json)
