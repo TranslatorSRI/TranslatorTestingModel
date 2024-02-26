@@ -5,16 +5,22 @@ message AcceptanceTestAsset
   string description = 0
   uriorcurie inputId = 0
   string inputName = 0
-  string predicate = 0
+  conceptCategory inputCategory = 0
+  predicateType predicateId = 0
+  string predicateName = 0
   uriorcurie outputId = 0
   string outputName = 0
-  expectedOutputEnum expectedOutput = 0
+  conceptCategory outputCategory = 0
+  associationCategory association = 0
+ repeated  qualifier qualifiers = 0
+  string expectedOutput = 0
   testIssueEnum testIssue = 0
   semanticSeverityEnum semanticSeverity = 0
   boolean inV1 = 0
   boolean wellKnown = 0
   uriorcurie testReference = 0
  repeated  string runnerSettings = 0
+  testMetadata testMetadata = 0
   uriorcurie id = 0
  repeated  string tags = 0
   date mustPassDate = 0
@@ -39,6 +45,12 @@ message AcceptanceTestCase
  repeated  precondition preconditions = 0
   trapiTemplateEnum trapiTemplate = 0
  repeated  componentEnum components = 0
+  testObjectiveEnum testCaseObjective = 0
+  testSourceEnum testCaseSource = 0
+  string testCasePredicateName = 0
+  string testCasePredicateId = 0
+  uriorcurie testCaseInputId = 0
+ repeated  string testCaseRunnerSettings = 0
  repeated  string tags = 0
  repeated  acceptanceTestAsset testAssets = 0
  }
@@ -65,7 +77,15 @@ message ComplianceTestCase
  repeated  precondition preconditions = 0
   trapiTemplateEnum trapiTemplate = 0
  repeated  componentEnum components = 0
+  testObjectiveEnum testCaseObjective = 0
+  testSourceEnum testCaseSource = 0
+  string testCasePredicateName = 0
+  string testCasePredicateId = 0
+  uriorcurie testCaseInputId = 0
+ repeated  string testCaseRunnerSettings = 0
  repeated  string tags = 0
+  string trapiVersion = 0
+  string biolinkVersion = 0
  }
 // Knowledge Graph navigation integration test
 message KnowledgeGraphNavigationTestCase
@@ -79,6 +99,12 @@ message KnowledgeGraphNavigationTestCase
  repeated  precondition preconditions = 0
   trapiTemplateEnum trapiTemplate = 0
  repeated  componentEnum components = 0
+  testObjectiveEnum testCaseObjective = 0
+  testSourceEnum testCaseSource = 0
+  string testCasePredicateName = 0
+  string testCasePredicateId = 0
+  uriorcurie testCaseInputId = 0
+ repeated  string testCaseRunnerSettings = 0
  repeated  string tags = 0
  }
 // 'One Hop' Knowledge Graph navigation integration test
@@ -93,6 +119,12 @@ message OneHopTestCase
  repeated  precondition preconditions = 0
   trapiTemplateEnum trapiTemplate = 0
  repeated  componentEnum components = 0
+  testObjectiveEnum testCaseObjective = 0
+  testSourceEnum testCaseSource = 0
+  string testCasePredicateName = 0
+  string testCasePredicateId = 0
+  uriorcurie testCaseInputId = 0
+ repeated  string testCaseRunnerSettings = 0
  repeated  string tags = 0
  }
 // Test case for testing the integrity of "One Hop" knowledge graph retrievals sensa legacy SRI_Testing harness.
@@ -115,6 +147,11 @@ message Precondition
   string description = 0
  repeated  string tags = 0
  }
+message Qualifier
+ {
+  string parameter = 0
+  string value = 0
+ }
 // Assumed additional model from Shervin's runner JSON here as an example.  This schema is not yet complete.
 message QuantitativeTestCase
  {
@@ -127,6 +164,12 @@ message QuantitativeTestCase
  repeated  precondition preconditions = 0
   trapiTemplateEnum trapiTemplate = 0
  repeated  componentEnum components = 0
+  testObjectiveEnum testCaseObjective = 0
+  testSourceEnum testCaseSource = 0
+  string testCasePredicateName = 0
+  string testCasePredicateId = 0
+  uriorcurie testCaseInputId = 0
+ repeated  string testCaseRunnerSettings = 0
  repeated  string tags = 0
  }
 // Test suite for testing Translator components against releases of standards like TRAPI and the Biolink Model.
@@ -148,16 +191,22 @@ message TestAsset
   string description = 0
   uriorcurie inputId = 0
   string inputName = 0
-  string predicate = 0
+  conceptCategory inputCategory = 0
+  predicateType predicateId = 0
+  string predicateName = 0
   uriorcurie outputId = 0
   string outputName = 0
-  expectedOutputEnum expectedOutput = 0
+  conceptCategory outputCategory = 0
+  associationCategory association = 0
+ repeated  qualifier qualifiers = 0
+  string expectedOutput = 0
   testIssueEnum testIssue = 0
   semanticSeverityEnum semanticSeverity = 0
   boolean inV1 = 0
   boolean wellKnown = 0
   uriorcurie testReference = 0
  repeated  string runnerSettings = 0
+  testMetadata testMetadata = 0
   uriorcurie id = 0
  repeated  string tags = 0
  }
@@ -173,6 +222,12 @@ message TestCase
  repeated  precondition preconditions = 0
   trapiTemplateEnum trapiTemplate = 0
  repeated  componentEnum components = 0
+  testObjectiveEnum testCaseObjective = 0
+  testSourceEnum testCaseSource = 0
+  string testCasePredicateName = 0
+  string testCasePredicateId = 0
+  uriorcurie testCaseInputId = 0
+ repeated  string testCaseRunnerSettings = 0
  repeated  string tags = 0
  }
 // The outcome of a TestRunner run of one specific TestCase.
@@ -193,16 +248,22 @@ message TestEdgeData
   string description = 0
   uriorcurie inputId = 0
   string inputName = 0
-  string predicate = 0
+  conceptCategory inputCategory = 0
+  predicateType predicateId = 0
+  string predicateName = 0
   uriorcurie outputId = 0
   string outputName = 0
-  expectedOutputEnum expectedOutput = 0
+  conceptCategory outputCategory = 0
+  associationCategory association = 0
+ repeated  qualifier qualifiers = 0
+  string expectedOutput = 0
   testIssueEnum testIssue = 0
   semanticSeverityEnum semanticSeverity = 0
   boolean inV1 = 0
   boolean wellKnown = 0
   uriorcurie testReference = 0
  repeated  string runnerSettings = 0
+  testMetadata testMetadata = 0
   uriorcurie id = 0
  repeated  string tags = 0
  }
@@ -223,6 +284,31 @@ message TestMetadata
   uriorcurie testReference = 0
   testObjectiveEnum testObjective = 0
  repeated  testEntityParameter testAnnotations = 0
+ }
+// The output of a TestRunner run of one specific TestCase.
+message TestOutput
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+ repeated  string tags = 0
+  string testCaseId = 0
+ repeated  testResultPKSet pks = 0
+ }
+// Primary keys for a given ARA result set from a SmokeTest result for a given TestCase.
+message TestResultPKSet
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+ repeated  string tags = 0
+  string parentPk = 0
+  string mergedPk = 0
+  string aragorn = 0
+  string arax = 0
+  string unsecret = 0
+  string bte = 0
+  string improving = 0
  }
 // General configuration parameters and test data input  for a single invocation of a TestRunner.
 message TestRunnerConfiguration

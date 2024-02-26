@@ -26,3 +26,9 @@ description: This is a acceptance test case'
 runner_settings:
   - "inferred"
   - "test"
+test_metadata:
+  id: 1
+  test_source: SMURF,
+  test_reference: https://github.com/NCATSTranslator/Feedback/issues/506
+  test_objective: AcceptanceTest
+

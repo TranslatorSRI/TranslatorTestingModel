@@ -20,6 +20,7 @@
 #      - semantic_severity
 #      - in_v1
 #      - well_known
+#      - test_metadata
 #    slot_usage:
 #      id:
 #        aliases: ["AssetIdentifier"]
@@ -34,3 +35,4 @@
 # id: example:TestAsset001
 name: foo bar
 description: This is a test asset
+test_meta_data: { "foo": "bar" }

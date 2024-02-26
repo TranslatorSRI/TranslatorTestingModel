@@ -23,6 +23,35 @@ default_range: string
 imports:
   - linkml:types
 
+types:
+
+  ##################################
+  # Testing Model Types            #
+  # (Mainly Biolink Model related) #
+  ##################################
+
+  category_type:
+    typeof: uriorcurie
+    description: >-
+      A primitive type in which the value denotes a class within the biolink model.
+      The value must be a URI or a CURIE within the 'biolink' namespace.
+
+  concept_category:
+    typeof: category_type
+    description: >-
+      A category type within the Biolink Model ('biolink' namespace) 'biolink:NamedThing' hierarchy.
+
+  association_category:
+    typeof: category_type
+    description: >-
+      A category type within the Biolink Model ('biolink' namespace) 'biolink:Association' hierarchy.
+
+  predicate_type:
+    typeof: uriorcurie
+    description: >-
+      A CURIE from the Biolink Model ('biolink' namespace) 'biolink:related_to' hierarchy.
+      For example, biolink:related_to, biolink:causes, biolink:treats.
+
 classes:
 
   ########################
@@ -35,6 +64,18 @@ classes:
     slots:
       - parameter
       - value
+
+  Qualifier:
+    is_a: TestEntityParameter
+    slot_usage:
+      parameter:
+        description: >-
+          The 'parameter' of a Qualifier should be a `qualifier` slot name from the
+          Biolink Model ('biolink' namespace) 'biolink:qualifier' hierarchy.
+      value:
+        description: >-
+          The 'value' of should be a suitable value generally drawn from an
+          applicable Biolink Model ("Enum") value set of the specified Qualifier.
 
   TestEntity:
     description: >-
@@ -72,9 +113,14 @@ classes:
     slots:
       - input_id
       - input_name
-      - predicate
+      - input_category
+      - predicate_id
+      - predicate_name
       - output_id
       - output_name
+      - output_category
+      - association
+      - qualifiers
       - expected_output
       - test_issue
       - semantic_severity
@@ -82,6 +128,7 @@ classes:
       - well_known
       - test_reference
       - runner_settings
+      - test_metadata
     slot_usage:
       id:
         aliases: ["AssetIdentifier"]
@@ -149,6 +196,12 @@ classes:
       - preconditions
       - trapi_template
       - components
+      - test_case_objective
+      - test_case_source
+      - test_case_predicate_name
+      - test_case_predicate_id
+      - test_case_input_id
+      - test_case_runner_settings
     slot_usage:
       test_assets:
         aliases: ["Block List"]
@@ -181,6 +234,9 @@ classes:
     is_a: TestCase
     description: >-
       TRAPI and Biolink Model standards compliance test
+    slots:
+      - trapi_version
+      - biolink_version
     slot_usage:
 #      test_assets:
 #        range: ComplianceTestAsset
@@ -285,6 +341,26 @@ classes:
           Different TestRunners may expect specific kinds of TestEntity as input.
           These 'test_entities' one or more instances of TestAsset, TestCase or TestSuite.
 
+  TestOutput:
+    description: >-
+      The output of a TestRunner run of one specific TestCase.
+    is_a: TestEntity
+    slots:
+      - test_case_id
+      - pks
+
+  TestResultPKSet:
+    description: >-
+      Primary keys for a given ARA result set from a SmokeTest result for a given TestCase.
+    is_a: TestEntity
+    slots:
+      - parent_pk
+      - merged_pk
+      - aragorn
+      - arax
+      - unsecret
+      - bte
+      - improving
 
 ###############
 # Model slots #
@@ -292,9 +368,34 @@ classes:
 
 slots:
 
+  parent_pk:
+  merged_pk:
+  aragorn:
+  arax:
+  unsecret:
+  bte:
+  improving:
+
+  pks:
+    description: >-
+      Primary keys for a given ARA result set from a SmokeTest result for a given TestCase.
+    range: TestResultPKSet
+    multivalued: true
+
+  results:
+    description: >-
+      The results of a TestRunner run of one specific TestCase.
+    range: TestOutput
+    multivalued: true
+
   #################
   # General Slots #
   #################
+
+  test_case_id:
+    description: >-
+      CURIE id of a TestCase registered in the system.
+    range: string
 
   parameter:
     description: >-
@@ -310,6 +411,7 @@ slots:
     range: TestEntityParameter
     multivalued: true
     inlined: true
+    inlined_as_list: true
 
   timestamp:
     description: >-
@@ -338,7 +440,9 @@ slots:
     multivalued: true
 
   test_source:
-    description: Provenance of a specific set of test assets, cases and/or suites.
+    description: >-
+      Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this, 
+      know about this.  We would like this to be an ORCID eventually, but currently it is just a string.
     range: TestSourceEnum
 
   test_reference:
@@ -353,6 +457,18 @@ slots:
       (e.g. acceptance pass/fail; benchmark; quantitative)
     range: TestObjectiveEnum
 
+  test_case_objective:
+    description: >-
+      Testing objective behind specified set of test particulars
+      (e.g. acceptance pass/fail; benchmark; quantitative)
+    range: TestObjectiveEnum
+
+  test_case_source:
+    description: >-
+      Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this, 
+      know about this.  We would like this to be an ORCID eventually, but currently it is just a string.
+    range: TestSourceEnum
+
   test_annotations:
     description: >-
       Metadata annotation.
@@ -362,6 +478,16 @@ slots:
   # TestAsset Slots #
   ###################
 
+  test_case_input_id:
+    aliases: ["InputID, node normalized", "SubjectID"]
+    range: uriorcurie
+
+  test_case_predicate_name:
+    aliases: ["Predicate"]
+
+  test_case_predicate_id:
+    aliases: ["Predicate"]
+
   input_id:
     aliases: ["InputID, node normalized", "SubjectID"]
     range: uriorcurie
@@ -369,7 +495,15 @@ slots:
   input_name:
     aliases: ["InputName (user choice)", "SubjectName"]
 
-  predicate:
+  input_category:
+    aliases: ["SubjectCategory"]
+    range: concept_category
+
+  predicate_id:
+    aliases: ["Predicate"]
+    range: predicate_type
+
+  predicate_name:
     aliases: ["Query", "Relationship"]
 
   output_id:
@@ -379,9 +513,30 @@ slots:
   output_name:
     aliases: ["OutputName", "ObjectName"]
 
+  output_category:
+    aliases: ["ObjectCategory"]
+    range: concept_category
+
+  association:
+    description: >-
+      Specific Biolink Model association 'category' which
+      applies to the test asset defined knowledge statement
+    range: association_category
+
+  qualifiers:
+    description: >-
+      Optional qualifiers which constrain to the test asset defined
+      knowledge statement. Note that this field records such qualifier
+      slots and values as tag=value pairs, where the tag is the
+      Biolink Model qualifier slot named and the value is an acceptable
+      (Biolink Model enum?) value of the said qualifier slot.
+    range: Qualifier
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+
   expected_output:
     aliases: ["Expected Output"]
-    range: ExpectedOutputEnum
 
   test_issue:
     aliases: ["issue label"]
@@ -402,7 +557,15 @@ slots:
   runner_settings:
     aliases: ["Settings"]
     description: >-
-      Settings for the test harness
+      Settings for the test harness for TestAsset
+    range: string
+    multivalued: true
+    required: true
+
+  test_case_runner_settings:
+    aliases: ["Settings"]
+    description: >-
+      Settings for the test harness for TestCase
     range: string
     multivalued: true
     required: true
@@ -534,6 +697,12 @@ slots:
     range: ComponentEnum
     multivalued: true
 
+  trapi_version:
+    description: TRAPI version (SemVer string)
+
+  biolink_version:
+    description: Biolink Model release (SemVer string)
+
   ###################
   # TestSuite Slots #
   ###################
@@ -554,6 +723,7 @@ slots:
       Test metadata describes the external provenance, cross-references and objectives for a given test.
     range: TestMetadata
     inlined: true
+    required: true
 
   test_persona:
     description: >-
@@ -702,25 +872,13 @@ enums:
       Expected output values for instances of Test Asset or Test Cases(?).
       (Note: does this Enum overlap with 'ExpectedResultsEnum' below?)
     permissible_values:
-      Top_Answer:
-        description:
       Acceptable:
         description:
       BadButForgivable:
         description:
       NeverShow:
         description:
-      number_1_TopAnswer:
-        is_a: Top_Answer
-        description:
-      number_2_Acceptable:
-        is_a: Acceptable
-        description:
-      number_3_BadButForgivable:
-        is_a: BadButForgivable
-        description:
-      number_4_NeverShow:
-        is_a: NeverShow
+      TopAnswer:
         description:
 
   TestIssueEnum:
@@ -793,12 +951,13 @@ enums:
       drug-to-gene:
 
   ComponentEnum:
-    permissible_values:
-      arax:
-      aragorn:
-      ars:
-      bte:
-      improving:
+    description: >-
+      Translator components are identified by their InfoRes identifiers.
+    reachable_from:
+      source_ontology: biolink
+      source_nodes:
+        - biolink:infores
+      include_self:  false
 
   #########################
   # TestSuite Model Enums #

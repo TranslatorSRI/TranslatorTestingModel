@@ -2,6 +2,7 @@
 ---
 # TODO: the TestCase example data needs further elaboration
 #
+#
 #  TestCase:
 #    description: >-
 #      Represents a single enumerated instance of Test Case, derived from a
@@ -34,10 +35,20 @@
 id: example:TestCase001
 name: foo bar
 description: This is a test case
+# NOTE: we only provide the minimal set of TestAsset slots where required: true
 test_assets:
   - id: example:TestAsset001
-    name: foo bar
-    description: This is a test asset
+    name: TestAsset001
+    input_id: MONDO:0011426
+    predicate_name: treats
+    output_id: DRUGBANK:DB01592
+    expected_output: NeverShow
     runner_settings:
       - "inferred"
       - "test"
+    test_metadata:
+      id: test:1
+      test_source: SMURF
+test_case_runner_settings:
+  - "inferred"
+  - "test"

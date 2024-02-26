@@ -5,6 +5,14 @@ PREFIX linkml: <https://w3id.org/linkml/>
 PREFIX schema1: <http://schema.org/>
 
 
+<CategoryType> IRI
+
+<ConceptCategory> IRI
+
+<AssociationCategory> IRI
+
+<PredicateType> IRI
+
 linkml:String xsd:string
 
 linkml:Integer xsd:integer
@@ -86,7 +94,9 @@ linkml:Sparqlpath xsd:string
 
 <ComplianceTestCase> CLOSED {
     (  $<ComplianceTestCase_tes> (  &<TestCase_tes> ;
-          rdf:type [ <TestCase> ] ?
+          rdf:type [ <TestCase> ] ? ;
+          <trapi_version> @linkml:String ? ;
+          <biolink_version> @linkml:String ?
        ) ;
        rdf:type [ <ComplianceTestCase> ]
     )
@@ -126,6 +136,16 @@ linkml:Sparqlpath xsd:string
     )
 }
 
+<Qualifier> CLOSED {
+    (  $<Qualifier_tes> (  &<TestEntityParameter_tes> ;
+          rdf:type [ <TestEntityParameter> ] ? ;
+          <parameter> @linkml:String ? ;
+          <value> @linkml:String ?
+       ) ;
+       rdf:type [ <Qualifier> ] ?
+    )
+}
+
 <QuantitativeTestCase> CLOSED {
     (  $<QuantitativeTestCase_tes> (  &<TestCase_tes> ;
           rdf:type [ <TestCase> ] ?
@@ -148,16 +168,22 @@ linkml:Sparqlpath xsd:string
              rdf:type [ <TestEntity> ] ? ;
              <input_id> @linkml:Uriorcurie ? ;
              <input_name> @linkml:String ? ;
-             <predicate> @linkml:String ? ;
+             <input_category> @<ConceptCategory> ? ;
+             <predicate_id> @<PredicateType> ? ;
+             <predicate_name> @linkml:String ? ;
              <output_id> @linkml:Uriorcurie ? ;
              <output_name> @linkml:String ? ;
-             <expected_output> @<ExpectedOutputEnum> ? ;
+             <output_category> @<ConceptCategory> ? ;
+             <association> @<AssociationCategory> ? ;
+             <qualifiers> @<Qualifier> * ;
+             <expected_output> @linkml:String ? ;
              <test_issue> @<TestIssueEnum> ? ;
              <semantic_severity> @<SemanticSeverityEnum> ? ;
              <in_v1> @linkml:Boolean ? ;
              <well_known> @linkml:Boolean ? ;
              <test_reference> @linkml:Uriorcurie ? ;
              <runner_settings> @linkml:String + ;
+             <test_metadata> @<TestMetadata> ;
              schema1:additionalType @linkml:String *
           ) ;
           rdf:type [ <TestAsset> ]
@@ -175,6 +201,12 @@ linkml:Sparqlpath xsd:string
              <preconditions> @<Precondition> * ;
              <trapi_template> @<TrapiTemplateEnum> ? ;
              <components> @<ComponentEnum> * ;
+             <test_case_objective> @<TestObjectiveEnum> ? ;
+             <test_case_source> @<TestSourceEnum> ? ;
+             <test_case_predicate_name> @linkml:String ? ;
+             <test_case_predicate_id> @linkml:String ? ;
+             <test_case_input_id> @linkml:Uriorcurie ? ;
+             <test_case_runner_settings> @linkml:String + ;
              schema1:additionalType @linkml:String *
           ) ;
           rdf:type [ <TestCase> ]
@@ -202,8 +234,8 @@ linkml:Sparqlpath xsd:string
 }
 
 <TestEntity>  (
-    @<Precondition> OR @<TestAsset> OR @<TestCase> OR @<TestCaseResult> OR @<TestMetadata> OR @<TestRunSession> OR
-    @<TestRunnerConfiguration> OR @<TestSuite> OR @<TestSuiteSpecification>
+    @<Precondition> OR @<TestAsset> OR @<TestCase> OR @<TestCaseResult> OR @<TestMetadata> OR @<TestOutput> OR @<TestResultPKSet>
+    OR @<TestRunSession> OR @<TestRunnerConfiguration> OR @<TestSuite> OR @<TestSuiteSpecification>
 )
 
 <TestEntity_struct> {
@@ -215,13 +247,15 @@ linkml:Sparqlpath xsd:string
     )
 }
 
-<TestEntityParameter> CLOSED {
-    (  $<TestEntityParameter_tes> (  <parameter> @linkml:String ? ;
-          <value> @linkml:String ?
-       ) ;
-       rdf:type [ <TestEntityParameter> ] ?
-    )
-}
+<TestEntityParameter>  (
+    CLOSED {
+       (  $<TestEntityParameter_tes> (  <parameter> @linkml:String ? ;
+             <value> @linkml:String ?
+          ) ;
+          rdf:type [ <TestEntityParameter> ] ?
+       )
+    } OR @<Qualifier>
+)
 
 <TestMetadata> CLOSED {
     (  $<TestMetadata_tes> (  &<TestEntity_tes> ;
@@ -232,6 +266,31 @@ linkml:Sparqlpath xsd:string
           <test_annotations> @<TestEntityParameter> *
        ) ;
        rdf:type [ <TestMetadata> ]
+    )
+}
+
+<TestOutput> CLOSED {
+    (  $<TestOutput_tes> (  &<TestEntity_tes> ;
+          rdf:type [ <TestEntity> ] ? ;
+          <test_case_id> @linkml:String ? ;
+          <pks> @<TestResultPKSet> *
+       ) ;
+       rdf:type [ <TestOutput> ]
+    )
+}
+
+<TestResultPKSet> CLOSED {
+    (  $<TestResultPKSet_tes> (  &<TestEntity_tes> ;
+          rdf:type [ <TestEntity> ] ? ;
+          <parent_pk> @linkml:String ? ;
+          <merged_pk> @linkml:String ? ;
+          <aragorn> @linkml:String ? ;
+          <arax> @linkml:String ? ;
+          <unsecret> @linkml:String ? ;
+          <bte> @linkml:String ? ;
+          <improving> @linkml:String ?
+       ) ;
+       rdf:type [ <TestResultPKSet> ]
     )
 }
 
@@ -261,7 +320,7 @@ linkml:Sparqlpath xsd:string
     CLOSED {
        (  $<TestSuite_tes> (  &<TestEntity_tes> ;
              rdf:type [ <TestEntity> ] ? ;
-             <test_metadata> @<TestMetadata> ? ;
+             <test_metadata> @<TestMetadata> ;
              <test_persona> @<TestPersonaEnum> ? ;
              <test_cases> @<TestCase> * ;
              <test_suite_specification> @<TestSuiteSpecification> ?

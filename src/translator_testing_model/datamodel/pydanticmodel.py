@@ -2,7 +2,7 @@ from __future__ import annotations
 from datetime import datetime, date
 from enum import Enum
 from typing import List, Dict, Optional, Any, Union
-from pydantic import BaseModel as BaseModel, ConfigDict, Field
+from pydantic import BaseModel as BaseModel, Field
 import sys
 if sys.version_info >= (3, 8):
     from typing import Literal
@@ -89,21 +89,13 @@ class ExpectedOutputEnum(str, Enum):
     Expected output values for instances of Test Asset or Test Cases(?). (Note: does this Enum overlap with 'ExpectedResultsEnum' below?)
     """
     
-    Top_Answer = "Top_Answer"
-    
     Acceptable = "Acceptable"
     
     BadButForgivable = "BadButForgivable"
     
     NeverShow = "NeverShow"
     
-    number_1_TopAnswer = "number_1_TopAnswer"
-    
-    number_2_Acceptable = "number_2_Acceptable"
-    
-    number_3_BadButForgivable = "number_3_BadButForgivable"
-    
-    number_4_NeverShow = "number_4_NeverShow"
+    TopAnswer = "TopAnswer"
     
     
 
@@ -241,6 +233,12 @@ class TestEntityParameter(ConfiguredBaseModel):
     value: Optional[str] = Field(None, description="""(String) value of a TestParameter.""")
     
 
+class Qualifier(TestEntityParameter):
+    
+    parameter: Optional[str] = Field(None, description="""The 'parameter' of a Qualifier should be a `qualifier` slot name from the Biolink Model ('biolink' namespace) 'biolink:qualifier' hierarchy.""")
+    value: Optional[str] = Field(None, description="""The 'value' of should be a suitable value generally drawn from an applicable Biolink Model (\"Enum\") value set of the specified Qualifier.""")
+    
+
 class TestEntity(ConfiguredBaseModel):
     """
     Abstract global 'identification' class shared as a parent with all major model classes within the data model for Translator testing.
@@ -255,7 +253,7 @@ class TestMetadata(TestEntity):
     """
     Represents metadata related to (external SME, SMURF, Translator feedback,  large scale batch, etc.) like the provenance of test assets, cases and/or suites.
     """
-    test_source: Optional[TestSourceEnum] = Field(None, description="""Provenance of a specific set of test assets, cases and/or suites.""")
+    test_source: Optional[TestSourceEnum] = Field(None, description="""Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string.""")
     test_reference: Optional[str] = Field(None, description="""Document URL where original test source particulars are registered (e.g. Github repo)""")
     test_objective: Optional[TestObjectiveEnum] = Field(None, description="""Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)""")
     test_annotations: Optional[List[TestEntityParameter]] = Field(default_factory=list, description="""Metadata annotation.""")
@@ -271,16 +269,22 @@ class TestAsset(TestEntity):
     """
     input_id: Optional[str] = Field(None)
     input_name: Optional[str] = Field(None)
-    predicate: Optional[str] = Field(None)
+    input_category: Optional[str] = Field(None)
+    predicate_id: Optional[str] = Field(None)
+    predicate_name: Optional[str] = Field(None)
     output_id: Optional[str] = Field(None)
     output_name: Optional[str] = Field(None)
-    expected_output: Optional[ExpectedOutputEnum] = Field(None)
+    output_category: Optional[str] = Field(None)
+    association: Optional[str] = Field(None, description="""Specific Biolink Model association 'category' which applies to the test asset defined knowledge statement""")
+    qualifiers: Optional[List[Qualifier]] = Field(default_factory=list, description="""Optional qualifiers which constrain to the test asset defined knowledge statement. Note that this field records such qualifier slots and values as tag=value pairs, where the tag is the Biolink Model qualifier slot named and the value is an acceptable (Biolink Model enum?) value of the said qualifier slot.""")
+    expected_output: Optional[str] = Field(None)
     test_issue: Optional[TestIssueEnum] = Field(None)
     semantic_severity: Optional[SemanticSeverityEnum] = Field(None)
     in_v1: Optional[bool] = Field(None)
     well_known: Optional[bool] = Field(None)
     test_reference: Optional[str] = Field(None, description="""Document URL where original test source particulars are registered (e.g. Github repo)""")
     runner_settings: List[str] = Field(default_factory=list, description="""Settings for the test harness, e.g. \"inferred\"""")
+    test_metadata: TestMetadata = Field(..., description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
@@ -303,16 +307,22 @@ class AcceptanceTestAsset(TestAsset):
     notes: Optional[str] = Field(None, description="""The notes of the query""")
     input_id: Optional[str] = Field(None)
     input_name: Optional[str] = Field(None)
-    predicate: Optional[str] = Field(None)
+    input_category: Optional[str] = Field(None)
+    predicate_id: Optional[str] = Field(None)
+    predicate_name: Optional[str] = Field(None)
     output_id: Optional[str] = Field(None)
     output_name: Optional[str] = Field(None)
-    expected_output: Optional[ExpectedOutputEnum] = Field(None)
+    output_category: Optional[str] = Field(None)
+    association: Optional[str] = Field(None, description="""Specific Biolink Model association 'category' which applies to the test asset defined knowledge statement""")
+    qualifiers: Optional[List[Qualifier]] = Field(default_factory=list, description="""Optional qualifiers which constrain to the test asset defined knowledge statement. Note that this field records such qualifier slots and values as tag=value pairs, where the tag is the Biolink Model qualifier slot named and the value is an acceptable (Biolink Model enum?) value of the said qualifier slot.""")
+    expected_output: Optional[str] = Field(None)
     test_issue: Optional[TestIssueEnum] = Field(None)
     semantic_severity: Optional[SemanticSeverityEnum] = Field(None)
     in_v1: Optional[bool] = Field(None)
     well_known: Optional[bool] = Field(None)
     test_reference: Optional[str] = Field(None, description="""Document URL where original test source particulars are registered (e.g. Github repo)""")
     runner_settings: List[str] = Field(default_factory=list, description="""Settings for the test harness, e.g. \"inferred\"""")
+    test_metadata: TestMetadata = Field(..., description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
@@ -325,16 +335,22 @@ class TestEdgeData(TestAsset):
     """
     input_id: Optional[str] = Field(None)
     input_name: Optional[str] = Field(None)
-    predicate: Optional[str] = Field(None)
+    input_category: Optional[str] = Field(None)
+    predicate_id: Optional[str] = Field(None)
+    predicate_name: Optional[str] = Field(None)
     output_id: Optional[str] = Field(None)
     output_name: Optional[str] = Field(None)
-    expected_output: Optional[ExpectedOutputEnum] = Field(None)
+    output_category: Optional[str] = Field(None)
+    association: Optional[str] = Field(None, description="""Specific Biolink Model association 'category' which applies to the test asset defined knowledge statement""")
+    qualifiers: Optional[List[Qualifier]] = Field(default_factory=list, description="""Optional qualifiers which constrain to the test asset defined knowledge statement. Note that this field records such qualifier slots and values as tag=value pairs, where the tag is the Biolink Model qualifier slot named and the value is an acceptable (Biolink Model enum?) value of the said qualifier slot.""")
+    expected_output: Optional[str] = Field(None)
     test_issue: Optional[TestIssueEnum] = Field(None)
     semantic_severity: Optional[SemanticSeverityEnum] = Field(None)
     in_v1: Optional[bool] = Field(None)
     well_known: Optional[bool] = Field(None)
     test_reference: Optional[str] = Field(None, description="""Document URL where original test source particulars are registered (e.g. Github repo)""")
     runner_settings: List[str] = Field(default_factory=list, description="""Settings for the test harness, e.g. \"inferred\"""")
+    test_metadata: TestMetadata = Field(..., description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
@@ -361,6 +377,12 @@ class TestCase(TestEntity):
     preconditions: Optional[List[str]] = Field(default_factory=list)
     trapi_template: Optional[TrapiTemplateEnum] = Field(None, description="""A template for a query, which can be used to generate a query for a test case.  note: the current enumerated values for this slot come from the Benchmarks repo config/benchmarks.json \"templates\" collection and refer to the \"name\" field of each template.  Templates themselves are currently stored in the config/[source_name]/templates directory.""")
     components: Optional[List[ComponentEnum]] = Field(default_factory=list, description="""The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.""")
+    test_case_objective: Optional[TestObjectiveEnum] = Field(None, description="""Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)""")
+    test_case_source: Optional[TestSourceEnum] = Field(None, description="""Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string.""")
+    test_case_predicate_name: Optional[str] = Field(None)
+    test_case_predicate_id: Optional[str] = Field(None)
+    test_case_input_id: Optional[str] = Field(None)
+    test_case_runner_settings: List[str] = Field(default_factory=list, description="""Settings for the test harness for TestCase""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
@@ -377,6 +399,12 @@ class AcceptanceTestCase(TestCase):
     preconditions: Optional[List[str]] = Field(default_factory=list)
     trapi_template: Optional[TrapiTemplateEnum] = Field(None, description="""A template for a query, which can be used to generate a query for a test case.  note: the current enumerated values for this slot come from the Benchmarks repo config/benchmarks.json \"templates\" collection and refer to the \"name\" field of each template.  Templates themselves are currently stored in the config/[source_name]/templates directory.""")
     components: Optional[List[ComponentEnum]] = Field(default_factory=list, description="""The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.""")
+    test_case_objective: Optional[TestObjectiveEnum] = Field(None, description="""Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)""")
+    test_case_source: Optional[TestSourceEnum] = Field(None, description="""Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string.""")
+    test_case_predicate_name: Optional[str] = Field(None)
+    test_case_predicate_id: Optional[str] = Field(None)
+    test_case_input_id: Optional[str] = Field(None)
+    test_case_runner_settings: List[str] = Field(default_factory=list, description="""Settings for the test harness for TestCase""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
@@ -393,6 +421,12 @@ class QuantitativeTestCase(TestCase):
     preconditions: Optional[List[str]] = Field(default_factory=list)
     trapi_template: Optional[TrapiTemplateEnum] = Field(None, description="""A template for a query, which can be used to generate a query for a test case.  note: the current enumerated values for this slot come from the Benchmarks repo config/benchmarks.json \"templates\" collection and refer to the \"name\" field of each template.  Templates themselves are currently stored in the config/[source_name]/templates directory.""")
     components: Optional[List[ComponentEnum]] = Field(default_factory=list, description="""The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.""")
+    test_case_objective: Optional[TestObjectiveEnum] = Field(None, description="""Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)""")
+    test_case_source: Optional[TestSourceEnum] = Field(None, description="""Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string.""")
+    test_case_predicate_name: Optional[str] = Field(None)
+    test_case_predicate_id: Optional[str] = Field(None)
+    test_case_input_id: Optional[str] = Field(None)
+    test_case_runner_settings: List[str] = Field(default_factory=list, description="""Settings for the test harness for TestCase""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
@@ -403,12 +437,20 @@ class ComplianceTestCase(TestCase):
     """
     TRAPI and Biolink Model standards compliance test
     """
+    trapi_version: Optional[str] = Field(None, description="""TRAPI version (SemVer string)""")
+    biolink_version: Optional[str] = Field(None, description="""Biolink Model release (SemVer string)""")
     test_env: Optional[TestEnvEnum] = Field(None, description="""Deployment environment within which the associated TestSuite is run.""")
     query_type: Optional[QueryTypeEnum] = Field(None, description="""Type of TestCase query.""")
     test_assets: List[TestAsset] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection.""")
     preconditions: Optional[List[str]] = Field(default_factory=list)
     trapi_template: Optional[TrapiTemplateEnum] = Field(None, description="""A template for a query, which can be used to generate a query for a test case.  note: the current enumerated values for this slot come from the Benchmarks repo config/benchmarks.json \"templates\" collection and refer to the \"name\" field of each template.  Templates themselves are currently stored in the config/[source_name]/templates directory.""")
     components: Optional[List[ComponentEnum]] = Field(default_factory=list, description="""The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.""")
+    test_case_objective: Optional[TestObjectiveEnum] = Field(None, description="""Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)""")
+    test_case_source: Optional[TestSourceEnum] = Field(None, description="""Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string.""")
+    test_case_predicate_name: Optional[str] = Field(None)
+    test_case_predicate_id: Optional[str] = Field(None)
+    test_case_input_id: Optional[str] = Field(None)
+    test_case_runner_settings: List[str] = Field(default_factory=list, description="""Settings for the test harness for TestCase""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
@@ -425,6 +467,12 @@ class KnowledgeGraphNavigationTestCase(TestCase):
     preconditions: Optional[List[str]] = Field(default_factory=list)
     trapi_template: Optional[TrapiTemplateEnum] = Field(None, description="""A template for a query, which can be used to generate a query for a test case.  note: the current enumerated values for this slot come from the Benchmarks repo config/benchmarks.json \"templates\" collection and refer to the \"name\" field of each template.  Templates themselves are currently stored in the config/[source_name]/templates directory.""")
     components: Optional[List[ComponentEnum]] = Field(default_factory=list, description="""The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.""")
+    test_case_objective: Optional[TestObjectiveEnum] = Field(None, description="""Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)""")
+    test_case_source: Optional[TestSourceEnum] = Field(None, description="""Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string.""")
+    test_case_predicate_name: Optional[str] = Field(None)
+    test_case_predicate_id: Optional[str] = Field(None)
+    test_case_input_id: Optional[str] = Field(None)
+    test_case_runner_settings: List[str] = Field(default_factory=list, description="""Settings for the test harness for TestCase""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
@@ -441,6 +489,12 @@ class OneHopTestCase(KnowledgeGraphNavigationTestCase):
     preconditions: Optional[List[str]] = Field(default_factory=list)
     trapi_template: Optional[TrapiTemplateEnum] = Field(None, description="""A template for a query, which can be used to generate a query for a test case.  note: the current enumerated values for this slot come from the Benchmarks repo config/benchmarks.json \"templates\" collection and refer to the \"name\" field of each template.  Templates themselves are currently stored in the config/[source_name]/templates directory.""")
     components: Optional[List[ComponentEnum]] = Field(default_factory=list, description="""The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.""")
+    test_case_objective: Optional[TestObjectiveEnum] = Field(None, description="""Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)""")
+    test_case_source: Optional[TestSourceEnum] = Field(None, description="""Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string.""")
+    test_case_predicate_name: Optional[str] = Field(None)
+    test_case_predicate_id: Optional[str] = Field(None)
+    test_case_input_id: Optional[str] = Field(None)
+    test_case_runner_settings: List[str] = Field(default_factory=list, description="""Settings for the test harness for TestCase""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
@@ -463,7 +517,7 @@ class TestSuite(TestEntity):
     """
     Specification of a set of Test Cases, one of either with a static list of 'test_cases' or a dynamic 'test_suite_specification' slot values. Note: at least one slot or the other, but generally not both(?) needs to be present.
     """
-    test_metadata: Optional[TestMetadata] = Field(None, description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
+    test_metadata: TestMetadata = Field(..., description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
     test_persona: Optional[TestPersonaEnum] = Field(None, description="""A Test persona describes the user or operational context of a given test.""")
     test_cases: Optional[Dict[str, TestCase]] = Field(default_factory=dict, description="""List of explicitly enumerated Test Cases.""")
     test_suite_specification: Optional[TestSuiteSpecification] = Field(None, description="""Declarative specification of a Test Suite of Test Cases whose generation is deferred, (i.e. within a Test Runner) or whose creation is achieved by stream processing of an external data source.""")
@@ -475,7 +529,7 @@ class TestSuite(TestEntity):
 
 class AcceptanceTestSuite(TestSuite):
     
-    test_metadata: Optional[TestMetadata] = Field(None, description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
+    test_metadata: TestMetadata = Field(..., description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
     test_persona: Optional[TestPersonaEnum] = Field(None, description="""A Test persona describes the user or operational context of a given test.""")
     test_cases: Optional[Dict[str, TestCase]] = Field(default_factory=dict, description="""List of explicitly enumerated Test Cases.""")
     test_suite_specification: Optional[TestSuiteSpecification] = Field(None, description="""Declarative specification of a Test Suite of Test Cases whose generation is deferred, (i.e. within a Test Runner) or whose creation is achieved by stream processing of an external data source.""")
@@ -496,7 +550,7 @@ class StandardsComplianceTestSuite(TestSuite):
     """
     Test suite for testing Translator components against releases of standards like TRAPI and the Biolink Model.
     """
-    test_metadata: Optional[TestMetadata] = Field(None, description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
+    test_metadata: TestMetadata = Field(..., description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
     test_persona: Optional[TestPersonaEnum] = Field(None, description="""A Test persona describes the user or operational context of a given test.""")
     test_cases: Optional[Dict[str, TestCase]] = Field(default_factory=dict, description="""List of explicitly enumerated Test Cases.""")
     test_suite_specification: Optional[TestSuiteSpecification] = Field(None, description="""Declarative specification of a Test Suite of Test Cases whose generation is deferred, (i.e. within a Test Runner) or whose creation is achieved by stream processing of an external data source.""")
@@ -510,7 +564,7 @@ class OneHopTestSuite(TestSuite):
     """
     Test case for testing the integrity of \"One Hop\" knowledge graph retrievals sensa legacy SRI_Testing harness.
     """
-    test_metadata: Optional[TestMetadata] = Field(None, description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
+    test_metadata: TestMetadata = Field(..., description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
     test_persona: Optional[TestPersonaEnum] = Field(None, description="""A Test persona describes the user or operational context of a given test.""")
     test_cases: Optional[Dict[str, TestCase]] = Field(default_factory=dict, description="""List of explicitly enumerated Test Cases.""")
     test_suite_specification: Optional[TestSuiteSpecification] = Field(None, description="""Declarative specification of a Test Suite of Test Cases whose generation is deferred, (i.e. within a Test Runner) or whose creation is achieved by stream processing of an external data source.""")
@@ -558,10 +612,40 @@ class TestRunSession(TestEntity):
     tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
     
 
+class TestOutput(TestEntity):
+    """
+    The output of a TestRunner run of one specific TestCase.
+    """
+    test_case_id: Optional[str] = Field(None, description="""CURIE id of a TestCase registered in the system.""")
+    pks: Optional[List[str]] = Field(default_factory=list, description="""Primary keys for a given ARA result set from a SmokeTest result for a given TestCase.""")
+    id: str = Field(..., description="""A unique identifier for a Test Entity""")
+    name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
+    description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
+    tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
+    
+
+class TestResultPKSet(TestEntity):
+    """
+    Primary keys for a given ARA result set from a SmokeTest result for a given TestCase.
+    """
+    parent_pk: Optional[str] = Field(None)
+    merged_pk: Optional[str] = Field(None)
+    aragorn: Optional[str] = Field(None)
+    arax: Optional[str] = Field(None)
+    unsecret: Optional[str] = Field(None)
+    bte: Optional[str] = Field(None)
+    improving: Optional[str] = Field(None)
+    id: str = Field(..., description="""A unique identifier for a Test Entity""")
+    name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
+    description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
+    tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
+    
+
 
 # Update forward refs
 # see https://pydantic-docs.helpmanual.io/usage/postponed_annotations/
 TestEntityParameter.update_forward_refs()
+Qualifier.update_forward_refs()
 TestEntity.update_forward_refs()
 TestMetadata.update_forward_refs()
 TestAsset.update_forward_refs()
@@ -583,4 +667,6 @@ OneHopTestSuite.update_forward_refs()
 TestRunnerConfiguration.update_forward_refs()
 TestCaseResult.update_forward_refs()
 TestRunSession.update_forward_refs()
+TestOutput.update_forward_refs()
+TestResultPKSet.update_forward_refs()
 
