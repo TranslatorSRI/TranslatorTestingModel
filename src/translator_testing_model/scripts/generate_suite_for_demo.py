@@ -1,8 +1,31 @@
 from src.translator_testing_model.datamodel.pydanticmodel import TestAsset, TestCase, TestSuite, TestMetadata
 import csv
 import json
-import os
 import requests
+import yaml
+import bmt
+from pprint import pprint
+toolkit = bmt.Toolkit()
+
+
+def retrieve_predicate_mapping():
+    # URL of the YAML file
+    predicate_mapping_url = "https://w3id.org/biolink/predicate_mapping.yaml"
+
+    # Fetch the content of the YAML file
+    request_response = requests.get(predicate_mapping_url)
+
+    # Check if the request was successful
+    if response.status_code == 200:
+        # Parse the YAML content into a Python dictionary
+        predicate_mapping = yaml.safe_load(request_response.content)
+
+        # Return the parsed dictionary
+        return predicate_mapping
+    else:
+        # Handle errors or unsuccessful requests
+        print(f"Failed to retrieve the file. HTTP Status Code: {request_response.status_code}")
+        return None
 
 
 def parse_tsv(filename):
@@ -26,21 +49,47 @@ def create_test_assets_from_tsv(test_assets):
     for row in test_assets:
         if row.get("Relationship") == "":
             continue
-        ta = TestAsset(id=row.get("id").replace(":", "_"),
-                       name=row.get("OutputName").replace(" ", "_") + "_" + row.get("Relationship").lower() + "_" + row.get("InputName (user choice)").replace(" ", "_"),
-                       description=row.get("OutputName").replace(" ", "_") + "_" + row.get("Relationship").lower() + "_" + row.get("InputName (user choice)").replace(" ", "_"),
-                       input_id=row.get("InputID, node normalized"),
-                       predicate_name=row.get("Relationship").lower(),
-                       predicate_id="biolink:"+row.get("Relationship").lower(),
-                       output_id=row.get("OutputID"),
-                       expected_output="NeverShow",
-                       test_metadata=TestMetadata(id=1),
-                       )
+
+        biolink_qualified_predicate = ""
+        biolink_object_aspect_qualifier = ""
+        biolink_object_direction_qualifier = ""
+        specified_predicate = row.get("Relationship").lower()
+        if toolkit.get_element(specified_predicate) is not None:
+            converted_predicate = toolkit.get_element(specified_predicate).name
+        else:
+            pred_mapping = toolkit.pmap
+            for collction in pred_mapping.values():
+                for map_item in collction:
+                    if map_item.get("mapped predicate") == specified_predicate:
+                        converted_predicate = map_item.get("mapped predicate")
+                        converted_predicate = "biolink:" + converted_predicate.replace(" ", "_")
+                        biolink_object_aspect_qualifier = map_item.get("biolink:object_aspect_qualifier")
+                        biolink_object_direction_qualifier = map_item.get("biolink:object_direction_qualifier")
+                        biolink_qualified_predicate = map_item.get("biolink:qualified_predicate")
+        ta = TestAsset(
+            id=row.get("id").replace(":", "_"),
+            name=row.get("OutputName").replace(" ", "_") + "_" + row.get("Relationship").lower() + "_" + row.get(
+                "InputName (user choice)").replace(" ", "_"),
+            description=row.get("OutputName").replace(" ", "_") + "_" + row.get("Relationship").lower() + "_" + row.get(
+                "InputName (user choice)").replace(" ", "_"),
+            input_id=row.get("InputID, node normalized"),
+            predicate_name=converted_predicate,
+            predicate_id="biolink:" + converted_predicate.replace(" ", "_"),
+            output_id=row.get("OutputID"),
+            expected_output="NeverShow",
+            test_metadata=TestMetadata(id=1),
+        )
+
+        if biolink_qualified_predicate != "":
+            ta.biolink_qualified_predicate = biolink_qualified_predicate
+            ta.biolink_object_aspect_qualifier = biolink_object_aspect_qualifier
+            ta.biolink_object_direction_qualifier = biolink_object_direction_qualifier
+
         ta.input_name = row.get("InputName (user choice)")
-        if row.get("GitHubIssue") != "" and row.get("GitHubIssue") is not None:
+        if row.get("Translator GitHubIssue") != "" and row.get("Translator GitHubIssue") is not None:
             tmd = TestMetadata(id=1,
                                test_source="SMURF",
-                               test_reference=row.get("GitHubIssue"),
+                               test_reference=row.get("Translator GitHubIssue"),
                                test_objective="AcceptanceTest")
             ta.test_metadata = tmd
         else:
@@ -75,6 +124,8 @@ def create_test_cases_from_test_assets(test_assets, test_case_model):
     grouped_assets = {}
     for test_asset in test_assets:
         key = (test_asset.input_id, test_asset.predicate_name)
+        if key[0] is None or key[1] is None:
+            pprint(test_asset)
         if key not in grouped_assets:
             grouped_assets[key] = []
         grouped_assets[key].append(test_asset)
@@ -123,8 +174,7 @@ def create_test_suite_from_test_cases(test_cases, test_suite_model):
 if __name__ == '__main__':
 
     # Reading the TSV file
-    tsv_file_path = 'pf_test_assets_2023_11_28.tsv'
-    print(f"Error: The file {tsv_file_path} does not exist in the directory {os.getcwd()}.")
+    tsv_file_path = 'pf_test_assets_030424.tsv'
     tsv_data = parse_tsv(tsv_file_path)
 
     # Create TestAsset objects
@@ -152,7 +202,7 @@ if __name__ == '__main__':
         with open(filename, 'w', encoding='utf-8') as file:
             json.dump(item.dict(), file, ensure_ascii=False, indent=4)
 
-    url = 'https://raw.githubusercontent.com/TranslatorSRI/Benchmarks/main/config/benchmarks.json'
+    url = 'https://raw.githubusercontent.com/TranslatorSRI/Benchmarks/main/benchmarks_runner/config/benchmarks.json'
 
     # Send a GET request to the URL
     response = requests.get(url)
@@ -177,9 +227,11 @@ if __name__ == '__main__':
                           test_env="ci",
                           components=["ars"],
                           test_case_objective="QuantitativeTest",
+                          test_case_runner_settings=["limit_queries"]
                           )
             file_prefix = k
-            test_cases.append(tc)
+            if k.startswith("DrugCentral_subset"):
+                test_cases.append(tc)
             filename = f"{file_prefix}.json"
             with open(filename, 'w', encoding='utf-8') as file:
                 json.dump(tc.dict(), file, ensure_ascii=False, indent=4)

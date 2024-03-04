@@ -187,6 +187,11 @@ CREATE TABLE "AcceptanceTestAsset" (
 	well_known BOOLEAN, 
 	test_reference TEXT, 
 	test_metadata TEXT NOT NULL, 
+	biolink_qualified_predicate TEXT, 
+	biolink_subject_aspect_qualifier TEXT, 
+	biolink_subject_direction_qualifier TEXT, 
+	biolink_object_aspect_qualifier TEXT, 
+	biolink_object_direction_qualifier TEXT, 
 	id TEXT NOT NULL, 
 	must_pass_date DATE, 
 	must_pass_environment VARCHAR(4), 
@@ -263,6 +268,11 @@ CREATE TABLE "TestAsset" (
 	well_known BOOLEAN, 
 	test_reference TEXT, 
 	test_metadata TEXT NOT NULL, 
+	biolink_qualified_predicate TEXT, 
+	biolink_subject_aspect_qualifier TEXT, 
+	biolink_subject_direction_qualifier TEXT, 
+	biolink_object_aspect_qualifier TEXT, 
+	biolink_object_direction_qualifier TEXT, 
 	id TEXT NOT NULL, 
 	PRIMARY KEY (id), 
 	FOREIGN KEY(test_metadata) REFERENCES "TestMetadata" (id)
@@ -301,6 +311,11 @@ CREATE TABLE "TestEdgeData" (
 	well_known BOOLEAN, 
 	test_reference TEXT, 
 	test_metadata TEXT NOT NULL, 
+	biolink_qualified_predicate TEXT, 
+	biolink_subject_aspect_qualifier TEXT, 
+	biolink_subject_direction_qualifier TEXT, 
+	biolink_object_aspect_qualifier TEXT, 
+	biolink_object_direction_qualifier TEXT, 
 	id TEXT NOT NULL, 
 	PRIMARY KEY (id), 
 	FOREIGN KEY(test_metadata) REFERENCES "TestMetadata" (id)
@@ -337,7 +352,7 @@ CREATE TABLE "TestSuite" (
 
 CREATE TABLE "AcceptanceTestCase_components" (
 	backref_id TEXT, 
-	components VARCHAR(9), 
+	components VARCHAR, 
 	PRIMARY KEY (backref_id, components), 
 	FOREIGN KEY(backref_id) REFERENCES "AcceptanceTestCase" (id)
 );
@@ -358,7 +373,7 @@ CREATE TABLE "AcceptanceTestCase_tags" (
 
 CREATE TABLE "ComplianceTestCase_components" (
 	backref_id TEXT, 
-	components VARCHAR(9), 
+	components VARCHAR, 
 	PRIMARY KEY (backref_id, components), 
 	FOREIGN KEY(backref_id) REFERENCES "ComplianceTestCase" (id)
 );
@@ -379,7 +394,7 @@ CREATE TABLE "ComplianceTestCase_tags" (
 
 CREATE TABLE "KnowledgeGraphNavigationTestCase_components" (
 	backref_id TEXT, 
-	components VARCHAR(9), 
+	components VARCHAR, 
 	PRIMARY KEY (backref_id, components), 
 	FOREIGN KEY(backref_id) REFERENCES "KnowledgeGraphNavigationTestCase" (id)
 );
@@ -400,7 +415,7 @@ CREATE TABLE "KnowledgeGraphNavigationTestCase_tags" (
 
 CREATE TABLE "OneHopTestCase_components" (
 	backref_id TEXT, 
-	components VARCHAR(9), 
+	components VARCHAR, 
 	PRIMARY KEY (backref_id, components), 
 	FOREIGN KEY(backref_id) REFERENCES "OneHopTestCase" (id)
 );
@@ -428,7 +443,7 @@ CREATE TABLE "Precondition_tags" (
 
 CREATE TABLE "QuantitativeTestCase_components" (
 	backref_id TEXT, 
-	components VARCHAR(9), 
+	components VARCHAR, 
 	PRIMARY KEY (backref_id, components), 
 	FOREIGN KEY(backref_id) REFERENCES "QuantitativeTestCase" (id)
 );
@@ -449,7 +464,7 @@ CREATE TABLE "QuantitativeTestCase_tags" (
 
 CREATE TABLE "TestCase_components" (
 	backref_id TEXT, 
-	components VARCHAR(9), 
+	components VARCHAR, 
 	PRIMARY KEY (backref_id, components), 
 	FOREIGN KEY(backref_id) REFERENCES "TestCase" (id)
 );

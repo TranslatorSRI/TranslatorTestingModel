@@ -2,7 +2,7 @@ from __future__ import annotations
 from datetime import datetime, date
 from enum import Enum
 from typing import List, Dict, Optional, Any, Union
-from pydantic import BaseModel as BaseModel, Field
+from pydantic import BaseModel as BaseModel, ConfigDict, Field
 import sys
 if sys.version_info >= (3, 8):
     from typing import Literal
@@ -13,13 +13,13 @@ else:
 metamodel_version = "None"
 version = "0.0.0"
 
-class ConfiguredBaseModel(BaseModel,
-                validate_assignment = True,
-                validate_default = True,
-                extra = 'forbid',
-                arbitrary_types_allowed = True,
-                use_enum_values = True):
-    pass
+class ConfiguredBaseModel(BaseModel):
+    model_config = ConfigDict(
+        validate_assignment=True,
+        validate_default=True,
+        extra='forbid',
+        arbitrary_types_allowed=True,
+        use_enum_values = True)
 
 
 class TestSourceEnum(str, Enum):
@@ -180,19 +180,12 @@ class TrapiTemplateEnum(str, Enum):
     
     
 
-class ComponentEnum(str, Enum):
+class ComponentEnum(str):
+    """
+    Translator components are identified by their InfoRes identifiers.
+    """
     
-    
-    arax = "arax"
-    
-    aragorn = "aragorn"
-    
-    ars = "ars"
-    
-    bte = "bte"
-    
-    improving = "improving"
-    
+    dummy = "dummy"
     
 
 class TestPersonaEnum(str, Enum):
@@ -281,6 +274,11 @@ class TestAsset(TestEntity):
     test_reference: Optional[str] = Field(None, description="""Document URL where original test source particulars are registered (e.g. Github repo)""")
     runner_settings: List[str] = Field(default_factory=list, description="""Settings for the test harness, e.g. \"inferred\"""")
     test_metadata: TestMetadata = Field(..., description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
+    biolink_qualified_predicate: Optional[str] = Field(None, description="""The qualified_predicate in Biolink model corresponding to the shorthand predicate name used in the test asset.""")
+    biolink_subject_aspect_qualifier: Optional[str] = Field(None, description="""The aspect of the subject of the test asset predicate""")
+    biolink_subject_direction_qualifier: Optional[str] = Field(None, description="""The direction of the subject of the test asset predicate""")
+    biolink_object_aspect_qualifier: Optional[str] = Field(None, description="""The aspect of the object of the test asset predicate""")
+    biolink_object_direction_qualifier: Optional[str] = Field(None, description="""The direction of the object of the test asset predicate""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
@@ -319,6 +317,11 @@ class AcceptanceTestAsset(TestAsset):
     test_reference: Optional[str] = Field(None, description="""Document URL where original test source particulars are registered (e.g. Github repo)""")
     runner_settings: List[str] = Field(default_factory=list, description="""Settings for the test harness, e.g. \"inferred\"""")
     test_metadata: TestMetadata = Field(..., description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
+    biolink_qualified_predicate: Optional[str] = Field(None, description="""The qualified_predicate in Biolink model corresponding to the shorthand predicate name used in the test asset.""")
+    biolink_subject_aspect_qualifier: Optional[str] = Field(None, description="""The aspect of the subject of the test asset predicate""")
+    biolink_subject_direction_qualifier: Optional[str] = Field(None, description="""The direction of the subject of the test asset predicate""")
+    biolink_object_aspect_qualifier: Optional[str] = Field(None, description="""The aspect of the object of the test asset predicate""")
+    biolink_object_direction_qualifier: Optional[str] = Field(None, description="""The direction of the object of the test asset predicate""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
@@ -347,6 +350,11 @@ class TestEdgeData(TestAsset):
     test_reference: Optional[str] = Field(None, description="""Document URL where original test source particulars are registered (e.g. Github repo)""")
     runner_settings: List[str] = Field(default_factory=list, description="""Settings for the test harness, e.g. \"inferred\"""")
     test_metadata: TestMetadata = Field(..., description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
+    biolink_qualified_predicate: Optional[str] = Field(None, description="""The qualified_predicate in Biolink model corresponding to the shorthand predicate name used in the test asset.""")
+    biolink_subject_aspect_qualifier: Optional[str] = Field(None, description="""The aspect of the subject of the test asset predicate""")
+    biolink_subject_direction_qualifier: Optional[str] = Field(None, description="""The direction of the subject of the test asset predicate""")
+    biolink_object_aspect_qualifier: Optional[str] = Field(None, description="""The aspect of the object of the test asset predicate""")
+    biolink_object_direction_qualifier: Optional[str] = Field(None, description="""The direction of the object of the test asset predicate""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
@@ -665,4 +673,4 @@ TestCaseResult.model_rebuild()
 TestRunSession.model_rebuild()
 TestOutput.model_rebuild()
 TestResultPKSet.model_rebuild()
-    
+

@@ -129,6 +129,11 @@ classes:
       - test_reference
       - runner_settings
       - test_metadata
+      - biolink_qualified_predicate
+      - biolink_subject_aspect_qualifier
+      - biolink_subject_direction_qualifier
+      - biolink_object_aspect_qualifier
+      - biolink_object_direction_qualifier
     slot_usage:
       id:
         aliases: ["AssetIdentifier"]
@@ -505,6 +510,31 @@ slots:
 
   predicate_name:
     aliases: ["Query", "Relationship"]
+
+  biolink_predicate:
+    description: the predicate in Biolink model corresponding to the shorthand predicate name used in the test asset.
+    range: uriorcurie
+
+  biolink_subject_aspect_qualifier:
+    description: >-
+      The aspect of the subject of the test asset predicate
+
+  biolink_subject_direction_qualifier:
+    description: >- 
+      The direction of the subject of the test asset predicate
+
+  biolink_object_aspect_qualifier:
+    description: >-
+      The aspect of the object of the test asset predicate
+
+  biolink_object_direction_qualifier:
+    description: >-
+        The direction of the object of the test asset predicate
+
+  biolink_qualified_predicate:
+    description: >-
+      The qualified_predicate in Biolink model corresponding to the shorthand predicate name used in the test asset.
+    range: uriorcurie
 
   output_id:
     aliases: ["OutputID", "ObjectID"]

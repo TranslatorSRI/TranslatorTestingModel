@@ -631,24 +631,14 @@
     {
       "name": "ComponentEnum",
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/ComponentEnum",
+      "description": "Translator components are identified by their InfoRes identifiers.",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
-      "permissible_values": [
-        {
-          "text": "arax"
-        },
-        {
-          "text": "aragorn"
-        },
-        {
-          "text": "ars"
-        },
-        {
-          "text": "bte"
-        },
-        {
-          "text": "improving"
-        }
-      ]
+      "reachable_from": {
+        "source_ontology": "biolink",
+        "source_nodes": [
+          "biolink:infores"
+        ]
+      }
     },
     {
       "name": "TestPersonaEnum",
@@ -1138,6 +1128,80 @@
         "TestAsset"
       ],
       "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "biolink_predicate",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/biolink_predicate",
+      "description": "the predicate in Biolink model corresponding to the shorthand predicate name used in the test asset.",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/biolink_predicate",
+      "range": "uriorcurie",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "biolink_subject_aspect_qualifier",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/biolink_subject_aspect_qualifier",
+      "description": "The aspect of the subject of the test asset predicate",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/biolink_subject_aspect_qualifier",
+      "owner": "TestAsset",
+      "domain_of": [
+        "TestAsset"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "biolink_subject_direction_qualifier",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/biolink_subject_direction_qualifier",
+      "description": "The direction of the subject of the test asset predicate",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/biolink_subject_direction_qualifier",
+      "owner": "TestAsset",
+      "domain_of": [
+        "TestAsset"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "biolink_object_aspect_qualifier",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/biolink_object_aspect_qualifier",
+      "description": "The aspect of the object of the test asset predicate",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/biolink_object_aspect_qualifier",
+      "owner": "TestAsset",
+      "domain_of": [
+        "TestAsset"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "biolink_object_direction_qualifier",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/biolink_object_direction_qualifier",
+      "description": "The direction of the object of the test asset predicate",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/biolink_object_direction_qualifier",
+      "owner": "TestAsset",
+      "domain_of": [
+        "TestAsset"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "biolink_qualified_predicate",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/biolink_qualified_predicate",
+      "description": "The qualified_predicate in Biolink model corresponding to the shorthand predicate name used in the test asset.",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/biolink_qualified_predicate",
+      "owner": "TestAsset",
+      "domain_of": [
+        "TestAsset"
+      ],
+      "range": "uriorcurie",
       "@type": "SlotDefinition"
     },
     {
@@ -2122,6 +2186,11 @@
         "test_reference",
         "TestAsset_runner_settings",
         "test_metadata",
+        "biolink_qualified_predicate",
+        "biolink_subject_aspect_qualifier",
+        "biolink_subject_direction_qualifier",
+        "biolink_object_aspect_qualifier",
+        "biolink_object_direction_qualifier",
         "TestAsset_id",
         "TestAsset_tags"
       ],
@@ -2156,6 +2225,11 @@
         "test_reference",
         "TestAsset_runner_settings",
         "test_metadata",
+        "biolink_qualified_predicate",
+        "biolink_subject_aspect_qualifier",
+        "biolink_subject_direction_qualifier",
+        "biolink_object_aspect_qualifier",
+        "biolink_object_direction_qualifier",
         "TestAsset_id",
         "TestAsset_tags",
         "must_pass_date",
@@ -2200,6 +2274,11 @@
         "test_reference",
         "TestAsset_runner_settings",
         "test_metadata",
+        "biolink_qualified_predicate",
+        "biolink_subject_aspect_qualifier",
+        "biolink_subject_direction_qualifier",
+        "biolink_object_aspect_qualifier",
+        "biolink_object_direction_qualifier",
         "TestAsset_id",
         "TestAsset_tags"
       ],
@@ -2599,9 +2678,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "translator_testing_model.yaml",
-  "source_file_date": "2023-12-07T10:23:17",
-  "source_file_size": 26460,
-  "generation_date": "2023-12-07T10:24:08",
+  "source_file_date": "2024-03-04T11:39:55",
+  "source_file_size": 27623,
+  "generation_date": "2024-03-04T11:40:00",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",
