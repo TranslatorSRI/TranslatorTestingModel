@@ -2,7 +2,7 @@ from __future__ import annotations
 from datetime import datetime, date
 from enum import Enum
 from typing import List, Dict, Optional, Any, Union
-from pydantic import BaseModel as BaseModel, Field
+from pydantic import BaseModel as BaseModel, ConfigDict, Field
 import sys
 if sys.version_info >= (3, 8):
     from typing import Literal
@@ -13,13 +13,13 @@ else:
 metamodel_version = "None"
 version = "0.0.0"
 
-class ConfiguredBaseModel(BaseModel,
-                validate_assignment = True,
-                validate_default = True,
-                extra = 'forbid',
-                arbitrary_types_allowed = True,
-                use_enum_values = True):
-    pass
+class ConfiguredBaseModel(BaseModel):
+    model_config = ConfigDict(
+        validate_assignment=True,
+        validate_default=True,
+        extra='forbid',
+        arbitrary_types_allowed=True,
+        use_enum_values = True)
 
 
 class TestSourceEnum(str, Enum):
@@ -49,6 +49,10 @@ class TestObjectiveEnum(str, Enum):
     BenchmarkTest = "BenchmarkTest"
     # Quantitative test
     QuantitativeTest = "QuantitativeTest"
+    # One Hop Tests of knowledge graph navigation
+    OneHopTests = "OneHopTests"
+    # TRAPI and Biolink Model ("reasoner-validator") validation
+    StandardsValidation = "StandardsValidation"
     
     
 
@@ -180,19 +184,12 @@ class TrapiTemplateEnum(str, Enum):
     
     
 
-class ComponentEnum(str, Enum):
+class ComponentEnum(str):
+    """
+    Translator components are identified by their InfoRes identifiers.
+    """
     
-    
-    arax = "arax"
-    
-    aragorn = "aragorn"
-    
-    ars = "ars"
-    
-    bte = "bte"
-    
-    improving = "improving"
-    
+    dummy = "dummy"
     
 
 class TestPersonaEnum(str, Enum):
@@ -665,4 +662,4 @@ TestCaseResult.model_rebuild()
 TestRunSession.model_rebuild()
 TestOutput.model_rebuild()
 TestResultPKSet.model_rebuild()
-    
+

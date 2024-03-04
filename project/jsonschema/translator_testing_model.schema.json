@@ -379,14 +379,7 @@
             "type": "object"
         },
         "ComponentEnum": {
-            "description": "",
-            "enum": [
-                "arax",
-                "aragorn",
-                "ars",
-                "bte",
-                "improving"
-            ],
+            "description": "Translator components are identified by their InfoRes identifiers.",
             "title": "ComponentEnum",
             "type": "string"
         },
@@ -1421,7 +1414,9 @@
             "enum": [
                 "AcceptanceTest",
                 "BenchmarkTest",
-                "QuantitativeTest"
+                "QuantitativeTest",
+                "OneHopTests",
+                "StandardsValidation"
             ],
             "title": "TestObjectiveEnum",
             "type": "string"

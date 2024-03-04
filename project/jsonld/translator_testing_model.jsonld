@@ -442,6 +442,14 @@
         {
           "text": "QuantitativeTest",
           "description": "Quantitative test"
+        },
+        {
+          "text": "OneHopTests",
+          "description": "One Hop Tests of knowledge graph navigation"
+        },
+        {
+          "text": "StandardsValidation",
+          "description": "TRAPI and Biolink Model (\"reasoner-validator\") validation"
         }
       ]
     },
@@ -631,24 +639,14 @@
     {
       "name": "ComponentEnum",
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/ComponentEnum",
+      "description": "Translator components are identified by their InfoRes identifiers.",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
-      "permissible_values": [
-        {
-          "text": "arax"
-        },
-        {
-          "text": "aragorn"
-        },
-        {
-          "text": "ars"
-        },
-        {
-          "text": "bte"
-        },
-        {
-          "text": "improving"
-        }
-      ]
+      "reachable_from": {
+        "source_ontology": "biolink",
+        "source_nodes": [
+          "biolink:infores"
+        ]
+      }
     },
     {
       "name": "TestPersonaEnum",
@@ -2599,9 +2597,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "translator_testing_model.yaml",
-  "source_file_date": "2023-12-07T10:23:17",
-  "source_file_size": 26460,
-  "generation_date": "2023-12-07T10:24:08",
+  "source_file_date": "2024-03-04T11:51:57",
+  "source_file_size": 27771,
+  "generation_date": "2024-03-04T12:12:52",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",

@@ -8,7 +8,7 @@ CREATE TABLE "AcceptanceTestCase" (
 	query_type VARCHAR(6), 
 	preconditions TEXT, 
 	trapi_template VARCHAR(24), 
-	test_case_objective VARCHAR(16), 
+	test_case_objective VARCHAR(19), 
 	test_case_source VARCHAR(18), 
 	test_case_predicate_name TEXT, 
 	test_case_predicate_id TEXT, 
@@ -25,7 +25,7 @@ CREATE TABLE "ComplianceTestCase" (
 	test_assets TEXT NOT NULL, 
 	preconditions TEXT, 
 	trapi_template VARCHAR(24), 
-	test_case_objective VARCHAR(16), 
+	test_case_objective VARCHAR(19), 
 	test_case_source VARCHAR(18), 
 	test_case_predicate_name TEXT, 
 	test_case_predicate_id TEXT, 
@@ -44,7 +44,7 @@ CREATE TABLE "KnowledgeGraphNavigationTestCase" (
 	test_assets TEXT NOT NULL, 
 	preconditions TEXT, 
 	trapi_template VARCHAR(24), 
-	test_case_objective VARCHAR(16), 
+	test_case_objective VARCHAR(19), 
 	test_case_source VARCHAR(18), 
 	test_case_predicate_name TEXT, 
 	test_case_predicate_id TEXT, 
@@ -61,7 +61,7 @@ CREATE TABLE "OneHopTestCase" (
 	test_assets TEXT NOT NULL, 
 	preconditions TEXT, 
 	trapi_template VARCHAR(24), 
-	test_case_objective VARCHAR(16), 
+	test_case_objective VARCHAR(19), 
 	test_case_source VARCHAR(18), 
 	test_case_predicate_name TEXT, 
 	test_case_predicate_id TEXT, 
@@ -91,7 +91,7 @@ CREATE TABLE "QuantitativeTestCase" (
 	test_assets TEXT NOT NULL, 
 	preconditions TEXT, 
 	trapi_template VARCHAR(24), 
-	test_case_objective VARCHAR(16), 
+	test_case_objective VARCHAR(19), 
 	test_case_source VARCHAR(18), 
 	test_case_predicate_name TEXT, 
 	test_case_predicate_id TEXT, 
@@ -108,7 +108,7 @@ CREATE TABLE "TestCase" (
 	test_assets TEXT NOT NULL, 
 	preconditions TEXT, 
 	trapi_template VARCHAR(24), 
-	test_case_objective VARCHAR(16), 
+	test_case_objective VARCHAR(19), 
 	test_case_source VARCHAR(18), 
 	test_case_predicate_name TEXT, 
 	test_case_predicate_id TEXT, 
@@ -128,7 +128,7 @@ CREATE TABLE "TestMetadata" (
 	description TEXT, 
 	test_source VARCHAR(18), 
 	test_reference TEXT, 
-	test_objective VARCHAR(16), 
+	test_objective VARCHAR(19), 
 	test_annotations TEXT, 
 	PRIMARY KEY (id)
 );
@@ -337,7 +337,7 @@ CREATE TABLE "TestSuite" (
 
 CREATE TABLE "AcceptanceTestCase_components" (
 	backref_id TEXT, 
-	components VARCHAR(9), 
+	components VARCHAR, 
 	PRIMARY KEY (backref_id, components), 
 	FOREIGN KEY(backref_id) REFERENCES "AcceptanceTestCase" (id)
 );
@@ -358,7 +358,7 @@ CREATE TABLE "AcceptanceTestCase_tags" (
 
 CREATE TABLE "ComplianceTestCase_components" (
 	backref_id TEXT, 
-	components VARCHAR(9), 
+	components VARCHAR, 
 	PRIMARY KEY (backref_id, components), 
 	FOREIGN KEY(backref_id) REFERENCES "ComplianceTestCase" (id)
 );
@@ -379,7 +379,7 @@ CREATE TABLE "ComplianceTestCase_tags" (
 
 CREATE TABLE "KnowledgeGraphNavigationTestCase_components" (
 	backref_id TEXT, 
-	components VARCHAR(9), 
+	components VARCHAR, 
 	PRIMARY KEY (backref_id, components), 
 	FOREIGN KEY(backref_id) REFERENCES "KnowledgeGraphNavigationTestCase" (id)
 );
@@ -400,7 +400,7 @@ CREATE TABLE "KnowledgeGraphNavigationTestCase_tags" (
 
 CREATE TABLE "OneHopTestCase_components" (
 	backref_id TEXT, 
-	components VARCHAR(9), 
+	components VARCHAR, 
 	PRIMARY KEY (backref_id, components), 
 	FOREIGN KEY(backref_id) REFERENCES "OneHopTestCase" (id)
 );
@@ -428,7 +428,7 @@ CREATE TABLE "Precondition_tags" (
 
 CREATE TABLE "QuantitativeTestCase_components" (
 	backref_id TEXT, 
-	components VARCHAR(9), 
+	components VARCHAR, 
 	PRIMARY KEY (backref_id, components), 
 	FOREIGN KEY(backref_id) REFERENCES "QuantitativeTestCase" (id)
 );
@@ -449,7 +449,7 @@ CREATE TABLE "QuantitativeTestCase_tags" (
 
 CREATE TABLE "TestCase_components" (
 	backref_id TEXT, 
-	components VARCHAR(9), 
+	components VARCHAR, 
 	PRIMARY KEY (backref_id, components), 
 	FOREIGN KEY(backref_id) REFERENCES "TestCase" (id)
 );

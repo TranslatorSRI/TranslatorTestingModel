@@ -2,7 +2,7 @@ from __future__ import annotations
 from datetime import datetime, date
 from enum import Enum
 from typing import List, Dict, Optional, Any, Union
-from pydantic import BaseModel as BaseModel, Field
+from pydantic import BaseModel as BaseModel, ConfigDict, Field
 import sys
 if sys.version_info >= (3, 8):
     from typing import Literal
@@ -53,6 +53,10 @@ class TestObjectiveEnum(str, Enum):
     BenchmarkTest = "BenchmarkTest"
     # Quantitative test
     QuantitativeTest = "QuantitativeTest"
+    # One Hop Tests of knowledge graph navigation
+    OneHopTests = "OneHopTests"
+    # TRAPI and Biolink Model ("reasoner-validator") validation
+    StandardsValidation = "StandardsValidation"
     
     
 
@@ -184,19 +188,12 @@ class TrapiTemplateEnum(str, Enum):
     
     
 
-class ComponentEnum(str, Enum):
+class ComponentEnum(str):
+    """
+    Translator components are identified by their InfoRes identifiers.
+    """
     
-    
-    arax = "arax"
-    
-    aragorn = "aragorn"
-    
-    ars = "ars"
-    
-    bte = "bte"
-    
-    improving = "improving"
-    
+    dummy = "dummy"
     
 
 class TestPersonaEnum(str, Enum):

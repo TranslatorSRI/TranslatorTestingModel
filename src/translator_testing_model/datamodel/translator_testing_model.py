@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2023-12-07T10:24:11
+# Generation date: 2024-03-04T12:12:57
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -44,7 +44,7 @@ DEFAULT_ = TTM
 # Types
 class CategoryType(Uriorcurie):
     """ A primitive type in which the value denotes a class within the biolink model. The value must be a URI or a CURIE within the 'biolink' namespace. """
-    type_class_uri = XSD.anyURI
+    type_class_uri = XSD["anyURI"]
     type_class_curie = "xsd:anyURI"
     type_name = "category_type"
     type_model_uri = TTM.CategoryType
@@ -52,7 +52,7 @@ class CategoryType(Uriorcurie):
 
 class PredicateType(Uriorcurie):
     """ A CURIE from the Biolink Model ('biolink' namespace) 'biolink:related_to' hierarchy. For example, biolink:related_to, biolink:causes, biolink:treats. """
-    type_class_uri = XSD.anyURI
+    type_class_uri = XSD["anyURI"]
     type_class_curie = "xsd:anyURI"
     type_name = "predicate_type"
     type_model_uri = TTM.PredicateType
@@ -60,7 +60,7 @@ class PredicateType(Uriorcurie):
 
 class ConceptCategory(CategoryType):
     """ A category type within the Biolink Model ('biolink' namespace) 'biolink:NamedThing' hierarchy. """
-    type_class_uri = XSD.anyURI
+    type_class_uri = XSD["anyURI"]
     type_class_curie = "xsd:anyURI"
     type_name = "concept_category"
     type_model_uri = TTM.ConceptCategory
@@ -68,7 +68,7 @@ class ConceptCategory(CategoryType):
 
 class AssociationCategory(CategoryType):
     """ A category type within the Biolink Model ('biolink' namespace) 'biolink:Association' hierarchy. """
-    type_class_uri = XSD.anyURI
+    type_class_uri = XSD["anyURI"]
     type_class_curie = "xsd:anyURI"
     type_name = "association_category"
     type_model_uri = TTM.AssociationCategory
@@ -170,7 +170,7 @@ class TestEntityParameter(YAMLRoot):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM.TestEntityParameter
+    class_class_uri: ClassVar[URIRef] = TTM["TestEntityParameter"]
     class_class_curie: ClassVar[str] = "ttm:TestEntityParameter"
     class_name: ClassVar[str] = "TestEntityParameter"
     class_model_uri: ClassVar[URIRef] = TTM.TestEntityParameter
@@ -192,7 +192,7 @@ class TestEntityParameter(YAMLRoot):
 class Qualifier(TestEntityParameter):
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM.Qualifier
+    class_class_uri: ClassVar[URIRef] = TTM["Qualifier"]
     class_class_curie: ClassVar[str] = "ttm:Qualifier"
     class_name: ClassVar[str] = "Qualifier"
     class_model_uri: ClassVar[URIRef] = TTM.Qualifier
@@ -218,7 +218,7 @@ class TestEntity(YAMLRoot):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM.TestEntity
+    class_class_uri: ClassVar[URIRef] = TTM["TestEntity"]
     class_class_curie: ClassVar[str] = "ttm:TestEntity"
     class_name: ClassVar[str] = "TestEntity"
     class_model_uri: ClassVar[URIRef] = TTM.TestEntity
@@ -255,7 +255,7 @@ class TestMetadata(TestEntity):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM.TestMetadata
+    class_class_uri: ClassVar[URIRef] = TTM["TestMetadata"]
     class_class_curie: ClassVar[str] = "ttm:TestMetadata"
     class_name: ClassVar[str] = "TestMetadata"
     class_model_uri: ClassVar[URIRef] = TTM.TestMetadata
@@ -296,7 +296,7 @@ class TestAsset(TestEntity):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM.TestAsset
+    class_class_uri: ClassVar[URIRef] = TTM["TestAsset"]
     class_class_curie: ClassVar[str] = "ttm:TestAsset"
     class_name: ClassVar[str] = "TestAsset"
     class_model_uri: ClassVar[URIRef] = TTM.TestAsset
@@ -402,7 +402,7 @@ class AcceptanceTestAsset(TestAsset):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM.AcceptanceTestAsset
+    class_class_uri: ClassVar[URIRef] = TTM["AcceptanceTestAsset"]
     class_class_curie: ClassVar[str] = "ttm:AcceptanceTestAsset"
     class_name: ClassVar[str] = "AcceptanceTestAsset"
     class_model_uri: ClassVar[URIRef] = TTM.AcceptanceTestAsset
@@ -468,7 +468,7 @@ class TestEdgeData(TestAsset):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM.TestEdgeData
+    class_class_uri: ClassVar[URIRef] = TTM["TestEdgeData"]
     class_class_curie: ClassVar[str] = "ttm:TestEdgeData"
     class_name: ClassVar[str] = "TestEdgeData"
     class_model_uri: ClassVar[URIRef] = TTM.TestEdgeData
@@ -493,7 +493,7 @@ class Precondition(TestEntity):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM.Precondition
+    class_class_uri: ClassVar[URIRef] = TTM["Precondition"]
     class_class_curie: ClassVar[str] = "ttm:Precondition"
     class_name: ClassVar[str] = "Precondition"
     class_model_uri: ClassVar[URIRef] = TTM.Precondition
@@ -518,7 +518,7 @@ class TestCase(TestEntity):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM.TestCase
+    class_class_uri: ClassVar[URIRef] = TTM["TestCase"]
     class_class_curie: ClassVar[str] = "ttm:TestCase"
     class_name: ClassVar[str] = "TestCase"
     class_model_uri: ClassVar[URIRef] = TTM.TestCase
@@ -600,7 +600,7 @@ class AcceptanceTestCase(TestCase):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM.AcceptanceTestCase
+    class_class_uri: ClassVar[URIRef] = TTM["AcceptanceTestCase"]
     class_class_curie: ClassVar[str] = "ttm:AcceptanceTestCase"
     class_name: ClassVar[str] = "AcceptanceTestCase"
     class_model_uri: ClassVar[URIRef] = TTM.AcceptanceTestCase
@@ -629,7 +629,7 @@ class QuantitativeTestCase(TestCase):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM.QuantitativeTestCase
+    class_class_uri: ClassVar[URIRef] = TTM["QuantitativeTestCase"]
     class_class_curie: ClassVar[str] = "ttm:QuantitativeTestCase"
     class_name: ClassVar[str] = "QuantitativeTestCase"
     class_model_uri: ClassVar[URIRef] = TTM.QuantitativeTestCase
@@ -654,7 +654,7 @@ class ComplianceTestCase(TestCase):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM.ComplianceTestCase
+    class_class_uri: ClassVar[URIRef] = TTM["ComplianceTestCase"]
     class_class_curie: ClassVar[str] = "ttm:ComplianceTestCase"
     class_name: ClassVar[str] = "ComplianceTestCase"
     class_model_uri: ClassVar[URIRef] = TTM.ComplianceTestCase
@@ -687,7 +687,7 @@ class KnowledgeGraphNavigationTestCase(TestCase):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM.KnowledgeGraphNavigationTestCase
+    class_class_uri: ClassVar[URIRef] = TTM["KnowledgeGraphNavigationTestCase"]
     class_class_curie: ClassVar[str] = "ttm:KnowledgeGraphNavigationTestCase"
     class_name: ClassVar[str] = "KnowledgeGraphNavigationTestCase"
     class_model_uri: ClassVar[URIRef] = TTM.KnowledgeGraphNavigationTestCase
@@ -712,7 +712,7 @@ class OneHopTestCase(KnowledgeGraphNavigationTestCase):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM.OneHopTestCase
+    class_class_uri: ClassVar[URIRef] = TTM["OneHopTestCase"]
     class_class_curie: ClassVar[str] = "ttm:OneHopTestCase"
     class_name: ClassVar[str] = "OneHopTestCase"
     class_model_uri: ClassVar[URIRef] = TTM.OneHopTestCase
@@ -737,7 +737,7 @@ class TestSuiteSpecification(TestEntity):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM.TestSuiteSpecification
+    class_class_uri: ClassVar[URIRef] = TTM["TestSuiteSpecification"]
     class_class_curie: ClassVar[str] = "ttm:TestSuiteSpecification"
     class_name: ClassVar[str] = "TestSuiteSpecification"
     class_model_uri: ClassVar[URIRef] = TTM.TestSuiteSpecification
@@ -770,7 +770,7 @@ class TestSuite(TestEntity):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM.TestSuite
+    class_class_uri: ClassVar[URIRef] = TTM["TestSuite"]
     class_class_curie: ClassVar[str] = "ttm:TestSuite"
     class_name: ClassVar[str] = "TestSuite"
     class_model_uri: ClassVar[URIRef] = TTM.TestSuite
@@ -807,7 +807,7 @@ class TestSuite(TestEntity):
 class AcceptanceTestSuite(TestSuite):
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM.AcceptanceTestSuite
+    class_class_uri: ClassVar[URIRef] = TTM["AcceptanceTestSuite"]
     class_class_curie: ClassVar[str] = "ttm:AcceptanceTestSuite"
     class_name: ClassVar[str] = "AcceptanceTestSuite"
     class_model_uri: ClassVar[URIRef] = TTM.AcceptanceTestSuite
@@ -830,7 +830,7 @@ class BenchmarkTestSuite(YAMLRoot):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM.BenchmarkTestSuite
+    class_class_uri: ClassVar[URIRef] = TTM["BenchmarkTestSuite"]
     class_class_curie: ClassVar[str] = "ttm:BenchmarkTestSuite"
     class_name: ClassVar[str] = "BenchmarkTestSuite"
     class_model_uri: ClassVar[URIRef] = TTM.BenchmarkTestSuite
@@ -843,7 +843,7 @@ class StandardsComplianceTestSuite(TestSuite):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM.StandardsComplianceTestSuite
+    class_class_uri: ClassVar[URIRef] = TTM["StandardsComplianceTestSuite"]
     class_class_curie: ClassVar[str] = "ttm:StandardsComplianceTestSuite"
     class_name: ClassVar[str] = "StandardsComplianceTestSuite"
     class_model_uri: ClassVar[URIRef] = TTM.StandardsComplianceTestSuite
@@ -867,7 +867,7 @@ class OneHopTestSuite(TestSuite):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM.OneHopTestSuite
+    class_class_uri: ClassVar[URIRef] = TTM["OneHopTestSuite"]
     class_class_curie: ClassVar[str] = "ttm:OneHopTestSuite"
     class_name: ClassVar[str] = "OneHopTestSuite"
     class_model_uri: ClassVar[URIRef] = TTM.OneHopTestSuite
@@ -891,7 +891,7 @@ class TestRunnerConfiguration(TestEntity):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM.TestRunnerConfiguration
+    class_class_uri: ClassVar[URIRef] = TTM["TestRunnerConfiguration"]
     class_class_curie: ClassVar[str] = "ttm:TestRunnerConfiguration"
     class_name: ClassVar[str] = "TestRunnerConfiguration"
     class_model_uri: ClassVar[URIRef] = TTM.TestRunnerConfiguration
@@ -924,7 +924,7 @@ class TestCaseResult(TestEntity):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM.TestCaseResult
+    class_class_uri: ClassVar[URIRef] = TTM["TestCaseResult"]
     class_class_curie: ClassVar[str] = "ttm:TestCaseResult"
     class_name: ClassVar[str] = "TestCaseResult"
     class_model_uri: ClassVar[URIRef] = TTM.TestCaseResult
@@ -959,7 +959,7 @@ class TestRunSession(TestEntity):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM.TestRunSession
+    class_class_uri: ClassVar[URIRef] = TTM["TestRunSession"]
     class_class_curie: ClassVar[str] = "ttm:TestRunSession"
     class_name: ClassVar[str] = "TestRunSession"
     class_model_uri: ClassVar[URIRef] = TTM.TestRunSession
@@ -996,7 +996,7 @@ class TestOutput(TestEntity):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM.TestOutput
+    class_class_uri: ClassVar[URIRef] = TTM["TestOutput"]
     class_class_curie: ClassVar[str] = "ttm:TestOutput"
     class_name: ClassVar[str] = "TestOutput"
     class_model_uri: ClassVar[URIRef] = TTM.TestOutput
@@ -1028,7 +1028,7 @@ class TestResultPKSet(TestEntity):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = TTM.TestResultPKSet
+    class_class_uri: ClassVar[URIRef] = TTM["TestResultPKSet"]
     class_class_curie: ClassVar[str] = "ttm:TestResultPKSet"
     class_name: ClassVar[str] = "TestResultPKSet"
     class_model_uri: ClassVar[URIRef] = TTM.TestResultPKSet
@@ -1112,6 +1112,12 @@ class TestObjectiveEnum(EnumDefinitionImpl):
     QuantitativeTest = PermissibleValue(
         text="QuantitativeTest",
         description="Quantitative test")
+    OneHopTests = PermissibleValue(
+        text="OneHopTests",
+        description="One Hop Tests of knowledge graph navigation")
+    StandardsValidation = PermissibleValue(
+        text="StandardsValidation",
+        description="TRAPI and Biolink Model (\"reasoner-validator\") validation")
 
     _defn = EnumDefinition(
         name="TestObjectiveEnum",
@@ -1266,15 +1272,12 @@ class TrapiTemplateEnum(EnumDefinitionImpl):
             PermissibleValue(text="drug-to-gene"))
 
 class ComponentEnum(EnumDefinitionImpl):
-
-    arax = PermissibleValue(text="arax")
-    aragorn = PermissibleValue(text="aragorn")
-    ars = PermissibleValue(text="ars")
-    bte = PermissibleValue(text="bte")
-    improving = PermissibleValue(text="improving")
-
+    """
+    Translator components are identified by their InfoRes identifiers.
+    """
     _defn = EnumDefinition(
         name="ComponentEnum",
+        description="Translator components are identified by their InfoRes identifiers.",
     )
 
 class TestPersonaEnum(EnumDefinitionImpl):
