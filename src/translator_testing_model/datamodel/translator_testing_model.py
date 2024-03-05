@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2024-03-04T12:12:57
+# Generation date: 2024-03-04T17:21:26
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -115,7 +115,7 @@ class ComplianceTestCaseId(TestCaseId):
     pass
 
 
-class KnowledgeGraphNavigationTestCaseId(TestCaseId):
+class KnowledgeGraphNavigationTestCaseId(ComplianceTestCaseId):
     pass
 
 
@@ -681,7 +681,7 @@ class ComplianceTestCase(TestCase):
 
 
 @dataclass
-class KnowledgeGraphNavigationTestCase(TestCase):
+class KnowledgeGraphNavigationTestCase(ComplianceTestCase):
     """
     Knowledge Graph navigation integration test
     """

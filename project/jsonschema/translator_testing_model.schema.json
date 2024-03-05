@@ -426,6 +426,10 @@
             "additionalProperties": false,
             "description": "Knowledge Graph navigation integration test",
             "properties": {
+                "biolink_version": {
+                    "description": "Biolink Model release (SemVer string)",
+                    "type": "string"
+                },
                 "components": {
                     "description": "The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.",
                     "items": {
@@ -500,6 +504,10 @@
                 "trapi_template": {
                     "$ref": "#/$defs/TrapiTemplateEnum",
                     "description": "A template for a query, which can be used to generate a query for a test case.  note: the current enumerated values for this slot come from the Benchmarks repo config/benchmarks.json \"templates\" collection and refer to the \"name\" field of each template.  Templates themselves are currently stored in the config/[source_name]/templates directory."
+                },
+                "trapi_version": {
+                    "description": "TRAPI version (SemVer string)",
+                    "type": "string"
                 }
             },
             "required": [
@@ -523,6 +531,10 @@
             "additionalProperties": false,
             "description": "'One Hop' Knowledge Graph navigation integration test",
             "properties": {
+                "biolink_version": {
+                    "description": "Biolink Model release (SemVer string)",
+                    "type": "string"
+                },
                 "components": {
                     "description": "The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.",
                     "items": {
@@ -597,6 +609,10 @@
                 "trapi_template": {
                     "$ref": "#/$defs/TrapiTemplateEnum",
                     "description": "A template for a query, which can be used to generate a query for a test case.  note: the current enumerated values for this slot come from the Benchmarks repo config/benchmarks.json \"templates\" collection and refer to the \"name\" field of each template.  Templates themselves are currently stored in the config/[source_name]/templates directory."
+                },
+                "trapi_version": {
+                    "description": "TRAPI version (SemVer string)",
+                    "type": "string"
                 }
             },
             "required": [

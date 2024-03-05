@@ -454,10 +454,12 @@ class ComplianceTestCase(TestCase):
     tags: Optional[List[str]] = Field(default_factory=list, description="""One or more 'tags' slot values (slot inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection.""")
     
 
-class KnowledgeGraphNavigationTestCase(TestCase):
+class KnowledgeGraphNavigationTestCase(ComplianceTestCase):
     """
     Knowledge Graph navigation integration test
     """
+    trapi_version: Optional[str] = Field(None, description="""TRAPI version (SemVer string)""")
+    biolink_version: Optional[str] = Field(None, description="""Biolink Model release (SemVer string)""")
     test_env: Optional[TestEnvEnum] = Field(None, description="""Deployment environment within which the associated TestSuite is run.""")
     query_type: Optional[QueryTypeEnum] = Field(None, description="""Type of TestCase query.""")
     test_assets: List[TestAsset] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection.""")
@@ -480,6 +482,8 @@ class OneHopTestCase(KnowledgeGraphNavigationTestCase):
     """
     'One Hop' Knowledge Graph navigation integration test
     """
+    trapi_version: Optional[str] = Field(None, description="""TRAPI version (SemVer string)""")
+    biolink_version: Optional[str] = Field(None, description="""Biolink Model release (SemVer string)""")
     test_env: Optional[TestEnvEnum] = Field(None, description="""Deployment environment within which the associated TestSuite is run.""")
     query_type: Optional[QueryTypeEnum] = Field(None, description="""Type of TestCase query.""")
     test_assets: List[TestAsset] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection.""")

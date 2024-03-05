@@ -49,6 +49,8 @@ CREATE TABLE "KnowledgeGraphNavigationTestCase" (
 	test_case_predicate_name TEXT, 
 	test_case_predicate_id TEXT, 
 	test_case_input_id TEXT, 
+	trapi_version TEXT, 
+	biolink_version TEXT, 
 	PRIMARY KEY (id)
 );
 
@@ -66,6 +68,8 @@ CREATE TABLE "OneHopTestCase" (
 	test_case_predicate_name TEXT, 
 	test_case_predicate_id TEXT, 
 	test_case_input_id TEXT, 
+	trapi_version TEXT, 
+	biolink_version TEXT, 
 	PRIMARY KEY (id)
 );
 

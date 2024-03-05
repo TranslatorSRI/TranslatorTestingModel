@@ -110,6 +110,8 @@ type KnowledgeGraphNavigationTestCase
     testCaseInputId: Uriorcurie
     testCaseRunnerSettings: [String]!
     tags: [String]
+    trapiVersion: String
+    biolinkVersion: String
   }
 
 type OneHopTestCase
@@ -130,6 +132,8 @@ type OneHopTestCase
     testCaseInputId: Uriorcurie
     testCaseRunnerSettings: [String]!
     tags: [String]
+    trapiVersion: String
+    biolinkVersion: String
   }
 
 type OneHopTestSuite

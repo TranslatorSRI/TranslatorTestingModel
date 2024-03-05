@@ -242,7 +242,7 @@ classes:
 #        range: ComplianceTestAsset
 
   KnowledgeGraphNavigationTestCase:
-    is_a: TestCase
+    is_a: ComplianceTestCase
     description: >-
       Knowledge Graph navigation integration test
     slot_usage:

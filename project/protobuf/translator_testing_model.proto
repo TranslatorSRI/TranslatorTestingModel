@@ -106,6 +106,8 @@ message KnowledgeGraphNavigationTestCase
   uriorcurie testCaseInputId = 0
  repeated  string testCaseRunnerSettings = 0
  repeated  string tags = 0
+  string trapiVersion = 0
+  string biolinkVersion = 0
  }
 // 'One Hop' Knowledge Graph navigation integration test
 message OneHopTestCase
@@ -126,6 +128,8 @@ message OneHopTestCase
   uriorcurie testCaseInputId = 0
  repeated  string testCaseRunnerSettings = 0
  repeated  string tags = 0
+  string trapiVersion = 0
+  string biolinkVersion = 0
  }
 // Test case for testing the integrity of "One Hop" knowledge graph retrievals sensa legacy SRI_Testing harness.
 message OneHopTestSuite

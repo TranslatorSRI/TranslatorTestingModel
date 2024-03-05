@@ -92,20 +92,22 @@ linkml:Sparqlpath xsd:string
     )
 }
 
-<ComplianceTestCase> CLOSED {
-    (  $<ComplianceTestCase_tes> (  &<TestCase_tes> ;
-          rdf:type [ <TestCase> ] ? ;
-          <trapi_version> @linkml:String ? ;
-          <biolink_version> @linkml:String ?
-       ) ;
-       rdf:type [ <ComplianceTestCase> ]
-    )
-}
+<ComplianceTestCase>  (
+    CLOSED {
+       (  $<ComplianceTestCase_tes> (  &<TestCase_tes> ;
+             rdf:type [ <TestCase> ] ? ;
+             <trapi_version> @linkml:String ? ;
+             <biolink_version> @linkml:String ?
+          ) ;
+          rdf:type [ <ComplianceTestCase> ]
+       )
+    } OR @<KnowledgeGraphNavigationTestCase>
+)
 
 <KnowledgeGraphNavigationTestCase>  (
     CLOSED {
-       (  $<KnowledgeGraphNavigationTestCase_tes> (  &<TestCase_tes> ;
-             rdf:type [ <TestCase> ] ?
+       (  $<KnowledgeGraphNavigationTestCase_tes> (  &<ComplianceTestCase_tes> ;
+             rdf:type [ <ComplianceTestCase> ] ?
           ) ;
           rdf:type [ <KnowledgeGraphNavigationTestCase> ]
        )
@@ -211,7 +213,7 @@ linkml:Sparqlpath xsd:string
           ) ;
           rdf:type [ <TestCase> ]
        )
-    } OR @<AcceptanceTestCase> OR @<ComplianceTestCase> OR @<KnowledgeGraphNavigationTestCase> OR @<QuantitativeTestCase>
+    } OR @<AcceptanceTestCase> OR @<ComplianceTestCase> OR @<QuantitativeTestCase>
 )
 
 <TestCaseResult> CLOSED {

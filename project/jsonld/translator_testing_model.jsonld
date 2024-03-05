@@ -2340,7 +2340,7 @@
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/KnowledgeGraphNavigationTestCase",
       "description": "Knowledge Graph navigation integration test",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
-      "is_a": "TestCase",
+      "is_a": "ComplianceTestCase",
       "slots": [
         "id",
         "name",
@@ -2357,7 +2357,9 @@
         "test_case_predicate_id",
         "test_case_input_id",
         "test_case_runner_settings",
-        "TestCase_tags"
+        "TestCase_tags",
+        "trapi_version",
+        "biolink_version"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/KnowledgeGraphNavigationTestCase",
@@ -2385,7 +2387,9 @@
         "test_case_predicate_id",
         "test_case_input_id",
         "test_case_runner_settings",
-        "TestCase_tags"
+        "TestCase_tags",
+        "trapi_version",
+        "biolink_version"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/OneHopTestCase",
@@ -2597,9 +2601,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "translator_testing_model.yaml",
-  "source_file_date": "2024-03-04T11:51:57",
-  "source_file_size": 27771,
-  "generation_date": "2024-03-04T12:12:52",
+  "source_file_date": "2024-03-04T17:20:51",
+  "source_file_size": 27781,
+  "generation_date": "2024-03-04T17:21:21",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",
