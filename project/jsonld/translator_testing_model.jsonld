@@ -1304,7 +1304,6 @@
         "TestEntity"
       ],
       "range": "string",
-      "required": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1888,7 +1887,6 @@
       "is_usage_slot": true,
       "usage_slot_name": "test_runner_settings",
       "range": "string",
-      "required": true,
       "@type": "SlotDefinition"
     },
     {
@@ -2476,9 +2474,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "translator_testing_model.yaml",
-  "source_file_date": "2024-03-06T16:15:47",
-  "source_file_size": 26897,
-  "generation_date": "2024-03-06T16:19:28",
+  "source_file_date": "2024-03-06T18:41:46",
+  "source_file_size": 26898,
+  "generation_date": "2024-03-06T18:41:58",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",

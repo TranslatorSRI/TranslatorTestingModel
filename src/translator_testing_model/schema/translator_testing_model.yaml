@@ -528,7 +528,7 @@ slots:
       Scalar parameters for the TestRunner processing a given TestEntity.
     range: string
     multivalued: true
-    required: true
+    required: false
 
   must_pass_date:
     description: >-

@@ -275,7 +275,7 @@ CREATE TABLE "TestSuite" (
 
 CREATE TABLE "AcceptanceTestCase_test_runner_settings" (
 	backref_id TEXT, 
-	test_runner_settings TEXT NOT NULL, 
+	test_runner_settings TEXT, 
 	PRIMARY KEY (backref_id, test_runner_settings), 
 	FOREIGN KEY(backref_id) REFERENCES "AcceptanceTestCase" (id)
 );
@@ -296,14 +296,14 @@ CREATE TABLE "Precondition_tags" (
 
 CREATE TABLE "Precondition_test_runner_settings" (
 	backref_id TEXT, 
-	test_runner_settings TEXT NOT NULL, 
+	test_runner_settings TEXT, 
 	PRIMARY KEY (backref_id, test_runner_settings), 
 	FOREIGN KEY(backref_id) REFERENCES "Precondition" (id)
 );
 
 CREATE TABLE "QuantitativeTestCase_test_runner_settings" (
 	backref_id TEXT, 
-	test_runner_settings TEXT NOT NULL, 
+	test_runner_settings TEXT, 
 	PRIMARY KEY (backref_id, test_runner_settings), 
 	FOREIGN KEY(backref_id) REFERENCES "QuantitativeTestCase" (id)
 );
@@ -317,7 +317,7 @@ CREATE TABLE "QuantitativeTestCase_tags" (
 
 CREATE TABLE "TestCase_test_runner_settings" (
 	backref_id TEXT, 
-	test_runner_settings TEXT NOT NULL, 
+	test_runner_settings TEXT, 
 	PRIMARY KEY (backref_id, test_runner_settings), 
 	FOREIGN KEY(backref_id) REFERENCES "TestCase" (id)
 );
@@ -338,7 +338,7 @@ CREATE TABLE "TestMetadata_tags" (
 
 CREATE TABLE "TestMetadata_test_runner_settings" (
 	backref_id TEXT, 
-	test_runner_settings TEXT NOT NULL, 
+	test_runner_settings TEXT, 
 	PRIMARY KEY (backref_id, test_runner_settings), 
 	FOREIGN KEY(backref_id) REFERENCES "TestMetadata" (id)
 );
@@ -352,7 +352,7 @@ CREATE TABLE "TestOutput_tags" (
 
 CREATE TABLE "TestOutput_test_runner_settings" (
 	backref_id TEXT, 
-	test_runner_settings TEXT NOT NULL, 
+	test_runner_settings TEXT, 
 	PRIMARY KEY (backref_id, test_runner_settings), 
 	FOREIGN KEY(backref_id) REFERENCES "TestOutput" (id)
 );
@@ -366,7 +366,7 @@ CREATE TABLE "TestRunSession_tags" (
 
 CREATE TABLE "TestRunSession_test_runner_settings" (
 	backref_id TEXT, 
-	test_runner_settings TEXT NOT NULL, 
+	test_runner_settings TEXT, 
 	PRIMARY KEY (backref_id, test_runner_settings), 
 	FOREIGN KEY(backref_id) REFERENCES "TestRunSession" (id)
 );
@@ -394,7 +394,7 @@ CREATE TABLE "TestSuiteSpecification_tags" (
 
 CREATE TABLE "TestSuiteSpecification_test_runner_settings" (
 	backref_id TEXT, 
-	test_runner_settings TEXT NOT NULL, 
+	test_runner_settings TEXT, 
 	PRIMARY KEY (backref_id, test_runner_settings), 
 	FOREIGN KEY(backref_id) REFERENCES "TestSuiteSpecification" (id)
 );
@@ -408,7 +408,7 @@ CREATE TABLE "AcceptanceTestAsset_tags" (
 
 CREATE TABLE "AcceptanceTestAsset_test_runner_settings" (
 	backref_id TEXT, 
-	test_runner_settings TEXT NOT NULL, 
+	test_runner_settings TEXT, 
 	PRIMARY KEY (backref_id, test_runner_settings), 
 	FOREIGN KEY(backref_id) REFERENCES "AcceptanceTestAsset" (id)
 );
@@ -422,7 +422,7 @@ CREATE TABLE "AcceptanceTestSuite_tags" (
 
 CREATE TABLE "AcceptanceTestSuite_test_runner_settings" (
 	backref_id TEXT, 
-	test_runner_settings TEXT NOT NULL, 
+	test_runner_settings TEXT, 
 	PRIMARY KEY (backref_id, test_runner_settings), 
 	FOREIGN KEY(backref_id) REFERENCES "AcceptanceTestSuite" (id)
 );
@@ -436,7 +436,7 @@ CREATE TABLE "OneHopTestSuite_tags" (
 
 CREATE TABLE "OneHopTestSuite_test_runner_settings" (
 	backref_id TEXT, 
-	test_runner_settings TEXT NOT NULL, 
+	test_runner_settings TEXT, 
 	PRIMARY KEY (backref_id, test_runner_settings), 
 	FOREIGN KEY(backref_id) REFERENCES "OneHopTestSuite" (id)
 );
@@ -450,7 +450,7 @@ CREATE TABLE "StandardsComplianceTestSuite_tags" (
 
 CREATE TABLE "StandardsComplianceTestSuite_test_runner_settings" (
 	backref_id TEXT, 
-	test_runner_settings TEXT NOT NULL, 
+	test_runner_settings TEXT, 
 	PRIMARY KEY (backref_id, test_runner_settings), 
 	FOREIGN KEY(backref_id) REFERENCES "StandardsComplianceTestSuite" (id)
 );
@@ -464,7 +464,7 @@ CREATE TABLE "TestAsset_tags" (
 
 CREATE TABLE "TestAsset_test_runner_settings" (
 	backref_id TEXT, 
-	test_runner_settings TEXT NOT NULL, 
+	test_runner_settings TEXT, 
 	PRIMARY KEY (backref_id, test_runner_settings), 
 	FOREIGN KEY(backref_id) REFERENCES "TestAsset" (id)
 );
@@ -478,7 +478,7 @@ CREATE TABLE "TestCaseResult_tags" (
 
 CREATE TABLE "TestCaseResult_test_runner_settings" (
 	backref_id TEXT, 
-	test_runner_settings TEXT NOT NULL, 
+	test_runner_settings TEXT, 
 	PRIMARY KEY (backref_id, test_runner_settings), 
 	FOREIGN KEY(backref_id) REFERENCES "TestCaseResult" (id)
 );
@@ -492,7 +492,7 @@ CREATE TABLE "TestEdgeData_tags" (
 
 CREATE TABLE "TestEdgeData_test_runner_settings" (
 	backref_id TEXT, 
-	test_runner_settings TEXT NOT NULL, 
+	test_runner_settings TEXT, 
 	PRIMARY KEY (backref_id, test_runner_settings), 
 	FOREIGN KEY(backref_id) REFERENCES "TestEdgeData" (id)
 );
@@ -506,7 +506,7 @@ CREATE TABLE "TestResultPKSet_tags" (
 
 CREATE TABLE "TestResultPKSet_test_runner_settings" (
 	backref_id TEXT, 
-	test_runner_settings TEXT NOT NULL, 
+	test_runner_settings TEXT, 
 	PRIMARY KEY (backref_id, test_runner_settings), 
 	FOREIGN KEY(backref_id) REFERENCES "TestResultPKSet" (id)
 );
@@ -520,7 +520,7 @@ CREATE TABLE "TestSuite_tags" (
 
 CREATE TABLE "TestSuite_test_runner_settings" (
 	backref_id TEXT, 
-	test_runner_settings TEXT NOT NULL, 
+	test_runner_settings TEXT, 
 	PRIMARY KEY (backref_id, test_runner_settings), 
 	FOREIGN KEY(backref_id) REFERENCES "TestSuite" (id)
 );

@@ -240,7 +240,7 @@ class TestEntity(ConfiguredBaseModel):
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
     tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
-    test_runner_settings: List[str] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
+    test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
     
 
 class TestMetadata(TestEntity):
@@ -255,7 +255,7 @@ class TestMetadata(TestEntity):
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
     tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
-    test_runner_settings: List[str] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
+    test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
     
 
 class TestAsset(TestEntity):
@@ -283,7 +283,7 @@ class TestAsset(TestEntity):
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
     tags: Optional[List[str]] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a \"Block List\" collection""")
-    test_runner_settings: List[str] = Field(default_factory=list, description="""Scalar settings for the TestRunner, e.g. \"inferred\"""")
+    test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar settings for the TestRunner, e.g. \"inferred\"""")
     
 
 class AcceptanceTestAsset(TestAsset):
@@ -321,7 +321,7 @@ class AcceptanceTestAsset(TestAsset):
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
     tags: Optional[List[str]] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a \"Block List\" collection""")
-    test_runner_settings: List[str] = Field(default_factory=list, description="""Scalar settings for the TestRunner, e.g. \"inferred\"""")
+    test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar settings for the TestRunner, e.g. \"inferred\"""")
     
 
 class TestEdgeData(TestAsset):
@@ -349,7 +349,7 @@ class TestEdgeData(TestAsset):
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
     tags: Optional[List[str]] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a \"Block List\" collection""")
-    test_runner_settings: List[str] = Field(default_factory=list, description="""Scalar settings for the TestRunner, e.g. \"inferred\"""")
+    test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar settings for the TestRunner, e.g. \"inferred\"""")
     
 
 class Precondition(TestEntity):
@@ -360,7 +360,7 @@ class Precondition(TestEntity):
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
     tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
-    test_runner_settings: List[str] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
+    test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
     
 
 class TestCase(TestEntity):
@@ -380,7 +380,7 @@ class TestCase(TestEntity):
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
     tags: Optional[List[str]] = Field(default_factory=list, description="""One or more 'tags' slot values (slot inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection.""")
-    test_runner_settings: List[str] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
+    test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
     
 
 class AcceptanceTestCase(TestCase):
@@ -400,7 +400,7 @@ class AcceptanceTestCase(TestCase):
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
     tags: Optional[List[str]] = Field(default_factory=list, description="""One or more 'tags' slot values (slot inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection.""")
-    test_runner_settings: List[str] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
+    test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
     
 
 class QuantitativeTestCase(TestCase):
@@ -420,7 +420,7 @@ class QuantitativeTestCase(TestCase):
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
     tags: Optional[List[str]] = Field(default_factory=list, description="""One or more 'tags' slot values (slot inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection.""")
-    test_runner_settings: List[str] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
+    test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
     
 
 class TestSuiteSpecification(TestEntity):
@@ -433,7 +433,7 @@ class TestSuiteSpecification(TestEntity):
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
     tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
-    test_runner_settings: List[str] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
+    test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
     
 
 class TestSuite(TestEntity):
@@ -448,7 +448,7 @@ class TestSuite(TestEntity):
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
     tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
-    test_runner_settings: List[str] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
+    test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
     
 
 class AcceptanceTestSuite(TestSuite):
@@ -461,7 +461,7 @@ class AcceptanceTestSuite(TestSuite):
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
     tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
-    test_runner_settings: List[str] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
+    test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
     
 
 class BenchmarkTestSuite(ConfiguredBaseModel):
@@ -483,7 +483,7 @@ class StandardsComplianceTestSuite(TestSuite):
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
     tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
-    test_runner_settings: List[str] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
+    test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
     
 
 class OneHopTestSuite(TestSuite):
@@ -498,7 +498,7 @@ class OneHopTestSuite(TestSuite):
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
     tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
-    test_runner_settings: List[str] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
+    test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
     
 
 class TestCaseResult(TestEntity):
@@ -512,7 +512,7 @@ class TestCaseResult(TestEntity):
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
     tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
-    test_runner_settings: List[str] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
+    test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
     
 
 class TestRunSession(TestEntity):
@@ -530,7 +530,7 @@ class TestRunSession(TestEntity):
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
     tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
-    test_runner_settings: List[str] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
+    test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
     
 
 class TestOutput(TestEntity):
@@ -543,7 +543,7 @@ class TestOutput(TestEntity):
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
     tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
-    test_runner_settings: List[str] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
+    test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
     
 
 class TestResultPKSet(TestEntity):
@@ -561,7 +561,7 @@ class TestResultPKSet(TestEntity):
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
     tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
-    test_runner_settings: List[str] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
+    test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
     
 
 

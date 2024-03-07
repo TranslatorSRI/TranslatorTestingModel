@@ -132,8 +132,7 @@
             },
             "required": [
                 "test_metadata",
-                "id",
-                "test_runner_settings"
+                "id"
             ],
             "title": "AcceptanceTestAsset",
             "type": "object"
@@ -209,8 +208,7 @@
             },
             "required": [
                 "test_assets",
-                "id",
-                "test_runner_settings"
+                "id"
             ],
             "title": "AcceptanceTestCase",
             "type": "object"
@@ -267,8 +265,7 @@
             },
             "required": [
                 "test_metadata",
-                "id",
-                "test_runner_settings"
+                "id"
             ],
             "title": "AcceptanceTestSuite",
             "type": "object"
@@ -384,8 +381,7 @@
             },
             "required": [
                 "test_metadata",
-                "id",
-                "test_runner_settings"
+                "id"
             ],
             "title": "OneHopTestSuite",
             "type": "object"
@@ -422,8 +418,7 @@
                 }
             },
             "required": [
-                "id",
-                "test_runner_settings"
+                "id"
             ],
             "title": "Precondition",
             "type": "object"
@@ -515,8 +510,7 @@
             },
             "required": [
                 "test_assets",
-                "id",
-                "test_runner_settings"
+                "id"
             ],
             "title": "QuantitativeTestCase",
             "type": "object"
@@ -591,8 +585,7 @@
             },
             "required": [
                 "test_metadata",
-                "id",
-                "test_runner_settings"
+                "id"
             ],
             "title": "StandardsComplianceTestSuite",
             "type": "object"
@@ -688,8 +681,7 @@
             },
             "required": [
                 "test_metadata",
-                "id",
-                "test_runner_settings"
+                "id"
             ],
             "title": "TestAsset",
             "type": "object"
@@ -765,8 +757,7 @@
             },
             "required": [
                 "test_assets",
-                "id",
-                "test_runner_settings"
+                "id"
             ],
             "title": "TestCase",
             "type": "object"
@@ -815,8 +806,7 @@
                 }
             },
             "required": [
-                "id",
-                "test_runner_settings"
+                "id"
             ],
             "title": "TestCaseResult",
             "type": "object"
@@ -874,9 +864,7 @@
                     "type": "string"
                 }
             },
-            "required": [
-                "test_runner_settings"
-            ],
+            "required": [],
             "title": "TestCaseResult",
             "type": "object"
         },
@@ -950,8 +938,7 @@
                 }
             },
             "required": [
-                "test_assets",
-                "test_runner_settings"
+                "test_assets"
             ],
             "title": "TestCase",
             "type": "object"
@@ -1047,8 +1034,7 @@
             },
             "required": [
                 "test_metadata",
-                "id",
-                "test_runner_settings"
+                "id"
             ],
             "title": "TestEdgeData",
             "type": "object"
@@ -1144,8 +1130,7 @@
                 }
             },
             "required": [
-                "id",
-                "test_runner_settings"
+                "id"
             ],
             "title": "TestMetadata",
             "type": "object"
@@ -1205,8 +1190,7 @@
                 }
             },
             "required": [
-                "id",
-                "test_runner_settings"
+                "id"
             ],
             "title": "TestOutput",
             "type": "object"
@@ -1275,8 +1259,7 @@
                 }
             },
             "required": [
-                "id",
-                "test_runner_settings"
+                "id"
             ],
             "title": "TestResultPKSet",
             "type": "object"
@@ -1313,14 +1296,28 @@
                 },
                 "test_case_results": {
                     "additionalProperties": {
-                        "$ref": "#/$defs/TestCaseResult__identifier_optional"
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/TestCaseResult__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
                     },
                     "description": "One or more instances of TestCaseResult.",
                     "type": "object"
                 },
                 "test_entities": {
                     "additionalProperties": {
-                        "$ref": "#/$defs/TestEntity__identifier_optional"
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/TestEntity__identifier_optional"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
                     },
                     "description": "Different TestRunners could expect specific kinds of TestEntity as an input.  These 'test_entities' are one or more instances of TestAsset, TestCase or (preferably?) TestSuite.",
                     "type": "object"
@@ -1354,8 +1351,7 @@
                 }
             },
             "required": [
-                "id",
-                "test_runner_settings"
+                "id"
             ],
             "title": "TestRunSession",
             "type": "object"
@@ -1426,8 +1422,7 @@
             },
             "required": [
                 "test_metadata",
-                "id",
-                "test_runner_settings"
+                "id"
             ],
             "title": "TestSuite",
             "type": "object"
@@ -1472,8 +1467,7 @@
                 }
             },
             "required": [
-                "id",
-                "test_runner_settings"
+                "id"
             ],
             "title": "TestSuiteSpecification",
             "type": "object"

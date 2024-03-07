@@ -156,7 +156,7 @@ linkml:Sparqlpath xsd:string
              <test_reference> @linkml:Uriorcurie ? ;
              <test_metadata> @<TestMetadata> ;
              schema1:additionalType @linkml:String * ;
-             <test_runner_settings> @linkml:String +
+             <test_runner_settings> @linkml:String *
           ) ;
           rdf:type [ <TestAsset> ]
        )
@@ -211,7 +211,7 @@ linkml:Sparqlpath xsd:string
     (  $<TestEntity_tes> (  schema1:name @linkml:String ? ;
           schema1:description @linkml:String ? ;
           schema1:additionalType @linkml:String * ;
-          <test_runner_settings> @linkml:String +
+          <test_runner_settings> @linkml:String *
        ) ;
        rdf:type [ <TestEntity> ]
     )

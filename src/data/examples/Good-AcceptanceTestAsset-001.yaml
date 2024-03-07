@@ -31,7 +31,7 @@ expected_output: NeverShow
 test_metadata:
   id: "test:1"
   test_source: SMURF
-runner_settings:
+test_runner_settings:
   - "inferred"
   - "test"
 
