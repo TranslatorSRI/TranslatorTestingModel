@@ -18,10 +18,10 @@ type AcceptanceTestAsset
     inV1: Boolean
     wellKnown: Boolean
     testReference: Uriorcurie
-    runnerSettings: [String]!
     testMetadata: TestMetadata!
     id: Uriorcurie!
     tags: [String]
+    testRunnerSettings: [String]!
     mustPassDate: Date
     mustPassEnvironment: TestEnvEnum
     scientificQuestion: String
@@ -39,17 +39,15 @@ type AcceptanceTestCase
     id: Uriorcurie!
     name: String
     description: String
-    testEnv: TestEnvEnum
+    testRunnerSettings: [String]!
     queryType: QueryTypeEnum
     preconditions: [Precondition]
     trapiTemplate: TrapiTemplateEnum
-    components: [ComponentEnum]
     testCaseObjective: TestObjectiveEnum
     testCaseSource: TestSourceEnum
     testCasePredicateName: String
     testCasePredicateId: String
     testCaseInputId: Uriorcurie
-    testCaseRunnerSettings: [String]!
     tags: [String]
     testAssets: [AcceptanceTestAsset]!
   }
@@ -60,6 +58,7 @@ type AcceptanceTestSuite
     name: String
     description: String
     tags: [String]
+    testRunnerSettings: [String]!
     testMetadata: TestMetadata!
     testPersona: TestPersonaEnum
     testCases: [TestCase]
@@ -70,78 +69,13 @@ type BenchmarkTestSuite
   {
   }
 
-type ComplianceTestCase
-  {
-    id: Uriorcurie!
-    name: String
-    description: String
-    testEnv: TestEnvEnum
-    queryType: QueryTypeEnum
-    testAssets: [TestAsset]!
-    preconditions: [Precondition]
-    trapiTemplate: TrapiTemplateEnum
-    components: [ComponentEnum]
-    testCaseObjective: TestObjectiveEnum
-    testCaseSource: TestSourceEnum
-    testCasePredicateName: String
-    testCasePredicateId: String
-    testCaseInputId: Uriorcurie
-    testCaseRunnerSettings: [String]!
-    tags: [String]
-    trapiVersion: String
-    biolinkVersion: String
-  }
-
-type KnowledgeGraphNavigationTestCase
-  {
-    id: Uriorcurie!
-    name: String
-    description: String
-    testEnv: TestEnvEnum
-    queryType: QueryTypeEnum
-    testAssets: [TestAsset]!
-    preconditions: [Precondition]
-    trapiTemplate: TrapiTemplateEnum
-    components: [ComponentEnum]
-    testCaseObjective: TestObjectiveEnum
-    testCaseSource: TestSourceEnum
-    testCasePredicateName: String
-    testCasePredicateId: String
-    testCaseInputId: Uriorcurie
-    testCaseRunnerSettings: [String]!
-    tags: [String]
-    trapiVersion: String
-    biolinkVersion: String
-  }
-
-type OneHopTestCase
-  {
-    id: Uriorcurie!
-    name: String
-    description: String
-    testEnv: TestEnvEnum
-    queryType: QueryTypeEnum
-    testAssets: [TestAsset]!
-    preconditions: [Precondition]
-    trapiTemplate: TrapiTemplateEnum
-    components: [ComponentEnum]
-    testCaseObjective: TestObjectiveEnum
-    testCaseSource: TestSourceEnum
-    testCasePredicateName: String
-    testCasePredicateId: String
-    testCaseInputId: Uriorcurie
-    testCaseRunnerSettings: [String]!
-    tags: [String]
-    trapiVersion: String
-    biolinkVersion: String
-  }
-
 type OneHopTestSuite
   {
     id: Uriorcurie!
     name: String
     description: String
     tags: [String]
+    testRunnerSettings: [String]!
     testMetadata: TestMetadata!
     testPersona: TestPersonaEnum
     testCases: [TestCase]
@@ -154,6 +88,7 @@ type Precondition
     name: String
     description: String
     tags: [String]
+    testRunnerSettings: [String]!
   }
 
 type Qualifier
@@ -167,18 +102,16 @@ type QuantitativeTestCase
     id: Uriorcurie!
     name: String
     description: String
-    testEnv: TestEnvEnum
+    testRunnerSettings: [String]!
     queryType: QueryTypeEnum
     testAssets: [TestAsset]!
     preconditions: [Precondition]
     trapiTemplate: TrapiTemplateEnum
-    components: [ComponentEnum]
     testCaseObjective: TestObjectiveEnum
     testCaseSource: TestSourceEnum
     testCasePredicateName: String
     testCasePredicateId: String
     testCaseInputId: Uriorcurie
-    testCaseRunnerSettings: [String]!
     tags: [String]
   }
 
@@ -188,6 +121,7 @@ type StandardsComplianceTestSuite
     name: String
     description: String
     tags: [String]
+    testRunnerSettings: [String]!
     testMetadata: TestMetadata!
     testPersona: TestPersonaEnum
     testCases: [TestCase]
@@ -214,10 +148,10 @@ type TestAsset
     inV1: Boolean
     wellKnown: Boolean
     testReference: Uriorcurie
-    runnerSettings: [String]!
     testMetadata: TestMetadata!
     id: Uriorcurie!
     tags: [String]
+    testRunnerSettings: [String]!
   }
 
 type TestCase
@@ -225,18 +159,16 @@ type TestCase
     id: Uriorcurie!
     name: String
     description: String
-    testEnv: TestEnvEnum
+    testRunnerSettings: [String]!
     queryType: QueryTypeEnum
     testAssets: [TestAsset]!
     preconditions: [Precondition]
     trapiTemplate: TrapiTemplateEnum
-    components: [ComponentEnum]
     testCaseObjective: TestObjectiveEnum
     testCaseSource: TestSourceEnum
     testCasePredicateName: String
     testCasePredicateId: String
     testCaseInputId: Uriorcurie
-    testCaseRunnerSettings: [String]!
     tags: [String]
   }
 
@@ -246,6 +178,7 @@ type TestCaseResult
     name: String
     description: String
     tags: [String]
+    testRunnerSettings: [String]!
     testSuiteId: Uriorcurie
     testCase: TestCase
     testCaseResult: TestCaseResultEnum
@@ -271,10 +204,10 @@ type TestEdgeData
     inV1: Boolean
     wellKnown: Boolean
     testReference: Uriorcurie
-    runnerSettings: [String]!
     testMetadata: TestMetadata!
     id: Uriorcurie!
     tags: [String]
+    testRunnerSettings: [String]!
   }
 
 interface TestEntity
@@ -283,6 +216,7 @@ interface TestEntity
     name: String
     description: String
     tags: [String]
+    testRunnerSettings: [String]!
   }
 
 type TestEntityParameter
@@ -297,6 +231,7 @@ type TestMetadata
     name: String
     description: String
     tags: [String]
+    testRunnerSettings: [String]!
     testSource: TestSourceEnum
     testReference: Uriorcurie
     testObjective: TestObjectiveEnum
@@ -309,6 +244,7 @@ type TestOutput
     name: String
     description: String
     tags: [String]
+    testRunnerSettings: [String]!
     testCaseId: String
     pks: [TestResultPKSet]
   }
@@ -319,6 +255,7 @@ type TestResultPKSet
     name: String
     description: String
     tags: [String]
+    testRunnerSettings: [String]!
     parentPk: String
     mergedPk: String
     aragorn: String
@@ -328,22 +265,17 @@ type TestResultPKSet
     improving: String
   }
 
-type TestRunnerConfiguration
-  {
-    id: Uriorcurie!
-    name: String
-    description: String
-    testRunParameters: [TestEntityParameter]
-    tags: [String]
-  }
-
 type TestRunSession
   {
     id: Uriorcurie!
     name: String
     description: String
     tags: [String]
+    testRunnerSettings: [String]!
+    components: [ComponentEnum]
+    testEnv: TestEnvEnum
     testRunnerName: String
+    testRunParameters: [TestEntityParameter]
     testEntities: [TestEntity]
     testCaseResults: [TestCaseResult]
     timestamp: Datetime
@@ -355,6 +287,7 @@ type TestSuite
     name: String
     description: String
     tags: [String]
+    testRunnerSettings: [String]!
     testMetadata: TestMetadata!
     testPersona: TestPersonaEnum
     testCases: [TestCase]
@@ -367,6 +300,7 @@ type TestSuiteSpecification
     name: String
     description: String
     tags: [String]
+    testRunnerSettings: [String]!
     testDataFileLocator: Uriorcurie
     testDataFileFormat: FileFormatEnum
   }
