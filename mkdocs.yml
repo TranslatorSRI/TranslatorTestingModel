@@ -14,6 +14,7 @@ nav:
   # - Home: home.md
   - Index: index.md
   - About: about.md
+  - Harmonizer: harmonizer.html
 site_url: https://TranslatorSRI.github.io/TranslatorTestingModel
 repo_url: https://github.com/TranslatorSRI/TranslatorTestingModel
 
