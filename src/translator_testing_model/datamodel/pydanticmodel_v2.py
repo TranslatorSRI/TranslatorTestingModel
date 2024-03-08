@@ -49,10 +49,10 @@ class TestObjectiveEnum(str, Enum):
     BenchmarkTest = "BenchmarkTest"
     # Quantitative test
     QuantitativeTest = "QuantitativeTest"
-    # One Hop Tests of knowledge graph navigation
-    OneHopTests = "OneHopTests"
+    # One Hop Test of knowledge graph navigation
+    OneHopTest = "OneHopTest"
     # TRAPI and Biolink Model ("reasoner-validator") validation
-    StandardsValidation = "StandardsValidation"
+    StandardsValidationTest = "StandardsValidationTest"
     
     
 

@@ -800,9 +800,9 @@ enums:
         description: Semantic benchmarking
       QuantitativeTest:
         description: Quantitative test
-      OneHopTests:
-        description: One Hop Tests of knowledge graph navigation
-      StandardsValidation:
+      OneHopTest:
+        description: One Hop Test of knowledge graph navigation
+      StandardsValidationTest:
         description: TRAPI and Biolink Model ("reasoner-validator") validation
 
   TestEnvEnum:

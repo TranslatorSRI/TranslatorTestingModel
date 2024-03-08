@@ -1141,8 +1141,8 @@
                 "AcceptanceTest",
                 "BenchmarkTest",
                 "QuantitativeTest",
-                "OneHopTests",
-                "StandardsValidation"
+                "OneHopTest",
+                "StandardsValidationTest"
             ],
             "title": "TestObjectiveEnum",
             "type": "string"
