@@ -4,7 +4,6 @@ import json
 import requests
 import yaml
 import bmt
-from pprint import pprint
 toolkit = bmt.Toolkit()
 
 
@@ -124,8 +123,6 @@ def create_test_cases_from_test_assets(test_assets, test_case_model):
     grouped_assets = {}
     for test_asset in test_assets:
         key = (test_asset.input_id, test_asset.predicate_name)
-        if key[0] is None or key[1] is None:
-            pprint(test_asset)
         if key not in grouped_assets:
             grouped_assets[key] = []
         grouped_assets[key].append(test_asset)
