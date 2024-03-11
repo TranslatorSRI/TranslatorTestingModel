@@ -65,25 +65,31 @@ def create_test_assets_from_tsv(test_assets):
                         biolink_object_aspect_qualifier = map_item.get("biolink:object_aspect_qualifier")
                         biolink_object_direction_qualifier = map_item.get("biolink:object_direction_qualifier")
                         biolink_qualified_predicate = map_item.get("biolink:qualified_predicate")
-        ta = TestAsset(
-            id=row.get("id").replace(":", "_"),
-            name=row.get("OutputName").replace(" ", "_") + "_" + row.get("Relationship").lower() + "_" + row.get(
-                "InputName (user choice)").replace(" ", "_"),
-            description=row.get("OutputName").replace(" ", "_") + "_" + row.get("Relationship").lower() + "_" + row.get(
-                "InputName (user choice)").replace(" ", "_"),
-            input_id=row.get("InputID, node normalized"),
-            predicate_name=converted_predicate,
-            predicate_id="biolink:" + converted_predicate.replace(" ", "_"),
-            output_id=row.get("OutputID"),
-            expected_output="NeverShow",
-            test_metadata=TestMetadata(id=1),
-        )
 
-        if biolink_qualified_predicate != "":
-            ta.biolink_qualified_predicate = biolink_qualified_predicate
-            ta.biolink_object_aspect_qualifier = biolink_object_aspect_qualifier
-            ta.biolink_object_direction_qualifier = biolink_object_direction_qualifier
 
+        expected_output = None
+        if row.get("Expected Result / Suggested Comparator") == "4_NeverShow":
+            expected_output = "NeverShow"
+        elif row.get("Expected Result / Suggested Comparator") == "3_BadButForgivable":
+            expected_output = "BadButForgivable"
+        elif row.get("Expected Result / Suggested Comparator") == "2_Acceptable":
+            expected_output = "Acceptable"
+        elif row.get("Expected Result / Suggested Comparator") == "1_TopAnswer":
+            expected_output = "TopAnswer"
+        else:
+            print(f"{row.get('id')} has invalid expected output")
+            continue
+            
+        ta = TestAsset(id=row.get("id").replace(":", "_"),
+                       name=expected_output + ': ' + row.get("OutputName").replace(" ", "_") + "_" + row.get("Relationship").lower() + "_" + row.get("InputName (user choice)").replace(" ", "_"),
+                       description=row.get("OutputName").replace(" ", "_") + "_" + row.get("Relationship").lower() + "_" + row.get("InputName (user choice)").replace(" ", "_"),
+                       input_id=row.get("InputID, node normalized"),
+                       predicate_name=row.get("Relationship").lower(),
+                       predicate_id="biolink:"+row.get("Relationship").lower(),
+                       output_id=row.get("OutputID"),
+                       expected_output=expected_output,
+                       test_metadata=TestMetadata(id=1),
+                       )
         ta.input_name = row.get("InputName (user choice)")
         if row.get("Translator GitHubIssue") != "" and row.get("Translator GitHubIssue") is not None:
             tmd = TestMetadata(id=1,
@@ -96,19 +102,12 @@ def create_test_assets_from_tsv(test_assets):
                                test_source="SMURF",
                                test_objective="AcceptanceTest")
             ta.test_metadata = tmd
-        ta.output_name = row.get("OutputName")
         ta.runner_settings = [row.get("Settings").lower()]
-        if row.get("Expected Result / Suggested Comparator") == "4_NeverShow":
-            ta.expected_output = "NeverShow"
-        elif row.get("Expected Result / Suggested Comparator") == "3_BadButForgivable":
-            ta.expected_output = "BadButForgivable"
-        elif row.get("Expected Result / Suggested Comparator") == "2_Acceptable":
-            ta.expected_output = "Acceptable"
-        elif row.get("Expected Result / Suggested Comparator") == "1_TopAnswer":
-            ta.expected_output = "TopAnswer"
-        else:
-            ta.expected_output = "NeverShow"
 
+        if biolink_qualified_predicate != "":
+            ta.biolink_qualified_predicate = biolink_qualified_predicate
+            ta.biolink_object_aspect_qualifier = biolink_object_aspect_qualifier
+            ta.biolink_object_direction_qualifier = biolink_object_direction_qualifier
         if row.get("Well Known") == "yes":
             ta.well_known = True
         else:
