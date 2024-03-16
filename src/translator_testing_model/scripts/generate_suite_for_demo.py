@@ -49,25 +49,25 @@ def create_test_assets_from_tsv(test_assets):
         if row.get("Relationship") == "":
             continue
 
+        converted_predicate = None
         biolink_qualified_predicate = ""
         biolink_object_aspect_qualifier = ""
         biolink_object_direction_qualifier = ""
-        specified_predicate = row.get("Relationship").lower()
+        specified_predicate = row.get("Relationship").lower().strip()
         if toolkit.get_element(specified_predicate) is not None:
             converted_predicate = toolkit.get_element(specified_predicate).name
+            converted_predicate = converted_predicate.replace(" ", "_")
         else:
             pred_mapping = toolkit.pmap
-            for collction in pred_mapping.values():
-                for map_item in collction:
+            for collct in pred_mapping.values():
+                for map_item in collct:
                     if map_item.get("mapped predicate") == specified_predicate:
-                        converted_predicate = map_item.get("mapped predicate")
-                        converted_predicate = "biolink:" + converted_predicate.replace(" ", "_")
-                        biolink_object_aspect_qualifier = map_item.get("biolink:object_aspect_qualifier")
-                        biolink_object_direction_qualifier = map_item.get("biolink:object_direction_qualifier")
-                        biolink_qualified_predicate = map_item.get("biolink:qualified_predicate")
+                        converted_predicate = map_item.get("predicate")
+                        converted_predicate = converted_predicate.replace(" ", "_")
+                        biolink_object_aspect_qualifier = map_item.get("object aspect qualifier")
+                        biolink_object_direction_qualifier = map_item.get("object direction qualifier")
+                        biolink_qualified_predicate = map_item.get("qualified predicate")
 
-
-        expected_output = None
         if row.get("Expected Result / Suggested Comparator") == "4_NeverShow":
             expected_output = "NeverShow"
         elif row.get("Expected Result / Suggested Comparator") == "3_BadButForgivable":
@@ -76,25 +76,53 @@ def create_test_assets_from_tsv(test_assets):
             expected_output = "Acceptable"
         elif row.get("Expected Result / Suggested Comparator") == "1_TopAnswer":
             expected_output = "TopAnswer"
+        elif row.get("Expected Result / Suggested Comparator") == "5_OverlyGeneric":
+            expected_output = "OverlyGeneric"
         else:
             print(f"{row.get('id')} has invalid expected output")
+            print(row.get("Expected Result / Suggested Comparator"))
             continue
-            
+        output_category = None
+        input_category = None
+        if row.get("InputID").startswith("NCBIGene:"):
+            input_category = 'biolink:Gene'
+
+        chem_prefixes = toolkit.get_element("chemical entity").id_prefixes
+
+        if any(row.get("InputID").startswith(prefix) for prefix in chem_prefixes):
+            input_category = 'biolink:ChemicalEntity'
+        if row.get("InputID").startswith("MONDO:"):
+            input_category = 'biolink:Disease'
+        if row.get("InputID").startswith("UBERON:"):
+            input_category = 'biolink:AnatomicalEntity'
+        if row.get("InputID").startswith("HP:"):
+            input_category = 'biolink:PhenotypicFeature'
+        if any(row.get("OutputID").startswith(prefix) for prefix in chem_prefixes):
+            output_category = 'biolink:ChemicalEntity'
+        if row.get("OutputID").startswith("MONDO:"):
+            output_category = 'biolink:Disease'
+        if row.get("OutputID").startswith("UBERON:"):
+            output_category = 'biolink:AnatomicalEntity'
+        if row.get("OutputID").startswith("HP:"):
+            output_category = 'biolink:PhenotypicFeature'
+
         ta = TestAsset(id=row.get("id").replace(":", "_"),
-                       name=expected_output + ': ' + row.get("OutputName").replace(" ", "_") + "_" + row.get("Relationship").lower() + "_" + row.get("InputName (user choice)").replace(" ", "_"),
-                       description=row.get("OutputName").replace(" ", "_") + "_" + row.get("Relationship").lower() + "_" + row.get("InputName (user choice)").replace(" ", "_"),
-                       input_id=row.get("InputID, node normalized"),
-                       predicate_name=row.get("Relationship").lower(),
-                       predicate_id="biolink:"+row.get("Relationship").lower(),
-                       output_id=row.get("OutputID"),
-                       expected_output=expected_output,
+                       name=expected_output + ': ' + row.get("OutputName").replace(" ", "_") + "_" + row.get("Relationship").lower() + "_" + row.get("InputName").strip().replace(" ", "_"),
+                       description=expected_output + ': ' + row.get("OutputName").replace(" ", "_") + "_" + row.get("Relationship").lower() + "_" + row.get("InputName").strip().replace(" ", "_"),
+                       input_id=row.get("InputID").strip(),
+                       predicate_name=row.get("Relationship").lower().strip(),
+                       predicate_id=converted_predicate,
+                       output_id=row.get("OutputID").strip(),
+                       output_category=output_category,
+                       expected_output=expected_output.strip(),
                        test_metadata=TestMetadata(id=1),
+                       input_category=input_category,
                        )
-        ta.input_name = row.get("InputName (user choice)")
+        ta.input_name = row.get("InputID")
         if row.get("Translator GitHubIssue") != "" and row.get("Translator GitHubIssue") is not None:
             tmd = TestMetadata(id=1,
                                test_source="SMURF",
-                               test_reference=row.get("Translator GitHubIssue"),
+                               test_reference=row.get("Translator GitHubIssue").strip(),
                                test_objective="AcceptanceTest")
             ta.test_metadata = tmd
         else:
@@ -170,8 +198,9 @@ def create_test_suite_from_test_cases(test_cases, test_suite_model):
 if __name__ == '__main__':
 
     # Reading the TSV file
-    tsv_file_path = 'pf_test_assets_030424.tsv'
+    tsv_file_path = 'pf_test_assets_031524.tsv'
     tsv_data = parse_tsv(tsv_file_path)
+    print(tsv_data[0])
 
     # Create TestAsset objects
     test_assets = create_test_assets_from_tsv(tsv_data)
