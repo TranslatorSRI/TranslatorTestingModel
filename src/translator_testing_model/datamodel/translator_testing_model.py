@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2024-03-04T11:40:04
+# Generation date: 2024-03-15T17:20:13
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -1181,6 +1181,7 @@ class ExpectedOutputEnum(EnumDefinitionImpl):
     BadButForgivable = PermissibleValue(text="BadButForgivable")
     NeverShow = PermissibleValue(text="NeverShow")
     TopAnswer = PermissibleValue(text="TopAnswer")
+    OverlyGeneric = PermissibleValue(text="OverlyGeneric")
 
     _defn = EnumDefinition(
         name="ExpectedOutputEnum",

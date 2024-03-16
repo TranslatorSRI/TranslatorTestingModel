@@ -76,38 +76,49 @@ def create_test_assets_from_tsv(test_assets):
             expected_output = "Acceptable"
         elif row.get("Expected Result / Suggested Comparator") == "1_TopAnswer":
             expected_output = "TopAnswer"
+        elif row.get("Expected Result / Suggested Comparator") == "5_OverlyGeneric":
+            expected_output = "OverlyGeneric"
         else:
             print(f"{row.get('id')} has invalid expected output")
             print(row.get("Expected Result / Suggested Comparator"))
             continue
-
+        output_category = None
         input_category = None
-        if row.get("InputID, node normalized").startswith("NCBIGene:"):
+        if row.get("InputID").startswith("NCBIGene:"):
             input_category = 'biolink:Gene'
 
         chem_prefixes = toolkit.get_element("chemical entity").id_prefixes
 
-        if any(row.get("InputID, node normalized").startswith(prefix) for prefix in chem_prefixes):
+        if any(row.get("InputID").startswith(prefix) for prefix in chem_prefixes):
             input_category = 'biolink:ChemicalEntity'
-        if row.get("InputID, node normalized").startswith("MONDO:"):
+        if row.get("InputID").startswith("MONDO:"):
             input_category = 'biolink:Disease'
-        if row.get("InputID, node normalized").startswith("UBERON:"):
+        if row.get("InputID").startswith("UBERON:"):
             input_category = 'biolink:AnatomicalEntity'
-        if row.get("InputID, node normalized").startswith("HP:"):
+        if row.get("InputID").startswith("HP:"):
             input_category = 'biolink:PhenotypicFeature'
+        if any(row.get("OutputID").startswith(prefix) for prefix in chem_prefixes):
+            output_category = 'biolink:ChemicalEntity'
+        if row.get("OutputID").startswith("MONDO:"):
+            output_category = 'biolink:Disease'
+        if row.get("OutputID").startswith("UBERON:"):
+            output_category = 'biolink:AnatomicalEntity'
+        if row.get("OutputID").startswith("HP:"):
+            output_category = 'biolink:PhenotypicFeature'
 
         ta = TestAsset(id=row.get("id").replace(":", "_"),
-                       name=expected_output + ': ' + row.get("OutputName").replace(" ", "_") + "_" + row.get("Relationship").lower() + "_" + row.get("InputName (user choice)").replace(" ", "_"),
-                       description=expected_output + ': ' + row.get("OutputName").replace(" ", "_") + "_" + row.get("Relationship").lower() + "_" + row.get("InputName (user choice)").replace(" ", "_"),
-                       input_id=row.get("InputID, node normalized").strip(),
+                       name=expected_output + ': ' + row.get("OutputName").replace(" ", "_") + "_" + row.get("Relationship").lower() + "_" + row.get("InputName").strip().replace(" ", "_"),
+                       description=expected_output + ': ' + row.get("OutputName").replace(" ", "_") + "_" + row.get("Relationship").lower() + "_" + row.get("InputName").strip().replace(" ", "_"),
+                       input_id=row.get("InputID").strip(),
                        predicate_name=row.get("Relationship").lower().strip(),
                        predicate_id=converted_predicate,
                        output_id=row.get("OutputID").strip(),
+                       output_category=output_category,
                        expected_output=expected_output.strip(),
                        test_metadata=TestMetadata(id=1),
                        input_category=input_category,
                        )
-        ta.input_name = row.get("InputName (user choice)")
+        ta.input_name = row.get("InputID")
         if row.get("Translator GitHubIssue") != "" and row.get("Translator GitHubIssue") is not None:
             tmd = TestMetadata(id=1,
                                test_source="SMURF",
@@ -147,7 +158,6 @@ def create_test_cases_from_test_assets(test_assets, test_case_model):
     test_cases = []
     for idx, (key, assets) in enumerate(grouped_assets.items()):
         test_case_id = f"TestCase_{idx}"
-        print(key)
         descriptions = '; '.join(asset.description for asset in assets)
         test_case = test_case_model(id=test_case_id,
                                     name="what " + key[1] + " " + key[0],
@@ -188,12 +198,12 @@ def create_test_suite_from_test_cases(test_cases, test_suite_model):
 if __name__ == '__main__':
 
     # Reading the TSV file
-    tsv_file_path = 'pf_test_assets_030424.tsv'
+    tsv_file_path = 'pf_test_assets_031524.tsv'
     tsv_data = parse_tsv(tsv_file_path)
+    print(tsv_data[0])
 
     # Create TestAsset objects
     test_assets = create_test_assets_from_tsv(tsv_data)
-    print(test_assets[0].dict())
     for asset in test_assets:
         if asset.test_metadata is None or asset.test_metadata == "":
             print(asset)

@@ -418,7 +418,8 @@
                 "Acceptable",
                 "BadButForgivable",
                 "NeverShow",
-                "TopAnswer"
+                "TopAnswer",
+                "OverlyGeneric"
             ],
             "title": "ExpectedOutputEnum",
             "type": "string"
