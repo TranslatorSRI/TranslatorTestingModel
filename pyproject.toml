@@ -19,6 +19,7 @@ linkml-runtime = "^1.6.1"
 linkml = "^1.6.1"
 pandas = "^2.1.2"
 pydantic = "^1.10.13"
+bmt = "^1.2.1"
 
 [tool.poetry-dynamic-versioning]
 enable = true

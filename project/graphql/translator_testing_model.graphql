@@ -20,6 +20,11 @@ type AcceptanceTestAsset
     testReference: Uriorcurie
     runnerSettings: [String]!
     testMetadata: TestMetadata!
+    biolinkQualifiedPredicate: Uriorcurie
+    biolinkSubjectAspectQualifier: String
+    biolinkSubjectDirectionQualifier: String
+    biolinkObjectAspectQualifier: String
+    biolinkObjectDirectionQualifier: String
     id: Uriorcurie!
     tags: [String]
     mustPassDate: Date
@@ -212,6 +217,11 @@ type TestAsset
     testReference: Uriorcurie
     runnerSettings: [String]!
     testMetadata: TestMetadata!
+    biolinkQualifiedPredicate: Uriorcurie
+    biolinkSubjectAspectQualifier: String
+    biolinkSubjectDirectionQualifier: String
+    biolinkObjectAspectQualifier: String
+    biolinkObjectDirectionQualifier: String
     id: Uriorcurie!
     tags: [String]
   }
@@ -269,6 +279,11 @@ type TestEdgeData
     testReference: Uriorcurie
     runnerSettings: [String]!
     testMetadata: TestMetadata!
+    biolinkQualifiedPredicate: Uriorcurie
+    biolinkSubjectAspectQualifier: String
+    biolinkSubjectDirectionQualifier: String
+    biolinkObjectAspectQualifier: String
+    biolinkObjectDirectionQualifier: String
     id: Uriorcurie!
     tags: [String]
   }
