@@ -215,6 +215,16 @@
 
       AcceptanceTestAsset : association
 
+      AcceptanceTestAsset : biolink_object_aspect_qualifier
+
+      AcceptanceTestAsset : biolink_object_direction_qualifier
+
+      AcceptanceTestAsset : biolink_qualified_predicate
+
+      AcceptanceTestAsset : biolink_subject_aspect_qualifier
+
+      AcceptanceTestAsset : biolink_subject_direction_qualifier
+
       AcceptanceTestAsset : description
 
       AcceptanceTestAsset : direction
@@ -480,6 +490,36 @@
 <td><a href="../test_metadata/">test_metadata</a></td>
 <td>1..1 <br/> <a href="../TestMetadata/">TestMetadata</a></td>
 <td>Test metadata describes the external provenance, cross-references and objecti...</td>
+<td><a href="../TestAsset/">TestAsset</a></td>
+</tr>
+<tr>
+<td><a href="../biolink_qualified_predicate/">biolink_qualified_predicate</a></td>
+<td>0..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>The qualified_predicate in Biolink model corresponding to the shorthand predi...</td>
+<td><a href="../TestAsset/">TestAsset</a></td>
+</tr>
+<tr>
+<td><a href="../biolink_subject_aspect_qualifier/">biolink_subject_aspect_qualifier</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>The aspect of the subject of the test asset predicate</td>
+<td><a href="../TestAsset/">TestAsset</a></td>
+</tr>
+<tr>
+<td><a href="../biolink_subject_direction_qualifier/">biolink_subject_direction_qualifier</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>The direction of the subject of the test asset predicate</td>
+<td><a href="../TestAsset/">TestAsset</a></td>
+</tr>
+<tr>
+<td><a href="../biolink_object_aspect_qualifier/">biolink_object_aspect_qualifier</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>The aspect of the object of the test asset predicate</td>
+<td><a href="../TestAsset/">TestAsset</a></td>
+</tr>
+<tr>
+<td><a href="../biolink_object_direction_qualifier/">biolink_object_direction_qualifier</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>The direction of the object of the test asset predicate</td>
 <td><a href="../TestAsset/">TestAsset</a></td>
 </tr>
 <tr>
@@ -921,6 +961,57 @@ attributes:
     range: TestMetadata
     required: true
     inlined: true
+  biolink_qualified_predicate:
+    name: biolink_qualified_predicate
+    description: The qualified_predicate in Biolink model corresponding to the shorthand
+      predicate name used in the test asset.
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    alias: biolink_qualified_predicate
+    owner: AcceptanceTestAsset
+    domain_of:
+    - TestAsset
+    range: uriorcurie
+  biolink_subject_aspect_qualifier:
+    name: biolink_subject_aspect_qualifier
+    description: The aspect of the subject of the test asset predicate
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    alias: biolink_subject_aspect_qualifier
+    owner: AcceptanceTestAsset
+    domain_of:
+    - TestAsset
+    range: string
+  biolink_subject_direction_qualifier:
+    name: biolink_subject_direction_qualifier
+    description: The direction of the subject of the test asset predicate
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    alias: biolink_subject_direction_qualifier
+    owner: AcceptanceTestAsset
+    domain_of:
+    - TestAsset
+    range: string
+  biolink_object_aspect_qualifier:
+    name: biolink_object_aspect_qualifier
+    description: The aspect of the object of the test asset predicate
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    alias: biolink_object_aspect_qualifier
+    owner: AcceptanceTestAsset
+    domain_of:
+    - TestAsset
+    range: string
+  biolink_object_direction_qualifier:
+    name: biolink_object_direction_qualifier
+    description: The direction of the object of the test asset predicate
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    alias: biolink_object_direction_qualifier
+    owner: AcceptanceTestAsset
+    domain_of:
+    - TestAsset
+    range: string
   id:
     name: id
     description: A unique identifier for a Test Entity
