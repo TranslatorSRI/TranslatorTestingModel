@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2024-03-15T17:20:13
+# Generation date: 2024-03-18T12:26:26
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -320,11 +320,6 @@ class TestAsset(TestEntity):
     in_v1: Optional[Union[bool, Bool]] = None
     well_known: Optional[Union[bool, Bool]] = None
     test_reference: Optional[Union[str, URIorCURIE]] = None
-    biolink_qualified_predicate: Optional[Union[str, URIorCURIE]] = None
-    biolink_subject_aspect_qualifier: Optional[str] = None
-    biolink_subject_direction_qualifier: Optional[str] = None
-    biolink_object_aspect_qualifier: Optional[str] = None
-    biolink_object_direction_qualifier: Optional[str] = None
     tags: Optional[Union[str, List[str]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
@@ -392,21 +387,6 @@ class TestAsset(TestEntity):
 
         if self.test_reference is not None and not isinstance(self.test_reference, URIorCURIE):
             self.test_reference = URIorCURIE(self.test_reference)
-
-        if self.biolink_qualified_predicate is not None and not isinstance(self.biolink_qualified_predicate, URIorCURIE):
-            self.biolink_qualified_predicate = URIorCURIE(self.biolink_qualified_predicate)
-
-        if self.biolink_subject_aspect_qualifier is not None and not isinstance(self.biolink_subject_aspect_qualifier, str):
-            self.biolink_subject_aspect_qualifier = str(self.biolink_subject_aspect_qualifier)
-
-        if self.biolink_subject_direction_qualifier is not None and not isinstance(self.biolink_subject_direction_qualifier, str):
-            self.biolink_subject_direction_qualifier = str(self.biolink_subject_direction_qualifier)
-
-        if self.biolink_object_aspect_qualifier is not None and not isinstance(self.biolink_object_aspect_qualifier, str):
-            self.biolink_object_aspect_qualifier = str(self.biolink_object_aspect_qualifier)
-
-        if self.biolink_object_direction_qualifier is not None and not isinstance(self.biolink_object_direction_qualifier, str):
-            self.biolink_object_direction_qualifier = str(self.biolink_object_direction_qualifier)
 
         if not isinstance(self.tags, list):
             self.tags = [self.tags] if self.tags is not None else []

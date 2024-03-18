@@ -1,4 +1,4 @@
-from src.translator_testing_model.datamodel.pydanticmodel import TestAsset, TestCase, TestSuite, TestMetadata
+from src.translator_testing_model.datamodel.pydanticmodel import TestAsset, TestCase, TestSuite, TestMetadata, Qualifier
 import csv
 import json
 import requests
@@ -54,19 +54,24 @@ def create_test_assets_from_tsv(test_assets):
         biolink_object_aspect_qualifier = ""
         biolink_object_direction_qualifier = ""
         specified_predicate = row.get("Relationship").lower().strip()
+        if specified_predicate == "decreases abundance or activity of":
+            specified_predicate = "decreases activity or abundance of"
+            print("specified predicate", specified_predicate)
         if toolkit.get_element(specified_predicate) is not None:
             converted_predicate = toolkit.get_element(specified_predicate).name
             converted_predicate = converted_predicate.replace(" ", "_")
+            print("converted predicate", specified_predicate)
         else:
             pred_mapping = toolkit.pmap
             for collct in pred_mapping.values():
                 for map_item in collct:
                     if map_item.get("mapped predicate") == specified_predicate:
+                        print("mapped it", map_item.get("mapped predicate"))
                         converted_predicate = map_item.get("predicate")
                         converted_predicate = converted_predicate.replace(" ", "_")
                         biolink_object_aspect_qualifier = map_item.get("object aspect qualifier")
                         biolink_object_direction_qualifier = map_item.get("object direction qualifier")
-                        biolink_qualified_predicate = map_item.get("qualified predicate")
+                        biolink_qualified_predicate = "biolink:"+map_item.get("qualified predicate")
 
         if row.get("Expected Result / Suggested Comparator") == "4_NeverShow":
             expected_output = "NeverShow"
@@ -105,20 +110,24 @@ def create_test_assets_from_tsv(test_assets):
             output_category = 'biolink:AnatomicalEntity'
         if row.get("OutputID").startswith("HP:"):
             output_category = 'biolink:PhenotypicFeature'
+        if row.get("OutputID").startswith("DRUGBANK:"):
+            output_category = 'biolink:ChemicalEntity'
 
+        print(converted_predicate, row, expected_output)
         ta = TestAsset(id=row.get("id").replace(":", "_"),
-                       name=expected_output + ': ' + row.get("OutputName").replace(" ", "_") + "_" + row.get("Relationship").lower() + "_" + row.get("InputName").strip().replace(" ", "_"),
-                       description=expected_output + ': ' + row.get("OutputName").replace(" ", "_") + "_" + row.get("Relationship").lower() + "_" + row.get("InputName").strip().replace(" ", "_"),
+                       name=expected_output + ': ' + row.get("OutputName").strip() +" "+ row.get("Relationship").strip().lower() +" "+ row.get("InputName").strip(),
+                       description=expected_output + ': ' + row.get("OutputName").strip() +" "+ row.get("Relationship").strip().lower() +" "+ row.get("InputName").strip(),
                        input_id=row.get("InputID").strip(),
-                       predicate_name=row.get("Relationship").lower().strip(),
-                       predicate_id=converted_predicate,
+                       predicate_name=converted_predicate,
+                       predicate_id="biolink:"+converted_predicate,
                        output_id=row.get("OutputID").strip(),
+                       output_name=row.get("OutputName").strip(),
                        output_category=output_category,
                        expected_output=expected_output.strip(),
                        test_metadata=TestMetadata(id=1),
                        input_category=input_category,
                        )
-        ta.input_name = row.get("InputID")
+        ta.input_name = row.get("InputName").strip()
         if row.get("Translator GitHubIssue") != "" and row.get("Translator GitHubIssue") is not None:
             tmd = TestMetadata(id=1,
                                test_source="SMURF",
@@ -133,9 +142,15 @@ def create_test_assets_from_tsv(test_assets):
         ta.runner_settings = [row.get("Settings").lower()]
 
         if biolink_qualified_predicate != "":
-            ta.biolink_qualified_predicate = biolink_qualified_predicate
-            ta.biolink_object_aspect_qualifier = biolink_object_aspect_qualifier
-            ta.biolink_object_direction_qualifier = biolink_object_direction_qualifier
+            qp = Qualifier(parameter="biolink_qualified_predicate",
+                           value=biolink_qualified_predicate)
+            oaq = Qualifier(parameter="biolink_object_aspect_qualifier",
+                            value=biolink_object_aspect_qualifier.replace(" ", "_"))
+            odq = Qualifier(parameter="biolink_object_direction_qualifier",
+                            value=biolink_object_direction_qualifier)
+            qualifiers = [qp, oaq, odq]
+
+            ta.qualifiers=qualifiers
         if row.get("Well Known") == "yes":
             ta.well_known = True
         else:

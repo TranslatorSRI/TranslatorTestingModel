@@ -12,26 +12,6 @@
                     "description": "Specific Biolink Model association 'category' which applies to the test asset defined knowledge statement",
                     "type": "string"
                 },
-                "biolink_object_aspect_qualifier": {
-                    "description": "The aspect of the object of the test asset predicate",
-                    "type": "string"
-                },
-                "biolink_object_direction_qualifier": {
-                    "description": "The direction of the object of the test asset predicate",
-                    "type": "string"
-                },
-                "biolink_qualified_predicate": {
-                    "description": "The qualified_predicate in Biolink model corresponding to the shorthand predicate name used in the test asset.",
-                    "type": "string"
-                },
-                "biolink_subject_aspect_qualifier": {
-                    "description": "The aspect of the subject of the test asset predicate",
-                    "type": "string"
-                },
-                "biolink_subject_direction_qualifier": {
-                    "description": "The direction of the subject of the test asset predicate",
-                    "type": "string"
-                },
                 "description": {
                     "description": "A human-readable description for a Test Entity",
                     "type": "string"
@@ -888,26 +868,6 @@
                     "description": "Specific Biolink Model association 'category' which applies to the test asset defined knowledge statement",
                     "type": "string"
                 },
-                "biolink_object_aspect_qualifier": {
-                    "description": "The aspect of the object of the test asset predicate",
-                    "type": "string"
-                },
-                "biolink_object_direction_qualifier": {
-                    "description": "The direction of the object of the test asset predicate",
-                    "type": "string"
-                },
-                "biolink_qualified_predicate": {
-                    "description": "The qualified_predicate in Biolink model corresponding to the shorthand predicate name used in the test asset.",
-                    "type": "string"
-                },
-                "biolink_subject_aspect_qualifier": {
-                    "description": "The aspect of the subject of the test asset predicate",
-                    "type": "string"
-                },
-                "biolink_subject_direction_qualifier": {
-                    "description": "The direction of the subject of the test asset predicate",
-                    "type": "string"
-                },
                 "description": {
                     "description": "A human-readable description for a Test Entity",
                     "type": "string"
@@ -1270,26 +1230,6 @@
             "properties": {
                 "association": {
                     "description": "Specific Biolink Model association 'category' which applies to the test asset defined knowledge statement",
-                    "type": "string"
-                },
-                "biolink_object_aspect_qualifier": {
-                    "description": "The aspect of the object of the test asset predicate",
-                    "type": "string"
-                },
-                "biolink_object_direction_qualifier": {
-                    "description": "The direction of the object of the test asset predicate",
-                    "type": "string"
-                },
-                "biolink_qualified_predicate": {
-                    "description": "The qualified_predicate in Biolink model corresponding to the shorthand predicate name used in the test asset.",
-                    "type": "string"
-                },
-                "biolink_subject_aspect_qualifier": {
-                    "description": "The aspect of the subject of the test asset predicate",
-                    "type": "string"
-                },
-                "biolink_subject_direction_qualifier": {
-                    "description": "The direction of the subject of the test asset predicate",
                     "type": "string"
                 },
                 "description": {
