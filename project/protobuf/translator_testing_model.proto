@@ -21,11 +21,6 @@ message AcceptanceTestAsset
   uriorcurie testReference = 0
  repeated  string runnerSettings = 0
   testMetadata testMetadata = 0
-  uriorcurie biolinkQualifiedPredicate = 0
-  string biolinkSubjectAspectQualifier = 0
-  string biolinkSubjectDirectionQualifier = 0
-  string biolinkObjectAspectQualifier = 0
-  string biolinkObjectDirectionQualifier = 0
   uriorcurie id = 0
  repeated  string tags = 0
   date mustPassDate = 0
@@ -212,11 +207,6 @@ message TestAsset
   uriorcurie testReference = 0
  repeated  string runnerSettings = 0
   testMetadata testMetadata = 0
-  uriorcurie biolinkQualifiedPredicate = 0
-  string biolinkSubjectAspectQualifier = 0
-  string biolinkSubjectDirectionQualifier = 0
-  string biolinkObjectAspectQualifier = 0
-  string biolinkObjectDirectionQualifier = 0
   uriorcurie id = 0
  repeated  string tags = 0
  }
@@ -274,11 +264,6 @@ message TestEdgeData
   uriorcurie testReference = 0
  repeated  string runnerSettings = 0
   testMetadata testMetadata = 0
-  uriorcurie biolinkQualifiedPredicate = 0
-  string biolinkSubjectAspectQualifier = 0
-  string biolinkSubjectDirectionQualifier = 0
-  string biolinkObjectAspectQualifier = 0
-  string biolinkObjectDirectionQualifier = 0
   uriorcurie id = 0
  repeated  string tags = 0
  }

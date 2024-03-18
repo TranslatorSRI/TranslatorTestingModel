@@ -184,11 +184,6 @@ linkml:Sparqlpath xsd:string
              <test_reference> @linkml:Uriorcurie ? ;
              <runner_settings> @linkml:String + ;
              <test_metadata> @<TestMetadata> ;
-             <biolink_qualified_predicate> @linkml:Uriorcurie ? ;
-             <biolink_subject_aspect_qualifier> @linkml:String ? ;
-             <biolink_subject_direction_qualifier> @linkml:String ? ;
-             <biolink_object_aspect_qualifier> @linkml:String ? ;
-             <biolink_object_direction_qualifier> @linkml:String ? ;
              schema1:additionalType @linkml:String *
           ) ;
           rdf:type [ <TestAsset> ]

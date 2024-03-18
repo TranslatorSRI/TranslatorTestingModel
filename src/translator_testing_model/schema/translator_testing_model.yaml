@@ -129,11 +129,6 @@ classes:
       - test_reference
       - runner_settings
       - test_metadata
-      - biolink_qualified_predicate
-      - biolink_subject_aspect_qualifier
-      - biolink_subject_direction_qualifier
-      - biolink_object_aspect_qualifier
-      - biolink_object_direction_qualifier
     slot_usage:
       id:
         aliases: ["AssetIdentifier"]
