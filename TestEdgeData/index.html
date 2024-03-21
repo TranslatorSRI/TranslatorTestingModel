@@ -238,8 +238,6 @@
 
           TestEdgeData --|&gt; Qualifier : qualifiers
 
-      TestEdgeData : runner_settings
-
       TestEdgeData : semantic_severity
 
           TestEdgeData --|&gt; SemanticSeverityEnum : semantic_severity
@@ -255,6 +253,8 @@
           TestEdgeData --|&gt; TestMetadata : test_metadata
 
       TestEdgeData : test_reference
+
+      TestEdgeData : test_runner_settings
 
       TestEdgeData : well_known
 
@@ -378,12 +378,6 @@
 <td><a href="../TestAsset/">TestAsset</a></td>
 </tr>
 <tr>
-<td><a href="../runner_settings/">runner_settings</a></td>
-<td>1..* <br/> <a href="../String/">String</a></td>
-<td>Settings for the test harness, e</td>
-<td><a href="../TestAsset/">TestAsset</a></td>
-</tr>
-<tr>
 <td><a href="../test_metadata/">test_metadata</a></td>
 <td>1..1 <br/> <a href="../TestMetadata/">TestMetadata</a></td>
 <td>Test metadata describes the external provenance, cross-references and objecti...</td>
@@ -411,6 +405,12 @@
 <td><a href="../tags/">tags</a></td>
 <td>0..* <br/> <a href="../String/">String</a></td>
 <td>One or more 'tags' slot values (inherited from TestEntity) should generally b...</td>
+<td><a href="../TestEntity/">TestEntity</a></td>
+</tr>
+<tr>
+<td><a href="../test_runner_settings/">test_runner_settings</a></td>
+<td>0..* <br/> <a href="../String/">String</a></td>
+<td>Scalar settings for the TestRunner, e</td>
 <td><a href="../TestEntity/">TestEntity</a></td>
 </tr>
 </tbody>
@@ -648,18 +648,6 @@ attributes:
     - TestMetadata
     - TestAsset
     range: uriorcurie
-  runner_settings:
-    name: runner_settings
-    description: Settings for the test harness, e.g. "inferred"
-    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
-    rank: 1000
-    multivalued: true
-    alias: runner_settings
-    owner: TestEdgeData
-    domain_of:
-    - TestAsset
-    range: string
-    required: true
   test_metadata:
     name: test_metadata
     description: Test metadata describes the external provenance, cross-references
@@ -724,6 +712,18 @@ attributes:
     domain_of:
     - TestEntity
     range: string
+  test_runner_settings:
+    name: test_runner_settings
+    description: Scalar settings for the TestRunner, e.g. "inferred"
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    multivalued: true
+    alias: test_runner_settings
+    owner: TestEdgeData
+    domain_of:
+    - TestEntity
+    range: string
+    required: false
 
 </code></pre>
 </details>

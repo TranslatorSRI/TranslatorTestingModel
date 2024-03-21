@@ -218,7 +218,6 @@
       TestEntity &lt;|-- TestCase
       TestEntity &lt;|-- TestSuiteSpecification
       TestEntity &lt;|-- TestSuite
-      TestEntity &lt;|-- TestRunnerConfiguration
       TestEntity &lt;|-- TestCaseResult
       TestEntity &lt;|-- TestRunSession
       TestEntity &lt;|-- TestOutput
@@ -232,6 +231,8 @@
 
       TestEntity : tags
 
+      TestEntity : test_runner_settings
+
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
@@ -243,7 +244,6 @@
 <li><a href="../TestCase/">TestCase</a></li>
 <li><a href="../TestSuiteSpecification/">TestSuiteSpecification</a></li>
 <li><a href="../TestSuite/">TestSuite</a></li>
-<li><a href="../TestRunnerConfiguration/">TestRunnerConfiguration</a></li>
 <li><a href="../TestCaseResult/">TestCaseResult</a></li>
 <li><a href="../TestRunSession/">TestRunSession</a></li>
 <li><a href="../TestOutput/">TestOutput</a></li>
@@ -284,6 +284,12 @@
 <td><a href="../tags/">tags</a></td>
 <td>0..* <br/> <a href="../String/">String</a></td>
 <td>A human-readable tags for categorical memberships of a TestEntity (preferably...</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../test_runner_settings/">test_runner_settings</a></td>
+<td>0..* <br/> <a href="../String/">String</a></td>
+<td>Scalar parameters for the TestRunner processing a given TestEntity</td>
 <td>direct</td>
 </tr>
 </tbody>
@@ -345,6 +351,7 @@ slots:
 - name
 - description
 - tags
+- test_runner_settings
 tree_root: true
 
 </code></pre>
@@ -406,6 +413,20 @@ attributes:
     domain_of:
     - TestEntity
     range: string
+  test_runner_settings:
+    name: test_runner_settings
+    description: Scalar parameters for the TestRunner processing a given TestEntity.
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    aliases:
+    - Settings
+    rank: 1000
+    multivalued: true
+    alias: test_runner_settings
+    owner: TestEntity
+    domain_of:
+    - TestEntity
+    range: string
+    required: false
 tree_root: true
 
 </code></pre>

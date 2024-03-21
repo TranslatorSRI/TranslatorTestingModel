@@ -324,7 +324,7 @@
 
 
 <h1 id="slot-test_run_parameters">Slot: test_run_parameters</h1>
-<p><em>Parameters for TestRunnerConfiguration that inform the TestHarness and TestRunners about the general characteristics of a test run.</em></p>
+<p><em>TestRunSession parameters informing a TestHarness about the global characteristics of TestRunner processing tests.</em></p>
 <p>URI: <a href="https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_run_parameters">ttm:test_run_parameters</a></p>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
@@ -344,9 +344,9 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../TestRunnerConfiguration/">TestRunnerConfiguration</a></td>
-<td>General configuration parameters and test data input  for a single invocation...</td>
-<td>no</td>
+<td><a href="../TestRunSession/">TestRunSession</a></td>
+<td>Single run of a TestRunner in a given environment, with a specified set of te...</td>
+<td>yes</td>
 </tr>
 </tbody>
 </table>
@@ -368,15 +368,15 @@
 <details>
 
 <pre><code class="language-yaml">name: test_run_parameters
-description: Parameters for TestRunnerConfiguration that inform the TestHarness and
-  TestRunners about the general characteristics of a test run.
+description: TestRunSession parameters informing a TestHarness about the global characteristics
+  of TestRunner processing tests.
 from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
 rank: 1000
 is_a: test_entity_parameters
 multivalued: true
 alias: test_run_parameters
 domain_of:
-- TestRunnerConfiguration
+- TestRunSession
 range: TestEntityParameter
 inlined: true
 inlined_as_list: true

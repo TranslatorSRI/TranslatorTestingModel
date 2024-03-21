@@ -8,14 +8,14 @@
       
       
       
-        <link rel="canonical" href="https://TranslatorSRI.github.io/TranslatorTestingModel/test_case_runner_settings/">
+        <link rel="canonical" href="https://TranslatorSRI.github.io/TranslatorTestingModel/test_runner_settings/">
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-8.5.10">
     
     
       
-        <title>Slot: test_case_runner_settings - Translator Testing Model</title>
+        <title>Slot: test_runner_settings - Translator Testing Model</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-test_case_runner_settings" class="md-skip">
+        <a href="#slot-test_runner_settings" class="md-skip">
           Skip to content
         </a>
       
@@ -97,7 +97,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: test_case_runner_settings
+              Slot: test_runner_settings
             
           </span>
         </div>
@@ -317,15 +317,15 @@
                 
                   
 
-  <a href="https://github.com/TranslatorSRI/TranslatorTestingModel/edit/master/docs/test_case_runner_settings.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/TranslatorSRI/TranslatorTestingModel/edit/master/docs/test_runner_settings.md" title="Edit this page" class="md-content__button md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
-<h1 id="slot-test_case_runner_settings">Slot: test_case_runner_settings</h1>
-<p><em>Settings for the test harness for TestCase</em></p>
-<p>URI: <a href="https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case_runner_settings">ttm:test_case_runner_settings</a></p>
+<h1 id="slot-test_runner_settings">Slot: test_runner_settings</h1>
+<p><em>Scalar parameters for the TestRunner processing a given TestEntity.</em></p>
+<p>URI: <a href="https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_runner_settings">ttm:test_runner_settings</a></p>
 <!-- no inheritance hierarchy -->
 
 <h2 id="applicable-classes">Applicable Classes</h2>
@@ -338,6 +338,36 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><a href="../TestEntity/">TestEntity</a></td>
+<td>Abstract global 'identification' class shared as a parent with all major mode...</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../TestMetadata/">TestMetadata</a></td>
+<td>Represents metadata related to (external SME, SMURF, Translator feedback,  la...</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../TestAsset/">TestAsset</a></td>
+<td>Represents a Test Asset, which is a single specific instance of TestCase-agno...</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><a href="../AcceptanceTestAsset/">AcceptanceTestAsset</a></td>
+<td>Model derived from Jenn's test asset design and Shervin's runner JSON here as...</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../TestEdgeData/">TestEdgeData</a></td>
+<td>Represents a single Biolink Model compliant instance of a subject-predicate-o...</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../Precondition/">Precondition</a></td>
+<td>Represents a precondition for a TestCase</td>
+<td>no</td>
+</tr>
 <tr>
 <td><a href="../TestCase/">TestCase</a></td>
 <td>Represents a single enumerated instance of Test Case, derived from a  given c...</td>
@@ -354,18 +384,48 @@
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../ComplianceTestCase/">ComplianceTestCase</a></td>
-<td>TRAPI and Biolink Model standards compliance test</td>
+<td><a href="../TestSuiteSpecification/">TestSuiteSpecification</a></td>
+<td>Parameters for a Test Case instances either dynamically generated from some e...</td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../KnowledgeGraphNavigationTestCase/">KnowledgeGraphNavigationTestCase</a></td>
-<td>Knowledge Graph navigation integration test</td>
+<td><a href="../TestSuite/">TestSuite</a></td>
+<td>Specification of a set of Test Cases, one of either with a static list of 'te...</td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../OneHopTestCase/">OneHopTestCase</a></td>
-<td>'One Hop' Knowledge Graph navigation integration test</td>
+<td><a href="../AcceptanceTestSuite/">AcceptanceTestSuite</a></td>
+<td></td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../StandardsComplianceTestSuite/">StandardsComplianceTestSuite</a></td>
+<td>Test suite for testing Translator components against releases of standards li...</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../OneHopTestSuite/">OneHopTestSuite</a></td>
+<td>Test case for testing the integrity of "One Hop" knowledge graph retrievals s...</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../TestCaseResult/">TestCaseResult</a></td>
+<td>The outcome of a TestRunner run of one specific TestCase</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../TestRunSession/">TestRunSession</a></td>
+<td>Single run of a TestRunner in a given environment, with a specified set of te...</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../TestOutput/">TestOutput</a></td>
+<td>The output of a TestRunner run of one specific TestCase</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../TestResultPKSet/">TestResultPKSet</a></td>
+<td>Primary keys for a given ARA result set from a SmokeTest result for a given T...</td>
 <td>no</td>
 </tr>
 </tbody>
@@ -377,9 +437,6 @@
 </li>
 <li>
 <p>Multivalued: True</p>
-</li>
-<li>
-<p>Required: True</p>
 </li>
 </ul>
 <h2 id="aliases">Aliases</h2>
@@ -394,18 +451,18 @@
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: test_case_runner_settings
-description: Settings for the test harness for TestCase
+<pre><code class="language-yaml">name: test_runner_settings
+description: Scalar parameters for the TestRunner processing a given TestEntity.
 from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
 aliases:
 - Settings
 rank: 1000
 multivalued: true
-alias: test_case_runner_settings
+alias: test_runner_settings
 domain_of:
-- TestCase
+- TestEntity
 range: string
-required: true
+required: false
 
 </code></pre>
 

@@ -248,8 +248,6 @@
 
           TestAsset --|&gt; Qualifier : qualifiers
 
-      TestAsset : runner_settings
-
       TestAsset : semantic_severity
 
           TestAsset --|&gt; SemanticSeverityEnum : semantic_severity
@@ -265,6 +263,8 @@
           TestAsset --|&gt; TestMetadata : test_metadata
 
       TestAsset : test_reference
+
+      TestAsset : test_runner_settings
 
       TestAsset : well_known
 
@@ -389,12 +389,6 @@
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../runner_settings/">runner_settings</a></td>
-<td>1..* <br/> <a href="../String/">String</a></td>
-<td>Settings for the test harness, e</td>
-<td>direct</td>
-</tr>
-<tr>
 <td><a href="../test_metadata/">test_metadata</a></td>
 <td>1..1 <br/> <a href="../TestMetadata/">TestMetadata</a></td>
 <td>Test metadata describes the external provenance, cross-references and objecti...</td>
@@ -424,6 +418,12 @@
 <td>One or more 'tags' slot values (inherited from TestEntity) should generally b...</td>
 <td><a href="../TestEntity/">TestEntity</a></td>
 </tr>
+<tr>
+<td><a href="../test_runner_settings/">test_runner_settings</a></td>
+<td>0..* <br/> <a href="../String/">String</a></td>
+<td>Scalar settings for the TestRunner, e</td>
+<td><a href="../TestEntity/">TestEntity</a></td>
+</tr>
 </tbody>
 </table>
 <h2 id="usages">Usages</h2>
@@ -445,24 +445,6 @@
 </tr>
 <tr>
 <td><a href="../QuantitativeTestCase/">QuantitativeTestCase</a></td>
-<td><a href="../test_assets/">test_assets</a></td>
-<td>range</td>
-<td><a href="./">TestAsset</a></td>
-</tr>
-<tr>
-<td><a href="../ComplianceTestCase/">ComplianceTestCase</a></td>
-<td><a href="../test_assets/">test_assets</a></td>
-<td>range</td>
-<td><a href="./">TestAsset</a></td>
-</tr>
-<tr>
-<td><a href="../KnowledgeGraphNavigationTestCase/">KnowledgeGraphNavigationTestCase</a></td>
-<td><a href="../test_assets/">test_assets</a></td>
-<td>range</td>
-<td><a href="./">TestAsset</a></td>
-</tr>
-<tr>
-<td><a href="../OneHopTestCase/">OneHopTestCase</a></td>
 <td><a href="../test_assets/">test_assets</a></td>
 <td>range</td>
 <td><a href="./">TestAsset</a></td>
@@ -520,7 +502,6 @@ slots:
 - in_v1
 - well_known
 - test_reference
-- runner_settings
 - test_metadata
 slot_usage:
   id:
@@ -536,11 +517,11 @@ slot_usage:
       generally be defined to specify TestAsset membership in a "Block List" collection
     domain_of:
     - TestEntity
-  runner_settings:
-    name: runner_settings
-    description: Settings for the test harness, e.g. "inferred"
+  test_runner_settings:
+    name: test_runner_settings
+    description: Scalar settings for the TestRunner, e.g. "inferred"
     domain_of:
-    - TestAsset
+    - TestEntity
 
 </code></pre>
 </details>
@@ -566,11 +547,11 @@ slot_usage:
       generally be defined to specify TestAsset membership in a "Block List" collection
     domain_of:
     - TestEntity
-  runner_settings:
-    name: runner_settings
-    description: Settings for the test harness, e.g. "inferred"
+  test_runner_settings:
+    name: test_runner_settings
+    description: Scalar settings for the TestRunner, e.g. "inferred"
     domain_of:
-    - TestAsset
+    - TestEntity
 attributes:
   input_id:
     name: input_id
@@ -761,18 +742,6 @@ attributes:
     - TestMetadata
     - TestAsset
     range: uriorcurie
-  runner_settings:
-    name: runner_settings
-    description: Settings for the test harness, e.g. "inferred"
-    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
-    rank: 1000
-    multivalued: true
-    alias: runner_settings
-    owner: TestAsset
-    domain_of:
-    - TestAsset
-    range: string
-    required: true
   test_metadata:
     name: test_metadata
     description: Test metadata describes the external provenance, cross-references
@@ -837,6 +806,18 @@ attributes:
     domain_of:
     - TestEntity
     range: string
+  test_runner_settings:
+    name: test_runner_settings
+    description: Scalar settings for the TestRunner, e.g. "inferred"
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    multivalued: true
+    alias: test_runner_settings
+    owner: TestAsset
+    domain_of:
+    - TestEntity
+    range: string
+    required: false
 
 </code></pre>
 </details>

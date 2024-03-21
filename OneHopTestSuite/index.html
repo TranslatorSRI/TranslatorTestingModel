@@ -226,6 +226,8 @@
 
           OneHopTestSuite --|&gt; TestPersonaEnum : test_persona
 
+      OneHopTestSuite : test_runner_settings
+
       OneHopTestSuite : test_suite_specification
 
           OneHopTestSuite --|&gt; TestSuiteSpecification : test_suite_specification
@@ -299,6 +301,12 @@
 <td><a href="../tags/">tags</a></td>
 <td>0..* <br/> <a href="../String/">String</a></td>
 <td>A human-readable tags for categorical memberships of a TestEntity (preferably...</td>
+<td><a href="../TestEntity/">TestEntity</a></td>
+</tr>
+<tr>
+<td><a href="../test_runner_settings/">test_runner_settings</a></td>
+<td>0..* <br/> <a href="../String/">String</a></td>
+<td>Scalar parameters for the TestRunner processing a given TestEntity</td>
 <td><a href="../TestEntity/">TestEntity</a></td>
 </tr>
 </tbody>
@@ -448,6 +456,20 @@ attributes:
     domain_of:
     - TestEntity
     range: string
+  test_runner_settings:
+    name: test_runner_settings
+    description: Scalar parameters for the TestRunner processing a given TestEntity.
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    aliases:
+    - Settings
+    rank: 1000
+    multivalued: true
+    alias: test_runner_settings
+    owner: OneHopTestSuite
+    domain_of:
+    - TestEntity
+    range: string
+    required: false
 
 </code></pre>
 </details>

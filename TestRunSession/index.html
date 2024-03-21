@@ -200,11 +200,15 @@
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"></path></svg>
 </a>
 <h1 id="class-testrunsession">Class: TestRunSession</h1>
-<p><em>A single invocation of a TestRunner.</em></p>
+<p><em>Single run of a TestRunner in a given environment, with a specified set of test_entities (generally, one or more instances of TestSuite).</em></p>
 <p>URI: <a href="https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestRunSession">ttm:TestRunSession</a></p>
 <div class="mermaid"> classDiagram
     class TestRunSession
       TestEntity &lt;|-- TestRunSession
+
+      TestRunSession : components
+
+          TestRunSession --|&gt; ComponentEnum : components
 
       TestRunSession : description
 
@@ -222,7 +226,17 @@
 
           TestRunSession --|&gt; TestEntity : test_entities
 
+      TestRunSession : test_env
+
+          TestRunSession --|&gt; TestEnvEnum : test_env
+
+      TestRunSession : test_run_parameters
+
+          TestRunSession --|&gt; TestEntityParameter : test_run_parameters
+
       TestRunSession : test_runner_name
+
+      TestRunSession : test_runner_settings
 
       TestRunSession : timestamp
 
@@ -247,15 +261,33 @@
 </thead>
 <tbody>
 <tr>
+<td><a href="../components/">components</a></td>
+<td>0..* <br/> <a href="../ComponentEnum/">ComponentEnum</a></td>
+<td>The component that this test case is intended to run against</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../test_env/">test_env</a></td>
+<td>0..1 <br/> <a href="../TestEnvEnum/">TestEnvEnum</a></td>
+<td>Deployment environment within which the associated TestSuite is run</td>
+<td>direct</td>
+</tr>
+<tr>
 <td><a href="../test_runner_name/">test_runner_name</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>Global system name of a TestRunner</td>
 <td>direct</td>
 </tr>
 <tr>
+<td><a href="../test_run_parameters/">test_run_parameters</a></td>
+<td>0..* <br/> <a href="../TestEntityParameter/">TestEntityParameter</a></td>
+<td>Different TestRunners could expect additional global test configuration param...</td>
+<td>direct</td>
+</tr>
+<tr>
 <td><a href="../test_entities/">test_entities</a></td>
 <td>0..* <br/> <a href="../TestEntity/">TestEntity</a></td>
-<td>Different TestRunners may expect specific kinds of TestEntity as input</td>
+<td>Different TestRunners could expect specific kinds of TestEntity as an input</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -294,6 +326,12 @@
 <td>A human-readable tags for categorical memberships of a TestEntity (preferably...</td>
 <td><a href="../TestEntity/">TestEntity</a></td>
 </tr>
+<tr>
+<td><a href="../test_runner_settings/">test_runner_settings</a></td>
+<td>0..* <br/> <a href="../String/">String</a></td>
+<td>Scalar parameters for the TestRunner processing a given TestEntity</td>
+<td><a href="../TestEntity/">TestEntity</a></td>
+</tr>
 </tbody>
 </table>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
@@ -325,20 +363,31 @@
 <h3 id="direct">Direct</h3>
 <details>
 <pre><code class="language-yaml">name: TestRunSession
-description: A single invocation of a TestRunner.
+description: Single run of a TestRunner in a given environment, with a specified set
+  of test_entities (generally, one or more instances of TestSuite).
 from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
 is_a: TestEntity
 slots:
+- components
+- test_env
 - test_runner_name
+- test_run_parameters
 - test_entities
 - test_case_results
 - timestamp
 slot_usage:
+  test_run_parameters:
+    name: test_run_parameters
+    description: Different TestRunners could expect additional global test configuration
+      parameters, like the applicable TRAPI version ("trapi_version") or Biolink Model
+      versions ("biolink_version").
+    domain_of:
+    - TestRunSession
   test_entities:
     name: test_entities
-    description: Different TestRunners may expect specific kinds of TestEntity as
-      input. These 'test_entities' one or more instances of TestAsset, TestCase or
-      TestSuite.
+    description: Different TestRunners could expect specific kinds of TestEntity as
+      an input.  These 'test_entities' are one or more instances of TestAsset, TestCase
+      or (preferably?) TestSuite.
     domain_of:
     - TestRunSession
 
@@ -347,18 +396,49 @@ slot_usage:
 <h3 id="induced">Induced</h3>
 <details>
 <pre><code class="language-yaml">name: TestRunSession
-description: A single invocation of a TestRunner.
+description: Single run of a TestRunner in a given environment, with a specified set
+  of test_entities (generally, one or more instances of TestSuite).
 from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
 is_a: TestEntity
 slot_usage:
+  test_run_parameters:
+    name: test_run_parameters
+    description: Different TestRunners could expect additional global test configuration
+      parameters, like the applicable TRAPI version ("trapi_version") or Biolink Model
+      versions ("biolink_version").
+    domain_of:
+    - TestRunSession
   test_entities:
     name: test_entities
-    description: Different TestRunners may expect specific kinds of TestEntity as
-      input. These 'test_entities' one or more instances of TestAsset, TestCase or
-      TestSuite.
+    description: Different TestRunners could expect specific kinds of TestEntity as
+      an input.  These 'test_entities' are one or more instances of TestAsset, TestCase
+      or (preferably?) TestSuite.
     domain_of:
     - TestRunSession
 attributes:
+  components:
+    name: components
+    description: The component that this test case is intended to run against.  Most
+      often this is the ARS for  acceptance tests, but for the Benchmarks repo integration,
+      this can also be individual components of the system like Aragorn, or ARAX.
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    multivalued: true
+    alias: components
+    owner: TestRunSession
+    domain_of:
+    - TestRunSession
+    range: ComponentEnum
+  test_env:
+    name: test_env
+    description: Deployment environment within which the associated TestSuite is run.
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    alias: test_env
+    owner: TestRunSession
+    domain_of:
+    - TestRunSession
+    range: TestEnvEnum
   test_runner_name:
     name: test_runner_name
     description: Global system name of a TestRunner.
@@ -369,11 +449,27 @@ attributes:
     domain_of:
     - TestRunSession
     range: string
+  test_run_parameters:
+    name: test_run_parameters
+    description: Different TestRunners could expect additional global test configuration
+      parameters, like the applicable TRAPI version ("trapi_version") or Biolink Model
+      versions ("biolink_version").
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    is_a: test_entity_parameters
+    multivalued: true
+    alias: test_run_parameters
+    owner: TestRunSession
+    domain_of:
+    - TestRunSession
+    range: TestEntityParameter
+    inlined: true
+    inlined_as_list: true
   test_entities:
     name: test_entities
-    description: Different TestRunners may expect specific kinds of TestEntity as
-      input. These 'test_entities' one or more instances of TestAsset, TestCase or
-      TestSuite.
+    description: Different TestRunners could expect specific kinds of TestEntity as
+      an input.  These 'test_entities' are one or more instances of TestAsset, TestCase
+      or (preferably?) TestSuite.
     from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
     rank: 1000
     multivalued: true
@@ -454,6 +550,20 @@ attributes:
     domain_of:
     - TestEntity
     range: string
+  test_runner_settings:
+    name: test_runner_settings
+    description: Scalar parameters for the TestRunner processing a given TestEntity.
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    aliases:
+    - Settings
+    rank: 1000
+    multivalued: true
+    alias: test_runner_settings
+    owner: TestRunSession
+    domain_of:
+    - TestEntity
+    range: string
+    required: false
 
 </code></pre>
 </details>

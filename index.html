@@ -426,18 +426,6 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <td>See AcceptanceTestAsset above for more details.</td>
 </tr>
 <tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="ComplianceTestCase/">ComplianceTestCase</a></td>
-<td>TRAPI and Biolink Model standards compliance test</td>
-</tr>
-<tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="KnowledgeGraphNavigationTestCase/">KnowledgeGraphNavigationTestCase</a></td>
-<td>Knowledge Graph navigation integration test</td>
-</tr>
-<tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="OneHopTestCase/">OneHopTestCase</a></td>
-<td>'One Hop' Knowledge Graph navigation integration test</td>
-</tr>
-<tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="QuantitativeTestCase/">QuantitativeTestCase</a></td>
 <td>Assumed additional model from Shervin's runner JSON here as an example.  This schema is not yet complete.</td>
 </tr>
@@ -458,12 +446,8 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <td>Primary keys for a given ARA result set from a SmokeTest result for a given TestCase.</td>
 </tr>
 <tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="TestRunnerConfiguration/">TestRunnerConfiguration</a></td>
-<td>General configuration parameters and test data input  for a single invocation of a TestRunner.</td>
-</tr>
-<tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="TestRunSession/">TestRunSession</a></td>
-<td>A single invocation of a TestRunner.</td>
+<td>Single run of a TestRunner in a given environment, with a specified set of test_entities (generally, one or more instances of TestSuite).</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="TestSuite/">TestSuite</a></td>
@@ -669,10 +653,6 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <td>The results of a TestRunner run of one specific TestCase</td>
 </tr>
 <tr>
-<td><a href="runner_settings/">runner_settings</a></td>
-<td>Settings for the test harness for TestAsset</td>
-</tr>
-<tr>
 <td><a href="scientific_question/">scientific_question</a></td>
 <td>The full human-readable scientific question a SME would ask, which is encoded...</td>
 </tr>
@@ -729,10 +709,6 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <td>One or more instances of TestCaseResult</td>
 </tr>
 <tr>
-<td><a href="test_case_runner_settings/">test_case_runner_settings</a></td>
-<td>Settings for the test harness for TestCase</td>
-</tr>
-<tr>
 <td><a href="test_case_source/">test_case_source</a></td>
 <td>Provenance of a specific set of test assets, cases and/or suites</td>
 </tr>
@@ -754,7 +730,7 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 </tr>
 <tr>
 <td><a href="test_entity_parameters/">test_entity_parameters</a></td>
-<td>One or more parameters documenting target characteristics of a TestEntity</td>
+<td>One or more 'tag = value' parameters documenting target characteristics of a ...</td>
 </tr>
 <tr>
 <td><a href="test_env/">test_env</a></td>
@@ -782,11 +758,15 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 </tr>
 <tr>
 <td><a href="test_run_parameters/">test_run_parameters</a></td>
-<td>Parameters for TestRunnerConfiguration that inform the TestHarness and TestRu...</td>
+<td>TestRunSession parameters informing a TestHarness about the global characteri...</td>
 </tr>
 <tr>
 <td><a href="test_runner_name/">test_runner_name</a></td>
 <td>Global system name of a TestRunner</td>
+</tr>
+<tr>
+<td><a href="test_runner_settings/">test_runner_settings</a></td>
+<td>Scalar parameters for the TestRunner processing a given TestEntity</td>
 </tr>
 <tr>
 <td><a href="test_source/">test_source</a></td>

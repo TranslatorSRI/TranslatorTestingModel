@@ -219,6 +219,8 @@
 
       Precondition : tags
 
+      Precondition : test_runner_settings
+
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
@@ -263,6 +265,12 @@
 <td>A human-readable tags for categorical memberships of a TestEntity (preferably...</td>
 <td><a href="../TestEntity/">TestEntity</a></td>
 </tr>
+<tr>
+<td><a href="../test_runner_settings/">test_runner_settings</a></td>
+<td>0..* <br/> <a href="../String/">String</a></td>
+<td>Scalar parameters for the TestRunner processing a given TestEntity</td>
+<td><a href="../TestEntity/">TestEntity</a></td>
+</tr>
 </tbody>
 </table>
 <h2 id="usages">Usages</h2>
@@ -290,24 +298,6 @@
 </tr>
 <tr>
 <td><a href="../QuantitativeTestCase/">QuantitativeTestCase</a></td>
-<td><a href="../preconditions/">preconditions</a></td>
-<td>range</td>
-<td><a href="./">Precondition</a></td>
-</tr>
-<tr>
-<td><a href="../ComplianceTestCase/">ComplianceTestCase</a></td>
-<td><a href="../preconditions/">preconditions</a></td>
-<td>range</td>
-<td><a href="./">Precondition</a></td>
-</tr>
-<tr>
-<td><a href="../KnowledgeGraphNavigationTestCase/">KnowledgeGraphNavigationTestCase</a></td>
-<td><a href="../preconditions/">preconditions</a></td>
-<td>range</td>
-<td><a href="./">Precondition</a></td>
-</tr>
-<tr>
-<td><a href="../OneHopTestCase/">OneHopTestCase</a></td>
 <td><a href="../preconditions/">preconditions</a></td>
 <td>range</td>
 <td><a href="./">Precondition</a></td>
@@ -405,6 +395,20 @@ attributes:
     domain_of:
     - TestEntity
     range: string
+  test_runner_settings:
+    name: test_runner_settings
+    description: Scalar parameters for the TestRunner processing a given TestEntity.
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    aliases:
+    - Settings
+    rank: 1000
+    multivalued: true
+    alias: test_runner_settings
+    owner: Precondition
+    domain_of:
+    - TestEntity
+    range: string
+    required: false
 
 </code></pre>
 </details>

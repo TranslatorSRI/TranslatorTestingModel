@@ -214,13 +214,7 @@
 
       TestCase &lt;|-- AcceptanceTestCase
       TestCase &lt;|-- QuantitativeTestCase
-      TestCase &lt;|-- ComplianceTestCase
-      TestCase &lt;|-- KnowledgeGraphNavigationTestCase
 
-
-      TestCase : components
-
-          TestCase --|&gt; ComponentEnum : components
 
       TestCase : description
 
@@ -252,15 +246,11 @@
 
       TestCase : test_case_predicate_name
 
-      TestCase : test_case_runner_settings
-
       TestCase : test_case_source
 
           TestCase --|&gt; TestSourceEnum : test_case_source
 
-      TestCase : test_env
-
-          TestCase --|&gt; TestEnvEnum : test_env
+      TestCase : test_runner_settings
 
       TestCase : trapi_template
 
@@ -274,8 +264,6 @@
 <li><strong>TestCase</strong><ul>
 <li><a href="../AcceptanceTestCase/">AcceptanceTestCase</a></li>
 <li><a href="../QuantitativeTestCase/">QuantitativeTestCase</a></li>
-<li><a href="../ComplianceTestCase/">ComplianceTestCase</a></li>
-<li><a href="../KnowledgeGraphNavigationTestCase/">KnowledgeGraphNavigationTestCase</a></li>
 </ul>
 </li>
 </ul>
@@ -292,12 +280,6 @@
 </tr>
 </thead>
 <tbody>
-<tr>
-<td><a href="../test_env/">test_env</a></td>
-<td>0..1 <br/> <a href="../TestEnvEnum/">TestEnvEnum</a></td>
-<td>Deployment environment within which the associated TestSuite is run</td>
-<td>direct</td>
-</tr>
 <tr>
 <td><a href="../query_type/">query_type</a></td>
 <td>0..1 <br/> <a href="../QueryTypeEnum/">QueryTypeEnum</a></td>
@@ -320,12 +302,6 @@
 <td><a href="../trapi_template/">trapi_template</a></td>
 <td>0..1 <br/> <a href="../TrapiTemplateEnum/">TrapiTemplateEnum</a></td>
 <td>A template for a query, which can be used to generate a query for a test case</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../components/">components</a></td>
-<td>0..* <br/> <a href="../ComponentEnum/">ComponentEnum</a></td>
-<td>The component that this test case is intended to run against</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -359,12 +335,6 @@
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../test_case_runner_settings/">test_case_runner_settings</a></td>
-<td>1..* <br/> <a href="../String/">String</a></td>
-<td>Settings for the test harness for TestCase</td>
-<td>direct</td>
-</tr>
-<tr>
 <td><a href="../id/">id</a></td>
 <td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td>A unique identifier for a Test Entity</td>
@@ -386,6 +356,12 @@
 <td><a href="../tags/">tags</a></td>
 <td>0..* <br/> <a href="../String/">String</a></td>
 <td>One or more 'tags' slot values (slot inherited from TestEntity) should genera...</td>
+<td><a href="../TestEntity/">TestEntity</a></td>
+</tr>
+<tr>
+<td><a href="../test_runner_settings/">test_runner_settings</a></td>
+<td>0..* <br/> <a href="../String/">String</a></td>
+<td>Scalar parameters for the TestRunner processing a given TestEntity</td>
 <td><a href="../TestEntity/">TestEntity</a></td>
 </tr>
 </tbody>
@@ -469,18 +445,15 @@ description: Represents a single enumerated instance of Test Case, derived from 
 from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
 is_a: TestEntity
 slots:
-- test_env
 - query_type
 - test_assets
 - preconditions
 - trapi_template
-- components
 - test_case_objective
 - test_case_source
 - test_case_predicate_name
 - test_case_predicate_id
 - test_case_input_id
-- test_case_runner_settings
 slot_usage:
   test_assets:
     name: test_assets
@@ -528,16 +501,6 @@ slot_usage:
     domain_of:
     - TestEntity
 attributes:
-  test_env:
-    name: test_env
-    description: Deployment environment within which the associated TestSuite is run.
-    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
-    rank: 1000
-    alias: test_env
-    owner: TestCase
-    domain_of:
-    - TestCase
-    range: TestEnvEnum
   query_type:
     name: query_type
     description: Type of TestCase query.
@@ -590,19 +553,6 @@ attributes:
     domain_of:
     - TestCase
     range: TrapiTemplateEnum
-  components:
-    name: components
-    description: The component that this test case is intended to run against.  Most
-      often this is the ARS for  acceptance tests, but for the Benchmarks repo integration,
-      this can also be individual components of the system like Aragorn, or ARAX.
-    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
-    rank: 1000
-    multivalued: true
-    alias: components
-    owner: TestCase
-    domain_of:
-    - TestCase
-    range: ComponentEnum
   test_case_objective:
     name: test_case_objective
     description: Testing objective behind specified set of test particulars (e.g.
@@ -660,20 +610,6 @@ attributes:
     domain_of:
     - TestCase
     range: uriorcurie
-  test_case_runner_settings:
-    name: test_case_runner_settings
-    description: Settings for the test harness for TestCase
-    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
-    aliases:
-    - Settings
-    rank: 1000
-    multivalued: true
-    alias: test_case_runner_settings
-    owner: TestCase
-    domain_of:
-    - TestCase
-    range: string
-    required: true
   id:
     name: id
     description: A unique identifier for a Test Entity
@@ -723,6 +659,20 @@ attributes:
     domain_of:
     - TestEntity
     range: string
+  test_runner_settings:
+    name: test_runner_settings
+    description: Scalar parameters for the TestRunner processing a given TestEntity.
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    aliases:
+    - Settings
+    rank: 1000
+    multivalued: true
+    alias: test_runner_settings
+    owner: TestCase
+    domain_of:
+    - TestEntity
+    range: string
+    required: false
 
 </code></pre>
 </details>
