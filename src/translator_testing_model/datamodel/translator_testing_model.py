@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2024-03-07T16:25:05
+# Generation date: 2024-03-21T14:12:58
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -1033,6 +1033,7 @@ class ExpectedOutputEnum(EnumDefinitionImpl):
     BadButForgivable = PermissibleValue(text="BadButForgivable")
     NeverShow = PermissibleValue(text="NeverShow")
     TopAnswer = PermissibleValue(text="TopAnswer")
+    OverlyGeneric = PermissibleValue(text="OverlyGeneric")
 
     _defn = EnumDefinition(
         name="ExpectedOutputEnum",
@@ -1275,6 +1276,24 @@ slots.predicate_id = Slot(uri=TTM.predicate_id, name="predicate_id", curie=TTM.c
 
 slots.predicate_name = Slot(uri=TTM.predicate_name, name="predicate_name", curie=TTM.curie('predicate_name'),
                    model_uri=TTM.predicate_name, domain=None, range=Optional[str])
+
+slots.biolink_predicate = Slot(uri=TTM.biolink_predicate, name="biolink_predicate", curie=TTM.curie('biolink_predicate'),
+                   model_uri=TTM.biolink_predicate, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.biolink_subject_aspect_qualifier = Slot(uri=TTM.biolink_subject_aspect_qualifier, name="biolink_subject_aspect_qualifier", curie=TTM.curie('biolink_subject_aspect_qualifier'),
+                   model_uri=TTM.biolink_subject_aspect_qualifier, domain=None, range=Optional[str])
+
+slots.biolink_subject_direction_qualifier = Slot(uri=TTM.biolink_subject_direction_qualifier, name="biolink_subject_direction_qualifier", curie=TTM.curie('biolink_subject_direction_qualifier'),
+                   model_uri=TTM.biolink_subject_direction_qualifier, domain=None, range=Optional[str])
+
+slots.biolink_object_aspect_qualifier = Slot(uri=TTM.biolink_object_aspect_qualifier, name="biolink_object_aspect_qualifier", curie=TTM.curie('biolink_object_aspect_qualifier'),
+                   model_uri=TTM.biolink_object_aspect_qualifier, domain=None, range=Optional[str])
+
+slots.biolink_object_direction_qualifier = Slot(uri=TTM.biolink_object_direction_qualifier, name="biolink_object_direction_qualifier", curie=TTM.curie('biolink_object_direction_qualifier'),
+                   model_uri=TTM.biolink_object_direction_qualifier, domain=None, range=Optional[str])
+
+slots.biolink_qualified_predicate = Slot(uri=TTM.biolink_qualified_predicate, name="biolink_qualified_predicate", curie=TTM.curie('biolink_qualified_predicate'),
+                   model_uri=TTM.biolink_qualified_predicate, domain=None, range=Optional[Union[str, URIorCURIE]])
 
 slots.output_id = Slot(uri=TTM.output_id, name="output_id", curie=TTM.curie('output_id'),
                    model_uri=TTM.output_id, domain=None, range=Optional[Union[str, URIorCURIE]])

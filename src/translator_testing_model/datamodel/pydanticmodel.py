@@ -101,6 +101,8 @@ class ExpectedOutputEnum(str, Enum):
     
     TopAnswer = "TopAnswer"
     
+    OverlyGeneric = "OverlyGeneric"
+    
     
 
 class TestIssueEnum(str, Enum):
