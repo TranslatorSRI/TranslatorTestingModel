@@ -19,10 +19,10 @@ message AcceptanceTestAsset
   boolean inV1 = 0
   boolean wellKnown = 0
   uriorcurie testReference = 0
- repeated  string runnerSettings = 0
   testMetadata testMetadata = 0
   uriorcurie id = 0
  repeated  string tags = 0
+ repeated  string testRunnerSettings = 0
   date mustPassDate = 0
   testEnvEnum mustPassEnvironment = 0
   string scientificQuestion = 0
@@ -40,17 +40,15 @@ message AcceptanceTestCase
   uriorcurie id = 0
   string name = 0
   string description = 0
-  testEnvEnum testEnv = 0
+ repeated  string testRunnerSettings = 0
   queryTypeEnum queryType = 0
  repeated  precondition preconditions = 0
   trapiTemplateEnum trapiTemplate = 0
- repeated  componentEnum components = 0
   testObjectiveEnum testCaseObjective = 0
   testSourceEnum testCaseSource = 0
   string testCasePredicateName = 0
   string testCasePredicateId = 0
   uriorcurie testCaseInputId = 0
- repeated  string testCaseRunnerSettings = 0
  repeated  string tags = 0
  repeated  acceptanceTestAsset testAssets = 0
  }
@@ -60,72 +58,11 @@ message AcceptanceTestSuite
   string name = 0
   string description = 0
  repeated  string tags = 0
+ repeated  string testRunnerSettings = 0
   testMetadata testMetadata = 0
   testPersonaEnum testPersona = 0
  repeated  testCase testCases = 0
   testSuiteSpecification testSuiteSpecification = 0
- }
-// TRAPI and Biolink Model standards compliance test
-message ComplianceTestCase
- {
-  uriorcurie id = 0
-  string name = 0
-  string description = 0
-  testEnvEnum testEnv = 0
-  queryTypeEnum queryType = 0
- repeated  testAsset testAssets = 0
- repeated  precondition preconditions = 0
-  trapiTemplateEnum trapiTemplate = 0
- repeated  componentEnum components = 0
-  testObjectiveEnum testCaseObjective = 0
-  testSourceEnum testCaseSource = 0
-  string testCasePredicateName = 0
-  string testCasePredicateId = 0
-  uriorcurie testCaseInputId = 0
- repeated  string testCaseRunnerSettings = 0
- repeated  string tags = 0
-  string trapiVersion = 0
-  string biolinkVersion = 0
- }
-// Knowledge Graph navigation integration test
-message KnowledgeGraphNavigationTestCase
- {
-  uriorcurie id = 0
-  string name = 0
-  string description = 0
-  testEnvEnum testEnv = 0
-  queryTypeEnum queryType = 0
- repeated  testAsset testAssets = 0
- repeated  precondition preconditions = 0
-  trapiTemplateEnum trapiTemplate = 0
- repeated  componentEnum components = 0
-  testObjectiveEnum testCaseObjective = 0
-  testSourceEnum testCaseSource = 0
-  string testCasePredicateName = 0
-  string testCasePredicateId = 0
-  uriorcurie testCaseInputId = 0
- repeated  string testCaseRunnerSettings = 0
- repeated  string tags = 0
- }
-// 'One Hop' Knowledge Graph navigation integration test
-message OneHopTestCase
- {
-  uriorcurie id = 0
-  string name = 0
-  string description = 0
-  testEnvEnum testEnv = 0
-  queryTypeEnum queryType = 0
- repeated  testAsset testAssets = 0
- repeated  precondition preconditions = 0
-  trapiTemplateEnum trapiTemplate = 0
- repeated  componentEnum components = 0
-  testObjectiveEnum testCaseObjective = 0
-  testSourceEnum testCaseSource = 0
-  string testCasePredicateName = 0
-  string testCasePredicateId = 0
-  uriorcurie testCaseInputId = 0
- repeated  string testCaseRunnerSettings = 0
- repeated  string tags = 0
  }
 // Test case for testing the integrity of "One Hop" knowledge graph retrievals sensa legacy SRI_Testing harness.
 message OneHopTestSuite
@@ -134,6 +71,7 @@ message OneHopTestSuite
   string name = 0
   string description = 0
  repeated  string tags = 0
+ repeated  string testRunnerSettings = 0
   testMetadata testMetadata = 0
   testPersonaEnum testPersona = 0
  repeated  testCase testCases = 0
@@ -146,6 +84,7 @@ message Precondition
   string name = 0
   string description = 0
  repeated  string tags = 0
+ repeated  string testRunnerSettings = 0
  }
 message Qualifier
  {
@@ -158,18 +97,16 @@ message QuantitativeTestCase
   uriorcurie id = 0
   string name = 0
   string description = 0
-  testEnvEnum testEnv = 0
+ repeated  string testRunnerSettings = 0
   queryTypeEnum queryType = 0
  repeated  testAsset testAssets = 0
  repeated  precondition preconditions = 0
   trapiTemplateEnum trapiTemplate = 0
- repeated  componentEnum components = 0
   testObjectiveEnum testCaseObjective = 0
   testSourceEnum testCaseSource = 0
   string testCasePredicateName = 0
   string testCasePredicateId = 0
   uriorcurie testCaseInputId = 0
- repeated  string testCaseRunnerSettings = 0
  repeated  string tags = 0
  }
 // Test suite for testing Translator components against releases of standards like TRAPI and the Biolink Model.
@@ -179,6 +116,7 @@ message StandardsComplianceTestSuite
   string name = 0
   string description = 0
  repeated  string tags = 0
+ repeated  string testRunnerSettings = 0
   testMetadata testMetadata = 0
   testPersonaEnum testPersona = 0
  repeated  testCase testCases = 0
@@ -205,10 +143,10 @@ message TestAsset
   boolean inV1 = 0
   boolean wellKnown = 0
   uriorcurie testReference = 0
- repeated  string runnerSettings = 0
   testMetadata testMetadata = 0
   uriorcurie id = 0
  repeated  string tags = 0
+ repeated  string testRunnerSettings = 0
  }
 // Represents a single enumerated instance of Test Case, derived from a  given collection of one or more TestAsset instances (the value of the 'test_assets' slot) which define the 'inputs' and 'outputs' of the TestCase, used to probe a particular test condition.
 message TestCase
@@ -216,18 +154,16 @@ message TestCase
   uriorcurie id = 0
   string name = 0
   string description = 0
-  testEnvEnum testEnv = 0
+ repeated  string testRunnerSettings = 0
   queryTypeEnum queryType = 0
  repeated  testAsset testAssets = 0
  repeated  precondition preconditions = 0
   trapiTemplateEnum trapiTemplate = 0
- repeated  componentEnum components = 0
   testObjectiveEnum testCaseObjective = 0
   testSourceEnum testCaseSource = 0
   string testCasePredicateName = 0
   string testCasePredicateId = 0
   uriorcurie testCaseInputId = 0
- repeated  string testCaseRunnerSettings = 0
  repeated  string tags = 0
  }
 // The outcome of a TestRunner run of one specific TestCase.
@@ -237,6 +173,7 @@ message TestCaseResult
   string name = 0
   string description = 0
  repeated  string tags = 0
+ repeated  string testRunnerSettings = 0
   uriorcurie testSuiteId = 0
   testCase testCase = 0
   testCaseResultEnum testCaseResult = 0
@@ -262,10 +199,10 @@ message TestEdgeData
   boolean inV1 = 0
   boolean wellKnown = 0
   uriorcurie testReference = 0
- repeated  string runnerSettings = 0
   testMetadata testMetadata = 0
   uriorcurie id = 0
  repeated  string tags = 0
+ repeated  string testRunnerSettings = 0
  }
 // A single 'tag = value' pair (where 'value' is a simple string).
 message TestEntityParameter
@@ -280,6 +217,7 @@ message TestMetadata
   string name = 0
   string description = 0
  repeated  string tags = 0
+ repeated  string testRunnerSettings = 0
   testSourceEnum testSource = 0
   uriorcurie testReference = 0
   testObjectiveEnum testObjective = 0
@@ -292,6 +230,7 @@ message TestOutput
   string name = 0
   string description = 0
  repeated  string tags = 0
+ repeated  string testRunnerSettings = 0
   string testCaseId = 0
  repeated  testResultPKSet pks = 0
  }
@@ -302,6 +241,7 @@ message TestResultPKSet
   string name = 0
   string description = 0
  repeated  string tags = 0
+ repeated  string testRunnerSettings = 0
   string parentPk = 0
   string mergedPk = 0
   string aragorn = 0
@@ -310,23 +250,18 @@ message TestResultPKSet
   string bte = 0
   string improving = 0
  }
-// General configuration parameters and test data input  for a single invocation of a TestRunner.
-message TestRunnerConfiguration
- {
-  uriorcurie id = 0
-  string name = 0
-  string description = 0
- repeated  testEntityParameter testRunParameters = 0
- repeated  string tags = 0
- }
-// A single invocation of a TestRunner.
+// Single run of a TestRunner in a given environment, with a specified set of test_entities (generally, one or more instances of TestSuite).
 message TestRunSession
  {
   uriorcurie id = 0
   string name = 0
   string description = 0
  repeated  string tags = 0
+ repeated  string testRunnerSettings = 0
+ repeated  componentEnum components = 0
+  testEnvEnum testEnv = 0
   string testRunnerName = 0
+ repeated  testEntityParameter testRunParameters = 0
  repeated  testEntity testEntities = 0
  repeated  testCaseResult testCaseResults = 0
   datetime timestamp = 0
@@ -338,6 +273,7 @@ message TestSuite
   string name = 0
   string description = 0
  repeated  string tags = 0
+ repeated  string testRunnerSettings = 0
   testMetadata testMetadata = 0
   testPersonaEnum testPersona = 0
  repeated  testCase testCases = 0
@@ -350,6 +286,7 @@ message TestSuiteSpecification
   string name = 0
   string description = 0
  repeated  string tags = 0
+ repeated  string testRunnerSettings = 0
   uriorcurie testDataFileLocator = 0
   fileFormatEnum testDataFileFormat = 0
  }

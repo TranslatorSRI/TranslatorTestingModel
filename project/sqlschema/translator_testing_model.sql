@@ -4,64 +4,10 @@ CREATE TABLE "AcceptanceTestCase" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	description TEXT, 
-	test_env VARCHAR(4), 
 	query_type VARCHAR(6), 
 	preconditions TEXT, 
 	trapi_template VARCHAR(24), 
-	test_case_objective VARCHAR(16), 
-	test_case_source VARCHAR(18), 
-	test_case_predicate_name TEXT, 
-	test_case_predicate_id TEXT, 
-	test_case_input_id TEXT, 
-	PRIMARY KEY (id)
-);
-
-CREATE TABLE "ComplianceTestCase" (
-	id TEXT NOT NULL, 
-	name TEXT, 
-	description TEXT, 
-	test_env VARCHAR(4), 
-	query_type VARCHAR(6), 
-	test_assets TEXT NOT NULL, 
-	preconditions TEXT, 
-	trapi_template VARCHAR(24), 
-	test_case_objective VARCHAR(16), 
-	test_case_source VARCHAR(18), 
-	test_case_predicate_name TEXT, 
-	test_case_predicate_id TEXT, 
-	test_case_input_id TEXT, 
-	trapi_version TEXT, 
-	biolink_version TEXT, 
-	PRIMARY KEY (id)
-);
-
-CREATE TABLE "KnowledgeGraphNavigationTestCase" (
-	id TEXT NOT NULL, 
-	name TEXT, 
-	description TEXT, 
-	test_env VARCHAR(4), 
-	query_type VARCHAR(6), 
-	test_assets TEXT NOT NULL, 
-	preconditions TEXT, 
-	trapi_template VARCHAR(24), 
-	test_case_objective VARCHAR(16), 
-	test_case_source VARCHAR(18), 
-	test_case_predicate_name TEXT, 
-	test_case_predicate_id TEXT, 
-	test_case_input_id TEXT, 
-	PRIMARY KEY (id)
-);
-
-CREATE TABLE "OneHopTestCase" (
-	id TEXT NOT NULL, 
-	name TEXT, 
-	description TEXT, 
-	test_env VARCHAR(4), 
-	query_type VARCHAR(6), 
-	test_assets TEXT NOT NULL, 
-	preconditions TEXT, 
-	trapi_template VARCHAR(24), 
-	test_case_objective VARCHAR(16), 
+	test_case_objective VARCHAR(23), 
 	test_case_source VARCHAR(18), 
 	test_case_predicate_name TEXT, 
 	test_case_predicate_id TEXT, 
@@ -86,12 +32,11 @@ CREATE TABLE "QuantitativeTestCase" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	description TEXT, 
-	test_env VARCHAR(4), 
 	query_type VARCHAR(6), 
 	test_assets TEXT NOT NULL, 
 	preconditions TEXT, 
 	trapi_template VARCHAR(24), 
-	test_case_objective VARCHAR(16), 
+	test_case_objective VARCHAR(23), 
 	test_case_source VARCHAR(18), 
 	test_case_predicate_name TEXT, 
 	test_case_predicate_id TEXT, 
@@ -103,12 +48,11 @@ CREATE TABLE "TestCase" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	description TEXT, 
-	test_env VARCHAR(4), 
 	query_type VARCHAR(6), 
 	test_assets TEXT NOT NULL, 
 	preconditions TEXT, 
 	trapi_template VARCHAR(24), 
-	test_case_objective VARCHAR(16), 
+	test_case_objective VARCHAR(23), 
 	test_case_source VARCHAR(18), 
 	test_case_predicate_name TEXT, 
 	test_case_predicate_id TEXT, 
@@ -128,7 +72,7 @@ CREATE TABLE "TestMetadata" (
 	description TEXT, 
 	test_source VARCHAR(18), 
 	test_reference TEXT, 
-	test_objective VARCHAR(16), 
+	test_objective VARCHAR(23), 
 	test_annotations TEXT, 
 	PRIMARY KEY (id)
 );
@@ -141,19 +85,13 @@ CREATE TABLE "TestOutput" (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE "TestRunnerConfiguration" (
-	id TEXT NOT NULL, 
-	name TEXT, 
-	description TEXT, 
-	test_run_parameters TEXT, 
-	PRIMARY KEY (id)
-);
-
 CREATE TABLE "TestRunSession" (
 	id TEXT NOT NULL, 
 	name TEXT, 
 	description TEXT, 
+	test_env VARCHAR(4), 
 	test_runner_name TEXT, 
+	test_run_parameters TEXT, 
 	timestamp DATETIME, 
 	PRIMARY KEY (id)
 );
@@ -335,17 +273,10 @@ CREATE TABLE "TestSuite" (
 	FOREIGN KEY(test_suite_specification) REFERENCES "TestSuiteSpecification" (id)
 );
 
-CREATE TABLE "AcceptanceTestCase_components" (
+CREATE TABLE "AcceptanceTestCase_test_runner_settings" (
 	backref_id TEXT, 
-	components VARCHAR, 
-	PRIMARY KEY (backref_id, components), 
-	FOREIGN KEY(backref_id) REFERENCES "AcceptanceTestCase" (id)
-);
-
-CREATE TABLE "AcceptanceTestCase_test_case_runner_settings" (
-	backref_id TEXT, 
-	test_case_runner_settings TEXT NOT NULL, 
-	PRIMARY KEY (backref_id, test_case_runner_settings), 
+	test_runner_settings TEXT, 
+	PRIMARY KEY (backref_id, test_runner_settings), 
 	FOREIGN KEY(backref_id) REFERENCES "AcceptanceTestCase" (id)
 );
 
@@ -356,69 +287,6 @@ CREATE TABLE "AcceptanceTestCase_tags" (
 	FOREIGN KEY(backref_id) REFERENCES "AcceptanceTestCase" (id)
 );
 
-CREATE TABLE "ComplianceTestCase_components" (
-	backref_id TEXT, 
-	components VARCHAR, 
-	PRIMARY KEY (backref_id, components), 
-	FOREIGN KEY(backref_id) REFERENCES "ComplianceTestCase" (id)
-);
-
-CREATE TABLE "ComplianceTestCase_test_case_runner_settings" (
-	backref_id TEXT, 
-	test_case_runner_settings TEXT NOT NULL, 
-	PRIMARY KEY (backref_id, test_case_runner_settings), 
-	FOREIGN KEY(backref_id) REFERENCES "ComplianceTestCase" (id)
-);
-
-CREATE TABLE "ComplianceTestCase_tags" (
-	backref_id TEXT, 
-	tags TEXT, 
-	PRIMARY KEY (backref_id, tags), 
-	FOREIGN KEY(backref_id) REFERENCES "ComplianceTestCase" (id)
-);
-
-CREATE TABLE "KnowledgeGraphNavigationTestCase_components" (
-	backref_id TEXT, 
-	components VARCHAR, 
-	PRIMARY KEY (backref_id, components), 
-	FOREIGN KEY(backref_id) REFERENCES "KnowledgeGraphNavigationTestCase" (id)
-);
-
-CREATE TABLE "KnowledgeGraphNavigationTestCase_test_case_runner_settings" (
-	backref_id TEXT, 
-	test_case_runner_settings TEXT NOT NULL, 
-	PRIMARY KEY (backref_id, test_case_runner_settings), 
-	FOREIGN KEY(backref_id) REFERENCES "KnowledgeGraphNavigationTestCase" (id)
-);
-
-CREATE TABLE "KnowledgeGraphNavigationTestCase_tags" (
-	backref_id TEXT, 
-	tags TEXT, 
-	PRIMARY KEY (backref_id, tags), 
-	FOREIGN KEY(backref_id) REFERENCES "KnowledgeGraphNavigationTestCase" (id)
-);
-
-CREATE TABLE "OneHopTestCase_components" (
-	backref_id TEXT, 
-	components VARCHAR, 
-	PRIMARY KEY (backref_id, components), 
-	FOREIGN KEY(backref_id) REFERENCES "OneHopTestCase" (id)
-);
-
-CREATE TABLE "OneHopTestCase_test_case_runner_settings" (
-	backref_id TEXT, 
-	test_case_runner_settings TEXT NOT NULL, 
-	PRIMARY KEY (backref_id, test_case_runner_settings), 
-	FOREIGN KEY(backref_id) REFERENCES "OneHopTestCase" (id)
-);
-
-CREATE TABLE "OneHopTestCase_tags" (
-	backref_id TEXT, 
-	tags TEXT, 
-	PRIMARY KEY (backref_id, tags), 
-	FOREIGN KEY(backref_id) REFERENCES "OneHopTestCase" (id)
-);
-
 CREATE TABLE "Precondition_tags" (
 	backref_id TEXT, 
 	tags TEXT, 
@@ -426,17 +294,17 @@ CREATE TABLE "Precondition_tags" (
 	FOREIGN KEY(backref_id) REFERENCES "Precondition" (id)
 );
 
-CREATE TABLE "QuantitativeTestCase_components" (
+CREATE TABLE "Precondition_test_runner_settings" (
 	backref_id TEXT, 
-	components VARCHAR, 
-	PRIMARY KEY (backref_id, components), 
-	FOREIGN KEY(backref_id) REFERENCES "QuantitativeTestCase" (id)
+	test_runner_settings TEXT, 
+	PRIMARY KEY (backref_id, test_runner_settings), 
+	FOREIGN KEY(backref_id) REFERENCES "Precondition" (id)
 );
 
-CREATE TABLE "QuantitativeTestCase_test_case_runner_settings" (
+CREATE TABLE "QuantitativeTestCase_test_runner_settings" (
 	backref_id TEXT, 
-	test_case_runner_settings TEXT NOT NULL, 
-	PRIMARY KEY (backref_id, test_case_runner_settings), 
+	test_runner_settings TEXT, 
+	PRIMARY KEY (backref_id, test_runner_settings), 
 	FOREIGN KEY(backref_id) REFERENCES "QuantitativeTestCase" (id)
 );
 
@@ -447,17 +315,10 @@ CREATE TABLE "QuantitativeTestCase_tags" (
 	FOREIGN KEY(backref_id) REFERENCES "QuantitativeTestCase" (id)
 );
 
-CREATE TABLE "TestCase_components" (
+CREATE TABLE "TestCase_test_runner_settings" (
 	backref_id TEXT, 
-	components VARCHAR, 
-	PRIMARY KEY (backref_id, components), 
-	FOREIGN KEY(backref_id) REFERENCES "TestCase" (id)
-);
-
-CREATE TABLE "TestCase_test_case_runner_settings" (
-	backref_id TEXT, 
-	test_case_runner_settings TEXT NOT NULL, 
-	PRIMARY KEY (backref_id, test_case_runner_settings), 
+	test_runner_settings TEXT, 
+	PRIMARY KEY (backref_id, test_runner_settings), 
 	FOREIGN KEY(backref_id) REFERENCES "TestCase" (id)
 );
 
@@ -475,6 +336,13 @@ CREATE TABLE "TestMetadata_tags" (
 	FOREIGN KEY(backref_id) REFERENCES "TestMetadata" (id)
 );
 
+CREATE TABLE "TestMetadata_test_runner_settings" (
+	backref_id TEXT, 
+	test_runner_settings TEXT, 
+	PRIMARY KEY (backref_id, test_runner_settings), 
+	FOREIGN KEY(backref_id) REFERENCES "TestMetadata" (id)
+);
+
 CREATE TABLE "TestOutput_tags" (
 	backref_id TEXT, 
 	tags TEXT, 
@@ -482,17 +350,31 @@ CREATE TABLE "TestOutput_tags" (
 	FOREIGN KEY(backref_id) REFERENCES "TestOutput" (id)
 );
 
-CREATE TABLE "TestRunnerConfiguration_tags" (
+CREATE TABLE "TestOutput_test_runner_settings" (
 	backref_id TEXT, 
-	tags TEXT, 
-	PRIMARY KEY (backref_id, tags), 
-	FOREIGN KEY(backref_id) REFERENCES "TestRunnerConfiguration" (id)
+	test_runner_settings TEXT, 
+	PRIMARY KEY (backref_id, test_runner_settings), 
+	FOREIGN KEY(backref_id) REFERENCES "TestOutput" (id)
 );
 
 CREATE TABLE "TestRunSession_tags" (
 	backref_id TEXT, 
 	tags TEXT, 
 	PRIMARY KEY (backref_id, tags), 
+	FOREIGN KEY(backref_id) REFERENCES "TestRunSession" (id)
+);
+
+CREATE TABLE "TestRunSession_test_runner_settings" (
+	backref_id TEXT, 
+	test_runner_settings TEXT, 
+	PRIMARY KEY (backref_id, test_runner_settings), 
+	FOREIGN KEY(backref_id) REFERENCES "TestRunSession" (id)
+);
+
+CREATE TABLE "TestRunSession_components" (
+	backref_id TEXT, 
+	components VARCHAR, 
+	PRIMARY KEY (backref_id, components), 
 	FOREIGN KEY(backref_id) REFERENCES "TestRunSession" (id)
 );
 
@@ -510,17 +392,24 @@ CREATE TABLE "TestSuiteSpecification_tags" (
 	FOREIGN KEY(backref_id) REFERENCES "TestSuiteSpecification" (id)
 );
 
-CREATE TABLE "AcceptanceTestAsset_runner_settings" (
+CREATE TABLE "TestSuiteSpecification_test_runner_settings" (
 	backref_id TEXT, 
-	runner_settings TEXT NOT NULL, 
-	PRIMARY KEY (backref_id, runner_settings), 
-	FOREIGN KEY(backref_id) REFERENCES "AcceptanceTestAsset" (id)
+	test_runner_settings TEXT, 
+	PRIMARY KEY (backref_id, test_runner_settings), 
+	FOREIGN KEY(backref_id) REFERENCES "TestSuiteSpecification" (id)
 );
 
 CREATE TABLE "AcceptanceTestAsset_tags" (
 	backref_id TEXT, 
 	tags TEXT, 
 	PRIMARY KEY (backref_id, tags), 
+	FOREIGN KEY(backref_id) REFERENCES "AcceptanceTestAsset" (id)
+);
+
+CREATE TABLE "AcceptanceTestAsset_test_runner_settings" (
+	backref_id TEXT, 
+	test_runner_settings TEXT, 
+	PRIMARY KEY (backref_id, test_runner_settings), 
 	FOREIGN KEY(backref_id) REFERENCES "AcceptanceTestAsset" (id)
 );
 
@@ -531,10 +420,24 @@ CREATE TABLE "AcceptanceTestSuite_tags" (
 	FOREIGN KEY(backref_id) REFERENCES "AcceptanceTestSuite" (id)
 );
 
+CREATE TABLE "AcceptanceTestSuite_test_runner_settings" (
+	backref_id TEXT, 
+	test_runner_settings TEXT, 
+	PRIMARY KEY (backref_id, test_runner_settings), 
+	FOREIGN KEY(backref_id) REFERENCES "AcceptanceTestSuite" (id)
+);
+
 CREATE TABLE "OneHopTestSuite_tags" (
 	backref_id TEXT, 
 	tags TEXT, 
 	PRIMARY KEY (backref_id, tags), 
+	FOREIGN KEY(backref_id) REFERENCES "OneHopTestSuite" (id)
+);
+
+CREATE TABLE "OneHopTestSuite_test_runner_settings" (
+	backref_id TEXT, 
+	test_runner_settings TEXT, 
+	PRIMARY KEY (backref_id, test_runner_settings), 
 	FOREIGN KEY(backref_id) REFERENCES "OneHopTestSuite" (id)
 );
 
@@ -545,17 +448,24 @@ CREATE TABLE "StandardsComplianceTestSuite_tags" (
 	FOREIGN KEY(backref_id) REFERENCES "StandardsComplianceTestSuite" (id)
 );
 
-CREATE TABLE "TestAsset_runner_settings" (
+CREATE TABLE "StandardsComplianceTestSuite_test_runner_settings" (
 	backref_id TEXT, 
-	runner_settings TEXT NOT NULL, 
-	PRIMARY KEY (backref_id, runner_settings), 
-	FOREIGN KEY(backref_id) REFERENCES "TestAsset" (id)
+	test_runner_settings TEXT, 
+	PRIMARY KEY (backref_id, test_runner_settings), 
+	FOREIGN KEY(backref_id) REFERENCES "StandardsComplianceTestSuite" (id)
 );
 
 CREATE TABLE "TestAsset_tags" (
 	backref_id TEXT, 
 	tags TEXT, 
 	PRIMARY KEY (backref_id, tags), 
+	FOREIGN KEY(backref_id) REFERENCES "TestAsset" (id)
+);
+
+CREATE TABLE "TestAsset_test_runner_settings" (
+	backref_id TEXT, 
+	test_runner_settings TEXT, 
+	PRIMARY KEY (backref_id, test_runner_settings), 
 	FOREIGN KEY(backref_id) REFERENCES "TestAsset" (id)
 );
 
@@ -566,17 +476,24 @@ CREATE TABLE "TestCaseResult_tags" (
 	FOREIGN KEY(backref_id) REFERENCES "TestCaseResult" (id)
 );
 
-CREATE TABLE "TestEdgeData_runner_settings" (
+CREATE TABLE "TestCaseResult_test_runner_settings" (
 	backref_id TEXT, 
-	runner_settings TEXT NOT NULL, 
-	PRIMARY KEY (backref_id, runner_settings), 
-	FOREIGN KEY(backref_id) REFERENCES "TestEdgeData" (id)
+	test_runner_settings TEXT, 
+	PRIMARY KEY (backref_id, test_runner_settings), 
+	FOREIGN KEY(backref_id) REFERENCES "TestCaseResult" (id)
 );
 
 CREATE TABLE "TestEdgeData_tags" (
 	backref_id TEXT, 
 	tags TEXT, 
 	PRIMARY KEY (backref_id, tags), 
+	FOREIGN KEY(backref_id) REFERENCES "TestEdgeData" (id)
+);
+
+CREATE TABLE "TestEdgeData_test_runner_settings" (
+	backref_id TEXT, 
+	test_runner_settings TEXT, 
+	PRIMARY KEY (backref_id, test_runner_settings), 
 	FOREIGN KEY(backref_id) REFERENCES "TestEdgeData" (id)
 );
 
@@ -587,9 +504,23 @@ CREATE TABLE "TestResultPKSet_tags" (
 	FOREIGN KEY(backref_id) REFERENCES "TestResultPKSet" (id)
 );
 
+CREATE TABLE "TestResultPKSet_test_runner_settings" (
+	backref_id TEXT, 
+	test_runner_settings TEXT, 
+	PRIMARY KEY (backref_id, test_runner_settings), 
+	FOREIGN KEY(backref_id) REFERENCES "TestResultPKSet" (id)
+);
+
 CREATE TABLE "TestSuite_tags" (
 	backref_id TEXT, 
 	tags TEXT, 
 	PRIMARY KEY (backref_id, tags), 
+	FOREIGN KEY(backref_id) REFERENCES "TestSuite" (id)
+);
+
+CREATE TABLE "TestSuite_test_runner_settings" (
+	backref_id TEXT, 
+	test_runner_settings TEXT, 
+	PRIMARY KEY (backref_id, test_runner_settings), 
 	FOREIGN KEY(backref_id) REFERENCES "TestSuite" (id)
 );

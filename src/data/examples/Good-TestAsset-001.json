@@ -6,7 +6,7 @@
   "predicate_name": "treats",
   "output_id": "MONDO:0005301",
   "expected_output": "Acceptable",
-  "runner_settings": ["inferred", "test"],
+  "test_runner_settings": ["inferred", "test"],
   "test_metadata": {
     "id": "example:TestAsset001"
   }

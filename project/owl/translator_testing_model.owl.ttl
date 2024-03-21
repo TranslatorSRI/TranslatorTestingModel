@@ -33,38 +33,6 @@ ttm:BenchmarkTestSuite a owl:Class,
     skos:definition "JsonObj(is_a='TestSuite')" ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
-ttm:ComplianceTestCase a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "ComplianceTestCase" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:trapi_version ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:biolink_version ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:trapi_version ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:biolink_version ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:biolink_version ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:trapi_version ],
-        ttm:TestCase ;
-    skos:definition "TRAPI and Biolink Model standards compliance test" ;
-    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
-
-ttm:OneHopTestCase a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "OneHopTestCase" ;
-    rdfs:subClassOf ttm:KnowledgeGraphNavigationTestCase ;
-    skos:definition "'One Hop' Knowledge Graph navigation integration test" ;
-    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
-
 ttm:OneHopTestSuite a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "OneHopTestSuite" ;
@@ -97,59 +65,61 @@ ttm:TestRunSession a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "TestRunSession" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:test_runner_name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:timestamp ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:timestamp ],
+        [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
             owl:onProperty ttm:test_runner_name ],
         [ a owl:Restriction ;
-            owl:allValuesFrom owl:Thing ;
+            owl:allValuesFrom ttm:ComponentEnum ;
+            owl:onProperty ttm:components ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:test_runner_name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty ttm:test_entities ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:test_case_results ],
         [ a owl:Restriction ;
             owl:allValuesFrom ttm:TestCaseResult ;
             owl:onProperty ttm:test_case_results ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:test_runner_name ],
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:test_run_parameters ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty ttm:test_case_results ],
+            owl:onProperty ttm:components ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:timestamp ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom owl:Thing ;
             owl:onProperty ttm:test_entities ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:test_run_parameters ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom ttm:TestEnvEnum ;
+            owl:onProperty ttm:test_env ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:test_env ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:test_run_parameters ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:Datetime ;
             owl:onProperty ttm:timestamp ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:timestamp ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty ttm:test_runner_name ],
+            owl:onProperty ttm:test_env ],
         ttm:TestEntity ;
-    skos:definition "A single invocation of a TestRunner." ;
-    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
-
-ttm:TestRunnerConfiguration a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "TestRunnerConfiguration" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:test_run_parameters ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:tags ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:test_run_parameters ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:test_run_parameters ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:tags ],
-        ttm:TestEntity ;
-    skos:definition "General configuration parameters and test data input  for a single invocation of a TestRunner." ;
+    skos:definition "Single run of a TestRunner in a given environment, with a specified set of test_entities (generally, one or more instances of TestSuite)." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:biolink_object_aspect_qualifier a owl:ObjectProperty,
@@ -190,6 +160,12 @@ ttm:biolink_subject_direction_qualifier a owl:ObjectProperty,
     skos:definition "The direction of the subject of the test asset predicate" ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
+ttm:biolink_version a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "biolink_version" ;
+    skos:definition "Biolink Model release (SemVer string)" ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
 ttm:results a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "results" ;
@@ -197,108 +173,107 @@ ttm:results a owl:ObjectProperty,
     skos:definition "The results of a TestRunner run of one specific TestCase." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
+ttm:trapi_version a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "trapi_version" ;
+    skos:definition "TRAPI version (SemVer string)" ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
 ttm:AcceptanceTestAsset a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "AcceptanceTestAsset" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:notes ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:query_node ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:expected_result ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:top_level ],
-        [ a owl:Restriction ;
             owl:allValuesFrom ttm:NodeEnum ;
             owl:onProperty ttm:query_node ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty ttm:answer_informal_concept ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:maxCardinality 1 ;
             owl:onProperty ttm:string_entry ],
         [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:top_level ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:scientific_question ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:must_pass_environment ],
+        [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty ttm:query_node ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:scientific_question ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:scientific_question ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:Date ;
-            owl:onProperty ttm:must_pass_date ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom ttm:DirectionEnum ;
-            owl:onProperty ttm:direction ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:answer_informal_concept ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:must_pass_date ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:direction ],
+            owl:onProperty ttm:string_entry ],
         [ a owl:Restriction ;
             owl:allValuesFrom ttm:TestEnvEnum ;
             owl:onProperty ttm:must_pass_environment ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:notes ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:notes ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:string_entry ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:top_level ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:must_pass_date ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:must_pass_environment ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:answer_informal_concept ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:scientific_question ],
-        [ a owl:Restriction ;
             owl:allValuesFrom linkml:Integer ;
             owl:onProperty ttm:top_level ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:direction ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:must_pass_environment ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:expected_result ],
         [ a owl:Restriction ;
             owl:allValuesFrom ttm:ExpectedResultsEnum ;
             owl:onProperty ttm:expected_result ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
             owl:onProperty ttm:string_entry ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:query_node ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:answer_informal_concept ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:answer_informal_concept ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:notes ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:must_pass_environment ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:expected_result ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:must_pass_date ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:scientific_question ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:notes ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:query_node ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:direction ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:expected_result ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Date ;
+            owl:onProperty ttm:must_pass_date ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:top_level ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:direction ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:must_pass_date ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:scientific_question ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:notes ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom ttm:DirectionEnum ;
+            owl:onProperty ttm:direction ],
         ttm:TestAsset ;
     skos:definition "Model derived from Jenn's test asset design and Shervin's runner JSON here as an example." ;
-    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
-
-ttm:KnowledgeGraphNavigationTestCase a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "KnowledgeGraphNavigationTestCase" ;
-    rdfs:subClassOf ttm:TestCase ;
-    skos:definition "Knowledge Graph navigation integration test" ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 <https://w3id.org/TranslatorSRI/TranslatorTestingModel/QueryTypeEnum#treats> a owl:Class,
@@ -311,19 +286,19 @@ ttm:TestOutput a owl:Class,
     rdfs:label "TestOutput" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty ttm:pks ],
+            owl:onProperty ttm:test_case_id ],
         [ a owl:Restriction ;
             owl:allValuesFrom ttm:TestResultPKSet ;
             owl:onProperty ttm:pks ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:test_case_id ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty ttm:test_case_id ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty ttm:test_case_id ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:test_case_id ],
+            owl:onProperty ttm:pks ],
         ttm:TestEntity ;
     skos:definition "The output of a TestRunner run of one specific TestCase." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
@@ -413,21 +388,21 @@ ttm:Qualifier a owl:Class,
     rdfs:label "Qualifier" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty ttm:parameter ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty ttm:value ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
             owl:onProperty ttm:parameter ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:parameter ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:value ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty ttm:value ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty ttm:parameter ],
         [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
+            owl:minCardinality 0 ;
             owl:onProperty ttm:value ],
         ttm:TestEntityParameter ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
@@ -452,27 +427,27 @@ ttm:TestCaseResult a owl:Class,
     rdfs:label "TestCaseResult" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty ttm:test_case ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:Uriorcurie ;
             owl:onProperty ttm:test_suite_id ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:test_case_result ],
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:test_suite_id ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty ttm:test_case ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:minCardinality 0 ;
             owl:onProperty ttm:test_case_result ],
         [ a owl:Restriction ;
             owl:allValuesFrom ttm:TestCase ;
             owl:onProperty ttm:test_case ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:test_suite_id ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
+            owl:onProperty ttm:test_case_result ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:test_case ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Uriorcurie ;
             owl:onProperty ttm:test_suite_id ],
         [ a owl:Restriction ;
             owl:allValuesFrom ttm:TestCaseResultEnum ;
@@ -500,23 +475,23 @@ ttm:TestEntityParameter a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "TestEntityParameter" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:maxCardinality 1 ;
             owl:onProperty ttm:value ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:parameter ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
             owl:onProperty ttm:value ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:parameter ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty ttm:parameter ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:value ] ;
+            owl:onProperty ttm:parameter ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:parameter ] ;
     skos:definition "A single 'tag = value' pair (where 'value' is a simple string)." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
@@ -580,9 +555,19 @@ ttm:TestEntityParameter a owl:Class,
     rdfs:label "BenchmarkTest" ;
     rdfs:subClassOf ttm:TestObjectiveEnum .
 
+<https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#OneHopTest> a owl:Class,
+        ttm:TestObjectiveEnum ;
+    rdfs:label "OneHopTest" ;
+    rdfs:subClassOf ttm:TestObjectiveEnum .
+
 <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#QuantitativeTest> a owl:Class,
         ttm:TestObjectiveEnum ;
     rdfs:label "QuantitativeTest" ;
+    rdfs:subClassOf ttm:TestObjectiveEnum .
+
+<https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#StandardsValidationTest> a owl:Class,
+        ttm:TestObjectiveEnum ;
+    rdfs:label "StandardsValidationTest" ;
     rdfs:subClassOf ttm:TestObjectiveEnum .
 
 <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestPersonaEnum#All> a owl:Class,
@@ -610,67 +595,67 @@ ttm:TestResultPKSet a owl:Class,
     rdfs:label "TestResultPKSet" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:minCardinality 0 ;
+            owl:onProperty ttm:aragorn ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:bte ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:merged_pk ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:merged_pk ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:parent_pk ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:improving ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:unsecret ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:improving ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
             owl:onProperty ttm:merged_pk ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
             owl:onProperty ttm:aragorn ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty ttm:improving ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:parent_pk ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty ttm:arax ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:bte ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty ttm:aragorn ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:improving ],
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:arax ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty ttm:aragorn ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
             owl:onProperty ttm:improving ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:bte ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:bte ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:merged_pk ],
+            owl:onProperty ttm:unsecret ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty ttm:bte ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty ttm:merged_pk ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:unsecret ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:unsecret ],
+            owl:onProperty ttm:arax ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty ttm:parent_pk ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:unsecret ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:allValuesFrom linkml:String ;
             owl:onProperty ttm:parent_pk ],
         [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:arax ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:arax ],
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:unsecret ],
         ttm:TestEntity ;
     skos:definition "Primary keys for a given ARA result set from a SmokeTest result for a given TestCase." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
@@ -710,20 +695,20 @@ ttm:TestSuiteSpecification a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "TestSuiteSpecification" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom ttm:FileFormatEnum ;
-            owl:onProperty ttm:test_data_file_format ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:maxCardinality 1 ;
             owl:onProperty ttm:test_data_file_format ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
+            owl:onProperty ttm:test_data_file_locator ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom ttm:FileFormatEnum ;
             owl:onProperty ttm:test_data_file_format ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:Uriorcurie ;
             owl:onProperty ttm:test_data_file_locator ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:test_data_file_locator ],
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:test_data_file_format ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty ttm:test_data_file_locator ],
@@ -795,27 +780,11 @@ ttm:qualifiers a owl:ObjectProperty,
     skos:definition "Optional qualifiers which constrain to the test asset defined knowledge statement. Note that this field records such qualifier slots and values as tag=value pairs, where the tag is the Biolink Model qualifier slot named and the value is an acceptable (Biolink Model enum?) value of the said qualifier slot." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
-ttm:runner_settings a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "runner_settings" ;
-    rdfs:range linkml:String ;
-    skos:altLabel "Settings" ;
-    skos:definition "Settings for the test harness for TestAsset" ;
-    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
-
 ttm:test_case_results a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "test_case_results" ;
     rdfs:range ttm:TestCaseResult ;
     skos:definition "One or more instances of TestCaseResult." ;
-    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
-
-ttm:test_case_runner_settings a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "test_case_runner_settings" ;
-    rdfs:range linkml:String ;
-    skos:altLabel "Settings" ;
-    skos:definition "Settings for the test harness for TestCase" ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:test_cases a owl:ObjectProperty,
@@ -836,183 +805,183 @@ ttm:test_entity_parameters a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "test_entity_parameters" ;
     rdfs:range ttm:TestEntityParameter ;
-    skos:definition "One or more parameters documenting target characteristics of a TestEntity." ;
+    skos:definition "One or more 'tag = value' parameters documenting target characteristics of a TestEntity." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:TestAsset a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "TestAsset" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:predicate_name ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty ttm:qualifiers ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty ttm:input_category ],
+            owl:onProperty ttm:association ],
         [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:runner_settings ],
+            owl:allValuesFrom linkml:Boolean ;
+            owl:onProperty ttm:in_v1 ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom ttm:TestIssueEnum ;
+            owl:onProperty ttm:test_issue ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:in_v1 ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty ttm:test_metadata ],
+            owl:onProperty ttm:test_reference ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:predicate_id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:output_id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:output_category ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Uriorcurie ;
+            owl:onProperty ttm:input_id ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty ttm:input_id ],
         [ a owl:Restriction ;
-            owl:allValuesFrom ttm:predicate_type ;
+            owl:minCardinality 0 ;
             owl:onProperty ttm:predicate_id ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty ttm:predicate_id ],
+            owl:onProperty ttm:input_category ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty ttm:test_metadata ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:well_known ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty ttm:expected_output ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty ttm:semantic_severity ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
             owl:onProperty ttm:id ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:output_category ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty ttm:predicate_name ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom ttm:TestIssueEnum ;
-            owl:onProperty ttm:test_issue ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:test_reference ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom ttm:concept_category ;
-            owl:onProperty ttm:output_category ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:Uriorcurie ;
-            owl:onProperty ttm:output_id ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:in_v1 ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
             owl:onProperty ttm:output_name ],
         [ a owl:Restriction ;
-            owl:allValuesFrom linkml:Boolean ;
-            owl:onProperty ttm:well_known ],
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:predicate_name ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:output_category ],
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:expected_output ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:test_issue ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty ttm:input_id ],
         [ a owl:Restriction ;
-            owl:allValuesFrom linkml:Uriorcurie ;
-            owl:onProperty ttm:id ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty ttm:input_category ],
+            owl:onProperty ttm:test_runner_settings ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:association ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom linkml:String ;
             owl:onProperty ttm:output_name ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:test_issue ],
+            owl:allValuesFrom ttm:SemanticSeverityEnum ;
+            owl:onProperty ttm:semantic_severity ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:output_name ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:Boolean ;
-            owl:onProperty ttm:in_v1 ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:tags ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty ttm:runner_settings ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:input_name ],
+            owl:allValuesFrom ttm:concept_category ;
+            owl:onProperty ttm:output_category ],
         [ a owl:Restriction ;
             owl:allValuesFrom ttm:association_category ;
             owl:onProperty ttm:association ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty ttm:well_known ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:input_name ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:expected_output ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:Uriorcurie ;
-            owl:onProperty ttm:input_id ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:test_reference ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:output_id ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:output_id ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:input_name ],
+            owl:onProperty ttm:test_issue ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty ttm:semantic_severity ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:input_name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:input_category ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom ttm:concept_category ;
+            owl:onProperty ttm:input_category ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:input_name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:association ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Uriorcurie ;
+            owl:onProperty ttm:id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Uriorcurie ;
+            owl:onProperty ttm:test_reference ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:predicate_name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:semantic_severity ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:test_metadata ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty ttm:expected_output ],
         [ a owl:Restriction ;
             owl:allValuesFrom ttm:TestMetadata ;
             owl:onProperty ttm:test_metadata ],
         [ a owl:Restriction ;
-            owl:allValuesFrom ttm:concept_category ;
-            owl:onProperty ttm:input_category ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:tags ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom ttm:SemanticSeverityEnum ;
-            owl:onProperty ttm:semantic_severity ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty ttm:predicate_id ],
+            owl:onProperty ttm:output_name ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:Uriorcurie ;
-            owl:onProperty ttm:test_reference ],
+            owl:onProperty ttm:output_id ],
         [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty ttm:id ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom ttm:Qualifier ;
-            owl:onProperty ttm:qualifiers ],
+            owl:allValuesFrom ttm:predicate_type ;
+            owl:onProperty ttm:predicate_id ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty ttm:predicate_name ],
+            owl:onProperty ttm:in_v1 ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:output_id ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty ttm:in_v1 ],
+            owl:onProperty ttm:predicate_name ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty ttm:well_known ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:test_issue ],
-        [ a owl:Restriction ;
             owl:minCardinality 1 ;
-            owl:onProperty ttm:test_metadata ],
+            owl:onProperty ttm:id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:test_runner_settings ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom ttm:Qualifier ;
+            owl:onProperty ttm:qualifiers ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Boolean ;
+            owl:onProperty ttm:well_known ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:tags ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty ttm:association ],
+            owl:onProperty ttm:input_name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:tags ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:output_category ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:test_reference ],
         ttm:TestEntity ;
     skos:definition "Represents a Test Asset, which is a single specific instance of TestCase-agnostic semantic parameters representing the specification of a Translator test target with inputs and (expected) outputs." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
@@ -1021,41 +990,41 @@ ttm:TestMetadata a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "TestMetadata" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:test_annotations ],
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:test_objective ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty ttm:test_objective ],
         [ a owl:Restriction ;
-            owl:allValuesFrom ttm:TestObjectiveEnum ;
-            owl:onProperty ttm:test_objective ],
+            owl:allValuesFrom ttm:TestSourceEnum ;
+            owl:onProperty ttm:test_source ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:Uriorcurie ;
             owl:onProperty ttm:test_reference ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty ttm:test_annotations ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:test_reference ],
+            owl:onProperty ttm:test_source ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty ttm:test_source ],
         [ a owl:Restriction ;
-            owl:allValuesFrom ttm:TestSourceEnum ;
-            owl:onProperty ttm:test_source ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty ttm:test_source ],
+            owl:onProperty ttm:test_annotations ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:test_annotations ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom ttm:TestObjectiveEnum ;
             owl:onProperty ttm:test_objective ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:test_annotations ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty ttm:test_reference ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty ttm:test_annotations ],
+            owl:onProperty ttm:test_reference ],
         ttm:TestEntity ;
     skos:definition "Represents metadata related to (external SME, SMURF, Translator feedback,  large scale batch, etc.) like the provenance of test assets, cases and/or suites." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
@@ -1069,38 +1038,38 @@ ttm:TestSuite a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "TestSuite" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom ttm:TestSuiteSpecification ;
-            owl:onProperty ttm:test_suite_specification ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom ttm:TestMetadata ;
-            owl:onProperty ttm:test_metadata ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty ttm:test_persona ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:test_cases ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
             owl:onProperty ttm:test_suite_specification ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty ttm:test_metadata ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:test_persona ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:test_metadata ],
         [ a owl:Restriction ;
             owl:allValuesFrom ttm:TestCase ;
             owl:onProperty ttm:test_cases ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
+            owl:onProperty ttm:test_persona ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty ttm:test_suite_specification ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom ttm:TestSuiteSpecification ;
+            owl:onProperty ttm:test_suite_specification ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty ttm:test_metadata ],
         [ a owl:Restriction ;
             owl:allValuesFrom ttm:TestPersonaEnum ;
             owl:onProperty ttm:test_persona ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:test_persona ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom ttm:TestMetadata ;
+            owl:onProperty ttm:test_metadata ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:test_metadata ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:test_cases ],
         ttm:TestEntity ;
     skos:definition "Specification of a set of Test Cases, one of either with a static list of 'test_cases' or a dynamic 'test_suite_specification' slot values. Note: at least one slot or the other, but generally not both(?) needs to be present." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
@@ -1127,12 +1096,6 @@ ttm:association a owl:ObjectProperty,
     rdfs:label "association" ;
     rdfs:range ttm:association_category ;
     skos:definition "Specific Biolink Model association 'category' which applies to the test asset defined knowledge statement" ;
-    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
-
-ttm:biolink_version a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "biolink_version" ;
-    skos:definition "Biolink Model release (SemVer string)" ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:bte a owl:ObjectProperty,
@@ -1418,7 +1381,7 @@ ttm:test_run_parameters a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "test_run_parameters" ;
     rdfs:subPropertyOf ttm:test_entity_parameters ;
-    skos:definition "Parameters for TestRunnerConfiguration that inform the TestHarness and TestRunners about the general characteristics of a test run." ;
+    skos:definition "TestRunSession parameters informing a TestHarness about the global characteristics of TestRunner processing tests." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:test_runner_name a owl:ObjectProperty,
@@ -1469,12 +1432,6 @@ ttm:trapi_template a owl:ObjectProperty,
     skos:definition "A template for a query, which can be used to generate a query for a test case.  note: the current enumerated values for this slot come from the Benchmarks repo config/benchmarks.json \"templates\" collection and refer to the \"name\" field of each template.  Templates themselves are currently stored in the config/[source_name]/templates directory." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
-ttm:trapi_version a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "trapi_version" ;
-    skos:definition "TRAPI version (SemVer string)" ;
-    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
-
 ttm:unsecret a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "unsecret" ;
@@ -1502,6 +1459,14 @@ ttm:test_assets a owl:ObjectProperty,
     skos:definition "List of explicitly enumerated Test Assets. The class attributes of TestAsset would be included in the TestCase versus being referred to by the identifier (curie) of the TestAsset. That is, this would be a list of objects (in JSONSchema serialization) versus a list of strings (where each string is an identifier pointing to another class)." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
+ttm:test_runner_settings a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "test_runner_settings" ;
+    rdfs:range linkml:String ;
+    skos:altLabel "Settings" ;
+    skos:definition "Scalar parameters for the TestRunner processing a given TestEntity." ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
 ttm:DirectionEnum a owl:Class,
         linkml:EnumDefinition ;
     owl:unionOf ( <https://w3id.org/TranslatorSRI/TranslatorTestingModel/DirectionEnum#increased> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/DirectionEnum#decreased> ) ;
@@ -1520,6 +1485,94 @@ ttm:NodeEnum a owl:Class,
     linkml:permissible_values <https://w3id.org/TranslatorSRI/TranslatorTestingModel/NodeEnum#object>,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/NodeEnum#subject> .
 
+ttm:TestCase a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "TestCase" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:query_type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom ttm:Precondition ;
+            owl:onProperty ttm:preconditions ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:test_case_input_id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom owl:Thing ;
+            owl:onProperty ttm:test_assets ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:test_case_predicate_name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:test_case_predicate_name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:tags ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:trapi_template ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom ttm:TrapiTemplateEnum ;
+            owl:onProperty ttm:trapi_template ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:test_case_predicate_name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:test_case_predicate_id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:tags ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:test_case_objective ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom ttm:TestSourceEnum ;
+            owl:onProperty ttm:test_case_source ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:test_case_source ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:query_type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom ttm:QueryTypeEnum ;
+            owl:onProperty ttm:query_type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:test_case_input_id ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:test_case_objective ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:test_case_predicate_id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:preconditions ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:test_case_predicate_id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty ttm:test_assets ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty ttm:trapi_template ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom ttm:TestObjectiveEnum ;
+            owl:onProperty ttm:test_case_objective ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Uriorcurie ;
+            owl:onProperty ttm:test_case_input_id ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty ttm:test_case_source ],
+        ttm:TestEntity ;
+    skos:definition "Represents a single enumerated instance of Test Case, derived from a  given collection of one or more TestAsset instances (the value of the 'test_assets' slot) which define the 'inputs' and 'outputs' of the TestCase, used to probe a particular test condition." ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
 ttm:id a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "id" ;
@@ -1531,6 +1584,12 @@ ttm:parameter a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "parameter" ;
     skos:definition "Name of a TestParameter." ;
+    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
+
+ttm:tags a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "tags" ;
+    skos:definition "A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:test_metadata a owl:ObjectProperty,
@@ -1568,127 +1627,12 @@ ttm:SemanticSeverityEnum a owl:Class,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/SemanticSeverityEnum#Low>,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/SemanticSeverityEnum#NotApplicable> .
 
-ttm:TestCase a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "TestCase" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:trapi_template ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom ttm:QueryTypeEnum ;
-            owl:onProperty ttm:query_type ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:test_env ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:test_case_input_id ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom ttm:TestObjectiveEnum ;
-            owl:onProperty ttm:test_case_objective ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:test_case_predicate_id ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:test_case_objective ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:test_case_source ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:query_type ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:trapi_template ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:components ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:test_case_predicate_id ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:test_case_predicate_name ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom ttm:TestSourceEnum ;
-            owl:onProperty ttm:test_case_source ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:query_type ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:test_case_source ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:test_case_runner_settings ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:test_case_objective ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty ttm:test_case_runner_settings ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom ttm:Precondition ;
-            owl:onProperty ttm:preconditions ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty ttm:test_assets ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:Uriorcurie ;
-            owl:onProperty ttm:test_case_input_id ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:tags ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom owl:Thing ;
-            owl:onProperty ttm:test_assets ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom ttm:ComponentEnum ;
-            owl:onProperty ttm:components ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:test_case_predicate_name ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:test_case_predicate_id ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:preconditions ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:test_case_input_id ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom ttm:TestEnvEnum ;
-            owl:onProperty ttm:test_env ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:test_env ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty ttm:test_case_predicate_name ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom ttm:TrapiTemplateEnum ;
-            owl:onProperty ttm:trapi_template ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:tags ],
-        ttm:TestEntity ;
-    skos:definition "Represents a single enumerated instance of Test Case, derived from a  given collection of one or more TestAsset instances (the value of the 'test_assets' slot) which define the 'inputs' and 'outputs' of the TestCase, used to probe a particular test condition." ;
-    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
-
 ttm:TestCaseResultEnum a owl:Class,
         linkml:EnumDefinition ;
     owl:unionOf ( <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestCaseResultEnum#test_passed> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestCaseResultEnum#test_failed> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestCaseResultEnum#test_skipped> ) ;
     linkml:permissible_values <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestCaseResultEnum#test_failed>,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestCaseResultEnum#test_passed>,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestCaseResultEnum#test_skipped> .
-
-ttm:tags a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "tags" ;
-    skos:definition "A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists." ;
-    skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
 
 ttm:ExpectedOutputEnum a owl:Class,
         linkml:EnumDefinition ;
@@ -1698,13 +1642,6 @@ ttm:ExpectedOutputEnum a owl:Class,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#NeverShow>,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#OverlyGeneric>,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedOutputEnum#TopAnswer> .
-
-ttm:TestObjectiveEnum a owl:Class,
-        linkml:EnumDefinition ;
-    owl:unionOf ( <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#AcceptanceTest> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#BenchmarkTest> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#QuantitativeTest> ) ;
-    linkml:permissible_values <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#AcceptanceTest>,
-        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#BenchmarkTest>,
-        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#QuantitativeTest> .
 
 ttm:TestPersonaEnum a owl:Class,
         linkml:EnumDefinition ;
@@ -1718,37 +1655,43 @@ ttm:TestEntity a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "TestEntity" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:test_runner_settings ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty ttm:name ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty ttm:description ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
-            owl:onProperty ttm:name ],
+            owl:onProperty ttm:tags ],
         [ a owl:Restriction ;
-            owl:allValuesFrom linkml:Uriorcurie ;
-            owl:onProperty ttm:id ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
+            owl:minCardinality 0 ;
             owl:onProperty ttm:tags ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
             owl:onProperty ttm:id ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty ttm:description ],
+            owl:onProperty ttm:test_runner_settings ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty ttm:id ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:minCardinality 0 ;
             owl:onProperty ttm:name ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty ttm:tags ],
-        [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
+            owl:onProperty ttm:description ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:Uriorcurie ;
+            owl:onProperty ttm:id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty ttm:description ] ;
     skos:definition "Abstract global 'identification' class shared as a parent with all major model classes within the data model for Translator testing." ;
     skos:inScheme <https://w3id.org/TranslatorSRI/TranslatorTestingModel> .
@@ -1779,6 +1722,15 @@ ttm:TestIssueEnum a owl:Class,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#chemical+roles>,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#contraindications>,
         <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#test_issue> .
+
+ttm:TestObjectiveEnum a owl:Class,
+        linkml:EnumDefinition ;
+    owl:unionOf ( <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#AcceptanceTest> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#BenchmarkTest> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#QuantitativeTest> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#OneHopTest> <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#StandardsValidationTest> ) ;
+    linkml:permissible_values <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#AcceptanceTest>,
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#BenchmarkTest>,
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#OneHopTest>,
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#QuantitativeTest>,
+        <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#StandardsValidationTest> .
 
 ttm:TestSourceEnum a owl:Class,
         linkml:EnumDefinition ;

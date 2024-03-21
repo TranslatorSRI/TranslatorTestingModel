@@ -88,6 +88,7 @@ classes:
       - name
       - description
       - tags
+      - test_runner_settings
 
   TestMetadata:
     description: >-
@@ -107,8 +108,8 @@ classes:
   TestAsset:
     description: >-
       Represents a Test Asset, which is a single specific instance of
-      TestCase-agnostic semantic parameters representing the
-      specification of a Translator test target with inputs and (expected) outputs.
+      TestCase-agnostic semantic parameters representing the specification
+      of a Translator test target with inputs and (expected) outputs.
     is_a: TestEntity
     slots:
       - input_id
@@ -127,7 +128,6 @@ classes:
       - in_v1
       - well_known
       - test_reference
-      - runner_settings
       - test_metadata
     slot_usage:
       id:
@@ -137,9 +137,9 @@ classes:
         description: >-
           One or more 'tags' slot values (inherited from TestEntity) should generally
           be defined to specify TestAsset membership in a "Block List" collection
-      runner_settings:
+      test_runner_settings:
         description: >-
-          Settings for the test harness, e.g. "inferred"
+          Scalar settings for the TestRunner, e.g. "inferred"
 
   AcceptanceTestAsset:
     is_a: TestAsset
@@ -190,18 +190,15 @@ classes:
       TestCase, used to probe a particular test condition.
     is_a: TestEntity
     slots:
-      - test_env
       - query_type
       - test_assets
       - preconditions
       - trapi_template
-      - components
       - test_case_objective
       - test_case_source
       - test_case_predicate_name
       - test_case_predicate_id
       - test_case_input_id
-      - test_case_runner_settings
     slot_usage:
       test_assets:
         aliases: ["Block List"]
@@ -230,32 +227,6 @@ classes:
 #      test_assets:
 #        range: QuantitativeTestAsset
 
-  ComplianceTestCase:
-    is_a: TestCase
-    description: >-
-      TRAPI and Biolink Model standards compliance test
-    slots:
-      - trapi_version
-      - biolink_version
-    slot_usage:
-#      test_assets:
-#        range: ComplianceTestAsset
-
-  KnowledgeGraphNavigationTestCase:
-    is_a: TestCase
-    description: >-
-      Knowledge Graph navigation integration test
-    slot_usage:
-#      test_assets:
-#        range: KnowledgeGraphNavigationTestAsset
-
-  OneHopTestCase:
-    is_a: KnowledgeGraphNavigationTestCase
-    description: >-
-      'One Hop' Knowledge Graph navigation integration test
-    slot_usage:
-#      test_assets:
-#        range: OneHopTestAsset
 
   #####################
   # Test Suite Models #
@@ -304,19 +275,6 @@ classes:
   # TestRunner Models #
   #####################
 
-  TestRunnerConfiguration:
-    description: >-
-      General configuration parameters and test data input 
-      for a single invocation of a TestRunner.
-    is_a: TestEntity
-    slots:
-      - test_run_parameters
-    slot_usage:
-      tags:
-        description: >-
-          One or more 'tags' slot values (slot inherited from TestEntity) 
-          should generally identify the TestRunner(s) using this configuration.
-
   TestCaseResult:
     description: >-
       The outcome of a TestRunner run of one specific TestCase.
@@ -328,18 +286,28 @@ classes:
 
   TestRunSession:
     description: >-
-      A single invocation of a TestRunner.
+      Single run of a TestRunner in a given environment, with a specified
+      set of test_entities (generally, one or more instances of TestSuite).
     is_a: TestEntity
     slots:
+      - components
+      - test_env
       - test_runner_name
+      - test_run_parameters
       - test_entities
       - test_case_results
       - timestamp
     slot_usage:
+      test_run_parameters:
+        description: >-
+          Different TestRunners could expect additional global test
+          configuration parameters, like the applicable TRAPI version
+          ("trapi_version") or Biolink Model versions ("biolink_version").
       test_entities:
         description: >-
-          Different TestRunners may expect specific kinds of TestEntity as input.
-          These 'test_entities' one or more instances of TestAsset, TestCase or TestSuite.
+          Different TestRunners could expect specific kinds of TestEntity
+          as an input.  These 'test_entities' are one or more instances of
+          TestAsset, TestCase or (preferably?) TestSuite.
 
   TestOutput:
     description: >-
@@ -407,7 +375,7 @@ slots:
 
   test_entity_parameters:
     description: >-
-      One or more parameters documenting target characteristics of a TestEntity.
+      One or more 'tag = value' parameters documenting target characteristics of a TestEntity.
     range: TestEntityParameter
     multivalued: true
     inlined: true
@@ -579,21 +547,13 @@ slots:
     aliases: ["Well Known"]
     range: boolean
 
-  runner_settings:
+  test_runner_settings:
     aliases: ["Settings"]
     description: >-
-      Settings for the test harness for TestAsset
+      Scalar parameters for the TestRunner processing a given TestEntity.
     range: string
     multivalued: true
-    required: true
-
-  test_case_runner_settings:
-    aliases: ["Settings"]
-    description: >-
-      Settings for the test harness for TestCase
-    range: string
-    multivalued: true
-    required: true
+    required: false
 
   must_pass_date:
     description: >-
@@ -778,8 +738,8 @@ slots:
 
   test_run_parameters:
     description: >-
-      Parameters for TestRunnerConfiguration that inform the TestHarness
-      and TestRunners about the general characteristics of a test run.
+      TestRunSession parameters informing a TestHarness about
+      the global characteristics of TestRunner processing tests.
     is_a: test_entity_parameters
 
   test_suite_id:
@@ -865,6 +825,10 @@ enums:
         description: Semantic benchmarking
       QuantitativeTest:
         description: Quantitative test
+      OneHopTest:
+        description: One Hop Test of knowledge graph navigation
+      StandardsValidationTest:
+        description: TRAPI and Biolink Model ("reasoner-validator") validation
 
   TestEnvEnum:
     description: >-
