@@ -139,7 +139,7 @@ def create_test_assets_from_tsv(test_assets):
                                test_source="SMURF",
                                test_objective="AcceptanceTest")
             ta.test_metadata = tmd
-        ta.runner_settings = [row.get("Settings").lower()]
+        ta.test_runner_settings = [row.get("Settings").lower()]
 
         if biolink_qualified_predicate != "":
             qp = Qualifier(parameter="biolink_qualified_predicate",
@@ -150,7 +150,7 @@ def create_test_assets_from_tsv(test_assets):
                             value=biolink_object_direction_qualifier)
             qualifiers = [qp, oaq, odq]
 
-            ta.qualifiers=qualifiers
+            ta.qualifiers = qualifiers
         if row.get("Well Known") == "yes":
             ta.well_known = True
         else:
@@ -181,7 +181,7 @@ def create_test_cases_from_test_assets(test_assets, test_case_model):
                                     components=["ars"],
                                     test_case_objective="AcceptanceTest",
                                     test_assets=assets,
-                                    test_case_runner_settings=["inferred"]
+                                    test_runner_settings=["inferred"]
                                     )
         if test_case.test_assets is None:
             print("test case has no assets", test_case)
@@ -189,13 +189,23 @@ def create_test_cases_from_test_assets(test_assets, test_case_model):
         if test_case.test_case_objective == "AcceptanceTest":
             test_input_id = ""
             test_case_predicate_name = ""
+            test_case_qualifiers = []
+            input_category = ""
+            output_category = ""
             for asset in assets:
+                # these all assume group by applies to the same input_id and predicate_name
                 test_input_id = asset.input_id
                 test_case_predicate_name = asset.predicate_name
+                test_case_qualifiers = asset.qualifiers
+                input_category = asset.input_category
+                output_category = asset.output_category
 
             test_case.test_case_input_id = test_input_id
             test_case.test_case_predicate_name = test_case_predicate_name
             test_case.test_case_predicate_id = "biolink:" + test_case_predicate_name
+            test_case.qualifiers = test_case_qualifiers
+            test_case.input_category = input_category
+            test_case.output_category = output_category
             test_cases.append(test_case)
 
     return test_cases
@@ -215,7 +225,6 @@ if __name__ == '__main__':
     # Reading the TSV file
     tsv_file_path = 'pf_test_assets_031524.tsv'
     tsv_data = parse_tsv(tsv_file_path)
-    print(tsv_data[0])
 
     # Create TestAsset objects
     test_assets = create_test_assets_from_tsv(tsv_data)
@@ -267,7 +276,7 @@ if __name__ == '__main__':
                           test_env="ci",
                           components=["ars"],
                           test_case_objective="QuantitativeTest",
-                          test_case_runner_settings=["limit_queries"]
+                          test_runner_settings=["limit_queries"]
                           )
             file_prefix = k
             if k.startswith("DrugCentral_subset"):
