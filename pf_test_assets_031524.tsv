@@ -265,7 +265,8 @@ Asset:335	decreases activity or abundance of	Inferred	BRAF (human)	NCBIGene:673	
 Asset:336	decreases activity or abundance of	Inferred	PDE5A (human)	NCBIGene:8654	PUBCHEM.COMPOUND:135398744	Sildenafil	1_TopAnswer				Sarah Stemann (StatPearl)																				PDE5A (human)
 Asset:337	decreases activity or abundance of	Inferred	MGAM (human)	NCBIGene:8972	PUBCHEM.COMPOUND:41774	Acarbose	1_TopAnswer				Sarah Stemann (DrugBank > Target)																				MGAM (human)
 Asset:338	decreases activity or abundance of	Inferred	SLC5A2 (human)	NCBIGene:6524	PUBCHEM.COMPOUND:24812758	Canagliflozin	1_TopAnswer				Sarah Stemann (StatPearl SGTL2 > SLC5A)																				SLC5A2 (human)
-Asset:339	decreases activity or abundance of	Inferred	Eliglustat	PUBCHEM.COMPOUND:23652731	NCBI:2629	GBA1	2_Acceptable				Sarah Stemann (DrugBank)																				
+Asset:339	decreases activity or abundance of	Inferred	Eliglustat	PUBCHEM.COMPOUND:23652731	NCBIGene:2629	GBA1	2_Acceptable				
+Sarah Stemann (DrugBank)																				
 Asset:34	Treats	Inferred	Lactose intolerance	MONDO:0100345	MESH:D010936	Plant extracts	4_NeverShow				Sandrine Muller					all															
 Asset:340	decreases activity or abundance of	Inferred	BRCA2	NCBIGene:675	PUBCHEM.COMPOUND:23725625	olaparib	2_Acceptable		Automated, LLM	No validation	Sharat Israni																				BRCA2
 Asset:341	decreases activity or abundance of	Inferred	BRCA2	NCBIGene:675	PUBCHEM.COMPOUND:11960529	veliparib	2_Acceptable		Automated, LLM	No validation	Sharat Israni																				BRCA2
