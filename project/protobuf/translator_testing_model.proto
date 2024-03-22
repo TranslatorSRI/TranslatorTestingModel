@@ -49,6 +49,7 @@ message AcceptanceTestCase
   testSourceEnum testCaseSource = 0
   string testCasePredicateName = 0
   string testCasePredicateId = 0
+ repeated  qualifier testCaseQualifiers = 0
   uriorcurie testCaseInputId = 0
  repeated  string testCaseRunnerSettings = 0
  repeated  string tags = 0
@@ -81,6 +82,7 @@ message ComplianceTestCase
   testSourceEnum testCaseSource = 0
   string testCasePredicateName = 0
   string testCasePredicateId = 0
+ repeated  qualifier testCaseQualifiers = 0
   uriorcurie testCaseInputId = 0
  repeated  string testCaseRunnerSettings = 0
  repeated  string tags = 0
@@ -103,6 +105,7 @@ message KnowledgeGraphNavigationTestCase
   testSourceEnum testCaseSource = 0
   string testCasePredicateName = 0
   string testCasePredicateId = 0
+ repeated  qualifier testCaseQualifiers = 0
   uriorcurie testCaseInputId = 0
  repeated  string testCaseRunnerSettings = 0
  repeated  string tags = 0
@@ -123,6 +126,7 @@ message OneHopTestCase
   testSourceEnum testCaseSource = 0
   string testCasePredicateName = 0
   string testCasePredicateId = 0
+ repeated  qualifier testCaseQualifiers = 0
   uriorcurie testCaseInputId = 0
  repeated  string testCaseRunnerSettings = 0
  repeated  string tags = 0
@@ -168,6 +172,7 @@ message QuantitativeTestCase
   testSourceEnum testCaseSource = 0
   string testCasePredicateName = 0
   string testCasePredicateId = 0
+ repeated  qualifier testCaseQualifiers = 0
   uriorcurie testCaseInputId = 0
  repeated  string testCaseRunnerSettings = 0
  repeated  string tags = 0
@@ -226,6 +231,7 @@ message TestCase
   testSourceEnum testCaseSource = 0
   string testCasePredicateName = 0
   string testCasePredicateId = 0
+ repeated  qualifier testCaseQualifiers = 0
   uriorcurie testCaseInputId = 0
  repeated  string testCaseRunnerSettings = 0
  repeated  string tags = 0

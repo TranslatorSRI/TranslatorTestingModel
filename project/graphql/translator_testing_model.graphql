@@ -48,6 +48,7 @@ type AcceptanceTestCase
     testCaseSource: TestSourceEnum
     testCasePredicateName: String
     testCasePredicateId: String
+    testCaseQualifiers: [Qualifier]
     testCaseInputId: Uriorcurie
     testCaseRunnerSettings: [String]!
     tags: [String]
@@ -85,6 +86,7 @@ type ComplianceTestCase
     testCaseSource: TestSourceEnum
     testCasePredicateName: String
     testCasePredicateId: String
+    testCaseQualifiers: [Qualifier]
     testCaseInputId: Uriorcurie
     testCaseRunnerSettings: [String]!
     tags: [String]
@@ -107,6 +109,7 @@ type KnowledgeGraphNavigationTestCase
     testCaseSource: TestSourceEnum
     testCasePredicateName: String
     testCasePredicateId: String
+    testCaseQualifiers: [Qualifier]
     testCaseInputId: Uriorcurie
     testCaseRunnerSettings: [String]!
     tags: [String]
@@ -127,6 +130,7 @@ type OneHopTestCase
     testCaseSource: TestSourceEnum
     testCasePredicateName: String
     testCasePredicateId: String
+    testCaseQualifiers: [Qualifier]
     testCaseInputId: Uriorcurie
     testCaseRunnerSettings: [String]!
     tags: [String]
@@ -173,6 +177,7 @@ type QuantitativeTestCase
     testCaseSource: TestSourceEnum
     testCasePredicateName: String
     testCasePredicateId: String
+    testCaseQualifiers: [Qualifier]
     testCaseInputId: Uriorcurie
     testCaseRunnerSettings: [String]!
     tags: [String]
@@ -231,6 +236,7 @@ type TestCase
     testCaseSource: TestSourceEnum
     testCasePredicateName: String
     testCasePredicateId: String
+    testCaseQualifiers: [Qualifier]
     testCaseInputId: Uriorcurie
     testCaseRunnerSettings: [String]!
     tags: [String]

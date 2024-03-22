@@ -198,6 +198,13 @@
                 "test_case_predicate_name": {
                     "type": "string"
                 },
+                "test_case_qualifiers": {
+                    "description": "Optional qualifiers which constrain to the test case defined knowledge statement. Note that this field records such qualifier slots and values as tag=value pairs, where the tag is the Biolink Model qualifier slot named and the value is an acceptable (Biolink Model enum?) value of the said qualifier slot.",
+                    "items": {
+                        "$ref": "#/$defs/Qualifier"
+                    },
+                    "type": "array"
+                },
                 "test_case_runner_settings": {
                     "description": "Settings for the test harness for TestCase",
                     "items": {
@@ -346,6 +353,13 @@
                 "test_case_predicate_name": {
                     "type": "string"
                 },
+                "test_case_qualifiers": {
+                    "description": "Optional qualifiers which constrain to the test case defined knowledge statement. Note that this field records such qualifier slots and values as tag=value pairs, where the tag is the Biolink Model qualifier slot named and the value is an acceptable (Biolink Model enum?) value of the said qualifier slot.",
+                    "items": {
+                        "$ref": "#/$defs/Qualifier"
+                    },
+                    "type": "array"
+                },
                 "test_case_runner_settings": {
                     "description": "Settings for the test harness for TestCase",
                     "items": {
@@ -483,6 +497,13 @@
                 "test_case_predicate_name": {
                     "type": "string"
                 },
+                "test_case_qualifiers": {
+                    "description": "Optional qualifiers which constrain to the test case defined knowledge statement. Note that this field records such qualifier slots and values as tag=value pairs, where the tag is the Biolink Model qualifier slot named and the value is an acceptable (Biolink Model enum?) value of the said qualifier slot.",
+                    "items": {
+                        "$ref": "#/$defs/Qualifier"
+                    },
+                    "type": "array"
+                },
                 "test_case_runner_settings": {
                     "description": "Settings for the test harness for TestCase",
                     "items": {
@@ -579,6 +600,13 @@
                 },
                 "test_case_predicate_name": {
                     "type": "string"
+                },
+                "test_case_qualifiers": {
+                    "description": "Optional qualifiers which constrain to the test case defined knowledge statement. Note that this field records such qualifier slots and values as tag=value pairs, where the tag is the Biolink Model qualifier slot named and the value is an acceptable (Biolink Model enum?) value of the said qualifier slot.",
+                    "items": {
+                        "$ref": "#/$defs/Qualifier"
+                    },
+                    "type": "array"
                 },
                 "test_case_runner_settings": {
                     "description": "Settings for the test harness for TestCase",
@@ -763,6 +791,13 @@
                 },
                 "test_case_predicate_name": {
                     "type": "string"
+                },
+                "test_case_qualifiers": {
+                    "description": "Optional qualifiers which constrain to the test case defined knowledge statement. Note that this field records such qualifier slots and values as tag=value pairs, where the tag is the Biolink Model qualifier slot named and the value is an acceptable (Biolink Model enum?) value of the said qualifier slot.",
+                    "items": {
+                        "$ref": "#/$defs/Qualifier"
+                    },
+                    "type": "array"
                 },
                 "test_case_runner_settings": {
                     "description": "Settings for the test harness for TestCase",
@@ -1017,6 +1052,13 @@
                 "test_case_predicate_name": {
                     "type": "string"
                 },
+                "test_case_qualifiers": {
+                    "description": "Optional qualifiers which constrain to the test case defined knowledge statement. Note that this field records such qualifier slots and values as tag=value pairs, where the tag is the Biolink Model qualifier slot named and the value is an acceptable (Biolink Model enum?) value of the said qualifier slot.",
+                    "items": {
+                        "$ref": "#/$defs/Qualifier"
+                    },
+                    "type": "array"
+                },
                 "test_case_runner_settings": {
                     "description": "Settings for the test harness for TestCase",
                     "items": {
@@ -1196,6 +1238,13 @@
                 },
                 "test_case_predicate_name": {
                     "type": "string"
+                },
+                "test_case_qualifiers": {
+                    "description": "Optional qualifiers which constrain to the test case defined knowledge statement. Note that this field records such qualifier slots and values as tag=value pairs, where the tag is the Biolink Model qualifier slot named and the value is an acceptable (Biolink Model enum?) value of the said qualifier slot.",
+                    "items": {
+                        "$ref": "#/$defs/Qualifier"
+                    },
+                    "type": "array"
                 },
                 "test_case_runner_settings": {
                     "description": "Settings for the test harness for TestCase",

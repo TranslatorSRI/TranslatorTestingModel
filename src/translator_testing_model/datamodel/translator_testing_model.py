@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2024-03-18T12:26:26
+# Generation date: 2024-03-22T08:49:00
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -535,6 +535,7 @@ class TestCase(TestEntity):
     test_case_source: Optional[Union[str, "TestSourceEnum"]] = None
     test_case_predicate_name: Optional[str] = None
     test_case_predicate_id: Optional[str] = None
+    test_case_qualifiers: Optional[Union[Union[dict, Qualifier], List[Union[dict, Qualifier]]]] = empty_list()
     test_case_input_id: Optional[Union[str, URIorCURIE]] = None
     tags: Optional[Union[str, List[str]]] = empty_list()
 
@@ -582,6 +583,10 @@ class TestCase(TestEntity):
 
         if self.test_case_predicate_id is not None and not isinstance(self.test_case_predicate_id, str):
             self.test_case_predicate_id = str(self.test_case_predicate_id)
+
+        if not isinstance(self.test_case_qualifiers, list):
+            self.test_case_qualifiers = [self.test_case_qualifiers] if self.test_case_qualifiers is not None else []
+        self.test_case_qualifiers = [v if isinstance(v, Qualifier) else Qualifier(**as_dict(v)) for v in self.test_case_qualifiers]
 
         if self.test_case_input_id is not None and not isinstance(self.test_case_input_id, URIorCURIE):
             self.test_case_input_id = URIorCURIE(self.test_case_input_id)
@@ -1408,21 +1413,6 @@ slots.predicate_name = Slot(uri=TTM.predicate_name, name="predicate_name", curie
 slots.biolink_predicate = Slot(uri=TTM.biolink_predicate, name="biolink_predicate", curie=TTM.curie('biolink_predicate'),
                    model_uri=TTM.biolink_predicate, domain=None, range=Optional[Union[str, URIorCURIE]])
 
-slots.biolink_subject_aspect_qualifier = Slot(uri=TTM.biolink_subject_aspect_qualifier, name="biolink_subject_aspect_qualifier", curie=TTM.curie('biolink_subject_aspect_qualifier'),
-                   model_uri=TTM.biolink_subject_aspect_qualifier, domain=None, range=Optional[str])
-
-slots.biolink_subject_direction_qualifier = Slot(uri=TTM.biolink_subject_direction_qualifier, name="biolink_subject_direction_qualifier", curie=TTM.curie('biolink_subject_direction_qualifier'),
-                   model_uri=TTM.biolink_subject_direction_qualifier, domain=None, range=Optional[str])
-
-slots.biolink_object_aspect_qualifier = Slot(uri=TTM.biolink_object_aspect_qualifier, name="biolink_object_aspect_qualifier", curie=TTM.curie('biolink_object_aspect_qualifier'),
-                   model_uri=TTM.biolink_object_aspect_qualifier, domain=None, range=Optional[str])
-
-slots.biolink_object_direction_qualifier = Slot(uri=TTM.biolink_object_direction_qualifier, name="biolink_object_direction_qualifier", curie=TTM.curie('biolink_object_direction_qualifier'),
-                   model_uri=TTM.biolink_object_direction_qualifier, domain=None, range=Optional[str])
-
-slots.biolink_qualified_predicate = Slot(uri=TTM.biolink_qualified_predicate, name="biolink_qualified_predicate", curie=TTM.curie('biolink_qualified_predicate'),
-                   model_uri=TTM.biolink_qualified_predicate, domain=None, range=Optional[Union[str, URIorCURIE]])
-
 slots.output_id = Slot(uri=TTM.output_id, name="output_id", curie=TTM.curie('output_id'),
                    model_uri=TTM.output_id, domain=None, range=Optional[Union[str, URIorCURIE]])
 
@@ -1437,6 +1427,9 @@ slots.association = Slot(uri=TTM.association, name="association", curie=TTM.curi
 
 slots.qualifiers = Slot(uri=TTM.qualifiers, name="qualifiers", curie=TTM.curie('qualifiers'),
                    model_uri=TTM.qualifiers, domain=None, range=Optional[Union[Union[dict, Qualifier], List[Union[dict, Qualifier]]]])
+
+slots.test_case_qualifiers = Slot(uri=TTM.test_case_qualifiers, name="test_case_qualifiers", curie=TTM.curie('test_case_qualifiers'),
+                   model_uri=TTM.test_case_qualifiers, domain=None, range=Optional[Union[Union[dict, Qualifier], List[Union[dict, Qualifier]]]])
 
 slots.expected_output = Slot(uri=TTM.expected_output, name="expected_output", curie=TTM.curie('expected_output'),
                    model_uri=TTM.expected_output, domain=None, range=Optional[str])

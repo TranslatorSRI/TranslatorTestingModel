@@ -1,3 +1,6 @@
+from itertools import groupby
+from operator import itemgetter
+
 from src.translator_testing_model.datamodel.pydanticmodel import TestAsset, TestCase, TestSuite, TestMetadata, Qualifier
 import csv
 import json
@@ -45,6 +48,7 @@ def parse_tsv(filename):
 # Functions to create TestAssets, TestCases, and TestSuite
 def create_test_assets_from_tsv(test_assets):
     assets = []
+
     for row in test_assets:
         if row.get("Relationship") == "":
             continue
@@ -56,17 +60,14 @@ def create_test_assets_from_tsv(test_assets):
         specified_predicate = row.get("Relationship").lower().strip()
         if specified_predicate == "decreases abundance or activity of":
             specified_predicate = "decreases activity or abundance of"
-            print("specified predicate", specified_predicate)
         if toolkit.get_element(specified_predicate) is not None:
             converted_predicate = toolkit.get_element(specified_predicate).name
             converted_predicate = converted_predicate.replace(" ", "_")
-            print("converted predicate", specified_predicate)
         else:
             pred_mapping = toolkit.pmap
             for collct in pred_mapping.values():
                 for map_item in collct:
                     if map_item.get("mapped predicate") == specified_predicate:
-                        print("mapped it", map_item.get("mapped predicate"))
                         converted_predicate = map_item.get("predicate")
                         converted_predicate = converted_predicate.replace(" ", "_")
                         biolink_object_aspect_qualifier = map_item.get("object aspect qualifier")
@@ -113,7 +114,6 @@ def create_test_assets_from_tsv(test_assets):
         if row.get("OutputID").startswith("DRUGBANK:"):
             output_category = 'biolink:ChemicalEntity'
 
-        print(converted_predicate, row, expected_output)
         ta = TestAsset(id=row.get("id").replace(":", "_"),
                        name=expected_output + ': ' + row.get("OutputName").strip() +" "+ row.get("Relationship").strip().lower() +" "+ row.get("InputName").strip(),
                        description=expected_output + ': ' + row.get("OutputName").strip() +" "+ row.get("Relationship").strip().lower() +" "+ row.get("InputName").strip(),
@@ -142,11 +142,11 @@ def create_test_assets_from_tsv(test_assets):
         ta.runner_settings = [row.get("Settings").lower()]
 
         if biolink_qualified_predicate != "":
-            qp = Qualifier(parameter="biolink_qualified_predicate",
+            qp = Qualifier(parameter="biolink:qualified_predicate",
                            value=biolink_qualified_predicate)
-            oaq = Qualifier(parameter="biolink_object_aspect_qualifier",
+            oaq = Qualifier(parameter="biolink:object_aspect_qualifier",
                             value=biolink_object_aspect_qualifier.replace(" ", "_"))
-            odq = Qualifier(parameter="biolink_object_direction_qualifier",
+            odq = Qualifier(parameter="biolink:object_direction_qualifier",
                             value=biolink_object_direction_qualifier)
             qualifiers = [qp, oaq, odq]
 
@@ -164,10 +164,14 @@ def create_test_cases_from_test_assets(test_assets, test_case_model):
     # Group test assets based on input_id and relationship
     grouped_assets = {}
     for test_asset in test_assets:
-        key = (test_asset.input_id, test_asset.predicate_name)
+        key = (test_asset.input_id, test_asset.predicate_name, test_asset.output_id)
         if key not in grouped_assets:
             grouped_assets[key] = []
         grouped_assets[key].append(test_asset)
+
+    for key, assets in grouped_assets.items():
+        if len(assets) > 1:
+            print(key, len(assets))
 
     # Create test cases from grouped test assets
     test_cases = []
@@ -189,13 +193,19 @@ def create_test_cases_from_test_assets(test_assets, test_case_model):
         if test_case.test_case_objective == "AcceptanceTest":
             test_input_id = ""
             test_case_predicate_name = ""
+            test_case_qualifiers = []
             for asset in assets:
                 test_input_id = asset.input_id
                 test_case_predicate_name = asset.predicate_name
+                test_case_qualifiers = asset.qualifiers
 
             test_case.test_case_input_id = test_input_id
             test_case.test_case_predicate_name = test_case_predicate_name
             test_case.test_case_predicate_id = "biolink:" + test_case_predicate_name
+
+            if test_case_qualifiers is not None:
+                print(test_case_qualifiers)
+            test_case.test_case_qualifiers = test_case_qualifiers
             test_cases.append(test_case)
 
     return test_cases
@@ -215,7 +225,6 @@ if __name__ == '__main__':
     # Reading the TSV file
     tsv_file_path = 'pf_test_assets_031524.tsv'
     tsv_data = parse_tsv(tsv_file_path)
-    print(tsv_data[0])
 
     # Create TestAsset objects
     test_assets = create_test_assets_from_tsv(tsv_data)

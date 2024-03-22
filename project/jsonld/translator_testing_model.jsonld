@@ -1143,51 +1143,6 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "biolink_subject_aspect_qualifier",
-      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/biolink_subject_aspect_qualifier",
-      "description": "The aspect of the subject of the test asset predicate",
-      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
-      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/biolink_subject_aspect_qualifier",
-      "range": "string",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "biolink_subject_direction_qualifier",
-      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/biolink_subject_direction_qualifier",
-      "description": "The direction of the subject of the test asset predicate",
-      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
-      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/biolink_subject_direction_qualifier",
-      "range": "string",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "biolink_object_aspect_qualifier",
-      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/biolink_object_aspect_qualifier",
-      "description": "The aspect of the object of the test asset predicate",
-      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
-      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/biolink_object_aspect_qualifier",
-      "range": "string",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "biolink_object_direction_qualifier",
-      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/biolink_object_direction_qualifier",
-      "description": "The direction of the object of the test asset predicate",
-      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
-      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/biolink_object_direction_qualifier",
-      "range": "string",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "biolink_qualified_predicate",
-      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/biolink_qualified_predicate",
-      "description": "The qualified_predicate in Biolink model corresponding to the shorthand predicate name used in the test asset.",
-      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
-      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/biolink_qualified_predicate",
-      "range": "uriorcurie",
-      "@type": "SlotDefinition"
-    },
-    {
       "name": "output_id",
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/output_id",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
@@ -1257,6 +1212,23 @@
       "owner": "TestAsset",
       "domain_of": [
         "TestAsset"
+      ],
+      "range": "Qualifier",
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "test_case_qualifiers",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case_qualifiers",
+      "description": "Optional qualifiers which constrain to the test case defined knowledge statement. Note that this field records such qualifier slots and values as tag=value pairs, where the tag is the Biolink Model qualifier slot named and the value is an acceptable (Biolink Model enum?) value of the said qualifier slot.",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "is_a": "qualifiers",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case_qualifiers",
+      "multivalued": true,
+      "owner": "TestCase",
+      "domain_of": [
+        "TestCase"
       ],
       "range": "Qualifier",
       "inlined": true,
@@ -2290,6 +2262,7 @@
         "test_case_source",
         "test_case_predicate_name",
         "test_case_predicate_id",
+        "test_case_qualifiers",
         "test_case_input_id",
         "test_case_runner_settings",
         "TestCase_tags"
@@ -2317,6 +2290,7 @@
         "test_case_source",
         "test_case_predicate_name",
         "test_case_predicate_id",
+        "test_case_qualifiers",
         "test_case_input_id",
         "test_case_runner_settings",
         "TestCase_tags",
@@ -2346,6 +2320,7 @@
         "test_case_source",
         "test_case_predicate_name",
         "test_case_predicate_id",
+        "test_case_qualifiers",
         "test_case_input_id",
         "test_case_runner_settings",
         "TestCase_tags"
@@ -2374,6 +2349,7 @@
         "test_case_source",
         "test_case_predicate_name",
         "test_case_predicate_id",
+        "test_case_qualifiers",
         "test_case_input_id",
         "test_case_runner_settings",
         "TestCase_tags",
@@ -2404,6 +2380,7 @@
         "test_case_source",
         "test_case_predicate_name",
         "test_case_predicate_id",
+        "test_case_qualifiers",
         "test_case_input_id",
         "test_case_runner_settings",
         "TestCase_tags"
@@ -2432,6 +2409,7 @@
         "test_case_source",
         "test_case_predicate_name",
         "test_case_predicate_id",
+        "test_case_qualifiers",
         "test_case_input_id",
         "test_case_runner_settings",
         "TestCase_tags"
@@ -2646,9 +2624,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "translator_testing_model.yaml",
-  "source_file_date": "2024-03-18T12:26:09",
-  "source_file_size": 27461,
-  "generation_date": "2024-03-18T12:26:22",
+  "source_file_date": "2024-03-22T08:48:47",
+  "source_file_size": 27309,
+  "generation_date": "2024-03-22T08:48:56",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",
