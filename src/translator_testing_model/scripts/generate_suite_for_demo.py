@@ -112,6 +112,10 @@ def create_test_assets_from_tsv(test_assets):
             output_category = 'biolink:PhenotypicFeature'
         if row.get("OutputID").startswith("DRUGBANK:"):
             output_category = 'biolink:ChemicalEntity'
+        if row.get("OutputID").startswith("NCBIGene:"):
+            output_category = 'biolink:Gene'
+        if row.get("OutputID").startswith("CHEBI:"):
+            output_category = 'biolink:ChemicalEntity'
 
         print(converted_predicate, row, expected_output)
         ta = TestAsset(id=row.get("id").replace(":", "_"),
