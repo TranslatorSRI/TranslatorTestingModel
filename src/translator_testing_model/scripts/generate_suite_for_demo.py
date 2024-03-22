@@ -270,7 +270,7 @@ def create_benchmark_test_case(subset: bool) -> TestCase or list[TestCase]:
 
 
 def dump_to_json(file_prefix):
-    filename = f"{file_prefix}.json"
+    filename = f"{file_prefix.id}.json"
     with open(filename, 'w', encoding='utf-8') as file:
         json.dump(file_prefix.dict(), file, ensure_ascii=False, indent=4)
 
@@ -289,13 +289,12 @@ if __name__ == '__main__':
     test_cases = create_test_cases_from_test_assets(pf_test_assets, TestCase)
 
     for i, item in enumerate(test_cases):
-        print(item)
         identifier = item.id
-        dump_to_json(identifier)
+        dump_to_json(item)
 
     for i, item in enumerate(pf_test_assets):
         identifier = item.id
-        dump_to_json(identifier)
+        dump_to_json(item)
 
     # Create Benchmark Test Cases - subset for now
     benchmark_case = create_benchmark_test_case(subset=True)
