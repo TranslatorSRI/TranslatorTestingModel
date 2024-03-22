@@ -202,6 +202,8 @@ classes:
       - test_case_input_id
       - test_input_category
       - test_output_category
+      - components
+      - test_env
     slot_usage:
       test_assets:
         aliases: ["Block List"]
@@ -469,7 +471,7 @@ slots:
   input_category:
     aliases: ["SubjectCategory"]
     range: concept_category
-  
+
   test_input_category:
     aliases: ["SubjectCategory"]
     range: concept_category

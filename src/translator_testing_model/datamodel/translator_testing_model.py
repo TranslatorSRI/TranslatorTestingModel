@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2024-03-22T11:56:55
+# Generation date: 2024-03-22T12:05:02
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -308,8 +308,8 @@ class TestAsset(TestEntity):
     in_v1: Optional[Union[bool, Bool]] = None
     well_known: Optional[Union[bool, Bool]] = None
     test_reference: Optional[Union[str, URIorCURIE]] = None
-    tags: Optional[Union[str, List[str]]] = empty_list()
     test_runner_settings: Optional[Union[str, List[str]]] = empty_list()
+    tags: Optional[Union[str, List[str]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -371,13 +371,13 @@ class TestAsset(TestEntity):
         if self.test_reference is not None and not isinstance(self.test_reference, URIorCURIE):
             self.test_reference = URIorCURIE(self.test_reference)
 
-        if not isinstance(self.tags, list):
-            self.tags = [self.tags] if self.tags is not None else []
-        self.tags = [v if isinstance(v, str) else str(v) for v in self.tags]
-
         if not isinstance(self.test_runner_settings, list):
             self.test_runner_settings = [self.test_runner_settings] if self.test_runner_settings is not None else []
         self.test_runner_settings = [v if isinstance(v, str) else str(v) for v in self.test_runner_settings]
+
+        if not isinstance(self.tags, list):
+            self.tags = [self.tags] if self.tags is not None else []
+        self.tags = [v if isinstance(v, str) else str(v) for v in self.tags]
 
         super().__post_init__(**kwargs)
 
@@ -521,6 +521,8 @@ class TestCase(TestEntity):
     test_case_input_id: Optional[Union[str, URIorCURIE]] = None
     test_input_category: Optional[Union[str, ConceptCategory]] = None
     test_output_category: Optional[Union[str, ConceptCategory]] = None
+    components: Optional[Union[Union[str, "ComponentEnum"], List[Union[str, "ComponentEnum"]]]] = empty_list()
+    test_env: Optional[Union[str, "TestEnvEnum"]] = None
     tags: Optional[Union[str, List[str]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
@@ -567,6 +569,13 @@ class TestCase(TestEntity):
 
         if self.test_output_category is not None and not isinstance(self.test_output_category, ConceptCategory):
             self.test_output_category = ConceptCategory(self.test_output_category)
+
+        if not isinstance(self.components, list):
+            self.components = [self.components] if self.components is not None else []
+        self.components = [v if isinstance(v, ComponentEnum) else ComponentEnum(v) for v in self.components]
+
+        if self.test_env is not None and not isinstance(self.test_env, TestEnvEnum):
+            self.test_env = TestEnvEnum(self.test_env)
 
         if not isinstance(self.tags, list):
             self.tags = [self.tags] if self.tags is not None else []

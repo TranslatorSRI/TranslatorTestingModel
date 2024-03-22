@@ -155,8 +155,8 @@ linkml:Sparqlpath xsd:string
              <well_known> @linkml:Boolean ? ;
              <test_reference> @linkml:Uriorcurie ? ;
              <test_metadata> @<TestMetadata> ;
-             schema1:additionalType @linkml:String * ;
-             <test_runner_settings> @linkml:String *
+             <test_runner_settings> @linkml:String * ;
+             schema1:additionalType @linkml:String *
           ) ;
           rdf:type [ <TestAsset> ]
        )
@@ -179,6 +179,8 @@ linkml:Sparqlpath xsd:string
              <test_case_input_id> @linkml:Uriorcurie ? ;
              <test_input_category> @<ConceptCategory> ? ;
              <test_output_category> @<ConceptCategory> ? ;
+             <components> @<ComponentEnum> * ;
+             <test_env> @<TestEnvEnum> ? ;
              schema1:additionalType @linkml:String *
           ) ;
           rdf:type [ <TestCase> ]

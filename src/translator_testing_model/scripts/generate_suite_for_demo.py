@@ -1,7 +1,7 @@
 from itertools import groupby
 from operator import itemgetter
 
-from src.translator_testing_model.datamodel.pydanticmodel import TestAsset, TestCase, TestSuite, TestMetadata, Qualifier
+from src.translator_testing_model.datamodel.pydanticmodel import TestRunSession, TestAsset, TestCase, TestSuite, TestMetadata, Qualifier
 import csv
 import json
 import requests
@@ -139,7 +139,7 @@ def create_test_assets_from_tsv(test_assets):
                                test_source="SMURF",
                                test_objective="AcceptanceTest")
             ta.test_metadata = tmd
-        ta.runner_settings = [row.get("Settings").lower()]
+        ta.test_runner_settings = [row.get("Settings").lower()]
 
         if biolink_qualified_predicate != "":
             qp = Qualifier(parameter="biolink:qualified_predicate",
@@ -163,6 +163,7 @@ def create_test_assets_from_tsv(test_assets):
 def create_test_cases_from_test_assets(test_assets, test_case_model):
     # Group test assets based on input_id and relationship
     grouped_assets = {}
+
     for test_asset in test_assets:
         key = (test_asset.input_id, test_asset.predicate_name, test_asset.output_id)
         if key not in grouped_assets:
@@ -185,7 +186,7 @@ def create_test_cases_from_test_assets(test_assets, test_case_model):
                                     components=["ars"],
                                     test_case_objective="AcceptanceTest",
                                     test_assets=assets,
-                                    test_case_runner_settings=["inferred"]
+                                    test_runner_settings=["inferred"]
                                     )
         if test_case.test_assets is None:
             print("test case has no assets", test_case)
@@ -211,9 +212,28 @@ def create_test_cases_from_test_assets(test_assets, test_case_model):
     return test_cases
 
 
-def create_test_suite_from_test_cases(test_cases, test_suite_model):
+def create_all_test_test_suite_from_test_cases(test_cases, test_suite_model):
     test_suite_id = "TestSuite_1"
     test_cases_dict = {test_case.id: test_case for test_case in test_cases}
+    tmd = TestMetadata(id=1,
+                          test_source="SMURF",
+                          test_objective="AcceptanceTest")
+    return test_suite_model(id=test_suite_id, test_cases=test_cases_dict, test_metadata=tmd)
+
+
+def create_test_suite_from_test_cases(test_cases, test_suite_model):
+    test_suite_id = "TestSuite_1"
+    just_1_or_4_assets = []
+    just_1_or_4_cases = []
+    for case in test_cases:
+        for asset in test_assets:
+            if asset.expected_output == "TopAnswer" or asset.expected_output == "NeverShow":
+                just_1_or_4_assets.append(asset)
+        case.test_assets = just_1_or_4_assets
+        just_1_or_4_cases.append(case)
+        
+    test_cases_dict = {test_case.id: test_case for test_case in just_1_or_4_cases}
+
     tmd = TestMetadata(id=1,
                           test_source="SMURF",
                           test_objective="AcceptanceTest")

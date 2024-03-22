@@ -19,9 +19,9 @@ type AcceptanceTestAsset
     wellKnown: Boolean
     testReference: Uriorcurie
     testMetadata: TestMetadata!
+    testRunnerSettings: [String]
     id: Uriorcurie!
     tags: [String]
-    testRunnerSettings: [String]
     mustPassDate: Date
     mustPassEnvironment: TestEnvEnum
     scientificQuestion: String
@@ -51,6 +51,8 @@ type AcceptanceTestCase
     testCaseInputId: Uriorcurie
     testInputCategory: ConceptCategory
     testOutputCategory: ConceptCategory
+    components: [ComponentEnum]
+    testEnv: TestEnvEnum
     tags: [String]
     testAssets: [AcceptanceTestAsset]!
   }
@@ -118,6 +120,8 @@ type QuantitativeTestCase
     testCaseInputId: Uriorcurie
     testInputCategory: ConceptCategory
     testOutputCategory: ConceptCategory
+    components: [ComponentEnum]
+    testEnv: TestEnvEnum
     tags: [String]
   }
 
@@ -155,9 +159,9 @@ type TestAsset
     wellKnown: Boolean
     testReference: Uriorcurie
     testMetadata: TestMetadata!
+    testRunnerSettings: [String]
     id: Uriorcurie!
     tags: [String]
-    testRunnerSettings: [String]
   }
 
 type TestCase
@@ -178,6 +182,8 @@ type TestCase
     testCaseInputId: Uriorcurie
     testInputCategory: ConceptCategory
     testOutputCategory: ConceptCategory
+    components: [ComponentEnum]
+    testEnv: TestEnvEnum
     tags: [String]
   }
 
@@ -214,9 +220,9 @@ type TestEdgeData
     wellKnown: Boolean
     testReference: Uriorcurie
     testMetadata: TestMetadata!
+    testRunnerSettings: [String]
     id: Uriorcurie!
     tags: [String]
-    testRunnerSettings: [String]
   }
 
 interface TestEntity

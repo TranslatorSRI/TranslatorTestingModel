@@ -141,6 +141,13 @@
             "additionalProperties": false,
             "description": "See AcceptanceTestAsset above for more details.",
             "properties": {
+                "components": {
+                    "description": "The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.",
+                    "items": {
+                        "$ref": "#/$defs/ComponentEnum"
+                    },
+                    "type": "array"
+                },
                 "description": {
                     "description": "A human-readable description for a Test Entity",
                     "type": "string"
@@ -200,6 +207,10 @@
                 "test_case_source": {
                     "$ref": "#/$defs/TestSourceEnum",
                     "description": "Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string."
+                },
+                "test_env": {
+                    "$ref": "#/$defs/TestEnvEnum",
+                    "description": "Deployment environment within which the associated TestSuite is run."
                 },
                 "test_input_category": {
                     "type": "string"
@@ -457,6 +468,13 @@
             "additionalProperties": false,
             "description": "Assumed additional model from Shervin's runner JSON here as an example.  This schema is not yet complete.",
             "properties": {
+                "components": {
+                    "description": "The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.",
+                    "items": {
+                        "$ref": "#/$defs/ComponentEnum"
+                    },
+                    "type": "array"
+                },
                 "description": {
                     "description": "A human-readable description for a Test Entity",
                     "type": "string"
@@ -516,6 +534,10 @@
                 "test_case_source": {
                     "$ref": "#/$defs/TestSourceEnum",
                     "description": "Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string."
+                },
+                "test_env": {
+                    "$ref": "#/$defs/TestEnvEnum",
+                    "description": "Deployment environment within which the associated TestSuite is run."
                 },
                 "test_input_category": {
                     "type": "string"
@@ -717,6 +739,13 @@
             "additionalProperties": false,
             "description": "Represents a single enumerated instance of Test Case, derived from a  given collection of one or more TestAsset instances (the value of the 'test_assets' slot) which define the 'inputs' and 'outputs' of the TestCase, used to probe a particular test condition.",
             "properties": {
+                "components": {
+                    "description": "The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.",
+                    "items": {
+                        "$ref": "#/$defs/ComponentEnum"
+                    },
+                    "type": "array"
+                },
                 "description": {
                     "description": "A human-readable description for a Test Entity",
                     "type": "string"
@@ -776,6 +805,10 @@
                 "test_case_source": {
                     "$ref": "#/$defs/TestSourceEnum",
                     "description": "Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string."
+                },
+                "test_env": {
+                    "$ref": "#/$defs/TestEnvEnum",
+                    "description": "Deployment environment within which the associated TestSuite is run."
                 },
                 "test_input_category": {
                     "type": "string"
@@ -912,6 +945,13 @@
             "additionalProperties": false,
             "description": "Represents a single enumerated instance of Test Case, derived from a  given collection of one or more TestAsset instances (the value of the 'test_assets' slot) which define the 'inputs' and 'outputs' of the TestCase, used to probe a particular test condition.",
             "properties": {
+                "components": {
+                    "description": "The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.",
+                    "items": {
+                        "$ref": "#/$defs/ComponentEnum"
+                    },
+                    "type": "array"
+                },
                 "description": {
                     "description": "A human-readable description for a Test Entity",
                     "type": "string"
@@ -971,6 +1011,10 @@
                 "test_case_source": {
                     "$ref": "#/$defs/TestSourceEnum",
                     "description": "Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string."
+                },
+                "test_env": {
+                    "$ref": "#/$defs/TestEnvEnum",
+                    "description": "Deployment environment within which the associated TestSuite is run."
                 },
                 "test_input_category": {
                     "type": "string"

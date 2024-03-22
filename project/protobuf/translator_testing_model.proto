@@ -20,9 +20,9 @@ message AcceptanceTestAsset
   boolean wellKnown = 0
   uriorcurie testReference = 0
   testMetadata testMetadata = 0
+ repeated  string testRunnerSettings = 0
   uriorcurie id = 0
  repeated  string tags = 0
- repeated  string testRunnerSettings = 0
   date mustPassDate = 0
   testEnvEnum mustPassEnvironment = 0
   string scientificQuestion = 0
@@ -52,6 +52,8 @@ message AcceptanceTestCase
   uriorcurie testCaseInputId = 0
   conceptCategory testInputCategory = 0
   conceptCategory testOutputCategory = 0
+ repeated  componentEnum components = 0
+  testEnvEnum testEnv = 0
  repeated  string tags = 0
  repeated  acceptanceTestAsset testAssets = 0
  }
@@ -113,6 +115,8 @@ message QuantitativeTestCase
   uriorcurie testCaseInputId = 0
   conceptCategory testInputCategory = 0
   conceptCategory testOutputCategory = 0
+ repeated  componentEnum components = 0
+  testEnvEnum testEnv = 0
  repeated  string tags = 0
  }
 // Test suite for testing Translator components against releases of standards like TRAPI and the Biolink Model.
@@ -150,9 +154,9 @@ message TestAsset
   boolean wellKnown = 0
   uriorcurie testReference = 0
   testMetadata testMetadata = 0
+ repeated  string testRunnerSettings = 0
   uriorcurie id = 0
  repeated  string tags = 0
- repeated  string testRunnerSettings = 0
  }
 // Represents a single enumerated instance of Test Case, derived from a  given collection of one or more TestAsset instances (the value of the 'test_assets' slot) which define the 'inputs' and 'outputs' of the TestCase, used to probe a particular test condition.
 message TestCase
@@ -173,6 +177,8 @@ message TestCase
   uriorcurie testCaseInputId = 0
   conceptCategory testInputCategory = 0
   conceptCategory testOutputCategory = 0
+ repeated  componentEnum components = 0
+  testEnvEnum testEnv = 0
  repeated  string tags = 0
  }
 // The outcome of a TestRunner run of one specific TestCase.
@@ -209,9 +215,9 @@ message TestEdgeData
   boolean wellKnown = 0
   uriorcurie testReference = 0
   testMetadata testMetadata = 0
+ repeated  string testRunnerSettings = 0
   uriorcurie id = 0
  repeated  string tags = 0
- repeated  string testRunnerSettings = 0
  }
 // A single 'tag = value' pair (where 'value' is a simple string).
 message TestEntityParameter

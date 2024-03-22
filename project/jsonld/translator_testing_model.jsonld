@@ -1360,9 +1360,10 @@
       ],
       "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_runner_settings",
       "multivalued": true,
-      "owner": "TestEntity",
+      "owner": "TestAsset",
       "domain_of": [
-        "TestEntity"
+        "TestEntity",
+        "TestAsset"
       ],
       "range": "string",
       "@type": "SlotDefinition"
@@ -1567,6 +1568,7 @@
       "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_env",
       "owner": "TestRunSession",
       "domain_of": [
+        "TestCase",
         "TestRunSession"
       ],
       "range": "TestEnvEnum",
@@ -1637,6 +1639,7 @@
       "multivalued": true,
       "owner": "TestRunSession",
       "domain_of": [
+        "TestCase",
         "TestRunSession"
       ],
       "range": "ComponentEnum",
@@ -2153,9 +2156,9 @@
         "well_known",
         "test_reference",
         "test_metadata",
+        "TestAsset_test_runner_settings",
         "TestAsset_id",
-        "TestAsset_tags",
-        "TestAsset_test_runner_settings"
+        "TestAsset_tags"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestAsset",
@@ -2187,9 +2190,9 @@
         "well_known",
         "test_reference",
         "test_metadata",
+        "TestAsset_test_runner_settings",
         "TestAsset_id",
         "TestAsset_tags",
-        "TestAsset_test_runner_settings",
         "must_pass_date",
         "must_pass_environment",
         "scientific_question",
@@ -2231,9 +2234,9 @@
         "well_known",
         "test_reference",
         "test_metadata",
+        "TestAsset_test_runner_settings",
         "TestAsset_id",
-        "TestAsset_tags",
-        "TestAsset_test_runner_settings"
+        "TestAsset_tags"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEdgeData",
@@ -2279,6 +2282,8 @@
         "test_case_input_id",
         "test_input_category",
         "test_output_category",
+        "components",
+        "test_env",
         "TestCase_tags"
       ],
       "slot_usage": {},
@@ -2307,6 +2312,8 @@
         "test_case_input_id",
         "test_input_category",
         "test_output_category",
+        "components",
+        "test_env",
         "TestCase_tags",
         "AcceptanceTestCase_test_assets"
       ],
@@ -2337,6 +2344,8 @@
         "test_case_input_id",
         "test_input_category",
         "test_output_category",
+        "components",
+        "test_env",
         "TestCase_tags"
       ],
       "slot_usage": {},
@@ -2544,9 +2553,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "translator_testing_model.yaml",
-  "source_file_date": "2024-03-22T11:56:43",
-  "source_file_size": 26949,
-  "generation_date": "2024-03-22T11:56:52",
+  "source_file_date": "2024-03-22T12:04:54",
+  "source_file_size": 27012,
+  "generation_date": "2024-03-22T12:04:58",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",
