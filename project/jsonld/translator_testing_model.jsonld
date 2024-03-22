@@ -1111,6 +1111,38 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "test_input_category",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_input_category",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "aliases": [
+        "SubjectCategory"
+      ],
+      "is_a": "input_category",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_input_category",
+      "owner": "TestCase",
+      "domain_of": [
+        "TestCase"
+      ],
+      "range": "concept_category",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "test_output_category",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_output_category",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "aliases": [
+        "ObjectCategory"
+      ],
+      "is_a": "output_category",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_output_category",
+      "owner": "TestCase",
+      "domain_of": [
+        "TestCase"
+      ],
+      "range": "concept_category",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "predicate_id",
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/predicate_id",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
@@ -2245,6 +2277,8 @@
         "test_case_predicate_id",
         "test_case_qualifiers",
         "test_case_input_id",
+        "test_input_category",
+        "test_output_category",
         "TestCase_tags"
       ],
       "slot_usage": {},
@@ -2271,6 +2305,8 @@
         "test_case_predicate_id",
         "test_case_qualifiers",
         "test_case_input_id",
+        "test_input_category",
+        "test_output_category",
         "TestCase_tags",
         "AcceptanceTestCase_test_assets"
       ],
@@ -2299,6 +2335,8 @@
         "test_case_predicate_id",
         "test_case_qualifiers",
         "test_case_input_id",
+        "test_input_category",
+        "test_output_category",
         "TestCase_tags"
       ],
       "slot_usage": {},
@@ -2506,9 +2544,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "translator_testing_model.yaml",
-  "source_file_date": "2024-03-22T08:56:35",
-  "source_file_size": 26668,
-  "generation_date": "2024-03-22T08:56:43",
+  "source_file_date": "2024-03-22T11:56:43",
+  "source_file_size": 26949,
+  "generation_date": "2024-03-22T11:56:52",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",

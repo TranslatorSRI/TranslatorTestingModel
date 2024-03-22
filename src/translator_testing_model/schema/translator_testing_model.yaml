@@ -200,6 +200,8 @@ classes:
       - test_case_predicate_id
       - test_case_qualifiers
       - test_case_input_id
+      - test_input_category
+      - test_output_category
     slot_usage:
       test_assets:
         aliases: ["Block List"]
@@ -467,6 +469,17 @@ slots:
   input_category:
     aliases: ["SubjectCategory"]
     range: concept_category
+  
+  test_input_category:
+    aliases: ["SubjectCategory"]
+    range: concept_category
+    is_a: input_category
+
+
+  test_output_category:
+    aliases: ["ObjectCategory"]
+    range: concept_category
+    is_a: output_category
 
   predicate_id:
     aliases: ["Predicate"]

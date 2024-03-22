@@ -49,6 +49,8 @@ type AcceptanceTestCase
     testCasePredicateId: String
     testCaseQualifiers: [Qualifier]
     testCaseInputId: Uriorcurie
+    testInputCategory: ConceptCategory
+    testOutputCategory: ConceptCategory
     tags: [String]
     testAssets: [AcceptanceTestAsset]!
   }
@@ -114,6 +116,8 @@ type QuantitativeTestCase
     testCasePredicateId: String
     testCaseQualifiers: [Qualifier]
     testCaseInputId: Uriorcurie
+    testInputCategory: ConceptCategory
+    testOutputCategory: ConceptCategory
     tags: [String]
   }
 
@@ -172,6 +176,8 @@ type TestCase
     testCasePredicateId: String
     testCaseQualifiers: [Qualifier]
     testCaseInputId: Uriorcurie
+    testInputCategory: ConceptCategory
+    testOutputCategory: ConceptCategory
     tags: [String]
   }
 

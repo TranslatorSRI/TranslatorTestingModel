@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2024-03-22T08:56:47
+# Generation date: 2024-03-22T11:56:55
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -519,6 +519,8 @@ class TestCase(TestEntity):
     test_case_predicate_id: Optional[str] = None
     test_case_qualifiers: Optional[Union[Union[dict, Qualifier], List[Union[dict, Qualifier]]]] = empty_list()
     test_case_input_id: Optional[Union[str, URIorCURIE]] = None
+    test_input_category: Optional[Union[str, ConceptCategory]] = None
+    test_output_category: Optional[Union[str, ConceptCategory]] = None
     tags: Optional[Union[str, List[str]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
@@ -559,6 +561,12 @@ class TestCase(TestEntity):
 
         if self.test_case_input_id is not None and not isinstance(self.test_case_input_id, URIorCURIE):
             self.test_case_input_id = URIorCURIE(self.test_case_input_id)
+
+        if self.test_input_category is not None and not isinstance(self.test_input_category, ConceptCategory):
+            self.test_input_category = ConceptCategory(self.test_input_category)
+
+        if self.test_output_category is not None and not isinstance(self.test_output_category, ConceptCategory):
+            self.test_output_category = ConceptCategory(self.test_output_category)
 
         if not isinstance(self.tags, list):
             self.tags = [self.tags] if self.tags is not None else []
@@ -1275,6 +1283,12 @@ slots.input_name = Slot(uri=TTM.input_name, name="input_name", curie=TTM.curie('
 
 slots.input_category = Slot(uri=TTM.input_category, name="input_category", curie=TTM.curie('input_category'),
                    model_uri=TTM.input_category, domain=None, range=Optional[Union[str, ConceptCategory]])
+
+slots.test_input_category = Slot(uri=TTM.test_input_category, name="test_input_category", curie=TTM.curie('test_input_category'),
+                   model_uri=TTM.test_input_category, domain=None, range=Optional[Union[str, ConceptCategory]])
+
+slots.test_output_category = Slot(uri=TTM.test_output_category, name="test_output_category", curie=TTM.curie('test_output_category'),
+                   model_uri=TTM.test_output_category, domain=None, range=Optional[Union[str, ConceptCategory]])
 
 slots.predicate_id = Slot(uri=TTM.predicate_id, name="predicate_id", curie=TTM.curie('predicate_id'),
                    model_uri=TTM.predicate_id, domain=None, range=Optional[Union[str, PredicateType]])

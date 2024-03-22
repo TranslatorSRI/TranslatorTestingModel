@@ -50,6 +50,8 @@ message AcceptanceTestCase
   string testCasePredicateId = 0
  repeated  qualifier testCaseQualifiers = 0
   uriorcurie testCaseInputId = 0
+  conceptCategory testInputCategory = 0
+  conceptCategory testOutputCategory = 0
  repeated  string tags = 0
  repeated  acceptanceTestAsset testAssets = 0
  }
@@ -109,6 +111,8 @@ message QuantitativeTestCase
   string testCasePredicateId = 0
  repeated  qualifier testCaseQualifiers = 0
   uriorcurie testCaseInputId = 0
+  conceptCategory testInputCategory = 0
+  conceptCategory testOutputCategory = 0
  repeated  string tags = 0
  }
 // Test suite for testing Translator components against releases of standards like TRAPI and the Biolink Model.
@@ -167,6 +171,8 @@ message TestCase
   string testCasePredicateId = 0
  repeated  qualifier testCaseQualifiers = 0
   uriorcurie testCaseInputId = 0
+  conceptCategory testInputCategory = 0
+  conceptCategory testOutputCategory = 0
  repeated  string tags = 0
  }
 // The outcome of a TestRunner run of one specific TestCase.

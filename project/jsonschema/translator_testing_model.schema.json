@@ -201,6 +201,12 @@
                     "$ref": "#/$defs/TestSourceEnum",
                     "description": "Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string."
                 },
+                "test_input_category": {
+                    "type": "string"
+                },
+                "test_output_category": {
+                    "type": "string"
+                },
                 "test_runner_settings": {
                     "description": "Scalar parameters for the TestRunner processing a given TestEntity.",
                     "items": {
@@ -511,6 +517,12 @@
                     "$ref": "#/$defs/TestSourceEnum",
                     "description": "Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string."
                 },
+                "test_input_category": {
+                    "type": "string"
+                },
+                "test_output_category": {
+                    "type": "string"
+                },
                 "test_runner_settings": {
                     "description": "Scalar parameters for the TestRunner processing a given TestEntity.",
                     "items": {
@@ -765,6 +777,12 @@
                     "$ref": "#/$defs/TestSourceEnum",
                     "description": "Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string."
                 },
+                "test_input_category": {
+                    "type": "string"
+                },
+                "test_output_category": {
+                    "type": "string"
+                },
                 "test_runner_settings": {
                     "description": "Scalar parameters for the TestRunner processing a given TestEntity.",
                     "items": {
@@ -953,6 +971,12 @@
                 "test_case_source": {
                     "$ref": "#/$defs/TestSourceEnum",
                     "description": "Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string."
+                },
+                "test_input_category": {
+                    "type": "string"
+                },
+                "test_output_category": {
+                    "type": "string"
                 },
                 "test_runner_settings": {
                     "description": "Scalar parameters for the TestRunner processing a given TestEntity.",

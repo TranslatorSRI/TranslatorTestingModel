@@ -177,6 +177,8 @@ linkml:Sparqlpath xsd:string
              <test_case_predicate_id> @linkml:String ? ;
              <test_case_qualifiers> @<Qualifier> * ;
              <test_case_input_id> @linkml:Uriorcurie ? ;
+             <test_input_category> @<ConceptCategory> ? ;
+             <test_output_category> @<ConceptCategory> ? ;
              schema1:additionalType @linkml:String *
           ) ;
           rdf:type [ <TestCase> ]

@@ -13,6 +13,8 @@ CREATE TABLE "AcceptanceTestCase" (
 	test_case_predicate_id TEXT, 
 	test_case_qualifiers TEXT, 
 	test_case_input_id TEXT, 
+	test_input_category TEXT, 
+	test_output_category TEXT, 
 	PRIMARY KEY (id)
 );
 
@@ -43,6 +45,8 @@ CREATE TABLE "QuantitativeTestCase" (
 	test_case_predicate_id TEXT, 
 	test_case_qualifiers TEXT, 
 	test_case_input_id TEXT, 
+	test_input_category TEXT, 
+	test_output_category TEXT, 
 	PRIMARY KEY (id)
 );
 
@@ -60,6 +64,8 @@ CREATE TABLE "TestCase" (
 	test_case_predicate_id TEXT, 
 	test_case_qualifiers TEXT, 
 	test_case_input_id TEXT, 
+	test_input_category TEXT, 
+	test_output_category TEXT, 
 	PRIMARY KEY (id)
 );
 
