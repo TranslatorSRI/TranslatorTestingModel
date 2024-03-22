@@ -106,9 +106,7 @@ def get_category(prefixes, id):
 
 
 def get_expected_output(row):
-    print(row)
     output = row.get("Expected Result / Suggested Comparator")
-    print(output)
     if output in ["4_NeverShow", "3_BadButForgivable", "2_Acceptable", "1_TopAnswer", "5_OverlyGeneric"]:
         print(f"{row.get('id')} has valid expected output: {output}")
         return output.split("_")[1]
@@ -117,7 +115,6 @@ def get_expected_output(row):
 
 
 def create_test_asset(row, toolkit):
-    print(row)
     specified_predicate = row.get("Relationship").lower().strip()
     converted_predicate, biolink_object_aspect_qualifier, biolink_object_direction_qualifier, biolink_qualified_predicate = get_converted_predicate(specified_predicate, toolkit)
 
@@ -283,7 +280,6 @@ if __name__ == '__main__':
 
     # Create TestAsset objects
     pf_test_assets = create_test_assets_from_tsv(tsv_data, SuiteNames.pass_fail, toolkit)
-    print(pf_test_assets)
 
     # Create TestCase objects
     test_cases = create_test_cases_from_test_assets(pf_test_assets, TestCase)
