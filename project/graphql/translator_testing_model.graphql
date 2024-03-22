@@ -48,6 +48,11 @@ type AcceptanceTestCase
     testCasePredicateName: String
     testCasePredicateId: String
     testCaseInputId: Uriorcurie
+    qualifiers: [Qualifier]
+    inputCategory: ConceptCategory
+    outputCategory: ConceptCategory
+    components: [ComponentEnum]
+    testEnv: TestEnvEnum
     tags: [String]
     testAssets: [AcceptanceTestAsset]!
   }
@@ -112,6 +117,11 @@ type QuantitativeTestCase
     testCasePredicateName: String
     testCasePredicateId: String
     testCaseInputId: Uriorcurie
+    qualifiers: [Qualifier]
+    inputCategory: ConceptCategory
+    outputCategory: ConceptCategory
+    components: [ComponentEnum]
+    testEnv: TestEnvEnum
     tags: [String]
   }
 
@@ -169,6 +179,11 @@ type TestCase
     testCasePredicateName: String
     testCasePredicateId: String
     testCaseInputId: Uriorcurie
+    qualifiers: [Qualifier]
+    inputCategory: ConceptCategory
+    outputCategory: ConceptCategory
+    components: [ComponentEnum]
+    testEnv: TestEnvEnum
     tags: [String]
   }
 
