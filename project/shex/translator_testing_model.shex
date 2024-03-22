@@ -92,34 +92,6 @@ linkml:Sparqlpath xsd:string
     )
 }
 
-<ComplianceTestCase> CLOSED {
-    (  $<ComplianceTestCase_tes> (  &<TestCase_tes> ;
-          rdf:type [ <TestCase> ] ? ;
-          <trapi_version> @linkml:String ? ;
-          <biolink_version> @linkml:String ?
-       ) ;
-       rdf:type [ <ComplianceTestCase> ]
-    )
-}
-
-<KnowledgeGraphNavigationTestCase>  (
-    CLOSED {
-       (  $<KnowledgeGraphNavigationTestCase_tes> (  &<TestCase_tes> ;
-             rdf:type [ <TestCase> ] ?
-          ) ;
-          rdf:type [ <KnowledgeGraphNavigationTestCase> ]
-       )
-    } OR @<OneHopTestCase>
-)
-
-<OneHopTestCase> CLOSED {
-    (  $<OneHopTestCase_tes> (  &<KnowledgeGraphNavigationTestCase_tes> ;
-          rdf:type [ <KnowledgeGraphNavigationTestCase> ] ?
-       ) ;
-       rdf:type [ <OneHopTestCase> ]
-    )
-}
-
 <OneHopTestSuite> CLOSED {
     (  $<OneHopTestSuite_tes> (  &<TestSuite_tes> ;
           rdf:type [ <TestSuite> ] ?
@@ -182,9 +154,9 @@ linkml:Sparqlpath xsd:string
              <in_v1> @linkml:Boolean ? ;
              <well_known> @linkml:Boolean ? ;
              <test_reference> @linkml:Uriorcurie ? ;
-             <runner_settings> @linkml:String + ;
              <test_metadata> @<TestMetadata> ;
-             schema1:additionalType @linkml:String *
+             schema1:additionalType @linkml:String * ;
+             <test_runner_settings> @linkml:String *
           ) ;
           rdf:type [ <TestAsset> ]
        )
@@ -195,24 +167,21 @@ linkml:Sparqlpath xsd:string
     CLOSED {
        (  $<TestCase_tes> (  &<TestEntity_tes> ;
              rdf:type [ <TestEntity> ] ? ;
-             <test_env> @<TestEnvEnum> ? ;
              <query_type> @<QueryTypeEnum> ? ;
              <test_assets> @<TestAsset> + ;
              <preconditions> @<Precondition> * ;
              <trapi_template> @<TrapiTemplateEnum> ? ;
-             <components> @<ComponentEnum> * ;
              <test_case_objective> @<TestObjectiveEnum> ? ;
              <test_case_source> @<TestSourceEnum> ? ;
              <test_case_predicate_name> @linkml:String ? ;
              <test_case_predicate_id> @linkml:String ? ;
              <test_case_qualifiers> @<Qualifier> * ;
              <test_case_input_id> @linkml:Uriorcurie ? ;
-             <test_case_runner_settings> @linkml:String + ;
              schema1:additionalType @linkml:String *
           ) ;
           rdf:type [ <TestCase> ]
        )
-    } OR @<AcceptanceTestCase> OR @<ComplianceTestCase> OR @<KnowledgeGraphNavigationTestCase> OR @<QuantitativeTestCase>
+    } OR @<AcceptanceTestCase> OR @<QuantitativeTestCase>
 )
 
 <TestCaseResult> CLOSED {
@@ -236,13 +205,14 @@ linkml:Sparqlpath xsd:string
 
 <TestEntity>  (
     @<Precondition> OR @<TestAsset> OR @<TestCase> OR @<TestCaseResult> OR @<TestMetadata> OR @<TestOutput> OR @<TestResultPKSet>
-    OR @<TestRunSession> OR @<TestRunnerConfiguration> OR @<TestSuite> OR @<TestSuiteSpecification>
+    OR @<TestRunSession> OR @<TestSuite> OR @<TestSuiteSpecification>
 )
 
 <TestEntity_struct> {
     (  $<TestEntity_tes> (  schema1:name @linkml:String ? ;
           schema1:description @linkml:String ? ;
-          schema1:additionalType @linkml:String *
+          schema1:additionalType @linkml:String * ;
+          <test_runner_settings> @linkml:String *
        ) ;
        rdf:type [ <TestEntity> ]
     )
@@ -295,20 +265,13 @@ linkml:Sparqlpath xsd:string
     )
 }
 
-<TestRunnerConfiguration> CLOSED {
-    (  $<TestRunnerConfiguration_tes> (  &<TestEntity_tes> ;
-          rdf:type [ <TestEntity> ] ? ;
-          <test_run_parameters> @<TestEntityParameter> * ;
-          schema1:additionalType @linkml:String *
-       ) ;
-       rdf:type [ <TestRunnerConfiguration> ]
-    )
-}
-
 <TestRunSession> CLOSED {
     (  $<TestRunSession_tes> (  &<TestEntity_tes> ;
           rdf:type [ <TestEntity> ] ? ;
+          <components> @<ComponentEnum> * ;
+          <test_env> @<TestEnvEnum> ? ;
           <test_runner_name> @linkml:String ? ;
+          <test_run_parameters> @<TestEntityParameter> * ;
           <test_entities> @<TestEntity> * ;
           <test_case_results> @<TestCaseResult> * ;
           <timestamp> @linkml:Datetime ?

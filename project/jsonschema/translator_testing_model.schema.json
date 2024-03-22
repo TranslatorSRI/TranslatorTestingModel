@@ -86,13 +86,6 @@
                     "$ref": "#/$defs/NodeEnum",
                     "description": "The node of the (templated) TRAPI query to replace"
                 },
-                "runner_settings": {
-                    "description": "Settings for the test harness, e.g. \"inferred\"",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
                 "scientific_question": {
                     "description": "The full human-readable scientific question a SME would ask, which is encoded into the test asset.",
                     "type": "string"
@@ -122,6 +115,13 @@
                     "description": "Document URL where original test source particulars are registered (e.g. Github repo)",
                     "type": "string"
                 },
+                "test_runner_settings": {
+                    "description": "Scalar settings for the TestRunner, e.g. \"inferred\"",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
                 "top_level": {
                     "description": "The answer must return in these many results",
                     "type": "integer"
@@ -131,7 +131,6 @@
                 }
             },
             "required": [
-                "runner_settings",
                 "test_metadata",
                 "id"
             ],
@@ -142,13 +141,6 @@
             "additionalProperties": false,
             "description": "See AcceptanceTestAsset above for more details.",
             "properties": {
-                "components": {
-                    "description": "The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.",
-                    "items": {
-                        "$ref": "#/$defs/ComponentEnum"
-                    },
-                    "type": "array"
-                },
                 "description": {
                     "description": "A human-readable description for a Test Entity",
                     "type": "string"
@@ -205,20 +197,16 @@
                     },
                     "type": "array"
                 },
-                "test_case_runner_settings": {
-                    "description": "Settings for the test harness for TestCase",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
                 "test_case_source": {
                     "$ref": "#/$defs/TestSourceEnum",
                     "description": "Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string."
                 },
-                "test_env": {
-                    "$ref": "#/$defs/TestEnvEnum",
-                    "description": "Deployment environment within which the associated TestSuite is run."
+                "test_runner_settings": {
+                    "description": "Scalar parameters for the TestRunner processing a given TestEntity.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 },
                 "trapi_template": {
                     "$ref": "#/$defs/TrapiTemplateEnum",
@@ -227,7 +215,6 @@
             },
             "required": [
                 "test_assets",
-                "test_case_runner_settings",
                 "id"
             ],
             "title": "AcceptanceTestCase",
@@ -271,6 +258,13 @@
                     "$ref": "#/$defs/TestPersonaEnum",
                     "description": "A Test persona describes the user or operational context of a given test."
                 },
+                "test_runner_settings": {
+                    "description": "Scalar parameters for the TestRunner processing a given TestEntity.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
                 "test_suite_specification": {
                     "$ref": "#/$defs/TestSuiteSpecification",
                     "description": "Declarative specification of a Test Suite of Test Cases whose generation is deferred, (i.e. within a Test Runner) or whose creation is achieved by stream processing of an external data source."
@@ -287,109 +281,6 @@
             "additionalProperties": false,
             "description": "JsonObj(is_a='TestSuite')",
             "title": "BenchmarkTestSuite",
-            "type": "object"
-        },
-        "ComplianceTestCase": {
-            "additionalProperties": false,
-            "description": "TRAPI and Biolink Model standards compliance test",
-            "properties": {
-                "biolink_version": {
-                    "description": "Biolink Model release (SemVer string)",
-                    "type": "string"
-                },
-                "components": {
-                    "description": "The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.",
-                    "items": {
-                        "$ref": "#/$defs/ComponentEnum"
-                    },
-                    "type": "array"
-                },
-                "description": {
-                    "description": "A human-readable description for a Test Entity",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "A unique identifier for a Test Entity",
-                    "type": "string"
-                },
-                "name": {
-                    "description": "A human-readable name for a Test Entity",
-                    "type": "string"
-                },
-                "preconditions": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "query_type": {
-                    "$ref": "#/$defs/QueryTypeEnum",
-                    "description": "Type of TestCase query."
-                },
-                "tags": {
-                    "description": "One or more 'tags' slot values (slot inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection.",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "test_assets": {
-                    "description": "One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection.",
-                    "items": {
-                        "$ref": "#/$defs/TestAsset"
-                    },
-                    "type": "array"
-                },
-                "test_case_input_id": {
-                    "type": "string"
-                },
-                "test_case_objective": {
-                    "$ref": "#/$defs/TestObjectiveEnum",
-                    "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)"
-                },
-                "test_case_predicate_id": {
-                    "type": "string"
-                },
-                "test_case_predicate_name": {
-                    "type": "string"
-                },
-                "test_case_qualifiers": {
-                    "description": "Optional qualifiers which constrain to the test case defined knowledge statement. Note that this field records such qualifier slots and values as tag=value pairs, where the tag is the Biolink Model qualifier slot named and the value is an acceptable (Biolink Model enum?) value of the said qualifier slot.",
-                    "items": {
-                        "$ref": "#/$defs/Qualifier"
-                    },
-                    "type": "array"
-                },
-                "test_case_runner_settings": {
-                    "description": "Settings for the test harness for TestCase",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "test_case_source": {
-                    "$ref": "#/$defs/TestSourceEnum",
-                    "description": "Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string."
-                },
-                "test_env": {
-                    "$ref": "#/$defs/TestEnvEnum",
-                    "description": "Deployment environment within which the associated TestSuite is run."
-                },
-                "trapi_template": {
-                    "$ref": "#/$defs/TrapiTemplateEnum",
-                    "description": "A template for a query, which can be used to generate a query for a test case.  note: the current enumerated values for this slot come from the Benchmarks repo config/benchmarks.json \"templates\" collection and refer to the \"name\" field of each template.  Templates themselves are currently stored in the config/[source_name]/templates directory."
-                },
-                "trapi_version": {
-                    "description": "TRAPI version (SemVer string)",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "test_assets",
-                "test_case_runner_settings",
-                "id"
-            ],
-            "title": "ComplianceTestCase",
             "type": "object"
         },
         "ComponentEnum": {
@@ -437,101 +328,6 @@
             "title": "FileFormatEnum",
             "type": "string"
         },
-        "KnowledgeGraphNavigationTestCase": {
-            "additionalProperties": false,
-            "description": "Knowledge Graph navigation integration test",
-            "properties": {
-                "components": {
-                    "description": "The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.",
-                    "items": {
-                        "$ref": "#/$defs/ComponentEnum"
-                    },
-                    "type": "array"
-                },
-                "description": {
-                    "description": "A human-readable description for a Test Entity",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "A unique identifier for a Test Entity",
-                    "type": "string"
-                },
-                "name": {
-                    "description": "A human-readable name for a Test Entity",
-                    "type": "string"
-                },
-                "preconditions": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "query_type": {
-                    "$ref": "#/$defs/QueryTypeEnum",
-                    "description": "Type of TestCase query."
-                },
-                "tags": {
-                    "description": "One or more 'tags' slot values (slot inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection.",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "test_assets": {
-                    "description": "One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection.",
-                    "items": {
-                        "$ref": "#/$defs/TestAsset"
-                    },
-                    "type": "array"
-                },
-                "test_case_input_id": {
-                    "type": "string"
-                },
-                "test_case_objective": {
-                    "$ref": "#/$defs/TestObjectiveEnum",
-                    "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)"
-                },
-                "test_case_predicate_id": {
-                    "type": "string"
-                },
-                "test_case_predicate_name": {
-                    "type": "string"
-                },
-                "test_case_qualifiers": {
-                    "description": "Optional qualifiers which constrain to the test case defined knowledge statement. Note that this field records such qualifier slots and values as tag=value pairs, where the tag is the Biolink Model qualifier slot named and the value is an acceptable (Biolink Model enum?) value of the said qualifier slot.",
-                    "items": {
-                        "$ref": "#/$defs/Qualifier"
-                    },
-                    "type": "array"
-                },
-                "test_case_runner_settings": {
-                    "description": "Settings for the test harness for TestCase",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "test_case_source": {
-                    "$ref": "#/$defs/TestSourceEnum",
-                    "description": "Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string."
-                },
-                "test_env": {
-                    "$ref": "#/$defs/TestEnvEnum",
-                    "description": "Deployment environment within which the associated TestSuite is run."
-                },
-                "trapi_template": {
-                    "$ref": "#/$defs/TrapiTemplateEnum",
-                    "description": "A template for a query, which can be used to generate a query for a test case.  note: the current enumerated values for this slot come from the Benchmarks repo config/benchmarks.json \"templates\" collection and refer to the \"name\" field of each template.  Templates themselves are currently stored in the config/[source_name]/templates directory."
-                }
-            },
-            "required": [
-                "test_assets",
-                "test_case_runner_settings",
-                "id"
-            ],
-            "title": "KnowledgeGraphNavigationTestCase",
-            "type": "object"
-        },
         "NodeEnum": {
             "description": "Target node of a Subject-Predicate-Object driven query",
             "enum": [
@@ -540,101 +336,6 @@
             ],
             "title": "NodeEnum",
             "type": "string"
-        },
-        "OneHopTestCase": {
-            "additionalProperties": false,
-            "description": "'One Hop' Knowledge Graph navigation integration test",
-            "properties": {
-                "components": {
-                    "description": "The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.",
-                    "items": {
-                        "$ref": "#/$defs/ComponentEnum"
-                    },
-                    "type": "array"
-                },
-                "description": {
-                    "description": "A human-readable description for a Test Entity",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "A unique identifier for a Test Entity",
-                    "type": "string"
-                },
-                "name": {
-                    "description": "A human-readable name for a Test Entity",
-                    "type": "string"
-                },
-                "preconditions": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "query_type": {
-                    "$ref": "#/$defs/QueryTypeEnum",
-                    "description": "Type of TestCase query."
-                },
-                "tags": {
-                    "description": "One or more 'tags' slot values (slot inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection.",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "test_assets": {
-                    "description": "One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection.",
-                    "items": {
-                        "$ref": "#/$defs/TestAsset"
-                    },
-                    "type": "array"
-                },
-                "test_case_input_id": {
-                    "type": "string"
-                },
-                "test_case_objective": {
-                    "$ref": "#/$defs/TestObjectiveEnum",
-                    "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)"
-                },
-                "test_case_predicate_id": {
-                    "type": "string"
-                },
-                "test_case_predicate_name": {
-                    "type": "string"
-                },
-                "test_case_qualifiers": {
-                    "description": "Optional qualifiers which constrain to the test case defined knowledge statement. Note that this field records such qualifier slots and values as tag=value pairs, where the tag is the Biolink Model qualifier slot named and the value is an acceptable (Biolink Model enum?) value of the said qualifier slot.",
-                    "items": {
-                        "$ref": "#/$defs/Qualifier"
-                    },
-                    "type": "array"
-                },
-                "test_case_runner_settings": {
-                    "description": "Settings for the test harness for TestCase",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "test_case_source": {
-                    "$ref": "#/$defs/TestSourceEnum",
-                    "description": "Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string."
-                },
-                "test_env": {
-                    "$ref": "#/$defs/TestEnvEnum",
-                    "description": "Deployment environment within which the associated TestSuite is run."
-                },
-                "trapi_template": {
-                    "$ref": "#/$defs/TrapiTemplateEnum",
-                    "description": "A template for a query, which can be used to generate a query for a test case.  note: the current enumerated values for this slot come from the Benchmarks repo config/benchmarks.json \"templates\" collection and refer to the \"name\" field of each template.  Templates themselves are currently stored in the config/[source_name]/templates directory."
-                }
-            },
-            "required": [
-                "test_assets",
-                "test_case_runner_settings",
-                "id"
-            ],
-            "title": "OneHopTestCase",
-            "type": "object"
         },
         "OneHopTestSuite": {
             "additionalProperties": false,
@@ -674,6 +375,13 @@
                     "$ref": "#/$defs/TestPersonaEnum",
                     "description": "A Test persona describes the user or operational context of a given test."
                 },
+                "test_runner_settings": {
+                    "description": "Scalar parameters for the TestRunner processing a given TestEntity.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
                 "test_suite_specification": {
                     "$ref": "#/$defs/TestSuiteSpecification",
                     "description": "Declarative specification of a Test Suite of Test Cases whose generation is deferred, (i.e. within a Test Runner) or whose creation is achieved by stream processing of an external data source."
@@ -708,6 +416,13 @@
                         "type": "string"
                     },
                     "type": "array"
+                },
+                "test_runner_settings": {
+                    "description": "Scalar parameters for the TestRunner processing a given TestEntity.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 }
             },
             "required": [
@@ -736,13 +451,6 @@
             "additionalProperties": false,
             "description": "Assumed additional model from Shervin's runner JSON here as an example.  This schema is not yet complete.",
             "properties": {
-                "components": {
-                    "description": "The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.",
-                    "items": {
-                        "$ref": "#/$defs/ComponentEnum"
-                    },
-                    "type": "array"
-                },
                 "description": {
                     "description": "A human-readable description for a Test Entity",
                     "type": "string"
@@ -799,20 +507,16 @@
                     },
                     "type": "array"
                 },
-                "test_case_runner_settings": {
-                    "description": "Settings for the test harness for TestCase",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
                 "test_case_source": {
                     "$ref": "#/$defs/TestSourceEnum",
                     "description": "Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string."
                 },
-                "test_env": {
-                    "$ref": "#/$defs/TestEnvEnum",
-                    "description": "Deployment environment within which the associated TestSuite is run."
+                "test_runner_settings": {
+                    "description": "Scalar parameters for the TestRunner processing a given TestEntity.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 },
                 "trapi_template": {
                     "$ref": "#/$defs/TrapiTemplateEnum",
@@ -821,7 +525,6 @@
             },
             "required": [
                 "test_assets",
-                "test_case_runner_settings",
                 "id"
             ],
             "title": "QuantitativeTestCase",
@@ -882,6 +585,13 @@
                 "test_persona": {
                     "$ref": "#/$defs/TestPersonaEnum",
                     "description": "A Test persona describes the user or operational context of a given test."
+                },
+                "test_runner_settings": {
+                    "description": "Scalar parameters for the TestRunner processing a given TestEntity.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 },
                 "test_suite_specification": {
                     "$ref": "#/$defs/TestSuiteSpecification",
@@ -952,13 +662,6 @@
                     },
                     "type": "array"
                 },
-                "runner_settings": {
-                    "description": "Settings for the test harness, e.g. \"inferred\"",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
                 "semantic_severity": {
                     "$ref": "#/$defs/SemanticSeverityEnum"
                 },
@@ -980,12 +683,18 @@
                     "description": "Document URL where original test source particulars are registered (e.g. Github repo)",
                     "type": "string"
                 },
+                "test_runner_settings": {
+                    "description": "Scalar settings for the TestRunner, e.g. \"inferred\"",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
                 "well_known": {
                     "type": "boolean"
                 }
             },
             "required": [
-                "runner_settings",
                 "test_metadata",
                 "id"
             ],
@@ -996,13 +705,6 @@
             "additionalProperties": false,
             "description": "Represents a single enumerated instance of Test Case, derived from a  given collection of one or more TestAsset instances (the value of the 'test_assets' slot) which define the 'inputs' and 'outputs' of the TestCase, used to probe a particular test condition.",
             "properties": {
-                "components": {
-                    "description": "The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.",
-                    "items": {
-                        "$ref": "#/$defs/ComponentEnum"
-                    },
-                    "type": "array"
-                },
                 "description": {
                     "description": "A human-readable description for a Test Entity",
                     "type": "string"
@@ -1059,20 +761,16 @@
                     },
                     "type": "array"
                 },
-                "test_case_runner_settings": {
-                    "description": "Settings for the test harness for TestCase",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
                 "test_case_source": {
                     "$ref": "#/$defs/TestSourceEnum",
                     "description": "Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string."
                 },
-                "test_env": {
-                    "$ref": "#/$defs/TestEnvEnum",
-                    "description": "Deployment environment within which the associated TestSuite is run."
+                "test_runner_settings": {
+                    "description": "Scalar parameters for the TestRunner processing a given TestEntity.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 },
                 "trapi_template": {
                     "$ref": "#/$defs/TrapiTemplateEnum",
@@ -1081,7 +779,6 @@
             },
             "required": [
                 "test_assets",
-                "test_case_runner_settings",
                 "id"
             ],
             "title": "TestCase",
@@ -1117,6 +814,13 @@
                 "test_case_result": {
                     "$ref": "#/$defs/TestCaseResultEnum",
                     "description": "Encoded result of a single test run of a given test case"
+                },
+                "test_runner_settings": {
+                    "description": "Scalar parameters for the TestRunner processing a given TestEntity.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 },
                 "test_suite_id": {
                     "description": "CURIE id of a TestSuite registered in the system.",
@@ -1170,6 +874,13 @@
                     "$ref": "#/$defs/TestCaseResultEnum",
                     "description": "Encoded result of a single test run of a given test case"
                 },
+                "test_runner_settings": {
+                    "description": "Scalar parameters for the TestRunner processing a given TestEntity.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
                 "test_suite_id": {
                     "description": "CURIE id of a TestSuite registered in the system.",
                     "type": "string"
@@ -1183,13 +894,6 @@
             "additionalProperties": false,
             "description": "Represents a single enumerated instance of Test Case, derived from a  given collection of one or more TestAsset instances (the value of the 'test_assets' slot) which define the 'inputs' and 'outputs' of the TestCase, used to probe a particular test condition.",
             "properties": {
-                "components": {
-                    "description": "The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.",
-                    "items": {
-                        "$ref": "#/$defs/ComponentEnum"
-                    },
-                    "type": "array"
-                },
                 "description": {
                     "description": "A human-readable description for a Test Entity",
                     "type": "string"
@@ -1246,20 +950,16 @@
                     },
                     "type": "array"
                 },
-                "test_case_runner_settings": {
-                    "description": "Settings for the test harness for TestCase",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
                 "test_case_source": {
                     "$ref": "#/$defs/TestSourceEnum",
                     "description": "Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string."
                 },
-                "test_env": {
-                    "$ref": "#/$defs/TestEnvEnum",
-                    "description": "Deployment environment within which the associated TestSuite is run."
+                "test_runner_settings": {
+                    "description": "Scalar parameters for the TestRunner processing a given TestEntity.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 },
                 "trapi_template": {
                     "$ref": "#/$defs/TrapiTemplateEnum",
@@ -1267,8 +967,7 @@
                 }
             },
             "required": [
-                "test_assets",
-                "test_case_runner_settings"
+                "test_assets"
             ],
             "title": "TestCase",
             "type": "object"
@@ -1330,13 +1029,6 @@
                     },
                     "type": "array"
                 },
-                "runner_settings": {
-                    "description": "Settings for the test harness, e.g. \"inferred\"",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
                 "semantic_severity": {
                     "$ref": "#/$defs/SemanticSeverityEnum"
                 },
@@ -1358,12 +1050,18 @@
                     "description": "Document URL where original test source particulars are registered (e.g. Github repo)",
                     "type": "string"
                 },
+                "test_runner_settings": {
+                    "description": "Scalar settings for the TestRunner, e.g. \"inferred\"",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
                 "well_known": {
                     "type": "boolean"
                 }
             },
             "required": [
-                "runner_settings",
                 "test_metadata",
                 "id"
             ],
@@ -1448,6 +1146,13 @@
                     "description": "Document URL where original test source particulars are registered (e.g. Github repo)",
                     "type": "string"
                 },
+                "test_runner_settings": {
+                    "description": "Scalar parameters for the TestRunner processing a given TestEntity.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
                 "test_source": {
                     "$ref": "#/$defs/TestSourceEnum",
                     "description": "Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string."
@@ -1464,7 +1169,9 @@
             "enum": [
                 "AcceptanceTest",
                 "BenchmarkTest",
-                "QuantitativeTest"
+                "QuantitativeTest",
+                "OneHopTest",
+                "StandardsValidationTest"
             ],
             "title": "TestObjectiveEnum",
             "type": "string"
@@ -1502,6 +1209,13 @@
                 "test_case_id": {
                     "description": "CURIE id of a TestCase registered in the system.",
                     "type": "string"
+                },
+                "test_runner_settings": {
+                    "description": "Scalar parameters for the TestRunner processing a given TestEntity.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 }
             },
             "required": [
@@ -1562,6 +1276,13 @@
                     },
                     "type": "array"
                 },
+                "test_runner_settings": {
+                    "description": "Scalar parameters for the TestRunner processing a given TestEntity.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
                 "unsecret": {
                     "type": "string"
                 }
@@ -1574,8 +1295,15 @@
         },
         "TestRunSession": {
             "additionalProperties": false,
-            "description": "A single invocation of a TestRunner.",
+            "description": "Single run of a TestRunner in a given environment, with a specified set of test_entities (generally, one or more instances of TestSuite).",
             "properties": {
+                "components": {
+                    "description": "The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.",
+                    "items": {
+                        "$ref": "#/$defs/ComponentEnum"
+                    },
+                    "type": "array"
+                },
                 "description": {
                     "description": "A human-readable description for a Test Entity",
                     "type": "string"
@@ -1620,12 +1348,30 @@
                             }
                         ]
                     },
-                    "description": "Different TestRunners may expect specific kinds of TestEntity as input. These 'test_entities' one or more instances of TestAsset, TestCase or TestSuite.",
+                    "description": "Different TestRunners could expect specific kinds of TestEntity as an input.  These 'test_entities' are one or more instances of TestAsset, TestCase or (preferably?) TestSuite.",
                     "type": "object"
+                },
+                "test_env": {
+                    "$ref": "#/$defs/TestEnvEnum",
+                    "description": "Deployment environment within which the associated TestSuite is run."
+                },
+                "test_run_parameters": {
+                    "description": "Different TestRunners could expect additional global test configuration parameters, like the applicable TRAPI version (\"trapi_version\") or Biolink Model versions (\"biolink_version\").",
+                    "items": {
+                        "$ref": "#/$defs/TestEntityParameter"
+                    },
+                    "type": "array"
                 },
                 "test_runner_name": {
                     "description": "Global system name of a TestRunner.",
                     "type": "string"
+                },
+                "test_runner_settings": {
+                    "description": "Scalar parameters for the TestRunner processing a given TestEntity.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 },
                 "timestamp": {
                     "description": "Date time when a given entity was created.",
@@ -1637,43 +1383,6 @@
                 "id"
             ],
             "title": "TestRunSession",
-            "type": "object"
-        },
-        "TestRunnerConfiguration": {
-            "additionalProperties": false,
-            "description": "General configuration parameters and test data input  for a single invocation of a TestRunner.",
-            "properties": {
-                "description": {
-                    "description": "A human-readable description for a Test Entity",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "A unique identifier for a Test Entity",
-                    "type": "string"
-                },
-                "name": {
-                    "description": "A human-readable name for a Test Entity",
-                    "type": "string"
-                },
-                "tags": {
-                    "description": "One or more 'tags' slot values (slot inherited from TestEntity)  should generally identify the TestRunner(s) using this configuration.",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "test_run_parameters": {
-                    "description": "Parameters for TestRunnerConfiguration that inform the TestHarness and TestRunners about the general characteristics of a test run.",
-                    "items": {
-                        "$ref": "#/$defs/TestEntityParameter"
-                    },
-                    "type": "array"
-                }
-            },
-            "required": [
-                "id"
-            ],
-            "title": "TestRunnerConfiguration",
             "type": "object"
         },
         "TestSourceEnum": {
@@ -1728,6 +1437,13 @@
                     "$ref": "#/$defs/TestPersonaEnum",
                     "description": "A Test persona describes the user or operational context of a given test."
                 },
+                "test_runner_settings": {
+                    "description": "Scalar parameters for the TestRunner processing a given TestEntity.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
                 "test_suite_specification": {
                     "$ref": "#/$defs/TestSuiteSpecification",
                     "description": "Declarative specification of a Test Suite of Test Cases whose generation is deferred, (i.e. within a Test Runner) or whose creation is achieved by stream processing of an external data source."
@@ -1770,6 +1486,13 @@
                 "test_data_file_locator": {
                     "description": "An web accessible file resource link to test entity data (e.g. a web accessible text file of Test Asset entries)",
                     "type": "string"
+                },
+                "test_runner_settings": {
+                    "description": "Scalar parameters for the TestRunner processing a given TestEntity.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 }
             },
             "required": [

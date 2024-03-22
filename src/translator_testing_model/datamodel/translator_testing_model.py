@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2024-03-22T08:49:00
+# Generation date: 2024-03-22T08:56:47
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -111,18 +111,6 @@ class QuantitativeTestCaseId(TestCaseId):
     pass
 
 
-class ComplianceTestCaseId(TestCaseId):
-    pass
-
-
-class KnowledgeGraphNavigationTestCaseId(TestCaseId):
-    pass
-
-
-class OneHopTestCaseId(KnowledgeGraphNavigationTestCaseId):
-    pass
-
-
 class TestSuiteSpecificationId(TestEntityId):
     pass
 
@@ -140,10 +128,6 @@ class StandardsComplianceTestSuiteId(TestSuiteId):
 
 
 class OneHopTestSuiteId(TestSuiteId):
-    pass
-
-
-class TestRunnerConfigurationId(TestEntityId):
     pass
 
 
@@ -227,6 +211,7 @@ class TestEntity(YAMLRoot):
     name: Optional[str] = None
     description: Optional[str] = None
     tags: Optional[Union[str, List[str]]] = empty_list()
+    test_runner_settings: Optional[Union[str, List[str]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -243,6 +228,10 @@ class TestEntity(YAMLRoot):
         if not isinstance(self.tags, list):
             self.tags = [self.tags] if self.tags is not None else []
         self.tags = [v if isinstance(v, str) else str(v) for v in self.tags]
+
+        if not isinstance(self.test_runner_settings, list):
+            self.test_runner_settings = [self.test_runner_settings] if self.test_runner_settings is not None else []
+        self.test_runner_settings = [v if isinstance(v, str) else str(v) for v in self.test_runner_settings]
 
         super().__post_init__(**kwargs)
 
@@ -302,7 +291,6 @@ class TestAsset(TestEntity):
     class_model_uri: ClassVar[URIRef] = TTM.TestAsset
 
     id: Union[str, TestAssetId] = None
-    runner_settings: Union[str, List[str]] = None
     test_metadata: Union[dict, TestMetadata] = None
     input_id: Optional[Union[str, URIorCURIE]] = None
     input_name: Optional[str] = None
@@ -321,18 +309,13 @@ class TestAsset(TestEntity):
     well_known: Optional[Union[bool, Bool]] = None
     test_reference: Optional[Union[str, URIorCURIE]] = None
     tags: Optional[Union[str, List[str]]] = empty_list()
+    test_runner_settings: Optional[Union[str, List[str]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
             self.MissingRequiredField("id")
         if not isinstance(self.id, TestAssetId):
             self.id = TestAssetId(self.id)
-
-        if self._is_empty(self.runner_settings):
-            self.MissingRequiredField("runner_settings")
-        if not isinstance(self.runner_settings, list):
-            self.runner_settings = [self.runner_settings] if self.runner_settings is not None else []
-        self.runner_settings = [v if isinstance(v, str) else str(v) for v in self.runner_settings]
 
         if self._is_empty(self.test_metadata):
             self.MissingRequiredField("test_metadata")
@@ -392,6 +375,10 @@ class TestAsset(TestEntity):
             self.tags = [self.tags] if self.tags is not None else []
         self.tags = [v if isinstance(v, str) else str(v) for v in self.tags]
 
+        if not isinstance(self.test_runner_settings, list):
+            self.test_runner_settings = [self.test_runner_settings] if self.test_runner_settings is not None else []
+        self.test_runner_settings = [v if isinstance(v, str) else str(v) for v in self.test_runner_settings]
+
         super().__post_init__(**kwargs)
 
 
@@ -408,7 +395,6 @@ class AcceptanceTestAsset(TestAsset):
     class_model_uri: ClassVar[URIRef] = TTM.AcceptanceTestAsset
 
     id: Union[str, AcceptanceTestAssetId] = None
-    runner_settings: Union[str, List[str]] = None
     test_metadata: Union[dict, TestMetadata] = None
     must_pass_date: Optional[Union[str, XSDDate]] = None
     must_pass_environment: Optional[Union[str, "TestEnvEnum"]] = None
@@ -474,7 +460,6 @@ class TestEdgeData(TestAsset):
     class_model_uri: ClassVar[URIRef] = TTM.TestEdgeData
 
     id: Union[str, TestEdgeDataId] = None
-    runner_settings: Union[str, List[str]] = None
     test_metadata: Union[dict, TestMetadata] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
@@ -525,12 +510,9 @@ class TestCase(TestEntity):
 
     id: Union[str, TestCaseId] = None
     test_assets: Union[Dict[Union[str, TestAssetId], Union[dict, TestAsset]], List[Union[dict, TestAsset]]] = empty_dict()
-    test_case_runner_settings: Union[str, List[str]] = None
-    test_env: Optional[Union[str, "TestEnvEnum"]] = None
     query_type: Optional[Union[str, "QueryTypeEnum"]] = None
     preconditions: Optional[Union[Union[str, PreconditionId], List[Union[str, PreconditionId]]]] = empty_list()
     trapi_template: Optional[Union[str, "TrapiTemplateEnum"]] = None
-    components: Optional[Union[Union[str, "ComponentEnum"], List[Union[str, "ComponentEnum"]]]] = empty_list()
     test_case_objective: Optional[Union[str, "TestObjectiveEnum"]] = None
     test_case_source: Optional[Union[str, "TestSourceEnum"]] = None
     test_case_predicate_name: Optional[str] = None
@@ -549,15 +531,6 @@ class TestCase(TestEntity):
             self.MissingRequiredField("test_assets")
         self._normalize_inlined_as_list(slot_name="test_assets", slot_type=TestAsset, key_name="id", keyed=True)
 
-        if self._is_empty(self.test_case_runner_settings):
-            self.MissingRequiredField("test_case_runner_settings")
-        if not isinstance(self.test_case_runner_settings, list):
-            self.test_case_runner_settings = [self.test_case_runner_settings] if self.test_case_runner_settings is not None else []
-        self.test_case_runner_settings = [v if isinstance(v, str) else str(v) for v in self.test_case_runner_settings]
-
-        if self.test_env is not None and not isinstance(self.test_env, TestEnvEnum):
-            self.test_env = TestEnvEnum(self.test_env)
-
         if self.query_type is not None and not isinstance(self.query_type, QueryTypeEnum):
             self.query_type = QueryTypeEnum(self.query_type)
 
@@ -567,10 +540,6 @@ class TestCase(TestEntity):
 
         if self.trapi_template is not None and not isinstance(self.trapi_template, TrapiTemplateEnum):
             self.trapi_template = TrapiTemplateEnum(self.trapi_template)
-
-        if not isinstance(self.components, list):
-            self.components = [self.components] if self.components is not None else []
-        self.components = [v if isinstance(v, ComponentEnum) else ComponentEnum(v) for v in self.components]
 
         if self.test_case_objective is not None and not isinstance(self.test_case_objective, TestObjectiveEnum):
             self.test_case_objective = TestObjectiveEnum(self.test_case_objective)
@@ -611,7 +580,6 @@ class AcceptanceTestCase(TestCase):
     class_model_uri: ClassVar[URIRef] = TTM.AcceptanceTestCase
 
     id: Union[str, AcceptanceTestCaseId] = None
-    test_case_runner_settings: Union[str, List[str]] = None
     test_assets: Union[Dict[Union[str, AcceptanceTestAssetId], Union[dict, AcceptanceTestAsset]], List[Union[dict, AcceptanceTestAsset]]] = empty_dict()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
@@ -641,96 +609,12 @@ class QuantitativeTestCase(TestCase):
 
     id: Union[str, QuantitativeTestCaseId] = None
     test_assets: Union[Dict[Union[str, TestAssetId], Union[dict, TestAsset]], List[Union[dict, TestAsset]]] = empty_dict()
-    test_case_runner_settings: Union[str, List[str]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
             self.MissingRequiredField("id")
         if not isinstance(self.id, QuantitativeTestCaseId):
             self.id = QuantitativeTestCaseId(self.id)
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass
-class ComplianceTestCase(TestCase):
-    """
-    TRAPI and Biolink Model standards compliance test
-    """
-    _inherited_slots: ClassVar[List[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = TTM["ComplianceTestCase"]
-    class_class_curie: ClassVar[str] = "ttm:ComplianceTestCase"
-    class_name: ClassVar[str] = "ComplianceTestCase"
-    class_model_uri: ClassVar[URIRef] = TTM.ComplianceTestCase
-
-    id: Union[str, ComplianceTestCaseId] = None
-    test_assets: Union[Dict[Union[str, TestAssetId], Union[dict, TestAsset]], List[Union[dict, TestAsset]]] = empty_dict()
-    test_case_runner_settings: Union[str, List[str]] = None
-    trapi_version: Optional[str] = None
-    biolink_version: Optional[str] = None
-
-    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, ComplianceTestCaseId):
-            self.id = ComplianceTestCaseId(self.id)
-
-        if self.trapi_version is not None and not isinstance(self.trapi_version, str):
-            self.trapi_version = str(self.trapi_version)
-
-        if self.biolink_version is not None and not isinstance(self.biolink_version, str):
-            self.biolink_version = str(self.biolink_version)
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass
-class KnowledgeGraphNavigationTestCase(TestCase):
-    """
-    Knowledge Graph navigation integration test
-    """
-    _inherited_slots: ClassVar[List[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = TTM["KnowledgeGraphNavigationTestCase"]
-    class_class_curie: ClassVar[str] = "ttm:KnowledgeGraphNavigationTestCase"
-    class_name: ClassVar[str] = "KnowledgeGraphNavigationTestCase"
-    class_model_uri: ClassVar[URIRef] = TTM.KnowledgeGraphNavigationTestCase
-
-    id: Union[str, KnowledgeGraphNavigationTestCaseId] = None
-    test_assets: Union[Dict[Union[str, TestAssetId], Union[dict, TestAsset]], List[Union[dict, TestAsset]]] = empty_dict()
-    test_case_runner_settings: Union[str, List[str]] = None
-
-    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, KnowledgeGraphNavigationTestCaseId):
-            self.id = KnowledgeGraphNavigationTestCaseId(self.id)
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass
-class OneHopTestCase(KnowledgeGraphNavigationTestCase):
-    """
-    'One Hop' Knowledge Graph navigation integration test
-    """
-    _inherited_slots: ClassVar[List[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = TTM["OneHopTestCase"]
-    class_class_curie: ClassVar[str] = "ttm:OneHopTestCase"
-    class_name: ClassVar[str] = "OneHopTestCase"
-    class_model_uri: ClassVar[URIRef] = TTM.OneHopTestCase
-
-    id: Union[str, OneHopTestCaseId] = None
-    test_assets: Union[Dict[Union[str, TestAssetId], Union[dict, TestAsset]], List[Union[dict, TestAsset]]] = empty_dict()
-    test_case_runner_settings: Union[str, List[str]] = None
-
-    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, OneHopTestCaseId):
-            self.id = OneHopTestCaseId(self.id)
 
         super().__post_init__(**kwargs)
 
@@ -890,39 +774,6 @@ class OneHopTestSuite(TestSuite):
 
 
 @dataclass
-class TestRunnerConfiguration(TestEntity):
-    """
-    General configuration parameters and test data input  for a single invocation of a TestRunner.
-    """
-    _inherited_slots: ClassVar[List[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = TTM["TestRunnerConfiguration"]
-    class_class_curie: ClassVar[str] = "ttm:TestRunnerConfiguration"
-    class_name: ClassVar[str] = "TestRunnerConfiguration"
-    class_model_uri: ClassVar[URIRef] = TTM.TestRunnerConfiguration
-
-    id: Union[str, TestRunnerConfigurationId] = None
-    test_run_parameters: Optional[Union[Union[dict, TestEntityParameter], List[Union[dict, TestEntityParameter]]]] = empty_list()
-    tags: Optional[Union[str, List[str]]] = empty_list()
-
-    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, TestRunnerConfigurationId):
-            self.id = TestRunnerConfigurationId(self.id)
-
-        if not isinstance(self.test_run_parameters, list):
-            self.test_run_parameters = [self.test_run_parameters] if self.test_run_parameters is not None else []
-        self.test_run_parameters = [v if isinstance(v, TestEntityParameter) else TestEntityParameter(**as_dict(v)) for v in self.test_run_parameters]
-
-        if not isinstance(self.tags, list):
-            self.tags = [self.tags] if self.tags is not None else []
-        self.tags = [v if isinstance(v, str) else str(v) for v in self.tags]
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass
 class TestCaseResult(TestEntity):
     """
     The outcome of a TestRunner run of one specific TestCase.
@@ -960,7 +811,8 @@ class TestCaseResult(TestEntity):
 @dataclass
 class TestRunSession(TestEntity):
     """
-    A single invocation of a TestRunner.
+    Single run of a TestRunner in a given environment, with a specified set of test_entities (generally, one or more
+    instances of TestSuite).
     """
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -970,7 +822,10 @@ class TestRunSession(TestEntity):
     class_model_uri: ClassVar[URIRef] = TTM.TestRunSession
 
     id: Union[str, TestRunSessionId] = None
+    components: Optional[Union[Union[str, "ComponentEnum"], List[Union[str, "ComponentEnum"]]]] = empty_list()
+    test_env: Optional[Union[str, "TestEnvEnum"]] = None
     test_runner_name: Optional[str] = None
+    test_run_parameters: Optional[Union[Union[dict, TestEntityParameter], List[Union[dict, TestEntityParameter]]]] = empty_list()
     test_entities: Optional[Union[Dict[Union[str, TestEntityId], Union[dict, TestEntity]], List[Union[dict, TestEntity]]]] = empty_dict()
     test_case_results: Optional[Union[Dict[Union[str, TestCaseResultId], Union[dict, TestCaseResult]], List[Union[dict, TestCaseResult]]]] = empty_dict()
     timestamp: Optional[Union[str, XSDDateTime]] = None
@@ -981,8 +836,19 @@ class TestRunSession(TestEntity):
         if not isinstance(self.id, TestRunSessionId):
             self.id = TestRunSessionId(self.id)
 
+        if not isinstance(self.components, list):
+            self.components = [self.components] if self.components is not None else []
+        self.components = [v if isinstance(v, ComponentEnum) else ComponentEnum(v) for v in self.components]
+
+        if self.test_env is not None and not isinstance(self.test_env, TestEnvEnum):
+            self.test_env = TestEnvEnum(self.test_env)
+
         if self.test_runner_name is not None and not isinstance(self.test_runner_name, str):
             self.test_runner_name = str(self.test_runner_name)
+
+        if not isinstance(self.test_run_parameters, list):
+            self.test_run_parameters = [self.test_run_parameters] if self.test_run_parameters is not None else []
+        self.test_run_parameters = [v if isinstance(v, TestEntityParameter) else TestEntityParameter(**as_dict(v)) for v in self.test_run_parameters]
 
         self._normalize_inlined_as_dict(slot_name="test_entities", slot_type=TestEntity, key_name="id", keyed=True)
 
@@ -1117,6 +983,12 @@ class TestObjectiveEnum(EnumDefinitionImpl):
     QuantitativeTest = PermissibleValue(
         text="QuantitativeTest",
         description="Quantitative test")
+    OneHopTest = PermissibleValue(
+        text="OneHopTest",
+        description="One Hop Test of knowledge graph navigation")
+    StandardsValidationTest = PermissibleValue(
+        text="StandardsValidationTest",
+        description="TRAPI and Biolink Model (\"reasoner-validator\") validation")
 
     _defn = EnumDefinition(
         name="TestObjectiveEnum",
@@ -1446,11 +1318,8 @@ slots.in_v1 = Slot(uri=TTM.in_v1, name="in_v1", curie=TTM.curie('in_v1'),
 slots.well_known = Slot(uri=TTM.well_known, name="well_known", curie=TTM.curie('well_known'),
                    model_uri=TTM.well_known, domain=None, range=Optional[Union[bool, Bool]])
 
-slots.runner_settings = Slot(uri=TTM.runner_settings, name="runner_settings", curie=TTM.curie('runner_settings'),
-                   model_uri=TTM.runner_settings, domain=None, range=Union[str, List[str]])
-
-slots.test_case_runner_settings = Slot(uri=TTM.test_case_runner_settings, name="test_case_runner_settings", curie=TTM.curie('test_case_runner_settings'),
-                   model_uri=TTM.test_case_runner_settings, domain=None, range=Union[str, List[str]])
+slots.test_runner_settings = Slot(uri=TTM.test_runner_settings, name="test_runner_settings", curie=TTM.curie('test_runner_settings'),
+                   model_uri=TTM.test_runner_settings, domain=None, range=Optional[Union[str, List[str]]])
 
 slots.must_pass_date = Slot(uri=TTM.must_pass_date, name="must_pass_date", curie=TTM.curie('must_pass_date'),
                    model_uri=TTM.must_pass_date, domain=None, range=Optional[Union[str, XSDDate]])
@@ -1557,8 +1426,8 @@ slots.TestAsset_id = Slot(uri=SCHEMA.identifier, name="TestAsset_id", curie=SCHE
 slots.TestAsset_tags = Slot(uri=SCHEMA.additionalType, name="TestAsset_tags", curie=SCHEMA.curie('additionalType'),
                    model_uri=TTM.TestAsset_tags, domain=TestAsset, range=Optional[Union[str, List[str]]])
 
-slots.TestAsset_runner_settings = Slot(uri=TTM.runner_settings, name="TestAsset_runner_settings", curie=TTM.curie('runner_settings'),
-                   model_uri=TTM.TestAsset_runner_settings, domain=TestAsset, range=Union[str, List[str]])
+slots.TestAsset_test_runner_settings = Slot(uri=TTM.test_runner_settings, name="TestAsset_test_runner_settings", curie=TTM.curie('test_runner_settings'),
+                   model_uri=TTM.TestAsset_test_runner_settings, domain=TestAsset, range=Optional[Union[str, List[str]]])
 
 slots.TestCase_test_assets = Slot(uri=TTM.test_assets, name="TestCase_test_assets", curie=TTM.curie('test_assets'),
                    model_uri=TTM.TestCase_test_assets, domain=TestCase, range=Union[Dict[Union[str, TestAssetId], Union[dict, TestAsset]], List[Union[dict, TestAsset]]])
@@ -1569,8 +1438,8 @@ slots.TestCase_tags = Slot(uri=SCHEMA.additionalType, name="TestCase_tags", curi
 slots.AcceptanceTestCase_test_assets = Slot(uri=TTM.test_assets, name="AcceptanceTestCase_test_assets", curie=TTM.curie('test_assets'),
                    model_uri=TTM.AcceptanceTestCase_test_assets, domain=AcceptanceTestCase, range=Union[Dict[Union[str, AcceptanceTestAssetId], Union[dict, AcceptanceTestAsset]], List[Union[dict, AcceptanceTestAsset]]])
 
-slots.TestRunnerConfiguration_tags = Slot(uri=SCHEMA.additionalType, name="TestRunnerConfiguration_tags", curie=SCHEMA.curie('additionalType'),
-                   model_uri=TTM.TestRunnerConfiguration_tags, domain=TestRunnerConfiguration, range=Optional[Union[str, List[str]]])
+slots.TestRunSession_test_run_parameters = Slot(uri=TTM.test_run_parameters, name="TestRunSession_test_run_parameters", curie=TTM.curie('test_run_parameters'),
+                   model_uri=TTM.TestRunSession_test_run_parameters, domain=TestRunSession, range=Optional[Union[Union[dict, TestEntityParameter], List[Union[dict, TestEntityParameter]]]])
 
 slots.TestRunSession_test_entities = Slot(uri=TTM.test_entities, name="TestRunSession_test_entities", curie=TTM.curie('test_entities'),
                    model_uri=TTM.TestRunSession_test_entities, domain=TestRunSession, range=Optional[Union[Dict[Union[str, TestEntityId], Union[dict, TestEntity]], List[Union[dict, TestEntity]]]])

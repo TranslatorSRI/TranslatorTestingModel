@@ -442,6 +442,14 @@
         {
           "text": "QuantitativeTest",
           "description": "Quantitative test"
+        },
+        {
+          "text": "OneHopTest",
+          "description": "One Hop Test of knowledge graph navigation"
+        },
+        {
+          "text": "StandardsValidationTest",
+          "description": "TRAPI and Biolink Model (\"reasoner-validator\") validation"
         }
       ]
     },
@@ -834,7 +842,7 @@
     {
       "name": "test_entity_parameters",
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_entity_parameters",
-      "description": "One or more parameters documenting target characteristics of a TestEntity.",
+      "description": "One or more 'tag = value' parameters documenting target characteristics of a TestEntity.",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_entity_parameters",
       "multivalued": true,
@@ -1311,39 +1319,20 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "runner_settings",
-      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/runner_settings",
-      "description": "Settings for the test harness for TestAsset",
+      "name": "test_runner_settings",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_runner_settings",
+      "description": "Scalar parameters for the TestRunner processing a given TestEntity.",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "aliases": [
         "Settings"
       ],
-      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/runner_settings",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_runner_settings",
       "multivalued": true,
-      "owner": "TestAsset",
+      "owner": "TestEntity",
       "domain_of": [
-        "TestAsset"
+        "TestEntity"
       ],
       "range": "string",
-      "required": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "test_case_runner_settings",
-      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case_runner_settings",
-      "description": "Settings for the test harness for TestCase",
-      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
-      "aliases": [
-        "Settings"
-      ],
-      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case_runner_settings",
-      "multivalued": true,
-      "owner": "TestCase",
-      "domain_of": [
-        "TestCase"
-      ],
-      "range": "string",
-      "required": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1544,9 +1533,9 @@
       "description": "Deployment environment within which the associated TestSuite is run.",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_env",
-      "owner": "TestCase",
+      "owner": "TestRunSession",
       "domain_of": [
-        "TestCase"
+        "TestRunSession"
       ],
       "range": "TestEnvEnum",
       "@type": "SlotDefinition"
@@ -1614,9 +1603,9 @@
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/components",
       "multivalued": true,
-      "owner": "TestCase",
+      "owner": "TestRunSession",
       "domain_of": [
-        "TestCase"
+        "TestRunSession"
       ],
       "range": "ComponentEnum",
       "@type": "SlotDefinition"
@@ -1627,10 +1616,6 @@
       "description": "TRAPI version (SemVer string)",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/trapi_version",
-      "owner": "ComplianceTestCase",
-      "domain_of": [
-        "ComplianceTestCase"
-      ],
       "range": "string",
       "@type": "SlotDefinition"
     },
@@ -1640,10 +1625,6 @@
       "description": "Biolink Model release (SemVer string)",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/biolink_version",
-      "owner": "ComplianceTestCase",
-      "domain_of": [
-        "ComplianceTestCase"
-      ],
       "range": "string",
       "@type": "SlotDefinition"
     },
@@ -1734,14 +1715,14 @@
     {
       "name": "test_run_parameters",
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_run_parameters",
-      "description": "Parameters for TestRunnerConfiguration that inform the TestHarness and TestRunners about the general characteristics of a test run.",
+      "description": "TestRunSession parameters informing a TestHarness about the global characteristics of TestRunner processing tests.",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "is_a": "test_entity_parameters",
       "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_run_parameters",
       "multivalued": true,
-      "owner": "TestRunnerConfiguration",
+      "owner": "TestRunSession",
       "domain_of": [
-        "TestRunnerConfiguration"
+        "TestRunSession"
       ],
       "range": "TestEntityParameter",
       "inlined": true,
@@ -1916,26 +1897,25 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "TestAsset_runner_settings",
-      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/runner_settings",
-      "description": "Settings for the test harness, e.g. \"inferred\"",
+      "name": "TestAsset_test_runner_settings",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_runner_settings",
+      "description": "Scalar settings for the TestRunner, e.g. \"inferred\"",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "aliases": [
         "Settings"
       ],
-      "is_a": "runner_settings",
+      "is_a": "test_runner_settings",
       "domain": "TestAsset",
-      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/runner_settings",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_runner_settings",
       "multivalued": true,
-      "alias": "runner_settings",
+      "alias": "test_runner_settings",
       "owner": "TestAsset",
       "domain_of": [
         "TestAsset"
       ],
       "is_usage_slot": true,
-      "usage_slot_name": "runner_settings",
+      "usage_slot_name": "test_runner_settings",
       "range": "string",
-      "required": true,
       "@type": "SlotDefinition"
     },
     {
@@ -2008,31 +1988,30 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "TestRunnerConfiguration_tags",
-      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/tags",
-      "description": "One or more 'tags' slot values (slot inherited from TestEntity)  should generally identify the TestRunner(s) using this configuration.",
+      "name": "TestRunSession_test_run_parameters",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_run_parameters",
+      "description": "Different TestRunners could expect additional global test configuration parameters, like the applicable TRAPI version (\"trapi_version\") or Biolink Model versions (\"biolink_version\").",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
-      "mappings": [
-        "http://schema.org/additionalType"
-      ],
-      "is_a": "tags",
-      "domain": "TestRunnerConfiguration",
-      "slot_uri": "http://schema.org/additionalType",
+      "is_a": "test_run_parameters",
+      "domain": "TestRunSession",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_run_parameters",
       "multivalued": true,
-      "alias": "tags",
-      "owner": "TestRunnerConfiguration",
+      "alias": "test_run_parameters",
+      "owner": "TestRunSession",
       "domain_of": [
-        "TestRunnerConfiguration"
+        "TestRunSession"
       ],
       "is_usage_slot": true,
-      "usage_slot_name": "tags",
-      "range": "string",
+      "usage_slot_name": "test_run_parameters",
+      "range": "TestEntityParameter",
+      "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
       "name": "TestRunSession_test_entities",
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_entities",
-      "description": "Different TestRunners may expect specific kinds of TestEntity as input. These 'test_entities' one or more instances of TestAsset, TestCase or TestSuite.",
+      "description": "Different TestRunners could expect specific kinds of TestEntity as an input.  These 'test_entities' are one or more instances of TestAsset, TestCase or (preferably?) TestSuite.",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "is_a": "test_entities",
       "domain": "TestRunSession",
@@ -2087,7 +2066,8 @@
         "id",
         "name",
         "description",
-        "tags"
+        "tags",
+        "test_runner_settings"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEntity",
@@ -2105,6 +2085,7 @@
         "name",
         "description",
         "tags",
+        "test_runner_settings",
         "test_source",
         "test_reference",
         "test_objective",
@@ -2139,10 +2120,10 @@
         "in_v1",
         "well_known",
         "test_reference",
-        "TestAsset_runner_settings",
         "test_metadata",
         "TestAsset_id",
-        "TestAsset_tags"
+        "TestAsset_tags",
+        "TestAsset_test_runner_settings"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestAsset",
@@ -2173,10 +2154,10 @@
         "in_v1",
         "well_known",
         "test_reference",
-        "TestAsset_runner_settings",
         "test_metadata",
         "TestAsset_id",
         "TestAsset_tags",
+        "TestAsset_test_runner_settings",
         "must_pass_date",
         "must_pass_environment",
         "scientific_question",
@@ -2217,10 +2198,10 @@
         "in_v1",
         "well_known",
         "test_reference",
-        "TestAsset_runner_settings",
         "test_metadata",
         "TestAsset_id",
-        "TestAsset_tags"
+        "TestAsset_tags",
+        "TestAsset_test_runner_settings"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEdgeData",
@@ -2236,7 +2217,8 @@
         "id",
         "name",
         "description",
-        "tags"
+        "tags",
+        "test_runner_settings"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/Precondition",
@@ -2252,19 +2234,17 @@
         "id",
         "name",
         "description",
-        "test_env",
+        "test_runner_settings",
         "query_type",
         "TestCase_test_assets",
         "preconditions",
         "trapi_template",
-        "components",
         "test_case_objective",
         "test_case_source",
         "test_case_predicate_name",
         "test_case_predicate_id",
         "test_case_qualifiers",
         "test_case_input_id",
-        "test_case_runner_settings",
         "TestCase_tags"
       ],
       "slot_usage": {},
@@ -2281,18 +2261,16 @@
         "id",
         "name",
         "description",
-        "test_env",
+        "test_runner_settings",
         "query_type",
         "preconditions",
         "trapi_template",
-        "components",
         "test_case_objective",
         "test_case_source",
         "test_case_predicate_name",
         "test_case_predicate_id",
         "test_case_qualifiers",
         "test_case_input_id",
-        "test_case_runner_settings",
         "TestCase_tags",
         "AcceptanceTestCase_test_assets"
       ],
@@ -2310,112 +2288,21 @@
         "id",
         "name",
         "description",
-        "test_env",
+        "test_runner_settings",
         "query_type",
         "TestCase_test_assets",
         "preconditions",
         "trapi_template",
-        "components",
         "test_case_objective",
         "test_case_source",
         "test_case_predicate_name",
         "test_case_predicate_id",
         "test_case_qualifiers",
         "test_case_input_id",
-        "test_case_runner_settings",
         "TestCase_tags"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/QuantitativeTestCase",
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "ComplianceTestCase",
-      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/ComplianceTestCase",
-      "description": "TRAPI and Biolink Model standards compliance test",
-      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
-      "is_a": "TestCase",
-      "slots": [
-        "id",
-        "name",
-        "description",
-        "test_env",
-        "query_type",
-        "TestCase_test_assets",
-        "preconditions",
-        "trapi_template",
-        "components",
-        "test_case_objective",
-        "test_case_source",
-        "test_case_predicate_name",
-        "test_case_predicate_id",
-        "test_case_qualifiers",
-        "test_case_input_id",
-        "test_case_runner_settings",
-        "TestCase_tags",
-        "trapi_version",
-        "biolink_version"
-      ],
-      "slot_usage": {},
-      "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/ComplianceTestCase",
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "KnowledgeGraphNavigationTestCase",
-      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/KnowledgeGraphNavigationTestCase",
-      "description": "Knowledge Graph navigation integration test",
-      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
-      "is_a": "TestCase",
-      "slots": [
-        "id",
-        "name",
-        "description",
-        "test_env",
-        "query_type",
-        "TestCase_test_assets",
-        "preconditions",
-        "trapi_template",
-        "components",
-        "test_case_objective",
-        "test_case_source",
-        "test_case_predicate_name",
-        "test_case_predicate_id",
-        "test_case_qualifiers",
-        "test_case_input_id",
-        "test_case_runner_settings",
-        "TestCase_tags"
-      ],
-      "slot_usage": {},
-      "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/KnowledgeGraphNavigationTestCase",
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "OneHopTestCase",
-      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/OneHopTestCase",
-      "description": "'One Hop' Knowledge Graph navigation integration test",
-      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
-      "is_a": "KnowledgeGraphNavigationTestCase",
-      "slots": [
-        "id",
-        "name",
-        "description",
-        "test_env",
-        "query_type",
-        "TestCase_test_assets",
-        "preconditions",
-        "trapi_template",
-        "components",
-        "test_case_objective",
-        "test_case_source",
-        "test_case_predicate_name",
-        "test_case_predicate_id",
-        "test_case_qualifiers",
-        "test_case_input_id",
-        "test_case_runner_settings",
-        "TestCase_tags"
-      ],
-      "slot_usage": {},
-      "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/OneHopTestCase",
       "@type": "ClassDefinition"
     },
     {
@@ -2429,6 +2316,7 @@
         "name",
         "description",
         "tags",
+        "test_runner_settings",
         "test_data_file_locator",
         "test_data_file_format"
       ],
@@ -2447,6 +2335,7 @@
         "name",
         "description",
         "tags",
+        "test_runner_settings",
         "test_metadata",
         "test_persona",
         "test_cases",
@@ -2466,6 +2355,7 @@
         "name",
         "description",
         "tags",
+        "test_runner_settings",
         "test_metadata",
         "test_persona",
         "test_cases",
@@ -2495,6 +2385,7 @@
         "name",
         "description",
         "tags",
+        "test_runner_settings",
         "test_metadata",
         "test_persona",
         "test_cases",
@@ -2515,6 +2406,7 @@
         "name",
         "description",
         "tags",
+        "test_runner_settings",
         "test_metadata",
         "test_persona",
         "test_cases",
@@ -2522,23 +2414,6 @@
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/OneHopTestSuite",
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "TestRunnerConfiguration",
-      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestRunnerConfiguration",
-      "description": "General configuration parameters and test data input  for a single invocation of a TestRunner.",
-      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
-      "is_a": "TestEntity",
-      "slots": [
-        "id",
-        "name",
-        "description",
-        "test_run_parameters",
-        "TestRunnerConfiguration_tags"
-      ],
-      "slot_usage": {},
-      "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestRunnerConfiguration",
       "@type": "ClassDefinition"
     },
     {
@@ -2552,6 +2427,7 @@
         "name",
         "description",
         "tags",
+        "test_runner_settings",
         "test_suite_id",
         "test_case",
         "test_case_result"
@@ -2563,7 +2439,7 @@
     {
       "name": "TestRunSession",
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestRunSession",
-      "description": "A single invocation of a TestRunner.",
+      "description": "Single run of a TestRunner in a given environment, with a specified set of test_entities (generally, one or more instances of TestSuite).",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "is_a": "TestEntity",
       "slots": [
@@ -2571,7 +2447,11 @@
         "name",
         "description",
         "tags",
+        "test_runner_settings",
+        "components",
+        "test_env",
         "test_runner_name",
+        "TestRunSession_test_run_parameters",
         "TestRunSession_test_entities",
         "test_case_results",
         "timestamp"
@@ -2591,6 +2471,7 @@
         "name",
         "description",
         "tags",
+        "test_runner_settings",
         "test_case_id",
         "pks"
       ],
@@ -2609,6 +2490,7 @@
         "name",
         "description",
         "tags",
+        "test_runner_settings",
         "parent_pk",
         "merged_pk",
         "aragorn",
@@ -2624,9 +2506,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "translator_testing_model.yaml",
-  "source_file_date": "2024-03-22T08:48:47",
-  "source_file_size": 27309,
-  "generation_date": "2024-03-22T08:48:56",
+  "source_file_date": "2024-03-22T08:56:35",
+  "source_file_size": 26668,
+  "generation_date": "2024-03-22T08:56:43",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",
