@@ -2551,9 +2551,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "translator_testing_model.yaml",
-  "source_file_date": "2024-03-22T14:52:42",
+  "source_file_date": "2024-04-03T11:02:59",
   "source_file_size": 26922,
-  "generation_date": "2024-03-22T14:52:52",
+  "generation_date": "2024-04-03T11:03:10",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",
