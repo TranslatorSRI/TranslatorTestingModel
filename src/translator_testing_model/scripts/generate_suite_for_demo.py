@@ -108,7 +108,6 @@ def get_category(prefixes, id):
 def get_expected_output(row):
     output = row.get("Expected Result / Suggested Comparator")
     if output in ["4_NeverShow", "3_BadButForgivable", "2_Acceptable", "1_TopAnswer", "5_OverlyGeneric"]:
-        print(f"{row.get('id')} has valid expected output: {output}")
         return output.split("_")[1]
     print(f"{row.get('id')} has invalid expected output: {output}")
     return None
@@ -275,7 +274,7 @@ def dump_to_json(file_prefix):
 if __name__ == '__main__':
 
     # Reading the TSV file
-    tsv_file_path = 'pf_test_assets_031524.tsv'
+    tsv_file_path = 'pf_test_assets_032224.tsv'
     tsv_data = parse_tsv(tsv_file_path)
 
     # Create TestAsset objects
