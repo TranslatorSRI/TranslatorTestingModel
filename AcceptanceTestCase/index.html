@@ -206,15 +206,27 @@
     class AcceptanceTestCase
       TestCase &lt;|-- AcceptanceTestCase
 
+      AcceptanceTestCase : components
+
+          AcceptanceTestCase --|&gt; ComponentEnum : components
+
       AcceptanceTestCase : description
 
       AcceptanceTestCase : id
 
+      AcceptanceTestCase : input_category
+
       AcceptanceTestCase : name
+
+      AcceptanceTestCase : output_category
 
       AcceptanceTestCase : preconditions
 
           AcceptanceTestCase --|&gt; Precondition : preconditions
+
+      AcceptanceTestCase : qualifiers
+
+          AcceptanceTestCase --|&gt; Qualifier : qualifiers
 
       AcceptanceTestCase : query_type
 
@@ -239,6 +251,10 @@
       AcceptanceTestCase : test_case_source
 
           AcceptanceTestCase --|&gt; TestSourceEnum : test_case_source
+
+      AcceptanceTestCase : test_env
+
+          AcceptanceTestCase --|&gt; TestEnvEnum : test_env
 
       AcceptanceTestCase : test_runner_settings
 
@@ -321,6 +337,36 @@
 <td><a href="../test_case_input_id/">test_case_input_id</a></td>
 <td>0..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td></td>
+<td><a href="../TestCase/">TestCase</a></td>
+</tr>
+<tr>
+<td><a href="../qualifiers/">qualifiers</a></td>
+<td>0..* <br/> <a href="../Qualifier/">Qualifier</a></td>
+<td>Optional qualifiers which constrain to the test asset defined knowledge state...</td>
+<td><a href="../TestCase/">TestCase</a></td>
+</tr>
+<tr>
+<td><a href="../input_category/">input_category</a></td>
+<td>0..1 <br/> <a href="../ConceptCategory/">ConceptCategory</a></td>
+<td></td>
+<td><a href="../TestCase/">TestCase</a></td>
+</tr>
+<tr>
+<td><a href="../output_category/">output_category</a></td>
+<td>0..1 <br/> <a href="../ConceptCategory/">ConceptCategory</a></td>
+<td></td>
+<td><a href="../TestCase/">TestCase</a></td>
+</tr>
+<tr>
+<td><a href="../components/">components</a></td>
+<td>0..* <br/> <a href="../ComponentEnum/">ComponentEnum</a></td>
+<td>The component that this test case is intended to run against</td>
+<td><a href="../TestCase/">TestCase</a></td>
+</tr>
+<tr>
+<td><a href="../test_env/">test_env</a></td>
+<td>0..1 <br/> <a href="../TestEnvEnum/">TestEnvEnum</a></td>
+<td>Deployment environment within which the associated TestSuite is run</td>
 <td><a href="../TestCase/">TestCase</a></td>
 </tr>
 <tr>
@@ -516,6 +562,72 @@ attributes:
     domain_of:
     - TestCase
     range: uriorcurie
+  qualifiers:
+    name: qualifiers
+    description: Optional qualifiers which constrain to the test asset defined knowledge
+      statement. Note that this field records such qualifier slots and values as tag=value
+      pairs, where the tag is the Biolink Model qualifier slot named and the value
+      is an acceptable (Biolink Model enum?) value of the said qualifier slot.
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    multivalued: true
+    alias: qualifiers
+    owner: AcceptanceTestCase
+    domain_of:
+    - TestAsset
+    - TestCase
+    range: Qualifier
+    inlined: true
+    inlined_as_list: true
+  input_category:
+    name: input_category
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    aliases:
+    - SubjectCategory
+    rank: 1000
+    alias: input_category
+    owner: AcceptanceTestCase
+    domain_of:
+    - TestAsset
+    - TestCase
+    range: concept_category
+  output_category:
+    name: output_category
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    aliases:
+    - ObjectCategory
+    rank: 1000
+    alias: output_category
+    owner: AcceptanceTestCase
+    domain_of:
+    - TestAsset
+    - TestCase
+    range: concept_category
+  components:
+    name: components
+    description: The component that this test case is intended to run against.  Most
+      often this is the ARS for  acceptance tests, but for the Benchmarks repo integration,
+      this can also be individual components of the system like Aragorn, or ARAX.
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    multivalued: true
+    alias: components
+    owner: AcceptanceTestCase
+    domain_of:
+    - TestCase
+    - TestRunSession
+    range: ComponentEnum
+  test_env:
+    name: test_env
+    description: Deployment environment within which the associated TestSuite is run.
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    alias: test_env
+    owner: AcceptanceTestCase
+    domain_of:
+    - TestCase
+    - TestRunSession
+    range: TestEnvEnum
   id:
     name: id
     description: A unique identifier for a Test Entity
