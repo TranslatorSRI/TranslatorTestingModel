@@ -199,6 +199,11 @@ classes:
       - test_case_predicate_name
       - test_case_predicate_id
       - test_case_input_id
+      - qualifiers
+      - input_category
+      - output_category
+      - components
+      - test_env
     slot_usage:
       test_assets:
         aliases: ["Block List"]

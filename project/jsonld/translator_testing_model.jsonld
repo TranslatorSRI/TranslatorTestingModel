@@ -1103,9 +1103,10 @@
         "SubjectCategory"
       ],
       "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/input_category",
-      "owner": "TestAsset",
+      "owner": "TestCase",
       "domain_of": [
-        "TestAsset"
+        "TestAsset",
+        "TestCase"
       ],
       "range": "concept_category",
       "@type": "SlotDefinition"
@@ -1235,9 +1236,10 @@
         "ObjectCategory"
       ],
       "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/output_category",
-      "owner": "TestAsset",
+      "owner": "TestCase",
       "domain_of": [
-        "TestAsset"
+        "TestAsset",
+        "TestCase"
       ],
       "range": "concept_category",
       "@type": "SlotDefinition"
@@ -1262,9 +1264,10 @@
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/qualifiers",
       "multivalued": true,
-      "owner": "TestAsset",
+      "owner": "TestCase",
       "domain_of": [
-        "TestAsset"
+        "TestAsset",
+        "TestCase"
       ],
       "range": "Qualifier",
       "inlined": true,
@@ -1563,6 +1566,7 @@
       "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_env",
       "owner": "TestRunSession",
       "domain_of": [
+        "TestCase",
         "TestRunSession"
       ],
       "range": "TestEnvEnum",
@@ -1633,6 +1637,7 @@
       "multivalued": true,
       "owner": "TestRunSession",
       "domain_of": [
+        "TestCase",
         "TestRunSession"
       ],
       "range": "ComponentEnum",
@@ -2272,6 +2277,11 @@
         "test_case_predicate_name",
         "test_case_predicate_id",
         "test_case_input_id",
+        "qualifiers",
+        "input_category",
+        "output_category",
+        "components",
+        "test_env",
         "TestCase_tags"
       ],
       "slot_usage": {},
@@ -2297,6 +2307,11 @@
         "test_case_predicate_name",
         "test_case_predicate_id",
         "test_case_input_id",
+        "qualifiers",
+        "input_category",
+        "output_category",
+        "components",
+        "test_env",
         "TestCase_tags",
         "AcceptanceTestCase_test_assets"
       ],
@@ -2324,6 +2339,11 @@
         "test_case_predicate_name",
         "test_case_predicate_id",
         "test_case_input_id",
+        "qualifiers",
+        "input_category",
+        "output_category",
+        "components",
+        "test_env",
         "TestCase_tags"
       ],
       "slot_usage": {},
@@ -2531,9 +2551,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "translator_testing_model.yaml",
-  "source_file_date": "2024-04-03T10:54:33",
-  "source_file_size": 26820,
-  "generation_date": "2024-04-03T10:56:17",
+  "source_file_date": "2024-04-03T11:02:59",
+  "source_file_size": 26922,
+  "generation_date": "2024-04-03T11:03:10",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",

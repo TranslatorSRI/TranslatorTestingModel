@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2024-04-03T10:56:21
+# Generation date: 2024-04-03T11:03:13
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -518,6 +518,11 @@ class TestCase(TestEntity):
     test_case_predicate_name: Optional[str] = None
     test_case_predicate_id: Optional[str] = None
     test_case_input_id: Optional[Union[str, URIorCURIE]] = None
+    qualifiers: Optional[Union[Union[dict, Qualifier], List[Union[dict, Qualifier]]]] = empty_list()
+    input_category: Optional[Union[str, ConceptCategory]] = None
+    output_category: Optional[Union[str, ConceptCategory]] = None
+    components: Optional[Union[Union[str, "ComponentEnum"], List[Union[str, "ComponentEnum"]]]] = empty_list()
+    test_env: Optional[Union[str, "TestEnvEnum"]] = None
     tags: Optional[Union[str, List[str]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
@@ -554,6 +559,23 @@ class TestCase(TestEntity):
 
         if self.test_case_input_id is not None and not isinstance(self.test_case_input_id, URIorCURIE):
             self.test_case_input_id = URIorCURIE(self.test_case_input_id)
+
+        if not isinstance(self.qualifiers, list):
+            self.qualifiers = [self.qualifiers] if self.qualifiers is not None else []
+        self.qualifiers = [v if isinstance(v, Qualifier) else Qualifier(**as_dict(v)) for v in self.qualifiers]
+
+        if self.input_category is not None and not isinstance(self.input_category, ConceptCategory):
+            self.input_category = ConceptCategory(self.input_category)
+
+        if self.output_category is not None and not isinstance(self.output_category, ConceptCategory):
+            self.output_category = ConceptCategory(self.output_category)
+
+        if not isinstance(self.components, list):
+            self.components = [self.components] if self.components is not None else []
+        self.components = [v if isinstance(v, ComponentEnum) else ComponentEnum(v) for v in self.components]
+
+        if self.test_env is not None and not isinstance(self.test_env, TestEnvEnum):
+            self.test_env = TestEnvEnum(self.test_env)
 
         if not isinstance(self.tags, list):
             self.tags = [self.tags] if self.tags is not None else []
