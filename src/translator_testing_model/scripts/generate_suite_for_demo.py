@@ -213,10 +213,49 @@ def create_test_cases_from_test_assets(test_assets, test_case_model):
 def create_test_suite_from_test_cases(test_cases, test_suite_model):
     test_suite_id = "TestSuite_1"
     test_cases_dict = {test_case.id: test_case for test_case in test_cases}
+
+    ci_test_case_collection = []
+    stress_test_case_collection = []
+
+    for i in range(len(test_cases)):
+        if i % 10 == 9:  # If the index is a multiple of 10 (accounting for 0-indexing)
+            ci_test_case_collection.append(test_cases[i])
+        if i % 2 == 1:    # If the index is a multiple of 5 (accounting for 0-indexing)
+            stress_test_case_collection.append(test_cases[i])
+    test_cases_dict_ci = {test_case.id: test_case for test_case in ci_test_case_collection}
+    test_cases_dict_stress = {test_case.id: test_case for test_case in stress_test_case_collection}
+    print(len(stress_test_case_collection), "number_stress")
+    print(len(test_cases_dict_ci), "number_ci")
+    print(len(test_cases_dict), "number_total")
+
+    # CI and DELTA have the same
+    # number: https://docs.google.com/document/d/1UNX7Z4Wjwg0FPA58VBNMYducNCq44LykzQ6_JU7FEEo/edit
+    print(len(test_cases_dict_ci), "number_delta")
+
     tmd = TestMetadata(id=1,
                        test_source="SMURF",
                        test_objective="AcceptanceTest")
-    return test_suite_model(id=test_suite_id, test_cases=test_cases_dict, test_metadata=tmd)
+
+    test_suite_ci_id = "TestSuite_2"
+    ci_tmd = TestMetadata(id=2,
+                          test_source="SMURF",
+                          test_objective="AcceptanceTest")
+
+
+    test_suite_stress_id = "TestSuite_3"
+    stress_tmd = TestMetadata(id=3,
+                              test_source="SMURF",
+                              test_objective="AcceptanceTest")
+
+    test_suite_delta_id = "TestSuite_4"
+    delta_tmd = TestMetadata(id=4,
+                             test_source="SMURF",
+                             test_objective="AcceptanceTest")
+
+    return (test_suite_model(id=test_suite_id, test_cases=test_cases_dict, test_metadata=tmd),
+            test_suite_model(id=test_suite_ci_id, test_cases=test_cases_dict_ci, test_metadata=ci_tmd),
+            test_suite_model(id=test_suite_stress_id, test_cases=test_cases_dict_stress, test_metadata=stress_tmd),
+            test_suite_model(id=test_suite_delta_id, test_cases=test_cases_dict_ci, test_metadata=delta_tmd))
 
 
 def create_benchmark_test_case(subset: bool) -> TestCase or list[TestCase]:
@@ -299,12 +338,32 @@ if __name__ == '__main__':
         test_cases.append(benchmark_case)
 
     # Assemble into a TestSuite
-    test_suite = create_test_suite_from_test_cases(test_cases, TestSuite)
+    (test_suite_all, test_suite_CI, test_suite_STRESS, test_suite_DELTA) = create_test_suite_from_test_cases(test_cases, TestSuite)
     #
-    # Convert to JSON and save to file
-    test_suite_json = test_suite.json(indent=4)
 
-    suite_json_output_path = 'pass_fail_test_suite_output.json'
+    # Convert to JSON and save to file
+    test_suite_json_all = test_suite_all.json(indent=4)
+    test_suite_json_CI = test_suite_CI.json(indent=4)
+    test_suite_json_STRESS = test_suite_STRESS.json(indent=4)
+    test_suite_json_DELTA = test_suite_DELTA.json(indent=4)
+
+
+    suite_json_output_path = 'semantic_smoke_test_suite_TEST.json'
 
     with open(suite_json_output_path, 'w') as file:
-        file.write(test_suite_json)
+        file.write(test_suite_json_all)
+
+    sst_ci_json_output_path = 'semantic_smoke_test_suite_CI.json'
+
+    with open(sst_ci_json_output_path, 'w') as file:
+        file.write(test_suite_json_CI)
+
+    suite_delta_json_output_path_prod = 'stress_test_PROD.json'
+
+    with open(suite_delta_json_output_path_prod, 'w') as file:
+        file.write(test_suite_json_STRESS)
+
+    suite_delta_json_output_path_prod = 'semantic_delta_and_time_profiling_PROD.json'
+
+    with open(suite_delta_json_output_path_prod, 'w') as file:
+        file.write(test_suite_json_DELTA)
