@@ -444,12 +444,12 @@
           "description": "Quantitative test"
         },
         {
-          "text": "OneHopTest",
-          "description": "One Hop Test of knowledge graph navigation"
+          "text": "StandardsValidationTest",
+          "description": "Release-specific TRAPI and Biolink Model compliance validation"
         },
         {
-          "text": "StandardsValidationTest",
-          "description": "TRAPI and Biolink Model (\"reasoner-validator\") validation"
+          "text": "OneHopTest",
+          "description": "Knowledge graph \"One Hop\" query navigation integrity"
         }
       ]
     },
@@ -964,7 +964,7 @@
     {
       "name": "test_objective",
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_objective",
-      "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)",
+      "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative; standards compliance; graph navigation integrity)",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_objective",
       "owner": "TestMetadata",
@@ -977,7 +977,7 @@
     {
       "name": "test_case_objective",
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case_objective",
-      "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)",
+      "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative; standards compliance; graph navigation integrity)",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case_objective",
       "owner": "TestCase",
@@ -2551,9 +2551,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "translator_testing_model.yaml",
-  "source_file_date": "2024-04-03T11:02:59",
-  "source_file_size": 26922,
-  "generation_date": "2024-04-03T11:03:10",
+  "source_file_date": "2024-04-17T12:16:34",
+  "source_file_size": 27037,
+  "generation_date": "2024-04-17T13:32:13",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",

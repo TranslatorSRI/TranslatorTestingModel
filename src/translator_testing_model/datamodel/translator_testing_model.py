@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2024-04-03T11:03:13
+# Generation date: 2024-04-17T13:32:19
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -1000,12 +1000,12 @@ class TestObjectiveEnum(EnumDefinitionImpl):
     QuantitativeTest = PermissibleValue(
         text="QuantitativeTest",
         description="Quantitative test")
-    OneHopTest = PermissibleValue(
-        text="OneHopTest",
-        description="One Hop Test of knowledge graph navigation")
     StandardsValidationTest = PermissibleValue(
         text="StandardsValidationTest",
-        description="TRAPI and Biolink Model (\"reasoner-validator\") validation")
+        description="Release-specific TRAPI and Biolink Model compliance validation")
+    OneHopTest = PermissibleValue(
+        text="OneHopTest",
+        description="Knowledge graph \"One Hop\" query navigation integrity")
 
     _defn = EnumDefinition(
         name="TestObjectiveEnum",
