@@ -454,13 +454,13 @@ slots:
   test_objective:
     description: >-
       Testing objective behind specified set of test particulars
-      (e.g. acceptance pass/fail; benchmark; quantitative)
+      (e.g. acceptance pass/fail; benchmark; quantitative; standards compliance; graph navigation integrity)
     range: TestObjectiveEnum
 
   test_case_objective:
     description: >-
       Testing objective behind specified set of test particulars
-      (e.g. acceptance pass/fail; benchmark; quantitative)
+      (e.g. acceptance pass/fail; benchmark; quantitative; standards compliance; graph navigation integrity)
     range: TestObjectiveEnum
 
   test_case_source:
@@ -840,6 +840,10 @@ enums:
         description: Semantic benchmarking
       QuantitativeTest:
         description: Quantitative test
+      StandardsValidationTest:
+        description: Release-specific TRAPI and Biolink Model compliance validation
+      OneHopTest:
+        description: Knowledge graph "One Hop" query navigation integrity
 
   TestEnvEnum:
     description: >-
