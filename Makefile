@@ -42,9 +42,12 @@ endif
 # when the user types "make" they should get help info
 help: status
 	@echo ""
-	@echo "make setup -- initial setup (run this first)"
+	@echo "make setup -- initial setup (run this first, once)"
 	@echo "make site -- makes site locally"
 	@echo "make install -- install dependencies"
+	@echo "make gen-project -- (re-)generate all project artifacts (after updating them)"
+	@echo "make gen-examples -- (re-)generate all project example data"
+	@echo "make gendoc -- (re-)generate project (markdown) documentation"
 	@echo "make test -- runs tests"
 	@echo "make lint -- perform linting"
 	@echo "make testdoc -- builds docs and runs local test server"

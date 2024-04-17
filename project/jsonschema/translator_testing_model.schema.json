@@ -202,7 +202,7 @@
                 },
                 "test_case_objective": {
                     "$ref": "#/$defs/TestObjectiveEnum",
-                    "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)"
+                    "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative; standards compliance; graph navigation integrity)"
                 },
                 "test_case_predicate_id": {
                     "type": "string"
@@ -529,7 +529,7 @@
                 },
                 "test_case_objective": {
                     "$ref": "#/$defs/TestObjectiveEnum",
-                    "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)"
+                    "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative; standards compliance; graph navigation integrity)"
                 },
                 "test_case_predicate_id": {
                     "type": "string"
@@ -800,7 +800,7 @@
                 },
                 "test_case_objective": {
                     "$ref": "#/$defs/TestObjectiveEnum",
-                    "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)"
+                    "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative; standards compliance; graph navigation integrity)"
                 },
                 "test_case_predicate_id": {
                     "type": "string"
@@ -1006,7 +1006,7 @@
                 },
                 "test_case_objective": {
                     "$ref": "#/$defs/TestObjectiveEnum",
-                    "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)"
+                    "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative; standards compliance; graph navigation integrity)"
                 },
                 "test_case_predicate_id": {
                     "type": "string"
@@ -1208,7 +1208,7 @@
                 },
                 "test_objective": {
                     "$ref": "#/$defs/TestObjectiveEnum",
-                    "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative)"
+                    "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative; standards compliance; graph navigation integrity)"
                 },
                 "test_reference": {
                     "description": "Document URL where original test source particulars are registered (e.g. Github repo)",
@@ -1238,8 +1238,8 @@
                 "AcceptanceTest",
                 "BenchmarkTest",
                 "QuantitativeTest",
-                "OneHopTest",
-                "StandardsValidationTest"
+                "StandardsValidationTest",
+                "OneHopTest"
             ],
             "title": "TestObjectiveEnum",
             "type": "string"
