@@ -831,7 +831,7 @@ enums:
       QuantitativeTest:
         description: Quantitative test
       StandardsValidationTest:
-        description: Release-specific TRAPI and Biolink Model compliance validation
+        description: Release-specific TRAPI and Biolink Model ("reasoner-validator") compliance validation
       OneHopTest:
         description: Knowledge graph "One Hop" query navigation integrity
 
