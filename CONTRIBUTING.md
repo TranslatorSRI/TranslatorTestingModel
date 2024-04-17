@@ -46,7 +46,7 @@ Please use our [Issue Tracker][issues] to request a new term for the ontology.
 
 ### Adding new terms yourself
 
-Please submit a [Pull Request][pulls] to submit a new term for consideration.
+Please submit a [Pull Request][pulls] to submit a new term for consideration. Do do this, you (carefully!) modify the [translator_testing_model.yaml](src/translator_testing_model/schema/translator_testing_model.yaml) file, in accordance with LinkML data model encoding  principles, then run `make gen-project` - in a terminal session, inside the root project directory - to regenerate all the other related project artifacts.
 
 <a id="best-practices"></a>
 
