@@ -43,12 +43,12 @@ test_assets:
     predicate_name: treats
     output_id: DRUGBANK:DB01592
     expected_output: NeverShow
-    runner_settings:
+    test_runner_settings:
       - "inferred"
       - "test"
     test_metadata:
       id: test:1
       test_source: SMURF
-test_case_runner_settings:
+test_runner_settings:
   - "inferred"
   - "test"

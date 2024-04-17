@@ -27,7 +27,6 @@
 #      - in_v1
 #      - well_known
 #      - test_reference
-#      - runner_settings
 #    slot_usage:
 #      id:
 #        aliases: ["AssetIdentifier"]
@@ -36,7 +35,7 @@
 #        description: >-
 #          One or more 'tags' slot values (inherited from TestEntity) should generally
 #          be defined to specify TestAsset membership in a "Block List" collection
-#      runner_settings:
+#      test_runner_settings:
 #        description: >-
 #          Settings for the test harness, e.g. "inferred"
 #
@@ -55,6 +54,6 @@ in_v1: True
 well_known: False
 test_metadata:
   id: "example:TestAsset001"
-runner_settings:
+test_runner_settings:
   - "inferred"
   - "test"
