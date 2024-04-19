@@ -18,7 +18,7 @@ python = ">=3.9,<3.13"
 linkml-runtime = "^1.6.1"
 linkml = "^1.6.1"
 pandas = "^2.1.2"
-pydantic = "^1.10.13"
+pydantic = "^2"
 bmt = "^1.2.1"
 
 [tool.poetry-dynamic-versioning]
