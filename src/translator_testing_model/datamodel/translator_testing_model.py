@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2024-04-17T14:08:22
+# Generation date: 2024-04-18T22:30:33
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -1191,9 +1191,15 @@ class TestPersonaEnum(EnumDefinitionImpl):
 
 class TestCaseResultEnum(EnumDefinitionImpl):
 
-    test_passed = PermissibleValue(text="test_passed")
-    test_failed = PermissibleValue(text="test_failed")
-    test_skipped = PermissibleValue(text="test_skipped")
+    PASSED = PermissibleValue(
+        text="PASSED",
+        description="test case result indicating success.")
+    FAILED = PermissibleValue(
+        text="FAILED",
+        description="test case result indicating failure.")
+    SKIPPED = PermissibleValue(
+        text="SKIPPED",
+        description="test case result indicating that the specified test was not run.")
 
     _defn = EnumDefinition(
         name="TestCaseResultEnum",

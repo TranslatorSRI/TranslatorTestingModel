@@ -211,12 +211,12 @@ class TestPersonaEnum(str, Enum):
 
 class TestCaseResultEnum(str, Enum):
     
-    
-    test_passed = "test_passed"
-    
-    test_failed = "test_failed"
-    
-    test_skipped = "test_skipped"
+    # test case result indicating success.
+    PASSED = "PASSED"
+    # test case result indicating failure.
+    FAILED = "FAILED"
+    # test case result indicating that the specified test was not run.
+    SKIPPED = "SKIPPED"
     
     
 

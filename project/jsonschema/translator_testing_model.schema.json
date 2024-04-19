@@ -887,9 +887,9 @@
         "TestCaseResultEnum": {
             "description": "",
             "enum": [
-                "test_passed",
-                "test_failed",
-                "test_skipped"
+                "PASSED",
+                "FAILED",
+                "SKIPPED"
             ],
             "title": "TestCaseResultEnum",
             "type": "string"

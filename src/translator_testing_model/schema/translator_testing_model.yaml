@@ -981,6 +981,9 @@ enums:
 
   TestCaseResultEnum:
     permissible_values:
-      test_passed:
-      test_failed:
-      test_skipped:
+      PASSED:
+        description: test case result indicating success.
+      FAILED:
+        description: test case result indicating failure.
+      SKIPPED:
+        description: test case result indicating that the specified test was not run.

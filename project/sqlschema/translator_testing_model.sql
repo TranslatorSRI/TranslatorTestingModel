@@ -224,7 +224,7 @@ CREATE TABLE "TestCaseResult" (
 	description TEXT, 
 	test_suite_id TEXT, 
 	test_case TEXT, 
-	test_case_result VARCHAR(12), 
+	test_case_result VARCHAR(7), 
 	"TestRunSession_id" TEXT, 
 	PRIMARY KEY (id), 
 	FOREIGN KEY(test_case) REFERENCES "TestCase" (id), 

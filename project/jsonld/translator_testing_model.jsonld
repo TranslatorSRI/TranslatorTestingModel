@@ -680,13 +680,16 @@
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "permissible_values": [
         {
-          "text": "test_passed"
+          "text": "PASSED",
+          "description": "test case result indicating success."
         },
         {
-          "text": "test_failed"
+          "text": "FAILED",
+          "description": "test case result indicating failure."
         },
         {
-          "text": "test_skipped"
+          "text": "SKIPPED",
+          "description": "test case result indicating that the specified test was not run."
         }
       ]
     }
@@ -2551,9 +2554,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "translator_testing_model.yaml",
-  "source_file_date": "2024-04-17T14:06:59",
-  "source_file_size": 27060,
-  "generation_date": "2024-04-17T14:08:17",
+  "source_file_date": "2024-04-18T22:29:50",
+  "source_file_size": 27247,
+  "generation_date": "2024-04-18T22:30:27",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",
