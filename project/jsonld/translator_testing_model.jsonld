@@ -2556,7 +2556,7 @@
   "source_file": "translator_testing_model.yaml",
   "source_file_date": "2024-04-18T22:29:50",
   "source_file_size": 27247,
-  "generation_date": "2024-04-18T22:30:27",
+  "generation_date": "2024-04-19T10:26:20",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",

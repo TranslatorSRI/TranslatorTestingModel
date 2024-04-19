@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2024-04-18T22:30:33
+# Generation date: 2024-04-19T10:26:22
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -12,6 +12,7 @@ import re
 from jsonasobj2 import JsonObj, as_dict
 from typing import Optional, List, Union, Dict, ClassVar, Any
 from dataclasses import dataclass
+from datetime import date, datetime
 from linkml_runtime.linkml_model.meta import EnumDefinition, PermissibleValue, PvFormulaOptions
 
 from linkml_runtime.utils.slot import Slot
@@ -570,10 +571,6 @@ class TestCase(TestEntity):
         if self.output_category is not None and not isinstance(self.output_category, ConceptCategory):
             self.output_category = ConceptCategory(self.output_category)
 
-        if not isinstance(self.components, list):
-            self.components = [self.components] if self.components is not None else []
-        self.components = [v if isinstance(v, ComponentEnum) else ComponentEnum(v) for v in self.components]
-
         if self.test_env is not None and not isinstance(self.test_env, TestEnvEnum):
             self.test_env = TestEnvEnum(self.test_env)
 
@@ -852,10 +849,6 @@ class TestRunSession(TestEntity):
             self.MissingRequiredField("id")
         if not isinstance(self.id, TestRunSessionId):
             self.id = TestRunSessionId(self.id)
-
-        if not isinstance(self.components, list):
-            self.components = [self.components] if self.components is not None else []
-        self.components = [v if isinstance(v, ComponentEnum) else ComponentEnum(v) for v in self.components]
 
         if self.test_env is not None and not isinstance(self.test_env, TestEnvEnum):
             self.test_env = TestEnvEnum(self.test_env)
