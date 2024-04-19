@@ -222,21 +222,21 @@
 
       TestSuite : test_cases
 
-          TestSuite --|&gt; TestCase : test_cases
+          TestSuite --&gt; TestCase : test_cases
 
       TestSuite : test_metadata
 
-          TestSuite --|&gt; TestMetadata : test_metadata
+          TestSuite --&gt; TestMetadata : test_metadata
 
       TestSuite : test_persona
 
-          TestSuite --|&gt; TestPersonaEnum : test_persona
+          TestSuite --&gt; TestPersonaEnum : test_persona
 
       TestSuite : test_runner_settings
 
       TestSuite : test_suite_specification
 
-          TestSuite --|&gt; TestSuiteSpecification : test_suite_specification
+          TestSuite --&gt; TestSuiteSpecification : test_suite_specification
 
 
 </div>

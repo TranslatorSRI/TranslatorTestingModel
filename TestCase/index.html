@@ -218,7 +218,7 @@
 
       TestCase : components
 
-          TestCase --|&gt; ComponentEnum : components
+          TestCase --&gt; ComponentEnum : components
 
       TestCase : description
 
@@ -232,27 +232,27 @@
 
       TestCase : preconditions
 
-          TestCase --|&gt; Precondition : preconditions
+          TestCase --&gt; Precondition : preconditions
 
       TestCase : qualifiers
 
-          TestCase --|&gt; Qualifier : qualifiers
+          TestCase --&gt; Qualifier : qualifiers
 
       TestCase : query_type
 
-          TestCase --|&gt; QueryTypeEnum : query_type
+          TestCase --&gt; QueryTypeEnum : query_type
 
       TestCase : tags
 
       TestCase : test_assets
 
-          TestCase --|&gt; TestAsset : test_assets
+          TestCase --&gt; TestAsset : test_assets
 
       TestCase : test_case_input_id
 
       TestCase : test_case_objective
 
-          TestCase --|&gt; TestObjectiveEnum : test_case_objective
+          TestCase --&gt; TestObjectiveEnum : test_case_objective
 
       TestCase : test_case_predicate_id
 
@@ -260,17 +260,17 @@
 
       TestCase : test_case_source
 
-          TestCase --|&gt; TestSourceEnum : test_case_source
+          TestCase --&gt; TestSourceEnum : test_case_source
 
       TestCase : test_env
 
-          TestCase --|&gt; TestEnvEnum : test_env
+          TestCase --&gt; TestEnvEnum : test_env
 
       TestCase : test_runner_settings
 
       TestCase : trapi_template
 
-          TestCase --|&gt; TrapiTemplateEnum : trapi_template
+          TestCase --&gt; TrapiTemplateEnum : trapi_template
 
 
 </div>

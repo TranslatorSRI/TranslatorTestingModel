@@ -208,7 +208,7 @@
 
       QuantitativeTestCase : components
 
-          QuantitativeTestCase --|&gt; ComponentEnum : components
+          QuantitativeTestCase --&gt; ComponentEnum : components
 
       QuantitativeTestCase : description
 
@@ -222,27 +222,27 @@
 
       QuantitativeTestCase : preconditions
 
-          QuantitativeTestCase --|&gt; Precondition : preconditions
+          QuantitativeTestCase --&gt; Precondition : preconditions
 
       QuantitativeTestCase : qualifiers
 
-          QuantitativeTestCase --|&gt; Qualifier : qualifiers
+          QuantitativeTestCase --&gt; Qualifier : qualifiers
 
       QuantitativeTestCase : query_type
 
-          QuantitativeTestCase --|&gt; QueryTypeEnum : query_type
+          QuantitativeTestCase --&gt; QueryTypeEnum : query_type
 
       QuantitativeTestCase : tags
 
       QuantitativeTestCase : test_assets
 
-          QuantitativeTestCase --|&gt; TestAsset : test_assets
+          QuantitativeTestCase --&gt; TestAsset : test_assets
 
       QuantitativeTestCase : test_case_input_id
 
       QuantitativeTestCase : test_case_objective
 
-          QuantitativeTestCase --|&gt; TestObjectiveEnum : test_case_objective
+          QuantitativeTestCase --&gt; TestObjectiveEnum : test_case_objective
 
       QuantitativeTestCase : test_case_predicate_id
 
@@ -250,17 +250,17 @@
 
       QuantitativeTestCase : test_case_source
 
-          QuantitativeTestCase --|&gt; TestSourceEnum : test_case_source
+          QuantitativeTestCase --&gt; TestSourceEnum : test_case_source
 
       QuantitativeTestCase : test_env
 
-          QuantitativeTestCase --|&gt; TestEnvEnum : test_env
+          QuantitativeTestCase --&gt; TestEnvEnum : test_env
 
       QuantitativeTestCase : test_runner_settings
 
       QuantitativeTestCase : trapi_template
 
-          QuantitativeTestCase --|&gt; TrapiTemplateEnum : trapi_template
+          QuantitativeTestCase --&gt; TrapiTemplateEnum : trapi_template
 
 
 </div>

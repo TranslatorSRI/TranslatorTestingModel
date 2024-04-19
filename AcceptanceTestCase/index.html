@@ -208,7 +208,7 @@
 
       AcceptanceTestCase : components
 
-          AcceptanceTestCase --|&gt; ComponentEnum : components
+          AcceptanceTestCase --&gt; ComponentEnum : components
 
       AcceptanceTestCase : description
 
@@ -222,27 +222,27 @@
 
       AcceptanceTestCase : preconditions
 
-          AcceptanceTestCase --|&gt; Precondition : preconditions
+          AcceptanceTestCase --&gt; Precondition : preconditions
 
       AcceptanceTestCase : qualifiers
 
-          AcceptanceTestCase --|&gt; Qualifier : qualifiers
+          AcceptanceTestCase --&gt; Qualifier : qualifiers
 
       AcceptanceTestCase : query_type
 
-          AcceptanceTestCase --|&gt; QueryTypeEnum : query_type
+          AcceptanceTestCase --&gt; QueryTypeEnum : query_type
 
       AcceptanceTestCase : tags
 
       AcceptanceTestCase : test_assets
 
-          AcceptanceTestCase --|&gt; AcceptanceTestAsset : test_assets
+          AcceptanceTestCase --&gt; AcceptanceTestAsset : test_assets
 
       AcceptanceTestCase : test_case_input_id
 
       AcceptanceTestCase : test_case_objective
 
-          AcceptanceTestCase --|&gt; TestObjectiveEnum : test_case_objective
+          AcceptanceTestCase --&gt; TestObjectiveEnum : test_case_objective
 
       AcceptanceTestCase : test_case_predicate_id
 
@@ -250,17 +250,17 @@
 
       AcceptanceTestCase : test_case_source
 
-          AcceptanceTestCase --|&gt; TestSourceEnum : test_case_source
+          AcceptanceTestCase --&gt; TestSourceEnum : test_case_source
 
       AcceptanceTestCase : test_env
 
-          AcceptanceTestCase --|&gt; TestEnvEnum : test_env
+          AcceptanceTestCase --&gt; TestEnvEnum : test_env
 
       AcceptanceTestCase : test_runner_settings
 
       AcceptanceTestCase : trapi_template
 
-          AcceptanceTestCase --|&gt; TrapiTemplateEnum : trapi_template
+          AcceptanceTestCase --&gt; TrapiTemplateEnum : trapi_template
 
 
 </div>

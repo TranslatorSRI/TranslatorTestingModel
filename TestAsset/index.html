@@ -246,21 +246,21 @@
 
       TestAsset : qualifiers
 
-          TestAsset --|&gt; Qualifier : qualifiers
+          TestAsset --&gt; Qualifier : qualifiers
 
       TestAsset : semantic_severity
 
-          TestAsset --|&gt; SemanticSeverityEnum : semantic_severity
+          TestAsset --&gt; SemanticSeverityEnum : semantic_severity
 
       TestAsset : tags
 
       TestAsset : test_issue
 
-          TestAsset --|&gt; TestIssueEnum : test_issue
+          TestAsset --&gt; TestIssueEnum : test_issue
 
       TestAsset : test_metadata
 
-          TestAsset --|&gt; TestMetadata : test_metadata
+          TestAsset --&gt; TestMetadata : test_metadata
 
       TestAsset : test_reference
 

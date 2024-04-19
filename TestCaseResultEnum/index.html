@@ -329,19 +329,19 @@
 </thead>
 <tbody>
 <tr>
-<td>test_passed</td>
+<td>PASSED</td>
 <td>None</td>
-<td></td>
+<td>test case result indicating success</td>
 </tr>
 <tr>
-<td>test_failed</td>
+<td>FAILED</td>
 <td>None</td>
-<td></td>
+<td>test case result indicating failure</td>
 </tr>
 <tr>
-<td>test_skipped</td>
+<td>SKIPPED</td>
 <td>None</td>
-<td></td>
+<td>test case result indicating that the specified test was not run</td>
 </tr>
 </tbody>
 </table>
@@ -372,12 +372,15 @@
 from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
 rank: 1000
 permissible_values:
-  test_passed:
-    text: test_passed
-  test_failed:
-    text: test_failed
-  test_skipped:
-    text: test_skipped
+  PASSED:
+    text: PASSED
+    description: test case result indicating success.
+  FAILED:
+    text: FAILED
+    description: test case result indicating failure.
+  SKIPPED:
+    text: SKIPPED
+    description: test case result indicating that the specified test was not run.
 
 </code></pre>
 

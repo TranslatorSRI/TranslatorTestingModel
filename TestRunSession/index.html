@@ -208,7 +208,7 @@
 
       TestRunSession : components
 
-          TestRunSession --|&gt; ComponentEnum : components
+          TestRunSession --&gt; ComponentEnum : components
 
       TestRunSession : description
 
@@ -220,19 +220,19 @@
 
       TestRunSession : test_case_results
 
-          TestRunSession --|&gt; TestCaseResult : test_case_results
+          TestRunSession --&gt; TestCaseResult : test_case_results
 
       TestRunSession : test_entities
 
-          TestRunSession --|&gt; TestEntity : test_entities
+          TestRunSession --&gt; TestEntity : test_entities
 
       TestRunSession : test_env
 
-          TestRunSession --|&gt; TestEnvEnum : test_env
+          TestRunSession --&gt; TestEnvEnum : test_env
 
       TestRunSession : test_run_parameters
 
-          TestRunSession --|&gt; TestEntityParameter : test_run_parameters
+          TestRunSession --&gt; TestEntityParameter : test_run_parameters
 
       TestRunSession : test_runner_name
 

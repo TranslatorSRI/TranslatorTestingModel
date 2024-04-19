@@ -216,21 +216,21 @@
 
       OneHopTestSuite : test_cases
 
-          OneHopTestSuite --|&gt; TestCase : test_cases
+          OneHopTestSuite --&gt; TestCase : test_cases
 
       OneHopTestSuite : test_metadata
 
-          OneHopTestSuite --|&gt; TestMetadata : test_metadata
+          OneHopTestSuite --&gt; TestMetadata : test_metadata
 
       OneHopTestSuite : test_persona
 
-          OneHopTestSuite --|&gt; TestPersonaEnum : test_persona
+          OneHopTestSuite --&gt; TestPersonaEnum : test_persona
 
       OneHopTestSuite : test_runner_settings
 
       OneHopTestSuite : test_suite_specification
 
-          OneHopTestSuite --|&gt; TestSuiteSpecification : test_suite_specification
+          OneHopTestSuite --&gt; TestSuiteSpecification : test_suite_specification
 
 
 </div>

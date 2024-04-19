@@ -215,21 +215,21 @@
 
       AcceptanceTestSuite : test_cases
 
-          AcceptanceTestSuite --|&gt; TestCase : test_cases
+          AcceptanceTestSuite --&gt; TestCase : test_cases
 
       AcceptanceTestSuite : test_metadata
 
-          AcceptanceTestSuite --|&gt; TestMetadata : test_metadata
+          AcceptanceTestSuite --&gt; TestMetadata : test_metadata
 
       AcceptanceTestSuite : test_persona
 
-          AcceptanceTestSuite --|&gt; TestPersonaEnum : test_persona
+          AcceptanceTestSuite --&gt; TestPersonaEnum : test_persona
 
       AcceptanceTestSuite : test_runner_settings
 
       AcceptanceTestSuite : test_suite_specification
 
-          AcceptanceTestSuite --|&gt; TestSuiteSpecification : test_suite_specification
+          AcceptanceTestSuite --&gt; TestSuiteSpecification : test_suite_specification
 
 
 </div>

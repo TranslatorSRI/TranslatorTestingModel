@@ -219,13 +219,13 @@
 
       AcceptanceTestAsset : direction
 
-          AcceptanceTestAsset --|&gt; DirectionEnum : direction
+          AcceptanceTestAsset --&gt; DirectionEnum : direction
 
       AcceptanceTestAsset : expected_output
 
       AcceptanceTestAsset : expected_result
 
-          AcceptanceTestAsset --|&gt; ExpectedResultsEnum : expected_result
+          AcceptanceTestAsset --&gt; ExpectedResultsEnum : expected_result
 
       AcceptanceTestAsset : id
 
@@ -241,7 +241,7 @@
 
       AcceptanceTestAsset : must_pass_environment
 
-          AcceptanceTestAsset --|&gt; TestEnvEnum : must_pass_environment
+          AcceptanceTestAsset --&gt; TestEnvEnum : must_pass_environment
 
       AcceptanceTestAsset : name
 
@@ -259,17 +259,17 @@
 
       AcceptanceTestAsset : qualifiers
 
-          AcceptanceTestAsset --|&gt; Qualifier : qualifiers
+          AcceptanceTestAsset --&gt; Qualifier : qualifiers
 
       AcceptanceTestAsset : query_node
 
-          AcceptanceTestAsset --|&gt; NodeEnum : query_node
+          AcceptanceTestAsset --&gt; NodeEnum : query_node
 
       AcceptanceTestAsset : scientific_question
 
       AcceptanceTestAsset : semantic_severity
 
-          AcceptanceTestAsset --|&gt; SemanticSeverityEnum : semantic_severity
+          AcceptanceTestAsset --&gt; SemanticSeverityEnum : semantic_severity
 
       AcceptanceTestAsset : string_entry
 
@@ -277,11 +277,11 @@
 
       AcceptanceTestAsset : test_issue
 
-          AcceptanceTestAsset --|&gt; TestIssueEnum : test_issue
+          AcceptanceTestAsset --&gt; TestIssueEnum : test_issue
 
       AcceptanceTestAsset : test_metadata
 
-          AcceptanceTestAsset --|&gt; TestMetadata : test_metadata
+          AcceptanceTestAsset --&gt; TestMetadata : test_metadata
 
       AcceptanceTestAsset : test_reference
 
