@@ -1,0 +1,14 @@
+{
+  "Translator-Testing-Model": {
+    "TestAsset": {
+      "name": "TestAsset",
+      "status": "published",
+      "display": true
+    },
+    "TestCase": {
+      "name": "TestCase",
+      "status": "published",
+      "display": true
+    }
+  }
+}
