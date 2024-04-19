@@ -210,17 +210,15 @@ class TestPersonaEnum(str, Enum):
     LookUp = "LookUp"
     # Someone working on basic biology questions or drug discoveries where the study of the biological mechanism.
     Mechanistic = "Mechanistic"
-    
-    
+
 
 class TestCaseResultEnum(str, Enum):
-    
-    
-    test_passed = "test_passed"
-    
-    test_failed = "test_failed"
-    
-    test_skipped = "test_skipped"
+    # test case result indicating success.
+    PASSED = "PASSED"
+    # test case result indicating failure.
+    FAILED = "FAILED"
+    # test case result indicating that the specified test was not run.
+    SKIPPED = "SKIPPED"
     
     
 
