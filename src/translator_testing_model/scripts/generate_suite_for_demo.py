@@ -164,7 +164,7 @@ def create_test_cases_from_test_assets(test_assets, test_case_model):
     grouped_assets = {}
     for test_asset in test_assets:
         qualifier_key = ""
-        if test_asset.qualifers and test_asset.qualifiers is not None:
+        if test_asset.qualifiers and test_asset.qualifiers is not None:
             for qualifier in test_asset.qualifiers:
                 qualifier_key = qualifier_key+qualifier.value
         key = (test_asset.input_id, test_asset.predicate_name, qualifier_key)
