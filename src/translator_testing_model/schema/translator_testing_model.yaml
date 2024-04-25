@@ -713,7 +713,7 @@ slots:
       Test metadata describes the external provenance, cross-references and objectives for a given test.
     range: TestMetadata
     inlined: true
-    required: true
+    required: false
 
   test_persona:
     description: >-

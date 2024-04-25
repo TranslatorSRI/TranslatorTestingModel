@@ -1702,7 +1702,6 @@
         "TestSuite"
       ],
       "range": "TestMetadata",
-      "required": true,
       "inlined": true,
       "@type": "SlotDefinition"
     },
@@ -2554,9 +2553,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "translator_testing_model.yaml",
-  "source_file_date": "2024-04-18T22:29:50",
-  "source_file_size": 27247,
-  "generation_date": "2024-04-19T10:26:20",
+  "source_file_date": "2024-04-25T12:16:22",
+  "source_file_size": 28237,
+  "generation_date": "2024-04-25T12:19:45",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",
