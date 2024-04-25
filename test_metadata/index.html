@@ -332,8 +332,8 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../TestSuite/">TestSuite</a></td>
-<td>Specification of a set of Test Cases, one of either with a static list of 'te...</td>
+<td><a href="../AcceptanceTestAsset/">AcceptanceTestAsset</a></td>
+<td>Model derived from Jenn's test asset design and Shervin's runner JSON here as...</td>
 <td>no</td>
 </tr>
 <tr>
@@ -342,13 +342,13 @@
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../StandardsComplianceTestSuite/">StandardsComplianceTestSuite</a></td>
-<td>Test suite for testing Translator components against releases of standards li...</td>
+<td><a href="../TestAsset/">TestAsset</a></td>
+<td>Represents a Test Asset, which is a single specific instance of TestCase-agno...</td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../AcceptanceTestAsset/">AcceptanceTestAsset</a></td>
-<td>Model derived from Jenn's test asset design and Shervin's runner JSON here as...</td>
+<td><a href="../TestSuite/">TestSuite</a></td>
+<td>Specification of a set of Test Cases, one of either with a static list of 'te...</td>
 <td>no</td>
 </tr>
 <tr>
@@ -357,25 +357,20 @@
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../TestAsset/">TestAsset</a></td>
-<td>Represents a Test Asset, which is a single specific instance of TestCase-agno...</td>
+<td><a href="../AcceptanceTestSuite/">AcceptanceTestSuite</a></td>
+<td></td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../AcceptanceTestSuite/">AcceptanceTestSuite</a></td>
-<td></td>
+<td><a href="../StandardsComplianceTestSuite/">StandardsComplianceTestSuite</a></td>
+<td>Test suite for testing Translator components against releases of standards li...</td>
 <td>no</td>
 </tr>
 </tbody>
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
-<li>
-<p>Range: <a href="../TestMetadata/">TestMetadata</a></p>
-</li>
-<li>
-<p>Required: True</p>
-</li>
+<li>Range: <a href="../TestMetadata/">TestMetadata</a></li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
@@ -395,7 +390,7 @@ domain_of:
 - TestAsset
 - TestSuite
 range: TestMetadata
-required: true
+required: false
 inlined: true
 
 </code></pre>
