@@ -25,6 +25,10 @@
       "prefix_reference": "https://w3id.org/biolink/"
     },
     {
+      "prefix_prefix": "infores",
+      "prefix_reference": "https://w3id.org/biolink/vocab/"
+    },
+    {
       "prefix_prefix": "schema",
       "prefix_reference": "http://schema.org/"
     },
@@ -644,12 +648,93 @@
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/ComponentEnum",
       "description": "Translator components are identified by their InfoRes identifiers.",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
-      "reachable_from": {
-        "source_ontology": "biolink",
-        "source_nodes": [
-          "biolink:infores"
-        ]
-      }
+      "permissible_values": [
+        {
+          "text": "ars",
+          "description": "Automatic Relay Service component of Translator",
+          "meaning": "infores:ncats-ars"
+        },
+        {
+          "text": "arax",
+          "description": "ARAX Translator Reasoner",
+          "meaning": "infores:arax"
+        },
+        {
+          "text": "explanatory",
+          "description": "A Translator Reasoner API for the Explanatory Agent",
+          "meaning": "infores:explanatory-agent"
+        },
+        {
+          "text": "improving",
+          "description": "imProving Agent OpenAPI TRAPI Specification",
+          "meaning": "infores:improving-agent"
+        },
+        {
+          "text": "aragorn",
+          "description": "Performs a query operation which compiles data from numerous ranking agent services.",
+          "meaning": "infores:aragorn"
+        },
+        {
+          "text": "bte",
+          "description": "BioThings Explorer",
+          "meaning": "infores:biothings-explorer"
+        },
+        {
+          "text": "unsecret",
+          "description": "Unsecret Agent OpenAPI for NCATS Biomedical Translator Reasoners",
+          "meaning": "infores:unsecret-agent"
+        },
+        {
+          "text": "rtxkg2",
+          "description": "TRAPI endpoint for the NCATS Biomedical Translator KP called RTX KG2",
+          "meaning": "infores:rtx-kg2"
+        },
+        {
+          "text": "icees",
+          "description": "ICEES (Integrated Clinical and Environmental Exposures Service)",
+          "meaning": "infores:icees-kg"
+        },
+        {
+          "text": "cam",
+          "description": "Causal Activity Model KP",
+          "meaning": "infores:cam-kp"
+        },
+        {
+          "text": "spoke",
+          "description": "SPOKE KP - an NIH NCATS Knowledge Provider to expose UCSFs SPOKE",
+          "meaning": "infores:spoke"
+        },
+        {
+          "text": "molepro",
+          "description": "Molecular Data Provider for NCATS Biomedical Translator Reasoners",
+          "meaning": "infores:molepro"
+        },
+        {
+          "text": "textmining",
+          "description": "Text Mining KP",
+          "meaning": "infores:textmining-kp"
+        },
+        {
+          "text": "cohd",
+          "description": "Columbia Open Health Data (COHD)",
+          "meaning": "infores:cohd"
+        },
+        {
+          "text": "openpredict",
+          "description": "OpenPredict API",
+          "meaning": "infores:openpredict"
+        },
+        {
+          "text": "collaboratory",
+          "description": "Translator Knowledge Collaboratory API",
+          "meaning": "infores:knowledge-collaboratory"
+        },
+        {
+          "text": "connections",
+          "description": "Connections Hypothesis Provider API",
+          "meaning": "infores:connections-hypothesis"
+        }
+      ]
     },
     {
       "name": "TestPersonaEnum",
@@ -2553,9 +2638,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "translator_testing_model.yaml",
-  "source_file_date": "2024-04-25T12:16:22",
-  "source_file_size": 28237,
-  "generation_date": "2024-04-25T12:49:11",
+  "source_file_date": "2024-04-25T16:22:16",
+  "source_file_size": 30696,
+  "generation_date": "2024-04-25T16:24:01",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",

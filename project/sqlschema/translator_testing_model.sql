@@ -590,7 +590,7 @@ CREATE TABLE "AcceptanceTestCase_preconditions" (
 );
 CREATE TABLE "AcceptanceTestCase_components" (
 	"AcceptanceTestCase_id" TEXT, 
-	components VARCHAR, 
+	components VARCHAR(13), 
 	PRIMARY KEY ("AcceptanceTestCase_id", components), 
 	FOREIGN KEY("AcceptanceTestCase_id") REFERENCES "AcceptanceTestCase" (id)
 );
@@ -615,7 +615,7 @@ CREATE TABLE "QuantitativeTestCase_preconditions" (
 );
 CREATE TABLE "QuantitativeTestCase_components" (
 	"QuantitativeTestCase_id" TEXT, 
-	components VARCHAR, 
+	components VARCHAR(13), 
 	PRIMARY KEY ("QuantitativeTestCase_id", components), 
 	FOREIGN KEY("QuantitativeTestCase_id") REFERENCES "QuantitativeTestCase" (id)
 );
@@ -645,7 +645,7 @@ CREATE TABLE "TestSuiteSpecification_test_runner_settings" (
 );
 CREATE TABLE "TestRunSession_components" (
 	"TestRunSession_id" TEXT, 
-	components VARCHAR, 
+	components VARCHAR(13), 
 	PRIMARY KEY ("TestRunSession_id", components), 
 	FOREIGN KEY("TestRunSession_id") REFERENCES "TestRunSession" (id)
 );
@@ -848,7 +848,7 @@ CREATE TABLE "TestCase_preconditions" (
 );
 CREATE TABLE "TestCase_components" (
 	"TestCase_id" TEXT, 
-	components VARCHAR, 
+	components VARCHAR(13), 
 	PRIMARY KEY ("TestCase_id", components), 
 	FOREIGN KEY("TestCase_id") REFERENCES "TestCase" (id)
 );

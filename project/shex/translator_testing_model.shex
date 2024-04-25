@@ -2,6 +2,7 @@ BASE <https://w3id.org/TranslatorSRI/TranslatorTestingModel/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX linkml: <https://w3id.org/linkml/>
+PREFIX infores: <https://w3id.org/biolink/vocab/>
 PREFIX schema1: <http://schema.org/>
 
 
@@ -206,7 +207,10 @@ linkml:Sparqlpath xsd:string
              <qualifiers> @<Qualifier> * ;
              <input_category> @<ConceptCategory> ? ;
              <output_category> @<ConceptCategory> ? ;
-             <components> . * ;
+             <components> [ infores:ncats-ars infores:arax infores:explanatory-agent infores:improving-agent infores:aragorn
+                infores:biothings-explorer infores:unsecret-agent infores:rtx-kg2 infores:icees-kg infores:cam-kp infores:spoke
+                infores:molepro infores:textmining-kp infores:cohd infores:openpredict infores:knowledge-collaboratory
+                infores:connections-hypothesis ] * ;
              <test_env> [ <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#dev>
                 <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#ci>
                 <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#test>
@@ -314,7 +318,10 @@ linkml:Sparqlpath xsd:string
 <TestRunSession> CLOSED {
     (  $<TestRunSession_tes> (  &<TestEntity_tes> ;
           rdf:type [ <TestEntity> ] ? ;
-          <components> . * ;
+          <components> [ infores:ncats-ars infores:arax infores:explanatory-agent infores:improving-agent infores:aragorn
+             infores:biothings-explorer infores:unsecret-agent infores:rtx-kg2 infores:icees-kg infores:cam-kp infores:spoke
+             infores:molepro infores:textmining-kp infores:cohd infores:openpredict infores:knowledge-collaboratory
+             infores:connections-hypothesis ] * ;
           <test_env> [ <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#dev>
              <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#ci>
              <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#test>
