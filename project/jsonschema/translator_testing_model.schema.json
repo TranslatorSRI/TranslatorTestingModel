@@ -313,6 +313,25 @@
         },
         "ComponentEnum": {
             "description": "Translator components are identified by their InfoRes identifiers.",
+            "enum": [
+                "ars",
+                "arax",
+                "explanatory",
+                "improving",
+                "aragorn",
+                "bte",
+                "unsecret",
+                "rtxkg2",
+                "icees",
+                "cam",
+                "spoke",
+                "molepro",
+                "textmining",
+                "cohd",
+                "openpredict",
+                "collaboratory",
+                "connections"
+            ],
             "title": "ComponentEnum",
             "type": "string"
         },

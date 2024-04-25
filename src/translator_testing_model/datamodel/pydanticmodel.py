@@ -167,11 +167,44 @@ class TrapiTemplateEnum(str, Enum):
     drug_to_gene = "drug-to-gene"
 
 
-class ComponentEnum(str):
+class ComponentEnum(str, Enum):
     """
     Translator components are identified by their InfoRes identifiers.
     """
-    pass
+    # Automatic Relay Service component of Translator
+    ars = "ars"
+    # ARAX Translator Reasoner
+    arax = "arax"
+    # A Translator Reasoner API for the Explanatory Agent
+    explanatory = "explanatory"
+    # imProving Agent OpenAPI TRAPI Specification
+    improving = "improving"
+    # Performs a query operation which compiles data from numerous ranking agent services.
+    aragorn = "aragorn"
+    # BioThings Explorer
+    bte = "bte"
+    # Unsecret Agent OpenAPI for NCATS Biomedical Translator Reasoners
+    unsecret = "unsecret"
+    # TRAPI endpoint for the NCATS Biomedical Translator KP called RTX KG2
+    rtxkg2 = "rtxkg2"
+    # ICEES (Integrated Clinical and Environmental Exposures Service)
+    icees = "icees"
+    # Causal Activity Model KP
+    cam = "cam"
+    # SPOKE KP - an NIH NCATS Knowledge Provider to expose UCSFs SPOKE
+    spoke = "spoke"
+    # Molecular Data Provider for NCATS Biomedical Translator Reasoners
+    molepro = "molepro"
+    # Text Mining KP
+    textmining = "textmining"
+    # Columbia Open Health Data (COHD)
+    cohd = "cohd"
+    # OpenPredict API
+    openpredict = "openpredict"
+    # Translator Knowledge Collaboratory API
+    collaboratory = "collaboratory"
+    # Connections Hypothesis Provider API
+    connections = "connections"
 
 
 class TestPersonaEnum(str, Enum):

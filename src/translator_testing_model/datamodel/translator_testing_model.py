@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2024-04-19T10:26:22
+# Generation date: 2024-04-25T16:01:00
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -35,6 +35,7 @@ dataclasses._init_fn = dataclasses_init_fn_with_kwargs
 # Namespaces
 BIOLINK = CurieNamespace('biolink', 'https://w3id.org/biolink/')
 EXAMPLE = CurieNamespace('example', 'https://example.org/')
+INFORES = CurieNamespace('infores', 'https://w3id.org/biolink/vocab/')
 LINKML = CurieNamespace('linkml', 'https://w3id.org/linkml/')
 SCHEMA = CurieNamespace('schema', 'http://schema.org/')
 TTM = CurieNamespace('ttm', 'https://w3id.org/TranslatorSRI/TranslatorTestingModel/')
@@ -571,6 +572,10 @@ class TestCase(TestEntity):
         if self.output_category is not None and not isinstance(self.output_category, ConceptCategory):
             self.output_category = ConceptCategory(self.output_category)
 
+        if not isinstance(self.components, list):
+            self.components = [self.components] if self.components is not None else []
+        self.components = [v if isinstance(v, ComponentEnum) else ComponentEnum(v) for v in self.components]
+
         if self.test_env is not None and not isinstance(self.test_env, TestEnvEnum):
             self.test_env = TestEnvEnum(self.test_env)
 
@@ -849,6 +854,10 @@ class TestRunSession(TestEntity):
             self.MissingRequiredField("id")
         if not isinstance(self.id, TestRunSessionId):
             self.id = TestRunSessionId(self.id)
+
+        if not isinstance(self.components, list):
+            self.components = [self.components] if self.components is not None else []
+        self.components = [v if isinstance(v, ComponentEnum) else ComponentEnum(v) for v in self.components]
 
         if self.test_env is not None and not isinstance(self.test_env, TestEnvEnum):
             self.test_env = TestEnvEnum(self.test_env)
@@ -1157,6 +1166,75 @@ class ComponentEnum(EnumDefinitionImpl):
     """
     Translator components are identified by their InfoRes identifiers.
     """
+    ars = PermissibleValue(
+        text="ars",
+        description="Automatic Relay Service component of Translator",
+        meaning=INFORES["ncats-ars"])
+    arax = PermissibleValue(
+        text="arax",
+        description="ARAX Translator Reasoner",
+        meaning=INFORES["arax"])
+    explanatory = PermissibleValue(
+        text="explanatory",
+        description="A Translator Reasoner API for the Explanatory Agent",
+        meaning=INFORES["explanatory-agent"])
+    improving = PermissibleValue(
+        text="improving",
+        description="imProving Agent OpenAPI TRAPI Specification",
+        meaning=INFORES["improving-agent"])
+    aragorn = PermissibleValue(
+        text="aragorn",
+        description="Performs a query operation which compiles data from numerous ranking agent services.",
+        meaning=INFORES["aragorn"])
+    bte = PermissibleValue(
+        text="bte",
+        description="BioThings Explorer",
+        meaning=INFORES["biothings-explorer"])
+    unsecret = PermissibleValue(
+        text="unsecret",
+        description="Unsecret Agent OpenAPI for NCATS Biomedical Translator Reasoners",
+        meaning=INFORES["unsecret-agent"])
+    rtxkg2 = PermissibleValue(
+        text="rtxkg2",
+        description="TRAPI endpoint for the NCATS Biomedical Translator KP called RTX KG2",
+        meaning=INFORES["rtx-kg2"])
+    icees = PermissibleValue(
+        text="icees",
+        description="ICEES (Integrated Clinical and Environmental Exposures Service)",
+        meaning=INFORES["icees-kg"])
+    cam = PermissibleValue(
+        text="cam",
+        description="Causal Activity Model KP",
+        meaning=INFORES["cam-kp"])
+    spoke = PermissibleValue(
+        text="spoke",
+        description="SPOKE KP - an NIH NCATS Knowledge Provider to expose UCSFs SPOKE",
+        meaning=INFORES["spoke"])
+    molepro = PermissibleValue(
+        text="molepro",
+        description="Molecular Data Provider for NCATS Biomedical Translator Reasoners",
+        meaning=INFORES["molepro"])
+    textmining = PermissibleValue(
+        text="textmining",
+        description="Text Mining KP",
+        meaning=INFORES["textmining-kp"])
+    cohd = PermissibleValue(
+        text="cohd",
+        description="Columbia Open Health Data (COHD)",
+        meaning=INFORES["cohd"])
+    openpredict = PermissibleValue(
+        text="openpredict",
+        description="OpenPredict API",
+        meaning=INFORES["openpredict"])
+    collaboratory = PermissibleValue(
+        text="collaboratory",
+        description="Translator Knowledge Collaboratory API",
+        meaning=INFORES["knowledge-collaboratory"])
+    connections = PermissibleValue(
+        text="connections",
+        description="Connections Hypothesis Provider API",
+        meaning=INFORES["connections-hypothesis"])
+
     _defn = EnumDefinition(
         name="ComponentEnum",
         description="Translator components are identified by their InfoRes identifiers.",
