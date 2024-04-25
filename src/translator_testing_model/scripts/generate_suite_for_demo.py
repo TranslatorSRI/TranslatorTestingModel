@@ -163,7 +163,11 @@ def create_test_cases_from_test_assets(test_assets, test_case_model):
     # Group test assets based on input_id and relationship
     grouped_assets = {}
     for test_asset in test_assets:
-        key = (test_asset.input_id, test_asset.predicate_name)
+        qualifier_key = ""
+        if test_asset.qualifers and test_asset.qualifiers is not None:
+            for qualifier in test_asset.qualifiers:
+                qualifier_key = qualifier_key+qualifier.value
+        key = (test_asset.input_id, test_asset.predicate_name, qualifier_key)
         if key not in grouped_assets:
             grouped_assets[key] = []
         grouped_assets[key].append(test_asset)
