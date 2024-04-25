@@ -1,52 +1,33 @@
-from __future__ import annotations 
-from datetime import (
-    datetime,
-    date
-)
-from decimal import Decimal 
-from enum import Enum 
-import re
+from __future__ import annotations
+from datetime import datetime, date
+from enum import Enum
+from typing import List, Dict, Optional, Any, Union
+from pydantic import BaseModel as BaseModel, ConfigDict, Field
 import sys
-from typing import (
-    Any,
-    List,
-    Literal,
-    Dict,
-    Optional,
-    Union
-)
-from pydantic.version import VERSION  as PYDANTIC_VERSION 
-if int(PYDANTIC_VERSION[0])>=2:
-    from pydantic import (
-        BaseModel,
-        ConfigDict,
-        Field,
-        field_validator
-    )
+if sys.version_info >= (3, 8):
+    from typing import Literal
 else:
-    from pydantic import (
-        BaseModel,
-        Field,
-        validator
-    )
+    from typing_extensions import Literal
+
 
 metamodel_version = "None"
 version = "0.0.0"
 
+class WeakRefShimBaseModel(BaseModel):
+   __slots__ = '__weakref__'
 
-class ConfiguredBaseModel(BaseModel):
-    model_config = ConfigDict(
-        validate_assignment = True,
-        validate_default = True,
-        extra = "forbid",
-        arbitrary_types_allowed = True,
-        use_enum_values = True,
-        strict = False,
-    )
+class ConfiguredBaseModel(WeakRefShimBaseModel,
+                validate_assignment = True,
+                validate_all = True,
+                underscore_attrs_are_private = True,
+                extra = 'forbid',
+                arbitrary_types_allowed = True,
+                use_enum_values = True):
     pass
 
 
 class TestSourceEnum(str, Enum):
+    
     # (External) Subject Matter Expert
     SME = "SME"
     # Subject Matter User Reasonably Familiar, generally Translator-internal biomedical science expert
@@ -61,9 +42,11 @@ class TestSourceEnum(str, Enum):
     TranslatorTeam = "TranslatorTeam"
     # Current SRI_Testing-like test data edges specific to KP or ARA components
     TestDataLocation = "TestDataLocation"
-
+    
+    
 
 class TestObjectiveEnum(str, Enum):
+    
     # Acceptance (pass/fail) test
     AcceptanceTest = "AcceptanceTest"
     # Semantic benchmarking
@@ -74,7 +57,8 @@ class TestObjectiveEnum(str, Enum):
     StandardsValidationTest = "StandardsValidationTest"
     # Knowledge graph "One Hop" query navigation integrity
     OneHopTest = "OneHopTest"
-
+    
+    
 
 class TestEnvEnum(str, Enum):
     """
@@ -88,51 +72,77 @@ class TestEnvEnum(str, Enum):
     test = "test"
     # Production
     prod = "prod"
-
+    
+    
 
 class FileFormatEnum(str, Enum):
     """
     Text file formats for test data sources.
     """
+    
     TSV = "TSV"
+    
     YAML = "YAML"
+    
     JSON = "JSON"
-
+    
+    
 
 class ExpectedOutputEnum(str, Enum):
     """
     Expected output values for instances of Test Asset or Test Cases(?). (Note: does this Enum overlap with 'ExpectedResultsEnum' below?)
     """
+    
     Acceptable = "Acceptable"
+    
     BadButForgivable = "BadButForgivable"
+    
     NeverShow = "NeverShow"
+    
     TopAnswer = "TopAnswer"
+    
     OverlyGeneric = "OverlyGeneric"
-
+    
+    
 
 class TestIssueEnum(str, Enum):
+    
+    
     causes_not_treats = "causes not treats"
     # 'Text Mining Knowledge Provider' generated relationship?
     TMKP = "TMKP"
+    
     category_too_generic = "category too generic"
+    
     contraindications = "contraindications"
+    
     chemical_roles = "chemical roles"
+    
     test_issue = "test_issue"
-
+    
+    
 
 class SemanticSeverityEnum(str, Enum):
     """
     From Jenn's worksheet, empty or ill defined (needs elaboration)
     """
+    
     High = "High"
+    
     Low = "Low"
+    
     NotApplicable = "NotApplicable"
-
+    
+    
 
 class DirectionEnum(str, Enum):
+    
+    
     increased = "increased"
+    
     decreased = "decreased"
-
+    
+    
 
 class ExpectedResultsEnum(str, Enum):
     """
@@ -142,42 +152,57 @@ class ExpectedResultsEnum(str, Enum):
     include_good = "include_good"
     # The query should not return the result in this test case
     exclude_bad = "exclude_bad"
-
+    
+    
 
 class NodeEnum(str, Enum):
     """
     Target node of a Subject-Predicate-Object driven query
     """
+    
     subject = "subject"
+    
     object = "object"
-
+    
+    
 
 class QueryTypeEnum(str, Enum):
     """
     Query
     """
+    
     treats = "treats"
-
+    
+    
 
 class TrapiTemplateEnum(str, Enum):
+    
+    
     ameliorates = "ameliorates"
+    
     treats = "treats"
+    
     three_hop = "three_hop"
+    
     drug_treats_rare_disease = "drug_treats_rare_disease"
+    
     drug_to_gene = "drug-to-gene"
-
+    
+    
 
 class ComponentEnum(str):
     """
     Translator components are identified by their InfoRes identifiers.
     """
-    pass
-
+    
+    dummy = "dummy"
+    
 
 class TestPersonaEnum(str, Enum):
     """
     User persona context of a given test.
     """
+    
     All = "All"
     # An MD or someone working in the clinical field.
     Clinical = "Clinical"
@@ -185,16 +210,19 @@ class TestPersonaEnum(str, Enum):
     LookUp = "LookUp"
     # Someone working on basic biology questions or drug discoveries where the study of the biological mechanism.
     Mechanistic = "Mechanistic"
-
+    
+    
 
 class TestCaseResultEnum(str, Enum):
+    
     # test case result indicating success.
     PASSED = "PASSED"
     # test case result indicating failure.
     FAILED = "FAILED"
     # test case result indicating that the specified test was not run.
     SKIPPED = "SKIPPED"
-
+    
+    
 
 class TestEntityParameter(ConfiguredBaseModel):
     """
@@ -202,12 +230,13 @@ class TestEntityParameter(ConfiguredBaseModel):
     """
     parameter: Optional[str] = Field(None, description="""Name of a TestParameter.""")
     value: Optional[str] = Field(None, description="""(String) value of a TestParameter.""")
-
+    
 
 class Qualifier(TestEntityParameter):
+    
     parameter: Optional[str] = Field(None, description="""The 'parameter' of a Qualifier should be a `qualifier` slot name from the Biolink Model ('biolink' namespace) 'biolink:qualifier' hierarchy.""")
     value: Optional[str] = Field(None, description="""The 'value' of should be a suitable value generally drawn from an applicable Biolink Model (\"Enum\") value set of the specified Qualifier.""")
-
+    
 
 class TestEntity(ConfiguredBaseModel):
     """
@@ -218,7 +247,7 @@ class TestEntity(ConfiguredBaseModel):
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
     tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
     test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
-
+    
 
 class TestMetadata(TestEntity):
     """
@@ -233,7 +262,7 @@ class TestMetadata(TestEntity):
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
     tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
     test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
-
+    
 
 class TestAsset(TestEntity):
     """
@@ -261,7 +290,7 @@ class TestAsset(TestEntity):
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
     tags: Optional[List[str]] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a \"Block List\" collection""")
     test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar settings for the TestRunner, e.g. \"inferred\"""")
-
+    
 
 class AcceptanceTestAsset(TestAsset):
     """
@@ -299,7 +328,7 @@ class AcceptanceTestAsset(TestAsset):
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
     tags: Optional[List[str]] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a \"Block List\" collection""")
     test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar settings for the TestRunner, e.g. \"inferred\"""")
-
+    
 
 class TestEdgeData(TestAsset):
     """
@@ -327,7 +356,7 @@ class TestEdgeData(TestAsset):
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
     tags: Optional[List[str]] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a \"Block List\" collection""")
     test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar settings for the TestRunner, e.g. \"inferred\"""")
-
+    
 
 class Precondition(TestEntity):
     """
@@ -338,7 +367,7 @@ class Precondition(TestEntity):
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
     tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
     test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
-
+    
 
 class TestCase(TestEntity):
     """
@@ -363,7 +392,7 @@ class TestCase(TestEntity):
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
     tags: Optional[List[str]] = Field(default_factory=list, description="""One or more 'tags' slot values (slot inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection.""")
     test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
-
+    
 
 class AcceptanceTestCase(TestCase):
     """
@@ -388,7 +417,7 @@ class AcceptanceTestCase(TestCase):
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
     tags: Optional[List[str]] = Field(default_factory=list, description="""One or more 'tags' slot values (slot inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection.""")
     test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
-
+    
 
 class QuantitativeTestCase(TestCase):
     """
@@ -413,7 +442,7 @@ class QuantitativeTestCase(TestCase):
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
     tags: Optional[List[str]] = Field(default_factory=list, description="""One or more 'tags' slot values (slot inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection.""")
     test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
-
+    
 
 class TestSuiteSpecification(TestEntity):
     """
@@ -426,7 +455,7 @@ class TestSuiteSpecification(TestEntity):
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
     tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
     test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
-
+    
 
 class TestSuite(TestEntity):
     """
@@ -441,9 +470,10 @@ class TestSuite(TestEntity):
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
     tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
     test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
-
+    
 
 class AcceptanceTestSuite(TestSuite):
+    
     test_metadata: TestMetadata = Field(..., description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
     test_persona: Optional[TestPersonaEnum] = Field(None, description="""A Test persona describes the user or operational context of a given test.""")
     test_cases: Optional[Dict[str, TestCase]] = Field(default_factory=dict, description="""List of explicitly enumerated Test Cases.""")
@@ -453,14 +483,14 @@ class AcceptanceTestSuite(TestSuite):
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
     tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
     test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
-
+    
 
 class BenchmarkTestSuite(ConfiguredBaseModel):
     """
     JsonObj(is_a='TestSuite')
     """
-    pass
-
+    None
+    
 
 class StandardsComplianceTestSuite(TestSuite):
     """
@@ -475,7 +505,7 @@ class StandardsComplianceTestSuite(TestSuite):
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
     tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
     test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
-
+    
 
 class OneHopTestSuite(TestSuite):
     """
@@ -490,7 +520,7 @@ class OneHopTestSuite(TestSuite):
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
     tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
     test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
-
+    
 
 class TestCaseResult(TestEntity):
     """
@@ -504,7 +534,7 @@ class TestCaseResult(TestEntity):
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
     tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
     test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
-
+    
 
 class TestRunSession(TestEntity):
     """
@@ -522,7 +552,7 @@ class TestRunSession(TestEntity):
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
     tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
     test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
-
+    
 
 class TestOutput(TestEntity):
     """
@@ -535,7 +565,7 @@ class TestOutput(TestEntity):
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
     tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
     test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
-
+    
 
 class TestResultPKSet(TestEntity):
     """
@@ -553,29 +583,30 @@ class TestResultPKSet(TestEntity):
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
     tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
     test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
+    
 
 
-# Model rebuild
-# see https://pydantic-docs.helpmanual.io/usage/models/#rebuilding-a-model
-TestEntityParameter.model_rebuild()
-Qualifier.model_rebuild()
-TestEntity.model_rebuild()
-TestMetadata.model_rebuild()
-TestAsset.model_rebuild()
-AcceptanceTestAsset.model_rebuild()
-TestEdgeData.model_rebuild()
-Precondition.model_rebuild()
-TestCase.model_rebuild()
-AcceptanceTestCase.model_rebuild()
-QuantitativeTestCase.model_rebuild()
-TestSuiteSpecification.model_rebuild()
-TestSuite.model_rebuild()
-AcceptanceTestSuite.model_rebuild()
-BenchmarkTestSuite.model_rebuild()
-StandardsComplianceTestSuite.model_rebuild()
-OneHopTestSuite.model_rebuild()
-TestCaseResult.model_rebuild()
-TestRunSession.model_rebuild()
-TestOutput.model_rebuild()
-TestResultPKSet.model_rebuild()
+# Update forward refs
+# see https://pydantic-docs.helpmanual.io/usage/postponed_annotations/
+TestEntityParameter.update_forward_refs()
+Qualifier.update_forward_refs()
+TestEntity.update_forward_refs()
+TestMetadata.update_forward_refs()
+TestAsset.update_forward_refs()
+AcceptanceTestAsset.update_forward_refs()
+TestEdgeData.update_forward_refs()
+Precondition.update_forward_refs()
+TestCase.update_forward_refs()
+AcceptanceTestCase.update_forward_refs()
+QuantitativeTestCase.update_forward_refs()
+TestSuiteSpecification.update_forward_refs()
+TestSuite.update_forward_refs()
+AcceptanceTestSuite.update_forward_refs()
+BenchmarkTestSuite.update_forward_refs()
+StandardsComplianceTestSuite.update_forward_refs()
+OneHopTestSuite.update_forward_refs()
+TestCaseResult.update_forward_refs()
+TestRunSession.update_forward_refs()
+TestOutput.update_forward_refs()
+TestResultPKSet.update_forward_refs()
 

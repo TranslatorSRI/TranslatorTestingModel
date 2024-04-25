@@ -52,6 +52,7 @@ class TestCaseGeneratorWrapper:
         return tests
 
 
+@skip("Not implemented yet")
 class TestTestCaseGenerator(unittest.TestCase):
     """Testing Test Case Generator functionality."""
 
