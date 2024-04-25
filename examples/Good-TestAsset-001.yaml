@@ -1,7 +1,8 @@
 # Example TestAsset data object
 ---
-# TODO: the TestAsset example data needs further elaboration
+# TODO: the TestAsset example data may need further elaboration
 
+#
 #
 #   TestAsset:
 #    description: >-
@@ -12,15 +13,20 @@
 #    slots:
 #      - input_id
 #      - input_name
-#      - predicate
+#      - input_category
+#      - predicate_id
+#      - predicate_name
 #      - output_id
 #      - output_name
+#      - output_category
+#      - association
+#      - qualifiers
 #      - expected_output
 #      - test_issue
 #      - semantic_severity
 #      - in_v1
 #      - well_known
-#      - runner_settings
+#      - test_reference
 #    slot_usage:
 #      id:
 #        aliases: ["AssetIdentifier"]
@@ -29,7 +35,7 @@
 #        description: >-
 #          One or more 'tags' slot values (inherited from TestEntity) should generally
 #          be defined to specify TestAsset membership in a "Block List" collection
-#      runner_settings:
+#      test_runner_settings:
 #        description: >-
 #          Settings for the test harness, e.g. "inferred"
 #
@@ -38,7 +44,7 @@ name: TestAsset001
 description: Iron treats Aceruloplasminemia
 input_id: MONDO:0011426
 input_name: Aceruloplasminemia
-predicate: Treats
+predicate_name: treats
 output_id: DRUGBANK:DB01592
 output_name: Iron (PUBCHEM)
 expected_output: NeverShow
@@ -46,11 +52,8 @@ test_reference: https://github.com/NCATSTranslator/Feedback/issues/506
 semantic_severity: NotApplicable
 in_v1: True
 well_known: False
-runner_settings:
+test_metadata:
+  id: "example:TestAsset001"
+test_runner_settings:
   - "inferred"
   - "test"
-test_metadata:
-  id: 1
-  test_source: SMURF,
-  test_reference: https://github.com/NCATSTranslator/Feedback/issues/506
-  test_objective: AcceptanceTest
