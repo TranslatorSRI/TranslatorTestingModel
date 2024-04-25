@@ -131,7 +131,6 @@
                 }
             },
             "required": [
-                "test_metadata",
                 "id"
             ],
             "title": "AcceptanceTestAsset",
@@ -262,18 +261,7 @@
                 },
                 "test_cases": {
                     "additionalProperties": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/$defs/TestCase__identifier_optional"
-                            },
-                            {
-                                "description": "One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection.",
-                                "items": {
-                                    "$ref": "#/$defs/TestAsset"
-                                },
-                                "type": "array"
-                            }
-                        ]
+                        "$ref": "#/$defs/TestCase__identifier_optional"
                     },
                     "description": "List of explicitly enumerated Test Cases.",
                     "type": "object"
@@ -299,7 +287,6 @@
                 }
             },
             "required": [
-                "test_metadata",
                 "id"
             ],
             "title": "AcceptanceTestSuite",
@@ -313,6 +300,25 @@
         },
         "ComponentEnum": {
             "description": "Translator components are identified by their InfoRes identifiers.",
+            "enum": [
+                "ars",
+                "arax",
+                "explanatory",
+                "improving",
+                "aragorn",
+                "bte",
+                "unsecret",
+                "rtxkg2",
+                "icees",
+                "cam",
+                "spoke",
+                "molepro",
+                "textmining",
+                "cohd",
+                "openpredict",
+                "collaboratory",
+                "connections"
+            ],
             "title": "ComponentEnum",
             "type": "string"
         },
@@ -390,18 +396,7 @@
                 },
                 "test_cases": {
                     "additionalProperties": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/$defs/TestCase__identifier_optional"
-                            },
-                            {
-                                "description": "One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection.",
-                                "items": {
-                                    "$ref": "#/$defs/TestAsset"
-                                },
-                                "type": "array"
-                            }
-                        ]
+                        "$ref": "#/$defs/TestCase__identifier_optional"
                     },
                     "description": "List of explicitly enumerated Test Cases.",
                     "type": "object"
@@ -427,7 +422,6 @@
                 }
             },
             "required": [
-                "test_metadata",
                 "id"
             ],
             "title": "OneHopTestSuite",
@@ -629,18 +623,7 @@
                 },
                 "test_cases": {
                     "additionalProperties": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/$defs/TestCase__identifier_optional"
-                            },
-                            {
-                                "description": "One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection.",
-                                "items": {
-                                    "$ref": "#/$defs/TestAsset"
-                                },
-                                "type": "array"
-                            }
-                        ]
+                        "$ref": "#/$defs/TestCase__identifier_optional"
                     },
                     "description": "List of explicitly enumerated Test Cases.",
                     "type": "object"
@@ -666,7 +649,6 @@
                 }
             },
             "required": [
-                "test_metadata",
                 "id"
             ],
             "title": "StandardsComplianceTestSuite",
@@ -762,7 +744,6 @@
                 }
             },
             "required": [
-                "test_metadata",
                 "id"
             ],
             "title": "TestAsset",
@@ -1163,7 +1144,6 @@
                 }
             },
             "required": [
-                "test_metadata",
                 "id"
             ],
             "title": "TestEdgeData",
@@ -1525,18 +1505,7 @@
                 },
                 "test_cases": {
                     "additionalProperties": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/$defs/TestCase__identifier_optional"
-                            },
-                            {
-                                "description": "One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection.",
-                                "items": {
-                                    "$ref": "#/$defs/TestAsset"
-                                },
-                                "type": "array"
-                            }
-                        ]
+                        "$ref": "#/$defs/TestCase__identifier_optional"
                     },
                     "description": "List of explicitly enumerated Test Cases.",
                     "type": "object"
@@ -1562,7 +1531,6 @@
                 }
             },
             "required": [
-                "test_metadata",
                 "id"
             ],
             "title": "TestSuite",
@@ -1627,7 +1595,7 @@
         }
     },
     "$id": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
-    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "$schema": "http://json-schema.org/draft-07/schema#",
     "additionalProperties": true,
     "metamodel_version": "1.7.0",
     "title": "Translator-Testing-Model",

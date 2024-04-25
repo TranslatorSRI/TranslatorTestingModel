@@ -190,12 +190,45 @@ class TrapiTemplateEnum(str, Enum):
     
     
 
-class ComponentEnum(str):
+class ComponentEnum(str, Enum):
     """
     Translator components are identified by their InfoRes identifiers.
     """
+    # Automatic Relay Service component of Translator
+    ars = "ars"
+    # ARAX Translator Reasoner
+    arax = "arax"
+    # A Translator Reasoner API for the Explanatory Agent
+    explanatory = "explanatory"
+    # imProving Agent OpenAPI TRAPI Specification
+    improving = "improving"
+    # Performs a query operation which compiles data from numerous ranking agent services.
+    aragorn = "aragorn"
+    # BioThings Explorer
+    bte = "bte"
+    # Unsecret Agent OpenAPI for NCATS Biomedical Translator Reasoners
+    unsecret = "unsecret"
+    # TRAPI endpoint for the NCATS Biomedical Translator KP called RTX KG2
+    rtxkg2 = "rtxkg2"
+    # ICEES (Integrated Clinical and Environmental Exposures Service)
+    icees = "icees"
+    # Causal Activity Model KP
+    cam = "cam"
+    # SPOKE KP - an NIH NCATS Knowledge Provider to expose UCSFs SPOKE
+    spoke = "spoke"
+    # Molecular Data Provider for NCATS Biomedical Translator Reasoners
+    molepro = "molepro"
+    # Text Mining KP
+    textmining = "textmining"
+    # Columbia Open Health Data (COHD)
+    cohd = "cohd"
+    # OpenPredict API
+    openpredict = "openpredict"
+    # Translator Knowledge Collaboratory API
+    collaboratory = "collaboratory"
+    # Connections Hypothesis Provider API
+    connections = "connections"
     
-    dummy = "dummy"
     
 
 class TestPersonaEnum(str, Enum):
@@ -284,7 +317,7 @@ class TestAsset(TestEntity):
     in_v1: Optional[bool] = Field(None)
     well_known: Optional[bool] = Field(None)
     test_reference: Optional[str] = Field(None, description="""Document URL where original test source particulars are registered (e.g. Github repo)""")
-    test_metadata: TestMetadata = Field(..., description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
+    test_metadata: Optional[TestMetadata] = Field(None, description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
@@ -322,7 +355,7 @@ class AcceptanceTestAsset(TestAsset):
     in_v1: Optional[bool] = Field(None)
     well_known: Optional[bool] = Field(None)
     test_reference: Optional[str] = Field(None, description="""Document URL where original test source particulars are registered (e.g. Github repo)""")
-    test_metadata: TestMetadata = Field(..., description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
+    test_metadata: Optional[TestMetadata] = Field(None, description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
@@ -350,7 +383,7 @@ class TestEdgeData(TestAsset):
     in_v1: Optional[bool] = Field(None)
     well_known: Optional[bool] = Field(None)
     test_reference: Optional[str] = Field(None, description="""Document URL where original test source particulars are registered (e.g. Github repo)""")
-    test_metadata: TestMetadata = Field(..., description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
+    test_metadata: Optional[TestMetadata] = Field(None, description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
@@ -461,7 +494,7 @@ class TestSuite(TestEntity):
     """
     Specification of a set of Test Cases, one of either with a static list of 'test_cases' or a dynamic 'test_suite_specification' slot values. Note: at least one slot or the other, but generally not both(?) needs to be present.
     """
-    test_metadata: TestMetadata = Field(..., description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
+    test_metadata: Optional[TestMetadata] = Field(None, description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
     test_persona: Optional[TestPersonaEnum] = Field(None, description="""A Test persona describes the user or operational context of a given test.""")
     test_cases: Optional[Dict[str, TestCase]] = Field(default_factory=dict, description="""List of explicitly enumerated Test Cases.""")
     test_suite_specification: Optional[TestSuiteSpecification] = Field(None, description="""Declarative specification of a Test Suite of Test Cases whose generation is deferred, (i.e. within a Test Runner) or whose creation is achieved by stream processing of an external data source.""")
@@ -474,7 +507,7 @@ class TestSuite(TestEntity):
 
 class AcceptanceTestSuite(TestSuite):
     
-    test_metadata: TestMetadata = Field(..., description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
+    test_metadata: Optional[TestMetadata] = Field(None, description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
     test_persona: Optional[TestPersonaEnum] = Field(None, description="""A Test persona describes the user or operational context of a given test.""")
     test_cases: Optional[Dict[str, TestCase]] = Field(default_factory=dict, description="""List of explicitly enumerated Test Cases.""")
     test_suite_specification: Optional[TestSuiteSpecification] = Field(None, description="""Declarative specification of a Test Suite of Test Cases whose generation is deferred, (i.e. within a Test Runner) or whose creation is achieved by stream processing of an external data source.""")
@@ -496,7 +529,7 @@ class StandardsComplianceTestSuite(TestSuite):
     """
     Test suite for testing Translator components against releases of standards like TRAPI and the Biolink Model.
     """
-    test_metadata: TestMetadata = Field(..., description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
+    test_metadata: Optional[TestMetadata] = Field(None, description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
     test_persona: Optional[TestPersonaEnum] = Field(None, description="""A Test persona describes the user or operational context of a given test.""")
     test_cases: Optional[Dict[str, TestCase]] = Field(default_factory=dict, description="""List of explicitly enumerated Test Cases.""")
     test_suite_specification: Optional[TestSuiteSpecification] = Field(None, description="""Declarative specification of a Test Suite of Test Cases whose generation is deferred, (i.e. within a Test Runner) or whose creation is achieved by stream processing of an external data source.""")
@@ -511,7 +544,7 @@ class OneHopTestSuite(TestSuite):
     """
     Test case for testing the integrity of \"One Hop\" knowledge graph retrievals sensa legacy SRI_Testing harness.
     """
-    test_metadata: TestMetadata = Field(..., description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
+    test_metadata: Optional[TestMetadata] = Field(None, description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
     test_persona: Optional[TestPersonaEnum] = Field(None, description="""A Test persona describes the user or operational context of a given test.""")
     test_cases: Optional[Dict[str, TestCase]] = Field(default_factory=dict, description="""List of explicitly enumerated Test Cases.""")
     test_suite_specification: Optional[TestSuiteSpecification] = Field(None, description="""Declarative specification of a Test Suite of Test Cases whose generation is deferred, (i.e. within a Test Runner) or whose creation is achieved by stream processing of an external data source.""")

@@ -55,20 +55,14 @@ linkml:Sparqlpath xsd:string
     (  $<AcceptanceTestAsset_tes> (  &<TestAsset_tes> ;
           rdf:type [ <TestAsset> ] ? ;
           <must_pass_date> @linkml:Date ? ;
-          <must_pass_environment> [ <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#dev>
-             <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#ci>
-             <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#test>
-             <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#prod> ] ? ;
+          <must_pass_environment> @<TestEnvEnum> ? ;
           <scientific_question> @linkml:String ? ;
           <string_entry> @linkml:String ? ;
-          <direction> [ <https://w3id.org/TranslatorSRI/TranslatorTestingModel/DirectionEnum#increased>
-             <https://w3id.org/TranslatorSRI/TranslatorTestingModel/DirectionEnum#decreased> ] ? ;
+          <direction> @<DirectionEnum> ? ;
           <answer_informal_concept> @linkml:String ? ;
-          <expected_result> [ <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedResultsEnum#include_good>
-             <https://w3id.org/TranslatorSRI/TranslatorTestingModel/ExpectedResultsEnum#exclude_bad> ] ? ;
+          <expected_result> @<ExpectedResultsEnum> ? ;
           <top_level> @linkml:Integer ? ;
-          <query_node> [ <https://w3id.org/TranslatorSRI/TranslatorTestingModel/NodeEnum#subject>
-             <https://w3id.org/TranslatorSRI/TranslatorTestingModel/NodeEnum#object> ] ? ;
+          <query_node> @<NodeEnum> ? ;
           <notes> @linkml:String ?
        ) ;
        rdf:type [ <AcceptanceTestAsset> ]
@@ -155,19 +149,12 @@ linkml:Sparqlpath xsd:string
              <association> @<AssociationCategory> ? ;
              <qualifiers> @<Qualifier> * ;
              <expected_output> @linkml:String ? ;
-             <test_issue> [ <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#causes%20not%20treats>
-                <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#TMKP>
-                <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#category%20too%20generic>
-                <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#contraindications>
-                <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#chemical%20roles>
-                <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#test_issue> ] ? ;
-             <semantic_severity> [ <https://w3id.org/TranslatorSRI/TranslatorTestingModel/SemanticSeverityEnum#High>
-                <https://w3id.org/TranslatorSRI/TranslatorTestingModel/SemanticSeverityEnum#Low>
-                <https://w3id.org/TranslatorSRI/TranslatorTestingModel/SemanticSeverityEnum#NotApplicable> ] ? ;
+             <test_issue> @<TestIssueEnum> ? ;
+             <semantic_severity> @<SemanticSeverityEnum> ? ;
              <in_v1> @linkml:Boolean ? ;
              <well_known> @linkml:Boolean ? ;
              <test_reference> @linkml:Uriorcurie ? ;
-             <test_metadata> @<TestMetadata> ;
+             <test_metadata> @<TestMetadata> ? ;
              schema1:additionalType @linkml:String * ;
              <test_runner_settings> @linkml:String *
           ) ;
@@ -180,37 +167,20 @@ linkml:Sparqlpath xsd:string
     CLOSED {
        (  $<TestCase_tes> (  &<TestEntity_tes> ;
              rdf:type [ <TestEntity> ] ? ;
-             <query_type> [ <https://w3id.org/TranslatorSRI/TranslatorTestingModel/QueryTypeEnum#treats> ] ? ;
+             <query_type> @<QueryTypeEnum> ? ;
              <test_assets> @<TestAsset> + ;
              <preconditions> @<Precondition> * ;
-             <trapi_template> [ <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TrapiTemplateEnum#ameliorates>
-                <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TrapiTemplateEnum#treats>
-                <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TrapiTemplateEnum#three_hop>
-                <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TrapiTemplateEnum#drug_treats_rare_disease>
-                <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TrapiTemplateEnum#drug-to-gene> ] ? ;
-             <test_case_objective> [ <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#AcceptanceTest>
-                <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#BenchmarkTest>
-                <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#QuantitativeTest>
-                <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#StandardsValidationTest>
-                <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#OneHopTest> ] ? ;
-             <test_case_source> [ <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestSourceEnum#SME>
-                <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestSourceEnum#SMURF>
-                <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestSourceEnum#GitHubUserFeedback>
-                <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestSourceEnum#TACT>
-                <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestSourceEnum#BenchMark>
-                <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestSourceEnum#TranslatorTeam>
-                <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestSourceEnum#TestDataLocation> ] ? ;
+             <trapi_template> @<TrapiTemplateEnum> ? ;
+             <test_case_objective> @<TestObjectiveEnum> ? ;
+             <test_case_source> @<TestSourceEnum> ? ;
              <test_case_predicate_name> @linkml:String ? ;
              <test_case_predicate_id> @linkml:String ? ;
              <test_case_input_id> @linkml:Uriorcurie ? ;
              <qualifiers> @<Qualifier> * ;
              <input_category> @<ConceptCategory> ? ;
              <output_category> @<ConceptCategory> ? ;
-             <components> . * ;
-             <test_env> [ <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#dev>
-                <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#ci>
-                <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#test>
-                <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#prod> ] ? ;
+             <components> @<ComponentEnum> * ;
+             <test_env> @<TestEnvEnum> ? ;
              schema1:additionalType @linkml:String *
           ) ;
           rdf:type [ <TestCase> ]
@@ -223,9 +193,7 @@ linkml:Sparqlpath xsd:string
           rdf:type [ <TestEntity> ] ? ;
           <test_suite_id> @linkml:Uriorcurie ? ;
           <test_case> @<TestCase> ? ;
-          <test_case_result> [ <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestCaseResultEnum#PASSED>
-             <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestCaseResultEnum#FAILED>
-             <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestCaseResultEnum#SKIPPED> ] ?
+          <test_case_result> @<TestCaseResultEnum> ?
        ) ;
        rdf:type [ <TestCaseResult> ]
     )
@@ -267,19 +235,9 @@ linkml:Sparqlpath xsd:string
 <TestMetadata> CLOSED {
     (  $<TestMetadata_tes> (  &<TestEntity_tes> ;
           rdf:type [ <TestEntity> ] ? ;
-          <test_source> [ <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestSourceEnum#SME>
-             <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestSourceEnum#SMURF>
-             <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestSourceEnum#GitHubUserFeedback>
-             <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestSourceEnum#TACT>
-             <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestSourceEnum#BenchMark>
-             <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestSourceEnum#TranslatorTeam>
-             <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestSourceEnum#TestDataLocation> ] ? ;
+          <test_source> @<TestSourceEnum> ? ;
           <test_reference> @linkml:Uriorcurie ? ;
-          <test_objective> [ <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#AcceptanceTest>
-             <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#BenchmarkTest>
-             <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#QuantitativeTest>
-             <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#StandardsValidationTest>
-             <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#OneHopTest> ] ? ;
+          <test_objective> @<TestObjectiveEnum> ? ;
           <test_annotations> @<TestEntityParameter> *
        ) ;
        rdf:type [ <TestMetadata> ]
@@ -314,11 +272,8 @@ linkml:Sparqlpath xsd:string
 <TestRunSession> CLOSED {
     (  $<TestRunSession_tes> (  &<TestEntity_tes> ;
           rdf:type [ <TestEntity> ] ? ;
-          <components> . * ;
-          <test_env> [ <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#dev>
-             <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#ci>
-             <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#test>
-             <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#prod> ] ? ;
+          <components> @<ComponentEnum> * ;
+          <test_env> @<TestEnvEnum> ? ;
           <test_runner_name> @linkml:String ? ;
           <test_run_parameters> @<TestEntityParameter> * ;
           <test_entities> @<TestEntity> * ;
@@ -333,11 +288,8 @@ linkml:Sparqlpath xsd:string
     CLOSED {
        (  $<TestSuite_tes> (  &<TestEntity_tes> ;
              rdf:type [ <TestEntity> ] ? ;
-             <test_metadata> @<TestMetadata> ;
-             <test_persona> [ <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestPersonaEnum#All>
-                <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestPersonaEnum#Clinical>
-                <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestPersonaEnum#LookUp>
-                <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestPersonaEnum#Mechanistic> ] ? ;
+             <test_metadata> @<TestMetadata> ? ;
+             <test_persona> @<TestPersonaEnum> ? ;
              <test_cases> @<TestCase> * ;
              <test_suite_specification> @<TestSuiteSpecification> ?
           ) ;
@@ -350,9 +302,7 @@ linkml:Sparqlpath xsd:string
     (  $<TestSuiteSpecification_tes> (  &<TestEntity_tes> ;
           rdf:type [ <TestEntity> ] ? ;
           <test_data_file_locator> @linkml:Uriorcurie ? ;
-          <test_data_file_format> [ <https://w3id.org/TranslatorSRI/TranslatorTestingModel/FileFormatEnum#TSV>
-             <https://w3id.org/TranslatorSRI/TranslatorTestingModel/FileFormatEnum#YAML>
-             <https://w3id.org/TranslatorSRI/TranslatorTestingModel/FileFormatEnum#JSON> ] ?
+          <test_data_file_format> @<FileFormatEnum> ?
        ) ;
        rdf:type [ <TestSuiteSpecification> ]
     )

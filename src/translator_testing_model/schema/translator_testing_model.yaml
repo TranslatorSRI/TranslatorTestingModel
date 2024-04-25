@@ -14,6 +14,7 @@ prefixes:
   ttm: https://w3id.org/TranslatorSRI/TranslatorTestingModel/
   linkml: https://w3id.org/linkml/
   biolink: https://w3id.org/biolink/
+  infores: https://w3id.org/biolink/vocab/
   schema: http://schema.org/
   example: https://example.org/
 
@@ -713,7 +714,7 @@ slots:
       Test metadata describes the external provenance, cross-references and objectives for a given test.
     range: TestMetadata
     inlined: true
-    required: true
+    required: false
 
   test_persona:
     description: >-
@@ -949,11 +950,83 @@ enums:
   ComponentEnum:
     description: >-
       Translator components are identified by their InfoRes identifiers.
-    reachable_from:
-      source_ontology: biolink
-      source_nodes:
-        - biolink:infores
-      include_self:  false
+    #    reachable_from:
+    #      source_ontology: biolink
+    #      source_nodes:
+    #        - biolink:infores
+    #      include_self:  false
+    permissible_values:
+      ars:
+        description: >-
+          Automatic Relay Service component of Translator
+        meaning: "infores:ncats-ars"
+      # ARA's
+      arax:
+        description: >-
+          ARAX Translator Reasoner
+        meaning: "infores:arax"
+      explanatory:
+        description: >-
+          A Translator Reasoner API for the Explanatory Agent
+        meaning: "infores:explanatory-agent"
+      improving:
+        description: >-
+          imProving Agent OpenAPI TRAPI Specification
+        meaning: "infores:improving-agent"
+      aragorn:
+        description: >-
+          Performs a query operation which compiles data from numerous ranking agent services.
+        meaning: "infores:aragorn"
+      bte:
+        description: >-
+          BioThings Explorer
+        meaning: "infores:biothings-explorer"
+      unsecret:
+        description: >-
+          Unsecret Agent OpenAPI for NCATS Biomedical Translator Reasoners
+        meaning: "infores:unsecret-agent"
+      # KP's
+      rtxkg2:
+        description: >-
+          TRAPI endpoint for the NCATS Biomedical Translator KP called RTX KG2
+        meaning: "infores:rtx-kg2"
+      icees:
+        description: >-
+          ICEES (Integrated Clinical and Environmental Exposures Service)
+        meaning: "infores:icees-kg"
+      cam:
+        description: >-
+          Causal Activity Model KP
+        meaning: "infores:cam-kp"
+      spoke:
+        description: >-
+          SPOKE KP - an NIH NCATS Knowledge Provider to expose UCSFs SPOKE
+        meaning: "infores:spoke"
+      molepro:
+        description: >-
+          Molecular Data Provider for NCATS Biomedical Translator Reasoners
+        meaning: "infores:molepro"
+      textmining:
+        description: >-
+          Text Mining KP
+        meaning: "infores:textmining-kp"
+      cohd:
+        description: >-
+          Columbia Open Health Data (COHD)
+        meaning: "infores:cohd"
+      openpredict:
+        description: >-
+          OpenPredict API
+        meaning: "infores:openpredict"
+      collaboratory:
+        description: >-
+          Translator Knowledge Collaboratory API
+        meaning: "infores:knowledge-collaboratory"
+      connections:
+        description: >-
+          Connections Hypothesis Provider API
+        meaning: "infores:connections-hypothesis"
+
 
   #########################
   # TestSuite Model Enums #
