@@ -256,6 +256,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#permissible-values" class="md-nav__link">
+    Permissible Values
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#slots" class="md-nav__link">
     Slots
   </a>
@@ -312,7 +319,103 @@
 <h1 id="enum-componentenum">Enum: ComponentEnum</h1>
 <p><em>Translator components are identified by their InfoRes identifiers.</em></p>
 <p>URI: <a href="./">ComponentEnum</a></p>
-<p><em>This is a dynamic enum</em></p>
+<h2 id="permissible-values">Permissible Values</h2>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Meaning</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ars</td>
+<td>infores:ncats-ars</td>
+<td>Automatic Relay Service component of Translator</td>
+</tr>
+<tr>
+<td>arax</td>
+<td>infores:arax</td>
+<td>ARAX Translator Reasoner</td>
+</tr>
+<tr>
+<td>explanatory</td>
+<td>infores:explanatory-agent</td>
+<td>A Translator Reasoner API for the Explanatory Agent</td>
+</tr>
+<tr>
+<td>improving</td>
+<td>infores:improving-agent</td>
+<td>imProving Agent OpenAPI TRAPI Specification</td>
+</tr>
+<tr>
+<td>aragorn</td>
+<td>infores:aragorn</td>
+<td>Performs a query operation which compiles data from numerous ranking agent se...</td>
+</tr>
+<tr>
+<td>bte</td>
+<td>infores:biothings-explorer</td>
+<td>BioThings Explorer</td>
+</tr>
+<tr>
+<td>unsecret</td>
+<td>infores:unsecret-agent</td>
+<td>Unsecret Agent OpenAPI for NCATS Biomedical Translator Reasoners</td>
+</tr>
+<tr>
+<td>rtxkg2</td>
+<td>infores:rtx-kg2</td>
+<td>TRAPI endpoint for the NCATS Biomedical Translator KP called RTX KG2</td>
+</tr>
+<tr>
+<td>icees</td>
+<td>infores:icees-kg</td>
+<td>ICEES (Integrated Clinical and Environmental Exposures Service)</td>
+</tr>
+<tr>
+<td>cam</td>
+<td>infores:cam-kp</td>
+<td>Causal Activity Model KP</td>
+</tr>
+<tr>
+<td>spoke</td>
+<td>infores:spoke</td>
+<td>SPOKE KP - an NIH NCATS Knowledge Provider to expose UCSFs SPOKE</td>
+</tr>
+<tr>
+<td>molepro</td>
+<td>infores:molepro</td>
+<td>Molecular Data Provider for NCATS Biomedical Translator Reasoners</td>
+</tr>
+<tr>
+<td>textmining</td>
+<td>infores:textmining-kp</td>
+<td>Text Mining KP</td>
+</tr>
+<tr>
+<td>cohd</td>
+<td>infores:cohd</td>
+<td>Columbia Open Health Data (COHD)</td>
+</tr>
+<tr>
+<td>openpredict</td>
+<td>infores:openpredict</td>
+<td>OpenPredict API</td>
+</tr>
+<tr>
+<td>collaboratory</td>
+<td>infores:knowledge-collaboratory</td>
+<td>Translator Knowledge Collaboratory API</td>
+</tr>
+<tr>
+<td>connections</td>
+<td>infores:connections-hypothesis</td>
+<td>Connections Hypothesis Provider API</td>
+</tr>
+</tbody>
+</table>
 <h2 id="slots">Slots</h2>
 <table>
 <thead>
@@ -340,11 +443,77 @@
 description: Translator components are identified by their InfoRes identifiers.
 from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
 rank: 1000
-reachable_from:
-  source_ontology: biolink
-  source_nodes:
-  - biolink:infores
-  include_self: false
+permissible_values:
+  ars:
+    text: ars
+    description: Automatic Relay Service component of Translator
+    meaning: infores:ncats-ars
+  arax:
+    text: arax
+    description: ARAX Translator Reasoner
+    meaning: infores:arax
+  explanatory:
+    text: explanatory
+    description: A Translator Reasoner API for the Explanatory Agent
+    meaning: infores:explanatory-agent
+  improving:
+    text: improving
+    description: imProving Agent OpenAPI TRAPI Specification
+    meaning: infores:improving-agent
+  aragorn:
+    text: aragorn
+    description: Performs a query operation which compiles data from numerous ranking
+      agent services.
+    meaning: infores:aragorn
+  bte:
+    text: bte
+    description: BioThings Explorer
+    meaning: infores:biothings-explorer
+  unsecret:
+    text: unsecret
+    description: Unsecret Agent OpenAPI for NCATS Biomedical Translator Reasoners
+    meaning: infores:unsecret-agent
+  rtxkg2:
+    text: rtxkg2
+    description: TRAPI endpoint for the NCATS Biomedical Translator KP called RTX
+      KG2
+    meaning: infores:rtx-kg2
+  icees:
+    text: icees
+    description: ICEES (Integrated Clinical and Environmental Exposures Service)
+    meaning: infores:icees-kg
+  cam:
+    text: cam
+    description: Causal Activity Model KP
+    meaning: infores:cam-kp
+  spoke:
+    text: spoke
+    description: SPOKE KP - an NIH NCATS Knowledge Provider to expose UCSFs SPOKE
+    meaning: infores:spoke
+  molepro:
+    text: molepro
+    description: Molecular Data Provider for NCATS Biomedical Translator Reasoners
+    meaning: infores:molepro
+  textmining:
+    text: textmining
+    description: Text Mining KP
+    meaning: infores:textmining-kp
+  cohd:
+    text: cohd
+    description: Columbia Open Health Data (COHD)
+    meaning: infores:cohd
+  openpredict:
+    text: openpredict
+    description: OpenPredict API
+    meaning: infores:openpredict
+  collaboratory:
+    text: collaboratory
+    description: Translator Knowledge Collaboratory API
+    meaning: infores:knowledge-collaboratory
+  connections:
+    text: connections
+    description: Connections Hypothesis Provider API
+    meaning: infores:connections-hypothesis
 
 </code></pre>
 
