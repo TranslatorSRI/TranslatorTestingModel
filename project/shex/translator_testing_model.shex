@@ -168,7 +168,7 @@ linkml:Sparqlpath xsd:string
              <in_v1> @linkml:Boolean ? ;
              <well_known> @linkml:Boolean ? ;
              <test_reference> @linkml:Uriorcurie ? ;
-             <test_metadata> @<TestMetadata> ;
+             <test_metadata> @<TestMetadata> ? ;
              schema1:additionalType @linkml:String * ;
              <test_runner_settings> @linkml:String *
           ) ;
@@ -340,7 +340,7 @@ linkml:Sparqlpath xsd:string
     CLOSED {
        (  $<TestSuite_tes> (  &<TestEntity_tes> ;
              rdf:type [ <TestEntity> ] ? ;
-             <test_metadata> @<TestMetadata> ;
+             <test_metadata> @<TestMetadata> ? ;
              <test_persona> [ <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestPersonaEnum#All>
                 <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestPersonaEnum#Clinical>
                 <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestPersonaEnum#LookUp>

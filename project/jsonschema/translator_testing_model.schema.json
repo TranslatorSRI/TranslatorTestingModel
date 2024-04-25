@@ -131,7 +131,6 @@
                 }
             },
             "required": [
-                "test_metadata",
                 "id"
             ],
             "title": "AcceptanceTestAsset",
@@ -299,7 +298,6 @@
                 }
             },
             "required": [
-                "test_metadata",
                 "id"
             ],
             "title": "AcceptanceTestSuite",
@@ -446,7 +444,6 @@
                 }
             },
             "required": [
-                "test_metadata",
                 "id"
             ],
             "title": "OneHopTestSuite",
@@ -685,7 +682,6 @@
                 }
             },
             "required": [
-                "test_metadata",
                 "id"
             ],
             "title": "StandardsComplianceTestSuite",
@@ -781,7 +777,6 @@
                 }
             },
             "required": [
-                "test_metadata",
                 "id"
             ],
             "title": "TestAsset",
@@ -1182,7 +1177,6 @@
                 }
             },
             "required": [
-                "test_metadata",
                 "id"
             ],
             "title": "TestEdgeData",
@@ -1581,7 +1575,6 @@
                 }
             },
             "required": [
-                "test_metadata",
                 "id"
             ],
             "title": "TestSuite",
