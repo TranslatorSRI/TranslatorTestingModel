@@ -11,6 +11,8 @@
 #      - id
 #      - name
 #      - description
+#      - tags
+#      - test_runner_settings
 #
 # where the slots are:
 #

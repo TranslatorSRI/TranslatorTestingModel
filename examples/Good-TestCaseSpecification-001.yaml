@@ -11,3 +11,7 @@
 id: example:TestCaseSpecification001
 name: foo bar
 description: This is a test case specification
+test_case_specification_runner_settings:
+  - "inferred"
+  - "test"
+

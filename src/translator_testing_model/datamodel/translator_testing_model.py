@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2024-04-19T10:26:22
+# Generation date: 2024-04-25T12:49:13
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -292,7 +292,6 @@ class TestAsset(TestEntity):
     class_model_uri: ClassVar[URIRef] = TTM.TestAsset
 
     id: Union[str, TestAssetId] = None
-    test_metadata: Union[dict, TestMetadata] = None
     input_id: Optional[Union[str, URIorCURIE]] = None
     input_name: Optional[str] = None
     input_category: Optional[Union[str, ConceptCategory]] = None
@@ -309,6 +308,7 @@ class TestAsset(TestEntity):
     in_v1: Optional[Union[bool, Bool]] = None
     well_known: Optional[Union[bool, Bool]] = None
     test_reference: Optional[Union[str, URIorCURIE]] = None
+    test_metadata: Optional[Union[dict, TestMetadata]] = None
     tags: Optional[Union[str, List[str]]] = empty_list()
     test_runner_settings: Optional[Union[str, List[str]]] = empty_list()
 
@@ -317,11 +317,6 @@ class TestAsset(TestEntity):
             self.MissingRequiredField("id")
         if not isinstance(self.id, TestAssetId):
             self.id = TestAssetId(self.id)
-
-        if self._is_empty(self.test_metadata):
-            self.MissingRequiredField("test_metadata")
-        if not isinstance(self.test_metadata, TestMetadata):
-            self.test_metadata = TestMetadata(**as_dict(self.test_metadata))
 
         if self.input_id is not None and not isinstance(self.input_id, URIorCURIE):
             self.input_id = URIorCURIE(self.input_id)
@@ -372,6 +367,9 @@ class TestAsset(TestEntity):
         if self.test_reference is not None and not isinstance(self.test_reference, URIorCURIE):
             self.test_reference = URIorCURIE(self.test_reference)
 
+        if self.test_metadata is not None and not isinstance(self.test_metadata, TestMetadata):
+            self.test_metadata = TestMetadata(**as_dict(self.test_metadata))
+
         if not isinstance(self.tags, list):
             self.tags = [self.tags] if self.tags is not None else []
         self.tags = [v if isinstance(v, str) else str(v) for v in self.tags]
@@ -396,7 +394,6 @@ class AcceptanceTestAsset(TestAsset):
     class_model_uri: ClassVar[URIRef] = TTM.AcceptanceTestAsset
 
     id: Union[str, AcceptanceTestAssetId] = None
-    test_metadata: Union[dict, TestMetadata] = None
     must_pass_date: Optional[Union[str, XSDDate]] = None
     must_pass_environment: Optional[Union[str, "TestEnvEnum"]] = None
     scientific_question: Optional[str] = None
@@ -461,7 +458,6 @@ class TestEdgeData(TestAsset):
     class_model_uri: ClassVar[URIRef] = TTM.TestEdgeData
 
     id: Union[str, TestEdgeDataId] = None
-    test_metadata: Union[dict, TestMetadata] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -679,7 +675,7 @@ class TestSuite(TestEntity):
     class_model_uri: ClassVar[URIRef] = TTM.TestSuite
 
     id: Union[str, TestSuiteId] = None
-    test_metadata: Union[dict, TestMetadata] = None
+    test_metadata: Optional[Union[dict, TestMetadata]] = None
     test_persona: Optional[Union[str, "TestPersonaEnum"]] = None
     test_cases: Optional[Union[Dict[Union[str, TestCaseId], Union[dict, TestCase]], List[Union[dict, TestCase]]]] = empty_dict()
     test_suite_specification: Optional[Union[dict, TestSuiteSpecification]] = None
@@ -690,9 +686,7 @@ class TestSuite(TestEntity):
         if not isinstance(self.id, TestSuiteId):
             self.id = TestSuiteId(self.id)
 
-        if self._is_empty(self.test_metadata):
-            self.MissingRequiredField("test_metadata")
-        if not isinstance(self.test_metadata, TestMetadata):
+        if self.test_metadata is not None and not isinstance(self.test_metadata, TestMetadata):
             self.test_metadata = TestMetadata(**as_dict(self.test_metadata))
 
         if self.test_persona is not None and not isinstance(self.test_persona, TestPersonaEnum):
@@ -716,7 +710,6 @@ class AcceptanceTestSuite(TestSuite):
     class_model_uri: ClassVar[URIRef] = TTM.AcceptanceTestSuite
 
     id: Union[str, AcceptanceTestSuiteId] = None
-    test_metadata: Union[dict, TestMetadata] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -752,7 +745,6 @@ class StandardsComplianceTestSuite(TestSuite):
     class_model_uri: ClassVar[URIRef] = TTM.StandardsComplianceTestSuite
 
     id: Union[str, StandardsComplianceTestSuiteId] = None
-    test_metadata: Union[dict, TestMetadata] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -776,7 +768,6 @@ class OneHopTestSuite(TestSuite):
     class_model_uri: ClassVar[URIRef] = TTM.OneHopTestSuite
 
     id: Union[str, OneHopTestSuiteId] = None
-    test_metadata: Union[dict, TestMetadata] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -1410,7 +1401,7 @@ slots.test_data_file_format = Slot(uri=TTM.test_data_file_format, name="test_dat
                    model_uri=TTM.test_data_file_format, domain=None, range=Optional[Union[str, "FileFormatEnum"]])
 
 slots.test_metadata = Slot(uri=TTM.test_metadata, name="test_metadata", curie=TTM.curie('test_metadata'),
-                   model_uri=TTM.test_metadata, domain=None, range=Union[dict, TestMetadata])
+                   model_uri=TTM.test_metadata, domain=None, range=Optional[Union[dict, TestMetadata]])
 
 slots.test_persona = Slot(uri=TTM.test_persona, name="test_persona", curie=TTM.curie('test_persona'),
                    model_uri=TTM.test_persona, domain=None, range=Optional[Union[str, "TestPersonaEnum"]])

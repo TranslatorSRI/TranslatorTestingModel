@@ -18,7 +18,7 @@ type AcceptanceTestAsset
     inV1: Boolean
     wellKnown: Boolean
     testReference: Uriorcurie
-    testMetadata: TestMetadata!
+    testMetadata: TestMetadata
     id: Uriorcurie!
     tags: [String]
     testRunnerSettings: [String]
@@ -64,7 +64,7 @@ type AcceptanceTestSuite
     description: String
     tags: [String]
     testRunnerSettings: [String]
-    testMetadata: TestMetadata!
+    testMetadata: TestMetadata
     testPersona: TestPersonaEnum
     testCases: [TestCase]
     testSuiteSpecification: TestSuiteSpecification
@@ -81,7 +81,7 @@ type OneHopTestSuite
     description: String
     tags: [String]
     testRunnerSettings: [String]
-    testMetadata: TestMetadata!
+    testMetadata: TestMetadata
     testPersona: TestPersonaEnum
     testCases: [TestCase]
     testSuiteSpecification: TestSuiteSpecification
@@ -132,7 +132,7 @@ type StandardsComplianceTestSuite
     description: String
     tags: [String]
     testRunnerSettings: [String]
-    testMetadata: TestMetadata!
+    testMetadata: TestMetadata
     testPersona: TestPersonaEnum
     testCases: [TestCase]
     testSuiteSpecification: TestSuiteSpecification
@@ -158,7 +158,7 @@ type TestAsset
     inV1: Boolean
     wellKnown: Boolean
     testReference: Uriorcurie
-    testMetadata: TestMetadata!
+    testMetadata: TestMetadata
     id: Uriorcurie!
     tags: [String]
     testRunnerSettings: [String]
@@ -219,7 +219,7 @@ type TestEdgeData
     inV1: Boolean
     wellKnown: Boolean
     testReference: Uriorcurie
-    testMetadata: TestMetadata!
+    testMetadata: TestMetadata
     id: Uriorcurie!
     tags: [String]
     testRunnerSettings: [String]
@@ -303,7 +303,7 @@ type TestSuite
     description: String
     tags: [String]
     testRunnerSettings: [String]
-    testMetadata: TestMetadata!
+    testMetadata: TestMetadata
     testPersona: TestPersonaEnum
     testCases: [TestCase]
     testSuiteSpecification: TestSuiteSpecification
