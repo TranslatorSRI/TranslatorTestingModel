@@ -261,7 +261,18 @@
                 },
                 "test_cases": {
                     "additionalProperties": {
-                        "$ref": "#/$defs/TestCase__identifier_optional"
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/TestCase__identifier_optional"
+                            },
+                            {
+                                "description": "One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection.",
+                                "items": {
+                                    "$ref": "#/$defs/TestAsset"
+                                },
+                                "type": "array"
+                            }
+                        ]
                     },
                     "description": "List of explicitly enumerated Test Cases.",
                     "type": "object"
@@ -396,7 +407,18 @@
                 },
                 "test_cases": {
                     "additionalProperties": {
-                        "$ref": "#/$defs/TestCase__identifier_optional"
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/TestCase__identifier_optional"
+                            },
+                            {
+                                "description": "One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection.",
+                                "items": {
+                                    "$ref": "#/$defs/TestAsset"
+                                },
+                                "type": "array"
+                            }
+                        ]
                     },
                     "description": "List of explicitly enumerated Test Cases.",
                     "type": "object"
@@ -623,7 +645,18 @@
                 },
                 "test_cases": {
                     "additionalProperties": {
-                        "$ref": "#/$defs/TestCase__identifier_optional"
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/TestCase__identifier_optional"
+                            },
+                            {
+                                "description": "One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection.",
+                                "items": {
+                                    "$ref": "#/$defs/TestAsset"
+                                },
+                                "type": "array"
+                            }
+                        ]
                     },
                     "description": "List of explicitly enumerated Test Cases.",
                     "type": "object"
@@ -1505,7 +1538,18 @@
                 },
                 "test_cases": {
                     "additionalProperties": {
-                        "$ref": "#/$defs/TestCase__identifier_optional"
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/TestCase__identifier_optional"
+                            },
+                            {
+                                "description": "One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection.",
+                                "items": {
+                                    "$ref": "#/$defs/TestAsset"
+                                },
+                                "type": "array"
+                            }
+                        ]
                     },
                     "description": "List of explicitly enumerated Test Cases.",
                     "type": "object"
@@ -1595,7 +1639,7 @@
         }
     },
     "$id": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
-    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
     "additionalProperties": true,
     "metamodel_version": "1.7.0",
     "title": "Translator-Testing-Model",
