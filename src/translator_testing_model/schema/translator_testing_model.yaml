@@ -1006,6 +1006,10 @@ enums:
         description: >-
           Molecular Data Provider for NCATS Biomedical Translator Reasoners
         meaning: "infores:molepro"
+      genetics:
+        description: >-
+          TRAPI endpoint for the NCATS Biomedical Translator Genetics Data KP
+        meaning: "infores:genetics-data-provider"
       textmining:
         description: >-
           Text Mining KP
