@@ -313,7 +313,7 @@ class PathfinderTestAsset(TestEntity):
     target_input_category: Optional[str] = Field(None)
     predicate_id: Optional[str] = Field(None)
     predicate_name: Optional[str] = Field(None)
-    minimum_expected_path_nodes: Optional[int] = Field(None, description="The number of nodes required in a path o pass this test.")
+    minimum_expected_path_nodes: Optional[int] = Field(None, description="The number of nodes required in a path to pass this test.")
     path_nodes: Optional[List[PathfinderPathNode]] = Field(None)
     association: Optional[str] = Field(None, description="""Specific Biolink Model association 'category' which applies to the test asset defined knowledge statement""")
     qualifiers: Optional[List[Qualifier]] = Field(default_factory=list, description="""Optional qualifiers which constrain to the test asset defined knowledge statement. Note that this field records such qualifier slots and values as tag=value pairs, where the tag is the Biolink Model qualifier slot named and the value is an acceptable (Biolink Model enum?) value of the said qualifier slot.""")
