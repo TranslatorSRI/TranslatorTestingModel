@@ -332,18 +332,13 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../OneHopTestSuite/">OneHopTestSuite</a></td>
-<td>Test case for testing the integrity of "One Hop" knowledge graph retrievals s...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../StandardsComplianceTestSuite/">StandardsComplianceTestSuite</a></td>
-<td>Test suite for testing Translator components against releases of standards li...</td>
-<td>no</td>
-</tr>
-<tr>
 <td><a href="../AcceptanceTestSuite/">AcceptanceTestSuite</a></td>
 <td></td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../OneHopTestSuite/">OneHopTestSuite</a></td>
+<td>Test case for testing the integrity of "One Hop" knowledge graph retrievals s...</td>
 <td>no</td>
 </tr>
 <tr>
@@ -351,12 +346,17 @@
 <td>Specification of a set of Test Cases, one of either with a static list of 'te...</td>
 <td>no</td>
 </tr>
+<tr>
+<td><a href="../StandardsComplianceTestSuite/">StandardsComplianceTestSuite</a></td>
+<td>Test suite for testing Translator components against releases of standards li...</td>
+<td>no</td>
+</tr>
 </tbody>
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
 <li>
-<p>Range: <a href="../TestCase/">TestCase</a></p>
+<p>Range: <a href="../TestCase/">TestCase</a>&nbsp;or&nbsp;<br /><a href="../PathfinderTestCase/">PathfinderTestCase</a>&nbsp;or&nbsp;<br /><a href="../TestCase/">TestCase</a></p>
 </li>
 <li>
 <p>Multivalued: True</p>
@@ -381,6 +381,9 @@ domain_of:
 range: TestCase
 required: false
 inlined: true
+any_of:
+- range: PathfinderTestCase
+- range: TestCase
 
 </code></pre>
 

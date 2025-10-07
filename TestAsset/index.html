@@ -212,6 +212,7 @@
       TestEntity &lt;|-- TestAsset
 
 
+      TestAsset &lt;|-- PathfinderTestAsset
       TestAsset &lt;|-- AcceptanceTestAsset
       TestAsset &lt;|-- TestEdgeData
 
@@ -274,6 +275,7 @@
 <ul>
 <li><a href="../TestEntity/">TestEntity</a><ul>
 <li><strong>TestAsset</strong><ul>
+<li><a href="../PathfinderTestAsset/">PathfinderTestAsset</a></li>
 <li><a href="../AcceptanceTestAsset/">AcceptanceTestAsset</a></li>
 <li><a href="../TestEdgeData/">TestEdgeData</a></li>
 </ul>
@@ -784,6 +786,7 @@ attributes:
     owner: TestAsset
     domain_of:
     - TestEntity
+    - PathfinderPathNode
     range: string
   description:
     name: description

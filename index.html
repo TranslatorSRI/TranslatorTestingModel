@@ -398,6 +398,10 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <td>JsonObj(is_a='TestSuite')</td>
 </tr>
 <tr>
+<td><a href="PathfinderPathNode/">PathfinderPathNode</a></td>
+<td>Represents an output path node</td>
+</tr>
+<tr>
 <td><a href="TestEntity/">TestEntity</a></td>
 <td>Abstract global 'identification' class shared as a parent with all major model classes within the data model for Translator testing.</td>
 </tr>
@@ -414,6 +418,10 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <td>Model derived from Jenn's test asset design and Shervin's runner JSON here as an example.</td>
 </tr>
 <tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="PathfinderTestAsset/">PathfinderTestAsset</a></td>
+<td>Represents a Test Asset, which is a single specific instance of TestCase-agnostic semantic parameters representing the specification of a Translator test target with inputs and (expected) outputs.</td>
+</tr>
+<tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="TestEdgeData/">TestEdgeData</a></td>
 <td>Represents a single Biolink Model compliant instance of a subject-predicate-object edge that can be used for testing.</td>
 </tr>
@@ -424,6 +432,10 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="AcceptanceTestCase/">AcceptanceTestCase</a></td>
 <td>See AcceptanceTestAsset above for more details.</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="PathfinderTestCase/">PathfinderTestCase</a></td>
+<td>None</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="QuantitativeTestCase/">QuantitativeTestCase</a></td>
@@ -561,6 +573,10 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <td>A unique identifier for a Test Entity</td>
 </tr>
 <tr>
+<td><a href="ids/">ids</a></td>
+<td></td>
+</tr>
+<tr>
 <td><a href="improving/">improving</a></td>
 <td></td>
 </tr>
@@ -583,6 +599,10 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <tr>
 <td><a href="merged_pk/">merged_pk</a></td>
 <td></td>
+</tr>
+<tr>
+<td><a href="minimum_required_path_nodes/">minimum_required_path_nodes</a></td>
+<td>The number of nodes required in a path to pass this test</td>
 </tr>
 <tr>
 <td><a href="must_pass_date/">must_pass_date</a></td>
@@ -619,6 +639,14 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <tr>
 <td><a href="parent_pk/">parent_pk</a></td>
 <td></td>
+</tr>
+<tr>
+<td><a href="path_nodes/">path_nodes</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="pathfinder_test_cases/">pathfinder_test_cases</a></td>
+<td>List of explicitly enumerated Pathfinder Test Cases</td>
 </tr>
 <tr>
 <td><a href="pks/">pks</a></td>
@@ -661,12 +689,36 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <td></td>
 </tr>
 <tr>
+<td><a href="source_input_category/">source_input_category</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="source_input_id/">source_input_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="source_input_name/">source_input_name</a></td>
+<td></td>
+</tr>
+<tr>
 <td><a href="string_entry/">string_entry</a></td>
 <td>The object of the core triple to be tested</td>
 </tr>
 <tr>
 <td><a href="tags/">tags</a></td>
 <td>A human-readable tags for categorical memberships of a TestEntity (preferably...</td>
+</tr>
+<tr>
+<td><a href="target_input_category/">target_input_category</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="target_input_id/">target_input_id</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="target_input_name/">target_input_name</a></td>
+<td></td>
 </tr>
 <tr>
 <td><a href="test_annotations/">test_annotations</a></td>

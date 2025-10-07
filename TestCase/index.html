@@ -212,6 +212,7 @@
       TestEntity &lt;|-- TestCase
 
 
+      TestCase &lt;|-- PathfinderTestCase
       TestCase &lt;|-- AcceptanceTestCase
       TestCase &lt;|-- QuantitativeTestCase
 
@@ -278,6 +279,7 @@
 <ul>
 <li><a href="../TestEntity/">TestEntity</a><ul>
 <li><strong>TestCase</strong><ul>
+<li><a href="../PathfinderTestCase/">PathfinderTestCase</a></li>
 <li><a href="../AcceptanceTestCase/">AcceptanceTestCase</a></li>
 <li><a href="../QuantitativeTestCase/">QuantitativeTestCase</a></li>
 </ul>
@@ -751,6 +753,7 @@ attributes:
     owner: TestCase
     domain_of:
     - TestEntity
+    - PathfinderPathNode
     range: string
   description:
     name: description
