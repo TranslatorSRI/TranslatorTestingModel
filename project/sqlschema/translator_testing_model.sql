@@ -9,9 +9,11 @@
 --     * Slot: parameter Description: The 'parameter' of a Qualifier should be a `qualifier` slot name from the Biolink Model ('biolink' namespace) 'biolink:qualifier' hierarchy.
 --     * Slot: value Description: The 'value' of should be a suitable value generally drawn from an applicable Biolink Model ("Enum") value set of the specified Qualifier.
 --     * Slot: TestAsset_id Description: Autocreated FK slot
+--     * Slot: PathfinderTestAsset_id Description: Autocreated FK slot
 --     * Slot: AcceptanceTestAsset_id Description: Autocreated FK slot
 --     * Slot: TestEdgeData_id Description: Autocreated FK slot
 --     * Slot: TestCase_id Description: Autocreated FK slot
+--     * Slot: PathfinderTestCase_id Description: Autocreated FK slot
 --     * Slot: AcceptanceTestCase_id Description: Autocreated FK slot
 --     * Slot: QuantitativeTestCase_id Description: Autocreated FK slot
 -- # Class: "TestEntity" Description: "Abstract global 'identification' class shared as a parent with all major model classes within the data model for Translator testing."
@@ -26,6 +28,9 @@
 --     * Slot: id Description: A unique identifier for a Test Entity
 --     * Slot: name Description: A human-readable name for a Test Entity
 --     * Slot: description Description: A human-readable description for a Test Entity
+-- # Class: "PathfinderPathNode" Description: "Represents an output path node"
+--     * Slot: id Description: 
+--     * Slot: name Description: A human-readable name for a Test Entity
 -- # Class: "TestAsset" Description: "Represents a Test Asset, which is a single specific instance of TestCase-agnostic semantic parameters representing the specification of a Translator test target with inputs and (expected) outputs."
 --     * Slot: input_id Description: 
 --     * Slot: input_name Description: 
@@ -47,6 +52,34 @@
 --     * Slot: description Description: A human-readable description for a Test Entity
 --     * Slot: TestCase_id Description: Autocreated FK slot
 --     * Slot: QuantitativeTestCase_id Description: Autocreated FK slot
+--     * Slot: test_metadata_id Description: Test metadata describes the external provenance, cross-references and objectives for a given test.
+-- # Class: "PathfinderTestAsset" Description: "Represents a Test Asset, which is a single specific instance of TestCase-agnostic semantic parameters representing the specification of a Translator test target with inputs and (expected) outputs."
+--     * Slot: source_input_id Description: 
+--     * Slot: source_input_name Description: 
+--     * Slot: source_input_category Description: 
+--     * Slot: target_input_id Description: 
+--     * Slot: target_input_name Description: 
+--     * Slot: target_input_category Description: 
+--     * Slot: minimum_required_path_nodes Description: The number of nodes required in a path to pass this test.
+--     * Slot: input_id Description: 
+--     * Slot: input_name Description: 
+--     * Slot: input_category Description: 
+--     * Slot: predicate_id Description: 
+--     * Slot: predicate_name Description: 
+--     * Slot: output_id Description: 
+--     * Slot: output_name Description: 
+--     * Slot: output_category Description: 
+--     * Slot: association Description: Specific Biolink Model association 'category' which applies to the test asset defined knowledge statement
+--     * Slot: expected_output Description: 
+--     * Slot: test_issue Description: 
+--     * Slot: semantic_severity Description: 
+--     * Slot: in_v1 Description: 
+--     * Slot: well_known Description: 
+--     * Slot: test_reference Description: Document URL where original test source particulars are registered (e.g. Github repo)
+--     * Slot: id Description: A unique identifier for a Test Entity
+--     * Slot: name Description: A human-readable name for a Test Entity
+--     * Slot: description Description: A human-readable description for a Test Entity
+--     * Slot: PathfinderTestCase_id Description: Autocreated FK slot
 --     * Slot: test_metadata_id Description: Test metadata describes the external provenance, cross-references and objectives for a given test.
 -- # Class: "AcceptanceTestAsset" Description: "Model derived from Jenn's test asset design and Shervin's runner JSON here as an example."
 --     * Slot: must_pass_date Description: The date by which this test must pass
@@ -121,6 +154,20 @@
 --     * Slot: AcceptanceTestSuite_id Description: Autocreated FK slot
 --     * Slot: StandardsComplianceTestSuite_id Description: Autocreated FK slot
 --     * Slot: OneHopTestSuite_id Description: Autocreated FK slot
+-- # Class: "PathfinderTestCase" Description: ""
+--     * Slot: query_type Description: Type of TestCase query.
+--     * Slot: trapi_template Description: A template for a query, which can be used to generate a query for a test case.  note: the current enumerated values for this slot come from the Benchmarks repo config/benchmarks.json "templates" collection and refer to the "name" field of each template.  Templates themselves are currently stored in the config/[source_name]/templates directory.
+--     * Slot: test_case_objective Description: Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative; standards compliance; graph navigation integrity)
+--     * Slot: test_case_source Description: Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string.
+--     * Slot: test_case_predicate_name Description: 
+--     * Slot: test_case_predicate_id Description: 
+--     * Slot: test_case_input_id Description: 
+--     * Slot: input_category Description: 
+--     * Slot: output_category Description: 
+--     * Slot: test_env Description: Deployment environment within which the associated TestSuite is run.
+--     * Slot: id Description: A unique identifier for a Test Entity
+--     * Slot: name Description: A human-readable name for a Test Entity
+--     * Slot: description Description: A human-readable description for a Test Entity
 -- # Class: "AcceptanceTestCase" Description: "See AcceptanceTestAsset above for more details."
 --     * Slot: query_type Description: Type of TestCase query.
 --     * Slot: trapi_template Description: A template for a query, which can be used to generate a query for a test case.  note: the current enumerated values for this slot come from the Benchmarks repo config/benchmarks.json "templates" collection and refer to the "name" field of each template.  Templates themselves are currently stored in the config/[source_name]/templates directory.
@@ -228,11 +275,23 @@
 -- # Class: "TestMetadata_test_runner_settings" Description: ""
 --     * Slot: TestMetadata_id Description: Autocreated FK slot
 --     * Slot: test_runner_settings Description: Scalar parameters for the TestRunner processing a given TestEntity.
+-- # Class: "PathfinderPathNode_ids" Description: ""
+--     * Slot: PathfinderPathNode_id Description: Autocreated FK slot
+--     * Slot: ids Description: 
 -- # Class: "TestAsset_tags" Description: ""
 --     * Slot: TestAsset_id Description: Autocreated FK slot
 --     * Slot: tags Description: One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a "Block List" collection
 -- # Class: "TestAsset_test_runner_settings" Description: ""
 --     * Slot: TestAsset_id Description: Autocreated FK slot
+--     * Slot: test_runner_settings Description: Scalar settings for the TestRunner, e.g. "inferred"
+-- # Class: "PathfinderTestAsset_path_nodes" Description: ""
+--     * Slot: PathfinderTestAsset_id Description: Autocreated FK slot
+--     * Slot: path_nodes_id Description: 
+-- # Class: "PathfinderTestAsset_tags" Description: ""
+--     * Slot: PathfinderTestAsset_id Description: Autocreated FK slot
+--     * Slot: tags Description: One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a "Block List" collection
+-- # Class: "PathfinderTestAsset_test_runner_settings" Description: ""
+--     * Slot: PathfinderTestAsset_id Description: Autocreated FK slot
 --     * Slot: test_runner_settings Description: Scalar settings for the TestRunner, e.g. "inferred"
 -- # Class: "AcceptanceTestAsset_tags" Description: ""
 --     * Slot: AcceptanceTestAsset_id Description: Autocreated FK slot
@@ -263,6 +322,18 @@
 --     * Slot: tags Description: One or more 'tags' slot values (slot inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a "Block List" collection.
 -- # Class: "TestCase_test_runner_settings" Description: ""
 --     * Slot: TestCase_id Description: Autocreated FK slot
+--     * Slot: test_runner_settings Description: Scalar parameters for the TestRunner processing a given TestEntity.
+-- # Class: "PathfinderTestCase_preconditions" Description: ""
+--     * Slot: PathfinderTestCase_id Description: Autocreated FK slot
+--     * Slot: preconditions_id Description: 
+-- # Class: "PathfinderTestCase_components" Description: ""
+--     * Slot: PathfinderTestCase_id Description: Autocreated FK slot
+--     * Slot: components Description: The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.
+-- # Class: "PathfinderTestCase_tags" Description: ""
+--     * Slot: PathfinderTestCase_id Description: Autocreated FK slot
+--     * Slot: tags Description: One or more 'tags' slot values (slot inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a "Block List" collection.
+-- # Class: "PathfinderTestCase_test_runner_settings" Description: ""
+--     * Slot: PathfinderTestCase_id Description: Autocreated FK slot
 --     * Slot: test_runner_settings Description: Scalar parameters for the TestRunner processing a given TestEntity.
 -- # Class: "AcceptanceTestCase_preconditions" Description: ""
 --     * Slot: AcceptanceTestCase_id Description: Autocreated FK slot
@@ -358,7 +429,28 @@ CREATE TABLE "TestMetadata" (
 	description TEXT, 
 	PRIMARY KEY (id)
 );
+CREATE TABLE "PathfinderPathNode" (
+	id INTEGER NOT NULL, 
+	name TEXT, 
+	PRIMARY KEY (id)
+);
 CREATE TABLE "Precondition" (
+	id TEXT NOT NULL, 
+	name TEXT, 
+	description TEXT, 
+	PRIMARY KEY (id)
+);
+CREATE TABLE "PathfinderTestCase" (
+	query_type VARCHAR(6), 
+	trapi_template VARCHAR(24), 
+	test_case_objective VARCHAR(23), 
+	test_case_source VARCHAR(18), 
+	test_case_predicate_name TEXT, 
+	test_case_predicate_id TEXT, 
+	test_case_input_id TEXT, 
+	input_category TEXT, 
+	output_category TEXT, 
+	test_env VARCHAR(4), 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	description TEXT, 
@@ -454,6 +546,38 @@ CREATE TABLE "TestEntity" (
 	"TestRunSession_id" TEXT, 
 	PRIMARY KEY (id), 
 	FOREIGN KEY("TestRunSession_id") REFERENCES "TestRunSession" (id)
+);
+CREATE TABLE "PathfinderTestAsset" (
+	source_input_id TEXT, 
+	source_input_name TEXT, 
+	source_input_category TEXT, 
+	target_input_id TEXT, 
+	target_input_name TEXT, 
+	target_input_category TEXT, 
+	minimum_required_path_nodes INTEGER, 
+	input_id TEXT, 
+	input_name TEXT, 
+	input_category TEXT, 
+	predicate_id TEXT, 
+	predicate_name TEXT, 
+	output_id TEXT, 
+	output_name TEXT, 
+	output_category TEXT, 
+	association TEXT, 
+	expected_output TEXT, 
+	test_issue VARCHAR(20), 
+	semantic_severity VARCHAR(13), 
+	in_v1 BOOLEAN, 
+	well_known BOOLEAN, 
+	test_reference TEXT, 
+	id TEXT NOT NULL, 
+	name TEXT, 
+	description TEXT, 
+	"PathfinderTestCase_id" TEXT, 
+	test_metadata_id TEXT, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY("PathfinderTestCase_id") REFERENCES "PathfinderTestCase" (id), 
+	FOREIGN KEY(test_metadata_id) REFERENCES "TestMetadata" (id)
 );
 CREATE TABLE "AcceptanceTestAsset" (
 	must_pass_date DATE, 
@@ -569,6 +693,12 @@ CREATE TABLE "TestMetadata_test_runner_settings" (
 	PRIMARY KEY ("TestMetadata_id", test_runner_settings), 
 	FOREIGN KEY("TestMetadata_id") REFERENCES "TestMetadata" (id)
 );
+CREATE TABLE "PathfinderPathNode_ids" (
+	"PathfinderPathNode_id" INTEGER, 
+	ids TEXT, 
+	PRIMARY KEY ("PathfinderPathNode_id", ids), 
+	FOREIGN KEY("PathfinderPathNode_id") REFERENCES "PathfinderPathNode" (id)
+);
 CREATE TABLE "Precondition_tags" (
 	"Precondition_id" TEXT, 
 	tags TEXT, 
@@ -580,6 +710,31 @@ CREATE TABLE "Precondition_test_runner_settings" (
 	test_runner_settings TEXT, 
 	PRIMARY KEY ("Precondition_id", test_runner_settings), 
 	FOREIGN KEY("Precondition_id") REFERENCES "Precondition" (id)
+);
+CREATE TABLE "PathfinderTestCase_preconditions" (
+	"PathfinderTestCase_id" TEXT, 
+	preconditions_id TEXT, 
+	PRIMARY KEY ("PathfinderTestCase_id", preconditions_id), 
+	FOREIGN KEY("PathfinderTestCase_id") REFERENCES "PathfinderTestCase" (id), 
+	FOREIGN KEY(preconditions_id) REFERENCES "Precondition" (id)
+);
+CREATE TABLE "PathfinderTestCase_components" (
+	"PathfinderTestCase_id" TEXT, 
+	components VARCHAR(13), 
+	PRIMARY KEY ("PathfinderTestCase_id", components), 
+	FOREIGN KEY("PathfinderTestCase_id") REFERENCES "PathfinderTestCase" (id)
+);
+CREATE TABLE "PathfinderTestCase_tags" (
+	"PathfinderTestCase_id" TEXT, 
+	tags TEXT, 
+	PRIMARY KEY ("PathfinderTestCase_id", tags), 
+	FOREIGN KEY("PathfinderTestCase_id") REFERENCES "PathfinderTestCase" (id)
+);
+CREATE TABLE "PathfinderTestCase_test_runner_settings" (
+	"PathfinderTestCase_id" TEXT, 
+	test_runner_settings TEXT, 
+	PRIMARY KEY ("PathfinderTestCase_id", test_runner_settings), 
+	FOREIGN KEY("PathfinderTestCase_id") REFERENCES "PathfinderTestCase" (id)
 );
 CREATE TABLE "AcceptanceTestCase_preconditions" (
 	"AcceptanceTestCase_id" TEXT, 
@@ -728,6 +883,25 @@ CREATE TABLE "TestEntity_test_runner_settings" (
 	PRIMARY KEY ("TestEntity_id", test_runner_settings), 
 	FOREIGN KEY("TestEntity_id") REFERENCES "TestEntity" (id)
 );
+CREATE TABLE "PathfinderTestAsset_path_nodes" (
+	"PathfinderTestAsset_id" TEXT, 
+	path_nodes_id INTEGER, 
+	PRIMARY KEY ("PathfinderTestAsset_id", path_nodes_id), 
+	FOREIGN KEY("PathfinderTestAsset_id") REFERENCES "PathfinderTestAsset" (id), 
+	FOREIGN KEY(path_nodes_id) REFERENCES "PathfinderPathNode" (id)
+);
+CREATE TABLE "PathfinderTestAsset_tags" (
+	"PathfinderTestAsset_id" TEXT, 
+	tags TEXT, 
+	PRIMARY KEY ("PathfinderTestAsset_id", tags), 
+	FOREIGN KEY("PathfinderTestAsset_id") REFERENCES "PathfinderTestAsset" (id)
+);
+CREATE TABLE "PathfinderTestAsset_test_runner_settings" (
+	"PathfinderTestAsset_id" TEXT, 
+	test_runner_settings TEXT, 
+	PRIMARY KEY ("PathfinderTestAsset_id", test_runner_settings), 
+	FOREIGN KEY("PathfinderTestAsset_id") REFERENCES "PathfinderTestAsset" (id)
+);
 CREATE TABLE "AcceptanceTestAsset_tags" (
 	"AcceptanceTestAsset_id" TEXT, 
 	tags TEXT, 
@@ -869,16 +1043,20 @@ CREATE TABLE "Qualifier" (
 	parameter TEXT, 
 	value TEXT, 
 	"TestAsset_id" TEXT, 
+	"PathfinderTestAsset_id" TEXT, 
 	"AcceptanceTestAsset_id" TEXT, 
 	"TestEdgeData_id" TEXT, 
 	"TestCase_id" TEXT, 
+	"PathfinderTestCase_id" TEXT, 
 	"AcceptanceTestCase_id" TEXT, 
 	"QuantitativeTestCase_id" TEXT, 
 	PRIMARY KEY (id), 
 	FOREIGN KEY("TestAsset_id") REFERENCES "TestAsset" (id), 
+	FOREIGN KEY("PathfinderTestAsset_id") REFERENCES "PathfinderTestAsset" (id), 
 	FOREIGN KEY("AcceptanceTestAsset_id") REFERENCES "AcceptanceTestAsset" (id), 
 	FOREIGN KEY("TestEdgeData_id") REFERENCES "TestEdgeData" (id), 
 	FOREIGN KEY("TestCase_id") REFERENCES "TestCase" (id), 
+	FOREIGN KEY("PathfinderTestCase_id") REFERENCES "PathfinderTestCase" (id), 
 	FOREIGN KEY("AcceptanceTestCase_id") REFERENCES "AcceptanceTestCase" (id), 
 	FOREIGN KEY("QuantitativeTestCase_id") REFERENCES "QuantitativeTestCase" (id)
 );

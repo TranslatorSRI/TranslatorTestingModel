@@ -87,6 +87,69 @@ type OneHopTestSuite
     testSuiteSpecification: TestSuiteSpecification
   }
 
+interface PathfinderPathNode
+  {
+    ids: [String]
+    name: String
+  }
+
+type PathfinderTestAsset
+  {
+    name: String
+    description: String
+    inputId: Uriorcurie
+    inputName: String
+    inputCategory: ConceptCategory
+    predicateId: PredicateType
+    predicateName: String
+    outputId: Uriorcurie
+    outputName: String
+    outputCategory: ConceptCategory
+    association: AssociationCategory
+    qualifiers: [Qualifier]
+    expectedOutput: String
+    testIssue: TestIssueEnum
+    semanticSeverity: SemanticSeverityEnum
+    inV1: Boolean
+    wellKnown: Boolean
+    testReference: Uriorcurie
+    testMetadata: TestMetadata
+    id: Uriorcurie!
+    tags: [String]
+    testRunnerSettings: [String]
+    sourceInputId: Uriorcurie
+    sourceInputName: String
+    sourceInputCategory: ConceptCategory
+    targetInputId: Uriorcurie
+    targetInputName: String
+    targetInputCategory: ConceptCategory
+    pathNodes: [PathfinderPathNode]
+    minimumRequiredPathNodes: Integer
+  }
+
+type PathfinderTestCase
+  {
+    id: Uriorcurie!
+    name: String
+    description: String
+    testRunnerSettings: [String]
+    queryType: QueryTypeEnum
+    preconditions: [Precondition]
+    trapiTemplate: TrapiTemplateEnum
+    testCaseObjective: TestObjectiveEnum
+    testCaseSource: TestSourceEnum
+    testCasePredicateName: String
+    testCasePredicateId: String
+    testCaseInputId: Uriorcurie
+    qualifiers: [Qualifier]
+    inputCategory: ConceptCategory
+    outputCategory: ConceptCategory
+    components: [ComponentEnum]
+    testEnv: TestEnvEnum
+    tags: [String]
+    testAssets: [PathfinderTestAsset]!
+  }
+
 type Precondition
   {
     id: Uriorcurie!

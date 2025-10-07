@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2024-04-25T16:46:31
+# Generation date: 2025-10-06T21:11:25
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -89,6 +89,10 @@ class TestAssetId(TestEntityId):
     pass
 
 
+class PathfinderTestAssetId(TestAssetId):
+    pass
+
+
 class AcceptanceTestAssetId(TestAssetId):
     pass
 
@@ -102,6 +106,10 @@ class PreconditionId(TestEntityId):
 
 
 class TestCaseId(TestEntityId):
+    pass
+
+
+class PathfinderTestCaseId(TestCaseId):
     pass
 
 
@@ -280,6 +288,32 @@ class TestMetadata(TestEntity):
 
 
 @dataclass
+class PathfinderPathNode(YAMLRoot):
+    """
+    Represents an output path node
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = TTM["PathfinderPathNode"]
+    class_class_curie: ClassVar[str] = "ttm:PathfinderPathNode"
+    class_name: ClassVar[str] = "PathfinderPathNode"
+    class_model_uri: ClassVar[URIRef] = TTM.PathfinderPathNode
+
+    ids: Optional[Union[str, List[str]]] = empty_list()
+    name: Optional[str] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if not isinstance(self.ids, list):
+            self.ids = [self.ids] if self.ids is not None else []
+        self.ids = [v if isinstance(v, str) else str(v) for v in self.ids]
+
+        if self.name is not None and not isinstance(self.name, str):
+            self.name = str(self.name)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
 class TestAsset(TestEntity):
     """
     Represents a Test Asset, which is a single specific instance of TestCase-agnostic semantic parameters representing
@@ -378,6 +412,63 @@ class TestAsset(TestEntity):
         if not isinstance(self.test_runner_settings, list):
             self.test_runner_settings = [self.test_runner_settings] if self.test_runner_settings is not None else []
         self.test_runner_settings = [v if isinstance(v, str) else str(v) for v in self.test_runner_settings]
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class PathfinderTestAsset(TestAsset):
+    """
+    Represents a Test Asset, which is a single specific instance of TestCase-agnostic semantic parameters representing
+    the specification of a Translator test target with inputs and (expected) outputs.
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = TTM["PathfinderTestAsset"]
+    class_class_curie: ClassVar[str] = "ttm:PathfinderTestAsset"
+    class_name: ClassVar[str] = "PathfinderTestAsset"
+    class_model_uri: ClassVar[URIRef] = TTM.PathfinderTestAsset
+
+    id: Union[str, PathfinderTestAssetId] = None
+    source_input_id: Optional[Union[str, URIorCURIE]] = None
+    source_input_name: Optional[str] = None
+    source_input_category: Optional[Union[str, ConceptCategory]] = None
+    target_input_id: Optional[Union[str, URIorCURIE]] = None
+    target_input_name: Optional[str] = None
+    target_input_category: Optional[Union[str, ConceptCategory]] = None
+    path_nodes: Optional[Union[Union[dict, PathfinderPathNode], List[Union[dict, PathfinderPathNode]]]] = empty_list()
+    minimum_required_path_nodes: Optional[int] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, PathfinderTestAssetId):
+            self.id = PathfinderTestAssetId(self.id)
+
+        if self.source_input_id is not None and not isinstance(self.source_input_id, URIorCURIE):
+            self.source_input_id = URIorCURIE(self.source_input_id)
+
+        if self.source_input_name is not None and not isinstance(self.source_input_name, str):
+            self.source_input_name = str(self.source_input_name)
+
+        if self.source_input_category is not None and not isinstance(self.source_input_category, ConceptCategory):
+            self.source_input_category = ConceptCategory(self.source_input_category)
+
+        if self.target_input_id is not None and not isinstance(self.target_input_id, URIorCURIE):
+            self.target_input_id = URIorCURIE(self.target_input_id)
+
+        if self.target_input_name is not None and not isinstance(self.target_input_name, str):
+            self.target_input_name = str(self.target_input_name)
+
+        if self.target_input_category is not None and not isinstance(self.target_input_category, ConceptCategory):
+            self.target_input_category = ConceptCategory(self.target_input_category)
+
+        if not isinstance(self.path_nodes, list):
+            self.path_nodes = [self.path_nodes] if self.path_nodes is not None else []
+        self.path_nodes = [v if isinstance(v, PathfinderPathNode) else PathfinderPathNode(**as_dict(v)) for v in self.path_nodes]
+
+        if self.minimum_required_path_nodes is not None and not isinstance(self.minimum_required_path_nodes, int):
+            self.minimum_required_path_nodes = int(self.minimum_required_path_nodes)
 
         super().__post_init__(**kwargs)
 
@@ -578,6 +669,31 @@ class TestCase(TestEntity):
         if not isinstance(self.tags, list):
             self.tags = [self.tags] if self.tags is not None else []
         self.tags = [v if isinstance(v, str) else str(v) for v in self.tags]
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class PathfinderTestCase(TestCase):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = TTM["PathfinderTestCase"]
+    class_class_curie: ClassVar[str] = "ttm:PathfinderTestCase"
+    class_name: ClassVar[str] = "PathfinderTestCase"
+    class_model_uri: ClassVar[URIRef] = TTM.PathfinderTestCase
+
+    id: Union[str, PathfinderTestCaseId] = None
+    test_assets: Union[Dict[Union[str, PathfinderTestAssetId], Union[dict, PathfinderTestAsset]], List[Union[dict, PathfinderTestAsset]]] = empty_dict()
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, PathfinderTestCaseId):
+            self.id = PathfinderTestCaseId(self.id)
+
+        if self._is_empty(self.test_assets):
+            self.MissingRequiredField("test_assets")
+        self._normalize_inlined_as_list(slot_name="test_assets", slot_type=PathfinderTestAsset, key_name="id", keyed=True)
 
         super().__post_init__(**kwargs)
 
@@ -1205,6 +1321,10 @@ class ComponentEnum(EnumDefinitionImpl):
         text="molepro",
         description="Molecular Data Provider for NCATS Biomedical Translator Reasoners",
         meaning=INFORES["molepro"])
+    genetics = PermissibleValue(
+        text="genetics",
+        description="TRAPI endpoint for the NCATS Biomedical Translator Genetics Data KP",
+        meaning=INFORES["genetics-data-provider"])
     textmining = PermissibleValue(
         text="textmining",
         description="Text Mining KP",
@@ -1316,6 +1436,9 @@ slots.timestamp = Slot(uri=TTM.timestamp, name="timestamp", curie=TTM.curie('tim
 slots.id = Slot(uri=SCHEMA.identifier, name="id", curie=SCHEMA.curie('identifier'),
                    model_uri=TTM.id, domain=None, range=URIRef)
 
+slots.ids = Slot(uri=SCHEMA.additionalType, name="ids", curie=SCHEMA.curie('additionalType'),
+                   model_uri=TTM.ids, domain=None, range=Optional[Union[str, List[str]]])
+
 slots.name = Slot(uri=SCHEMA.name, name="name", curie=SCHEMA.curie('name'),
                    model_uri=TTM.name, domain=None, range=Optional[str])
 
@@ -1360,6 +1483,30 @@ slots.input_name = Slot(uri=TTM.input_name, name="input_name", curie=TTM.curie('
 
 slots.input_category = Slot(uri=TTM.input_category, name="input_category", curie=TTM.curie('input_category'),
                    model_uri=TTM.input_category, domain=None, range=Optional[Union[str, ConceptCategory]])
+
+slots.source_input_id = Slot(uri=TTM.source_input_id, name="source_input_id", curie=TTM.curie('source_input_id'),
+                   model_uri=TTM.source_input_id, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.source_input_name = Slot(uri=TTM.source_input_name, name="source_input_name", curie=TTM.curie('source_input_name'),
+                   model_uri=TTM.source_input_name, domain=None, range=Optional[str])
+
+slots.source_input_category = Slot(uri=TTM.source_input_category, name="source_input_category", curie=TTM.curie('source_input_category'),
+                   model_uri=TTM.source_input_category, domain=None, range=Optional[Union[str, ConceptCategory]])
+
+slots.target_input_id = Slot(uri=TTM.target_input_id, name="target_input_id", curie=TTM.curie('target_input_id'),
+                   model_uri=TTM.target_input_id, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.target_input_name = Slot(uri=TTM.target_input_name, name="target_input_name", curie=TTM.curie('target_input_name'),
+                   model_uri=TTM.target_input_name, domain=None, range=Optional[str])
+
+slots.target_input_category = Slot(uri=TTM.target_input_category, name="target_input_category", curie=TTM.curie('target_input_category'),
+                   model_uri=TTM.target_input_category, domain=None, range=Optional[Union[str, ConceptCategory]])
+
+slots.path_nodes = Slot(uri=TTM.path_nodes, name="path_nodes", curie=TTM.curie('path_nodes'),
+                   model_uri=TTM.path_nodes, domain=None, range=Optional[Union[Union[dict, PathfinderPathNode], List[Union[dict, PathfinderPathNode]]]])
+
+slots.minimum_required_path_nodes = Slot(uri=TTM.minimum_required_path_nodes, name="minimum_required_path_nodes", curie=TTM.curie('minimum_required_path_nodes'),
+                   model_uri=TTM.minimum_required_path_nodes, domain=None, range=Optional[int])
 
 slots.predicate_id = Slot(uri=TTM.predicate_id, name="predicate_id", curie=TTM.curie('predicate_id'),
                    model_uri=TTM.predicate_id, domain=None, range=Optional[Union[str, PredicateType]])
@@ -1487,6 +1634,9 @@ slots.test_persona = Slot(uri=TTM.test_persona, name="test_persona", curie=TTM.c
 slots.test_cases = Slot(uri=TTM.test_cases, name="test_cases", curie=TTM.curie('test_cases'),
                    model_uri=TTM.test_cases, domain=None, range=Optional[Union[Dict[Union[str, TestCaseId], Union[dict, TestCase]], List[Union[dict, TestCase]]]])
 
+slots.pathfinder_test_cases = Slot(uri=TTM.pathfinder_test_cases, name="pathfinder_test_cases", curie=TTM.curie('pathfinder_test_cases'),
+                   model_uri=TTM.pathfinder_test_cases, domain=None, range=Optional[Union[Dict[Union[str, PathfinderTestCaseId], Union[dict, PathfinderTestCase]], List[Union[dict, PathfinderTestCase]]]])
+
 slots.test_suite_specification = Slot(uri=TTM.test_suite_specification, name="test_suite_specification", curie=TTM.curie('test_suite_specification'),
                    model_uri=TTM.test_suite_specification, domain=None, range=Optional[Union[dict, TestSuiteSpecification]])
 
@@ -1531,6 +1681,9 @@ slots.TestCase_test_assets = Slot(uri=TTM.test_assets, name="TestCase_test_asset
 
 slots.TestCase_tags = Slot(uri=SCHEMA.additionalType, name="TestCase_tags", curie=SCHEMA.curie('additionalType'),
                    model_uri=TTM.TestCase_tags, domain=TestCase, range=Optional[Union[str, List[str]]])
+
+slots.PathfinderTestCase_test_assets = Slot(uri=TTM.test_assets, name="PathfinderTestCase_test_assets", curie=TTM.curie('test_assets'),
+                   model_uri=TTM.PathfinderTestCase_test_assets, domain=PathfinderTestCase, range=Union[Dict[Union[str, PathfinderTestAssetId], Union[dict, PathfinderTestAsset]], List[Union[dict, PathfinderTestAsset]]])
 
 slots.AcceptanceTestCase_test_assets = Slot(uri=TTM.test_assets, name="AcceptanceTestCase_test_assets", curie=TTM.curie('test_assets'),
                    model_uri=TTM.AcceptanceTestCase_test_assets, domain=AcceptanceTestCase, range=Union[Dict[Union[str, AcceptanceTestAssetId], Union[dict, AcceptanceTestAsset]], List[Union[dict, AcceptanceTestAsset]]])

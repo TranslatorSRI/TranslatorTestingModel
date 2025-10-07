@@ -101,6 +101,15 @@ classes:
       - test_reference
       - test_objective
       - test_annotations
+  
+  PathfinderPathNode:
+    description: >-
+      Represents an output path node
+    abstract: true
+    tree_root: true
+    slots:
+      - ids
+      - name
 
   #####################
   # Test Asset Models #
@@ -141,6 +150,22 @@ classes:
       test_runner_settings:
         description: >-
           Scalar settings for the TestRunner, e.g. "inferred"
+  
+  PathfinderTestAsset:
+    is_a: TestAsset
+    description: >-
+      Represents a Test Asset, which is a single specific instance of TestCase-agnostic
+      semantic parameters representing the specification of a Translator test target with
+      inputs and (expected) outputs.
+    slots:
+      - source_input_id
+      - source_input_name
+      - source_input_category
+      - target_input_id
+      - target_input_name
+      - target_input_category
+      - path_nodes
+      - minimum_required_path_nodes
 
   AcceptanceTestAsset:
     is_a: TestAsset
@@ -216,6 +241,12 @@ classes:
         description: >-
           One or more 'tags' slot values (slot inherited from TestEntity) should generally
           be defined as filters to specify TestAsset membership in a "Block List" collection.
+  
+  PathfinderTestCase:
+    is_a: TestCase
+    slot_usage:
+      test_assets:
+        range: PathfinderTestAsset
 
   AcceptanceTestCase:
     is_a: TestCase
@@ -232,7 +263,6 @@ classes:
     slot_usage:
 #      test_assets:
 #        range: QuantitativeTestAsset
-
 
   #####################
   # Test Suite Models #
@@ -258,7 +288,7 @@ classes:
       - test_persona
       - test_cases
       - test_suite_specification
-
+  
   AcceptanceTestSuite:
     is_a: TestSuite
     description:
@@ -397,6 +427,10 @@ slots:
     slot_uri: schema:identifier
     range: uriorcurie
     description: A unique identifier for a Test Entity
+  
+  ids:
+    slot_uri: schema:additionalType
+    multivalued: true
 
   name:
     slot_uri: schema:name
@@ -472,6 +506,31 @@ slots:
   input_category:
     aliases: ["SubjectCategory"]
     range: concept_category
+  
+  source_input_id:
+    range: uriorcurie
+  
+  source_input_name:
+
+  source_input_category:
+    range: concept_category
+  
+  target_input_id:
+    range: uriorcurie
+  
+  target_input_name:
+
+  target_input_category:
+    range: concept_category
+  
+  path_nodes:
+    multivalued: true
+    range: PathfinderPathNode
+  
+  minimum_required_path_nodes:
+    description: >-
+      The number of nodes required in a path to pass this test.
+    range: integer
 
   predicate_id:
     aliases: ["Predicate"]
@@ -725,6 +784,17 @@ slots:
     description: >-
       List of explicitly enumerated Test Cases.
     range: TestCase
+    any_of:
+      - range: PathfinderTestCase
+      - range: TestCase
+    multivalued: true
+    inlined: true
+    required: false
+  
+  pathfinder_test_cases:
+    description: >-
+      List of explicitly enumerated Pathfinder Test Cases.
+    range: PathfinderTestCase
     multivalued: true
     inlined: true
     required: false

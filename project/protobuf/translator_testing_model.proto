@@ -82,6 +82,62 @@ message OneHopTestSuite
  repeated  testCase testCases = 0
   testSuiteSpecification testSuiteSpecification = 0
  }
+// Represents a Test Asset, which is a single specific instance of TestCase-agnostic semantic parameters representing the specification of a Translator test target with inputs and (expected) outputs.
+message PathfinderTestAsset
+ {
+  string name = 0
+  string description = 0
+  uriorcurie inputId = 0
+  string inputName = 0
+  conceptCategory inputCategory = 0
+  predicateType predicateId = 0
+  string predicateName = 0
+  uriorcurie outputId = 0
+  string outputName = 0
+  conceptCategory outputCategory = 0
+  associationCategory association = 0
+ repeated  qualifier qualifiers = 0
+  string expectedOutput = 0
+  testIssueEnum testIssue = 0
+  semanticSeverityEnum semanticSeverity = 0
+  boolean inV1 = 0
+  boolean wellKnown = 0
+  uriorcurie testReference = 0
+  testMetadata testMetadata = 0
+  uriorcurie id = 0
+ repeated  string tags = 0
+ repeated  string testRunnerSettings = 0
+  uriorcurie sourceInputId = 0
+  string sourceInputName = 0
+  conceptCategory sourceInputCategory = 0
+  uriorcurie targetInputId = 0
+  string targetInputName = 0
+  conceptCategory targetInputCategory = 0
+ repeated  pathfinderPathNode pathNodes = 0
+  integer minimumRequiredPathNodes = 0
+ }
+message PathfinderTestCase
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+ repeated  string testRunnerSettings = 0
+  queryTypeEnum queryType = 0
+ repeated  precondition preconditions = 0
+  trapiTemplateEnum trapiTemplate = 0
+  testObjectiveEnum testCaseObjective = 0
+  testSourceEnum testCaseSource = 0
+  string testCasePredicateName = 0
+  string testCasePredicateId = 0
+  uriorcurie testCaseInputId = 0
+ repeated  qualifier qualifiers = 0
+  conceptCategory inputCategory = 0
+  conceptCategory outputCategory = 0
+ repeated  componentEnum components = 0
+  testEnvEnum testEnv = 0
+ repeated  string tags = 0
+ repeated  pathfinderTestAsset testAssets = 0
+ }
 // Represents a precondition for a TestCase
 message Precondition
  {
