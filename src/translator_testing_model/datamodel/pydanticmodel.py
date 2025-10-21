@@ -306,7 +306,7 @@ class TestAsset(TestEntity):
     test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar settings for the TestRunner, e.g. \"inferred\"""")
 
 
-class PathfinderTestAsset(TestAsset):
+class PathfinderTestAsset(TestEntity):
     """
     Represents a Test Asset, which is a single specific instance of TestCase-agnostic semantic parameters representing the specification of a Translator test target with inputs and (expected) outputs.
     """
@@ -444,7 +444,7 @@ class TestCase(TestEntity):
     test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
 
 
-class PathfinderTestCase(TestCase):
+class PathfinderTestCase(TestEntity):
     query_type: Optional[QueryTypeEnum] = Field(None, description="""Type of TestCase query.""")
     test_assets: List[PathfinderTestAsset] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection.""")
     preconditions: Optional[List[str]] = Field(default_factory=list)
@@ -453,10 +453,11 @@ class PathfinderTestCase(TestCase):
     test_case_source: Optional[TestSourceEnum] = Field(None, description="""Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string.""")
     test_case_predicate_name: Optional[str] = Field(None)
     test_case_predicate_id: Optional[str] = Field(None)
-    test_case_input_id: Optional[str] = Field(None)
+    test_case_source_input_id: Optional[str] = Field(None)
+    test_case_target_input_id: Optional[str] = Field(None)
     qualifiers: Optional[List[Qualifier]] = Field(default_factory=list, description="""Optional qualifiers which constrain to the test asset defined knowledge statement. Note that this field records such qualifier slots and values as tag=value pairs, where the tag is the Biolink Model qualifier slot named and the value is an acceptable (Biolink Model enum?) value of the said qualifier slot.""")
-    input_category: Optional[str] = Field(None)
-    output_category: Optional[str] = Field(None)
+    source_input_category: Optional[str] = Field(None)
+    target_input_category: Optional[str] = Field(None)
     components: Optional[List[ComponentEnum]] = Field(default_factory=list, description="""The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.""")
     test_env: Optional[TestEnvEnum] = Field(None, description="""Deployment environment within which the associated TestSuite is run.""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
