@@ -306,7 +306,7 @@ class TestAsset(TestEntity):
     test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar settings for the TestRunner, e.g. \"inferred\"""")
 
 
-class PathfinderTestAsset(TestAsset):
+class PathfinderTestAsset(TestEntity):
     """
     Represents a Test Asset, which is a single specific instance of TestCase-agnostic semantic parameters representing the specification of a Translator test target with inputs and (expected) outputs.
     """
@@ -316,30 +316,16 @@ class PathfinderTestAsset(TestAsset):
     target_input_id: Optional[str] = Field(None)
     target_input_name: Optional[str] = Field(None)
     target_input_category: Optional[str] = Field(None)
-    path_nodes: Optional[List[PathfinderPathNode]] = Field(default_factory=list)
-    minimum_required_path_nodes: Optional[int] = Field(None, description="""The number of nodes required in a path to pass this test.""")
-    input_id: Optional[str] = Field(None)
-    input_name: Optional[str] = Field(None)
-    input_category: Optional[str] = Field(None)
     predicate_id: Optional[str] = Field(None)
     predicate_name: Optional[str] = Field(None)
-    output_id: Optional[str] = Field(None)
-    output_name: Optional[str] = Field(None)
-    output_category: Optional[str] = Field(None)
-    association: Optional[str] = Field(None, description="""Specific Biolink Model association 'category' which applies to the test asset defined knowledge statement""")
-    qualifiers: Optional[List[Qualifier]] = Field(default_factory=list, description="""Optional qualifiers which constrain to the test asset defined knowledge statement. Note that this field records such qualifier slots and values as tag=value pairs, where the tag is the Biolink Model qualifier slot named and the value is an acceptable (Biolink Model enum?) value of the said qualifier slot.""")
+    minimum_required_path_nodes: int = Field(..., description="""The number of nodes required in a path to pass this test.""")
+    path_nodes: List[PathfinderPathNode] = Field(default_factory=list)
     expected_output: Optional[str] = Field(None)
-    test_issue: Optional[TestIssueEnum] = Field(None)
-    semantic_severity: Optional[SemanticSeverityEnum] = Field(None)
-    in_v1: Optional[bool] = Field(None)
-    well_known: Optional[bool] = Field(None)
-    test_reference: Optional[str] = Field(None, description="""Document URL where original test source particulars are registered (e.g. Github repo)""")
-    test_metadata: Optional[TestMetadata] = Field(None, description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
-    tags: Optional[List[str]] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a \"Block List\" collection""")
-    test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar settings for the TestRunner, e.g. \"inferred\"""")
+    tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
+    test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
 
 
 class AcceptanceTestAsset(TestAsset):
@@ -444,25 +430,15 @@ class TestCase(TestEntity):
     test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
 
 
-class PathfinderTestCase(TestCase):
-    query_type: Optional[QueryTypeEnum] = Field(None, description="""Type of TestCase query.""")
-    test_assets: List[PathfinderTestAsset] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection.""")
-    preconditions: Optional[List[str]] = Field(default_factory=list)
-    trapi_template: Optional[TrapiTemplateEnum] = Field(None, description="""A template for a query, which can be used to generate a query for a test case.  note: the current enumerated values for this slot come from the Benchmarks repo config/benchmarks.json \"templates\" collection and refer to the \"name\" field of each template.  Templates themselves are currently stored in the config/[source_name]/templates directory.""")
+class PathfinderTestCase(TestEntity):
+    test_assets: List[PathfinderTestAsset] = Field(default_factory=list, description="""List of explicitly enumerated Test Assets. The class attributes of TestAsset would be included in the TestCase versus being referred to by the identifier (curie) of the TestAsset. That is, this would be a list of objects (in JSONSchema serialization) versus a list of strings (where each string is an identifier pointing to another class).""")
     test_case_objective: Optional[TestObjectiveEnum] = Field(None, description="""Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative; standards compliance; graph navigation integrity)""")
-    test_case_source: Optional[TestSourceEnum] = Field(None, description="""Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string.""")
-    test_case_predicate_name: Optional[str] = Field(None)
-    test_case_predicate_id: Optional[str] = Field(None)
-    test_case_input_id: Optional[str] = Field(None)
-    qualifiers: Optional[List[Qualifier]] = Field(default_factory=list, description="""Optional qualifiers which constrain to the test asset defined knowledge statement. Note that this field records such qualifier slots and values as tag=value pairs, where the tag is the Biolink Model qualifier slot named and the value is an acceptable (Biolink Model enum?) value of the said qualifier slot.""")
-    input_category: Optional[str] = Field(None)
-    output_category: Optional[str] = Field(None)
     components: Optional[List[ComponentEnum]] = Field(default_factory=list, description="""The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.""")
     test_env: Optional[TestEnvEnum] = Field(None, description="""Deployment environment within which the associated TestSuite is run.""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
     description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
-    tags: Optional[List[str]] = Field(default_factory=list, description="""One or more 'tags' slot values (slot inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection.""")
+    tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
     test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
 
 
@@ -516,6 +492,33 @@ class QuantitativeTestCase(TestCase):
     test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
 
 
+class PerformanceTestCase(TestCase):
+    """
+    Represents a performance test case.
+    """
+    test_run_time: int = Field(...)
+    spawn_rate: float = Field(...)
+    query_type: Optional[QueryTypeEnum] = Field(None, description="""Type of TestCase query.""")
+    test_assets: List[TestAsset] = Field(default_factory=list, description="""One or more 'tags' slot values (inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in 'test_assets' slot (\"Block List\") collection.""")
+    preconditions: Optional[List[str]] = Field(default_factory=list)
+    trapi_template: Optional[TrapiTemplateEnum] = Field(None, description="""A template for a query, which can be used to generate a query for a test case.  note: the current enumerated values for this slot come from the Benchmarks repo config/benchmarks.json \"templates\" collection and refer to the \"name\" field of each template.  Templates themselves are currently stored in the config/[source_name]/templates directory.""")
+    test_case_objective: Optional[TestObjectiveEnum] = Field(None, description="""Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative; standards compliance; graph navigation integrity)""")
+    test_case_source: Optional[TestSourceEnum] = Field(None, description="""Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string.""")
+    test_case_predicate_name: Optional[str] = Field(None)
+    test_case_predicate_id: Optional[str] = Field(None)
+    test_case_input_id: Optional[str] = Field(None)
+    qualifiers: Optional[List[Qualifier]] = Field(default_factory=list, description="""Optional qualifiers which constrain to the test asset defined knowledge statement. Note that this field records such qualifier slots and values as tag=value pairs, where the tag is the Biolink Model qualifier slot named and the value is an acceptable (Biolink Model enum?) value of the said qualifier slot.""")
+    input_category: Optional[str] = Field(None)
+    output_category: Optional[str] = Field(None)
+    components: Optional[List[ComponentEnum]] = Field(default_factory=list, description="""The component that this test case is intended to run against.  Most often this is the ARS for  acceptance tests, but for the Benchmarks repo integration, this can also be individual components of the system like Aragorn, or ARAX.""")
+    test_env: Optional[TestEnvEnum] = Field(None, description="""Deployment environment within which the associated TestSuite is run.""")
+    id: str = Field(..., description="""A unique identifier for a Test Entity""")
+    name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
+    description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
+    tags: Optional[List[str]] = Field(default_factory=list, description="""One or more 'tags' slot values (slot inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection.""")
+    test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
+
+
 class TestSuiteSpecification(TestEntity):
     """
     Parameters for a Test Case instances either dynamically generated from some external source of Test Assets.
@@ -535,7 +538,7 @@ class TestSuite(TestEntity):
     """
     test_metadata: Optional[TestMetadata] = Field(None, description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
     test_persona: Optional[TestPersonaEnum] = Field(None, description="""A Test persona describes the user or operational context of a given test.""")
-    test_cases: Optional[Dict[str, Union[PathfinderTestCase, TestCase]]] = Field(default_factory=dict, description="""List of explicitly enumerated Test Cases.""")
+    test_cases: Optional[Dict[str, Union[PathfinderTestCase, PerformanceTestCase, TestCase]]] = Field(default_factory=dict, description="""List of explicitly enumerated Test Cases.""")
     test_suite_specification: Optional[TestSuiteSpecification] = Field(None, description="""Declarative specification of a Test Suite of Test Cases whose generation is deferred, (i.e. within a Test Runner) or whose creation is achieved by stream processing of an external data source.""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
@@ -547,7 +550,7 @@ class TestSuite(TestEntity):
 class AcceptanceTestSuite(TestSuite):
     test_metadata: Optional[TestMetadata] = Field(None, description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
     test_persona: Optional[TestPersonaEnum] = Field(None, description="""A Test persona describes the user or operational context of a given test.""")
-    test_cases: Optional[Dict[str, Union[PathfinderTestCase, TestCase]]] = Field(default_factory=dict, description="""List of explicitly enumerated Test Cases.""")
+    test_cases: Optional[Dict[str, Union[PathfinderTestCase, PerformanceTestCase, TestCase]]] = Field(default_factory=dict, description="""List of explicitly enumerated Test Cases.""")
     test_suite_specification: Optional[TestSuiteSpecification] = Field(None, description="""Declarative specification of a Test Suite of Test Cases whose generation is deferred, (i.e. within a Test Runner) or whose creation is achieved by stream processing of an external data source.""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
@@ -556,11 +559,31 @@ class AcceptanceTestSuite(TestSuite):
     test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
 
 
-class BenchmarkTestSuite(ConfiguredBaseModel):
+class BenchmarkTestSuite(TestSuite):
+    test_metadata: Optional[TestMetadata] = Field(None, description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
+    test_persona: Optional[TestPersonaEnum] = Field(None, description="""A Test persona describes the user or operational context of a given test.""")
+    test_cases: Optional[Dict[str, Union[PathfinderTestCase, PerformanceTestCase, TestCase]]] = Field(default_factory=dict, description="""List of explicitly enumerated Test Cases.""")
+    test_suite_specification: Optional[TestSuiteSpecification] = Field(None, description="""Declarative specification of a Test Suite of Test Cases whose generation is deferred, (i.e. within a Test Runner) or whose creation is achieved by stream processing of an external data source.""")
+    id: str = Field(..., description="""A unique identifier for a Test Entity""")
+    name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
+    description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
+    tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
+    test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
+
+
+class PerformanceTestSuite(TestSuite):
     """
-    JsonObj(is_a='TestSuite')
+    A small test suite designed to test the performance of the Translator system.
     """
-    pass
+    test_metadata: Optional[TestMetadata] = Field(None, description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
+    test_persona: Optional[TestPersonaEnum] = Field(None, description="""A Test persona describes the user or operational context of a given test.""")
+    test_cases: Optional[Dict[str, PerformanceTestCase]] = Field(default_factory=dict, description="""List of explicitly enumerated Test Cases.""")
+    test_suite_specification: Optional[TestSuiteSpecification] = Field(None, description="""Declarative specification of a Test Suite of Test Cases whose generation is deferred, (i.e. within a Test Runner) or whose creation is achieved by stream processing of an external data source.""")
+    id: str = Field(..., description="""A unique identifier for a Test Entity""")
+    name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
+    description: Optional[str] = Field(None, description="""A human-readable description for a Test Entity""")
+    tags: Optional[List[str]] = Field(default_factory=list, description="""A human-readable tags for categorical memberships of a TestEntity (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity into formally typed or ad hoc lists.""")
+    test_runner_settings: Optional[List[str]] = Field(default_factory=list, description="""Scalar parameters for the TestRunner processing a given TestEntity.""")
 
 
 class StandardsComplianceTestSuite(TestSuite):
@@ -569,7 +592,7 @@ class StandardsComplianceTestSuite(TestSuite):
     """
     test_metadata: Optional[TestMetadata] = Field(None, description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
     test_persona: Optional[TestPersonaEnum] = Field(None, description="""A Test persona describes the user or operational context of a given test.""")
-    test_cases: Optional[Dict[str, Union[PathfinderTestCase, TestCase]]] = Field(default_factory=dict, description="""List of explicitly enumerated Test Cases.""")
+    test_cases: Optional[Dict[str, Union[PathfinderTestCase, PerformanceTestCase, TestCase]]] = Field(default_factory=dict, description="""List of explicitly enumerated Test Cases.""")
     test_suite_specification: Optional[TestSuiteSpecification] = Field(None, description="""Declarative specification of a Test Suite of Test Cases whose generation is deferred, (i.e. within a Test Runner) or whose creation is achieved by stream processing of an external data source.""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
@@ -584,7 +607,7 @@ class OneHopTestSuite(TestSuite):
     """
     test_metadata: Optional[TestMetadata] = Field(None, description="""Test metadata describes the external provenance, cross-references and objectives for a given test.""")
     test_persona: Optional[TestPersonaEnum] = Field(None, description="""A Test persona describes the user or operational context of a given test.""")
-    test_cases: Optional[Dict[str, Union[PathfinderTestCase, TestCase]]] = Field(default_factory=dict, description="""List of explicitly enumerated Test Cases.""")
+    test_cases: Optional[Dict[str, Union[PathfinderTestCase, PerformanceTestCase, TestCase]]] = Field(default_factory=dict, description="""List of explicitly enumerated Test Cases.""")
     test_suite_specification: Optional[TestSuiteSpecification] = Field(None, description="""Declarative specification of a Test Suite of Test Cases whose generation is deferred, (i.e. within a Test Runner) or whose creation is achieved by stream processing of an external data source.""")
     id: str = Field(..., description="""A unique identifier for a Test Entity""")
     name: Optional[str] = Field(None, description="""A human-readable name for a Test Entity""")
@@ -672,10 +695,12 @@ TestCase.model_rebuild()
 PathfinderTestCase.model_rebuild()
 AcceptanceTestCase.model_rebuild()
 QuantitativeTestCase.model_rebuild()
+PerformanceTestCase.model_rebuild()
 TestSuiteSpecification.model_rebuild()
 TestSuite.model_rebuild()
 AcceptanceTestSuite.model_rebuild()
 BenchmarkTestSuite.model_rebuild()
+PerformanceTestSuite.model_rebuild()
 StandardsComplianceTestSuite.model_rebuild()
 OneHopTestSuite.model_rebuild()
 TestCaseResult.model_rebuild()

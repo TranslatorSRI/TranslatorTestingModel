@@ -1090,9 +1090,10 @@
       "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative; standards compliance; graph navigation integrity)",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_case_objective",
-      "owner": "TestCase",
+      "owner": "PathfinderTestCase",
       "domain_of": [
-        "TestCase"
+        "TestCase",
+        "PathfinderTestCase"
       ],
       "range": "TestObjectiveEnum",
       "@type": "SlotDefinition"
@@ -1304,6 +1305,7 @@
         "PathfinderTestAsset"
       ],
       "range": "PathfinderPathNode",
+      "required": true,
       "inlined": true,
       "@type": "SlotDefinition"
     },
@@ -1318,6 +1320,7 @@
         "PathfinderTestAsset"
       ],
       "range": "integer",
+      "required": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1328,9 +1331,10 @@
         "Predicate"
       ],
       "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/predicate_id",
-      "owner": "TestAsset",
+      "owner": "PathfinderTestAsset",
       "domain_of": [
-        "TestAsset"
+        "TestAsset",
+        "PathfinderTestAsset"
       ],
       "range": "predicate_type",
       "@type": "SlotDefinition"
@@ -1344,9 +1348,10 @@
         "Relationship"
       ],
       "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/predicate_name",
-      "owner": "TestAsset",
+      "owner": "PathfinderTestAsset",
       "domain_of": [
-        "TestAsset"
+        "TestAsset",
+        "PathfinderTestAsset"
       ],
       "range": "string",
       "@type": "SlotDefinition"
@@ -1491,9 +1496,10 @@
         "Expected Output"
       ],
       "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/expected_output",
-      "owner": "TestAsset",
+      "owner": "PathfinderTestAsset",
       "domain_of": [
-        "TestAsset"
+        "TestAsset",
+        "PathfinderTestAsset"
       ],
       "range": "string",
       "@type": "SlotDefinition"
@@ -1776,6 +1782,7 @@
       "owner": "TestRunSession",
       "domain_of": [
         "TestCase",
+        "PathfinderTestCase",
         "TestRunSession"
       ],
       "range": "TestEnvEnum",
@@ -1801,9 +1808,10 @@
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_assets",
       "multivalued": true,
-      "owner": "TestCase",
+      "owner": "PathfinderTestCase",
       "domain_of": [
-        "TestCase"
+        "TestCase",
+        "PathfinderTestCase"
       ],
       "range": "TestAsset",
       "required": true,
@@ -1847,6 +1855,7 @@
       "owner": "TestRunSession",
       "domain_of": [
         "TestCase",
+        "PathfinderTestCase",
         "TestRunSession"
       ],
       "range": "ComponentEnum",
@@ -1944,6 +1953,10 @@
         },
         {
           "range": "TestCase",
+          "@type": "AnonymousSlotExpression"
+        },
+        {
+          "range": "PerformanceTestCase",
           "@type": "AnonymousSlotExpression"
         }
       ],
@@ -2072,6 +2085,32 @@
       ],
       "range": "TestCaseResult",
       "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "performanceTestCase__test_run_time",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_run_time",
+      "alias": "test_run_time",
+      "owner": "PerformanceTestCase",
+      "domain_of": [
+        "PerformanceTestCase"
+      ],
+      "range": "integer",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "performanceTestCase__spawn_rate",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/spawn_rate",
+      "alias": "spawn_rate",
+      "owner": "PerformanceTestCase",
+      "domain_of": [
+        "PerformanceTestCase"
+      ],
+      "range": "float",
+      "required": true,
       "@type": "SlotDefinition"
     },
     {
@@ -2232,7 +2271,7 @@
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_assets",
       "description": "List of explicitly enumerated Test Assets. The class attributes of TestAsset would be included in the TestCase versus being referred to by the identifier (curie) of the TestAsset. That is, this would be a list of objects (in JSONSchema serialization) versus a list of strings (where each string is an identifier pointing to another class).",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
-      "is_a": "TestCase_test_assets",
+      "is_a": "test_assets",
       "domain": "PathfinderTestCase",
       "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_assets",
       "multivalued": true,
@@ -2269,6 +2308,62 @@
       "required": true,
       "inlined": true,
       "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "PerformanceTestCase_test_assets",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_assets",
+      "description": "List of explicitly enumerated Test Assets. The class attributes of TestAsset would be included in the TestCase versus being referred to by the identifier (curie) of the TestAsset. That is, this would be a list of objects (in JSONSchema serialization) versus a list of strings (where each string is an identifier pointing to another class).",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "is_a": "TestCase_test_assets",
+      "domain": "PerformanceTestCase",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_assets",
+      "multivalued": true,
+      "alias": "test_assets",
+      "owner": "PerformanceTestCase",
+      "domain_of": [
+        "PerformanceTestCase"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "test_assets",
+      "range": "TestAsset",
+      "required": true,
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "PerformanceTestSuite_test_cases",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_cases",
+      "description": "List of explicitly enumerated Test Cases.",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "is_a": "test_cases",
+      "domain": "PerformanceTestSuite",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_cases",
+      "multivalued": true,
+      "alias": "test_cases",
+      "owner": "PerformanceTestSuite",
+      "domain_of": [
+        "PerformanceTestSuite"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "test_cases",
+      "range": "PerformanceTestCase",
+      "inlined": true,
+      "any_of": [
+        {
+          "range": "PathfinderTestCase",
+          "@type": "AnonymousSlotExpression"
+        },
+        {
+          "range": "TestCase",
+          "@type": "AnonymousSlotExpression"
+        },
+        {
+          "range": "PerformanceTestCase",
+          "@type": "AnonymousSlotExpression"
+        }
+      ],
       "@type": "SlotDefinition"
     },
     {
@@ -2384,14 +2479,12 @@
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/PathfinderPathNode",
       "description": "Represents an output path node",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
-      "abstract": true,
       "slots": [
         "ids",
         "name"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/PathfinderPathNode",
-      "tree_root": true,
       "@type": "ClassDefinition"
     },
     {
@@ -2433,38 +2526,24 @@
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/PathfinderTestAsset",
       "description": "Represents a Test Asset, which is a single specific instance of TestCase-agnostic semantic parameters representing the specification of a Translator test target with inputs and (expected) outputs.",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
-      "is_a": "TestAsset",
+      "is_a": "TestEntity",
       "slots": [
+        "id",
         "name",
         "description",
-        "input_id",
-        "input_name",
-        "input_category",
-        "predicate_id",
-        "predicate_name",
-        "output_id",
-        "output_name",
-        "output_category",
-        "association",
-        "qualifiers",
-        "expected_output",
-        "test_issue",
-        "semantic_severity",
-        "in_v1",
-        "well_known",
-        "test_reference",
-        "test_metadata",
-        "TestAsset_id",
-        "TestAsset_tags",
-        "TestAsset_test_runner_settings",
+        "tags",
+        "test_runner_settings",
         "source_input_id",
         "source_input_name",
         "source_input_category",
         "target_input_id",
         "target_input_name",
         "target_input_category",
+        "predicate_id",
+        "predicate_name",
+        "minimum_required_path_nodes",
         "path_nodes",
-        "minimum_required_path_nodes"
+        "expected_output"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/PathfinderTestAsset",
@@ -2600,27 +2679,17 @@
       "name": "PathfinderTestCase",
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/PathfinderTestCase",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
-      "is_a": "TestCase",
+      "is_a": "TestEntity",
       "slots": [
         "id",
         "name",
         "description",
+        "tags",
         "test_runner_settings",
-        "query_type",
-        "preconditions",
-        "trapi_template",
+        "PathfinderTestCase_test_assets",
         "test_case_objective",
-        "test_case_source",
-        "test_case_predicate_name",
-        "test_case_predicate_id",
-        "test_case_input_id",
-        "qualifiers",
-        "input_category",
-        "output_category",
         "components",
-        "test_env",
-        "TestCase_tags",
-        "PathfinderTestCase_test_assets"
+        "test_env"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/PathfinderTestCase",
@@ -2689,6 +2758,53 @@
       "@type": "ClassDefinition"
     },
     {
+      "name": "PerformanceTestCase",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/PerformanceTestCase",
+      "description": "Represents a performance test case.",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "is_a": "TestCase",
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "test_runner_settings",
+        "query_type",
+        "preconditions",
+        "trapi_template",
+        "test_case_objective",
+        "test_case_source",
+        "test_case_predicate_name",
+        "test_case_predicate_id",
+        "test_case_input_id",
+        "qualifiers",
+        "input_category",
+        "output_category",
+        "components",
+        "test_env",
+        "TestCase_tags",
+        "performanceTestCase__test_run_time",
+        "performanceTestCase__spawn_rate",
+        "PerformanceTestCase_test_assets"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "test_run_time",
+          "range": "integer",
+          "required": true,
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "spawn_rate",
+          "range": "float",
+          "required": true,
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/PerformanceTestCase",
+      "@type": "ClassDefinition"
+    },
+    {
       "name": "TestSuiteSpecification",
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestSuiteSpecification",
       "description": "Parameters for a Test Case instances either dynamically generated from some external source of Test Assets.",
@@ -2751,10 +2867,42 @@
     {
       "name": "BenchmarkTestSuite",
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/BenchmarkTestSuite",
-      "description": "JsonObj(is_a='TestSuite')",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "is_a": "TestSuite",
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "tags",
+        "test_runner_settings",
+        "test_metadata",
+        "test_persona",
+        "test_cases",
+        "test_suite_specification"
+      ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/BenchmarkTestSuite",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "PerformanceTestSuite",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/PerformanceTestSuite",
+      "description": "A small test suite designed to test the performance of the Translator system.",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "is_a": "TestSuite",
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "tags",
+        "test_runner_settings",
+        "test_metadata",
+        "test_persona",
+        "test_suite_specification",
+        "PerformanceTestSuite_test_cases"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/PerformanceTestSuite",
       "@type": "ClassDefinition"
     },
     {
@@ -2889,9 +3037,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "translator_testing_model.yaml",
-  "source_file_date": "2025-10-06T21:05:42",
-  "source_file_size": 31366,
-  "generation_date": "2025-10-06T21:11:24",
+  "source_file_date": "2025-10-22T11:36:16",
+  "source_file_size": 32097,
+  "generation_date": "2025-10-22T11:36:20",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",

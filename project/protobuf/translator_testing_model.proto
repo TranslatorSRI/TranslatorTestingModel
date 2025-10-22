@@ -69,6 +69,18 @@ message AcceptanceTestSuite
  repeated  testCase testCases = 0
   testSuiteSpecification testSuiteSpecification = 0
  }
+message BenchmarkTestSuite
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+ repeated  string tags = 0
+ repeated  string testRunnerSettings = 0
+  testMetadata testMetadata = 0
+  testPersonaEnum testPersona = 0
+ repeated  testCase testCases = 0
+  testSuiteSpecification testSuiteSpecification = 0
+ }
 // Test case for testing the integrity of "One Hop" knowledge graph retrievals sensa legacy SRI_Testing harness.
 message OneHopTestSuite
  {
@@ -82,29 +94,18 @@ message OneHopTestSuite
  repeated  testCase testCases = 0
   testSuiteSpecification testSuiteSpecification = 0
  }
+// Represents an output path node
+message PathfinderPathNode
+ {
+ repeated  string ids = 0
+  string name = 0
+ }
 // Represents a Test Asset, which is a single specific instance of TestCase-agnostic semantic parameters representing the specification of a Translator test target with inputs and (expected) outputs.
 message PathfinderTestAsset
  {
+  uriorcurie id = 0
   string name = 0
   string description = 0
-  uriorcurie inputId = 0
-  string inputName = 0
-  conceptCategory inputCategory = 0
-  predicateType predicateId = 0
-  string predicateName = 0
-  uriorcurie outputId = 0
-  string outputName = 0
-  conceptCategory outputCategory = 0
-  associationCategory association = 0
- repeated  qualifier qualifiers = 0
-  string expectedOutput = 0
-  testIssueEnum testIssue = 0
-  semanticSeverityEnum semanticSeverity = 0
-  boolean inV1 = 0
-  boolean wellKnown = 0
-  uriorcurie testReference = 0
-  testMetadata testMetadata = 0
-  uriorcurie id = 0
  repeated  string tags = 0
  repeated  string testRunnerSettings = 0
   uriorcurie sourceInputId = 0
@@ -113,10 +114,26 @@ message PathfinderTestAsset
   uriorcurie targetInputId = 0
   string targetInputName = 0
   conceptCategory targetInputCategory = 0
- repeated  pathfinderPathNode pathNodes = 0
+  predicateType predicateId = 0
+  string predicateName = 0
   integer minimumRequiredPathNodes = 0
+ repeated  pathfinderPathNode pathNodes = 0
+  string expectedOutput = 0
  }
 message PathfinderTestCase
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+ repeated  string tags = 0
+ repeated  string testRunnerSettings = 0
+ repeated  pathfinderTestAsset testAssets = 0
+  testObjectiveEnum testCaseObjective = 0
+ repeated  componentEnum components = 0
+  testEnvEnum testEnv = 0
+ }
+// Represents a performance test case.
+message PerformanceTestCase
  {
   uriorcurie id = 0
   string name = 0
@@ -136,7 +153,22 @@ message PathfinderTestCase
  repeated  componentEnum components = 0
   testEnvEnum testEnv = 0
  repeated  string tags = 0
- repeated  pathfinderTestAsset testAssets = 0
+  integer testRunTime = 0
+  float spawnRate = 0
+ repeated  testAsset testAssets = 0
+ }
+// A small test suite designed to test the performance of the Translator system.
+message PerformanceTestSuite
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+ repeated  string tags = 0
+ repeated  string testRunnerSettings = 0
+  testMetadata testMetadata = 0
+  testPersonaEnum testPersona = 0
+  testSuiteSpecification testSuiteSpecification = 0
+ repeated  performanceTestCase testCases = 0
  }
 // Represents a precondition for a TestCase
 message Precondition

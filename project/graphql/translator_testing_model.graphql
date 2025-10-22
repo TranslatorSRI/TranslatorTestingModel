@@ -72,6 +72,15 @@ type AcceptanceTestSuite
 
 type BenchmarkTestSuite
   {
+    id: Uriorcurie!
+    name: String
+    description: String
+    tags: [String]
+    testRunnerSettings: [String]
+    testMetadata: TestMetadata
+    testPersona: TestPersonaEnum
+    testCases: [TestCase]
+    testSuiteSpecification: TestSuiteSpecification
   }
 
 type OneHopTestSuite
@@ -87,7 +96,7 @@ type OneHopTestSuite
     testSuiteSpecification: TestSuiteSpecification
   }
 
-interface PathfinderPathNode
+type PathfinderPathNode
   {
     ids: [String]
     name: String
@@ -95,26 +104,9 @@ interface PathfinderPathNode
 
 type PathfinderTestAsset
   {
+    id: Uriorcurie!
     name: String
     description: String
-    inputId: Uriorcurie
-    inputName: String
-    inputCategory: ConceptCategory
-    predicateId: PredicateType
-    predicateName: String
-    outputId: Uriorcurie
-    outputName: String
-    outputCategory: ConceptCategory
-    association: AssociationCategory
-    qualifiers: [Qualifier]
-    expectedOutput: String
-    testIssue: TestIssueEnum
-    semanticSeverity: SemanticSeverityEnum
-    inV1: Boolean
-    wellKnown: Boolean
-    testReference: Uriorcurie
-    testMetadata: TestMetadata
-    id: Uriorcurie!
     tags: [String]
     testRunnerSettings: [String]
     sourceInputId: Uriorcurie
@@ -123,11 +115,27 @@ type PathfinderTestAsset
     targetInputId: Uriorcurie
     targetInputName: String
     targetInputCategory: ConceptCategory
-    pathNodes: [PathfinderPathNode]
-    minimumRequiredPathNodes: Integer
+    predicateId: PredicateType
+    predicateName: String
+    minimumRequiredPathNodes: Integer!
+    pathNodes: [PathfinderPathNode]!
+    expectedOutput: String
   }
 
 type PathfinderTestCase
+  {
+    id: Uriorcurie!
+    name: String
+    description: String
+    tags: [String]
+    testRunnerSettings: [String]
+    testAssets: [PathfinderTestAsset]!
+    testCaseObjective: TestObjectiveEnum
+    components: [ComponentEnum]
+    testEnv: TestEnvEnum
+  }
+
+type PerformanceTestCase
   {
     id: Uriorcurie!
     name: String
@@ -147,7 +155,22 @@ type PathfinderTestCase
     components: [ComponentEnum]
     testEnv: TestEnvEnum
     tags: [String]
-    testAssets: [PathfinderTestAsset]!
+    testRunTime: Integer!
+    spawnRate: Float!
+    testAssets: [TestAsset]!
+  }
+
+type PerformanceTestSuite
+  {
+    id: Uriorcurie!
+    name: String
+    description: String
+    tags: [String]
+    testRunnerSettings: [String]
+    testMetadata: TestMetadata
+    testPersona: TestPersonaEnum
+    testSuiteSpecification: TestSuiteSpecification
+    testCases: [PerformanceTestCase]
   }
 
 type Precondition

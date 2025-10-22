@@ -105,8 +105,6 @@ classes:
   PathfinderPathNode:
     description: >-
       Represents an output path node
-    abstract: true
-    tree_root: true
     slots:
       - ids
       - name
@@ -152,7 +150,7 @@ classes:
           Scalar settings for the TestRunner, e.g. "inferred"
   
   PathfinderTestAsset:
-    is_a: TestAsset
+    is_a: TestEntity
     description: >-
       Represents a Test Asset, which is a single specific instance of TestCase-agnostic
       semantic parameters representing the specification of a Translator test target with
@@ -164,8 +162,11 @@ classes:
       - target_input_id
       - target_input_name
       - target_input_category
-      - path_nodes
+      - predicate_id
+      - predicate_name
       - minimum_required_path_nodes
+      - path_nodes
+      - expected_output
 
   AcceptanceTestAsset:
     is_a: TestAsset
@@ -243,7 +244,12 @@ classes:
           be defined as filters to specify TestAsset membership in a "Block List" collection.
   
   PathfinderTestCase:
-    is_a: TestCase
+    is_a: TestEntity
+    slots:
+      - test_assets
+      - test_case_objective
+      - components
+      - test_env
     slot_usage:
       test_assets:
         range: PathfinderTestAsset
@@ -263,6 +269,21 @@ classes:
     slot_usage:
 #      test_assets:
 #        range: QuantitativeTestAsset
+
+  PerformanceTestCase:
+    is_a: TestCase
+    description: >-
+      Represents a performance test case.
+    attributes:
+      test_run_time:
+        required: true
+        range: integer
+      spawn_rate:
+        required: true
+        range: float
+    slot_usage:
+      test_assets:
+        range: TestAsset
 
   #####################
   # Test Suite Models #
@@ -294,8 +315,16 @@ classes:
     description:
 
   BenchmarkTestSuite:
+    is_a: TestSuite
     description:
-     is_a: TestSuite
+    
+  PerformanceTestSuite:
+    is_a: TestSuite
+    description: >-
+      A small test suite designed to test the performance of the Translator system.
+    slot_usage:
+      test_cases:
+        range: PerformanceTestCase
      
   StandardsComplianceTestSuite:
     description: >-
@@ -524,6 +553,7 @@ slots:
     range: concept_category
   
   path_nodes:
+    required: true
     multivalued: true
     range: PathfinderPathNode
   
@@ -531,6 +561,7 @@ slots:
     description: >-
       The number of nodes required in a path to pass this test.
     range: integer
+    required: true
 
   predicate_id:
     aliases: ["Predicate"]
@@ -787,6 +818,7 @@ slots:
     any_of:
       - range: PathfinderTestCase
       - range: TestCase
+      - range: PerformanceTestCase
     multivalued: true
     inlined: true
     required: false
