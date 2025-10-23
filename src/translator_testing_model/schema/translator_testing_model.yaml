@@ -164,6 +164,7 @@ classes:
       - target_input_category
       - predicate_id
       - predicate_name
+      - qualifiers
       - minimum_required_path_nodes
       - path_nodes
       - expected_output

@@ -597,6 +597,13 @@
                 "predicate_name": {
                     "type": "string"
                 },
+                "qualifiers": {
+                    "description": "Optional qualifiers which constrain to the test asset defined knowledge statement. Note that this field records such qualifier slots and values as tag=value pairs, where the tag is the Biolink Model qualifier slot named and the value is an acceptable (Biolink Model enum?) value of the said qualifier slot.",
+                    "items": {
+                        "$ref": "#/$defs/Qualifier"
+                    },
+                    "type": "array"
+                },
                 "source_input_category": {
                     "type": "string"
                 },

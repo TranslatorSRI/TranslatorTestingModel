@@ -9,6 +9,7 @@
 --     * Slot: parameter Description: The 'parameter' of a Qualifier should be a `qualifier` slot name from the Biolink Model ('biolink' namespace) 'biolink:qualifier' hierarchy.
 --     * Slot: value Description: The 'value' of should be a suitable value generally drawn from an applicable Biolink Model ("Enum") value set of the specified Qualifier.
 --     * Slot: TestAsset_id Description: Autocreated FK slot
+--     * Slot: PathfinderTestAsset_id Description: Autocreated FK slot
 --     * Slot: AcceptanceTestAsset_id Description: Autocreated FK slot
 --     * Slot: TestEdgeData_id Description: Autocreated FK slot
 --     * Slot: TestCase_id Description: Autocreated FK slot
@@ -1135,6 +1136,7 @@ CREATE TABLE "Qualifier" (
 	parameter TEXT, 
 	value TEXT, 
 	"TestAsset_id" TEXT, 
+	"PathfinderTestAsset_id" TEXT, 
 	"AcceptanceTestAsset_id" TEXT, 
 	"TestEdgeData_id" TEXT, 
 	"TestCase_id" TEXT, 
@@ -1143,6 +1145,7 @@ CREATE TABLE "Qualifier" (
 	"PerformanceTestCase_id" TEXT, 
 	PRIMARY KEY (id), 
 	FOREIGN KEY("TestAsset_id") REFERENCES "TestAsset" (id), 
+	FOREIGN KEY("PathfinderTestAsset_id") REFERENCES "PathfinderTestAsset" (id), 
 	FOREIGN KEY("AcceptanceTestAsset_id") REFERENCES "AcceptanceTestAsset" (id), 
 	FOREIGN KEY("TestEdgeData_id") REFERENCES "TestEdgeData" (id), 
 	FOREIGN KEY("TestCase_id") REFERENCES "TestCase" (id), 

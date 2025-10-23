@@ -1481,6 +1481,7 @@
       "owner": "TestCase",
       "domain_of": [
         "TestAsset",
+        "PathfinderTestAsset",
         "TestCase"
       ],
       "range": "Qualifier",
@@ -2541,6 +2542,7 @@
         "target_input_category",
         "predicate_id",
         "predicate_name",
+        "qualifiers",
         "minimum_required_path_nodes",
         "path_nodes",
         "expected_output"
@@ -3037,9 +3039,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "translator_testing_model.yaml",
-  "source_file_date": "2025-10-22T11:36:16",
-  "source_file_size": 32097,
-  "generation_date": "2025-10-22T11:36:20",
+  "source_file_date": "2025-10-22T15:23:19",
+  "source_file_size": 32116,
+  "generation_date": "2025-10-22T15:23:25",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",

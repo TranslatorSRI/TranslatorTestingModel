@@ -117,6 +117,7 @@ type PathfinderTestAsset
     targetInputCategory: ConceptCategory
     predicateId: PredicateType
     predicateName: String
+    qualifiers: [Qualifier]
     minimumRequiredPathNodes: Integer!
     pathNodes: [PathfinderPathNode]!
     expectedOutput: String

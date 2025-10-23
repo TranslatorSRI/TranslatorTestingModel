@@ -116,6 +116,7 @@ message PathfinderTestAsset
   conceptCategory targetInputCategory = 0
   predicateType predicateId = 0
   string predicateName = 0
+ repeated  qualifier qualifiers = 0
   integer minimumRequiredPathNodes = 0
  repeated  pathfinderPathNode pathNodes = 0
   string expectedOutput = 0

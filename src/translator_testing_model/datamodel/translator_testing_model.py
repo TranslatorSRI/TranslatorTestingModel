@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-10-22T11:36:21
+# Generation date: 2025-10-22T15:23:25
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -452,6 +452,7 @@ class PathfinderTestAsset(TestEntity):
     target_input_category: Optional[Union[str, ConceptCategory]] = None
     predicate_id: Optional[Union[str, PredicateType]] = None
     predicate_name: Optional[str] = None
+    qualifiers: Optional[Union[Union[dict, Qualifier], List[Union[dict, Qualifier]]]] = empty_list()
     expected_output: Optional[str] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
@@ -494,6 +495,10 @@ class PathfinderTestAsset(TestEntity):
 
         if self.predicate_name is not None and not isinstance(self.predicate_name, str):
             self.predicate_name = str(self.predicate_name)
+
+        if not isinstance(self.qualifiers, list):
+            self.qualifiers = [self.qualifiers] if self.qualifiers is not None else []
+        self.qualifiers = [v if isinstance(v, Qualifier) else Qualifier(**as_dict(v)) for v in self.qualifiers]
 
         if self.expected_output is not None and not isinstance(self.expected_output, str):
             self.expected_output = str(self.expected_output)

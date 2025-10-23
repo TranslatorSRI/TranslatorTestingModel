@@ -128,6 +128,7 @@ linkml:Sparqlpath xsd:string
           <target_input_category> @<ConceptCategory> ? ;
           <predicate_id> @<PredicateType> ? ;
           <predicate_name> @linkml:String ? ;
+          <qualifiers> @<Qualifier> * ;
           <minimum_required_path_nodes> @linkml:Integer ;
           <path_nodes> @<PathfinderPathNode> + ;
           <expected_output> @linkml:String ?
