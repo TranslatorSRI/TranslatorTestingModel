@@ -332,11 +332,6 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../TestCase/">TestCase</a></td>
-<td>Represents a single enumerated instance of Test Case, derived from a  given c...</td>
-<td>yes</td>
-</tr>
-<tr>
 <td><a href="../AcceptanceTestCase/">AcceptanceTestCase</a></td>
 <td>See AcceptanceTestAsset above for more details</td>
 <td>yes</td>
@@ -347,8 +342,18 @@
 <td>no</td>
 </tr>
 <tr>
+<td><a href="../PerformanceTestCase/">PerformanceTestCase</a></td>
+<td>Represents a performance test case</td>
+<td>yes</td>
+</tr>
+<tr>
 <td><a href="../PathfinderTestCase/">PathfinderTestCase</a></td>
 <td></td>
+<td>yes</td>
+</tr>
+<tr>
+<td><a href="../TestCase/">TestCase</a></td>
+<td>Represents a single enumerated instance of Test Case, derived from a  given c...</td>
 <td>yes</td>
 </tr>
 </tbody>
@@ -385,6 +390,7 @@ multivalued: true
 alias: test_assets
 domain_of:
 - TestCase
+- PathfinderTestCase
 range: TestAsset
 required: true
 inlined: true

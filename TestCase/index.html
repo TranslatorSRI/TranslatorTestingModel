@@ -212,9 +212,9 @@
       TestEntity &lt;|-- TestCase
 
 
-      TestCase &lt;|-- PathfinderTestCase
       TestCase &lt;|-- AcceptanceTestCase
       TestCase &lt;|-- QuantitativeTestCase
+      TestCase &lt;|-- PerformanceTestCase
 
 
       TestCase : components
@@ -279,9 +279,9 @@
 <ul>
 <li><a href="../TestEntity/">TestEntity</a><ul>
 <li><strong>TestCase</strong><ul>
-<li><a href="../PathfinderTestCase/">PathfinderTestCase</a></li>
 <li><a href="../AcceptanceTestCase/">AcceptanceTestCase</a></li>
 <li><a href="../QuantitativeTestCase/">QuantitativeTestCase</a></li>
+<li><a href="../PerformanceTestCase/">PerformanceTestCase</a></li>
 </ul>
 </li>
 </ul>
@@ -438,6 +438,12 @@
 <td><a href="./">TestCase</a></td>
 </tr>
 <tr>
+<td><a href="../BenchmarkTestSuite/">BenchmarkTestSuite</a></td>
+<td><a href="../test_cases/">test_cases</a></td>
+<td>range</td>
+<td><a href="./">TestCase</a></td>
+</tr>
+<tr>
 <td><a href="../StandardsComplianceTestSuite/">StandardsComplianceTestSuite</a></td>
 <td><a href="../test_cases/">test_cases</a></td>
 <td>range</td>
@@ -517,6 +523,7 @@ slot_usage:
     - Block List
     domain_of:
     - TestCase
+    - PathfinderTestCase
   tags:
     name: tags
     description: One or more 'tags' slot values (slot inherited from TestEntity) should
@@ -546,6 +553,7 @@ slot_usage:
     - Block List
     domain_of:
     - TestCase
+    - PathfinderTestCase
   tags:
     name: tags
     description: One or more 'tags' slot values (slot inherited from TestEntity) should
@@ -578,6 +586,7 @@ attributes:
     owner: TestCase
     domain_of:
     - TestCase
+    - PathfinderTestCase
     range: TestAsset
     required: true
     inlined: true
@@ -617,6 +626,7 @@ attributes:
     owner: TestCase
     domain_of:
     - TestCase
+    - PathfinderTestCase
     range: TestObjectiveEnum
   test_case_source:
     name: test_case_source
@@ -677,6 +687,7 @@ attributes:
     owner: TestCase
     domain_of:
     - TestAsset
+    - PathfinderTestAsset
     - TestCase
     range: Qualifier
     inlined: true
@@ -717,6 +728,7 @@ attributes:
     owner: TestCase
     domain_of:
     - TestCase
+    - PathfinderTestCase
     - TestRunSession
     range: ComponentEnum
   test_env:
@@ -728,6 +740,7 @@ attributes:
     owner: TestCase
     domain_of:
     - TestCase
+    - PathfinderTestCase
     - TestRunSession
     range: TestEnvEnum
   id:

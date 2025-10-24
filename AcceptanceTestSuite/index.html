@@ -268,7 +268,7 @@
 </tr>
 <tr>
 <td><a href="../test_cases/">test_cases</a></td>
-<td>0..* <br/> <a href="../TestCase/">TestCase</a> or <br/><a href="../PathfinderTestCase/">PathfinderTestCase</a> or <br/><a href="../TestCase/">TestCase</a></td>
+<td>0..* <br/> <a href="../TestCase/">TestCase</a> or <br/><a href="../PathfinderTestCase/">PathfinderTestCase</a> or <br/><a href="../TestCase/">TestCase</a> or <br/><a href="../PerformanceTestCase/">PerformanceTestCase</a></td>
 <td>List of explicitly enumerated Test Cases</td>
 <td><a href="../TestSuite/">TestSuite</a></td>
 </tr>
@@ -391,6 +391,7 @@ attributes:
     any_of:
     - range: PathfinderTestCase
     - range: TestCase
+    - range: PerformanceTestCase
   test_suite_specification:
     name: test_suite_specification
     description: Declarative specification of a Test Suite of Test Cases whose generation

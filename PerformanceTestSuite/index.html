@@ -5,10 +5,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://TranslatorSRI.github.io/TranslatorTestingModel/Qualifier/" rel="canonical"/>
+<link href="https://TranslatorSRI.github.io/TranslatorTestingModel/PerformanceTestSuite/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.0, mkdocs-material-8.5.10" name="generator"/>
-<title>Class: Qualifier - Translator Testing Model</title>
+<title>Class: PerformanceTestSuite - Translator Testing Model</title>
 <link href="../assets/stylesheets/main.975780f9.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -21,7 +21,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#class-qualifier">
+<a class="md-skip" href="#class-performancetestsuite">
           Skip to content
         </a>
 </div>
@@ -45,7 +45,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Class: Qualifier
+              Class: PerformanceTestSuite
             
           </span>
 </div>
@@ -152,11 +152,6 @@
   </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#usages">
-    Usages
-  </a>
-</li>
-<li class="md-nav__item">
 <a class="md-nav__link" href="#identifier-and-mapping-information">
     Identifier and Mapping Information
   </a>
@@ -201,25 +196,51 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<a class="md-content__button md-icon" href="https://github.com/TranslatorSRI/TranslatorTestingModel/edit/master/docs/Qualifier.md" title="Edit this page">
+<a class="md-content__button md-icon" href="https://github.com/TranslatorSRI/TranslatorTestingModel/edit/master/docs/PerformanceTestSuite.md" title="Edit this page">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"></path></svg>
 </a>
-<h1 id="class-qualifier">Class: Qualifier</h1>
-<p>URI: <a href="https://w3id.org/TranslatorSRI/TranslatorTestingModel/Qualifier">ttm:Qualifier</a></p>
+<h1 id="class-performancetestsuite">Class: PerformanceTestSuite</h1>
+<p><em>A small test suite designed to test the performance of the Translator system.</em></p>
+<p>URI: <a href="https://w3id.org/TranslatorSRI/TranslatorTestingModel/PerformanceTestSuite">ttm:PerformanceTestSuite</a></p>
 <div class="mermaid"> classDiagram
-    class Qualifier
-      TestEntityParameter &lt;|-- Qualifier
+    class PerformanceTestSuite
+      TestSuite &lt;|-- PerformanceTestSuite
 
-      Qualifier : parameter
+      PerformanceTestSuite : description
 
-      Qualifier : value
+      PerformanceTestSuite : id
+
+      PerformanceTestSuite : name
+
+      PerformanceTestSuite : tags
+
+      PerformanceTestSuite : test_cases
+
+          PerformanceTestSuite --&gt; PerformanceTestCase : test_cases
+
+      PerformanceTestSuite : test_metadata
+
+          PerformanceTestSuite --&gt; TestMetadata : test_metadata
+
+      PerformanceTestSuite : test_persona
+
+          PerformanceTestSuite --&gt; TestPersonaEnum : test_persona
+
+      PerformanceTestSuite : test_runner_settings
+
+      PerformanceTestSuite : test_suite_specification
+
+          PerformanceTestSuite --&gt; TestSuiteSpecification : test_suite_specification
 
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../TestEntityParameter/">TestEntityParameter</a><ul>
-<li><strong>Qualifier</strong></li>
+<li><a href="../TestEntity/">TestEntity</a><ul>
+<li><a href="../TestSuite/">TestSuite</a><ul>
+<li><strong>PerformanceTestSuite</strong></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -235,77 +256,58 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../parameter/">parameter</a></td>
+<td><a href="../test_metadata/">test_metadata</a></td>
+<td>0..1 <br/> <a href="../TestMetadata/">TestMetadata</a></td>
+<td>Test metadata describes the external provenance, cross-references and objecti...</td>
+<td><a href="../TestSuite/">TestSuite</a></td>
+</tr>
+<tr>
+<td><a href="../test_persona/">test_persona</a></td>
+<td>0..1 <br/> <a href="../TestPersonaEnum/">TestPersonaEnum</a></td>
+<td>A Test persona describes the user or operational context of a given test</td>
+<td><a href="../TestSuite/">TestSuite</a></td>
+</tr>
+<tr>
+<td><a href="../test_cases/">test_cases</a></td>
+<td>0..* <br/> <a href="../PerformanceTestCase/">PerformanceTestCase</a></td>
+<td>List of explicitly enumerated Test Cases</td>
+<td><a href="../TestSuite/">TestSuite</a></td>
+</tr>
+<tr>
+<td><a href="../test_suite_specification/">test_suite_specification</a></td>
+<td>0..1 <br/> <a href="../TestSuiteSpecification/">TestSuiteSpecification</a></td>
+<td>Declarative specification of a Test Suite of Test Cases whose generation is d...</td>
+<td><a href="../TestSuite/">TestSuite</a></td>
+</tr>
+<tr>
+<td><a href="../id/">id</a></td>
+<td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>A unique identifier for a Test Entity</td>
+<td><a href="../TestEntity/">TestEntity</a></td>
+</tr>
+<tr>
+<td><a href="../name/">name</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
-<td>The 'parameter' of a Qualifier should be a <code>qualifier</code> slot name from the Bio...</td>
-<td><a href="../TestEntityParameter/">TestEntityParameter</a></td>
+<td>A human-readable name for a Test Entity</td>
+<td><a href="../TestEntity/">TestEntity</a></td>
 </tr>
 <tr>
-<td><a href="../value/">value</a></td>
+<td><a href="../description/">description</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
-<td>The 'value' of should be a suitable value generally drawn from an applicable ...</td>
-<td><a href="../TestEntityParameter/">TestEntityParameter</a></td>
-</tr>
-</tbody>
-</table>
-<h2 id="usages">Usages</h2>
-<table>
-<thead>
-<tr>
-<th>used by</th>
-<th>used in</th>
-<th>type</th>
-<th>used</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../TestAsset/">TestAsset</a></td>
-<td><a href="../qualifiers/">qualifiers</a></td>
-<td>range</td>
-<td><a href="./">Qualifier</a></td>
+<td>A human-readable description for a Test Entity</td>
+<td><a href="../TestEntity/">TestEntity</a></td>
 </tr>
 <tr>
-<td><a href="../PathfinderTestAsset/">PathfinderTestAsset</a></td>
-<td><a href="../qualifiers/">qualifiers</a></td>
-<td>range</td>
-<td><a href="./">Qualifier</a></td>
+<td><a href="../tags/">tags</a></td>
+<td>0..* <br/> <a href="../String/">String</a></td>
+<td>A human-readable tags for categorical memberships of a TestEntity (preferably...</td>
+<td><a href="../TestEntity/">TestEntity</a></td>
 </tr>
 <tr>
-<td><a href="../AcceptanceTestAsset/">AcceptanceTestAsset</a></td>
-<td><a href="../qualifiers/">qualifiers</a></td>
-<td>range</td>
-<td><a href="./">Qualifier</a></td>
-</tr>
-<tr>
-<td><a href="../TestEdgeData/">TestEdgeData</a></td>
-<td><a href="../qualifiers/">qualifiers</a></td>
-<td>range</td>
-<td><a href="./">Qualifier</a></td>
-</tr>
-<tr>
-<td><a href="../TestCase/">TestCase</a></td>
-<td><a href="../qualifiers/">qualifiers</a></td>
-<td>range</td>
-<td><a href="./">Qualifier</a></td>
-</tr>
-<tr>
-<td><a href="../AcceptanceTestCase/">AcceptanceTestCase</a></td>
-<td><a href="../qualifiers/">qualifiers</a></td>
-<td>range</td>
-<td><a href="./">Qualifier</a></td>
-</tr>
-<tr>
-<td><a href="../QuantitativeTestCase/">QuantitativeTestCase</a></td>
-<td><a href="../qualifiers/">qualifiers</a></td>
-<td>range</td>
-<td><a href="./">Qualifier</a></td>
-</tr>
-<tr>
-<td><a href="../PerformanceTestCase/">PerformanceTestCase</a></td>
-<td><a href="../qualifiers/">qualifiers</a></td>
-<td>range</td>
-<td><a href="./">Qualifier</a></td>
+<td><a href="../test_runner_settings/">test_runner_settings</a></td>
+<td>0..* <br/> <a href="../String/">String</a></td>
+<td>Scalar parameters for the TestRunner processing a given TestEntity</td>
+<td><a href="../TestEntity/">TestEntity</a></td>
 </tr>
 </tbody>
 </table>
@@ -325,11 +327,11 @@
 <tbody>
 <tr>
 <td>self</td>
-<td>ttm:Qualifier</td>
+<td>ttm:PerformanceTestSuite</td>
 </tr>
 <tr>
 <td>native</td>
-<td>ttm:Qualifier</td>
+<td>ttm:PerformanceTestSuite</td>
 </tr>
 </tbody>
 </table>
@@ -337,66 +339,150 @@
 <!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
 <h3 id="direct">Direct</h3>
 <details>
-<pre><code class="language-yaml">name: Qualifier
+<pre><code class="language-yaml">name: PerformanceTestSuite
+description: A small test suite designed to test the performance of the Translator
+  system.
 from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
-is_a: TestEntityParameter
+is_a: TestSuite
 slot_usage:
-  parameter:
-    name: parameter
-    description: The 'parameter' of a Qualifier should be a `qualifier` slot name
-      from the Biolink Model ('biolink' namespace) 'biolink:qualifier' hierarchy.
+  test_cases:
+    name: test_cases
     domain_of:
-    - TestEntityParameter
-  value:
-    name: value
-    description: The 'value' of should be a suitable value generally drawn from an
-      applicable Biolink Model ("Enum") value set of the specified Qualifier.
-    domain_of:
-    - TestEntityParameter
+    - TestSuite
+    range: PerformanceTestCase
 
 </code></pre>
 </details>
 <h3 id="induced">Induced</h3>
 <details>
-<pre><code class="language-yaml">name: Qualifier
+<pre><code class="language-yaml">name: PerformanceTestSuite
+description: A small test suite designed to test the performance of the Translator
+  system.
 from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
-is_a: TestEntityParameter
+is_a: TestSuite
 slot_usage:
-  parameter:
-    name: parameter
-    description: The 'parameter' of a Qualifier should be a `qualifier` slot name
-      from the Biolink Model ('biolink' namespace) 'biolink:qualifier' hierarchy.
+  test_cases:
+    name: test_cases
     domain_of:
-    - TestEntityParameter
-  value:
-    name: value
-    description: The 'value' of should be a suitable value generally drawn from an
-      applicable Biolink Model ("Enum") value set of the specified Qualifier.
-    domain_of:
-    - TestEntityParameter
+    - TestSuite
+    range: PerformanceTestCase
 attributes:
-  parameter:
-    name: parameter
-    description: The 'parameter' of a Qualifier should be a `qualifier` slot name
-      from the Biolink Model ('biolink' namespace) 'biolink:qualifier' hierarchy.
+  test_metadata:
+    name: test_metadata
+    description: Test metadata describes the external provenance, cross-references
+      and objectives for a given test.
     from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
     rank: 1000
-    alias: parameter
-    owner: Qualifier
+    alias: test_metadata
+    owner: PerformanceTestSuite
     domain_of:
-    - TestEntityParameter
-    range: string
-  value:
-    name: value
-    description: The 'value' of should be a suitable value generally drawn from an
-      applicable Biolink Model ("Enum") value set of the specified Qualifier.
+    - TestAsset
+    - TestSuite
+    range: TestMetadata
+    required: false
+    inlined: true
+  test_persona:
+    name: test_persona
+    description: A Test persona describes the user or operational context of a given
+      test.
     from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
     rank: 1000
-    alias: value
-    owner: Qualifier
+    alias: test_persona
+    owner: PerformanceTestSuite
     domain_of:
-    - TestEntityParameter
+    - TestSuite
+    range: TestPersonaEnum
+  test_cases:
+    name: test_cases
+    description: List of explicitly enumerated Test Cases.
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    multivalued: true
+    alias: test_cases
+    owner: PerformanceTestSuite
+    domain_of:
+    - TestSuite
+    range: PerformanceTestCase
+    required: false
+    inlined: true
+  test_suite_specification:
+    name: test_suite_specification
+    description: Declarative specification of a Test Suite of Test Cases whose generation
+      is deferred, (i.e. within a Test Runner) or whose creation is achieved by stream
+      processing of an external data source.
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    alias: test_suite_specification
+    owner: PerformanceTestSuite
+    domain_of:
+    - TestSuite
+    range: TestSuiteSpecification
+    required: false
+    inlined: true
+  id:
+    name: id
+    description: A unique identifier for a Test Entity
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    slot_uri: schema:identifier
+    identifier: true
+    alias: id
+    owner: PerformanceTestSuite
+    domain_of:
+    - TestEntity
+    range: uriorcurie
+    required: true
+  name:
+    name: name
+    description: A human-readable name for a Test Entity
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    slot_uri: schema:name
+    alias: name
+    owner: PerformanceTestSuite
+    domain_of:
+    - TestEntity
+    - PathfinderPathNode
     range: string
+  description:
+    name: description
+    description: A human-readable description for a Test Entity
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    slot_uri: schema:description
+    alias: description
+    owner: PerformanceTestSuite
+    domain_of:
+    - TestEntity
+    range: string
+  tags:
+    name: tags
+    description: A human-readable tags for categorical memberships of a TestEntity
+      (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity
+      into formally typed or ad hoc lists.
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    slot_uri: schema:additionalType
+    multivalued: true
+    alias: tags
+    owner: PerformanceTestSuite
+    domain_of:
+    - TestEntity
+    range: string
+  test_runner_settings:
+    name: test_runner_settings
+    description: Scalar parameters for the TestRunner processing a given TestEntity.
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    aliases:
+    - Settings
+    rank: 1000
+    multivalued: true
+    alias: test_runner_settings
+    owner: PerformanceTestSuite
+    domain_of:
+    - TestEntity
+    range: string
+    required: false
 
 </code></pre>
 </details>

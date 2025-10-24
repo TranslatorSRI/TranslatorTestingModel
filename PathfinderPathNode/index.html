@@ -201,9 +201,6 @@
 </a>
 <h1 id="class-pathfinderpathnode">Class: PathfinderPathNode</h1>
 <p><em>Represents an output path node</em></p>
-<ul>
-<li><strong>NOTE</strong>: this is an abstract class and should not be instantiated directly</li>
-</ul>
 <p>URI: <a href="https://w3id.org/TranslatorSRI/TranslatorTestingModel/PathfinderPathNode">ttm:PathfinderPathNode</a></p>
 <div class="mermaid"> classDiagram
     class PathfinderPathNode
@@ -289,11 +286,9 @@
 <pre><code class="language-yaml">name: PathfinderPathNode
 description: Represents an output path node
 from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
-abstract: true
 slots:
 - ids
 - name
-tree_root: true
 
 </code></pre>
 </details>
@@ -302,7 +297,6 @@ tree_root: true
 <pre><code class="language-yaml">name: PathfinderPathNode
 description: Represents an output path node
 from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
-abstract: true
 attributes:
   ids:
     name: ids
@@ -327,7 +321,6 @@ attributes:
     - TestEntity
     - PathfinderPathNode
     range: string
-tree_root: true
 
 </code></pre>
 </details>

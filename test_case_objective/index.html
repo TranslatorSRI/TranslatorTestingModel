@@ -332,11 +332,6 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../TestCase/">TestCase</a></td>
-<td>Represents a single enumerated instance of Test Case, derived from a  given c...</td>
-<td>no</td>
-</tr>
-<tr>
 <td><a href="../AcceptanceTestCase/">AcceptanceTestCase</a></td>
 <td>See AcceptanceTestAsset above for more details</td>
 <td>no</td>
@@ -347,8 +342,18 @@
 <td>no</td>
 </tr>
 <tr>
+<td><a href="../PerformanceTestCase/">PerformanceTestCase</a></td>
+<td>Represents a performance test case</td>
+<td>no</td>
+</tr>
+<tr>
 <td><a href="../PathfinderTestCase/">PathfinderTestCase</a></td>
 <td></td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../TestCase/">TestCase</a></td>
+<td>Represents a single enumerated instance of Test Case, derived from a  given c...</td>
 <td>no</td>
 </tr>
 </tbody>
@@ -373,6 +378,7 @@ rank: 1000
 alias: test_case_objective
 domain_of:
 - TestCase
+- PathfinderTestCase
 range: TestObjectiveEnum
 
 </code></pre>

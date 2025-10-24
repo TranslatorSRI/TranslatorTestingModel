@@ -203,7 +203,7 @@
 <p>URI: <a href="https://w3id.org/TranslatorSRI/TranslatorTestingModel/PathfinderTestCase">ttm:PathfinderTestCase</a></p>
 <div class="mermaid"> classDiagram
     class PathfinderTestCase
-      TestCase &lt;|-- PathfinderTestCase
+      TestEntity &lt;|-- PathfinderTestCase
 
       PathfinderTestCase : components
 
@@ -213,23 +213,7 @@
 
       PathfinderTestCase : id
 
-      PathfinderTestCase : input_category
-
       PathfinderTestCase : name
-
-      PathfinderTestCase : output_category
-
-      PathfinderTestCase : preconditions
-
-          PathfinderTestCase --&gt; Precondition : preconditions
-
-      PathfinderTestCase : qualifiers
-
-          PathfinderTestCase --&gt; Qualifier : qualifiers
-
-      PathfinderTestCase : query_type
-
-          PathfinderTestCase --&gt; QueryTypeEnum : query_type
 
       PathfinderTestCase : tags
 
@@ -237,19 +221,9 @@
 
           PathfinderTestCase --&gt; PathfinderTestAsset : test_assets
 
-      PathfinderTestCase : test_case_input_id
-
       PathfinderTestCase : test_case_objective
 
           PathfinderTestCase --&gt; TestObjectiveEnum : test_case_objective
-
-      PathfinderTestCase : test_case_predicate_id
-
-      PathfinderTestCase : test_case_predicate_name
-
-      PathfinderTestCase : test_case_source
-
-          PathfinderTestCase --&gt; TestSourceEnum : test_case_source
 
       PathfinderTestCase : test_env
 
@@ -257,19 +231,12 @@
 
       PathfinderTestCase : test_runner_settings
 
-      PathfinderTestCase : trapi_template
-
-          PathfinderTestCase --&gt; TrapiTemplateEnum : trapi_template
-
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
 <li><a href="../TestEntity/">TestEntity</a><ul>
-<li><a href="../TestCase/">TestCase</a><ul>
 <li><strong>PathfinderTestCase</strong></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -285,88 +252,28 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../query_type/">query_type</a></td>
-<td>0..1 <br/> <a href="../QueryTypeEnum/">QueryTypeEnum</a></td>
-<td>Type of TestCase query</td>
-<td><a href="../TestCase/">TestCase</a></td>
-</tr>
-<tr>
 <td><a href="../test_assets/">test_assets</a></td>
 <td>1..* <br/> <a href="../PathfinderTestAsset/">PathfinderTestAsset</a></td>
-<td>One or more 'tags' slot values (inherited from TestEntity) should generally b...</td>
-<td><a href="../TestCase/">TestCase</a></td>
-</tr>
-<tr>
-<td><a href="../preconditions/">preconditions</a></td>
-<td>0..* <br/> <a href="../Precondition/">Precondition</a></td>
-<td></td>
-<td><a href="../TestCase/">TestCase</a></td>
-</tr>
-<tr>
-<td><a href="../trapi_template/">trapi_template</a></td>
-<td>0..1 <br/> <a href="../TrapiTemplateEnum/">TrapiTemplateEnum</a></td>
-<td>A template for a query, which can be used to generate a query for a test case</td>
-<td><a href="../TestCase/">TestCase</a></td>
+<td>List of explicitly enumerated Test Assets</td>
+<td>direct</td>
 </tr>
 <tr>
 <td><a href="../test_case_objective/">test_case_objective</a></td>
 <td>0..1 <br/> <a href="../TestObjectiveEnum/">TestObjectiveEnum</a></td>
 <td>Testing objective behind specified set of test particulars (e</td>
-<td><a href="../TestCase/">TestCase</a></td>
-</tr>
-<tr>
-<td><a href="../test_case_source/">test_case_source</a></td>
-<td>0..1 <br/> <a href="../TestSourceEnum/">TestSourceEnum</a></td>
-<td>Provenance of a specific set of test assets, cases and/or suites</td>
-<td><a href="../TestCase/">TestCase</a></td>
-</tr>
-<tr>
-<td><a href="../test_case_predicate_name/">test_case_predicate_name</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td></td>
-<td><a href="../TestCase/">TestCase</a></td>
-</tr>
-<tr>
-<td><a href="../test_case_predicate_id/">test_case_predicate_id</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td></td>
-<td><a href="../TestCase/">TestCase</a></td>
-</tr>
-<tr>
-<td><a href="../test_case_input_id/">test_case_input_id</a></td>
-<td>0..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
-<td></td>
-<td><a href="../TestCase/">TestCase</a></td>
-</tr>
-<tr>
-<td><a href="../qualifiers/">qualifiers</a></td>
-<td>0..* <br/> <a href="../Qualifier/">Qualifier</a></td>
-<td>Optional qualifiers which constrain to the test asset defined knowledge state...</td>
-<td><a href="../TestCase/">TestCase</a></td>
-</tr>
-<tr>
-<td><a href="../input_category/">input_category</a></td>
-<td>0..1 <br/> <a href="../ConceptCategory/">ConceptCategory</a></td>
-<td></td>
-<td><a href="../TestCase/">TestCase</a></td>
-</tr>
-<tr>
-<td><a href="../output_category/">output_category</a></td>
-<td>0..1 <br/> <a href="../ConceptCategory/">ConceptCategory</a></td>
-<td></td>
-<td><a href="../TestCase/">TestCase</a></td>
+<td>direct</td>
 </tr>
 <tr>
 <td><a href="../components/">components</a></td>
 <td>0..* <br/> <a href="../ComponentEnum/">ComponentEnum</a></td>
 <td>The component that this test case is intended to run against</td>
-<td><a href="../TestCase/">TestCase</a></td>
+<td>direct</td>
 </tr>
 <tr>
 <td><a href="../test_env/">test_env</a></td>
 <td>0..1 <br/> <a href="../TestEnvEnum/">TestEnvEnum</a></td>
 <td>Deployment environment within which the associated TestSuite is run</td>
-<td><a href="../TestCase/">TestCase</a></td>
+<td>direct</td>
 </tr>
 <tr>
 <td><a href="../id/">id</a></td>
@@ -389,7 +296,7 @@
 <tr>
 <td><a href="../tags/">tags</a></td>
 <td>0..* <br/> <a href="../String/">String</a></td>
-<td>One or more 'tags' slot values (slot inherited from TestEntity) should genera...</td>
+<td>A human-readable tags for categorical memberships of a TestEntity (preferably...</td>
 <td><a href="../TestEntity/">TestEntity</a></td>
 </tr>
 <tr>
@@ -430,12 +337,18 @@
 <details>
 <pre><code class="language-yaml">name: PathfinderTestCase
 from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
-is_a: TestCase
+is_a: TestEntity
+slots:
+- test_assets
+- test_case_objective
+- components
+- test_env
 slot_usage:
   test_assets:
     name: test_assets
     domain_of:
     - TestCase
+    - PathfinderTestCase
     range: PathfinderTestAsset
 
 </code></pre>
@@ -444,29 +357,22 @@ slot_usage:
 <details>
 <pre><code class="language-yaml">name: PathfinderTestCase
 from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
-is_a: TestCase
+is_a: TestEntity
 slot_usage:
   test_assets:
     name: test_assets
     domain_of:
     - TestCase
+    - PathfinderTestCase
     range: PathfinderTestAsset
 attributes:
-  query_type:
-    name: query_type
-    description: Type of TestCase query.
-    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
-    rank: 1000
-    alias: query_type
-    owner: PathfinderTestCase
-    domain_of:
-    - TestCase
-    range: QueryTypeEnum
   test_assets:
     name: test_assets
-    description: One or more 'tags' slot values (inherited from TestEntity) should
-      generally be defined as filters to specify TestAsset membership in 'test_assets'
-      slot ("Block List") collection.
+    description: List of explicitly enumerated Test Assets. The class attributes of
+      TestAsset would be included in the TestCase versus being referred to by the
+      identifier (curie) of the TestAsset. That is, this would be a list of objects
+      (in JSONSchema serialization) versus a list of strings (where each string is
+      an identifier pointing to another class).
     from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
     rank: 1000
     multivalued: true
@@ -474,34 +380,11 @@ attributes:
     owner: PathfinderTestCase
     domain_of:
     - TestCase
+    - PathfinderTestCase
     range: PathfinderTestAsset
     required: true
     inlined: true
     inlined_as_list: true
-  preconditions:
-    name: preconditions
-    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
-    rank: 1000
-    multivalued: true
-    alias: preconditions
-    owner: PathfinderTestCase
-    domain_of:
-    - TestCase
-    range: Precondition
-  trapi_template:
-    name: trapi_template
-    description: 'A template for a query, which can be used to generate a query for
-      a test case.  note: the current enumerated values for this slot come from the
-      Benchmarks repo config/benchmarks.json "templates" collection and refer to the
-      "name" field of each template.  Templates themselves are currently stored in
-      the config/[source_name]/templates directory.'
-    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
-    rank: 1000
-    alias: trapi_template
-    owner: PathfinderTestCase
-    domain_of:
-    - TestCase
-    range: TrapiTemplateEnum
   test_case_objective:
     name: test_case_objective
     description: Testing objective behind specified set of test particulars (e.g.
@@ -513,94 +396,8 @@ attributes:
     owner: PathfinderTestCase
     domain_of:
     - TestCase
+    - PathfinderTestCase
     range: TestObjectiveEnum
-  test_case_source:
-    name: test_case_source
-    description: Provenance of a specific set of test assets, cases and/or suites.  Or,
-      the person who cares about this,  know about this.  We would like this to be
-      an ORCID eventually, but currently it is just a string.
-    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
-    rank: 1000
-    alias: test_case_source
-    owner: PathfinderTestCase
-    domain_of:
-    - TestCase
-    range: TestSourceEnum
-  test_case_predicate_name:
-    name: test_case_predicate_name
-    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
-    aliases:
-    - Predicate
-    rank: 1000
-    alias: test_case_predicate_name
-    owner: PathfinderTestCase
-    domain_of:
-    - TestCase
-    range: string
-  test_case_predicate_id:
-    name: test_case_predicate_id
-    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
-    aliases:
-    - Predicate
-    rank: 1000
-    alias: test_case_predicate_id
-    owner: PathfinderTestCase
-    domain_of:
-    - TestCase
-    range: string
-  test_case_input_id:
-    name: test_case_input_id
-    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
-    aliases:
-    - InputID, node normalized
-    - SubjectID
-    rank: 1000
-    alias: test_case_input_id
-    owner: PathfinderTestCase
-    domain_of:
-    - TestCase
-    range: uriorcurie
-  qualifiers:
-    name: qualifiers
-    description: Optional qualifiers which constrain to the test asset defined knowledge
-      statement. Note that this field records such qualifier slots and values as tag=value
-      pairs, where the tag is the Biolink Model qualifier slot named and the value
-      is an acceptable (Biolink Model enum?) value of the said qualifier slot.
-    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
-    rank: 1000
-    multivalued: true
-    alias: qualifiers
-    owner: PathfinderTestCase
-    domain_of:
-    - TestAsset
-    - TestCase
-    range: Qualifier
-    inlined: true
-    inlined_as_list: true
-  input_category:
-    name: input_category
-    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
-    aliases:
-    - SubjectCategory
-    rank: 1000
-    alias: input_category
-    owner: PathfinderTestCase
-    domain_of:
-    - TestAsset
-    - TestCase
-    range: concept_category
-  output_category:
-    name: output_category
-    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
-    aliases:
-    - ObjectCategory
-    rank: 1000
-    alias: output_category
-    owner: PathfinderTestCase
-    domain_of:
-    - TestAsset
-    - TestCase
-    range: concept_category
   components:
     name: components
     description: The component that this test case is intended to run against.  Most
@@ -613,6 +410,7 @@ attributes:
     owner: PathfinderTestCase
     domain_of:
     - TestCase
+    - PathfinderTestCase
     - TestRunSession
     range: ComponentEnum
   test_env:
@@ -624,6 +422,7 @@ attributes:
     owner: PathfinderTestCase
     domain_of:
     - TestCase
+    - PathfinderTestCase
     - TestRunSession
     range: TestEnvEnum
   id:
@@ -664,9 +463,9 @@ attributes:
     range: string
   tags:
     name: tags
-    description: One or more 'tags' slot values (slot inherited from TestEntity) should
-      generally be defined as filters to specify TestAsset membership in a "Block
-      List" collection.
+    description: A human-readable tags for categorical memberships of a TestEntity
+      (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity
+      into formally typed or ad hoc lists.
     from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
     rank: 1000
     slot_uri: schema:additionalType

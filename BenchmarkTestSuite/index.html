@@ -142,6 +142,11 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
+<a class="md-nav__link" href="#inheritance">
+    Inheritance
+  </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#slots">
     Slots
   </a>
@@ -195,13 +200,49 @@
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"></path></svg>
 </a>
 <h1 id="class-benchmarktestsuite">Class: BenchmarkTestSuite</h1>
-<p><em>JsonObj(is_a='TestSuite')</em></p>
 <p>URI: <a href="https://w3id.org/TranslatorSRI/TranslatorTestingModel/BenchmarkTestSuite">ttm:BenchmarkTestSuite</a></p>
 <div class="mermaid"> classDiagram
     class BenchmarkTestSuite
+      TestSuite &lt;|-- BenchmarkTestSuite
+
+      BenchmarkTestSuite : description
+
+      BenchmarkTestSuite : id
+
+      BenchmarkTestSuite : name
+
+      BenchmarkTestSuite : tags
+
+      BenchmarkTestSuite : test_cases
+
+          BenchmarkTestSuite --&gt; TestCase : test_cases
+
+      BenchmarkTestSuite : test_metadata
+
+          BenchmarkTestSuite --&gt; TestMetadata : test_metadata
+
+      BenchmarkTestSuite : test_persona
+
+          BenchmarkTestSuite --&gt; TestPersonaEnum : test_persona
+
+      BenchmarkTestSuite : test_runner_settings
+
+      BenchmarkTestSuite : test_suite_specification
+
+          BenchmarkTestSuite --&gt; TestSuiteSpecification : test_suite_specification
+
 
 </div>
-<!-- no inheritance hierarchy -->
+<h2 id="inheritance">Inheritance</h2>
+<ul>
+<li><a href="../TestEntity/">TestEntity</a><ul>
+<li><a href="../TestSuite/">TestSuite</a><ul>
+<li><strong>BenchmarkTestSuite</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h2 id="slots">Slots</h2>
 <table>
 <thead>
@@ -214,10 +255,58 @@
 </thead>
 <tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td><a href="../test_metadata/">test_metadata</a></td>
+<td>0..1 <br/> <a href="../TestMetadata/">TestMetadata</a></td>
+<td>Test metadata describes the external provenance, cross-references and objecti...</td>
+<td><a href="../TestSuite/">TestSuite</a></td>
+</tr>
+<tr>
+<td><a href="../test_persona/">test_persona</a></td>
+<td>0..1 <br/> <a href="../TestPersonaEnum/">TestPersonaEnum</a></td>
+<td>A Test persona describes the user or operational context of a given test</td>
+<td><a href="../TestSuite/">TestSuite</a></td>
+</tr>
+<tr>
+<td><a href="../test_cases/">test_cases</a></td>
+<td>0..* <br/> <a href="../TestCase/">TestCase</a> or <br/><a href="../PathfinderTestCase/">PathfinderTestCase</a> or <br/><a href="../TestCase/">TestCase</a> or <br/><a href="../PerformanceTestCase/">PerformanceTestCase</a></td>
+<td>List of explicitly enumerated Test Cases</td>
+<td><a href="../TestSuite/">TestSuite</a></td>
+</tr>
+<tr>
+<td><a href="../test_suite_specification/">test_suite_specification</a></td>
+<td>0..1 <br/> <a href="../TestSuiteSpecification/">TestSuiteSpecification</a></td>
+<td>Declarative specification of a Test Suite of Test Cases whose generation is d...</td>
+<td><a href="../TestSuite/">TestSuite</a></td>
+</tr>
+<tr>
+<td><a href="../id/">id</a></td>
+<td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>A unique identifier for a Test Entity</td>
+<td><a href="../TestEntity/">TestEntity</a></td>
+</tr>
+<tr>
+<td><a href="../name/">name</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>A human-readable name for a Test Entity</td>
+<td><a href="../TestEntity/">TestEntity</a></td>
+</tr>
+<tr>
+<td><a href="../description/">description</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>A human-readable description for a Test Entity</td>
+<td><a href="../TestEntity/">TestEntity</a></td>
+</tr>
+<tr>
+<td><a href="../tags/">tags</a></td>
+<td>0..* <br/> <a href="../String/">String</a></td>
+<td>A human-readable tags for categorical memberships of a TestEntity (preferably...</td>
+<td><a href="../TestEntity/">TestEntity</a></td>
+</tr>
+<tr>
+<td><a href="../test_runner_settings/">test_runner_settings</a></td>
+<td>0..* <br/> <a href="../String/">String</a></td>
+<td>Scalar parameters for the TestRunner processing a given TestEntity</td>
+<td><a href="../TestEntity/">TestEntity</a></td>
 </tr>
 </tbody>
 </table>
@@ -250,16 +339,137 @@
 <h3 id="direct">Direct</h3>
 <details>
 <pre><code class="language-yaml">name: BenchmarkTestSuite
-description: JsonObj(is_a='TestSuite')
 from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+is_a: TestSuite
 
 </code></pre>
 </details>
 <h3 id="induced">Induced</h3>
 <details>
 <pre><code class="language-yaml">name: BenchmarkTestSuite
-description: JsonObj(is_a='TestSuite')
 from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+is_a: TestSuite
+attributes:
+  test_metadata:
+    name: test_metadata
+    description: Test metadata describes the external provenance, cross-references
+      and objectives for a given test.
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    alias: test_metadata
+    owner: BenchmarkTestSuite
+    domain_of:
+    - TestAsset
+    - TestSuite
+    range: TestMetadata
+    required: false
+    inlined: true
+  test_persona:
+    name: test_persona
+    description: A Test persona describes the user or operational context of a given
+      test.
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    alias: test_persona
+    owner: BenchmarkTestSuite
+    domain_of:
+    - TestSuite
+    range: TestPersonaEnum
+  test_cases:
+    name: test_cases
+    description: List of explicitly enumerated Test Cases.
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    multivalued: true
+    alias: test_cases
+    owner: BenchmarkTestSuite
+    domain_of:
+    - TestSuite
+    range: TestCase
+    required: false
+    inlined: true
+    any_of:
+    - range: PathfinderTestCase
+    - range: TestCase
+    - range: PerformanceTestCase
+  test_suite_specification:
+    name: test_suite_specification
+    description: Declarative specification of a Test Suite of Test Cases whose generation
+      is deferred, (i.e. within a Test Runner) or whose creation is achieved by stream
+      processing of an external data source.
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    alias: test_suite_specification
+    owner: BenchmarkTestSuite
+    domain_of:
+    - TestSuite
+    range: TestSuiteSpecification
+    required: false
+    inlined: true
+  id:
+    name: id
+    description: A unique identifier for a Test Entity
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    slot_uri: schema:identifier
+    identifier: true
+    alias: id
+    owner: BenchmarkTestSuite
+    domain_of:
+    - TestEntity
+    range: uriorcurie
+    required: true
+  name:
+    name: name
+    description: A human-readable name for a Test Entity
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    slot_uri: schema:name
+    alias: name
+    owner: BenchmarkTestSuite
+    domain_of:
+    - TestEntity
+    - PathfinderPathNode
+    range: string
+  description:
+    name: description
+    description: A human-readable description for a Test Entity
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    slot_uri: schema:description
+    alias: description
+    owner: BenchmarkTestSuite
+    domain_of:
+    - TestEntity
+    range: string
+  tags:
+    name: tags
+    description: A human-readable tags for categorical memberships of a TestEntity
+      (preferably a URI or CURIE). Typically used to aggregate instances of TestEntity
+      into formally typed or ad hoc lists.
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    slot_uri: schema:additionalType
+    multivalued: true
+    alias: tags
+    owner: BenchmarkTestSuite
+    domain_of:
+    - TestEntity
+    range: string
+  test_runner_settings:
+    name: test_runner_settings
+    description: Scalar parameters for the TestRunner processing a given TestEntity.
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    aliases:
+    - Settings
+    rank: 1000
+    multivalued: true
+    alias: test_runner_settings
+    owner: BenchmarkTestSuite
+    domain_of:
+    - TestEntity
+    range: string
+    required: false
 
 </code></pre>
 </details>

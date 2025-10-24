@@ -212,7 +212,6 @@
       TestEntity &lt;|-- TestAsset
 
 
-      TestAsset &lt;|-- PathfinderTestAsset
       TestAsset &lt;|-- AcceptanceTestAsset
       TestAsset &lt;|-- TestEdgeData
 
@@ -275,7 +274,6 @@
 <ul>
 <li><a href="../TestEntity/">TestEntity</a><ul>
 <li><strong>TestAsset</strong><ul>
-<li><a href="../PathfinderTestAsset/">PathfinderTestAsset</a></li>
 <li><a href="../AcceptanceTestAsset/">AcceptanceTestAsset</a></li>
 <li><a href="../TestEdgeData/">TestEdgeData</a></li>
 </ul>
@@ -451,6 +449,12 @@
 <td>range</td>
 <td><a href="./">TestAsset</a></td>
 </tr>
+<tr>
+<td><a href="../PerformanceTestCase/">PerformanceTestCase</a></td>
+<td><a href="../test_assets/">test_assets</a></td>
+<td>range</td>
+<td><a href="./">TestAsset</a></td>
+</tr>
 </tbody>
 </table>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
@@ -601,6 +605,7 @@ attributes:
     owner: TestAsset
     domain_of:
     - TestAsset
+    - PathfinderTestAsset
     range: predicate_type
   predicate_name:
     name: predicate_name
@@ -613,6 +618,7 @@ attributes:
     owner: TestAsset
     domain_of:
     - TestAsset
+    - PathfinderTestAsset
     range: string
   output_id:
     name: output_id
@@ -674,6 +680,7 @@ attributes:
     owner: TestAsset
     domain_of:
     - TestAsset
+    - PathfinderTestAsset
     - TestCase
     range: Qualifier
     inlined: true
@@ -688,6 +695,7 @@ attributes:
     owner: TestAsset
     domain_of:
     - TestAsset
+    - PathfinderTestAsset
     range: string
   test_issue:
     name: test_issue

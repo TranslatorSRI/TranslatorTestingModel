@@ -394,16 +394,20 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 </thead>
 <tbody>
 <tr>
-<td><a href="BenchmarkTestSuite/">BenchmarkTestSuite</a></td>
-<td>JsonObj(is_a='TestSuite')</td>
-</tr>
-<tr>
 <td><a href="PathfinderPathNode/">PathfinderPathNode</a></td>
 <td>Represents an output path node</td>
 </tr>
 <tr>
 <td><a href="TestEntity/">TestEntity</a></td>
 <td>Abstract global 'identification' class shared as a parent with all major model classes within the data model for Translator testing.</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="PathfinderTestAsset/">PathfinderTestAsset</a></td>
+<td>Represents a Test Asset, which is a single specific instance of TestCase-agnostic semantic parameters representing the specification of a Translator test target with inputs and (expected) outputs.</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="PathfinderTestCase/">PathfinderTestCase</a></td>
+<td>None</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="Precondition/">Precondition</a></td>
@@ -418,10 +422,6 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <td>Model derived from Jenn's test asset design and Shervin's runner JSON here as an example.</td>
 </tr>
 <tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="PathfinderTestAsset/">PathfinderTestAsset</a></td>
-<td>Represents a Test Asset, which is a single specific instance of TestCase-agnostic semantic parameters representing the specification of a Translator test target with inputs and (expected) outputs.</td>
-</tr>
-<tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="TestEdgeData/">TestEdgeData</a></td>
 <td>Represents a single Biolink Model compliant instance of a subject-predicate-object edge that can be used for testing.</td>
 </tr>
@@ -434,8 +434,8 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <td>See AcceptanceTestAsset above for more details.</td>
 </tr>
 <tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="PathfinderTestCase/">PathfinderTestCase</a></td>
-<td>None</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="PerformanceTestCase/">PerformanceTestCase</a></td>
+<td>Represents a performance test case.</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="QuantitativeTestCase/">QuantitativeTestCase</a></td>
@@ -470,8 +470,16 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <td>None</td>
 </tr>
 <tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="BenchmarkTestSuite/">BenchmarkTestSuite</a></td>
+<td>None</td>
+</tr>
+<tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="OneHopTestSuite/">OneHopTestSuite</a></td>
 <td>Test case for testing the integrity of "One Hop" knowledge graph retrievals sensa legacy SRI_Testing harness.</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="PerformanceTestSuite/">PerformanceTestSuite</a></td>
+<td>A small test suite designed to test the performance of the Translator system.</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="StandardsComplianceTestSuite/">StandardsComplianceTestSuite</a></td>
@@ -701,6 +709,10 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <td></td>
 </tr>
 <tr>
+<td><a href="spawn_rate/">spawn_rate</a></td>
+<td></td>
+</tr>
+<tr>
 <td><a href="string_entry/">string_entry</a></td>
 <td>The object of the core triple to be tested</td>
 </tr>
@@ -811,6 +823,10 @@ applied to run the diverse polymorphic testing objectives for the Biomedical Dat
 <tr>
 <td><a href="test_run_parameters/">test_run_parameters</a></td>
 <td>TestRunSession parameters informing a TestHarness about the global characteri...</td>
+</tr>
+<tr>
+<td><a href="test_run_time/">test_run_time</a></td>
+<td></td>
 </tr>
 <tr>
 <td><a href="test_runner_name/">test_runner_name</a></td>
