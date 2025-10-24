@@ -94,8 +94,10 @@ linkml:Sparqlpath xsd:string
 }
 
 <BenchmarkTestSuite> CLOSED {
-    (  $<BenchmarkTestSuite_tes> rdf:type . * ;
-       rdf:type [ <BenchmarkTestSuite> ] ?
+    (  $<BenchmarkTestSuite_tes> (  &<TestSuite_tes> ;
+          rdf:type [ <TestSuite> ] ?
+       ) ;
+       rdf:type [ <BenchmarkTestSuite> ]
     )
 }
 
@@ -107,7 +109,7 @@ linkml:Sparqlpath xsd:string
     )
 }
 
-<PathfinderPathNode> {
+<PathfinderPathNode> CLOSED {
     (  $<PathfinderPathNode_tes> (  schema1:additionalType @linkml:String * ;
           schema1:name @linkml:String ?
        ) ;
@@ -116,27 +118,64 @@ linkml:Sparqlpath xsd:string
 }
 
 <PathfinderTestAsset> CLOSED {
-    (  $<PathfinderTestAsset_tes> (  &<TestAsset_tes> ;
-          rdf:type [ <TestAsset> ] ? ;
+    (  $<PathfinderTestAsset_tes> (  &<TestEntity_tes> ;
+          rdf:type [ <TestEntity> ] ? ;
           <source_input_id> @linkml:Uriorcurie ? ;
           <source_input_name> @linkml:String ? ;
           <source_input_category> @<ConceptCategory> ? ;
           <target_input_id> @linkml:Uriorcurie ? ;
           <target_input_name> @linkml:String ? ;
           <target_input_category> @<ConceptCategory> ? ;
-          <path_nodes> @<PathfinderPathNode> * ;
-          <minimum_required_path_nodes> @linkml:Integer ?
+          <predicate_id> @<PredicateType> ? ;
+          <predicate_name> @linkml:String ? ;
+          <qualifiers> @<Qualifier> * ;
+          <minimum_required_path_nodes> @linkml:Integer ;
+          <path_nodes> @<PathfinderPathNode> + ;
+          <expected_output> @linkml:String ?
        ) ;
        rdf:type [ <PathfinderTestAsset> ]
     )
 }
 
 <PathfinderTestCase> CLOSED {
-    (  $<PathfinderTestCase_tes> (  &<TestCase_tes> ;
-          rdf:type [ <TestCase> ] ? ;
-          <test_assets> @<PathfinderTestAsset> +
+    (  $<PathfinderTestCase_tes> (  &<TestEntity_tes> ;
+          rdf:type [ <TestEntity> ] ? ;
+          <test_assets> @<PathfinderTestAsset> + ;
+          <test_case_objective> [ <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#AcceptanceTest>
+             <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#BenchmarkTest>
+             <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#QuantitativeTest>
+             <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#StandardsValidationTest>
+             <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#OneHopTest> ] ? ;
+          <components> [ infores:ncats-ars infores:arax infores:explanatory-agent infores:improving-agent infores:aragorn
+             infores:biothings-explorer infores:unsecret-agent infores:rtx-kg2 infores:icees-kg infores:cam-kp infores:spoke
+             infores:molepro infores:genetics-data-provider infores:textmining-kp infores:cohd infores:openpredict
+             infores:knowledge-collaboratory infores:connections-hypothesis ] * ;
+          <test_env> [ <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#dev>
+             <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#ci>
+             <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#test>
+             <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#prod> ] ?
        ) ;
        rdf:type [ <PathfinderTestCase> ]
+    )
+}
+
+<PerformanceTestCase> CLOSED {
+    (  $<PerformanceTestCase_tes> (  &<TestCase_tes> ;
+          rdf:type [ <TestCase> ] ? ;
+          <test_run_time> @linkml:Integer ;
+          <spawn_rate> @linkml:Float ;
+          <test_assets> @<TestAsset> +
+       ) ;
+       rdf:type [ <PerformanceTestCase> ]
+    )
+}
+
+<PerformanceTestSuite> CLOSED {
+    (  $<PerformanceTestSuite_tes> (  &<TestSuite_tes> ;
+          rdf:type [ <TestSuite> ] ? ;
+          <test_cases> @<PerformanceTestCase> *
+       ) ;
+       rdf:type [ <PerformanceTestSuite> ]
     )
 }
 
@@ -207,7 +246,7 @@ linkml:Sparqlpath xsd:string
           ) ;
           rdf:type [ <TestAsset> ]
        )
-    } OR @<AcceptanceTestAsset> OR @<PathfinderTestAsset> OR @<TestEdgeData>
+    } OR @<AcceptanceTestAsset> OR @<TestEdgeData>
 )
 
 <TestCase>  (
@@ -252,7 +291,7 @@ linkml:Sparqlpath xsd:string
           ) ;
           rdf:type [ <TestCase> ]
        )
-    } OR @<AcceptanceTestCase> OR @<PathfinderTestCase> OR @<QuantitativeTestCase>
+    } OR @<AcceptanceTestCase> OR @<PerformanceTestCase> OR @<QuantitativeTestCase>
 )
 
 <TestCaseResult> CLOSED {
@@ -277,8 +316,8 @@ linkml:Sparqlpath xsd:string
 }
 
 <TestEntity>  (
-    @<Precondition> OR @<TestAsset> OR @<TestCase> OR @<TestCaseResult> OR @<TestMetadata> OR @<TestOutput> OR @<TestResultPKSet>
-    OR @<TestRunSession> OR @<TestSuite> OR @<TestSuiteSpecification>
+    @<PathfinderTestAsset> OR @<PathfinderTestCase> OR @<Precondition> OR @<TestAsset> OR @<TestCase> OR @<TestCaseResult> OR
+    @<TestMetadata> OR @<TestOutput> OR @<TestResultPKSet> OR @<TestRunSession> OR @<TestSuite> OR @<TestSuiteSpecification>
 )
 
 <TestEntity_struct> {
@@ -383,7 +422,8 @@ linkml:Sparqlpath xsd:string
           ) ;
           rdf:type [ <TestSuite> ]
        )
-    } OR @<AcceptanceTestSuite> OR @<OneHopTestSuite> OR @<StandardsComplianceTestSuite>
+    } OR @<AcceptanceTestSuite> OR @<BenchmarkTestSuite> OR @<OneHopTestSuite> OR @<PerformanceTestSuite> OR
+    @<StandardsComplianceTestSuite>
 )
 
 <TestSuiteSpecification> CLOSED {
