@@ -1,0 +1,14 @@
+{
+  "id": "example:TestAsset002",
+  "name": "TestAsset002",
+  "description": "Sirolimus treats Castleman disease",
+  "input_id": "MONDO:0015564",
+  "predicate_name": "treats",
+  "output_ids": ["PUBCHEM.COMPOUND:5284616", "CHEBI:9168"],
+  "output_name": "sirolimus",
+  "expected_output": "TopAnswer",
+  "test_runner_settings": ["inferred"],
+  "test_metadata": {
+    "id": "example:TestAsset002"
+  }
+}

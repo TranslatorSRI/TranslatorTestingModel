@@ -37,7 +37,6 @@
 --     * Slot: input_category Description: 
 --     * Slot: predicate_id Description: 
 --     * Slot: predicate_name Description: 
---     * Slot: output_id Description: 
 --     * Slot: output_name Description: 
 --     * Slot: output_category Description: 
 --     * Slot: association Description: Specific Biolink Model association 'category' which applies to the test asset defined knowledge statement
@@ -85,7 +84,6 @@
 --     * Slot: input_category Description: 
 --     * Slot: predicate_id Description: 
 --     * Slot: predicate_name Description: 
---     * Slot: output_id Description: 
 --     * Slot: output_name Description: 
 --     * Slot: output_category Description: 
 --     * Slot: association Description: Specific Biolink Model association 'category' which applies to the test asset defined knowledge statement
@@ -106,7 +104,6 @@
 --     * Slot: input_category Description: 
 --     * Slot: predicate_id Description: 
 --     * Slot: predicate_name Description: 
---     * Slot: output_id Description: 
 --     * Slot: output_name Description: 
 --     * Slot: output_category Description: 
 --     * Slot: association Description: Specific Biolink Model association 'category' which applies to the test asset defined knowledge statement
@@ -134,7 +131,6 @@
 --     * Slot: test_case_input_id Description: 
 --     * Slot: input_category Description: 
 --     * Slot: output_category Description: 
---     * Slot: test_env Description: Deployment environment within which the associated TestSuite is run.
 --     * Slot: id Description: A unique identifier for a Test Entity
 --     * Slot: name Description: A human-readable name for a Test Entity
 --     * Slot: description Description: A human-readable description for a Test Entity
@@ -145,7 +141,6 @@
 --     * Slot: OneHopTestSuite_id Description: Autocreated FK slot
 -- # Class: "PathfinderTestCase" Description: ""
 --     * Slot: test_case_objective Description: Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative; standards compliance; graph navigation integrity)
---     * Slot: test_env Description: Deployment environment within which the associated TestSuite is run.
 --     * Slot: id Description: A unique identifier for a Test Entity
 --     * Slot: name Description: A human-readable name for a Test Entity
 --     * Slot: description Description: A human-readable description for a Test Entity
@@ -159,7 +154,6 @@
 --     * Slot: test_case_input_id Description: 
 --     * Slot: input_category Description: 
 --     * Slot: output_category Description: 
---     * Slot: test_env Description: Deployment environment within which the associated TestSuite is run.
 --     * Slot: id Description: A unique identifier for a Test Entity
 --     * Slot: name Description: A human-readable name for a Test Entity
 --     * Slot: description Description: A human-readable description for a Test Entity
@@ -173,7 +167,6 @@
 --     * Slot: test_case_input_id Description: 
 --     * Slot: input_category Description: 
 --     * Slot: output_category Description: 
---     * Slot: test_env Description: Deployment environment within which the associated TestSuite is run.
 --     * Slot: id Description: A unique identifier for a Test Entity
 --     * Slot: name Description: A human-readable name for a Test Entity
 --     * Slot: description Description: A human-readable description for a Test Entity
@@ -189,7 +182,6 @@
 --     * Slot: test_case_input_id Description: 
 --     * Slot: input_category Description: 
 --     * Slot: output_category Description: 
---     * Slot: test_env Description: Deployment environment within which the associated TestSuite is run.
 --     * Slot: id Description: A unique identifier for a Test Entity
 --     * Slot: name Description: A human-readable name for a Test Entity
 --     * Slot: description Description: A human-readable description for a Test Entity
@@ -251,7 +243,7 @@
 --     * Slot: TestRunSession_id Description: Autocreated FK slot
 --     * Slot: test_case_id Description: Slot referencing a single TestCase.
 -- # Class: "TestRunSession" Description: "Single run of a TestRunner in a given environment, with a specified set of test_entities (generally, one or more instances of TestSuite)."
---     * Slot: test_env Description: Deployment environment within which the associated TestSuite is run.
+--     * Slot: test_env Description: Deployment environment within which a TestRunSession ran. Test cases don't carry one: the same suite runs in every environment, and the TestHarness is told which one to test.
 --     * Slot: test_runner_name Description: Global system name of a TestRunner.
 --     * Slot: timestamp Description: Date time when a given entity was created.
 --     * Slot: id Description: A unique identifier for a Test Entity
@@ -288,6 +280,9 @@
 -- # Class: "PathfinderPathNode_ids" Description: ""
 --     * Slot: PathfinderPathNode_id Description: Autocreated FK slot
 --     * Slot: ids Description: 
+-- # Class: "TestAsset_output_ids" Description: ""
+--     * Slot: TestAsset_id Description: Autocreated FK slot
+--     * Slot: output_ids Description: One or more CURIEs that identify the expected output. Any one of them may stand for the expected answer, eg the same chemical under its ChEBI and PubChem identifiers when node normalization no longer merges them into one concept.
 -- # Class: "TestAsset_tags" Description: ""
 --     * Slot: TestAsset_id Description: Autocreated FK slot
 --     * Slot: tags Description: One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a "Block List" collection
@@ -303,12 +298,18 @@
 -- # Class: "PathfinderTestAsset_test_runner_settings" Description: ""
 --     * Slot: PathfinderTestAsset_id Description: Autocreated FK slot
 --     * Slot: test_runner_settings Description: Scalar parameters for the TestRunner processing a given TestEntity.
+-- # Class: "AcceptanceTestAsset_output_ids" Description: ""
+--     * Slot: AcceptanceTestAsset_id Description: Autocreated FK slot
+--     * Slot: output_ids Description: One or more CURIEs that identify the expected output. Any one of them may stand for the expected answer, eg the same chemical under its ChEBI and PubChem identifiers when node normalization no longer merges them into one concept.
 -- # Class: "AcceptanceTestAsset_tags" Description: ""
 --     * Slot: AcceptanceTestAsset_id Description: Autocreated FK slot
 --     * Slot: tags Description: One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a "Block List" collection
 -- # Class: "AcceptanceTestAsset_test_runner_settings" Description: ""
 --     * Slot: AcceptanceTestAsset_id Description: Autocreated FK slot
 --     * Slot: test_runner_settings Description: Scalar settings for the TestRunner, e.g. "inferred"
+-- # Class: "TestEdgeData_output_ids" Description: ""
+--     * Slot: TestEdgeData_id Description: Autocreated FK slot
+--     * Slot: output_ids Description: One or more CURIEs that identify the expected output. Any one of them may stand for the expected answer, eg the same chemical under its ChEBI and PubChem identifiers when node normalization no longer merges them into one concept.
 -- # Class: "TestEdgeData_tags" Description: ""
 --     * Slot: TestEdgeData_id Description: Autocreated FK slot
 --     * Slot: tags Description: One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a "Block List" collection
@@ -473,7 +474,6 @@ CREATE TABLE "Precondition" (
 );
 CREATE TABLE "PathfinderTestCase" (
 	test_case_objective VARCHAR(23), 
-	test_env VARCHAR(4), 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	description TEXT, 
@@ -489,7 +489,6 @@ CREATE TABLE "AcceptanceTestCase" (
 	test_case_input_id TEXT, 
 	input_category TEXT, 
 	output_category TEXT, 
-	test_env VARCHAR(4), 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	description TEXT, 
@@ -505,7 +504,6 @@ CREATE TABLE "QuantitativeTestCase" (
 	test_case_input_id TEXT, 
 	input_category TEXT, 
 	output_category TEXT, 
-	test_env VARCHAR(4), 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	description TEXT, 
@@ -600,7 +598,6 @@ CREATE TABLE "AcceptanceTestAsset" (
 	input_category TEXT, 
 	predicate_id TEXT, 
 	predicate_name TEXT, 
-	output_id TEXT, 
 	output_name TEXT, 
 	output_category TEXT, 
 	association TEXT, 
@@ -625,7 +622,6 @@ CREATE TABLE "TestEdgeData" (
 	input_category TEXT, 
 	predicate_id TEXT, 
 	predicate_name TEXT, 
-	output_id TEXT, 
 	output_name TEXT, 
 	output_category TEXT, 
 	association TEXT, 
@@ -877,7 +873,6 @@ CREATE TABLE "TestCase" (
 	test_case_input_id TEXT, 
 	input_category TEXT, 
 	output_category TEXT, 
-	test_env VARCHAR(4), 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	description TEXT, 
@@ -905,7 +900,6 @@ CREATE TABLE "PerformanceTestCase" (
 	test_case_input_id TEXT, 
 	input_category TEXT, 
 	output_category TEXT, 
-	test_env VARCHAR(4), 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	description TEXT, 
@@ -944,6 +938,12 @@ CREATE TABLE "PathfinderTestAsset_test_runner_settings" (
 	PRIMARY KEY ("PathfinderTestAsset_id", test_runner_settings), 
 	FOREIGN KEY("PathfinderTestAsset_id") REFERENCES "PathfinderTestAsset" (id)
 );
+CREATE TABLE "AcceptanceTestAsset_output_ids" (
+	"AcceptanceTestAsset_id" TEXT, 
+	output_ids TEXT, 
+	PRIMARY KEY ("AcceptanceTestAsset_id", output_ids), 
+	FOREIGN KEY("AcceptanceTestAsset_id") REFERENCES "AcceptanceTestAsset" (id)
+);
 CREATE TABLE "AcceptanceTestAsset_tags" (
 	"AcceptanceTestAsset_id" TEXT, 
 	tags TEXT, 
@@ -955,6 +955,12 @@ CREATE TABLE "AcceptanceTestAsset_test_runner_settings" (
 	test_runner_settings TEXT, 
 	PRIMARY KEY ("AcceptanceTestAsset_id", test_runner_settings), 
 	FOREIGN KEY("AcceptanceTestAsset_id") REFERENCES "AcceptanceTestAsset" (id)
+);
+CREATE TABLE "TestEdgeData_output_ids" (
+	"TestEdgeData_id" TEXT, 
+	output_ids TEXT, 
+	PRIMARY KEY ("TestEdgeData_id", output_ids), 
+	FOREIGN KEY("TestEdgeData_id") REFERENCES "TestEdgeData" (id)
 );
 CREATE TABLE "TestEdgeData_tags" (
 	"TestEdgeData_id" TEXT, 
@@ -1046,7 +1052,6 @@ CREATE TABLE "TestAsset" (
 	input_category TEXT, 
 	predicate_id TEXT, 
 	predicate_name TEXT, 
-	output_id TEXT, 
 	output_name TEXT, 
 	output_category TEXT, 
 	association TEXT, 
@@ -1152,6 +1157,12 @@ CREATE TABLE "Qualifier" (
 	FOREIGN KEY("AcceptanceTestCase_id") REFERENCES "AcceptanceTestCase" (id), 
 	FOREIGN KEY("QuantitativeTestCase_id") REFERENCES "QuantitativeTestCase" (id), 
 	FOREIGN KEY("PerformanceTestCase_id") REFERENCES "PerformanceTestCase" (id)
+);
+CREATE TABLE "TestAsset_output_ids" (
+	"TestAsset_id" TEXT, 
+	output_ids TEXT, 
+	PRIMARY KEY ("TestAsset_id", output_ids), 
+	FOREIGN KEY("TestAsset_id") REFERENCES "TestAsset" (id)
 );
 CREATE TABLE "TestAsset_tags" (
 	"TestAsset_id" TEXT, 

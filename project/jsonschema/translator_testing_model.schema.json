@@ -63,8 +63,12 @@
                 "output_category": {
                     "type": "string"
                 },
-                "output_id": {
-                    "type": "string"
+                "output_ids": {
+                    "description": "One or more CURIEs that identify the expected output. Any one of them may stand for the expected answer, eg the same chemical under its ChEBI and PubChem identifiers when node normalization no longer merges them into one concept.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 },
                 "output_name": {
                     "type": "string"
@@ -212,10 +216,6 @@
                 "test_case_source": {
                     "$ref": "#/$defs/TestSourceEnum",
                     "description": "Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string."
-                },
-                "test_env": {
-                    "$ref": "#/$defs/TestEnvEnum",
-                    "description": "Deployment environment within which the associated TestSuite is run."
                 },
                 "test_runner_settings": {
                     "description": "Scalar parameters for the TestRunner processing a given TestEntity.",
@@ -686,10 +686,6 @@
                     "$ref": "#/$defs/TestObjectiveEnum",
                     "description": "Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative; standards compliance; graph navigation integrity)"
                 },
-                "test_env": {
-                    "$ref": "#/$defs/TestEnvEnum",
-                    "description": "Deployment environment within which the associated TestSuite is run."
-                },
                 "test_runner_settings": {
                     "description": "Scalar parameters for the TestRunner processing a given TestEntity.",
                     "items": {
@@ -784,10 +780,6 @@
                 "test_case_source": {
                     "$ref": "#/$defs/TestSourceEnum",
                     "description": "Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string."
-                },
-                "test_env": {
-                    "$ref": "#/$defs/TestEnvEnum",
-                    "description": "Deployment environment within which the associated TestSuite is run."
                 },
                 "test_run_time": {
                     "type": "integer"
@@ -892,10 +884,6 @@
                 "test_case_source": {
                     "$ref": "#/$defs/TestSourceEnum",
                     "description": "Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string."
-                },
-                "test_env": {
-                    "$ref": "#/$defs/TestEnvEnum",
-                    "description": "Deployment environment within which the associated TestSuite is run."
                 },
                 "test_run_time": {
                     "type": "integer"
@@ -1106,10 +1094,6 @@
                     "$ref": "#/$defs/TestSourceEnum",
                     "description": "Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string."
                 },
-                "test_env": {
-                    "$ref": "#/$defs/TestEnvEnum",
-                    "description": "Deployment environment within which the associated TestSuite is run."
-                },
                 "test_runner_settings": {
                     "description": "Scalar parameters for the TestRunner processing a given TestEntity.",
                     "items": {
@@ -1263,8 +1247,12 @@
                 "output_category": {
                     "type": "string"
                 },
-                "output_id": {
-                    "type": "string"
+                "output_ids": {
+                    "description": "One or more CURIEs that identify the expected output. Any one of them may stand for the expected answer, eg the same chemical under its ChEBI and PubChem identifiers when node normalization no longer merges them into one concept.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 },
                 "output_name": {
                     "type": "string"
@@ -1396,10 +1384,6 @@
                 "test_case_source": {
                     "$ref": "#/$defs/TestSourceEnum",
                     "description": "Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string."
-                },
-                "test_env": {
-                    "$ref": "#/$defs/TestEnvEnum",
-                    "description": "Deployment environment within which the associated TestSuite is run."
                 },
                 "test_runner_settings": {
                     "description": "Scalar parameters for the TestRunner processing a given TestEntity.",
@@ -1603,10 +1587,6 @@
                     "$ref": "#/$defs/TestSourceEnum",
                     "description": "Provenance of a specific set of test assets, cases and/or suites.  Or, the person who cares about this,  know about this.  We would like this to be an ORCID eventually, but currently it is just a string."
                 },
-                "test_env": {
-                    "$ref": "#/$defs/TestEnvEnum",
-                    "description": "Deployment environment within which the associated TestSuite is run."
-                },
                 "test_runner_settings": {
                     "description": "Scalar parameters for the TestRunner processing a given TestEntity.",
                     "items": {
@@ -1663,8 +1643,12 @@
                 "output_category": {
                     "type": "string"
                 },
-                "output_id": {
-                    "type": "string"
+                "output_ids": {
+                    "description": "One or more CURIEs that identify the expected output. Any one of them may stand for the expected answer, eg the same chemical under its ChEBI and PubChem identifiers when node normalization no longer merges them into one concept.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 },
                 "output_name": {
                     "type": "string"
@@ -2005,7 +1989,7 @@
                 },
                 "test_env": {
                     "$ref": "#/$defs/TestEnvEnum",
-                    "description": "Deployment environment within which the associated TestSuite is run."
+                    "description": "Deployment environment within which a TestRunSession ran. Test cases don't carry one: the same suite runs in every environment, and the TestHarness is told which one to test."
                 },
                 "test_run_parameters": {
                     "description": "Different TestRunners could expect additional global test configuration parameters, like the applicable TRAPI version (\"trapi_version\") or Biolink Model versions (\"biolink_version\").",
