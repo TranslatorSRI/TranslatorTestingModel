@@ -269,7 +269,7 @@
 <tr>
 <td><a href="../test_env/">test_env</a></td>
 <td>0..1 <br/> <a href="../TestEnvEnum/">TestEnvEnum</a></td>
-<td>Deployment environment within which the associated TestSuite is run</td>
+<td>Deployment environment within which a TestRunSession ran</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -433,14 +433,14 @@ attributes:
     range: ComponentEnum
   test_env:
     name: test_env
-    description: Deployment environment within which the associated TestSuite is run.
+    description: 'Deployment environment within which a TestRunSession ran. Test cases
+      don''t carry one: the same suite runs in every environment, and the TestHarness
+      is told which one to test.'
     from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
     rank: 1000
     alias: test_env
     owner: TestRunSession
     domain_of:
-    - TestCase
-    - PathfinderTestCase
     - TestRunSession
     range: TestEnvEnum
   test_runner_name:

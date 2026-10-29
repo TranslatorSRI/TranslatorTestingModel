@@ -252,10 +252,6 @@
 
           AcceptanceTestCase --&gt; TestSourceEnum : test_case_source
 
-      AcceptanceTestCase : test_env
-
-          AcceptanceTestCase --&gt; TestEnvEnum : test_env
-
       AcceptanceTestCase : test_runner_settings
 
       AcceptanceTestCase : trapi_template
@@ -361,12 +357,6 @@
 <td><a href="../components/">components</a></td>
 <td>0..* <br/> <a href="../ComponentEnum/">ComponentEnum</a></td>
 <td>The component that this test case is intended to run against</td>
-<td><a href="../TestCase/">TestCase</a></td>
-</tr>
-<tr>
-<td><a href="../test_env/">test_env</a></td>
-<td>0..1 <br/> <a href="../TestEnvEnum/">TestEnvEnum</a></td>
-<td>Deployment environment within which the associated TestSuite is run</td>
 <td><a href="../TestCase/">TestCase</a></td>
 </tr>
 <tr>
@@ -624,18 +614,6 @@ attributes:
     - PathfinderTestCase
     - TestRunSession
     range: ComponentEnum
-  test_env:
-    name: test_env
-    description: Deployment environment within which the associated TestSuite is run.
-    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
-    rank: 1000
-    alias: test_env
-    owner: AcceptanceTestCase
-    domain_of:
-    - TestCase
-    - PathfinderTestCase
-    - TestRunSession
-    range: TestEnvEnum
   id:
     name: id
     description: A unique identifier for a Test Entity

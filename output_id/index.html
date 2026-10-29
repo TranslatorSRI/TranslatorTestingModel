@@ -256,49 +256,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#applicable-classes" class="md-nav__link">
-    Applicable Classes
+  <a href="#domain-and-range" class="md-nav__link">
+    Domain and Range
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
-    Properties
+  <a href="#parents" class="md-nav__link">
+    Parents
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#aliases" class="md-nav__link">
-    Aliases
+  <a href="#children" class="md-nav__link">
+    Children
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#identifier-and-mapping-information" class="md-nav__link">
-    Identifier and Mapping Information
+  <a href="#used-by" class="md-nav__link">
+    Used by
   </a>
-  
-    <nav class="md-nav" aria-label="Identifier and Mapping Information">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#schema-source" class="md-nav__link">
-    Schema Source
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#linkml-source" class="md-nav__link">
-    LinkML Source
+  <a href="#other-properties" class="md-nav__link">
+    Other properties
   </a>
   
 </li>
@@ -325,66 +312,33 @@
 
 <h1 id="slot-output_id">Slot: output_id</h1>
 <p>URI: <a href="https://w3id.org/TranslatorSRI/TranslatorTestingModel/output_id">ttm:output_id</a></p>
-<!-- no inheritance hierarchy -->
-
-<h2 id="applicable-classes">Applicable Classes</h2>
+<h2 id="domain-and-range">Domain and Range</h2>
+<p>None &#8594;  <sub>0..1</sub> <a href="types/Uriorcurie.md">Uriorcurie</a></p>
+<h2 id="parents">Parents</h2>
+<h2 id="children">Children</h2>
+<h2 id="used-by">Used by</h2>
+<ul>
+<li><a href="../QueryAnswerPair/">QueryAnswerPair</a></li>
+<li><a href="../TestAsset/">TestAsset</a></li>
+<li><a href="../TestEdgeData/">TestEdgeData</a></li>
+</ul>
+<h2 id="other-properties">Other properties</h2>
 <table>
 <thead>
 <tr>
-<th>Name</th>
-<th>Description</th>
-<th>Modifies Slot</th>
+<th></th>
+<th></th>
+<th></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><a href="../AcceptanceTestAsset/">AcceptanceTestAsset</a></td>
-<td>Model derived from Jenn's test asset design and Shervin's runner JSON here as...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../TestEdgeData/">TestEdgeData</a></td>
-<td>Represents a single Biolink Model compliant instance of a subject-predicate-o...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../TestAsset/">TestAsset</a></td>
-<td>Represents a Test Asset, which is a single specific instance of TestCase-agno...</td>
-<td>no</td>
+<td><strong>Aliases:</strong></td>
+<td></td>
+<td>OutputID</td>
 </tr>
 </tbody>
 </table>
-<h2 id="properties">Properties</h2>
-<ul>
-<li>Range: <a href="../Uriorcurie/">Uriorcurie</a></li>
-</ul>
-<h2 id="aliases">Aliases</h2>
-<ul>
-<li>OutputID</li>
-<li>ObjectID</li>
-</ul>
-<h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="schema-source">Schema Source</h3>
-<ul>
-<li>from schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel</li>
-</ul>
-<h2 id="linkml-source">LinkML Source</h2>
-<details>
-
-<pre><code class="language-yaml">name: output_id
-from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
-aliases:
-- OutputID
-- ObjectID
-rank: 1000
-alias: output_id
-domain_of:
-- TestAsset
-range: uriorcurie
-
-</code></pre>
-
-</details>
 
 
 

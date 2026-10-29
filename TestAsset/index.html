@@ -236,7 +236,7 @@
 
       TestAsset : output_category
 
-      TestAsset : output_id
+      TestAsset : output_ids
 
       TestAsset : output_name
 
@@ -323,9 +323,9 @@
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../output_id/">output_id</a></td>
-<td>0..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
-<td></td>
+<td><a href="../output_ids/">output_ids</a></td>
+<td>0..* <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>One or more CURIEs that identify the expected output</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -497,7 +497,7 @@ slots:
 - input_category
 - predicate_id
 - predicate_name
-- output_id
+- output_ids
 - output_name
 - output_category
 - association
@@ -620,14 +620,19 @@ attributes:
     - TestAsset
     - PathfinderTestAsset
     range: string
-  output_id:
-    name: output_id
+  output_ids:
+    name: output_ids
+    description: One or more CURIEs that identify the expected output. Any one of
+      them may stand for the expected answer, eg the same chemical under its ChEBI
+      and PubChem identifiers when node normalization no longer merges them into one
+      concept.
     from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
     aliases:
     - OutputID
     - ObjectID
     rank: 1000
-    alias: output_id
+    multivalued: true
+    alias: output_ids
     owner: TestAsset
     domain_of:
     - TestAsset

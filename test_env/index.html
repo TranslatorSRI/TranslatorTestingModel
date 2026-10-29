@@ -317,7 +317,7 @@
 
 
 <h1 id="slot-test_env">Slot: test_env</h1>
-<p><em>Deployment environment within which the associated TestSuite is run.</em></p>
+<p><em>Deployment environment within which a TestRunSession ran. Test cases don't carry one: the same suite runs in every environment, and the TestHarness is told which one to test.</em></p>
 <p>URI: <a href="https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_env">ttm:test_env</a></p>
 <!-- no inheritance hierarchy -->
 
@@ -332,33 +332,8 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../AcceptanceTestCase/">AcceptanceTestCase</a></td>
-<td>See AcceptanceTestAsset above for more details</td>
-<td>no</td>
-</tr>
-<tr>
 <td><a href="../TestRunSession/">TestRunSession</a></td>
 <td>Single run of a TestRunner in a given environment, with a specified set of te...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../QuantitativeTestCase/">QuantitativeTestCase</a></td>
-<td>Assumed additional model from Shervin's runner JSON here as an example</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../PerformanceTestCase/">PerformanceTestCase</a></td>
-<td>Represents a performance test case</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../PathfinderTestCase/">PathfinderTestCase</a></td>
-<td></td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../TestCase/">TestCase</a></td>
-<td>Represents a single enumerated instance of Test Case, derived from a  given c...</td>
 <td>no</td>
 </tr>
 </tbody>
@@ -376,13 +351,13 @@
 <details>
 
 <pre><code class="language-yaml">name: test_env
-description: Deployment environment within which the associated TestSuite is run.
+description: 'Deployment environment within which a TestRunSession ran. Test cases
+  don''t carry one: the same suite runs in every environment, and the TestHarness
+  is told which one to test.'
 from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
 rank: 1000
 alias: test_env
 domain_of:
-- TestCase
-- PathfinderTestCase
 - TestRunSession
 range: TestEnvEnum
 
