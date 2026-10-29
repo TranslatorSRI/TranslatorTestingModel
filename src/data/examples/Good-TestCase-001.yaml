@@ -11,7 +11,6 @@
 #      TestCase, used to probe a particular test condition.
 #    is_a: TestEntity
 #    slots:
-#      - test_env
 #      - test_case_type
 #      - query_type
 #      - test_assets

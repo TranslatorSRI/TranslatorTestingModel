@@ -1779,13 +1779,11 @@
     {
       "name": "test_env",
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_env",
-      "description": "Deployment environment within which the associated TestSuite is run.",
+      "description": "Deployment environment within which a TestRunSession ran. Test cases don't carry one: the same suite runs in every environment, and the TestHarness is told which one to test.",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_env",
       "owner": "TestRunSession",
       "domain_of": [
-        "TestCase",
-        "PathfinderTestCase",
         "TestRunSession"
       ],
       "range": "TestEnvEnum",
@@ -2672,7 +2670,6 @@
         "input_category",
         "output_category",
         "components",
-        "test_env",
         "TestCase_tags"
       ],
       "slot_usage": {},
@@ -2692,8 +2689,7 @@
         "test_runner_settings",
         "PathfinderTestCase_test_assets",
         "test_case_objective",
-        "components",
-        "test_env"
+        "components"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/PathfinderTestCase",
@@ -2722,7 +2718,6 @@
         "input_category",
         "output_category",
         "components",
-        "test_env",
         "TestCase_tags",
         "AcceptanceTestCase_test_assets"
       ],
@@ -2754,7 +2749,6 @@
         "input_category",
         "output_category",
         "components",
-        "test_env",
         "TestCase_tags"
       ],
       "slot_usage": {},
@@ -2784,7 +2778,6 @@
         "input_category",
         "output_category",
         "components",
-        "test_env",
         "TestCase_tags",
         "performanceTestCase__test_run_time",
         "performanceTestCase__spawn_rate",
@@ -3041,9 +3034,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "translator_testing_model.yaml",
-  "source_file_date": "2026-10-29T02:02:06",
-  "source_file_size": 32414,
-  "generation_date": "2026-10-29T02:03:21",
+  "source_file_date": "2026-10-29T16:38:03",
+  "source_file_size": 32498,
+  "generation_date": "2026-10-29T16:38:18",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",

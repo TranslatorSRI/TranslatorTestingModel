@@ -131,7 +131,6 @@
 --     * Slot: test_case_input_id Description: 
 --     * Slot: input_category Description: 
 --     * Slot: output_category Description: 
---     * Slot: test_env Description: Deployment environment within which the associated TestSuite is run.
 --     * Slot: id Description: A unique identifier for a Test Entity
 --     * Slot: name Description: A human-readable name for a Test Entity
 --     * Slot: description Description: A human-readable description for a Test Entity
@@ -142,7 +141,6 @@
 --     * Slot: OneHopTestSuite_id Description: Autocreated FK slot
 -- # Class: "PathfinderTestCase" Description: ""
 --     * Slot: test_case_objective Description: Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative; standards compliance; graph navigation integrity)
---     * Slot: test_env Description: Deployment environment within which the associated TestSuite is run.
 --     * Slot: id Description: A unique identifier for a Test Entity
 --     * Slot: name Description: A human-readable name for a Test Entity
 --     * Slot: description Description: A human-readable description for a Test Entity
@@ -156,7 +154,6 @@
 --     * Slot: test_case_input_id Description: 
 --     * Slot: input_category Description: 
 --     * Slot: output_category Description: 
---     * Slot: test_env Description: Deployment environment within which the associated TestSuite is run.
 --     * Slot: id Description: A unique identifier for a Test Entity
 --     * Slot: name Description: A human-readable name for a Test Entity
 --     * Slot: description Description: A human-readable description for a Test Entity
@@ -170,7 +167,6 @@
 --     * Slot: test_case_input_id Description: 
 --     * Slot: input_category Description: 
 --     * Slot: output_category Description: 
---     * Slot: test_env Description: Deployment environment within which the associated TestSuite is run.
 --     * Slot: id Description: A unique identifier for a Test Entity
 --     * Slot: name Description: A human-readable name for a Test Entity
 --     * Slot: description Description: A human-readable description for a Test Entity
@@ -186,7 +182,6 @@
 --     * Slot: test_case_input_id Description: 
 --     * Slot: input_category Description: 
 --     * Slot: output_category Description: 
---     * Slot: test_env Description: Deployment environment within which the associated TestSuite is run.
 --     * Slot: id Description: A unique identifier for a Test Entity
 --     * Slot: name Description: A human-readable name for a Test Entity
 --     * Slot: description Description: A human-readable description for a Test Entity
@@ -248,7 +243,7 @@
 --     * Slot: TestRunSession_id Description: Autocreated FK slot
 --     * Slot: test_case_id Description: Slot referencing a single TestCase.
 -- # Class: "TestRunSession" Description: "Single run of a TestRunner in a given environment, with a specified set of test_entities (generally, one or more instances of TestSuite)."
---     * Slot: test_env Description: Deployment environment within which the associated TestSuite is run.
+--     * Slot: test_env Description: Deployment environment within which a TestRunSession ran. Test cases don't carry one: the same suite runs in every environment, and the TestHarness is told which one to test.
 --     * Slot: test_runner_name Description: Global system name of a TestRunner.
 --     * Slot: timestamp Description: Date time when a given entity was created.
 --     * Slot: id Description: A unique identifier for a Test Entity
@@ -479,7 +474,6 @@ CREATE TABLE "Precondition" (
 );
 CREATE TABLE "PathfinderTestCase" (
 	test_case_objective VARCHAR(23), 
-	test_env VARCHAR(4), 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	description TEXT, 
@@ -495,7 +489,6 @@ CREATE TABLE "AcceptanceTestCase" (
 	test_case_input_id TEXT, 
 	input_category TEXT, 
 	output_category TEXT, 
-	test_env VARCHAR(4), 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	description TEXT, 
@@ -511,7 +504,6 @@ CREATE TABLE "QuantitativeTestCase" (
 	test_case_input_id TEXT, 
 	input_category TEXT, 
 	output_category TEXT, 
-	test_env VARCHAR(4), 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	description TEXT, 
@@ -881,7 +873,6 @@ CREATE TABLE "TestCase" (
 	test_case_input_id TEXT, 
 	input_category TEXT, 
 	output_category TEXT, 
-	test_env VARCHAR(4), 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	description TEXT, 
@@ -909,7 +900,6 @@ CREATE TABLE "PerformanceTestCase" (
 	test_case_input_id TEXT, 
 	input_category TEXT, 
 	output_category TEXT, 
-	test_env VARCHAR(4), 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	description TEXT, 

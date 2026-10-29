@@ -231,7 +231,6 @@ classes:
       - input_category
       - output_category
       - components
-      - test_env
     slot_usage:
       test_assets:
         aliases: ["Block List"]
@@ -250,7 +249,6 @@ classes:
       - test_assets
       - test_case_objective
       - components
-      - test_env
     slot_usage:
       test_assets:
         range: PathfinderTestAsset
@@ -743,7 +741,9 @@ slots:
 
   test_env:
     description: >-
-      Deployment environment within which the associated TestSuite is run.
+      Deployment environment within which a TestRunSession ran. Test cases
+      don't carry one: the same suite runs in every environment, and the
+      TestHarness is told which one to test.
     range: TestEnvEnum
 
   query_type:

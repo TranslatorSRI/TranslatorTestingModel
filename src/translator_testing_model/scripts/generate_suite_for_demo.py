@@ -180,7 +180,6 @@ def create_test_cases_from_test_assets(test_assets, test_case_model):
         test_case = test_case_model(id=test_case_id,
                                     name="what " + key[1] + " " + key[0],
                                     description=descriptions,
-                                    test_env="ci",
                                     components=["ars"],
                                     test_case_objective="AcceptanceTest",
                                     test_assets=assets,
@@ -285,7 +284,6 @@ def create_benchmark_test_case(subset: bool) -> TestCase or list[TestCase]:
                                  name=k,
                                  description=k,
                                  test_assets=[test_asset],
-                                 test_env="ci",
                                  components=["ars"],
                                  test_case_objective="QuantitativeTest",
                                  test_runner_settings=["limit_queries"]

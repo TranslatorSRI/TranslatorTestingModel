@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-10-29T02:03:22
+# Generation date: 2026-10-29T16:38:20
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -645,7 +645,6 @@ class TestCase(TestEntity):
     input_category: Optional[Union[str, ConceptCategory]] = None
     output_category: Optional[Union[str, ConceptCategory]] = None
     components: Optional[Union[Union[str, "ComponentEnum"], List[Union[str, "ComponentEnum"]]]] = empty_list()
-    test_env: Optional[Union[str, "TestEnvEnum"]] = None
     tags: Optional[Union[str, List[str]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
@@ -697,9 +696,6 @@ class TestCase(TestEntity):
             self.components = [self.components] if self.components is not None else []
         self.components = [v if isinstance(v, ComponentEnum) else ComponentEnum(v) for v in self.components]
 
-        if self.test_env is not None and not isinstance(self.test_env, TestEnvEnum):
-            self.test_env = TestEnvEnum(self.test_env)
-
         if not isinstance(self.tags, list):
             self.tags = [self.tags] if self.tags is not None else []
         self.tags = [v if isinstance(v, str) else str(v) for v in self.tags]
@@ -720,7 +716,6 @@ class PathfinderTestCase(TestEntity):
     test_assets: Union[Dict[Union[str, PathfinderTestAssetId], Union[dict, PathfinderTestAsset]], List[Union[dict, PathfinderTestAsset]]] = empty_dict()
     test_case_objective: Optional[Union[str, "TestObjectiveEnum"]] = None
     components: Optional[Union[Union[str, "ComponentEnum"], List[Union[str, "ComponentEnum"]]]] = empty_list()
-    test_env: Optional[Union[str, "TestEnvEnum"]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -738,9 +733,6 @@ class PathfinderTestCase(TestEntity):
         if not isinstance(self.components, list):
             self.components = [self.components] if self.components is not None else []
         self.components = [v if isinstance(v, ComponentEnum) else ComponentEnum(v) for v in self.components]
-
-        if self.test_env is not None and not isinstance(self.test_env, TestEnvEnum):
-            self.test_env = TestEnvEnum(self.test_env)
 
         super().__post_init__(**kwargs)
 

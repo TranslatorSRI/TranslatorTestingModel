@@ -52,7 +52,6 @@ type AcceptanceTestCase
     inputCategory: ConceptCategory
     outputCategory: ConceptCategory
     components: [ComponentEnum]
-    testEnv: TestEnvEnum
     tags: [String]
     testAssets: [AcceptanceTestAsset]!
   }
@@ -133,7 +132,6 @@ type PathfinderTestCase
     testAssets: [PathfinderTestAsset]!
     testCaseObjective: TestObjectiveEnum
     components: [ComponentEnum]
-    testEnv: TestEnvEnum
   }
 
 type PerformanceTestCase
@@ -154,7 +152,6 @@ type PerformanceTestCase
     inputCategory: ConceptCategory
     outputCategory: ConceptCategory
     components: [ComponentEnum]
-    testEnv: TestEnvEnum
     tags: [String]
     testRunTime: Integer!
     spawnRate: Float!
@@ -208,7 +205,6 @@ type QuantitativeTestCase
     inputCategory: ConceptCategory
     outputCategory: ConceptCategory
     components: [ComponentEnum]
-    testEnv: TestEnvEnum
     tags: [String]
   }
 
@@ -270,7 +266,6 @@ type TestCase
     inputCategory: ConceptCategory
     outputCategory: ConceptCategory
     components: [ComponentEnum]
-    testEnv: TestEnvEnum
     tags: [String]
   }
 

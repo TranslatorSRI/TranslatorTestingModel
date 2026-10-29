@@ -149,11 +149,7 @@ linkml:Sparqlpath xsd:string
           <components> [ infores:ncats-ars infores:arax infores:explanatory-agent infores:improving-agent infores:aragorn
              infores:biothings-explorer infores:unsecret-agent infores:rtx-kg2 infores:icees-kg infores:cam-kp infores:spoke
              infores:molepro infores:genetics-data-provider infores:textmining-kp infores:cohd infores:openpredict
-             infores:knowledge-collaboratory infores:connections-hypothesis ] * ;
-          <test_env> [ <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#dev>
-             <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#ci>
-             <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#test>
-             <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#prod> ] ?
+             infores:knowledge-collaboratory infores:connections-hypothesis ] *
        ) ;
        rdf:type [ <PathfinderTestCase> ]
     )
@@ -283,10 +279,6 @@ linkml:Sparqlpath xsd:string
                 infores:biothings-explorer infores:unsecret-agent infores:rtx-kg2 infores:icees-kg infores:cam-kp infores:spoke
                 infores:molepro infores:genetics-data-provider infores:textmining-kp infores:cohd infores:openpredict
                 infores:knowledge-collaboratory infores:connections-hypothesis ] * ;
-             <test_env> [ <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#dev>
-                <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#ci>
-                <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#test>
-                <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestEnvEnum#prod> ] ? ;
              schema1:additionalType @linkml:String *
           ) ;
           rdf:type [ <TestCase> ]
