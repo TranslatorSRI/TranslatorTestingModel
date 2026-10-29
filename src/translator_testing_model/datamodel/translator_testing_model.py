@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-10-22T15:23:25
+# Generation date: 2026-10-29T02:03:22
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -344,7 +344,7 @@ class TestAsset(TestEntity):
     input_category: Optional[Union[str, ConceptCategory]] = None
     predicate_id: Optional[Union[str, PredicateType]] = None
     predicate_name: Optional[str] = None
-    output_id: Optional[Union[str, URIorCURIE]] = None
+    output_ids: Optional[Union[Union[str, URIorCURIE], List[Union[str, URIorCURIE]]]] = empty_list()
     output_name: Optional[str] = None
     output_category: Optional[Union[str, ConceptCategory]] = None
     association: Optional[Union[str, AssociationCategory]] = None
@@ -380,8 +380,9 @@ class TestAsset(TestEntity):
         if self.predicate_name is not None and not isinstance(self.predicate_name, str):
             self.predicate_name = str(self.predicate_name)
 
-        if self.output_id is not None and not isinstance(self.output_id, URIorCURIE):
-            self.output_id = URIorCURIE(self.output_id)
+        if not isinstance(self.output_ids, list):
+            self.output_ids = [self.output_ids] if self.output_ids is not None else []
+        self.output_ids = [v if isinstance(v, URIorCURIE) else URIorCURIE(v) for v in self.output_ids]
 
         if self.output_name is not None and not isinstance(self.output_name, str):
             self.output_name = str(self.output_name)
@@ -1652,8 +1653,8 @@ slots.biolink_object_direction_qualifier = Slot(uri=TTM.biolink_object_direction
 slots.biolink_qualified_predicate = Slot(uri=TTM.biolink_qualified_predicate, name="biolink_qualified_predicate", curie=TTM.curie('biolink_qualified_predicate'),
                    model_uri=TTM.biolink_qualified_predicate, domain=None, range=Optional[Union[str, URIorCURIE]])
 
-slots.output_id = Slot(uri=TTM.output_id, name="output_id", curie=TTM.curie('output_id'),
-                   model_uri=TTM.output_id, domain=None, range=Optional[Union[str, URIorCURIE]])
+slots.output_ids = Slot(uri=TTM.output_ids, name="output_ids", curie=TTM.curie('output_ids'),
+                   model_uri=TTM.output_ids, domain=None, range=Optional[Union[Union[str, URIorCURIE], List[Union[str, URIorCURIE]]]])
 
 slots.output_name = Slot(uri=TTM.output_name, name="output_name", curie=TTM.curie('output_name'),
                    model_uri=TTM.output_name, domain=None, range=Optional[str])

@@ -222,7 +222,7 @@ linkml:Sparqlpath xsd:string
              <input_category> @<ConceptCategory> ? ;
              <predicate_id> @<PredicateType> ? ;
              <predicate_name> @linkml:String ? ;
-             <output_id> @linkml:Uriorcurie ? ;
+             <output_ids> @linkml:Uriorcurie * ;
              <output_name> @linkml:String ? ;
              <output_category> @<ConceptCategory> ? ;
              <association> @<AssociationCategory> ? ;

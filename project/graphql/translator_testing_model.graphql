@@ -7,7 +7,7 @@ type AcceptanceTestAsset
     inputCategory: ConceptCategory
     predicateId: PredicateType
     predicateName: String
-    outputId: Uriorcurie
+    outputIds: [Uriorcurie]
     outputName: String
     outputCategory: ConceptCategory
     association: AssociationCategory
@@ -234,7 +234,7 @@ type TestAsset
     inputCategory: ConceptCategory
     predicateId: PredicateType
     predicateName: String
-    outputId: Uriorcurie
+    outputIds: [Uriorcurie]
     outputName: String
     outputCategory: ConceptCategory
     association: AssociationCategory
@@ -295,7 +295,7 @@ type TestEdgeData
     inputCategory: ConceptCategory
     predicateId: PredicateType
     predicateName: String
-    outputId: Uriorcurie
+    outputIds: [Uriorcurie]
     outputName: String
     outputCategory: ConceptCategory
     association: AssociationCategory

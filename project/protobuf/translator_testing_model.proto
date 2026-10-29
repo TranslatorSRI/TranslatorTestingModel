@@ -8,7 +8,7 @@ message AcceptanceTestAsset
   conceptCategory inputCategory = 0
   predicateType predicateId = 0
   string predicateName = 0
-  uriorcurie outputId = 0
+ repeated  uriorcurie outputIds = 0
   string outputName = 0
   conceptCategory outputCategory = 0
   associationCategory association = 0
@@ -231,7 +231,7 @@ message TestAsset
   conceptCategory inputCategory = 0
   predicateType predicateId = 0
   string predicateName = 0
-  uriorcurie outputId = 0
+ repeated  uriorcurie outputIds = 0
   string outputName = 0
   conceptCategory outputCategory = 0
   associationCategory association = 0
@@ -292,7 +292,7 @@ message TestEdgeData
   conceptCategory inputCategory = 0
   predicateType predicateId = 0
   string predicateName = 0
-  uriorcurie outputId = 0
+ repeated  uriorcurie outputIds = 0
   string outputName = 0
   conceptCategory outputCategory = 0
   associationCategory association = 0

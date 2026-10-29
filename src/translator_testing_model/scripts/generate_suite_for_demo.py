@@ -132,7 +132,7 @@ def create_test_asset(row, toolkit):
         input_id=row.get("InputID").strip(),
         predicate_name=converted_predicate,
         predicate_id=f"biolink:{converted_predicate}",
-        output_id=row.get("OutputID").strip(),
+        output_ids=[row.get("OutputID").strip()],
         output_name=row.get("OutputName").strip(),
         output_category=output_category,
         expected_output=expected_output.strip(),

@@ -63,8 +63,12 @@
                 "output_category": {
                     "type": "string"
                 },
-                "output_id": {
-                    "type": "string"
+                "output_ids": {
+                    "description": "One or more CURIEs that identify the expected output. Any one of them may stand for the expected answer, eg the same chemical under its ChEBI and PubChem identifiers when node normalization no longer merges them into one concept.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 },
                 "output_name": {
                     "type": "string"
@@ -1263,8 +1267,12 @@
                 "output_category": {
                     "type": "string"
                 },
-                "output_id": {
-                    "type": "string"
+                "output_ids": {
+                    "description": "One or more CURIEs that identify the expected output. Any one of them may stand for the expected answer, eg the same chemical under its ChEBI and PubChem identifiers when node normalization no longer merges them into one concept.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 },
                 "output_name": {
                     "type": "string"
@@ -1663,8 +1671,12 @@
                 "output_category": {
                     "type": "string"
                 },
-                "output_id": {
-                    "type": "string"
+                "output_ids": {
+                    "description": "One or more CURIEs that identify the expected output. Any one of them may stand for the expected answer, eg the same chemical under its ChEBI and PubChem identifiers when node normalization no longer merges them into one concept.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 },
                 "output_name": {
                     "type": "string"

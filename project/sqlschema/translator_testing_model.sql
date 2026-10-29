@@ -37,7 +37,6 @@
 --     * Slot: input_category Description: 
 --     * Slot: predicate_id Description: 
 --     * Slot: predicate_name Description: 
---     * Slot: output_id Description: 
 --     * Slot: output_name Description: 
 --     * Slot: output_category Description: 
 --     * Slot: association Description: Specific Biolink Model association 'category' which applies to the test asset defined knowledge statement
@@ -85,7 +84,6 @@
 --     * Slot: input_category Description: 
 --     * Slot: predicate_id Description: 
 --     * Slot: predicate_name Description: 
---     * Slot: output_id Description: 
 --     * Slot: output_name Description: 
 --     * Slot: output_category Description: 
 --     * Slot: association Description: Specific Biolink Model association 'category' which applies to the test asset defined knowledge statement
@@ -106,7 +104,6 @@
 --     * Slot: input_category Description: 
 --     * Slot: predicate_id Description: 
 --     * Slot: predicate_name Description: 
---     * Slot: output_id Description: 
 --     * Slot: output_name Description: 
 --     * Slot: output_category Description: 
 --     * Slot: association Description: Specific Biolink Model association 'category' which applies to the test asset defined knowledge statement
@@ -288,6 +285,9 @@
 -- # Class: "PathfinderPathNode_ids" Description: ""
 --     * Slot: PathfinderPathNode_id Description: Autocreated FK slot
 --     * Slot: ids Description: 
+-- # Class: "TestAsset_output_ids" Description: ""
+--     * Slot: TestAsset_id Description: Autocreated FK slot
+--     * Slot: output_ids Description: One or more CURIEs that identify the expected output. Any one of them may stand for the expected answer, eg the same chemical under its ChEBI and PubChem identifiers when node normalization no longer merges them into one concept.
 -- # Class: "TestAsset_tags" Description: ""
 --     * Slot: TestAsset_id Description: Autocreated FK slot
 --     * Slot: tags Description: One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a "Block List" collection
@@ -303,12 +303,18 @@
 -- # Class: "PathfinderTestAsset_test_runner_settings" Description: ""
 --     * Slot: PathfinderTestAsset_id Description: Autocreated FK slot
 --     * Slot: test_runner_settings Description: Scalar parameters for the TestRunner processing a given TestEntity.
+-- # Class: "AcceptanceTestAsset_output_ids" Description: ""
+--     * Slot: AcceptanceTestAsset_id Description: Autocreated FK slot
+--     * Slot: output_ids Description: One or more CURIEs that identify the expected output. Any one of them may stand for the expected answer, eg the same chemical under its ChEBI and PubChem identifiers when node normalization no longer merges them into one concept.
 -- # Class: "AcceptanceTestAsset_tags" Description: ""
 --     * Slot: AcceptanceTestAsset_id Description: Autocreated FK slot
 --     * Slot: tags Description: One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a "Block List" collection
 -- # Class: "AcceptanceTestAsset_test_runner_settings" Description: ""
 --     * Slot: AcceptanceTestAsset_id Description: Autocreated FK slot
 --     * Slot: test_runner_settings Description: Scalar settings for the TestRunner, e.g. "inferred"
+-- # Class: "TestEdgeData_output_ids" Description: ""
+--     * Slot: TestEdgeData_id Description: Autocreated FK slot
+--     * Slot: output_ids Description: One or more CURIEs that identify the expected output. Any one of them may stand for the expected answer, eg the same chemical under its ChEBI and PubChem identifiers when node normalization no longer merges them into one concept.
 -- # Class: "TestEdgeData_tags" Description: ""
 --     * Slot: TestEdgeData_id Description: Autocreated FK slot
 --     * Slot: tags Description: One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a "Block List" collection
@@ -600,7 +606,6 @@ CREATE TABLE "AcceptanceTestAsset" (
 	input_category TEXT, 
 	predicate_id TEXT, 
 	predicate_name TEXT, 
-	output_id TEXT, 
 	output_name TEXT, 
 	output_category TEXT, 
 	association TEXT, 
@@ -625,7 +630,6 @@ CREATE TABLE "TestEdgeData" (
 	input_category TEXT, 
 	predicate_id TEXT, 
 	predicate_name TEXT, 
-	output_id TEXT, 
 	output_name TEXT, 
 	output_category TEXT, 
 	association TEXT, 
@@ -944,6 +948,12 @@ CREATE TABLE "PathfinderTestAsset_test_runner_settings" (
 	PRIMARY KEY ("PathfinderTestAsset_id", test_runner_settings), 
 	FOREIGN KEY("PathfinderTestAsset_id") REFERENCES "PathfinderTestAsset" (id)
 );
+CREATE TABLE "AcceptanceTestAsset_output_ids" (
+	"AcceptanceTestAsset_id" TEXT, 
+	output_ids TEXT, 
+	PRIMARY KEY ("AcceptanceTestAsset_id", output_ids), 
+	FOREIGN KEY("AcceptanceTestAsset_id") REFERENCES "AcceptanceTestAsset" (id)
+);
 CREATE TABLE "AcceptanceTestAsset_tags" (
 	"AcceptanceTestAsset_id" TEXT, 
 	tags TEXT, 
@@ -955,6 +965,12 @@ CREATE TABLE "AcceptanceTestAsset_test_runner_settings" (
 	test_runner_settings TEXT, 
 	PRIMARY KEY ("AcceptanceTestAsset_id", test_runner_settings), 
 	FOREIGN KEY("AcceptanceTestAsset_id") REFERENCES "AcceptanceTestAsset" (id)
+);
+CREATE TABLE "TestEdgeData_output_ids" (
+	"TestEdgeData_id" TEXT, 
+	output_ids TEXT, 
+	PRIMARY KEY ("TestEdgeData_id", output_ids), 
+	FOREIGN KEY("TestEdgeData_id") REFERENCES "TestEdgeData" (id)
 );
 CREATE TABLE "TestEdgeData_tags" (
 	"TestEdgeData_id" TEXT, 
@@ -1046,7 +1062,6 @@ CREATE TABLE "TestAsset" (
 	input_category TEXT, 
 	predicate_id TEXT, 
 	predicate_name TEXT, 
-	output_id TEXT, 
 	output_name TEXT, 
 	output_category TEXT, 
 	association TEXT, 
@@ -1152,6 +1167,12 @@ CREATE TABLE "Qualifier" (
 	FOREIGN KEY("AcceptanceTestCase_id") REFERENCES "AcceptanceTestCase" (id), 
 	FOREIGN KEY("QuantitativeTestCase_id") REFERENCES "QuantitativeTestCase" (id), 
 	FOREIGN KEY("PerformanceTestCase_id") REFERENCES "PerformanceTestCase" (id)
+);
+CREATE TABLE "TestAsset_output_ids" (
+	"TestAsset_id" TEXT, 
+	output_ids TEXT, 
+	PRIMARY KEY ("TestAsset_id", output_ids), 
+	FOREIGN KEY("TestAsset_id") REFERENCES "TestAsset" (id)
 );
 CREATE TABLE "TestAsset_tags" (
 	"TestAsset_id" TEXT, 

@@ -1411,14 +1411,16 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "output_id",
-      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/output_id",
+      "name": "output_ids",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/output_ids",
+      "description": "One or more CURIEs that identify the expected output. Any one of them may stand for the expected answer, eg the same chemical under its ChEBI and PubChem identifiers when node normalization no longer merges them into one concept.",
       "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
       "aliases": [
         "OutputID",
         "ObjectID"
       ],
-      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/output_id",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/output_ids",
+      "multivalued": true,
       "owner": "TestAsset",
       "domain_of": [
         "TestAsset"
@@ -2502,7 +2504,7 @@
         "input_category",
         "predicate_id",
         "predicate_name",
-        "output_id",
+        "output_ids",
         "output_name",
         "output_category",
         "association",
@@ -2565,7 +2567,7 @@
         "input_category",
         "predicate_id",
         "predicate_name",
-        "output_id",
+        "output_ids",
         "output_name",
         "output_category",
         "association",
@@ -2609,7 +2611,7 @@
         "input_category",
         "predicate_id",
         "predicate_name",
-        "output_id",
+        "output_ids",
         "output_name",
         "output_category",
         "association",
@@ -3039,9 +3041,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "translator_testing_model.yaml",
-  "source_file_date": "2025-10-22T15:23:19",
-  "source_file_size": 32116,
-  "generation_date": "2025-10-22T15:23:25",
+  "source_file_date": "2026-10-29T02:02:06",
+  "source_file_size": 32414,
+  "generation_date": "2026-10-29T02:03:21",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",
