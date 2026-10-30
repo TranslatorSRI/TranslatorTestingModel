@@ -19,6 +19,8 @@ type AcceptanceTestAsset
     wellKnown: Boolean
     testReference: Uriorcurie
     testMetadata: TestMetadata
+    skip: Boolean
+    skipReason: String
     id: Uriorcurie!
     tags: [String]
     testRunnerSettings: [String]
@@ -52,6 +54,8 @@ type AcceptanceTestCase
     inputCategory: ConceptCategory
     outputCategory: ConceptCategory
     components: [ComponentEnum]
+    skip: Boolean
+    skipReason: String
     tags: [String]
     testAssets: [AcceptanceTestAsset]!
   }
@@ -120,6 +124,8 @@ type PathfinderTestAsset
     minimumRequiredPathNodes: Integer!
     pathNodes: [PathfinderPathNode]!
     expectedOutput: String
+    skip: Boolean
+    skipReason: String
   }
 
 type PathfinderTestCase
@@ -132,6 +138,8 @@ type PathfinderTestCase
     testAssets: [PathfinderTestAsset]!
     testCaseObjective: TestObjectiveEnum
     components: [ComponentEnum]
+    skip: Boolean
+    skipReason: String
   }
 
 type PerformanceTestCase
@@ -152,6 +160,8 @@ type PerformanceTestCase
     inputCategory: ConceptCategory
     outputCategory: ConceptCategory
     components: [ComponentEnum]
+    skip: Boolean
+    skipReason: String
     tags: [String]
     testRunTime: Integer!
     spawnRate: Float!
@@ -205,6 +215,8 @@ type QuantitativeTestCase
     inputCategory: ConceptCategory
     outputCategory: ConceptCategory
     components: [ComponentEnum]
+    skip: Boolean
+    skipReason: String
     tags: [String]
   }
 
@@ -242,6 +254,8 @@ type TestAsset
     wellKnown: Boolean
     testReference: Uriorcurie
     testMetadata: TestMetadata
+    skip: Boolean
+    skipReason: String
     id: Uriorcurie!
     tags: [String]
     testRunnerSettings: [String]
@@ -266,6 +280,8 @@ type TestCase
     inputCategory: ConceptCategory
     outputCategory: ConceptCategory
     components: [ComponentEnum]
+    skip: Boolean
+    skipReason: String
     tags: [String]
   }
 
@@ -302,6 +318,8 @@ type TestEdgeData
     wellKnown: Boolean
     testReference: Uriorcurie
     testMetadata: TestMetadata
+    skip: Boolean
+    skipReason: String
     id: Uriorcurie!
     tags: [String]
     testRunnerSettings: [String]

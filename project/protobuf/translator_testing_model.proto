@@ -20,6 +20,8 @@ message AcceptanceTestAsset
   boolean wellKnown = 0
   uriorcurie testReference = 0
   testMetadata testMetadata = 0
+  boolean skip = 0
+  string skipReason = 0
   uriorcurie id = 0
  repeated  string tags = 0
  repeated  string testRunnerSettings = 0
@@ -53,6 +55,8 @@ message AcceptanceTestCase
   conceptCategory inputCategory = 0
   conceptCategory outputCategory = 0
  repeated  componentEnum components = 0
+  boolean skip = 0
+  string skipReason = 0
  repeated  string tags = 0
  repeated  acceptanceTestAsset testAssets = 0
  }
@@ -119,6 +123,8 @@ message PathfinderTestAsset
   integer minimumRequiredPathNodes = 0
  repeated  pathfinderPathNode pathNodes = 0
   string expectedOutput = 0
+  boolean skip = 0
+  string skipReason = 0
  }
 message PathfinderTestCase
  {
@@ -130,6 +136,8 @@ message PathfinderTestCase
  repeated  pathfinderTestAsset testAssets = 0
   testObjectiveEnum testCaseObjective = 0
  repeated  componentEnum components = 0
+  boolean skip = 0
+  string skipReason = 0
  }
 // Represents a performance test case.
 message PerformanceTestCase
@@ -150,6 +158,8 @@ message PerformanceTestCase
   conceptCategory inputCategory = 0
   conceptCategory outputCategory = 0
  repeated  componentEnum components = 0
+  boolean skip = 0
+  string skipReason = 0
  repeated  string tags = 0
   integer testRunTime = 0
   float spawnRate = 0
@@ -202,6 +212,8 @@ message QuantitativeTestCase
   conceptCategory inputCategory = 0
   conceptCategory outputCategory = 0
  repeated  componentEnum components = 0
+  boolean skip = 0
+  string skipReason = 0
  repeated  string tags = 0
  }
 // Test suite for testing Translator components against releases of standards like TRAPI and the Biolink Model.
@@ -239,6 +251,8 @@ message TestAsset
   boolean wellKnown = 0
   uriorcurie testReference = 0
   testMetadata testMetadata = 0
+  boolean skip = 0
+  string skipReason = 0
   uriorcurie id = 0
  repeated  string tags = 0
  repeated  string testRunnerSettings = 0
@@ -263,6 +277,8 @@ message TestCase
   conceptCategory inputCategory = 0
   conceptCategory outputCategory = 0
  repeated  componentEnum components = 0
+  boolean skip = 0
+  string skipReason = 0
  repeated  string tags = 0
  }
 // The outcome of a TestRunner run of one specific TestCase.
@@ -299,6 +315,8 @@ message TestEdgeData
   boolean wellKnown = 0
   uriorcurie testReference = 0
   testMetadata testMetadata = 0
+  boolean skip = 0
+  string skipReason = 0
   uriorcurie id = 0
  repeated  string tags = 0
  repeated  string testRunnerSettings = 0

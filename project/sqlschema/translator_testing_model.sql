@@ -46,6 +46,8 @@
 --     * Slot: in_v1 Description: 
 --     * Slot: well_known Description: 
 --     * Slot: test_reference Description: Document URL where original test source particulars are registered (e.g. Github repo)
+--     * Slot: skip Description: Don't run this test (for a test case, any of its assets) until the issue behind it is fixed, eg one that always fails for a known reason. The Test Harness reports a skipped test as skipped rather than leaving it out, and can be told to run skipped tests anyway.
+--     * Slot: skip_reason Description: Why the test is skipped, eg the issue it waits on, for the reports.
 --     * Slot: id Description: A unique identifier for a Test Entity
 --     * Slot: name Description: A human-readable name for a Test Entity
 --     * Slot: description Description: A human-readable description for a Test Entity
@@ -64,6 +66,8 @@
 --     * Slot: predicate_name Description: 
 --     * Slot: minimum_required_path_nodes Description: The number of nodes required in a path to pass this test.
 --     * Slot: expected_output Description: 
+--     * Slot: skip Description: Don't run this test (for a test case, any of its assets) until the issue behind it is fixed, eg one that always fails for a known reason. The Test Harness reports a skipped test as skipped rather than leaving it out, and can be told to run skipped tests anyway.
+--     * Slot: skip_reason Description: Why the test is skipped, eg the issue it waits on, for the reports.
 --     * Slot: id Description: A unique identifier for a Test Entity
 --     * Slot: name Description: A human-readable name for a Test Entity
 --     * Slot: description Description: A human-readable description for a Test Entity
@@ -93,6 +97,8 @@
 --     * Slot: in_v1 Description: 
 --     * Slot: well_known Description: 
 --     * Slot: test_reference Description: Document URL where original test source particulars are registered (e.g. Github repo)
+--     * Slot: skip Description: Don't run this test (for a test case, any of its assets) until the issue behind it is fixed, eg one that always fails for a known reason. The Test Harness reports a skipped test as skipped rather than leaving it out, and can be told to run skipped tests anyway.
+--     * Slot: skip_reason Description: Why the test is skipped, eg the issue it waits on, for the reports.
 --     * Slot: id Description: A unique identifier for a Test Entity
 --     * Slot: name Description: A human-readable name for a Test Entity
 --     * Slot: description Description: A human-readable description for a Test Entity
@@ -113,6 +119,8 @@
 --     * Slot: in_v1 Description: 
 --     * Slot: well_known Description: 
 --     * Slot: test_reference Description: Document URL where original test source particulars are registered (e.g. Github repo)
+--     * Slot: skip Description: Don't run this test (for a test case, any of its assets) until the issue behind it is fixed, eg one that always fails for a known reason. The Test Harness reports a skipped test as skipped rather than leaving it out, and can be told to run skipped tests anyway.
+--     * Slot: skip_reason Description: Why the test is skipped, eg the issue it waits on, for the reports.
 --     * Slot: id Description: A unique identifier for a Test Entity
 --     * Slot: name Description: A human-readable name for a Test Entity
 --     * Slot: description Description: A human-readable description for a Test Entity
@@ -131,6 +139,8 @@
 --     * Slot: test_case_input_id Description: 
 --     * Slot: input_category Description: 
 --     * Slot: output_category Description: 
+--     * Slot: skip Description: Don't run this test (for a test case, any of its assets) until the issue behind it is fixed, eg one that always fails for a known reason. The Test Harness reports a skipped test as skipped rather than leaving it out, and can be told to run skipped tests anyway.
+--     * Slot: skip_reason Description: Why the test is skipped, eg the issue it waits on, for the reports.
 --     * Slot: id Description: A unique identifier for a Test Entity
 --     * Slot: name Description: A human-readable name for a Test Entity
 --     * Slot: description Description: A human-readable description for a Test Entity
@@ -141,6 +151,8 @@
 --     * Slot: OneHopTestSuite_id Description: Autocreated FK slot
 -- # Class: "PathfinderTestCase" Description: ""
 --     * Slot: test_case_objective Description: Testing objective behind specified set of test particulars (e.g. acceptance pass/fail; benchmark; quantitative; standards compliance; graph navigation integrity)
+--     * Slot: skip Description: Don't run this test (for a test case, any of its assets) until the issue behind it is fixed, eg one that always fails for a known reason. The Test Harness reports a skipped test as skipped rather than leaving it out, and can be told to run skipped tests anyway.
+--     * Slot: skip_reason Description: Why the test is skipped, eg the issue it waits on, for the reports.
 --     * Slot: id Description: A unique identifier for a Test Entity
 --     * Slot: name Description: A human-readable name for a Test Entity
 --     * Slot: description Description: A human-readable description for a Test Entity
@@ -154,6 +166,8 @@
 --     * Slot: test_case_input_id Description: 
 --     * Slot: input_category Description: 
 --     * Slot: output_category Description: 
+--     * Slot: skip Description: Don't run this test (for a test case, any of its assets) until the issue behind it is fixed, eg one that always fails for a known reason. The Test Harness reports a skipped test as skipped rather than leaving it out, and can be told to run skipped tests anyway.
+--     * Slot: skip_reason Description: Why the test is skipped, eg the issue it waits on, for the reports.
 --     * Slot: id Description: A unique identifier for a Test Entity
 --     * Slot: name Description: A human-readable name for a Test Entity
 --     * Slot: description Description: A human-readable description for a Test Entity
@@ -167,6 +181,8 @@
 --     * Slot: test_case_input_id Description: 
 --     * Slot: input_category Description: 
 --     * Slot: output_category Description: 
+--     * Slot: skip Description: Don't run this test (for a test case, any of its assets) until the issue behind it is fixed, eg one that always fails for a known reason. The Test Harness reports a skipped test as skipped rather than leaving it out, and can be told to run skipped tests anyway.
+--     * Slot: skip_reason Description: Why the test is skipped, eg the issue it waits on, for the reports.
 --     * Slot: id Description: A unique identifier for a Test Entity
 --     * Slot: name Description: A human-readable name for a Test Entity
 --     * Slot: description Description: A human-readable description for a Test Entity
@@ -182,6 +198,8 @@
 --     * Slot: test_case_input_id Description: 
 --     * Slot: input_category Description: 
 --     * Slot: output_category Description: 
+--     * Slot: skip Description: Don't run this test (for a test case, any of its assets) until the issue behind it is fixed, eg one that always fails for a known reason. The Test Harness reports a skipped test as skipped rather than leaving it out, and can be told to run skipped tests anyway.
+--     * Slot: skip_reason Description: Why the test is skipped, eg the issue it waits on, for the reports.
 --     * Slot: id Description: A unique identifier for a Test Entity
 --     * Slot: name Description: A human-readable name for a Test Entity
 --     * Slot: description Description: A human-readable description for a Test Entity
@@ -474,6 +492,8 @@ CREATE TABLE "Precondition" (
 );
 CREATE TABLE "PathfinderTestCase" (
 	test_case_objective VARCHAR(23), 
+	skip BOOLEAN, 
+	skip_reason TEXT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	description TEXT, 
@@ -489,6 +509,8 @@ CREATE TABLE "AcceptanceTestCase" (
 	test_case_input_id TEXT, 
 	input_category TEXT, 
 	output_category TEXT, 
+	skip BOOLEAN, 
+	skip_reason TEXT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	description TEXT, 
@@ -504,6 +526,8 @@ CREATE TABLE "QuantitativeTestCase" (
 	test_case_input_id TEXT, 
 	input_category TEXT, 
 	output_category TEXT, 
+	skip BOOLEAN, 
+	skip_reason TEXT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	description TEXT, 
@@ -575,6 +599,8 @@ CREATE TABLE "PathfinderTestAsset" (
 	predicate_name TEXT, 
 	minimum_required_path_nodes INTEGER NOT NULL, 
 	expected_output TEXT, 
+	skip BOOLEAN, 
+	skip_reason TEXT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	description TEXT, 
@@ -607,6 +633,8 @@ CREATE TABLE "AcceptanceTestAsset" (
 	in_v1 BOOLEAN, 
 	well_known BOOLEAN, 
 	test_reference TEXT, 
+	skip BOOLEAN, 
+	skip_reason TEXT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	description TEXT, 
@@ -631,6 +659,8 @@ CREATE TABLE "TestEdgeData" (
 	in_v1 BOOLEAN, 
 	well_known BOOLEAN, 
 	test_reference TEXT, 
+	skip BOOLEAN, 
+	skip_reason TEXT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	description TEXT, 
@@ -873,6 +903,8 @@ CREATE TABLE "TestCase" (
 	test_case_input_id TEXT, 
 	input_category TEXT, 
 	output_category TEXT, 
+	skip BOOLEAN, 
+	skip_reason TEXT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	description TEXT, 
@@ -900,6 +932,8 @@ CREATE TABLE "PerformanceTestCase" (
 	test_case_input_id TEXT, 
 	input_category TEXT, 
 	output_category TEXT, 
+	skip BOOLEAN, 
+	skip_reason TEXT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	description TEXT, 
@@ -1061,6 +1095,8 @@ CREATE TABLE "TestAsset" (
 	in_v1 BOOLEAN, 
 	well_known BOOLEAN, 
 	test_reference TEXT, 
+	skip BOOLEAN, 
+	skip_reason TEXT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	description TEXT, 

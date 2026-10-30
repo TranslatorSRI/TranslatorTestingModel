@@ -97,6 +97,14 @@
                 "semantic_severity": {
                     "$ref": "#/$defs/SemanticSeverityEnum"
                 },
+                "skip": {
+                    "description": "Don't run this test (for a test case, any of its assets) until the issue behind it is fixed, eg one that always fails for a known reason. The Test Harness reports a skipped test as skipped rather than leaving it out, and can be told to run skipped tests anyway.",
+                    "type": "boolean"
+                },
+                "skip_reason": {
+                    "description": "Why the test is skipped, eg the issue it waits on, for the reports.",
+                    "type": "string"
+                },
                 "string_entry": {
                     "description": "The object of the core triple to be tested",
                     "type": "string"
@@ -185,6 +193,14 @@
                 "query_type": {
                     "$ref": "#/$defs/QueryTypeEnum",
                     "description": "Type of TestCase query."
+                },
+                "skip": {
+                    "description": "Don't run this test (for a test case, any of its assets) until the issue behind it is fixed, eg one that always fails for a known reason. The Test Harness reports a skipped test as skipped rather than leaving it out, and can be told to run skipped tests anyway.",
+                    "type": "boolean"
+                },
+                "skip_reason": {
+                    "description": "Why the test is skipped, eg the issue it waits on, for the reports.",
+                    "type": "string"
                 },
                 "tags": {
                     "description": "One or more 'tags' slot values (slot inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection.",
@@ -604,6 +620,14 @@
                     },
                     "type": "array"
                 },
+                "skip": {
+                    "description": "Don't run this test (for a test case, any of its assets) until the issue behind it is fixed, eg one that always fails for a known reason. The Test Harness reports a skipped test as skipped rather than leaving it out, and can be told to run skipped tests anyway.",
+                    "type": "boolean"
+                },
+                "skip_reason": {
+                    "description": "Why the test is skipped, eg the issue it waits on, for the reports.",
+                    "type": "string"
+                },
                 "source_input_category": {
                     "type": "string"
                 },
@@ -666,6 +690,14 @@
                 },
                 "name": {
                     "description": "A human-readable name for a Test Entity",
+                    "type": "string"
+                },
+                "skip": {
+                    "description": "Don't run this test (for a test case, any of its assets) until the issue behind it is fixed, eg one that always fails for a known reason. The Test Harness reports a skipped test as skipped rather than leaving it out, and can be told to run skipped tests anyway.",
+                    "type": "boolean"
+                },
+                "skip_reason": {
+                    "description": "Why the test is skipped, eg the issue it waits on, for the reports.",
                     "type": "string"
                 },
                 "tags": {
@@ -746,6 +778,14 @@
                 "query_type": {
                     "$ref": "#/$defs/QueryTypeEnum",
                     "description": "Type of TestCase query."
+                },
+                "skip": {
+                    "description": "Don't run this test (for a test case, any of its assets) until the issue behind it is fixed, eg one that always fails for a known reason. The Test Harness reports a skipped test as skipped rather than leaving it out, and can be told to run skipped tests anyway.",
+                    "type": "boolean"
+                },
+                "skip_reason": {
+                    "description": "Why the test is skipped, eg the issue it waits on, for the reports.",
+                    "type": "string"
                 },
                 "spawn_rate": {
                     "type": "number"
@@ -850,6 +890,14 @@
                 "query_type": {
                     "$ref": "#/$defs/QueryTypeEnum",
                     "description": "Type of TestCase query."
+                },
+                "skip": {
+                    "description": "Don't run this test (for a test case, any of its assets) until the issue behind it is fixed, eg one that always fails for a known reason. The Test Harness reports a skipped test as skipped rather than leaving it out, and can be told to run skipped tests anyway.",
+                    "type": "boolean"
+                },
+                "skip_reason": {
+                    "description": "Why the test is skipped, eg the issue it waits on, for the reports.",
+                    "type": "string"
                 },
                 "spawn_rate": {
                     "type": "number"
@@ -1063,6 +1111,14 @@
                     "$ref": "#/$defs/QueryTypeEnum",
                     "description": "Type of TestCase query."
                 },
+                "skip": {
+                    "description": "Don't run this test (for a test case, any of its assets) until the issue behind it is fixed, eg one that always fails for a known reason. The Test Harness reports a skipped test as skipped rather than leaving it out, and can be told to run skipped tests anyway.",
+                    "type": "boolean"
+                },
+                "skip_reason": {
+                    "description": "Why the test is skipped, eg the issue it waits on, for the reports.",
+                    "type": "string"
+                },
                 "tags": {
                     "description": "One or more 'tags' slot values (slot inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection.",
                     "items": {
@@ -1273,6 +1329,14 @@
                 "semantic_severity": {
                     "$ref": "#/$defs/SemanticSeverityEnum"
                 },
+                "skip": {
+                    "description": "Don't run this test (for a test case, any of its assets) until the issue behind it is fixed, eg one that always fails for a known reason. The Test Harness reports a skipped test as skipped rather than leaving it out, and can be told to run skipped tests anyway.",
+                    "type": "boolean"
+                },
+                "skip_reason": {
+                    "description": "Why the test is skipped, eg the issue it waits on, for the reports.",
+                    "type": "string"
+                },
                 "tags": {
                     "description": "One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a \"Block List\" collection",
                     "items": {
@@ -1353,6 +1417,14 @@
                 "query_type": {
                     "$ref": "#/$defs/QueryTypeEnum",
                     "description": "Type of TestCase query."
+                },
+                "skip": {
+                    "description": "Don't run this test (for a test case, any of its assets) until the issue behind it is fixed, eg one that always fails for a known reason. The Test Harness reports a skipped test as skipped rather than leaving it out, and can be told to run skipped tests anyway.",
+                    "type": "boolean"
+                },
+                "skip_reason": {
+                    "description": "Why the test is skipped, eg the issue it waits on, for the reports.",
+                    "type": "string"
                 },
                 "tags": {
                     "description": "One or more 'tags' slot values (slot inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection.",
@@ -1556,6 +1628,14 @@
                     "$ref": "#/$defs/QueryTypeEnum",
                     "description": "Type of TestCase query."
                 },
+                "skip": {
+                    "description": "Don't run this test (for a test case, any of its assets) until the issue behind it is fixed, eg one that always fails for a known reason. The Test Harness reports a skipped test as skipped rather than leaving it out, and can be told to run skipped tests anyway.",
+                    "type": "boolean"
+                },
+                "skip_reason": {
+                    "description": "Why the test is skipped, eg the issue it waits on, for the reports.",
+                    "type": "string"
+                },
                 "tags": {
                     "description": "One or more 'tags' slot values (slot inherited from TestEntity) should generally be defined as filters to specify TestAsset membership in a \"Block List\" collection.",
                     "items": {
@@ -1668,6 +1748,14 @@
                 },
                 "semantic_severity": {
                     "$ref": "#/$defs/SemanticSeverityEnum"
+                },
+                "skip": {
+                    "description": "Don't run this test (for a test case, any of its assets) until the issue behind it is fixed, eg one that always fails for a known reason. The Test Harness reports a skipped test as skipped rather than leaving it out, and can be told to run skipped tests anyway.",
+                    "type": "boolean"
+                },
+                "skip_reason": {
+                    "description": "Why the test is skipped, eg the issue it waits on, for the reports.",
+                    "type": "string"
                 },
                 "tags": {
                     "description": "One or more 'tags' slot values (inherited from TestEntity) should generally be defined to specify TestAsset membership in a \"Block List\" collection",
