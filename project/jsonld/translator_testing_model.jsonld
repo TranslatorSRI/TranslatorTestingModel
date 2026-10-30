@@ -1568,6 +1568,39 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "skip",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/skip",
+      "description": "Don't run this test (for a test case, any of its assets) until the issue behind it is fixed, eg one that always fails for a known reason. The Test Harness reports a skipped test as skipped rather than leaving it out, and can be told to run skipped tests anyway.",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/skip",
+      "ifabsent": "false",
+      "owner": "PathfinderTestCase",
+      "domain_of": [
+        "TestAsset",
+        "PathfinderTestAsset",
+        "TestCase",
+        "PathfinderTestCase"
+      ],
+      "range": "boolean",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "skip_reason",
+      "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/skip_reason",
+      "description": "Why the test is skipped, eg the issue it waits on, for the reports.",
+      "from_schema": "https://w3id.org/TranslatorSRI/TranslatorTestingModel",
+      "slot_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/skip_reason",
+      "owner": "PathfinderTestCase",
+      "domain_of": [
+        "TestAsset",
+        "PathfinderTestAsset",
+        "TestCase",
+        "PathfinderTestCase"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "test_runner_settings",
       "definition_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/test_runner_settings",
       "description": "Scalar parameters for the TestRunner processing a given TestEntity.",
@@ -2514,6 +2547,8 @@
         "well_known",
         "test_reference",
         "test_metadata",
+        "skip",
+        "skip_reason",
         "TestAsset_id",
         "TestAsset_tags",
         "TestAsset_test_runner_settings"
@@ -2545,7 +2580,9 @@
         "qualifiers",
         "minimum_required_path_nodes",
         "path_nodes",
-        "expected_output"
+        "expected_output",
+        "skip",
+        "skip_reason"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/PathfinderTestAsset",
@@ -2577,6 +2614,8 @@
         "well_known",
         "test_reference",
         "test_metadata",
+        "skip",
+        "skip_reason",
         "TestAsset_id",
         "TestAsset_tags",
         "TestAsset_test_runner_settings",
@@ -2621,6 +2660,8 @@
         "well_known",
         "test_reference",
         "test_metadata",
+        "skip",
+        "skip_reason",
         "TestAsset_id",
         "TestAsset_tags",
         "TestAsset_test_runner_settings"
@@ -2670,6 +2711,8 @@
         "input_category",
         "output_category",
         "components",
+        "skip",
+        "skip_reason",
         "TestCase_tags"
       ],
       "slot_usage": {},
@@ -2689,7 +2732,9 @@
         "test_runner_settings",
         "PathfinderTestCase_test_assets",
         "test_case_objective",
-        "components"
+        "components",
+        "skip",
+        "skip_reason"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/TranslatorSRI/TranslatorTestingModel/PathfinderTestCase",
@@ -2718,6 +2763,8 @@
         "input_category",
         "output_category",
         "components",
+        "skip",
+        "skip_reason",
         "TestCase_tags",
         "AcceptanceTestCase_test_assets"
       ],
@@ -2749,6 +2796,8 @@
         "input_category",
         "output_category",
         "components",
+        "skip",
+        "skip_reason",
         "TestCase_tags"
       ],
       "slot_usage": {},
@@ -2778,6 +2827,8 @@
         "input_category",
         "output_category",
         "components",
+        "skip",
+        "skip_reason",
         "TestCase_tags",
         "performanceTestCase__test_run_time",
         "performanceTestCase__spawn_rate",
@@ -3034,9 +3085,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "translator_testing_model.yaml",
-  "source_file_date": "2026-10-29T16:38:03",
-  "source_file_size": 32498,
-  "generation_date": "2026-10-29T16:38:18",
+  "source_file_date": "2026-10-30T15:05:58",
+  "source_file_size": 33114,
+  "generation_date": "2026-10-30T15:06:04",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",

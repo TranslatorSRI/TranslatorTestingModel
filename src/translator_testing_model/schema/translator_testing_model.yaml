@@ -137,6 +137,8 @@ classes:
       - well_known
       - test_reference
       - test_metadata
+      - skip
+      - skip_reason
     slot_usage:
       id:
         aliases: ["AssetIdentifier"]
@@ -168,6 +170,8 @@ classes:
       - minimum_required_path_nodes
       - path_nodes
       - expected_output
+      - skip
+      - skip_reason
 
   AcceptanceTestAsset:
     is_a: TestAsset
@@ -231,6 +235,8 @@ classes:
       - input_category
       - output_category
       - components
+      - skip
+      - skip_reason
     slot_usage:
       test_assets:
         aliases: ["Block List"]
@@ -249,6 +255,8 @@ classes:
       - test_assets
       - test_case_objective
       - components
+      - skip
+      - skip_reason
     slot_usage:
       test_assets:
         range: PathfinderTestAsset
@@ -647,6 +655,20 @@ slots:
   well_known:
     aliases: ["Well Known"]
     range: boolean
+
+  skip:
+    description: >-
+      Don't run this test (for a test case, any of its assets) until the
+      issue behind it is fixed, eg one that always fails for a known reason.
+      The Test Harness reports a skipped test as skipped rather than leaving
+      it out, and can be told to run skipped tests anyway.
+    range: boolean
+    ifabsent: "false"
+
+  skip_reason:
+    description: >-
+      Why the test is skipped, eg the issue it waits on, for the reports.
+    range: string
 
   test_runner_settings:
     aliases: ["Settings"]

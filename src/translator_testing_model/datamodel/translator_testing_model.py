@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-10-29T16:38:20
+# Generation date: 2026-10-30T15:06:05
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -356,6 +356,8 @@ class TestAsset(TestEntity):
     well_known: Optional[Union[bool, Bool]] = None
     test_reference: Optional[Union[str, URIorCURIE]] = None
     test_metadata: Optional[Union[dict, TestMetadata]] = None
+    skip: Optional[Union[bool, Bool]] = False
+    skip_reason: Optional[str] = None
     tags: Optional[Union[str, List[str]]] = empty_list()
     test_runner_settings: Optional[Union[str, List[str]]] = empty_list()
 
@@ -418,6 +420,12 @@ class TestAsset(TestEntity):
         if self.test_metadata is not None and not isinstance(self.test_metadata, TestMetadata):
             self.test_metadata = TestMetadata(**as_dict(self.test_metadata))
 
+        if self.skip is not None and not isinstance(self.skip, Bool):
+            self.skip = Bool(self.skip)
+
+        if self.skip_reason is not None and not isinstance(self.skip_reason, str):
+            self.skip_reason = str(self.skip_reason)
+
         if not isinstance(self.tags, list):
             self.tags = [self.tags] if self.tags is not None else []
         self.tags = [v if isinstance(v, str) else str(v) for v in self.tags]
@@ -455,6 +463,8 @@ class PathfinderTestAsset(TestEntity):
     predicate_name: Optional[str] = None
     qualifiers: Optional[Union[Union[dict, Qualifier], List[Union[dict, Qualifier]]]] = empty_list()
     expected_output: Optional[str] = None
+    skip: Optional[Union[bool, Bool]] = False
+    skip_reason: Optional[str] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -503,6 +513,12 @@ class PathfinderTestAsset(TestEntity):
 
         if self.expected_output is not None and not isinstance(self.expected_output, str):
             self.expected_output = str(self.expected_output)
+
+        if self.skip is not None and not isinstance(self.skip, Bool):
+            self.skip = Bool(self.skip)
+
+        if self.skip_reason is not None and not isinstance(self.skip_reason, str):
+            self.skip_reason = str(self.skip_reason)
 
         super().__post_init__(**kwargs)
 
@@ -645,6 +661,8 @@ class TestCase(TestEntity):
     input_category: Optional[Union[str, ConceptCategory]] = None
     output_category: Optional[Union[str, ConceptCategory]] = None
     components: Optional[Union[Union[str, "ComponentEnum"], List[Union[str, "ComponentEnum"]]]] = empty_list()
+    skip: Optional[Union[bool, Bool]] = False
+    skip_reason: Optional[str] = None
     tags: Optional[Union[str, List[str]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
@@ -696,6 +714,12 @@ class TestCase(TestEntity):
             self.components = [self.components] if self.components is not None else []
         self.components = [v if isinstance(v, ComponentEnum) else ComponentEnum(v) for v in self.components]
 
+        if self.skip is not None and not isinstance(self.skip, Bool):
+            self.skip = Bool(self.skip)
+
+        if self.skip_reason is not None and not isinstance(self.skip_reason, str):
+            self.skip_reason = str(self.skip_reason)
+
         if not isinstance(self.tags, list):
             self.tags = [self.tags] if self.tags is not None else []
         self.tags = [v if isinstance(v, str) else str(v) for v in self.tags]
@@ -716,6 +740,8 @@ class PathfinderTestCase(TestEntity):
     test_assets: Union[Dict[Union[str, PathfinderTestAssetId], Union[dict, PathfinderTestAsset]], List[Union[dict, PathfinderTestAsset]]] = empty_dict()
     test_case_objective: Optional[Union[str, "TestObjectiveEnum"]] = None
     components: Optional[Union[Union[str, "ComponentEnum"], List[Union[str, "ComponentEnum"]]]] = empty_list()
+    skip: Optional[Union[bool, Bool]] = False
+    skip_reason: Optional[str] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -733,6 +759,12 @@ class PathfinderTestCase(TestEntity):
         if not isinstance(self.components, list):
             self.components = [self.components] if self.components is not None else []
         self.components = [v if isinstance(v, ComponentEnum) else ComponentEnum(v) for v in self.components]
+
+        if self.skip is not None and not isinstance(self.skip, Bool):
+            self.skip = Bool(self.skip)
+
+        if self.skip_reason is not None and not isinstance(self.skip_reason, str):
+            self.skip_reason = str(self.skip_reason)
 
         super().__post_init__(**kwargs)
 
@@ -1674,6 +1706,12 @@ slots.in_v1 = Slot(uri=TTM.in_v1, name="in_v1", curie=TTM.curie('in_v1'),
 
 slots.well_known = Slot(uri=TTM.well_known, name="well_known", curie=TTM.curie('well_known'),
                    model_uri=TTM.well_known, domain=None, range=Optional[Union[bool, Bool]])
+
+slots.skip = Slot(uri=TTM.skip, name="skip", curie=TTM.curie('skip'),
+                   model_uri=TTM.skip, domain=None, range=Optional[Union[bool, Bool]])
+
+slots.skip_reason = Slot(uri=TTM.skip_reason, name="skip_reason", curie=TTM.curie('skip_reason'),
+                   model_uri=TTM.skip_reason, domain=None, range=Optional[str])
 
 slots.test_runner_settings = Slot(uri=TTM.test_runner_settings, name="test_runner_settings", curie=TTM.curie('test_runner_settings'),
                    model_uri=TTM.test_runner_settings, domain=None, range=Optional[Union[str, List[str]]])

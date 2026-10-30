@@ -131,7 +131,9 @@ linkml:Sparqlpath xsd:string
           <qualifiers> @<Qualifier> * ;
           <minimum_required_path_nodes> @linkml:Integer ;
           <path_nodes> @<PathfinderPathNode> + ;
-          <expected_output> @linkml:String ?
+          <expected_output> @linkml:String ? ;
+          <skip> @linkml:Boolean ? ;
+          <skip_reason> @linkml:String ?
        ) ;
        rdf:type [ <PathfinderTestAsset> ]
     )
@@ -149,7 +151,9 @@ linkml:Sparqlpath xsd:string
           <components> [ infores:ncats-ars infores:arax infores:explanatory-agent infores:improving-agent infores:aragorn
              infores:biothings-explorer infores:unsecret-agent infores:rtx-kg2 infores:icees-kg infores:cam-kp infores:spoke
              infores:molepro infores:genetics-data-provider infores:textmining-kp infores:cohd infores:openpredict
-             infores:knowledge-collaboratory infores:connections-hypothesis ] *
+             infores:knowledge-collaboratory infores:connections-hypothesis ] * ;
+          <skip> @linkml:Boolean ? ;
+          <skip_reason> @linkml:String ?
        ) ;
        rdf:type [ <PathfinderTestCase> ]
     )
@@ -237,6 +241,8 @@ linkml:Sparqlpath xsd:string
              <well_known> @linkml:Boolean ? ;
              <test_reference> @linkml:Uriorcurie ? ;
              <test_metadata> @<TestMetadata> ? ;
+             <skip> @linkml:Boolean ? ;
+             <skip_reason> @linkml:String ? ;
              schema1:additionalType @linkml:String * ;
              <test_runner_settings> @linkml:String *
           ) ;
@@ -279,6 +285,8 @@ linkml:Sparqlpath xsd:string
                 infores:biothings-explorer infores:unsecret-agent infores:rtx-kg2 infores:icees-kg infores:cam-kp infores:spoke
                 infores:molepro infores:genetics-data-provider infores:textmining-kp infores:cohd infores:openpredict
                 infores:knowledge-collaboratory infores:connections-hypothesis ] * ;
+             <skip> @linkml:Boolean ? ;
+             <skip_reason> @linkml:String ? ;
              schema1:additionalType @linkml:String *
           ) ;
           rdf:type [ <TestCase> ]
