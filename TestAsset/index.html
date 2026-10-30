@@ -252,6 +252,10 @@
 
           TestAsset --&gt; SemanticSeverityEnum : semantic_severity
 
+      TestAsset : skip
+
+      TestAsset : skip_reason
+
       TestAsset : tags
 
       TestAsset : test_issue
@@ -395,6 +399,18 @@
 <td>direct</td>
 </tr>
 <tr>
+<td><a href="../skip/">skip</a></td>
+<td>0..1 <br/> <a href="../Boolean/">Boolean</a></td>
+<td>Don't run this test (for a test case, any of its assets) until the issue behi...</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../skip_reason/">skip_reason</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>Why the test is skipped, eg the issue it waits on, for the reports</td>
+<td>direct</td>
+</tr>
+<tr>
 <td><a href="../id/">id</a></td>
 <td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td>A unique identifier for a Test Entity</td>
@@ -509,6 +525,8 @@ slots:
 - well_known
 - test_reference
 - test_metadata
+- skip
+- skip_reason
 slot_usage:
   id:
     name: id
@@ -774,6 +792,36 @@ attributes:
     range: TestMetadata
     required: false
     inlined: true
+  skip:
+    name: skip
+    description: Don't run this test (for a test case, any of its assets) until the
+      issue behind it is fixed, eg one that always fails for a known reason. The Test
+      Harness reports a skipped test as skipped rather than leaving it out, and can
+      be told to run skipped tests anyway.
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    ifabsent: 'false'
+    alias: skip
+    owner: TestAsset
+    domain_of:
+    - TestAsset
+    - PathfinderTestAsset
+    - TestCase
+    - PathfinderTestCase
+    range: boolean
+  skip_reason:
+    name: skip_reason
+    description: Why the test is skipped, eg the issue it waits on, for the reports.
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    alias: skip_reason
+    owner: TestAsset
+    domain_of:
+    - TestAsset
+    - PathfinderTestAsset
+    - TestCase
+    - PathfinderTestCase
+    range: string
   id:
     name: id
     description: A unique identifier for a Test Entity

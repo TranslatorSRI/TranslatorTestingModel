@@ -232,6 +232,10 @@
 
           QuantitativeTestCase --&gt; QueryTypeEnum : query_type
 
+      QuantitativeTestCase : skip
+
+      QuantitativeTestCase : skip_reason
+
       QuantitativeTestCase : tags
 
       QuantitativeTestCase : test_assets
@@ -357,6 +361,18 @@
 <td><a href="../components/">components</a></td>
 <td>0..* <br/> <a href="../ComponentEnum/">ComponentEnum</a></td>
 <td>The component that this test case is intended to run against</td>
+<td><a href="../TestCase/">TestCase</a></td>
+</tr>
+<tr>
+<td><a href="../skip/">skip</a></td>
+<td>0..1 <br/> <a href="../Boolean/">Boolean</a></td>
+<td>Don't run this test (for a test case, any of its assets) until the issue behi...</td>
+<td><a href="../TestCase/">TestCase</a></td>
+</tr>
+<tr>
+<td><a href="../skip_reason/">skip_reason</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>Why the test is skipped, eg the issue it waits on, for the reports</td>
 <td><a href="../TestCase/">TestCase</a></td>
 </tr>
 <tr>
@@ -604,6 +620,36 @@ attributes:
     - PathfinderTestCase
     - TestRunSession
     range: ComponentEnum
+  skip:
+    name: skip
+    description: Don't run this test (for a test case, any of its assets) until the
+      issue behind it is fixed, eg one that always fails for a known reason. The Test
+      Harness reports a skipped test as skipped rather than leaving it out, and can
+      be told to run skipped tests anyway.
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    ifabsent: 'false'
+    alias: skip
+    owner: QuantitativeTestCase
+    domain_of:
+    - TestAsset
+    - PathfinderTestAsset
+    - TestCase
+    - PathfinderTestCase
+    range: boolean
+  skip_reason:
+    name: skip_reason
+    description: Why the test is skipped, eg the issue it waits on, for the reports.
+    from_schema: https://w3id.org/TranslatorSRI/TranslatorTestingModel
+    rank: 1000
+    alias: skip_reason
+    owner: QuantitativeTestCase
+    domain_of:
+    - TestAsset
+    - PathfinderTestAsset
+    - TestCase
+    - PathfinderTestCase
+    range: string
   id:
     name: id
     description: A unique identifier for a Test Entity
