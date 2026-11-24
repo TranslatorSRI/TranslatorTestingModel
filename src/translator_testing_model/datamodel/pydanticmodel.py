@@ -61,6 +61,8 @@ class TestSourceEnum(str, Enum):
     TranslatorTeam = "TranslatorTeam"
     # Current SRI_Testing-like test data edges specific to KP or ARA components
     TestDataLocation = "TestDataLocation"
+    # Drug repurposing outcomes reported outside Translator (eg a publication, a clinical program or a repurposing portfolio). The test asset's test_metadata records where each one came from.
+    ExternalRepurposing = "ExternalRepurposing"
 
 
 class TestObjectiveEnum(str, Enum):
@@ -118,6 +120,8 @@ class TestIssueEnum(str, Enum):
     contraindications = "contraindications"
     chemical_roles = "chemical roles"
     test_issue = "test_issue"
+    # The test asset's source data looks doubtful (eg a missing or suspect identifier, a contradictory or duplicated assertion). It is still run, but its result should be read with care until the asset is checked.
+    questionable = "questionable"
 
 
 class SemanticSeverityEnum(str, Enum):

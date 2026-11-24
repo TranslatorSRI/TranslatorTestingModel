@@ -953,6 +953,11 @@ enums:
         description: >-
           Current SRI_Testing-like test data edges
           specific to KP or ARA components
+      ExternalRepurposing:
+        description: >-
+          Drug repurposing outcomes reported outside Translator (eg a
+          publication, a clinical program or a repurposing portfolio).
+          The test asset's test_metadata records where each one came from.
 
   TestObjectiveEnum:
     permissible_values:
@@ -1024,6 +1029,12 @@ enums:
         description:
       test_issue:
         description:
+      questionable:
+        description: >-
+          The test asset's source data looks doubtful (eg a missing or
+          suspect identifier, a contradictory or duplicated assertion). It
+          is still run, but its result should be read with care until the
+          asset is checked.
 
   SemanticSeverityEnum:
     description: From Jenn's worksheet, empty or ill defined (needs elaboration)
