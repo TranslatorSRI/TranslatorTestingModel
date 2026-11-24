@@ -1,5 +1,5 @@
 # Auto generated from translator_testing_model.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-10-30T15:06:05
+# Generation date: 2026-11-24T20:24:18
 # Schema: Translator-Testing-Model
 #
 # id: https://w3id.org/TranslatorSRI/TranslatorTestingModel
@@ -1238,6 +1238,9 @@ class TestSourceEnum(EnumDefinitionImpl):
     TestDataLocation = PermissibleValue(
         text="TestDataLocation",
         description="Current SRI_Testing-like test data edges specific to KP or ARA components")
+    ExternalRepurposing = PermissibleValue(
+        text="ExternalRepurposing",
+        description="""Drug repurposing outcomes reported outside Translator (eg a publication, a clinical program or a repurposing portfolio). The test asset's test_metadata records where each one came from.""")
 
     _defn = EnumDefinition(
         name="TestSourceEnum",
@@ -1323,6 +1326,9 @@ class TestIssueEnum(EnumDefinitionImpl):
         description="'Text Mining Knowledge Provider' generated relationship?")
     contraindications = PermissibleValue(text="contraindications")
     test_issue = PermissibleValue(text="test_issue")
+    questionable = PermissibleValue(
+        text="questionable",
+        description="""The test asset's source data looks doubtful (eg a missing or suspect identifier, a contradictory or duplicated assertion). It is still run, but its result should be read with care until the asset is checked.""")
 
     _defn = EnumDefinition(
         name="TestIssueEnum",

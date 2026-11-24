@@ -1827,7 +1827,8 @@
                 "category too generic",
                 "contraindications",
                 "chemical roles",
-                "test_issue"
+                "test_issue",
+                "questionable"
             ],
             "title": "TestIssueEnum",
             "type": "string"
@@ -2118,7 +2119,8 @@
                 "TACT",
                 "BenchMark",
                 "TranslatorTeam",
-                "TestDataLocation"
+                "TestDataLocation",
+                "ExternalRepurposing"
             ],
             "title": "TestSourceEnum",
             "type": "string"

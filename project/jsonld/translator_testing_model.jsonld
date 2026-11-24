@@ -427,6 +427,10 @@
         {
           "text": "TestDataLocation",
           "description": "Current SRI_Testing-like test data edges specific to KP or ARA components"
+        },
+        {
+          "text": "ExternalRepurposing",
+          "description": "Drug repurposing outcomes reported outside Translator (eg a publication, a clinical program or a repurposing portfolio). The test asset's test_metadata records where each one came from."
         }
       ]
     },
@@ -544,6 +548,10 @@
         },
         {
           "text": "test_issue"
+        },
+        {
+          "text": "questionable",
+          "description": "The test asset's source data looks doubtful (eg a missing or suspect identifier, a contradictory or duplicated assertion). It is still run, but its result should be read with care until the asset is checked."
         }
       ]
     },
@@ -3085,9 +3093,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "translator_testing_model.yaml",
-  "source_file_date": "2026-10-30T15:05:58",
-  "source_file_size": 33114,
-  "generation_date": "2026-10-30T15:06:04",
+  "source_file_date": "2026-11-24T20:24:14",
+  "source_file_size": 33673,
+  "generation_date": "2026-11-24T20:24:17",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/translator_testing_model.context.jsonld",

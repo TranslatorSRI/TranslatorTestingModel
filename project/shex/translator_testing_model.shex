@@ -233,7 +233,8 @@ linkml:Sparqlpath xsd:string
                 <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#category%20too%20generic>
                 <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#contraindications>
                 <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#chemical%20roles>
-                <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#test_issue> ] ? ;
+                <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#test_issue>
+                <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestIssueEnum#questionable> ] ? ;
              <semantic_severity> [ <https://w3id.org/TranslatorSRI/TranslatorTestingModel/SemanticSeverityEnum#High>
                 <https://w3id.org/TranslatorSRI/TranslatorTestingModel/SemanticSeverityEnum#Low>
                 <https://w3id.org/TranslatorSRI/TranslatorTestingModel/SemanticSeverityEnum#NotApplicable> ] ? ;
@@ -274,7 +275,8 @@ linkml:Sparqlpath xsd:string
                 <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestSourceEnum#TACT>
                 <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestSourceEnum#BenchMark>
                 <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestSourceEnum#TranslatorTeam>
-                <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestSourceEnum#TestDataLocation> ] ? ;
+                <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestSourceEnum#TestDataLocation>
+                <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestSourceEnum#ExternalRepurposing> ] ? ;
              <test_case_predicate_name> @linkml:String ? ;
              <test_case_predicate_id> @linkml:String ? ;
              <test_case_input_id> @linkml:Uriorcurie ? ;
@@ -349,7 +351,8 @@ linkml:Sparqlpath xsd:string
              <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestSourceEnum#TACT>
              <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestSourceEnum#BenchMark>
              <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestSourceEnum#TranslatorTeam>
-             <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestSourceEnum#TestDataLocation> ] ? ;
+             <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestSourceEnum#TestDataLocation>
+             <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestSourceEnum#ExternalRepurposing> ] ? ;
           <test_reference> @linkml:Uriorcurie ? ;
           <test_objective> [ <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#AcceptanceTest>
              <https://w3id.org/TranslatorSRI/TranslatorTestingModel/TestObjectiveEnum#BenchmarkTest>
